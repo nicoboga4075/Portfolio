@@ -1,5 +1,8 @@
-/ /en 301
-/index.html /en 301
-/index_en.html /en 301
-/index_fr.html /fr 301
+/ /en 301!
+/index.html /en 301!
+/index_en.html /en 301!
+/index_fr.html /fr 301!
+/blog.html /en 301!
+/blog_en.html /en/blog 301!
+/blog_fr.html /fr/blog 301!
 /404.html  /not-found  301!

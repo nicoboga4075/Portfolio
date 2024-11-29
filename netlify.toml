@@ -7,3 +7,13 @@
   from = "/fr"
   to = "/index_fr.html"
   status = 200
+  
+[[redirects]]
+  from = "/en/blog"
+  to = "/blog_en.html"
+  status = 200
+
+[[redirects]]
+  from = "/fr/blog"
+  to = "/blog_fr.html"
+  status = 200

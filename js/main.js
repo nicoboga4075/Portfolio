@@ -18,16 +18,13 @@
 
 
 	var fullHeight = function() {
-
 		$('.js-fullheight').css('height', $(window).height());
 		$(window).resize(function(){
 			$('.js-fullheight').css('height', $(window).height());
 		});
-
 	};
 	fullHeight();
 
-	// loader
 	var loader = function() {
 		setTimeout(function() { 
 			if($('#ftco-loader').length > 0) {
@@ -37,12 +34,8 @@
 	};
 	loader();
 
-	// Scrollax
    $.Scrollax();
 
-
-
-   // Burger Menu
 	var burgerMenu = function() {
 
 		$('body').on('click', '.js-fh5co-nav-toggle', function(event){
@@ -61,7 +54,6 @@
 
 	};
 	burgerMenu();
-
 
 	var onePageClick = function() {
 
@@ -111,29 +103,16 @@
 
 	$('nav .dropdown').hover(function(){
 		var $this = $(this);
-		// 	 timer;
-		// clearTimeout(timer);
 		$this.addClass('show');
 		$this.find('> a').attr('aria-expanded', true);
-		// $this.find('.dropdown-menu').addClass('animated-fast fadeInUp show');
 		$this.find('.dropdown-menu').addClass('show');
 	}, function(){
 		var $this = $(this);
-			// timer;
-		// timer = setTimeout(function(){
 			$this.removeClass('show');
 			$this.find('> a').attr('aria-expanded', false);
-			// $this.find('.dropdown-menu').removeClass('animated-fast fadeInUp show');
 			$this.find('.dropdown-menu').removeClass('show');
-		// }, 100);
 	});
 
-
-	$('#dropdown04').on('show.bs.dropdown', function () {
-	  console.log('show');
-	});
-
-	// scroll
 	var scrollWindow = function() {
 		$(window).scroll(function(){
 			var $w = $(this),
@@ -173,8 +152,6 @@
 	};
 	scrollWindow();
 
-	
-
 	var counter = function() {
 		
 		$('#section-counter, .hero-wrap, .ftco-counter, .ftco-about').waypoint( function( direction ) {
@@ -185,7 +162,6 @@
 				$('.number').each(function(){
 					var $this = $(this),
 						num = $this.data('number');
-						console.log(num);
 					$this.animateNumber(
 					  {
 					    number: num,
@@ -238,7 +214,6 @@
 	};
 	contentWayPoint();
 
-	// magnific popup
 	$('.image-popup').magnificPopup({
     type: 'image',
     closeOnContentClick: true,
@@ -284,9 +259,6 @@
 		});
 	};
 	goHere();
-
-	// $("#myScrollspy").scrollspy({ offset: -75 });
-
 
 
 var TxtRotate = function(el, toRotate, period) {
@@ -339,7 +311,6 @@ window.onload = function() {
       new TxtRotate(elements[i], JSON.parse(toRotate), period);
     }
   }
-  // INJECT CSS
   var css = document.createElement("style");
   css.type = "text/css";
   css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
@@ -348,15 +319,6 @@ window.onload = function() {
 
 
 })(jQuery);
-
-
-
-
-
-
-
-// this makes the height of each page equal to the height of the window
-// $('.page').css('height', $( window ).height());
 
 // scrollspy section
 (function($){
@@ -376,8 +338,6 @@ window.onload = function() {
 },500);
     hash($(this).attr('href'));
   });
-  
-  
   
   //select all the anchors in the navbar one after another
   $navbara.each(function(){
@@ -433,10 +393,7 @@ $(function() {
   })
 
   function percentageToDegrees(percentage) {
-
     return percentage / 100 * 360
-
   }
 
 });
-

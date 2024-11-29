@@ -9472,11 +9472,14 @@ textarea.form-control {
   margin-bottom: 7px;
   margin-right: 4px;
   border-radius: 4px;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 11px; }
-  .tagcloud a:hover {
-    border: 1px solid #000; }
+  color: #3e64ff;
+  border: 1px solid #3e64ff;
+  font-size: 11px;
+  }
+
+.tagcloud a:hover {
+    border: 1px solid #718dff; 
+	opacity:0.7; }
 
 .comment-form-wrap {
   clear: both; }
@@ -9712,7 +9715,7 @@ textarea.form-control {
     position: absolute;
     width: 25px;
     height: 25px;
-    background-color: #007BFF;
+    background-color: var(--blue);
     border-radius: 50%;
     top: 0;
     left: 0;
@@ -9726,5 +9729,43 @@ textarea.form-control {
 
 #language-toggle:checked + .toggle-slider {
     transform: translateX(25px);
-    background-color: #007BFF;
+    background-color: var(--blue);
+}
+
+.blog-img { 
+    background-image: url(../images/image_3.jpg);
+}
+
+.about-author {
+	margin-top: 20px;
+}
+
+/* Prestamatch */
+
+.articleContainer h2{
+	color: var(--blue);
+}
+
+.articleImage3 {
+    width: 100%;
+    min-width: 20%;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(15, 41, 48, .05);
+}
+
+.titleCenter {
+    font-size: 40px;
+    color: var(--blue);
+    font-weight: bold;
+    line-height: 50px;
+    margin-bottom: 25px;
+}
+
+.secondTitle {
+    font-style: italic;
+    margin-bottom: 20px;
 }
