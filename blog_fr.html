@@ -5,7 +5,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-	  <base href="../">
+      <base href="../">
       <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
@@ -45,77 +45,90 @@
          <div class="container">
             <div class="row">
                <div class="col-lg-8 ftco-animate" id="articleShape">
-				    <iframe id="iframePrestamatch" style="visibility:hidden;"></iframe>
-					<script id="loadArticleScript">
-						const iframe = document.getElementById('iframePrestamatch');
-						const hashLink = window.location.hash ? window.location.hash.substring(1) : '';	
-						const errorArticle = 'Oops ! Une erreur est survenue. Réessayez plus tard.';
-				
-						if (hashLink || sessionStorage.getItem('currentHash')) {
-						
-							if(hashLink){
-								sessionStorage.setItem('currentHash', hashLink);
-							}
-													
-							history.replaceState(null, null, window.location.pathname);
-							const urlArticle = hashLink ? `https://prestamatch.com/${hashLink}` :  `https://prestamatch.com/${sessionStorage.getItem('currentHash')}`;
-						
-							iframe.src = urlArticle;
-
-							iframe.onload = () => {
-								const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-								const targetUrl = urlArticle;
-
-								fetch(proxyUrl + targetUrl, {
-									method: 'GET',
-									headers: {
-										'Origin': 'https://nicoboga.netlify.app',
-										'X-Requested-With': 'XMLHttpRequest',
-									}
-								})
-								.then(response => response.text())
-								.then(html => {
-								
-									if(html.includes('See /corsdemo for more info')){
-										document.getElementById('articleShape').innerHTML = errorArticle;
-									} else {																
-										const parser = new DOMParser();
-										const doc = parser.parseFromString(html, 'text/html');
-
-										const header = doc.querySelector('.header');
-										if (header) header.remove();
-
-										const footer = doc.querySelector('.footer');
-										if (footer) footer.remove();
-										
-										const docPrestamatch = doc.body.innerHTML.replace('Nous avons', "J'ai").replace('notre site','le site').replace('img/articles','images').replaceAll('<center><a>','').replaceAll('</a></center>','').replaceAll('<center>','').replaceAll('</center>','');
-										document.getElementById('articleShape').innerHTML =  docPrestamatch + document.getElementById('articleShape').innerHTML;	
-									}
-								})
-								.catch(error => {
-									document.getElementById('articleShape').innerHTML = errorArticle;
-								})
-								.finally(() => {
-									document.getElementById('iframePrestamatch').remove();
-									document.getElementById('loadArticleScript').remove();
-								});
+                  <iframe id="iframeArticle" style="visibility:hidden;"></iframe>
+                  <script id="loadArticleScript">
+					const articleShape = document.getElementById('articleShape'); 
+					const iframe = document.getElementById('iframeArticle');
+					const hashLink = window.location.hash ? window.location.hash.substring(1) : '';
+					const articlesPrestamatch = ['sur-quels-criteres-choisir-une-agence-web', '5-conseils-pour-un-nom-de-marque-parfait'];
+					const errorArticle = 'Oops ! Une erreur est survenue. Réessayez plus tard.';
+					const origin = window.location.origin;
+					const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+				   
+					const currentHash = hashLink || sessionStorage.getItem('currentHash');
+					if (!currentHash) {
+					  articleShape.innerHTML = errorArticle;
+					} else {
+					   sessionStorage.setItem('currentHash', currentHash);
+					   history.replaceState(null, null, window.location.pathname);
+					   
+					   const isPrestamatch = articlesPrestamatch.includes(currentHash);
+					   const host = isPrestamatch ? 'https://prestamatch.com' : origin;
+					   const urlArticle = isPrestamatch ? `${host}/${currentHash}` : `${host}/articles/${currentHash}_fr.html`;
+					 
+					   iframe.src = urlArticle;
+					 
+					   iframe.onload = () => {
+							
+							const targetUrl = isPrestamatch ? proxyUrl + urlArticle : urlArticle;
+							const parameters = { 
+								method: 'GET',
+								headers: {
+									'Origin': origin,
+									'X-Requested-With': 'XMLHttpRequest'
+								}
 							};
-						} else {
-							document.getElementById('articleShape').innerHTML = errorArticle;
-						}
-					</script>
+					 
+							fetch(targetUrl, parameters)
+							.then(response => response.text())
+							.then(html => {							
+							
+								if(html.includes('See /corsdemo for more info') || html.includes("Cette page n'existe plus sur Prestamatch") || html.includes("It seems you've hit a broken link or the page has moved")){
+									throw new Error();
+								}		
+								
+								const parser = new DOMParser();
+								const doc = parser.parseFromString(html, 'text/html');
+				 
+								const header = doc.querySelector('.header');
+								if (header) header.remove();
+				 
+								const footer = doc.querySelector('.footer');
+								if (footer) footer.remove();
+								
+								const docArticle = !isPrestamatch ? doc.body.innerHTML : doc.body.innerHTML
+									.replace('Nous avons', "J'ai")
+									.replace('notre site','le site')
+									.replace('img/articles','images')
+									.replaceAll('<center><a>','')
+									.replaceAll('</a></center>','')
+									.replaceAll('<center>','').replaceAll('</center>','');
+									
+								articleShape.innerHTML =  docArticle + articleShape.innerHTML;	
+								
+							})
+							.catch(error => {
+								articleShape.innerHTML = errorArticle;
+							})
+							.finally(() => {
+								document.getElementById('iframeArticle').remove();
+								document.getElementById('loadArticleScript').remove();
+							});
+						}; 
+					}
+                  </script>
                   <div class="about-author d-flex p-4 bg-light">
                      <div class="bio mr-5">
                         <img src="images/about.jpg" class="img-fluid mb-4">
                      </div>
                      <div class="desc">
-                        <h3>Nicolas Bogalheiro</h3>
+                        <h3>Nicolas BOGALHEIRO</h3>
                         <p>Ingénieur logiciel</p>
-						<p style="text-align:center">Scanne-moi</p>
-						<img src="images/qrcode.png" style="max-width:265px">
+                        <p style="text-align:center">Scanne-moi</p>
+                        <img src="images/qrcode.png" style="max-width:265px">
                      </div>
                   </div>
-<!--                   <div class="pt-5 mt-5">
+                  <!--                   <div class="pt-5 mt-5">
                      <h3 class="mb-5">6 Comments</h3>
                      <ul class="comment-list">
                         <li class="comment">
@@ -180,45 +193,45 @@
                            </div>
                         </form>
                      </div> -->
-                  </div>
                </div>
-               <!-- <div class="col-lg-4 sidebar ftco-animate"> -->
-                  <!-- <div class="sidebar-box"> -->
-                     <!-- <form action="#" class="search-form"> -->
-                        <!-- <div class="form-group"> -->
-                           <!-- <span class="icon icon-search"></span> -->
-                           <!-- <input type="text" class="form-control" placeholder="Search..."> -->
-                        <!-- </div> -->
-                     <!-- </form> -->
-                  <!-- </div> -->
-                  <!-- <div class="sidebar-box ftco-animate"> -->
-                     <!-- <h3 class="heading-sidebar">Catégories</h3> -->
-                     <!-- <ul class="categories"> -->
-                        <!-- <li><a href="#">Catégorie<span>(1)</span></a></li> -->
-                     <!-- </ul> -->
-                  <!-- </div> -->
-                  <!-- <div class="sidebar-box ftco-animate"> -->
-                     <!-- <h3 class="heading-sidebar">Récents</h3> -->
-                     <!-- <div class="block-21 mb-4 d-flex"> -->
-                        <!-- <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a> -->
-                        <!-- <div class="text"> -->
-                           <!-- <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3> -->
-                           <!-- <div class="meta"> -->
-                              <!-- <div><a href="#"><span class="icon-calendar"></span> March 12, 2019</a></div> -->
-                              <!-- <div><a href="#"><span class="icon-person"></span> Admin</a></div> -->
-                              <!-- <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
-                           <!-- </div> -->
-                        <!-- </div> -->
-                     <!-- </div> -->
-                  <!-- </div> -->
-                  <!-- <div class="sidebar-box ftco-animate"> -->
-                     <!-- <h3 class="heading-sidebar">Tag Cloud</h3> -->
-                     <!-- <div class="tagcloud"> -->
-                        <!-- <a href="#" class="tag-cloud-link"></a> -->
-                     <!-- </div> -->
-                  <!-- </div> -->
-               <!-- </div> -->
             </div>
+            <!-- <div class="col-lg-4 sidebar ftco-animate"> -->
+            <!-- <div class="sidebar-box"> -->
+            <!-- <form action="#" class="search-form"> -->
+            <!-- <div class="form-group"> -->
+            <!-- <span class="icon icon-search"></span> -->
+            <!-- <input type="text" class="form-control" placeholder="Search..."> -->
+            <!-- </div> -->
+            <!-- </form> -->
+            <!-- </div> -->
+            <!-- <div class="sidebar-box ftco-animate"> -->
+            <!-- <h3 class="heading-sidebar">Catégories</h3> -->
+            <!-- <ul class="categories"> -->
+            <!-- <li><a href="#">Catégorie<span>(1)</span></a></li> -->
+            <!-- </ul> -->
+            <!-- </div> -->
+            <!-- <div class="sidebar-box ftco-animate"> -->
+            <!-- <h3 class="heading-sidebar">Récents</h3> -->
+            <!-- <div class="block-21 mb-4 d-flex"> -->
+            <!-- <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a> -->
+            <!-- <div class="text"> -->
+            <!-- <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3> -->
+            <!-- <div class="meta"> -->
+            <!-- <div><a href="#"><span class="icon-calendar"></span> March 12, 2019</a></div> -->
+            <!-- <div><a href="#"><span class="icon-person"></span> Admin</a></div> -->
+            <!-- <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- <div class="sidebar-box ftco-animate"> -->
+            <!-- <h3 class="heading-sidebar">Tag Cloud</h3> -->
+            <!-- <div class="tagcloud"> -->
+            <!-- <a href="#" class="tag-cloud-link"></a> -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- </div> -->
+         </div>
       </section>
       <footer class="ftco-footer ftco-section">
          <div class="container">

@@ -38,24 +38,24 @@
                   <!-- <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li> -->
                </ul>
             </div>
-			<div class="language-switch">
-				<span class="lang-text on">EN</span>
-				<label class="toggle-container">
-					<input id="language-toggle" type="checkbox">
-					<span class="toggle-slider"></span>
-				</label>
-				<span class="lang-text off">FR</span>
-			</div>
-			<script>
-				const toggle = document.getElementById('language-toggle');
-				toggle.checked = false;
-				toggle.addEventListener('change', function () {
-					if (this.checked) {
-						window.location.href = '/fr';
-					}
-				});
-			</script>
-		</div>
+            <div class="language-switch">
+               <span class="lang-text on">EN</span>
+               <label class="toggle-container">
+               <input id="language-toggle" type="checkbox">
+               <span class="toggle-slider"></span>
+               </label>
+               <span class="lang-text off">FR</span>
+            </div>
+            <script>
+               const toggle = document.getElementById('language-toggle');
+               toggle.checked = false;
+               toggle.addEventListener('change', function () {
+               	if (this.checked) {
+               		window.location.href = '/fr';
+               	}
+               });
+            </script>
+         </div>
       </nav>
       <section class="hero-wrap js-fullheight">
          <div class="overlay"></div>
@@ -141,16 +141,16 @@
          </div>
       </section>
       <!-- <section class="ftco-section ftco-hireme img" style="background-image: url(images/bg_1.jpg)"> -->
-         <!-- <div class="overlay"></div> -->
-         <!-- <div class="container"> -->
-            <!-- <div class="row justify-content-center"> -->
-               <!-- <div class="col-md-7 ftco-animate text-center"> -->
-                  <!-- <h2>I'm <span>available</span> for opportunities</h2> -->
-                  <!-- <p>Looking for a permanent contract ASAP</p> -->
-                  <!-- <p class="mb-0"><a target="_blank" href="https://www.linkedin.com/messaging/thread/new/" class="btn btn-primary py-3 px-5">Hire me</a></p> -->
-               <!-- </div> -->
-            <!-- </div> -->
-         <!-- </div> -->
+      <!-- <div class="overlay"></div> -->
+      <!-- <div class="container"> -->
+      <!-- <div class="row justify-content-center"> -->
+      <!-- <div class="col-md-7 ftco-animate text-center"> -->
+      <!-- <h2>I'm <span>available</span> for opportunities</h2> -->
+      <!-- <p>Looking for a permanent contract ASAP</p> -->
+      <!-- <p class="mb-0"><a target="_blank" href="https://www.linkedin.com/messaging/thread/new/" class="btn btn-primary py-3 px-5">Hire me</a></p> -->
+      <!-- </div> -->
+      <!-- </div> -->
+      <!-- </div> -->
       <!-- </section> -->
       <section class="ftco-section ftco-no-pb goto-here" id="resume-section">
          <div class="container">
@@ -756,15 +756,15 @@
          </section> -->
       <section class="ftco-section" id="blog-section">
          <div class="container">
-         <div class="row justify-content-center mb-5 pb-5">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-         <h2 class="mb-4">Blog</h2>
-         <p>Far far away, beyond the mountains of code</p>
-          </div>
+            <div class="row justify-content-center mb-5 pb-5">
+               <div class="col-md-7 heading-section text-center ftco-animate">
+                  <h2 class="mb-4">Blog</h2>
+                  <p>Far far away, beyond the mountains of code</p>
+               </div>
+            </div>
+            <h2>Available soon...</h2>
          </div>
-		 <h2>Available soon...</h2>
-         </div>
-         </section>
+      </section>
       <!-- 		<section class="ftco-section contact-section ftco-no-pb" id="contact-section">
          <div class="container">
          <div class="row justify-content-center mb-5 pb-3">
@@ -884,12 +884,13 @@
       <script src="js/jquery.animateNumber.min.js"></script>
       <script src="js/scrollax.min.js"></script>
       <script src="js/main.js"></script>
-	  <script>
-		window.addEventListener("load", function() {
-			if (window.location.hash) {
-				history.replaceState(null, null, window.location.pathname);
-			}
-		});
-	  </script>
+      <script>
+         window.addEventListener("load", function() {
+         	if (window.location.hash) {
+         		history.replaceState(null, null, window.location.pathname);
+         	}
+         });
+          
+      </script>
    </body>
 </html>
