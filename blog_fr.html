@@ -39,6 +39,14 @@
                   <!-- <li class="nav-item"><a href="index_fr.html#contact-section" class="nav-link"><span>Contact</span></a></li> -->
                </ul>
             </div>
+            <div class="language-switch">
+                <span class="lang-text off">EN</span>
+                <label class="toggle-container">
+                   <input id="language-toggle" type="checkbox">
+                   <span class="toggle-slider"></span>
+                </label>
+                <span class="lang-text on">FR</span>
+            </div>			
          </div>
       </nav>
       <section class="ftco-section">
@@ -54,7 +62,16 @@
 					const host = window.location.origin;
 				   
 					const currentHash = hashLink || sessionStorage.getItem('currentHash');
-					if (!currentHash) {
+					
+					const toggle = document.getElementById('language-toggle');
+					toggle.checked = true;         
+					toggle.addEventListener('change', function () {
+						if (!this.checked) {
+							window.location.href = currentHash ? `/en/blog#${currentHash}` : '/en';
+						}
+					});					
+					
+					if (!currentHash) {					 
 					  articleShape.innerHTML = errorArticle;
 					} else {
 					   sessionStorage.setItem('currentHash', currentHash);
