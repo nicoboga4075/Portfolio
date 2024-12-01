@@ -50,40 +50,24 @@
 					const articleShape = document.getElementById('articleShape'); 
 					const iframe = document.getElementById('iframeArticle');
 					const hashLink = window.location.hash ? window.location.hash.substring(1) : '';
-					const articlesPrestamatch = ['sur-quels-criteres-choisir-une-agence-web', '5-conseils-pour-un-nom-de-marque-parfait'];
 					const errorArticle = 'Oops ! Une erreur est survenue. Réessayez plus tard.';
-					const origin = window.location.origin;
-					const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+					const host = window.location.origin;
 				   
 					const currentHash = hashLink || sessionStorage.getItem('currentHash');
 					if (!currentHash) {
 					  articleShape.innerHTML = errorArticle;
 					} else {
 					   sessionStorage.setItem('currentHash', currentHash);
-					   history.replaceState(null, null, window.location.pathname);
-					   
-					   const isPrestamatch = articlesPrestamatch.includes(currentHash);
-					   const host = isPrestamatch ? 'https://prestamatch.com' : origin;
-					   const urlArticle = isPrestamatch ? `${host}/${currentHash}` : `${host}/articles/${currentHash}_fr.html`;
+					   history.replaceState(null, null, window.location.pathname);					   
+					   const urlArticle =`${host}/articles/${currentHash}_fr.html`;
 					 
 					   iframe.src = urlArticle;
 					 
-					   iframe.onload = () => {
-							
-							const targetUrl = isPrestamatch ? proxyUrl + urlArticle : urlArticle;
-							const parameters = { 
-								method: 'GET',
-								headers: {
-									'Origin': origin,
-									'X-Requested-With': 'XMLHttpRequest'
-								}
-							};
-					 
-							fetch(targetUrl, parameters)
+					   iframe.onload = () => {					 
+							fetch(urlArticle)
 							.then(response => response.text())
-							.then(html => {							
-							
-								if(html.includes('See /corsdemo for more info') || html.includes("Cette page n'existe plus sur Prestamatch") || html.includes("It seems you've hit a broken link or the page has moved")){
+							.then(html => {													
+								if(html.includes("It seems you've hit a broken link or the page has moved")){
 									throw new Error();
 								}		
 								
@@ -95,17 +79,8 @@
 				 
 								const footer = doc.querySelector('.footer');
 								if (footer) footer.remove();
-								
-								const docArticle = !isPrestamatch ? doc.body.innerHTML : doc.body.innerHTML
-									.replace('Nous avons', "J'ai")
-									.replace('notre site','le site')
-									.replace('img/articles','images')
-									.replaceAll('<center><a>','')
-									.replaceAll('</a></center>','')
-									.replaceAll('<center>','').replaceAll('</center>','');
-									
-								articleShape.innerHTML =  docArticle + articleShape.innerHTML;	
-								
+																	
+								articleShape.innerHTML =  doc.body.innerHTML + articleShape.innerHTML;									
 							})
 							.catch(error => {
 								articleShape.innerHTML = errorArticle;
@@ -121,10 +96,10 @@
                      <div class="bio mr-5">
                         <img src="images/about.jpg" class="img-fluid mb-4">
                      </div>
-                     <div class="desc">
+                     <div class="desc" style="text-align:center;">
                         <h3>Nicolas BOGALHEIRO</h3>
-                        <p>Ingénieur logiciel</p>
-                        <p style="text-align:center">Scanne-moi</p>
+                        <p>Ingénieur Logiciel</p>
+                        <p>Scanne-moi</p>
                         <img src="images/qrcode.png" style="max-width:15vw;">
                      </div>
                   </div>

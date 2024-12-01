@@ -44,7 +44,65 @@
       <section class="ftco-section">
          <div class="container">
             <div class="row">
-               <div class="col-lg-8 ftco-animate">
+               <div class="col-lg-8 ftco-animate" id="articleShape">
+				<iframe id="iframeArticle" style="visibility:hidden;"></iframe>
+                  <script id="loadArticleScript">
+					const articleShape = document.getElementById('articleShape'); 
+					const iframe = document.getElementById('iframeArticle');
+					const hashLink = window.location.hash ? window.location.hash.substring(1) : '';
+					const errorArticle = 'Oops ! An error has occurred. Try again later.';
+					const host = window.location.origin;
+				   
+					const currentHash = hashLink || sessionStorage.getItem('currentHash');
+					if (!currentHash) {
+					  articleShape.innerHTML = errorArticle;
+					} else {
+					   sessionStorage.setItem('currentHash', currentHash);
+					   history.replaceState(null, null, window.location.pathname);					   
+					   const urlArticle =`${host}/articles/${currentHash}_en.html`;
+					 
+					   iframe.src = urlArticle;
+					 
+					   iframe.onload = () => {					 
+							fetch(urlArticle)
+							.then(response => response.text())
+							.then(html => {													
+								if(html.includes("It seems you've hit a broken link or the page has moved")){
+									throw new Error();
+								}		
+								
+								const parser = new DOMParser();
+								const doc = parser.parseFromString(html, 'text/html');
+				 
+								const header = doc.querySelector('.header');
+								if (header) header.remove();
+				 
+								const footer = doc.querySelector('.footer');
+								if (footer) footer.remove();
+																	
+								articleShape.innerHTML =  doc.body.innerHTML + articleShape.innerHTML;									
+							})
+							.catch(error => {
+								articleShape.innerHTML = errorArticle;
+							})
+							.finally(() => {
+								document.getElementById('iframeArticle').remove();
+								document.getElementById('loadArticleScript').remove();
+							});
+						}; 
+					}
+                  </script>
+				  <div class="about-author d-flex p-4 bg-light">
+                     <div class="bio mr-5">
+                        <img src="images/about.jpg" class="img-fluid mb-4">
+                     </div>
+                     <div class="desc" style="text-align:center;">
+                        <h3>Nicolas BOGALHEIRO</h3>
+                        <p>Software Engineer</p>
+                        <p>Scan me</p>
+                        <img src="images/qrcode.png" style="max-width:15vw;">
+                     </div>
+                  </div>
                </div>
             </div>
          </div>
