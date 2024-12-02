@@ -127,19 +127,10 @@
       <footer class="ftco-footer ftco-section">
          <div class="container">
             <div class="row mb-5">
-               <div class="col-md-6">
+               <div class="col-md-8">
                   <div class="ftco-footer-widget mb-4">
                      <h2 class="ftco-heading-2">About</h2>
                      <p>Far far away, beyond the mountains of code, far from the lands of outdated designs and clunky interfaces, there lives the web developer. Crafting seamless user experiences, building responsive websites and breathing life into lines of code, the engineer turns ideas into digital reality.</p>
-                  </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="ftco-footer-widget mb-4 ml-md-4">
-                     <h2 class="ftco-heading-2">Links</h2>
-                     <ul class="list-unstyled">
-                        <li><a href="#about-section"><span class="icon-long-arrow-right mr-2"></span>Profile</a></li>
-                        <li><a href="#services-section"><span class="icon-long-arrow-right mr-2"></span>Services</a></li>
-                     </ul>
                   </div>
                </div>
                <div class="col-md-4">
@@ -147,11 +138,11 @@
                      <h2 class="ftco-heading-2">Have a question ?</h2>
                      <div class="block-23 mb-3">
                         <ul>
-                           <li><a href="mailto:nicolas.bogalheiro@gmail.com"><span class="icon icon-envelope"></span><span class="text">nicolas.bogalheiro@gmail.com</span></a></li>
+                           <li><a href="mailto:nicolas.bogalheiro@gmail.com"><span class="icon icon-envelope"></span><span class="text">&nbsp;&nbsp;nicolas.bogalheiro@gmail.com</span></a></li>
                         </ul>
                      </div>
                      <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
-                        <li class="ftco-animate"><a target="_blank" href="https://www.linkedin.com/in/nicolas-bogalheiro-126a7616b"><span class="icon-linkedin"></span></a></li>
+                        <li class="ftco-animate"><a target="_blank" href="https://www.linkedin.com/in/nicolas-bogalheiro-126a7616b/?locale=en_US"><span class="icon-linkedin"></span></a></li>
                         <li class="ftco-animate"><a target="_blank" href="https://github.com/nicoboga4075"><span class="icon-github"></span></a></li>
                      </ul>
                   </div>
@@ -185,5 +176,14 @@
       <script src="js/jquery.animateNumber.min.js"></script>
       <script src="js/scrollax.min.js"></script>
       <script src="js/main.js"></script>
+      <script>
+		 window.addEventListener('scroll', () => {
+			  if (window.scrollY === 0) {
+				document.querySelector('.off').classList.add('no-scroll');
+			  } else {
+				document.querySelector('.off').classList.remove('no-scroll');
+			  }
+		 });
+      </script>
    </body>
 </html>

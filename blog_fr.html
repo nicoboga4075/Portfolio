@@ -228,19 +228,10 @@
       <footer class="ftco-footer ftco-section">
          <div class="container">
             <div class="row mb-5">
-               <div class="col-md-6">
+               <div class="col-md-8">
                   <div class="ftco-footer-widget mb-4">
                      <h2 class="ftco-heading-2">À propos</h2>
                      <p>Loin, très loin, au-delà des montagnes de code, loin des terres de designs dépassés et d’interfaces obsolètes, ici gît le développeur web. Visant des expériences utilisateurs fluides, construisant des sites web adaptatifs et insufflant la vie à des lignes de code, l'ingénieur transforme les idées en réalité numérique.</p>
-                  </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="ftco-footer-widget mb-4 ml-md-4">
-                     <h2 class="ftco-heading-2">Raccourcis</h2>
-                     <ul class="list-unstyled">
-                        <li><a href="#about-section"><span class="icon-long-arrow-right mr-2"></span>Profile</a></li>
-                        <li><a href="#services-section"><span class="icon-long-arrow-right mr-2"></span>Services</a></li>
-                     </ul>
                   </div>
                </div>
                <div class="col-md-4">
@@ -248,7 +239,7 @@
                      <h2 class="ftco-heading-2">Une question ?</h2>
                      <div class="block-23 mb-3">
                         <ul>
-                           <li><a href="mailto:nicolas.bogalheiro@gmail.com"><span class="icon icon-envelope"></span><span class="text">nicolas.bogalheiro@gmail.com</span></a></li>
+                           <li><a href="mailto:nicolas.bogalheiro@gmail.com"><span class="icon icon-envelope"></span><span class="text">&nbsp;&nbsp;nicolas.bogalheiro@gmail.com</span></a></li>
                         </ul>
                      </div>
                      <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
@@ -286,5 +277,14 @@
       <script src="js/jquery.animateNumber.min.js"></script>
       <script src="js/scrollax.min.js"></script>
       <script src="js/main.js"></script>
+      <script>
+		 window.addEventListener('scroll', () => {
+			  if (window.scrollY === 0) {
+				document.querySelector('.off').classList.add('no-scroll');
+			  } else {
+				document.querySelector('.off').classList.remove('no-scroll');
+			  }
+		 });
+      </script>
    </body>
 </html>
