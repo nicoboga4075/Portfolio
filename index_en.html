@@ -943,9 +943,9 @@
 		   * Callback after Google Identity Services library is loaded.
 		   */
 		  function gisLoaded() {
-			const CLIENT_ID = window.location.hostname === "localhost" ? '1055389217083-06jfuk25voes9kmabavavhh2o4hmt4v1.apps.googleusercontent.com' : '1055389217083-6n7d4lmadmau3hs2mp93s9677i83pplc.apps.googleusercontent.com';
+			const id = window.location.hostname === "localhost" ? '1055389217083-06jfuk25voes9kmabavavhh2o4hmt4v1.apps.googleusercontent.com' : '1055389217083-6n7d4lmadmau3hs2mp93s9677i83pplc.apps.googleusercontent.com';
 			tokenClient = google.accounts.oauth2.initTokenClient({
-			  client_id: CLIENT_ID,
+			  client_id: id,
 			  scope: 'https://www.googleapis.com/auth/gmail.send',
 			  callback: (resp) => {
 				if (resp.error !== undefined) {
