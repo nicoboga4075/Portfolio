@@ -20,3 +20,28 @@
   from = "/fr/blog"
   to = "/blog_fr.html"
   status = 200
+
+[[redirects]]
+  from = "/404"
+  to = "/404.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/terms"
+  to = "/terms_en.html"
+  status = 200
+
+[[redirects]]
+  from = "/fr/terms"
+  to = "/terms_fr.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/policy"
+  to = "/policy_en.html"
+  status = 200
+
+[[redirects]]
+  from = "/fr/policy"
+  to = "/policy_fr.html"
+  status = 200

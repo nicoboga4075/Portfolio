@@ -11,5 +11,10 @@
 /blog_en.html /en/blog 301!
 /blog_fr /fr/blog 301!
 /blog_fr.html /fr/blog 301!
-/404  /not-found  301!
-/404.html  /not-found  301!
+/404.html /404 301!
+/terms.html /en/terms 301!
+/terms_en.html /en/terms 301!
+/terms_fr.html /fr/terms 301!
+/policy.html /en/policy 301!
+/policy_en.html /en/policy 301!
+/policy_fr.html /fr/policy 301!
