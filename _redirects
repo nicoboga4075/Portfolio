@@ -1,16 +1,10 @@
 / /en 301!
-/index /en 301!
 /index.html /en 301!
-/index_en /fr 301!
 /index_en.html /en 301!
-/index_fr /fr 301!
 /index_fr.html /fr 301!
-/blog /en 301!
 /blog.html /en 301!
-/blog_en /en/blog 301!
 /blog_en.html /en/blog 301!
-/blog_fr /fr/blog 301!
-/blog_fr.html /fr/blog 301!
+/blog_fr.html /fr/blog 301! 
 /404.html /404 301!
 /terms.html /en/terms 301!
 /terms_en.html /en/terms 301!
