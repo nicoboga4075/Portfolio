@@ -255,6 +255,8 @@
 				scrollTop: $('.goto-here').offset().top
 			}, 500, 'easeInOutExpo');
 			
+			sessionStorage.setItem('currentHash', $('.goto-here').attr('id'));
+			
 			return false;
 		});
 	};
