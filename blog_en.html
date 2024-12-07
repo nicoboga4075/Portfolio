@@ -5,21 +5,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="author" content="Nicolas BOGALHEIRO">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" crossorigin="anonymous">
       <base href="../">
       <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
       <link rel="manifest" href="./site.webmanifest">
-      <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
       <link rel="stylesheet" href="css/animate.css">
       <link rel="stylesheet" href="css/owl.carousel.min.css">
       <link rel="stylesheet" href="css/owl.theme.default.min.css">
       <link rel="stylesheet" href="css/magnific-popup.css">
       <link rel="stylesheet" href="css/aos.css">
-      <link rel="stylesheet" href="css/ionicons.min.css">
-      <link rel="stylesheet" href="css/flaticon.css">
-      <link rel="stylesheet" href="css/icomoon.css">
+      <link rel="preload" href="css/icomoon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
       <link rel="stylesheet" href="css/style.css">
    </head>
    <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -27,7 +25,7 @@
          <div class="container">
             <a class="navbar-brand" href="/en"><span>P</span>ortfolio</a>
             <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="oi oi-menu"></span> Menu
+            <span class="icon icon-menu"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                <ul class="navbar-nav nav ml-auto">
@@ -110,15 +108,15 @@
 						}; 
 					}
                   </script>
-				  <div class="about-author d-flex p-4 bg-light">
+                  <div class="about-author d-flex p-4 bg-light">
                      <div class="bio mr-5">
-                        <img src="images/about.jpg" class="img-fluid mb-4">
+                        <img src="images/about.jpg" class="img-fluid mb-4" alt="Profile Picture" loading="lazy">
                      </div>
                      <div class="desc" style="text-align:center;">
                         <h3>Nicolas BOGALHEIRO</h3>
                         <p>Software Engineer</p>
                         <p>Scan me</p>
-                        <img src="images/qrcode.png" style="max-width:15vw;">
+                        <img src="images/qrcode.png" style="max-width:15vw;" alt="Linkedin QR Code" loading="lazy">
                      </div>
                   </div>
                </div>
@@ -182,7 +180,7 @@
       <script>
 		 document.getElementById('year').innerText = new Date().getFullYear();
 		 window.addEventListener('scroll', () => {
-			  if (window.scrollY === 0) {
+			  if (window.scrollY <= 5) {
 				document.querySelector('.off').classList.add('no-scroll');
 			  } else {
 				document.querySelector('.off').classList.remove('no-scroll');

@@ -4,23 +4,23 @@
       <title>Portfolio</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://accounts.google.com https://apis.google.com  https://www.googleapis.com 'unsafe-inline';">
+      <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://accounts.google.com https://apis.google.com  https://www.googleapis.com 'unsafe-inline'; object-src 'none';">
       <meta name="author" content="Nicolas BOGALHEIRO">
       <meta name="description" content="Explorez mon portfolio pour découvrir mes expériences professionnelles en tant qu'ingénieur développeur et contactez-moi pour des collaborations">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" crossorigin="anonymous">
       <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
       <link rel="manifest" href="./site.webmanifest">
-      <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
       <link rel="stylesheet" href="css/animate.css">
       <link rel="stylesheet" href="css/owl.carousel.min.css">
       <link rel="stylesheet" href="css/owl.theme.default.min.css">
       <link rel="stylesheet" href="css/magnific-popup.css">
       <link rel="stylesheet" href="css/aos.css">
-      <link rel="stylesheet" href="css/ionicons.min.css">
-      <link rel="stylesheet" href="css/flaticon.css">
-      <link rel="stylesheet" href="css/icomoon.css">
+      <link rel="preload" href="css/ionicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <link rel="preload" href="css/flaticon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <link rel="preload" href="css/icomoon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
       <link rel="stylesheet" href="css/style.css">
    </head>
    <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -28,7 +28,7 @@
          <div class="container">
             <a href="/fr" class="navbar-brand"><span>P</span>ortfolio</a>
             <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="oi oi-menu"></span> Menu
+            <span class="icon icon-menu"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                <ul class="navbar-nav nav ml-auto">
@@ -117,35 +117,35 @@
          <div class="container">
             <div class="row">
                <div class="col-sm ftco-animate">
-                  <a class="partner" target="_blank" href="https://www.microsoft.com"><img src="images/partner-1.png" width="1000" height="406" class="img-fluid" alt="Microsoft"></a>
+                  <a class="partner" target="_blank" href="https://www.microsoft.com"><img src="images/partner-1.png" width="1000" height="406" class="img-fluid" alt="Microsoft" loading="lazy"></a>
                </div>
                <div class="col-sm ftco-animate">
-                  <a class="partner" target="_blank" href="https://www.android.com"><img src="images/partner-2.png" width="1000" height="406" class="img-fluid" alt="Android"></a>
+                  <a class="partner" target="_blank" href="https://www.android.com"><img src="images/partner-2.png" width="1000" height="406" class="img-fluid" alt="Android" loading="lazy"></a>
                </div>
                <div class="col-sm ftco-animate">
-                  <a class="partner" target="_blank" href="https://www.java.com"><img src="images/partner-3.png" width="1000" height="406" class="img-fluid" alt="Java"></a>
+                  <a class="partner" target="_blank" href="https://www.java.com"><img src="images/partner-3.png" width="1000" height="406" class="img-fluid" alt="Java" loading="lazy"></a>
                </div>
                <div class="col-sm ftco-animate">
-                  <a class="partner" target="_blank" href="https://www.google.com"><img src="images/partner-4.png" width="1000" height="406" class="img-fluid" alt="Google"></a>
+                  <a class="partner" target="_blank" href="https://www.google.com"><img src="images/partner-4.png" width="1000" height="406" class="img-fluid" alt="Google" loading="lazy"></a>
                </div>
                <div class="col-sm ftco-animate">
-                  <a class="partner" target="_blank" href="https://www.adobe.com"><img src="images/partner-5.png" width="1000" height="406" class="img-fluid" alt="Adobe"></a>
+                  <a class="partner" target="_blank" href="https://www.adobe.com"><img src="images/partner-5.png" width="1000" height="406" class="img-fluid" alt="Adobe" loading="lazy"></a>
                </div>
             </div>
          </div>
       </section>
-      <!-- <section class="ftco-section ftco-hireme img" style="background-image: url(images/bg_1.jpg)"> -->
-      <!-- <div class="overlay"></div> -->
-      <!-- <div class="container"> -->
-      <!-- <div class="row justify-content-center"> -->
-      <!-- <div class="col-md-7 ftco-animate text-center"> -->
-      <!-- <h2>Je suis <span>disponible</span> pour des opportunités</h2> -->
-      <!-- <p>En recherche d'un CDI ASAP</p> -->
-      <!-- <p class="mb-0"><a target="_blank" href="https://www.linkedin.com/messaging/thread/new/" class="btn btn-primary py-3 px-5">M'embaucher</a></p> -->
-      <!-- </div> -->
-      <!-- </div> -->
-      <!-- </div> -->
-      <!-- </section> -->
+      <!-- <section class="ftco-section ftco-hireme img" style="background-image: url(images/bg_1.jpg)">
+      <div class="overlay"></div>
+      <div class="container">
+      <div class="row justify-content-center">
+      <div class="col-md-7 ftco-animate text-center">
+      <h2>Je suis <span>disponible</span> pour des opportunités</h2>
+      <p>En recherche d'un CDI ASAP</p>
+      <p class="mb-0"><a target="_blank" href="https://www.linkedin.com/messaging/thread/new/" class="btn btn-primary py-3 px-5">M'embaucher</a></p>
+      </div>
+      </div>
+      </div>
+      </section> -->
       <section class="ftco-section ftco-no-pb" id="resume-section">
          <div class="container">
             <div class="row">
@@ -262,7 +262,7 @@
                            <div class="bg-white rounded-lg shadow p-4">
                               <h2 class="h5 font-weight-bold text-center mb-4">C#</h2>
                               <div class="block-21 mb-4 d-flex" style="justify-content: center;">
-                                 <a class="blog-img"></a>										
+                                <a class="blog-img" target="_blank" href="https://learn.microsoft.com/fr-fr/dotnet/csharp/" aria-label="C#"></a>										
                               </div>
                               <div class="row text-center mt-4">
                                  <div class="col-6 border-right">
@@ -280,7 +280,7 @@
                            <div class="bg-white rounded-lg shadow p-4">
                               <h2 class="h5 font-weight-bold text-center mb-4">Python</h2>
                               <div class="block-21 mb-4 d-flex" style="justify-content: center;">
-                                 <a class="blog-img"></a>										
+                                <a class="blog-img" target="_blank" href="https://www.python.org/" aria-label="Python"></a>										
                               </div>
                               <div class="row text-center mt-4">
                                  <div class="col-6 border-right">
@@ -298,7 +298,7 @@
                            <div class="bg-white rounded-lg shadow p-4">
                               <h2 class="h5 font-weight-bold text-center mb-4">Javascript</h2>
                               <div class="block-21 mb-4 d-flex" style="justify-content: center;">
-                                 <a class="blog-img"></a>										
+                                <a class="blog-img" target="_blank" href="https://developer.mozilla.org/fr/docs/Web/JavaScript" aria-label="Javascript"></a>										
                               </div>
                               <div class="row text-center mt-4">
                                  <div class="col-6 border-right">
@@ -318,7 +318,7 @@
                            <div class="bg-white rounded-lg shadow p-4">
                               <h2 class="h5 font-weight-bold text-center mb-4">SQL</h2>
                               <div class="block-21 mb-4 d-flex" style="justify-content: center;">
-                                 <a class="blog-img"></a>										
+                                <a class="blog-img" target="_blank" href="https://sql.sh/" aria-label="SQL"></a>										
                               </div>
                               <div class="row text-center mt-4">
                                  <div class="col-6 border-right">
@@ -336,7 +336,7 @@
                            <div class="bg-white rounded-lg shadow p-4">
                               <h2 class="h5 font-weight-bold text-center mb-4">Projet</h2>
                               <div class="block-21 mb-4 d-flex" style="justify-content: center;">
-                                 <a class="blog-img"></a>										
+                                <a class="blog-img" target="_blank" href="https://blog.hubspot.fr/marketing/difference-cycle-en-v-et-methode-agile" aria-label="Projet"></a>										
                               </div>
                               <div class="row text-center mt-4">
                                  <div class="col-6 border-right">
@@ -354,7 +354,7 @@
                            <div class="bg-white rounded-lg shadow p-4">
                               <h2 class="h5 font-weight-bold text-center mb-4">DevOps</h2>
                               <div class="block-21 mb-4 d-flex" style="justify-content: center;">
-                                 <a class="blog-img"></a>										
+                                <a class="blog-img" target="_blank" href="https://azure.microsoft.com/fr-fr/resources/cloud-computing-dictionary/what-is-devops" aria-label="DevOps"></a>										
                               </div>
                               <div class="row text-center mt-4">
                                  <div class="col-6 border-right">
@@ -374,7 +374,7 @@
                            <div class="bg-white rounded-lg shadow p-4">
                               <h2 class="h5 font-weight-bold text-center mb-4">Design</h2>
                               <div class="block-21 mb-4 d-flex" style="justify-content: center;">
-                                 <a class="blog-img"></a>										
+                                <a class="blog-img" target="_blank" href="https://developer.mozilla.org/fr/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure" aria-label="Design"></a>										
                               </div>
                               <div class="row text-center mt-4">
                                  <div class="col-6 border-right">
@@ -392,7 +392,7 @@
                            <div class="bg-white rounded-lg shadow p-4">
                               <h2 class="h5 font-weight-bold text-center mb-4">Extensions</h2>
                               <div class="block-21 mb-4 d-flex" style="justify-content: center;">
-                                 <a class="blog-img"></a>										
+                                <a class="blog-img" target="_blank" href="https://www.geeksforgeeks.org/differences-between-bootstrap-and-jquery-ui/" aria-label="Extensions"></a>										
                               </div>
                               <div class="row text-center mt-4">
                                  <div class="col-6 border-right">
@@ -410,7 +410,7 @@
                            <div class="bg-white rounded-lg shadow p-4">
                               <h2 class="h5 font-weight-bold text-center mb-4">Cybersécurité</h2>
                               <div class="block-21 mb-4 d-flex" style="justify-content: center;">
-                                 <a class="blog-img"></a>										
+                                <a class="blog-img" target="_blank" href="https://owasp.org/www-community/OWASP_Risk_Rating_Methodology" aria-label="Cybersécurité"></a>										
                               </div>
                               <div class="row text-center mt-4">
                                  <div class="col-6 border-right">
@@ -430,7 +430,7 @@
                            <div class="bg-white rounded-lg shadow p-4">
                               <h2 class="h5 font-weight-bold text-center mb-4">+</h2>
                               <div class="block-21 mb-4 d-flex" style="justify-content: center;">
-                                 <a class="blog-img"></a>										
+                                <a class="blog-img" target="_blank" href="#" aria-label="+"></a>										
                               </div>
                               <div class="row text-center mt-4">
                                  <div class="col-6 border-right">
@@ -570,12 +570,12 @@
             <div class="row justify-content-center py-5 mt-5">
                <div class="col-md-12 heading-section text-center ftco-animate">
                   <h2 class="mb-4">Services</h2>
-                  <p>Programmation, Assistance technique & Formation</p>
+                  <p>Programmation, Assistance Technique & Formation</p>
                </div>
             </div>
             <div class="row">
                <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow">
+                  <a class="services-1 shadow" href="#" aria-label="Data Viz">
                      <span class="icon">
                      <i class="flaticon-analysis"></i>
                      </span>
@@ -586,7 +586,7 @@
                   </a>
                </div>
                <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow">
+                  <a class="services-1 shadow" href="#" aria-label="Relation Client">
                      <span class="icon">
                      <i class="flaticon-flasks"></i>
                      </span>
@@ -597,7 +597,7 @@
                   </a>
                </div>
                <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow">
+                  <a class="services-1 shadow" href="#" aria-label="Développement Web">
                      <span class="icon">
                      <i class="flaticon-ideas"></i>
                      </span>
@@ -608,7 +608,7 @@
                   </a>
                </div>
                <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow">
+                  <a class="services-1 shadow" href="#" aria-label="Transformation Digitale">
                      <span class="icon">
                      <i class="flaticon-innovation"></i>
                      </span>
@@ -619,23 +619,23 @@
                   </a>
                </div>
                <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow">
+                  <a class="services-1 shadow" href="#" aria-label="Gestion de Projet">
                      <span class="icon">
                      <i class="flaticon-ux-design"></i>
                      </span>
                      <div class="desc">
-                        <h3 class="mb-5">Gestion de Projet</h3>
+                        <h3 class="mb-5">Gestion De Projet</h3>
                         <p></p>
                      </div>
                   </a>
                </div>
                <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow">
+                  <a class="services-1 shadow" href="#" aria-label="Support technique">
                      <span class="icon">
                      <i class="flaticon-idea"></i>
                      </span>
                      <div class="desc">
-                        <h3 class="mb-5">Support technique</h3>
+                        <h3 class="mb-5">Support Technique</h3>
                         <p></p>
                      </div>
                   </a>
@@ -992,8 +992,8 @@
 			}
 		}
       </script>
-      <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-      <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+      <script defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()" crossorigin="anonymous"></script>
+      <script defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
       <script type="text/javascript">
          window.addEventListener("load", function() {
 			document.getElementById('year').innerText = new Date().getFullYear();
@@ -1030,7 +1030,7 @@
          });
 
          window.addEventListener('scroll', () => {
-			if (window.scrollY === 0) {
+			if (window.scrollY <= 5) {
 				document.querySelector('.off').classList.add('no-scroll');
 			} else {
 				document.querySelector('.off').classList.remove('no-scroll');
