@@ -244,25 +244,6 @@
     fixedContentPos: false
   });
 
-
-  var goHere = function() {
-
-		$('.mouse-icon').on('click', function(event){
-			
-			event.preventDefault();
-
-			$('html,body').animate({
-				scrollTop: $('.goto-here').offset().top
-			}, 500, 'easeInOutExpo');
-			
-			sessionStorage.setItem('currentHash', $('.goto-here').attr('id'));
-			
-			return false;
-		});
-	};
-	goHere();
-
-
 var TxtRotate = function(el, toRotate, period) {
   this.toRotate = toRotate;
   this.el = el;

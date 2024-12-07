@@ -8741,8 +8741,8 @@ h1, h2, h3, h4, h5,
     padding: 0 20px; }
     @media (max-width: 991.98px) {
       .ftco-partner .partner {
-        padding: 0 70px;
-        margin-bottom: 40px; } }
+       display: none; }
+	}
 
 .services-1 {
   margin-bottom: 40px;
@@ -9689,12 +9689,12 @@ textarea.form-control {
 
 .lang-text {
     font-size: 16px;
-	font-weight:bold;
+	font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .lang-text.on {
-    color: var(--blue);
+    color: #3e64ff;
 }
 
 .lang-text.off {
@@ -9703,8 +9703,14 @@ textarea.form-control {
 
 @media(max-width: 991.98px){
 	.lang-text.off.no-scroll {
-		color: rgba(255, 255, 255, 0.5);
-	}	
+		color: var(--white);
+	}
+	.ftco-navbar-light:not(.awake) .navbar-brand:hover {
+		color: var(--white)!important;
+	}
+	.mouse {
+		display: none;
+	}
 }
 
 .toggle-container {
@@ -9730,7 +9736,7 @@ textarea.form-control {
 }
 
 #language-toggle {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 #language-toggle:checked + .toggle-slider {
