@@ -1022,9 +1022,9 @@
 			const contactForm = document.getElementById('contactForm'); 
 			contactForm.addEventListener('submit', async (event) => {
 			  event.preventDefault();
-			  const name = document.getElementById('nameField').value;
-			  const subject = document.getElementById('subjectField').value;
-			  const message = document.getElementById('messageField').value;
+			  const name = document.getElementById('nameField').value.trim();
+			  const subject = document.getElementById('subjectField').value.trim();
+			  const message = document.getElementById('messageField').value.trim();
 			  await sendEmail(name, subject, message);
 			});
          });
