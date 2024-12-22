@@ -1,0 +1,130 @@
+<div class="articleContainer">
+   <div class="titleCenter">Une application MCS : Kézako ?</div>
+   <div class="secondTitle">Avec l’omniprésence du numérique dans nos vies, protéger les systèmes informatiques est devenu indispensable. Mais assurer leur sécurité ne se limite pas à une mise en place initiale de protections : il faut les surveiller et les mettre à jour régulièrement pour éviter les incidents. <b>C’est là qu’intervient le Maintien en Condition de Sécurité (MCS), un processus qui consiste à réduire les failles pouvant être exploitées par des cyberattaques, communément appelées les vulnérabilités</b>. Le Maintien en Condition Opérationnelle (MCO), quant à lui, vise à s’assurer que les équipements informatiques comme les serveurs ou les réseaux fonctionnent correctement et durablement. En résumé, le MCO se concentre sur le bon fonctionnement technique tandis que le MCS se focalise sur la protection contre les menaces extérieures. Les deux sont essentiels : une panne non réglée peut laisser une porte ouverte aux attaques et une vulnérabilité non corrigée peut mettre hors service tout un système. Dans cet article, nous découvrirons ce qu’est une application MCS, pourquoi elle est essentielle pour toute organisation et comment elle contribue à renforcer durablement la sécurité des infrastructures numériques.
+   </div>
+   <p>L'augmentation des menaces de cybersécurité étant de plus en plus accentuée aujourd'hui, l’usage d’outils pour alerter les entreprises et les institutions est devenu incontournable. En effet, d’après un article du Monde datant du 27 mai 2020, les arnaques par courrier et SMS, pendant le confinement, ont pratiquement été multipliées par 5 ! Des applications d'aide au maintien en condition de sécurité (MCS) rentrent alors en jeu pour assurer sécurité, qualité et scalabilité mais c'est quoi au juste ? <b>Une application MCS permet d’alerter une organisation lorsqu’un risque est encouru sur un environnement défini par un de ses collaborateurs, le but étant d’automatiser et de faciliter les mécanismes d’aide à la décision</b>. Elle est généralement articulée en 4 parties :
+   <ul>
+      <li>la partie « Feed » chargée de la <b>veille des vulnérabilités</b> (scripting)</li>
+      <li>la partie « UI » équivalente à l'interface utilisateur (front-end)</li>
+      <li>la partie « API » dédiée à la gestion des requêtes utilisateurs et embarquant notamment le module de <b>calcul de risque ou CVSS</b> (back-end)</li>
+      <li>la partie « DB » stockant les données de l’API (database)</li>
+   </ul>
+   </p>
+   <p>Elle se base sur une <b>API REST</b> qui envoie des réponses en <b>JSON</b> et utilise un protocole sécurisé pour authentifier les utilisateurs (OAuth2 avec Python par exemple) et le protocole <b>HTTP</b> (HyperText Transfer Protocol) pour communiquer. L’application repose sur une <b>architecture client-serveur</b> et une mise en relation avec à minima une base de données (Postgre SQL ou Elastic Search par exemple). Le serveur désigne l’ensemble de l’API tandis que le client représente le logiciel qui envoie des requêtes à l’API. Les objectifs majeurs sont les suivants : la <b>confidentialité</b>, la <b>maintenabilité</b> mais aussi une gestion fine des actions que les utilisateurs ont le droit d'effectuer (<b>CRUD</b> : création, lecture, mise à jour ou suppression de ressources) et un paramétrage de l'application depuis la base de données.</p>
+   <img class="articleImage" src="/images/mcs-design.png" style="max-width:70vw;margin-bottom:15px;" alt="MCS Design">
+   <p>Pour rappel, six contraintes architecturales définissent un système REST :
+   <ol>
+      <li>
+         <i>Responsabilités séparées entre le client et le serveur</i>
+         <p>Cela permet de supporter la multiplicité des domaines organisationnels nécessaires à l’échelle de l’Internet et améliorer la portabilité de l’interface utilisateur sur plusieurs plateformes.</p>
+      </li>
+      <li>
+         <i>Absence de conservation de l’état de la session</i> 
+         <p>Chaque requête contient donc toutes les informations nécessaires pour que le serveur puisse y répondre et il n’y a pas besoin de maintenir une connexion permanente entre le client et le serveur. Cependant, l’authentification se montre plus complexe à gérer, impliquant l’intervention de tokens transmis à chaque requête. Le fonctionnement de ces derniers sera décrit plus tard.</p>
+      </li>
+      <li>
+         <i>Possibilité de mise en cache</i> 
+         <p>La performance et l’extensibilité se voient nettement améliorées car la mise en cache permet souvent d'éviter des requêtes redondantes, la surchage des serveurs et le gaspillage de bande passante.</p>
+      </li>
+      <li>
+         <i>Division en couches</i> 
+         <p>Le client doit ignorer la nature du serveur auquel il est connecté (intermédiaire ou final). Un serveur intermédiaire peut améliorer l’extensibilité du système en mettant en place une répartition de charge et un cache partagé, ou encore renforcer les politiques de sécurité.</p>
+      </li>
+      <li>
+         <i>Interface uniforme</i> 
+         <p>Contrainte fondamentale, elle découple l’architecture, permettant aux composants d’évoluer indépendamment. Elle se décompose en quatre parties :
+         <ul>
+            <li>
+               <i>Identification des ressources dans les requêtes via un URI</i>  
+               <p>Les ressources elles-mêmes sont conceptuellement distinctes des représentations qui sont retournées au client. Rappelons qu’un URI (Uniform Resource Identifier) est un court identifiant d’une ressource sur un réseau physique ou abstrait et dont la syntaxe respecte les normes Internet instaurées par le WWW (World Wide Web). Un URI peut être de type « locator » (URL) ou « name » (URN) ou les deux. Ici, l’URI n’est rien d’autre que l’adresse où se trouve la base de données avec laquelle l’API sera en interaction.</p>
+            </li>
+            <li>
+               <i>Manipulation des ressources par des représentations</i>  
+               <p>Chaque représentation d’une ressource fournit suffisamment d’informations au client pour modifier ou supprimer la ressource.</p>
+            </li>
+            <li>
+               <i>Messages autodescriptifs</i>  
+               <p>Chaque message contient assez d'informations pour savoir comment l'interpréter.</p>
+            </li>
+            <li>
+               <i>Hypermédia comme moteur d’état de l’application (HATEOAS)</i> 
+               <p>Après avoir accédé à une URI initiale de l’application, de manière analogue aux humains accédant à la page d’accueil d’un site web, le client doit être en mesure d’utiliser dynamiquement les hyperliens fournis par le serveur afin de découvrir toutes les actions possibles et les ressources dont il a besoin pour poursuivre la navigation.</p>
+            </li>
+         </ul>
+         </p>
+      </li>
+      <li>
+         <i>Avec code à la demande (contrainte facultative)</i> 
+         <p>Le serveur peut transférer du code exécutable au client. Ceci améliore l’extensibilité du système mais réduit la visibilité de l’organisation des ressources, et est donc optionnel.</p>
+      </li>
+   </ol>
+   </p>
+   <p>Nous allons désormais détailler le fonctionnement du protocole <b>OAuth2</b>, généralement utilisé pour authentifier les utilisateurs de l’API. Ce protocole libre permet d'autoriser le client à utiliser l'API et fonctionne à l'aide de tokens. Un <b>token</b> est une suite de caractères, long, chiffré et permettant à la contrainte sans état d'être implémentée, en étant transmis dans chaque requête du client vers le serveur. D’abord, il est important de bien différencier <b>authentification</b> et <b>identification</b>. La première permet, pour le système, de valider la légitimité de l’accès à l’entité tandis que la seconde donne lieu à la reconnaissance de l’entité dont l’identité a été définie précédemment. 
+   <ul>
+      <li>
+         <i>Phase d'authentification</i> 
+         <p>Dans un premier temps, le mécanisme utilise les informations d’authentification : email et mot de passe. Après ces vérifications, il crée un token avec des valeurs par défaut présentes en base qui seront dépendantes du contexte d’authentification (quel utilisateur est connecté ?). Un token est renvoyé et sert d’élément d’identification de l’utilisateur pour chaque requête vers le serveur API.</p>
+      </li>
+      <li>
+         <i>Phase d’identification</i> 
+         <p>Il s'agit ici de la gestion fine des droits de l’utilisateur. Lorsqu’une requête est envoyée vers le serveur API, plusieurs vérifications vont être réalisées :
+         <ul>
+            <li>
+               On vérifie premièrement :
+               <ul>
+                  <li>l’identité de l’utilisateur</li>
+                  <li>que le token fourni est correct</li>
+                  <li>l’existence de la ressource</li>
+                  <li>si l’action souhaitée est une action implémentée au sein de l’API</li>
+               </ul>
+            </li>
+            <li>
+               On vérifie ensuite l’autorisation, par ordre de priorité :
+               <ul>
+                  <li>de l’utilisateur à se connecter via l’application</li>
+                  <li>de l’application à effectuer l’action sur la ressource</li>
+                  <li>de l’utilisateur à effectuer l’action sur la ressource par rapport au contrat et à l’application</li>
+                  <li>de l’utilisateur à effectuer l’action sur la ressource par rapport au contrat et à l’application, selon un rôle</li>
+               </ul>
+            </li>
+         </ul>
+		 </p>
+         <p>Certaines vérifications d’identifications ou encore d’autorisations sont donc effectuées plusieurs fois. Ceci est nécessaire, bien que de la maintenance soit ajoutée. Il est indispensable pour une entreprise ou une institution d’ajouter des mesures de sécurité dans le fonctionnement de l’API. Il est souvent important d’augmenter la sécurité et la performance, au détriment de la maintenance s’il le faut.</p>
+      </li>
+   </ul>
+   </p>
+   <p>Nous allons enfin définir les variables intervenant généralement dans une application MCS. D'une part, les <b>environnements</b> et les <b>contextes</b> sont définis par l’utilisateur directement et sont donc des variables abstraites. D’autre part, <b>CPE, CVE et CVSS</b> apparaissent notamment dans la base américaine <a target="_blank" href="https://nvd.nist.gov/vuln/data-feeds">NVD</a> (National Vulnerability Database) et vont être récupérées via des scripts exécutés réguliérement (quotidiennement de préférence). Au même titre que la base japonaise <a target="_blank" href="https://jvndb.jvn.jp/en/feed">JVNDB</a> (Japanese Vulnerability National Database), elle a pour objectif de répertorier, maintenir et diffuser des informations sur des vulnérabilités découvertes ciblant les systèmes informatiques réels.
+   <ul>
+   <li>
+      Environnement (ENV) 
+      <p>Un environnement désigne le périmètre client, c’est-à-dire la « zone » dans lequel on retrouve l’ensemble des matériels et des logiciels système d’une entreprise. Il possède un ou plusieurs contextes. Il s’agit par exemple d’une DMZ (zone démilitarisée), c’est-à-dire un sous-réseau séparé du réseau local et isolé de celui-ci et d’Internet (ou d’un autre réseau) par un pare-feu. Ce sous-réseau filtré englobe les machines susceptibles d’être accédées depuis Internet sans besoin d’accès au réseau local.</p>
+   </li>
+   <li>
+      Contexte (CONT) 
+      <p>Un contexte peut être une application métier ou BO (Business Object), un framework, une librairie…. Il contient un ou plusieurs logiciels ou CPE. Après la définition d’un environnement et d’un contexte, l’utilisateur associe le CPE au contexte et toutes les caractéristiques qui en découlent. La collecte de ces données permet d’avoir des informations sur les vulnérabilités existantes sur un produit qu’un client (ou utilisateur) place dans un environnement et un contexte donnés. Cela revient à évaluer le potentiel danger créé par la vulnérabilité étudiée et à fournir une solution de contournement nécessaire (téléchargement de <b>patchs</b> par exemple).</p>
+   </li>
+   <li>
+      CPE 
+      <p>Le CPE (Common Platform Enumeration) peut être au choix :
+		 <ul>
+			<li>une application (« part » : « a »)</li>
+			<li>une plate-forme hardware (« part » : « h »)</li>
+			<li>un sytème d’exploitation (« part » : « o »)</li>
+		 </ul>
+	  </p>
+	  <p>Il doit être au plus proche de la version réellement installée. Chaque CPE possède un ou plusieurs CVE. Il est rendu unique par un URI pouvant être de 2 versions (V2 ou V3) et suivant les normes décrites <a target="_blank" href="https://nvd.nist.gov/products/cpe/search">ici</a>.</p>
+   </li>
+   <li>
+      CVE 
+      <p>La CVE (Common Vulnerabilities and Exposures) définit la vulnérabilité d’au moins un CPE. Elle est décrite notamment par la date de création, la date de publication, la date de mise à jour, la description, les références, les produits concernés et les métriques CVSS.</p>
+   </li>
+   <li>
+      CVSS 
+      <p>Le CVSS (Common Vulnerability Scoring System) permet d’évaluer la <b>criticité</b> des vulnérabilités selon des critères objectifs et mesurables comme la complexité d’accès ou encore la présence ou non de privilèges. Il établit trois scores par version (V2 et V3) :  <b>le score d’impact, le score d’exploitabilité et le score de base</b> qui résulte des deux autres. Les scores précédemment cités sont calculés à partir des ratios définis pour des paramètres particuliers comme, par exemple, la complexité d’accès et l’authentification. Pour plus de renseignements, cliquez <a target="_blank" href="https://nvd.nist.gov/vuln-metrics/cvss">ici</a>.
+      </p>
+   </li>
+   </ul>
+   </p>
+   <img class="articleImage" src="/images/mcs-example.png" style="max-width:70vw;margin-bottom:15px;" alt="MCS Example">
+   <p>En conclusion, une application MCS incarne une approche structurée et proactive pour anticiper et neutraliser les vulnérabilités informatiques. En alliant veille continue, automatisation des décisions et gestion fine des droits, elle permet aux organisations de mieux maîtriser leurs environnements numériques. Plus qu’un simple outil, elle devient un levier stratégique, indispensable face à l’évolution constante des cyberattaques. En complément de lecture, je vous conseille <a target="_blank" href="https://www.bassetti-group.com/le-maintien-en-condition-de-securite-mcs-un-outil-pour-couvrir-les-risques-de-securite-du-systeme-dinformation-si-dans-la-duree">cet article</a>.</p>
+</div>
