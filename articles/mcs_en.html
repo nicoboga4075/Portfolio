@@ -1,6 +1,6 @@
 <div class="articleContainer">
    <div class="titleCenter">What is a MSC application ?</div>
-   <div class="secondTitle">With the ubiquity of digital technology in our lives, protecting computer systems has become a necessity. But ensuring their safety is not just about putting protections in place initially : they need to be monitored and updated regularly to avoid incidents. <b>That’s where Maintenance in Security Condition (MSC) comes in, a process of reducing flaws that can be exploited by cyber attacks, commonly known as vulnerabilities</b>. Meanwhile, Maintenance in Operational Condition (MOC) aims to ensure that computer equipments such as servers or networks run properly and sustainably. In summary, MOC focuses on good technical running while MSC focuses on protection against external threats. Both are essential: an unresolved failure can leave a door open to attack and an unpatched vulnerability can take an entire system out of service. In this article, we’ll explore what a MSC application is, why it’s essential for any organization and how it can help make digital infrastructures more secure in the long run.
+   <div class="secondTitle">With the ubiquity of digital technology in our lives, protecting computer systems has become a necessity. But ensuring their safety is not just about putting protections in place initially : they need to be monitored and updated regularly to avoid incidents. <b>That’s where Maintenance in Security Condition (MSC) comes in, a process of reducing flaws that can be exploited by cyber attacks, commonly known as vulnerabilities</b>. Meanwhile, Maintenance in Operational Condition (MOC) aims to ensure that computer equipments such as servers or networks run properly and sustainably. In summary, MOC focuses on good technical running while MSC focuses on protection against external threats. Both are essential : an unresolved failure can leave a door open to attack and an unpatched vulnerability can take an entire system out of service. In this article, we’ll explore what a MSC application is, why it’s essential for any organization and how it can help make digital infrastructures more secure in the long run.
    </div>
    <p>The rise of cyber threats becoming more and more acute today, using tools so as to alert businesses and institutions has become a must. Indeed, according to an article from « Le Monde » dated May 27th 2020, mail and SMS scams during confinement almost increased 5-fold ! MSC applications come into action to ensure safety, quality and scalability but what is it exactly ? <b>A MSC app aims to alert an organization when a risk appears on a environment defined by one of its employees so as to automate and facilitate decision support mechanisms</b>. It is generally articulated in 4 parts :
    <ul>
@@ -12,7 +12,7 @@
    </p>
    <p>It uses a <b>REST API</b> that sends responses in <b>JSON</b> and uses a secure protocol to authenticate users (for instance, OAuth2 with Python) and the <b>HTTP</b> (HyperText Transfer Protocol) to communicate. The application is based on a <b>client-server architecture</b> and linking to at least one database (for example, Postgre SQL or Elastic Search). The server designates the entire API while the client represents the software that sends requests to the API. Primary objectives are <b>confidentiality</b>, <b>maintainability</b> but also a fine-grained management of the actions that users are entitled to perform (<b>CRUD</b> - creation, reading, update or removal of resources) and a setting up of the app from the database.</p>
    <img class="articleImage" src="/images/mcs-design.png" style="max-width:70vw;margin-bottom:15px;" alt="MCS Design">
-   <p>As a reminder, there are six architectural constraints which define a REST system:
+   <p>As a reminder, there are six architectural constraints which define a REST system :
    <ol>
       <li>
          <i>Separated responsibilities between client and server</i>
@@ -32,7 +32,7 @@
       </li>
       <li>
          <i>Uniform interface</i>
-         <p>As a fundamental constraint, it uncouples the architecture, allowing components to scale independently. It is divided into four parts:
+         <p>As a fundamental constraint, it uncouples the architecture, allowing components to scale independently. It is divided into four parts :
          <ul>
             <li>
                <i>Identification of the resources in queries through an URI</i>
@@ -79,7 +79,7 @@
                </ul>
             </li>
             <li>
-				Authorization is then checked in order of priority:
+				Authorization is then checked in order of priority :
                <ul>
                   <li>of the user to log in through the application</li>
                   <li>of the application to perform the resource action</li>
@@ -105,7 +105,7 @@
       </li>
       <li>
          CPE
-         <p>The CPE (Common Platform Enumeration) can be chosen:
+         <p>The CPE (Common Platform Enumeration) can be chosen :
          <ul>
             <li>an application (« part » : « a »)</li>
             <li>a hardware platform (« part » : « h »)</li>
@@ -120,7 +120,7 @@
       </li>
       <li>
          CVSS
-         <p>The CVSS (Common Vulnerability Scoring System) can be used to assess the <b>criticality</b> of vulnerabilities based on objective, measurable criteria such as access complexity or presence or absence of privileges. It establishes three scores per version (V2 and V3): <b>the impact score, the exploitability score, and the base score</b> that results from the other two. The above-mentioned scores are calculated from ratios defined for particular parameters such as access complexity and authentication. For more information, click <a target="_blank" href="https://nvd.nist.gov/vuln-metrics/cvss">here</a>.</p>
+         <p>The CVSS (Common Vulnerability Scoring System) can be used to assess the <b>criticality</b> of vulnerabilities based on objective, measurable criteria such as access complexity or presence or absence of privileges. It establishes three scores per version (V2 and V3) : <b>the impact score, the exploitability score, and the base score</b> that results from the other two. The above-mentioned scores are calculated from ratios defined for particular parameters such as access complexity and authentication. For more information, click <a target="_blank" href="https://nvd.nist.gov/vuln-metrics/cvss">here</a>.</p>
       </li>
    </ul>
    </p>
