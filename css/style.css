@@ -109,3 +109,121 @@
     font-style: italic;
     margin-bottom: 20px;
 }
+
+/* Contact Popup */
+
+.close-btn{
+    cursor : pointer;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.close-btn:hover{
+    font-weight: bold;
+    color:#fffffd;
+}
+
+#contact-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    background-color: #3e64ff;   
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#contact-window {
+    position: fixed;
+    bottom: 85px;
+    right: 20px;
+    width: 300px;
+    height: auto;
+    background-color: #fffffd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+#contact-header {
+    background-color: #3e64ff;
+    color: white;
+    padding: 9px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#contact-info {
+    font-size: 14px;
+    color: #333;
+}
+
+#contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 10px;
+    width: 100%;
+}
+
+#contact-info i {
+    font-size: 15px;
+}
+
+#contact-info a {
+    color: #3e64ff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+#contact-info a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+@media(max-width:910px){
+    .close-btn{
+        margin-left: 50px;
+    }
+	
+    #contact-window {
+        bottom:90px;
+        right: 20px;
+        width: 230px;
+        border-radius: 25px;
+    }
+	
+    #contact-header {
+        padding: 4px;
+        font-size: 14px;
+        justify-content: center; 
+        border-top-right-radius: 25px;
+        border-top-left-radius: 25px;
+    }
+	
+    #contact-info {
+        font-size: 12px;
+        color: #333;
+    }
+	
+    #contact-info p {
+        gap: 8px;
+        width: 90%;
+    }
+	
+    #contact-info i {
+        font-size: 13px;
+    }
+}

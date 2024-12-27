@@ -380,3 +380,12 @@ $(function() {
   }
 
 });
+
+function toggleContact() {
+    const contactWindow = document.getElementById('contact-window');
+    if (!contactWindow.style.display || contactWindow.style.display === 'none') {
+        contactWindow.style.display = 'flex';       
+    } else {
+        contactWindow.style.display = 'none';
+    }
+}
