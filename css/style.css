@@ -227,3 +227,9 @@
         font-size: 13px;
     }
 }
+
+/* Projects */
+
+.project{
+	cursor: pointer;
+}
