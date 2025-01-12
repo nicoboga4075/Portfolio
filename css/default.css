@@ -1,0 +1,79 @@
+/* General */
+
+:root {
+  --main:#3e64ff
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: var(--main);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.horizontal-center { 
+  padding: 50px;
+}
+
+/* Language Switcher */
+
+.language-switch {
+    padding: 10px;
+}
+
+.lang-text {
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.lang-text.on {
+    color: var(--main);
+}
+
+.lang-text.off {
+    color: black;
+}
+
+@media(max-width: 991.98px){
+	.lang-text.off.top-scroll {
+		color: white;
+	}
+}
+
+.toggle-container {
+    position: relative;
+    width: 50px;
+    display: inline-block;
+    height: 25px;
+    background-color: #EBEFFF;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-slider {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: var(--main);
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#language-toggle {
+    visibility: hidden;
+}
+
+#language-toggle:checked + .toggle-slider {
+    transform: translateX(25px);
+    background-color: var(--main);
+}

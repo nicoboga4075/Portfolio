@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-   <head>
+<html lang="fr">
+   <head id="blog">
       <title>Portfolio</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,10 +10,10 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
       <link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
       <base href="../../">
-      <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-      <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-      <link rel="manifest" href="./site.webmanifest">
+      <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+      <link rel="manifest" href="site.webmanifest">
       <link rel="stylesheet" href="css/animate.css">
       <link rel="stylesheet" href="css/owl.carousel.min.css">
       <link rel="stylesheet" href="css/owl.theme.default.min.css">
@@ -22,12 +22,12 @@
       <link rel="preload" href="css/icomoon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
       <link rel="stylesheet" href="css/style.css">
    </head>
-   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+   <body data-spy="scroll" data-target="#ftco-navbar" data-offset="300" onload="initPage()">
+      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
          <div class="container">
-            <a class="navbar-brand" href="/fr"><span>P</span>ortfolio</a>
-            <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="icon icon-menu"></span> Menu
+            <a id="home-page" class="navbar-brand"><span>P</span>ortfolio</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-menu"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                <ul class="navbar-nav nav ml-auto">
@@ -40,7 +40,7 @@
                   <li class="nav-item"><a href="/fr#contact-section" class="nav-link"><span>Contact</span></a></li>
                </ul>
             </div>
-            <div class="language-switch">
+            <div class="language-switch d-flex align-items-center justify-content-center">
                 <span class="lang-text off">EN</span>
                 <label class="toggle-container">
                    <input id="language-toggle" type="checkbox">
@@ -54,71 +54,16 @@
          <div class="container">
             <div class="row">
                <div class="col-lg-8 ftco-animate" id="articleShape">
-                  <iframe id="iframeArticle" style="visibility:hidden;"></iframe>
-                  <script id="loadArticleScript">
-					const articleShape = document.getElementById('articleShape'); 
-					const iframe = document.getElementById('iframeArticle');
-					const hashLink = window.location.hash ? window.location.hash.substring(1) : '';
-					const errorArticle = 'Oops ! Une erreur est survenue. Réessayez plus tard.';
-					const host = window.location.origin;
-				   
-					const currentHash = hashLink || sessionStorage.getItem('currentHash');
-					
-					const toggle = document.getElementById('language-toggle');
-					toggle.checked = true;         
-					toggle.addEventListener('change', function () {
-						if (!this.checked) {
-							window.location.href = currentHash ? `/en/blog#${currentHash}` : '/en';
-						}
-					});					
-					
-					if (!currentHash) {					 
-					  articleShape.innerHTML = errorArticle;
-					} else {
-					   sessionStorage.setItem('currentHash', currentHash);
-					   history.replaceState(null, null, window.location.pathname);					   
-					   const urlArticle =`${host}/articles/${currentHash}_fr.html`;
-					 
-					   iframe.src = urlArticle;
-					 
-					   iframe.onload = () => {					 
-							fetch(urlArticle)
-							.then(response => response.text())
-							.then(html => {													
-								if(html.includes("It seems you've hit a broken link or the page has moved")){
-									throw new Error();
-								}		
-								
-								const parser = new DOMParser();
-								const doc = parser.parseFromString(html, 'text/html');
-				 
-								const header = doc.querySelector('.header');
-								if (header) header.remove();
-				 
-								const footer = doc.querySelector('.footer');
-								if (footer) footer.remove();
-																	
-								articleShape.innerHTML =  doc.body.innerHTML + articleShape.innerHTML;									
-							})
-							.catch(error => {
-								articleShape.innerHTML = errorArticle;
-							})
-							.finally(() => {
-								document.getElementById('iframeArticle').remove();
-								document.getElementById('loadArticleScript').remove();
-							});
-						}; 
-					}
-                  </script>
+                  <iframe id="iframeArticle"></iframe>
                   <div class="about-author d-flex p-4 bg-light">
                      <div class="bio mr-5">
-                        <img src="images/about.webp" class="img-fluid mb-4" alt="Photo de profil" loading="lazy">
+                        <img src="images/profile.webp" class="img-fluid mb-4" alt="Photo de profil" loading="lazy">
                      </div>
-                     <div class="desc" style="text-align:center;">
+                     <div class="desc text-center">
                         <h3>Nicolas BOGALHEIRO</h3>
                         <p>Ingénieur Logiciel</p>
                         <p>Scanne-moi</p>
-                        <img src="images/qrcode.png" style="max-width:15vw;" alt="QR Code Linkedin" loading="lazy">
+                        <img src="images/qrcode.png" id="qrcode" alt="QR Code Linkedin" loading="lazy">
                      </div>
                   </div>
                   <!--                   <div class="pt-5 mt-5">
@@ -126,7 +71,7 @@
                      <ul class="comment-list">
                         <li class="comment">
                            <div class="vcard bio">
-                              <img src="images/background.avif" alt="Image placeholder">
+                              <img src="images/background.webp" alt="Image placeholder">
                            </div>
                            <div class="comment-body">
                               <h3>John Doe</h3>
@@ -137,7 +82,7 @@
                            <ul class="children">
                               <li class="comment">
                                  <div class="vcard bio">
-                                    <img src="images/background.avif" alt="Image placeholder">
+                                    <img src="images/background.webp" alt="Image placeholder">
                                  </div>
                                  <div class="comment-body">
                                     <h3>John Doe</h3>
@@ -148,7 +93,7 @@
                                  <ul class="children">
                                     <li class="comment">
                                        <div class="vcard bio">
-                                          <img src="images/background.avif" alt="Image placeholder">
+                                          <img src="images/background.webp" alt="Image placeholder">
                                        </div>
                                        <div class="comment-body">
                                           <h3>John Doe</h3>
@@ -205,8 +150,8 @@
             <!-- </div> -->
             <!-- <div class="sidebar-box ftco-animate"> -->
             <!-- <h3 class="heading-sidebar">Récents</h3> -->
-            <!-- <div class="block-21 mb-4 d-flex"> -->
-            <!-- <a class="blog-img mr-4" style="background-image: url(images/computer.jpg);"></a> -->
+            <!-- <div class="block-21 mb-4 d-flex justify-content-center"> -->
+            <!-- <a id="computer" class="blog-img mr-4"></a> -->
             <!-- <div class="text"> -->
             <!-- <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3> -->
             <!-- <div class="meta"> -->
@@ -256,7 +201,7 @@
                   <p>
                      Copyright &copy;<i id="year"></i> Tous droits réservés | Ce site est fait avec <i class="icon-heart color-danger" aria-hidden="true"></i> par <a href="https://colorlib.com" target="_blank">Colorlib</a>
                   </p>
-                  <p><a href="/fr/policy"><i>Politique de confidentialité</i></a> | <a href="/fr/terms"><i>Conditions d'utilisation</i></a></p>
+                  <p><a id="policy"><i>Politique de confidentialité</i></a> | <a id="terms"><i>Conditions d'utilisation</i></a></p>
                </div>
             </div>
          </div>
@@ -280,15 +225,5 @@
       <script src="js/jquery.animateNumber.min.js"></script>
       <script src="js/scrollax.min.js"></script>
       <script src="js/main.js"></script>
-      <script>
-		 document.getElementById('year').innerText = new Date().getFullYear();
-		 window.addEventListener('scroll', () => {
-			  if (window.scrollY <= 5) {
-				document.querySelector('.off').classList.add('no-scroll');
-			  } else {
-				document.querySelector('.off').classList.remove('no-scroll');
-			  }
-		 });
-      </script>
    </body>
 </html>

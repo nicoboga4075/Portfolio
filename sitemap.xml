@@ -3,59 +3,59 @@
     <!-- Home pages -->
     <url>
         <loc>https://nicoboga.netlify.app/en</loc>
-        <lastmod>2025-01-04</lastmod>
+        <lastmod>2025-01-31</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr</loc>
-        <lastmod>2025-01-04</lastmod>
+        <lastmod>2025-01-31</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <!-- Blog pages -->
     <url>
         <loc>https://nicoboga.netlify.app/en/blog</loc>
-        <lastmod>2024-12-25</lastmod>
+        <lastmod>2025-01-31</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/blog</loc>
-        <lastmod>2024-12-25</lastmod>
+        <lastmod>2025-01-31</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <!-- Terms pages -->
     <url>
         <loc>https://nicoboga.netlify.app/en/terms</loc>
-        <lastmod>2024-12-08</lastmod>
+        <lastmod>2025-01-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/terms</loc>
-        <lastmod>2024-12-08</lastmod>
+        <lastmod>2025-01-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <!-- Policy pages -->
     <url>
         <loc>https://nicoboga.netlify.app/en/policy</loc>
-        <lastmod>2024-12-08</lastmod>
+        <lastmod>2025-01-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/policy</loc>
-        <lastmod>2024-12-08</lastmod>
+        <lastmod>2025-01-31</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <!-- 404 page -->
     <url>
         <loc>https://nicoboga.netlify.app/404</loc>
-        <lastmod>2024-12-08</lastmod>
+        <lastmod>2025-01-31</lastmod>
         <changefreq>never</changefreq>
         <priority>0.4</priority>
     </url>

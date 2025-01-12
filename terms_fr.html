@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
+	<head id="terms">
 		<title>Conditions d'utilisation</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="author" content="Nicolas BOGALHEIRO">
 		<meta name="description" content="Conditions d'utilisation">
 		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
-		<base href="../">
-		<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-		<link rel="manifest" href="./site.webmanifest">
-		  <style>
-			body {
-			  font-family: "Poppins", sans-serif;
-			  text-align: center;
-			}
-		  </style>
+		<base href="../../">
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+		<link rel="manifest" href="site.webmanifest">
+		<link rel="stylesheet" href="css/default.css">
+		<script src="js/default.js"></script>
 	</head>
-	<body>
+	<body onload="initPage()">
 		<h1>Conditions d'utilisation</h1>
 		<i>Mis à jour le 4 décembre 2024</i>
+		<div class="language-switch d-flex align-items-center justify-content-center">
+                <span class="lang-text">EN</span>
+                <label class="toggle-container">
+                   <input id="language-toggle" type="checkbox">
+                   <span class="toggle-slider"></span>
+                </label>
+                <span class="lang-text on">FR</span>
+        </div>
 		<div>
 			<h3>Accès à l'application</h3>
 			<p>L'utilisation de l'application est autorisée sous réserve de votre respect des conditions suivantes. Vous vous engagez à ne pas l'utiliser à des fins illégales.</p>
@@ -35,5 +39,6 @@
 			<p>Ces conditions sont régies par les lois françaises.</p>
 			<i>Pour toute question relative à ces conditions, vous pouvez me contacter via le formulaire de contact.</i>
 		</div>
+		<a id="home-page">Retour à l'accueil</a>
 	</body>
 </html>

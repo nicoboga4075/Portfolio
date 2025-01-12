@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+	<head id="policy">
 		<title>Privacy policy</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="author" content="Nicolas BOGALHEIRO">
 		<meta name="description" content="Privacy policy">
 		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
-		<base href="../">
-		<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-		<link rel="manifest" href="./site.webmanifest">
-		  <style>
-			body {
-			  font-family: "Poppins", sans-serif;
-			  text-align: center;
-			}
-		  </style>
+		<base href="../../">
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+		<link rel="manifest" href="site.webmanifest">
+		<link rel="stylesheet" href="css/default.css">
+		<script src="js/default.js"></script>
 	</head>
-	<body>
+	<body onload="initPage()">
 		<h1>Privacy policy</h1>
 		<i>Updated on December 7, 2024</i>
+		<div class="language-switch d-flex align-items-center justify-content-center">
+                <span class="lang-text on">EN</span>
+                <label class="toggle-container">
+                   <input id="language-toggle" type="checkbox">
+                   <span class="toggle-slider"></span>
+                </label>
+                <span class="lang-text">FR</span>
+        </div>
 		<div>
 			<h3>What data is collected ?</h3>
 			<p>The personal data used is that which the user explicitly provides in the contact form : sender's name, subject of the email and message content. This information is included in an email sent via the Gmail API and is not stored on the application server. When logging in via OAuth (manual authentication), your email address is retrieved from your Google account. No other personal or sensitive data is collected or used.</p>
@@ -35,5 +39,6 @@
 			<p>We will retain your personal information for the length of time needed to fulfill the purposes outlined in this privacy policy unless a longer retention period is required or permitted by law. The access token required for authentication through the Gmail API is securely retained and is automatically deleted in the event of an error or obsolete after prolonged inactivity. You can delete this data manually by deleting data from your browser. By default, the access token expires after 1 hour, according to Google's rules. No data is retained once the message is sent. If you experience repeated errors sending the message, I suggest you refresh the page or open a new tab.</p>
 			<i>If you have any questions about your personal data, you can contact me via the form.</i>
 		</div>
+		<a id="home-page">Go back to the homepage</a>
 	</body>
 </html>

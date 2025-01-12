@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+	<head id="terms">
 		<title>Terms of use</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="author" content="Nicolas BOGALHEIRO">
 		<meta name="description" content="Terms of use">
 		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
-		<base href="../">
-		<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-		<link rel="manifest" href="./site.webmanifest">
-		  <style>
-			body {
-			  font-family: "Poppins", sans-serif;
-			  text-align: center;
-			}
-		  </style>
+		<base href="../../">
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+		<link rel="manifest" href="site.webmanifest">
+		<link rel="stylesheet" href="css/default.css">
+		<script src="js/default.js"></script>
 	</head>
-	<body>
+	<body onload="initPage()">
 		<h1>Terms of use</h1>
 		<i>Updated on December 4, 2024</i>
+		<div class="language-switch d-flex align-items-center justify-content-center">
+                <span class="lang-text on">EN</span>
+                <label class="toggle-container">
+                   <input id="language-toggle" type="checkbox">
+                   <span class="toggle-slider"></span>
+                </label>
+                <span class="lang-text">FR</span>
+        </div>
 		<div>
 			<h3>Application access</h3>
 			<p>Use of the application is permitted subject to your compliance with the following conditions. You agree not to use it for any illegal purpose.</p>
@@ -35,5 +39,6 @@
 			<p>These terms are governed by French laws.</p>
 			<i>If you have any questions about these terms, you can contact me via the contact form.</i>
 		</div>
+		<a id="home-page">Go back to the homepage</a>
 	</body>
 </html>
