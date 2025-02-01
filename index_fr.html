@@ -4,7 +4,7 @@
       <title>Portfolio</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://accounts.google.com https://apis.google.com  https://www.googleapis.com 'unsafe-inline'; object-src 'none';">
+      <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://accounts.google.com https://apis.google.com https://www.googleapis.com https://www.google.com https://www.gstatic.com 'unsafe-inline'; object-src 'none';">
       <meta name="author" content="Nicolas BOGALHEIRO">
       <meta name="title" property="og:title" content="Portfolio">
       <meta name="image" property="og:image" content="https://nicoboga.netlify.app/images/view.png">
@@ -897,13 +897,12 @@
 			 </div>
 			 <div class="row no-gutters block-9">
 				<div class="col-md-6 order-md-last d-flex">
-					<form class="bg-light p-4 p-md-5 contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+					<form class="bg-light p-4 p-md-5 contact-form" id="contactForm" name="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
 						<p hidden>
 							<label>
 							  Ne remplissez pas ce champ si vous êtes humain : <input name="bot-field" />
 							</label>
 						</p>
-						<div data-netlify-recaptcha="true"></div>
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Nom" id="nameField" required>
 						</div>
@@ -913,7 +912,8 @@
 						<div class="form-group">
 							<textarea cols="30" rows="10" class="form-control" placeholder="Message" id="messageField" required></textarea>
 						</div>
-						<div id="content" class="text-center"></div>
+						<div data-netlify-recaptcha="true"></div>
+						<div id="callbackForm" class="text-center"></div>
 						<div class="form-group text-right">
 							<input type="submit" value="Envoyer" class="btn btn-primary py-3 px-5">
 						</div>

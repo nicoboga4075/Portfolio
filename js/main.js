@@ -551,8 +551,8 @@ async function sendEmail(name, subject, message) {
 	].join('\n');
 	const errorMessage =  getMessage('error-generic');
 	const successMessage = getMessage('success-mail');
-	const content = document.getElementById('content');
-	content.innerText = '';
+	const callbackForm = document.getElementById('callbackForm');
+	callbackForm.innerText = '';
 
 	// Base64 encode the email in URL-safe format
 	const base64EncodedEmail = btoa(email)
@@ -576,10 +576,10 @@ async function sendEmail(name, subject, message) {
 		});
 
 		if(response.ok){
-			content.innerText = successMessage;
+			callbackForm.innerText = successMessage;
 			localStorage.setItem('tokenAPI', JSON.stringify(token));
 		} else{
-			content.innerText = errorMessage;
+			callbackForm.innerText = errorMessage;
 			localStorage.clear();
 		}
 	}
@@ -605,20 +605,20 @@ async function sendEmail(name, subject, message) {
 	}
 	
 	if (!token) {
-		content.innerText = '';
+		callbackForm.innerText = '';
 		// Request access token and wait for user consent with Google Identity Services
 		try {
 			tokenClient.requestAccessToken({prompt: 'consent'});
 			await checkTokenConsent();
 		} catch (error) {
-			content.innerText = errorMessage;
+			callbackForm.innerText = errorMessage;
 			localStorage.clear();
 		}
 	} else {
 		try {
 			await sendHelper(token);
 		} catch (error) {
-			content.innerText = errorMessage;
+			callbackForm.innerText = errorMessage;
 			localStorage.clear();
 		}
 	}
