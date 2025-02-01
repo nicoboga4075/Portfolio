@@ -897,20 +897,20 @@
 			 </div>
 			 <div class="row no-gutters block-9">
 				<div class="col-md-6 order-md-last d-flex">
-					<form class="bg-light p-4 p-md-5 contact-form" id="contactForm" name="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+					<form class="bg-light p-4 p-md-5 contact-form" name="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
 						<p hidden>
 							<label>
 							  Ne remplissez pas ce champ si vous êtes humain : <input name="bot-field" />
 							</label>
 						</p>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Nom" id="nameField" required>
+							<input type="text" class="form-control" placeholder="Nom" name="name" required>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Objet" id="subjectField" required>
+							<input type="text" class="form-control" placeholder="Objet" name="subject" required>
 						</div>
 						<div class="form-group">
-							<textarea cols="30" rows="10" class="form-control" placeholder="Message" id="messageField" required></textarea>
+							<textarea cols="30" rows="10" class="form-control" placeholder="Message" name="message" required></textarea>
 						</div>
 						<div data-netlify-recaptcha="true"></div>
 						<div id="callbackForm" class="text-center"></div>
