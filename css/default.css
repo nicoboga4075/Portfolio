@@ -16,6 +16,10 @@ a {
   cursor: pointer;
 }
 
+[hidden] {
+	display: none!important;
+}
+
 .horizontal-center { 
   padding: 50px;
 }
