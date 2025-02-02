@@ -6,45 +6,40 @@
 
 [[redirects]]
   from = "/en"
-  to = "/index_en.html"
+  to = "/index_en"
   status = 200
 
 [[redirects]]
   from = "/fr"
-  to = "/index_fr.html"
+  to = "/index_fr"
   status = 200
   
 [[redirects]]
   from = "/en/blog"
-  to = "/blog_en.html"
+  to = "/blog_en"
   status = 200
 
 [[redirects]]
   from = "/fr/blog"
-  to = "/blog_fr.html"
-  status = 200
-
-[[redirects]]
-  from = "/404"
-  to = "/404.html"
+  to = "/blog_fr"
   status = 200
 
 [[redirects]]
   from = "/en/terms"
-  to = "/terms_en.html"
+  to = "/terms_en"
   status = 200
 
 [[redirects]]
   from = "/fr/terms"
-  to = "/terms_fr.html"
+  to = "/terms_fr"
   status = 200
 
 [[redirects]]
   from = "/en/policy"
-  to = "/policy_en.html"
+  to = "/policy_en"
   status = 200
 
 [[redirects]]
   from = "/fr/policy"
-  to = "/policy_fr.html"
+  to = "/policy_fr"
   status = 200

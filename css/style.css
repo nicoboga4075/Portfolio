@@ -118,7 +118,7 @@ a {
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-#language-toggle, #iframeArticle {
+#language-toggle {
     visibility: hidden;
 }
 
@@ -322,4 +322,10 @@ a {
     .project p {
         font-size: 8px!important ;
     }
+}
+
+/* Blog */
+
+#iframeArticle {
+    visibility: hidden;
 }
