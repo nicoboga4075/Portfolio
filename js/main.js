@@ -455,8 +455,8 @@ function initPage(){
 	});
 
 	loadImages('.logo-school', 'png');
-	loadImages('.blog-img', 'jpg');
-	loadImages('.project.img','jpg');
+	loadImages('.blog-img', 'avif');
+	loadImages('.project.img','avif');
 	loadImages('.articleImage', 'avif');
 	
 	const contactForm = document.querySelector("form[name='contactForm']");
