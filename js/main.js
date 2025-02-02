@@ -64,7 +64,7 @@ function addRedirectById(elementId) {
     const path = appRoutes[elementId];
     balise.href = path ? path.replace('{lng}',getCurrentLanguage()) : "/en";
     balise.addEventListener('click', function() {
-	  saveHashSession(''); // Reset hash for all other links
+	  sessionStorage.clear(); // Reset hash for all other links
     });
   }
 }
@@ -531,9 +531,9 @@ function gapiLoaded() {
 
 function gisLoaded() {
 	fetch("/.netlify/functions/env")
-	.then(response => response.text())
-	.then(id => tokenClient = google.accounts.oauth2.initTokenClient({
-	  client_id: id,
+	.then(response => response.json())
+	.then(variables => tokenClient = google.accounts.oauth2.initTokenClient({
+	  client_id: variables.ENV_CLIENT_ID,
 	  scope: 'https://www.googleapis.com/auth/gmail.send',
 	  callback: (resp) => {
 		if (resp.error !== undefined) {
@@ -582,7 +582,9 @@ async function sendEmail(name, subject, message) {
 		if(response.ok){
 			localStorage.setItem('tokenAPI', JSON.stringify(token));
 			callbackForm.innerText = successMessage;
-			sessionStorage.clear();
+			if(window.location.protocol === "https:"){
+				sessionStorage.clear();
+			}
 		} else{
 			callbackForm.innerText = errorMessage;
 			localStorage.clear();
@@ -628,3 +630,21 @@ async function sendEmail(name, subject, message) {
 		}
 	}
 }
+
+function enableSubmitForm() {
+  const submitButton = document.querySelector("input[type='submit']");
+  const recaptchaResponse = grecaptcha.getResponse();
+  submitButton.disabled = recaptchaResponse.length > 0 ? false : true;
+}
+
+function initCaptcha() {
+	fetch("/.netlify/functions/env")
+	  .then(response => response.json())
+	  .then(variables => {
+		grecaptcha.render('captchaCheck', {
+		  'sitekey' : variables.SITE_RECAPTCHA_KEY,
+		  'callback': enableSubmitForm
+		});
+	  })
+	  .catch(error => { return false; });
+};

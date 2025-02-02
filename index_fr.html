@@ -4,7 +4,7 @@
       <title>Portfolio</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://accounts.google.com https://apis.google.com https://www.google.com/recaptcha/api.js https://www.gstatic.com 'unsafe-inline'; object-src 'none';">
+      <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://accounts.google.com https://apis.google.com https://www.google.com https://www.gstatic.com 'unsafe-inline'; object-src 'none';">
       <meta name="author" content="Nicolas BOGALHEIRO">
       <meta name="title" property="og:title" content="Portfolio">
       <meta name="image" property="og:image" content="https://nicoboga.netlify.app/images/view.png">
@@ -915,10 +915,10 @@
 						<div class="form-group">
 							<textarea cols="30" rows="10" class="form-control" placeholder="Message" name="message" required></textarea>
 						</div>
-						<div data-netlify-recaptcha="true"></div>
+						<div id="captchaCheck"></div>
 						<div id="callbackForm" class="text-center"></div>
 						<div class="form-group text-right">
-							<input type="submit" value="Envoyer" class="btn btn-primary py-3 px-5">
+							<input type="submit" value="Envoyer" class="btn btn-primary py-3 px-5" disabled>
 						</div>
 					</form>
 				</div>
@@ -1011,5 +1011,6 @@
       <script src="js/main.js"></script>
       <script defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()" crossorigin="anonymous"></script>
       <script defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+	  <script async defer src="https://www.google.com/recaptcha/api.js?hl=fr&onload=initCaptcha&render=explicit"></script>
    </body>
 </html>
