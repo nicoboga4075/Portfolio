@@ -1,3 +1,6 @@
+[build]
+  publish = "."  
+
 [dev]
   port = 8888
   framework = "#static"
@@ -6,40 +9,40 @@
 
 [[redirects]]
   from = "/en"
-  to = "/index_en"
+  to = "/index_en.html"
   status = 200
 
 [[redirects]]
   from = "/fr"
-  to = "/index_fr"
+  to = "/index_fr.html"
   status = 200
   
 [[redirects]]
   from = "/en/blog"
-  to = "/blog_en"
+  to = "/blog_en.html"
   status = 200
 
 [[redirects]]
   from = "/fr/blog"
-  to = "/blog_fr"
+  to = "/blog_fr.html"
   status = 200
 
 [[redirects]]
   from = "/en/terms"
-  to = "/terms_en"
+  to = "/terms_en.html"
   status = 200
 
 [[redirects]]
   from = "/fr/terms"
-  to = "/terms_fr"
+  to = "/terms_fr.html"
   status = 200
 
 [[redirects]]
   from = "/en/policy"
-  to = "/policy_en"
+  to = "/policy_en.html"
   status = 200
 
 [[redirects]]
   from = "/fr/policy"
-  to = "/policy_fr"
+  to = "/policy_fr.html"
   status = 200
