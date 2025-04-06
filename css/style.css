@@ -248,6 +248,10 @@ a {
 
 #contact-link i {
     font-size: 15px;
+	height: 15px;
+	width: 15px;
+	background-size: contain;
+	background-repeat: no-repeat; 
 }
 
 #contact-link a {
@@ -333,4 +337,13 @@ a {
 
 #iframeArticle {
     visibility: hidden;
+}
+
+/* Footer */
+.ftco-footer .ftco-footer-widget ul li a span {
+    font-size: 25px;
+    height: 25px;
+    width: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
