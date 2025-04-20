@@ -64,12 +64,12 @@
                <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-center">
                   <div class="text text-center">
                      <span class="subheading">Bonjour ! Je m'appelle</span>
-                     <h1>Nicolas BOGALHEIRO</h1>
+                     <h1 class="author"></h1>
                      <h2>Je suis un 
                         <span
                            class="txt-rotate"
                            data-period="2000"
-                           data-rotate='[ "Ingénieur Logiciel.", "Développeur Full Stack.","Ingénieur Support.", "Ingénieur Clientèle.", "Développeur Front-End.", "Développeur Back-End." ]'></span>
+                           data-rotate='[ "Ingénieur Logiciel.", "Développeur Full Stack.","Ingénieur Support.", "Consultant.", "Développeur Front-End.", "Développeur Back-End." ]'></span>
                      </h2>
                   </div>
                </div>
@@ -94,20 +94,20 @@
                   <div class="row justify-content-start pb-3">
                      <div class="col-md-12 heading-section ftco-animate">
                         <h2 class="mb-4">À propos de moi</h2>
-                        <p>Consultant <a target="_blank" href="https://astekgroup.fr">Astek</a> évoluant actuellement à <a target="_blank" href="https://www.alstom.com/fr">Alstom</a></p>
+                        <p>Consultant <a target="_blank" href="https://astekgroup.fr">Astek</a> en mission chez <a target="_blank" href="https://www.alstom.com/fr">Alstom</a></p>
                         <ul class="about-info mt-4 px-md-0 px-2">
-                           <li class="d-flex"><span>Nom :</span> <span>Nicolas BOGALHEIRO</span></li>
-                           <li class="d-flex"><span>Âge :</span> <span>27</span></li>
+                           <li class="d-flex"><span>Nom :</span> <span class="author"></span></li>
+                           <li class="d-flex"><span>Âge :</span> <span class="age"></span></li>
                            <li class="d-flex"><span>Profession :</span> <span>Ingénieur</span></li>
                            <li class="d-flex"><span>Promotion :</span> <span><a target="_blank" href="https://www.esilv.fr">ESILV</a> 2021</span></li>
-                           <li class="d-flex"><span>Email :</span> <span>nicolas.bogalheiro@gmail.com</span></li>
+                           <li class="d-flex"><span>Email :</span> <span class="email"></span></li>
                         </ul>
                      </div>
                   </div>
                   <div class="counter-wrap ftco-animate d-flex mt-md-3">
                      <div class="text">
                         <p class="mb-4">
-                           <span class="number" data-number="4">0</span>
+                           <span class="number xp">0</span>
                            <span>Années d'Expérience</span>
                         </p>
                         <p>
@@ -571,6 +571,17 @@
                         </div>
                      </div>
                      <div class="resume-wrap d-flex ftco-animate">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                           <span class="icon-certificate"></span>
+                        </div>
+                        <div class="text pl-3">
+                           <span class="date">Juillet 2015</span>
+                           <h2>Bac</h2>
+                           <span class="position">TB</span>
+                           <p>Scientifique : St Jacques de Compostelle (Dax)</p>
+                        </div>
+                     </div>
+                     <div class="resume-wrap d-flex ftco-animate">
                         <div id="FFT" class="icon svg d-flex align-items-center justify-content-center">
                         </div>
                         <div class="text pl-3">
@@ -862,7 +873,7 @@
                   <div class="blog-entry">
                      <a id="work" href="/fr/blog#presentation" class="articleImage block-20"></a>
                      <div class="text mt-3 float-right d-block">
-                        <h3 class="heading"><a href="/fr/blog#presentation">Bref : Mon parcours pro</a></h3>
+                        <h3 class="heading"><a href="/fr/blog#presentation">Mon parcours pro en quelques lignes</a></h3>
                         <div class="d-flex align-items-center mb-3 meta">
                            <p class="mb-0">
                               <span>1er Décembre 2024&nbsp;&nbsp;<i class="icon-clock-o"></i>&nbsp;4 min</span>
@@ -923,7 +934,7 @@
 					</div>
 					<div>
 						<h3 class="mb-4">Adresse</h3>
-						<p>Lyon</p>
+						<p id="city"></p>
 					  </div>
 				  </div>
 			   </div>
@@ -934,7 +945,7 @@
 					</div>
 					<div>
 						<h3 class="mb-4">Email</h3>
-						<p>nicolas.bogalheiro@gmail.com</p>
+						<p class="email"></p>
 					  </div>
 				  </div>
 			   </div>
@@ -980,7 +991,7 @@
 		<div id="contact-link">
 			<p class="d-flex align-items-center">
 				<i class="icon-envelope"></i> 
-				<span>nicolas.bogalheiro@gmail.com</span>
+				<span class="email"></span>
 			</p>
 			<p class="d-flex align-items-center">
 				<i class="icon-linkedin"></i> 
@@ -1014,7 +1025,7 @@
                      <h2 class="ftco-heading-2">Une question ?</h2>
                      <div class="block-23 mb-3">
                         <ul>
-                           <li><span class="icon-envelope"></span><span class="text">&nbsp;&nbsp;nicolas.bogalheiro@gmail.com</span></li>
+                           <li><span class="icon-envelope"></span>&nbsp;&nbsp;<span class="text email"></span></li>
                         </ul>
                      </div>
                      <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
