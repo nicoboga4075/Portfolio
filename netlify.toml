@@ -6,6 +6,108 @@
   framework = "#static"
   publish = "."
   staticServerPort = 3999
+	
+[[context.production.plugins]]
+  package = "netlify-plugin-minify-html"
+
+  [context.production.plugins.inputs.minifierOptions]
+    removeComments = true
+    collapseInlineTagWhitespace = true
+   
+[[context.production.plugins]]
+  package = "@netlify/plugin-lighthouse"
+  
+  [context.production.plugins.inputs]
+    fail_deploy_on_score_thresholds = "true"
+	
+  [context.production.plugins.inputs.settings]
+    preset = "desktop"
+	locale = "en"
+
+  [context.production.plugins.inputs.thresholds]
+    performance = 0.5
+    accessibility = 0.5
+	best-practices = 0.5
+	seo = 0.5
+	pwa = 0
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "articles/5-conseils-pour-un-nom-de-marque-parfait_en.html"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "articles/5-conseils-pour-un-nom-de-marque-parfait_fr.html"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "articles/mcs_en.html"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "articles/mcs_fr.html"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "articles/presentation_en.html"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "articles/presentation_fr.html"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "articles/sur-quels-criteres-choisir-une-agence-web_en.html"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "articles/sur-quels-criteres-choisir-une-agence-web_fr.html"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "en"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "en/"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "fr"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "fr/"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "404"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "404/"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "fr/blog"
+  
+  [[context.production.plugins.inputs.audits]]
+	path = "fr/blog/"
+
+  [[context.production.plugins.inputs.audits]]
+	path = "en/blog"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "en/blog/"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "fr/policy"
+  
+  [[context.production.plugins.inputs.audits]]
+	path = "fr/policy/"
+
+  [[context.production.plugins.inputs.audits]]
+	path = "en/policy"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "en/policy/"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "fr/terms"
+  
+  [[context.production.plugins.inputs.audits]]
+	path = "fr/terms/"
+
+  [[context.production.plugins.inputs.audits]]
+	path = "en/terms"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "en/terms/" 
 
 [[redirects]]
   from = "/en"

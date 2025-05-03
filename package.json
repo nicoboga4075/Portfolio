@@ -1,0 +1,35 @@
+{
+  "name": "Portfolio",
+  "version": "1.0.0",
+  "description": "This project is deployed on **Netlify** : https://nicoboga.netlify.app",
+  "scripts": {
+    "build": "npm run build-desktop",
+    "build-desktop": "npm run uglifyjs",
+    "uglifyjs": "for file in js/*.js; do terser \"$file\" --compress --mangle --output \"js/$(basename \"$file\")\"; done",
+    "obfuscate": "javascript-obfuscator js/ --output js/ --compact true --control-flow-flattening true --self-defending true"
+  },
+  "author": "Nicolas BOGALHEIRO",
+  "license": "ISC",
+  "keywords": [
+    "portfolio",
+    "web",
+    "mobile",
+    "french",
+    "english",
+    "HTML",
+    "CSS",
+    "Javascript",
+    "Typescript",
+    "Node",
+    "JS",
+    "MinifyHTML",
+    "LightHouse",
+    "Terser",
+    "JavascriptObfuscator",
+    "Netlify"
+  ],
+  "dependencies": {
+    "javascript-obfuscator": "^4.1.1",
+    "terser": "^5.39.0"
+  }
+}
