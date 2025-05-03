@@ -36,6 +36,10 @@ a {
 	background-image: url(/images/background.webp);
 }
 
+.last-update {
+	color: #a0f669;
+}
+
 /* Resume Section */
 
 .logo-school {

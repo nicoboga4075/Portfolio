@@ -1,5 +1,6 @@
 [build]
-  publish = "."  
+  publish = "."
+  command = "npm run build"  
 
 [dev]
   port = 8888
@@ -56,57 +57,79 @@
 	path = "articles/sur-quels-criteres-choisir-une-agence-web_fr.html"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = ""
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "en"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "en/"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "fr"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "fr/"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "404"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "404/"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "fr/blog"
   
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "fr/blog/"
 
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "en/blog"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "en/blog/"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "fr/policy"
   
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "fr/policy/"
 
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "en/policy"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "en/policy/"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "fr/terms"
   
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "fr/terms/"
 
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "en/terms"
 	
   [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
 	path = "en/terms/" 
 
 [[redirects]]

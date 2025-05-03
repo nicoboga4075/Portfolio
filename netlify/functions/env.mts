@@ -2,9 +2,9 @@ import { Context } from "@netlify/functions";
 
 export default async (req: Request, context: Context) => {
   const filteredEnvVars = Object.entries(process.env)
-    .filter(([key, _]) => key.startsWith("ENV_") || key.startsWith("SITE_"))
+    .filter(([key, _]) => key.startsWith("ENV_") || key.startsWith("SITE_") || key.startsWith("GITHUB_"))
     .reduce((acc, [key, value]) => {
-      acc[key] = key.includes("SECRET") || key.includes("TOKEN") ? "HIDDEN" : value;
+      acc[key] = key.includes("SECRET") ? "HIDDEN" : value;
       return acc;
     }, {} as Record<string, string>);
 

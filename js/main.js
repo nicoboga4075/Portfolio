@@ -79,6 +79,38 @@ function toggleContact() {
    }
 }
 
+function getCurrentCompleteDate(){
+	return new Date().toLocaleString();
+}
+
+function getCurrentDate(){
+	return new Date().toLocaleDateString();
+}
+
+function lastCvUpdate(lang) {
+	fetch("/.netlify/functions/env")
+	  .then(response => response.json())
+	  .then(variables => {
+		const url = `https://api.github.com/repos/nicoboga4075/Portfolio/commits?path=docs/public/CV_${lang}.pdf&per_page=1`;
+		fetch(url, {
+		  headers: {
+			'Authorization': `Bearer ${variables.GITHUB_API_TOKEN}`,
+			'Accept': 'application/vnd.github+json'
+		  }
+		})
+		.then(res => res.json())
+		.then(data => {
+		  if (data.length > 0) {
+			const lastUpdate = data[0].commit.committer.date;
+			lastUpdateDate.innerHTML = new Date(lastUpdate).toLocaleString();
+		  } else {
+			lastUpdateDate.innerHTML = getCurrentCompleteDate();
+		  }
+		})
+	  })
+	  .catch(error => { lastUpdateDate.innerHTML = getCurrentDate(); return false; });
+}
+
 function addRedirectById(elementId) {
   const balise = document.getElementById(elementId);
   if (balise) {
@@ -499,7 +531,9 @@ function initPage(){
 	loadImages('.logo-school', 'png');
 	loadImages('.blog-img', 'avif');
 	loadImages('.project.img','avif');
-	loadImages('.articleImage', 'avif');
+	loadImages('.articleImage', 'avif');	
+		
+	lastCvUpdate(getCurrentLanguage());
 	
 	const contactForm = document.querySelector("form[name='contactForm']");
 	contactForm.addEventListener('submit', async (event) => { 
@@ -690,4 +724,4 @@ function initCaptcha() {
 		});
 	  })
 	  .catch(error => { return false; });
-};
+}
