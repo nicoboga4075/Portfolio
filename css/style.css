@@ -19,6 +19,16 @@ a {
     pointer-events: none;
     cursor: default;
 }
+
+th, td {
+	text-align: center;
+	color: var(--dark);
+	font-size: 14px;
+}
+
+td strong {
+	color: var(--main);
+}
  
 /* Home Section */
 

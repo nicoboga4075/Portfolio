@@ -33,10 +33,10 @@
 	pwa = 0
 	
   [[context.production.plugins.inputs.audits]]
-	path = "articles/5-conseils-pour-un-nom-de-marque-parfait_en.html"
+	path = "articles/du-voc-de-dev_en.html"
 	
   [[context.production.plugins.inputs.audits]]
-	path = "articles/5-conseils-pour-un-nom-de-marque-parfait_fr.html"
+	path = "articles/du-voc-de-dev_fr.html"
 	
   [[context.production.plugins.inputs.audits]]
 	path = "articles/mcs_en.html"
@@ -55,6 +55,12 @@
 	
   [[context.production.plugins.inputs.audits]]
 	path = "articles/sur-quels-criteres-choisir-une-agence-web_fr.html"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "articles/5-conseils-pour-un-nom-de-marque-parfait_en.html"
+	
+  [[context.production.plugins.inputs.audits]]
+	path = "articles/5-conseils-pour-un-nom-de-marque-parfait_fr.html"
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
