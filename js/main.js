@@ -70,13 +70,13 @@ function getCurrentLanguage() {
 	return document.documentElement.lang;	
 }
 
-function toggleContact() {
-   const contactWindow = document.getElementById('contact-window');
-   if (!contactWindow.style.display || contactWindow.style.display === 'none') {
-        contactWindow.style.display = 'flex';       
-   } else {
-        contactWindow.style.display = 'none';
-   }
+function toggleVisibility(selector, visibleClass = "d-flex") {
+    const $element = $(selector);
+    if ($element.is("[hidden]") || $element.hasClass("d-none")) {
+      $element.prop("hidden", false).removeClass("d-none").addClass(visibleClass);
+    } else {
+      $element.prop("hidden", true).removeClass(visibleClass);
+    }
 }
 
 function getCurrentCompleteDate(){
@@ -136,6 +136,33 @@ function loadImages(selector, extension, one = false) {
   });
 }
 
+function loadBingo(){
+	let timer = null;
+	let number = 0;
+	const target = 2713;
+	const labelBtn = $("#bingoBtn").html();
+
+	$("#bingoBtn").click(function() {
+		if (number == 0) {
+			$("#bingoTimer").removeClass();
+			$("#bingoBtn").html("Stop");
+			timer = setInterval(() => {
+				number++;
+				$("#bingoTimer").html(number);
+			}, 10);
+		} else {
+			if (number == target) {
+				$("#bingoTimer").addClass("victory");
+			} else {
+				$("#bingoTimer").addClass("defeat");
+				$("#bingoBtn").html(labelBtn);
+				clearInterval(timer);
+				number = 0;
+			}
+		}
+	});
+}
+
 function getMessage(key) {
 	return appMessages[key]?.[`${getCurrentLanguage()}`] || "";
 }
@@ -178,6 +205,7 @@ function initProfile() {
 	  }
 	});
 	$('#cdiCount').text(cdiCount);
+	$('#experiences .resume-wrap a:first').addClass('victory');
 }
 
 AOS.init({
@@ -483,6 +511,16 @@ function initPage(){
   
   initTranslator();
 
+  $(".open-mfp").click(function() {
+    const target = $(this).data("target");
+    toggleVisibility(target);
+  });
+
+  $(".mfp-close").click(function() {
+    const modalId = $(this).closest(".mfp")[0].id;
+    toggleVisibility("#" + modalId);
+  });
+
   const idPage = document.querySelector('head').id;
   
   if (idPage === 'index'){
@@ -548,6 +586,8 @@ function initPage(){
 			return false;
 		}
 	});
+
+	loadBingo();
 
   } else if (idPage === 'blog'){
 		const articleShape = document.getElementById('articleShape'); 

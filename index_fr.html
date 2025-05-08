@@ -69,7 +69,7 @@
                         <span
                            class="txt-rotate"
                            data-period="2000"
-                           data-rotate='[ "Ingénieur Logiciel.", "Développeur Full Stack.","Ingénieur Support.", "Consultant.", "Développeur Front-End.", "Développeur Back-End." ]'></span>
+                           data-rotate='[ "Ingénieur Logiciel.", "Développeur Full Stack.","Ingénieur Support.", "Consultant IT.", "Développeur Front-End.", "Développeur Back-End." ]'></span>
                      </h2>
                   </div>
                </div>
@@ -998,13 +998,13 @@
 			 </div>
          </div>
       </section>
-      <div id="contact-icon" class="d-flex align-items-center justify-content-center" onclick="toggleContact()">
+      <div id="contact-icon" class="open-mfp d-flex justify-content-center" data-target="#contact-window">
             <span class="icon-user"></span>
       </div>
-      <div id="contact-window">
+      <div id="contact-window" class="mfp flex-column" hidden>
 		<div id="contact-header" class="d-flex align-items-center justify-content-between">
 			<h6>Me contacter</h6>
-			<span onclick="toggleContact()" class="close-btn">×</span>
+			<span class="mfp-close">×</span>
 		</div>
 		<div id="contact-link">
 			<p class="d-flex align-items-center">
@@ -1055,10 +1055,22 @@
                   </div>
                </div>
             </div>
+			<div class="row mb-5">
+				<div class="col-md-12 text-center">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Un bingo ?</h2>
+						<div class="block-23 mb-3 d-flex flex-column align-items-center">
+							<p>Si tu tombes sur le numéro 2713, tu as gagné !</p>
+							<div id="bingoTimer">0</div>
+							<div id="bingoBtn">Jouer</div>
+						</div>
+					</div>
+				</div>
+			</div>
             <div class="row">
                <div class="col-md-12 text-center">
                   <p>
-                     Copyright &copy;<i id="year"></i> Tous droits réservés | Ce site est fait avec <i class="icon-heart color-danger" aria-hidden="true"></i> par <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                     Copyright &copy;<i id="year"></i> Tous droits réservés | Ce site est fait avec <i class="icon-heart" aria-hidden="true"></i>
                   </p>
                   <p><a id="policy"><i>Politique de confidentialité</i></a> | <a id="terms"><i>Conditions d'utilisation</i></a></p>
                </div>

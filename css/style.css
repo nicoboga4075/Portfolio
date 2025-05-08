@@ -29,6 +29,15 @@ th, td {
 td strong {
 	color: var(--main);
 }
+
+.open-mfp {
+	color: var(--white);
+}
+
+.open-mfp:hover, .btn.btn-primary:hover {
+	color: var(--white)!important;
+	opacity: 0.7;
+}
  
 /* Home Section */
 
@@ -42,12 +51,16 @@ td strong {
 	background-image: url(/images/profile.webp);
 }
 
+#profile:hover {
+	opacity: 0.9;
+}
+
 .ftco-hireme {
 	background-image: url(/images/background.webp);
 }
 
-.last-update {
-	color: #a0f669;
+.ftco-hireme .overlay {
+	opacity: 0.5!important;
 }
 
 /* Resume Section */
@@ -152,6 +165,10 @@ td strong {
 
 /* Blog Section */
 
+.blog-entry .articleImage:hover {
+    opacity: 0.7 !important;
+}
+
 .articleContainer h2{
 	color: var(--main);
 }
@@ -191,24 +208,12 @@ td strong {
 
 /* Contact Popup */
 
-.close-btn{
-    cursor : pointer;
-    font-size: 20px;
-    padding: 5px;
-}
-
-.close-btn:hover{
-    font-weight: bold;
-    color:	var(--white);
-}
-
 #contact-icon {
     position: fixed;
     bottom: 20px;
     right: 20px;
     width: 60px;
     background-color: var(--main);   
-    color: var(--white);
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
@@ -229,8 +234,6 @@ td strong {
     background-color: var(--white);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-    display: none;
-    flex-direction: column;
     overflow: hidden;
     z-index: 1000;
 }
@@ -280,10 +283,6 @@ td strong {
 }
 
 @media(max-width:910px){
-    .close-btn{
-        margin-left: 50px;
-    }
-	
     #contact-window {
         bottom:90px;
         right: 20px;
@@ -319,6 +318,10 @@ td strong {
 
 /* Projects Section */
 
+#projects-section {
+	opacity: 0.8;
+}
+
 .project{
 	cursor: pointer;
 }
@@ -347,6 +350,16 @@ td strong {
     }
 }
 
+/* Services Section */
+
+.services-1:hover {
+    opacity: 0.8;
+}
+
+.services-1:hover h3{
+	color: var(--white)!important;
+}
+
 /* Blog */
 
 #iframeArticle {
@@ -356,10 +369,60 @@ td strong {
 }
 
 /* Footer */
+
 .ftco-footer .ftco-footer-widget ul li a span {
     font-size: 25px;
     height: 25px;
     width: 25px;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+#bingoTimer {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+#bingoBtn {
+	padding: 10px 30px;
+	background-color: var(--main);
+	cursor: pointer;
+	color: var(--white);
+	font-weight: bold;
+	font-size: 30px;
+	border-radius: 5px;
+	margin: 20px;
+}
+
+#bingoBtn:hover{
+	opacity: 0.8;
+}
+
+.victory {
+  color: var(--success);
+  border-radius: 10px;
+  animation: blink 0.5s alternate 5;
+}
+
+.defeat {
+  color: var(--danger);
+  border-radius: 10px;
+  animation: shake 0.5s;
+}
+
+@keyframes blink {
+  from { opacity: 1; }
+  to { opacity: 0.3; }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0px); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0px); }
+}
+
+.icon-heart {
+	color: var(--red);
 }
