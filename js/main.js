@@ -1,5 +1,6 @@
-let xp = 4; // Years of experience
+let xp = 4;
 let cdiCount = 3;
+let internshipsCount = 3;
 let email = "nicolas.bogalheiro@gmail.com";
 let city = "Lyon";
 let certifsCount = 3;
@@ -36,12 +37,17 @@ let appSubSections = [
   "awards"
 ];
 
+let appSecondarySections = [
+  "counter-section",
+  "carousel-section"
+];
+
 let appAllSections = [
   homeSection,
   ...appMainSections,
   goHereSection,
   ...appSubSections,
-  indicatorsSection
+  ...appSecondarySections
 ];
 
 let appMessages = {
@@ -228,6 +234,32 @@ AOS.init({
 	"use strict";
 	
 	initProfile();
+	
+	var carousel = function() {
+		$('.owl-carousel').owlCarousel({
+			loop: true,
+			autoplay: true,
+			margin: 10,
+			animateOut: 'fadeOut',
+			animateIn: 'fadeIn',
+			nav: true,
+			autoplayHoverPause: false,
+			items: 5,
+			navText : ["<span class='icon-chevron-circle-left'></span>","<span class='icon-chevron-circle-right'></span>"],
+			responsive: {
+			  0:{
+				items:3
+			  },
+			  576:{
+				items:4
+			  },
+			  992:{
+				items:5
+			  }
+			}
+		});
+	};
+	carousel();
 	
 	$(window).stellar({
 		responsive: true,
