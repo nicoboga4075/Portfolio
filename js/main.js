@@ -15,17 +15,15 @@ let appRoutes = {
 };
 
 let homeSection = "home-section";
-
 let goHereSection = "resume-section";
-
-let indicatorsSection = "counter-section";
+let blogSection = "blog-section";
 
 let appMainSections = [
   "about-section",
   "resume-section",
   "services-section",
   "projects-section",
-  "blog-section",
+  blogSection,
   "contact-section"
 ];
 
@@ -74,7 +72,7 @@ function percentageToDegrees(percentage) {
 }
 
 function computeAge() {
-	const d = new Date("1997-11-19");
+	const d = new Date('1997-11-19');
 	const today = new Date();
 	return today.getFullYear() - d.getFullYear() - (today < new Date(today.getFullYear(), d.getMonth(), d.getDate()) ? 1 : 0);
 }
@@ -83,12 +81,12 @@ function getCurrentLanguage() {
 	return document.documentElement.lang;	
 }
 
-function toggleVisibility(selector, visibleClass = "d-flex") {
+function toggleVisibility(selector, visibleClass = 'd-flex') {
     const $element = $(selector);
-    if ($element.is("[hidden]") || $element.hasClass("d-none")) {
-      $element.prop("hidden", false).removeClass("d-none").addClass(visibleClass);
+    if ($element.is('[hidden]') || $element.hasClass('d-none')) {
+      $element.prop('hidden', false).removeClass('d-none').addClass(visibleClass);
     } else {
-      $element.prop("hidden", true).removeClass(visibleClass);
+      $element.prop('hidden', true).removeClass(visibleClass);
     }
 }
 
@@ -125,11 +123,11 @@ function lastCvUpdate(lang) {
 }
 
 function addRedirectById(elementId) {
-  const balise = document.getElementById(elementId);
+  const balise = $('#' + elementId);
   if (balise) {
     const path = appRoutes[elementId];
-    balise.href = path ? path.replace('{lng}',getCurrentLanguage()) : "/en";
-    balise.addEventListener('click', function() {
+    balise.attr('href', path ? path.replace('{lng}', getCurrentLanguage()) : '/en');
+    balise.on('click', function() {
 	  sessionStorage.clear(); // Reset hash for all other links
     });
   }
@@ -153,22 +151,22 @@ function loadBingo(){
 	let timer = null;
 	let number = 0;
 	const target = 2713;
-	const labelBtn = $("#bingoBtn").html();
+	const labelBtn = $('#bingoBtn').html();
 
-	$("#bingoBtn").click(function() {
+	$('#bingoBtn').click(function() {
 		if (number == 0) {
-			$("#bingoTimer").removeClass();
-			$("#bingoBtn").html("Stop");
+			$('#bingoTimer').removeClass();
+			$('#bingoBtn').html('Stop');
 			timer = setInterval(() => {
 				number++;
-				$("#bingoTimer").html(number);
+				$('#bingoTimer').html(number);
 			}, 10);
 		} else {
 			if (number == target) {
-				$("#bingoTimer").addClass("victory");
+				$('#bingoTimer').addClass('victory');
 			} else {
-				$("#bingoTimer").addClass("defeat");
-				$("#bingoBtn").html(labelBtn);
+				$('#bingoTimer').addClass('defeat');
+				$('#bingoBtn').html(labelBtn);
 				clearInterval(timer);
 				number = 0;
 			}
@@ -177,7 +175,7 @@ function loadBingo(){
 }
 
 function getMessage(key) {
-	return appMessages[key]?.[`${getCurrentLanguage()}`] || "";
+	return appMessages[key]?.[`${getCurrentLanguage()}`] || '';
 }
 
 function switchLanguage(url) {
@@ -195,10 +193,10 @@ function switchLanguage(url) {
 }
 
 function initTranslator() {
-	const toggle = document.getElementById('language-toggle');
+	const toggle = $('#language-toggle');
 	if(toggle){
-		toggle.checked = getCurrentLanguage() == 'fr';
-		toggle.addEventListener('change', function () {
+		toggle.prop('checked', getCurrentLanguage() == 'fr');
+		toggle.on('change', function () {
 			toggle.checked = getCurrentLanguage() == 'fr';
 			window.location.href = switchLanguage(window.location.href);
 		});
@@ -232,34 +230,6 @@ AOS.init({
 
 (function($) {
 	"use strict";
-	
-	initProfile();
-	
-	var carousel = function() {
-		$('.owl-carousel').owlCarousel({
-			loop: true,
-			autoplay: true,
-			margin: 10,
-			animateOut: 'fadeOut',
-			animateIn: 'fadeIn',
-			nav: true,
-			autoplayHoverPause: false,
-			items: 5,
-			navText : ["<span class='icon-chevron-circle-left'></span>","<span class='icon-chevron-circle-right'></span>"],
-			responsive: {
-			  0:{
-				items:3
-			  },
-			  576:{
-				items:4
-			  },
-			  992:{
-				items:5
-			  }
-			}
-		});
-	};
-	carousel();
 	
 	$(window).stellar({
 		responsive: true,
@@ -310,29 +280,35 @@ AOS.init({
 		});
 	};
 	onePageClick();
-	
+
 	var carousel = function() {
-		$('.home-slider').owlCarousel({
-	    loop:true,
-	    autoplay: true,
-	    margin:0,
-	    animateOut: 'fadeOut',
-	    animateIn: 'fadeIn',
-	    nav:false,
-	    autoplayHoverPause: false,
-	    items: 1,
-	    navText : ["<span class='icon-chevron-left'></span>","<span class='icon-chevron-right'></span>"],
-	    responsive:{
-	      0:{
-	        items:1
-	      },
-	      600:{
-	        items:1
-	      },
-	      1000:{
-	        items:1
-	      }
-	    }
+		$(".owl-carousel").each(function(){
+			var itemCount = $(this).children().length;
+			$(this).owlCarousel({
+				loop: true,
+				autoplay: true,
+				margin: 10,
+				animateOut: 'fadeOut',
+				animateIn: 'fadeIn',
+				nav: true,
+				autoplayHoverPause: false,
+				items: 4,
+				navText: ['<span class="icon-chevron-circle-left"></span>','<span class="icon-chevron-circle-right"></span>'],
+				responsive: {
+				  0:{
+					items:Math.min(2, itemCount)
+				  },
+				  576:{
+					items:Math.min(3, itemCount)
+				  },
+				  992:{
+					items:Math.min(4, itemCount)
+				  },
+				  1200:{
+					items:Math.min(5, itemCount)  
+				  }
+				}
+			 });
 		});
 	};
 	carousel();
@@ -379,21 +355,21 @@ AOS.init({
 			}
 			// For small screens, the header becomes dark
 			if (window.scrollY <= 5) {
-				document.querySelector('.off').classList.add('top-scroll');
+				$('.off').first().addClass('top-scroll');
 			} else {
-				document.querySelector('.off').classList.remove('top-scroll');
+				$('.off').first().removeClass('top-scroll');
 			}
 		});
 	};
 	scrollWindow();
 
 	var counter = function() {
-		$('#section-counter, .hero-wrap, .ftco-counter, .ftco-about').waypoint( function( direction ) {
+		$('.ftco-about, .ftco-counter').waypoint( function( direction ) {
 			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
 				var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
 				$('.number').each(function(){
-					var $this = $(this), num = $this.data('number');
-					$this.animateNumber(
+					var num = $(this).data('number');
+					$(this).animateNumber(
 					  {
 					    number: num,
 					    numberStep: comma_separator_number_step
@@ -416,11 +392,11 @@ AOS.init({
 						var el = $(this);
 						setTimeout( function () {
 							var effect = el.data('animate-effect');
-							if ( effect === 'fadeIn') {
+							if (effect === 'fadeIn') {
 								el.addClass('fadeIn ftco-animated');
-							} else if ( effect === 'fadeInLeft') {
+							} else if (effect === 'fadeInLeft') {
 								el.addClass('fadeInLeft ftco-animated');
-							} else if ( effect === 'fadeInRight') {
+							} else if (effect === 'fadeInRight') {
 								el.addClass('fadeInRight ftco-animated');
 							} else {
 								el.addClass('fadeInUp ftco-animated');
@@ -475,14 +451,14 @@ AOS.init({
     goHere();
 	
 	var copyright = function() {
-		const yearCopyright = document.getElementById('year');
+		const yearCopyright = $('#year');
 		if (yearCopyright){
-			yearCopyright.innerText = new Date().getFullYear();
+			yearCopyright.text(new Date().getFullYear());
 		}		
 	}
 	copyright();
 	
-	$(".progress").each(function() {
+	$('.progress').each(function() {
 		var value = $(this).attr('data-value');
 		var left = $(this).find('.progress-left .progress-bar');
 		var right = $(this).find('.progress-right .progress-bar');
@@ -496,12 +472,12 @@ AOS.init({
 		  }
 		}
 	});
-	document.querySelectorAll('.progress-bar').forEach(progressBar => {
-		const valueNow = parseFloat(progressBar.getAttribute('aria-valuenow'));
-		const valueMin = parseFloat(progressBar.getAttribute('aria-valuemin'));
-		const valueMax = parseFloat(progressBar.getAttribute('aria-valuemax'));
+	$('.progress-bar').each(function(){
+		const valueNow = parseFloat($(this).attr('aria-valuenow'));
+		const valueMin = parseFloat($(this).attr('aria-valuemin'));
+		const valueMax = parseFloat($(this).attr('aria-valuemax'));
 		const widthPercentage = ((valueNow - valueMin) / (valueMax - valueMin)) * 100;
-		progressBar.style.width = `${widthPercentage}%`;
+		$(this).css('width', `${widthPercentage}%`);
 	});	
 
     var TxtRotate = function(el, toRotate, period) {
@@ -518,7 +494,7 @@ AOS.init({
 		  var fullTxt = this.toRotate[i];
 
 		  this.txt = this.isDeleting ? fullTxt.substring(0, this.txt.length - 1) : fullTxt.substring(0, this.txt.length + 1);
-		  this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+		  this.el.html('<span class="wrap">'+this.txt+'</span>');
 
 		  var that = this;
 		  var delta = 300 - Math.random() * 100;
@@ -536,39 +512,60 @@ AOS.init({
 
 		  setTimeout(function() { that.tick(); }, delta);
 	};
-	document.querySelectorAll('.txt-rotate').forEach(el => {
-		var toRotate = el.getAttribute('data-rotate');
-		var period = el.getAttribute('data-period');
+	$('.txt-rotate').each(function(){
+		var toRotate = $(this).attr('data-rotate');
+		var period = $(this).attr('data-period');
 		if (toRotate) {
-		  new TxtRotate(el, JSON.parse(toRotate), period);
+		  new TxtRotate($(this), JSON.parse(toRotate), period);
 		}
 	});
+	
+	$('[data-bs-toggle="tooltip"]').each(function() {
+      new bootstrap.Tooltip(this);
+    });
+	
+	initProfile();
 	
 })(jQuery);
 
 function initPage(){
 	
   loadImages('.icon.svg','svg'); // Load SVG for all pages
- 
-  Object.keys(appRoutes).forEach(appRoute => { addRedirectById(appRoute) });
+
+  $.each(appRoutes, function(appRoute) { 
+	addRedirectById(appRoute);
+  });
   
   initTranslator();
 
-  $(".open-mfp").click(function() {
-    const target = $(this).data("target");
+  $('.open-mfp').click(function() {
+    const target = $(this).data('target');
     toggleVisibility(target);
   });
 
-  $(".mfp-close").click(function() {
-    const modalId = $(this).closest(".mfp")[0].id;
-    toggleVisibility("#" + modalId);
+  $('.mfp-close').click(function() {
+    const modalId = $(this).closest('.mfp')[0].id;
+    toggleVisibility('#' + modalId);
+  });
+  
+  $('.owl-menu').click(function() {
+    const target = $(this).data('target');
+	$('.owl-menu.active').removeClass('active');
+	$(this).addClass('active');
+	$('.owl-carousel').not(target).each(function() {
+	  if (!$(this).hasClass('d-none')) {
+		$(this).addClass('d-none');
+	  }
+	  $(this).removeClass('active');
+	});
+	$(target).removeClass('d-none').addClass('active');
+	$(target).trigger('refresh.owl.carousel'); // To avoid glitch switching to other carousel
   });
 
   const idPage = document.querySelector('head').id;
   
   if (idPage === 'index'){
-	const navLinks = document.querySelectorAll('.nav-link');
-	navLinks.forEach((navLink, index) => {
+	$('.nav-link').each(function(index, navLink) {
 		navLink.href = `#${appAllSections[index]}`;
 		appScrollSections.push($($(navLink).attr('href')));
 		navLink.addEventListener('click', function (event) {
@@ -592,7 +589,8 @@ function initPage(){
 		// Retains the value of the scroll top with the reference at the middle of the page
 		var scrollMiddle = $(this).scrollTop() + ($(window).height()/2);
 		if ($(this).scrollTop() < 150){
-			saveHashSession(homeSection);
+			$('a[href*="' + homeSection + '"]').addClass('active');
+			saveHashSession(homeSection);	
 		}
 		for (let appScrollSection of appScrollSections) {
 			var scrollStartZone = appScrollSection.offset().top;
@@ -615,15 +613,14 @@ function initPage(){
 	loadImages('.articleImage', 'avif');	
 		
 	lastCvUpdate(getCurrentLanguage());
-	
-	const contactForm = document.querySelector("form[name='contactForm']");
-	contactForm.addEventListener('submit', async (event) => { 
+
+	$('form[name="contactForm"]').on('submit', async (event) => { 
 		event.preventDefault(); // Avoid Netlify default submission
 		const formData = new FormData(event.target);
 		try {
 			await sendEmail(formData.get('name'), formData.get('subject'), formData.get('message'));
-			if(window.location.protocol === "https:"){
-				contactForm.submit(); // Submit form after sending the email
+			if(window.location.protocol === 'https:'){
+				$(this).submit(); // Submit form after sending the email
 			}
 		} catch (error) {
 			return false;
@@ -633,23 +630,26 @@ function initPage(){
 	loadBingo();
 
   } else if (idPage === 'blog'){
-		const articleShape = document.getElementById('articleShape'); 
-		const iframeArticle = document.getElementById('iframeArticle');
+		
+		$('a[href*="' + blogSection + '"]').addClass('active');
+	  
+		const articleShape = $('#articleShape'); 
+		const iframeArticle = $('#iframeArticle');
 		const hashLink = window.location.hash ? window.location.hash.substring(1) : '';
 		const errorArticle = getMessage('error-generic');
 		const host = window.location.origin;
 		const currentHash = hashLink || sessionStorage.getItem('currentHash');
 		
 		if (!currentHash) {					 
-		  articleShape.innerHTML = errorArticle;
+		  articleShape.html(errorArticle);
 		} else {
 		   saveHashSession(currentHash);
 		   clearUrlPath();				   
 		   const urlArticle = `${host}/articles/${currentHash}_${getCurrentLanguage()}.html`;
 		 
-		   iframeArticle.src = urlArticle;
+		   iframeArticle.prop('src', urlArticle);
 		 
-		   iframeArticle.onload = () => {					 
+		   iframeArticle.on('load', function(){					 
 				fetch(urlArticle)
 				.then(response => response.text())
 				.then(html => {													
@@ -666,17 +666,17 @@ function initPage(){
 					const footer = doc.querySelector('.footer');
 					if (footer) footer.remove();
 														
-					articleShape.innerHTML =  doc.body.innerHTML + articleShape.innerHTML;
+					articleShape.html(doc.body.innerHTML + articleShape.html());
 					loadImages('.articleImage','png');
 					initProfile();
 				})
 				.catch(error => {
-					articleShape.innerHTML = errorArticle;
+					articleShape.html(errorArticle);
 				})
 				.finally(() => {
 					iframeArticle.remove();
 				});
-			}; 
+			}); 
 	    }  
     }
 }
@@ -715,8 +715,8 @@ async function sendEmail(name, subject, message) {
 	].join('\n');
 	const successMessage = getMessage('success-generic');
 	const errorMessage = getMessage('error-generic');
-	const callbackForm = document.getElementById('callbackForm');
-	callbackForm.innerText = '';
+	const callbackForm = $('#callbackForm');
+	callbackForm.text('');
 
 	// Base64 encode the email in URL-safe format
 	const base64EncodedEmail = btoa(email)
@@ -741,12 +741,12 @@ async function sendEmail(name, subject, message) {
 
 		if(response.ok){
 			localStorage.setItem('tokenAPI', JSON.stringify(token));
-			callbackForm.innerText = successMessage;
-			if(window.location.protocol === "https:"){
+			callbackForm.text(successMessage);
+			if(window.location.protocol === 'https:'){
 				sessionStorage.clear();
 			}
 		} else{
-			callbackForm.innerText = errorMessage;
+			callbackForm.text(errorMessage);
 			localStorage.clear();
 		}
 	}
@@ -772,29 +772,29 @@ async function sendEmail(name, subject, message) {
 	}
 	
 	if (!token) {
-		callbackForm.innerText = '';
+		callbackForm.text('');
 		// Request access token and wait for user consent with Google Identity Services
 		try {
 			tokenClient.requestAccessToken({prompt: 'consent'});
 			await checkTokenConsent();
 		} catch (error) {
-			callbackForm.innerText = errorMessage;
+			callbackForm.text(errorMessage);
 			localStorage.clear();
 		}
 	} else {
 		try {
 			await sendHelper(token);
 		} catch (error) {
-			callbackForm.innerText = errorMessage;
+			callbackForm.text(errorMessage);
 			localStorage.clear();
 		}
 	}
 }
 
 function enableSubmitForm() {
-  const submitButton = document.querySelector("input[type='submit']");
+  const submitButton = $('input[type="submit"]');
   const recaptchaResponse = grecaptcha.getResponse();
-  submitButton.disabled = recaptchaResponse.length > 0 ? false : true;
+  submitButton.prop('disabled', recaptchaResponse.length > 0 ? false : true);
 }
 
 function initCaptcha() {

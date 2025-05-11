@@ -81,14 +81,14 @@
             </a>
          </div>
       </section>
-      <section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+      <section class="ftco-section ftco-about ftco-no-pt ftco-no-pb img" id="about-section">
          <div class="container">
             <div class="row d-flex no-gutters">
                <div class="col-md-6 col-lg-6 d-flex">
                   <div class="img-about img d-flex align-items-stretch">
                      <div class="overlay"></div>
                      <div id="profile" class="img d-flex align-self-stretch align-items-center">
-						<div class="bulle-bd text-center">
+						<div class="bulle-bd text-center bg-white">
 							Faster, Higher, Stronger - Together !
 						</div>
 					 </div>
@@ -420,7 +420,7 @@
 									<span class="small text-gray"></span>
 								 </div>
 								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">JQuery</div>
+									<div class="h5 font-weight-bold mb-0">jQuery</div>
 									<span class="small text-gray"></span>
 								 </div>
 							  </div>
@@ -608,7 +608,8 @@
             <div class="row justify-content-center py-5 mt-5">
                <div class="col-md-12 heading-section text-center ftco-animate">
                   <h2 class="mb-4">Services</h2>
-                  <p>Programming, Customer Support & Training</p>
+				  <img class="img-fluid" src="images/developer.png" id="developer" />
+                  <p class="mt-4">Programming, Customer Support & Training</p>			  
                </div>
             </div>
             <div class="row">
@@ -814,7 +815,7 @@
          	</div>
          </div>
       </section>
-	  <section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="counter-section">
+	  <section class="ftco-section ftco-counter" id="counter-section">
          <div class="container-fluid px-md-5">
          	<div class="row d-md-flex align-items-center">
 			   <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
@@ -853,8 +854,16 @@
           </div>
 	  </section>
 	  <section class="ftco-section ftco-counter img" id="carousel-section">
-		  <div class="container-fluid px-md-5" id="carousel-container">
-			  <div class="owl-carousel owl-theme">
+		  <div class="container-fluid px-md-5 pb-3 pt-3 bg-dark text-white text-center">
+			  <h2 class="text-white">Discover my skills</h2>
+			  <div class="owl-menus d-flex justify-content-center">
+				<span class="owl-menu active" data-target="#hard-skills">Hard skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Practical or technical abilities learned through training or experience"></i></span>
+				<span class="owl-menu" data-target="#soft-skills">Soft skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Personal attributes or interpersonal abilities that enhance how you work and interact with others"></i></span>
+				<span class="owl-menu" data-target="#mad-skills">Mad skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Atypical abilities or unique talents, often developed through personal passions"></i></span>
+			  </div>
+			  <div class="owl-carousel owl-theme active" id="hard-skills">
+				  <div class="d-flex flex-column align-items-center"><img src="images/python.png" class="img-fluid"/><span>Python</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/csharp.png" class="img-fluid"/><span>C#</span></div>
 				  <div class="d-flex flex-column align-items-center"><img src="images/vscode.png" class="img-fluid"/><span>VS Code</span></div>
 				  <div class="d-flex flex-column align-items-center"><img src="images/vsstudio.png" class="img-fluid"/><span>Visual Studio</span></div>
 				  <div class="d-flex flex-column align-items-center"><img src="images/github.png" class="img-fluid"/><span>GitHub</span></div>
@@ -862,9 +871,32 @@
 				  <div class="d-flex flex-column align-items-center"><img src="images/html.png" class="img-fluid"/><span>HTML</span></div>
 				  <div class="d-flex flex-column align-items-center"><img src="images/css.png" class="img-fluid"/><span>CSS</span></div>
 				  <div class="d-flex flex-column align-items-center"><img src="images/javascript.png" class="img-fluid"/><span>JS</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/jquery.png" class="img-fluid"/><span>jQuery</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/sql.png" class="img-fluid"/><span>SQL</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/powershell.png" class="img-fluid"/><span>Powershell</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/postman.png" class="img-fluid"/><span>Postman</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/docker.png" class="img-fluid"/><span>Docker</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/robot.png" class="img-fluid"/><span>Robot Framework</span></div>
 				  <div class="d-flex flex-column align-items-center"><img src="images/office.png" class="img-fluid"/><span>Office</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/python.png" class="img-fluid"/><span>Python</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/csharp.png" class="img-fluid"/><span>C#</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/netsurvey.png" class="img-fluid"/><span>Net-Survey</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/ethnos.png" class="img-fluid"/><span>Ethnos</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/webreports.png" class="img-fluid"/><span>Web-Reports</span></div>
+			 </div>
+			 <div class="owl-carousel owl-theme d-none" id="soft-skills">
+				  <div class="d-flex flex-column align-items-center"><img src="images/team.png" class="img-fluid"/><span>Team spirit</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/leadership.png" class="img-fluid"/><span>Leadership</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/communication.png" class="img-fluid"/><span>Communication</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/adaptability.png" class="img-fluid"/><span>Adaptability</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/proactivity.png" class="img-fluid"/><span>Proactivity</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/independence.png" class="img-fluid"/><span>Independence</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/empathy.png" class="img-fluid"/><span>Empathy</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/creativity.png" class="img-fluid"/><span>Creativity</span></div>
+			 </div>
+			 <div class="owl-carousel owl-theme d-none" id="mad-skills">
+				  <div class="d-flex flex-column align-items-center"><img src="images/tennis.png" class="img-fluid"/><span>Tennis</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/chess.png" class="img-fluid"/><span>Chess</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/travel.png" class="img-fluid"/><span>Travel</span></div>
+				  <div class="d-flex flex-column align-items-center"><img src="images/writing.png" class="img-fluid"/><span>Writing</span></div>
 			 </div>
 		 </div>
       </section>
@@ -955,7 +987,7 @@
             </div>
          </div>
       </section>
-      <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
+      <section class="contact-section ftco-section ftco-no-pb" id="contact-section">
          <div class="container">
 			 <div class="row justify-content-center mb-5 pb-3">
 			  <div class="col-md-7 heading-section text-center ftco-animate">
@@ -1014,7 +1046,7 @@
 				</div>
 				<div class="col-md-6 d-flex d-lg-none">
 					<div id="profile" class="img">
-						<div class="bulle-bd text-center">
+						<div class="bulle-bd text-center bg-white">
 							Faster, Higher, Stronger - Together !
 						</div>
 					</div>
@@ -1022,15 +1054,15 @@
 			 </div>
          </div>
       </section>
-      <div id="contact-icon" class="open-mfp d-flex justify-content-center" data-target="#contact-window">
+      <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" data-target="#contact-window">
             <span class="icon-user"></span>
       </div>
-      <div id="contact-window" class="mfp flex-column" hidden>
-		<div id="contact-header" class="d-flex align-items-center justify-content-between">
+      <div id="contact-window" class="mfp flex-column bg-white" hidden>
+		<div id="contact-header" class="d-flex align-items-center justify-content-between text-white">
 			<h6>Contact me</h6>
 			<span class="mfp-close">×</span>
 		</div>
-		<div id="contact-link">
+		<div id="contact-link" class="text-dark">
 			<p class="d-flex align-items-center">
 				<i class="icon-envelope"></i> 
 				<span class="email"></span>
@@ -1086,7 +1118,7 @@
 						<div class="block-23 mb-3 d-flex flex-column align-items-center">
 							<p>If you come across number 2713, you've won !</p>
 							<div id="bingoTimer">0</div>
-							<div id="bingoBtn">Play</div>
+							<div id="bingoBtn" class="text-white">Play</div>
 						</div>
 					</div>
 				</div>

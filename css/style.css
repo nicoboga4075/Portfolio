@@ -30,10 +30,6 @@ td strong {
 	color: var(--main);
 }
 
-.open-mfp {
-	color: var(--white);
-}
-
 .open-mfp:hover, .btn.btn-primary:hover {
 	color: var(--white)!important;
 	opacity: 0.7;
@@ -231,7 +227,6 @@ td strong {
     right: 20px;
     width: 300px;
     height: auto;
-    background-color: var(--white);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -240,21 +235,18 @@ td strong {
 
 #contact-header {
     background-color: var(--main);
-    color: var(--white);
     padding: 8px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
 #contact-header h6 {
-	color: var(--white);
 	font-weight: bold;
 	margin-top: 8px;	
 }
 
 #contact-link {
     font-size: 14px;
-    color: var(--dark);
 }
 
 #contact-link p {
@@ -343,9 +335,16 @@ td strong {
 
 /* Carousel Section */
 
-#carousel-container {
-	background-color: var(--dark);
-	color: var(--white);
+.owl-menus {
+	gap: 60px;
+}
+
+.owl-menu {
+	cursor: pointer;
+}
+
+.owl-menu.active{
+	color: var(--main);
 }
 
 .owl-carousel {
@@ -400,8 +399,12 @@ td strong {
     opacity: 0.8;
 }
 
-.services-1:hover h3{
+.services-1:hover h3 {
 	color: var(--white)!important;
+}
+
+#developer {
+	height: 250px;
 }
 
 /* Blog */
@@ -431,7 +434,6 @@ td strong {
 	padding: 10px 30px;
 	background-color: var(--main);
 	cursor: pointer;
-	color: var(--white);
 	font-weight: bold;
 	font-size: 30px;
 	border-radius: 5px;
@@ -476,7 +478,6 @@ td strong {
   position: absolute;
   top: 20px;
   right: 20px;
-  background: var(--white);
   border: 2px solid var(--main);
   border-radius: 10px;
   padding: 10px;
