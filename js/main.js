@@ -166,22 +166,22 @@ function loadBingo(){
 	let timer = null;
 	let number = 0;
 	const target = 2713;
-	const labelBtn = $('#bingoBtn').html();
+	const labelBtn = $('#bingoBtn').text();
 
 	$('#bingoBtn').click(function() {
 		if (number == 0) {
 			$('#bingoTimer').removeClass();
-			$('#bingoBtn').html('Stop');
+			$('#bingoBtn').text('Stop');
 			timer = setInterval(() => {
 				number++;
-				$('#bingoTimer').html(number);
+				$('#bingoTimer').text(number);
 			}, 10);
 		} else {
 			if (number == target) {
 				$('#bingoTimer').addClass('victory');
 			} else {
 				$('#bingoTimer').addClass('defeat');
-				$('#bingoBtn').html(labelBtn);
+				$('#bingoBtn').text(labelBtn);
 				clearInterval(timer);
 				number = 0;
 			}
@@ -194,17 +194,21 @@ function getMessage(key) {
 }
 
 function switchLanguage(url) {
-    var newUrl = url;
-    if (url.includes('/fr')) {
-        newUrl = url.replace('/fr', '/en');
-    } else if (url.includes('/en')) {
-        newUrl = url.replace('/en', '/fr');
+    try {
+        const urlObj = new URL(url, window.location.origin);
+        urlObj.pathname = urlObj.pathname.replace(/^\/(fr|en)/, (match) => {
+            return match === '/fr' ? '/en' : '/fr';
+        });
+        const currentHash = sessionStorage.getItem('currentHash');
+        if (currentHash && /^[a-zA-Z0-9-_]+$/.test(currentHash)) {
+            urlObj.hash = `#${currentHash}`;
+        } else {
+            urlObj.hash = '';
+        }
+        return urlObj.pathname + urlObj.search + urlObj.hash;
+    } catch (error) {
+        return '/';
     }
-	const currentHash = sessionStorage.getItem('currentHash');
-	if(currentHash){
-		newUrl += `#${currentHash}`; 
-	}
-    return newUrl;
 }
 
 function initTranslator() {
@@ -213,7 +217,10 @@ function initTranslator() {
 		toggle.prop('checked', getCurrentLanguage() == 'fr');
 		toggle.on('change', function () {
 			toggle.checked = getCurrentLanguage() == 'fr';
-			window.location.href = switchLanguage(window.location.href);
+			const newUrl = switchLanguage(window.location.href);
+			if (/^\/(?!\/)/.test(newUrl)) {
+				window.location.href = newUrl;
+			}
 		});
 	}
 }
@@ -667,6 +674,14 @@ function initPage(){
   const idPage = getCurrentRoute();
   
   if (idPage === 'index'){
+	fetch("/.netlify/functions/visit")
+      .then(response => response.json())
+      .then(data => {
+		 $('#ftco-visitor').text(data.visits);
+      })
+      .catch(error => {
+		 $('#ftco-visitor').text(error);
+	  });
 	$('.nav-link').each(function(index, navLink) {
 		navLink.href = `#${appAllSections[index]}`;
 		appScrollSections.push($($(navLink).attr('href')));
@@ -752,7 +767,7 @@ function initPage(){
 		const currentHash = hashLink || sessionStorage.getItem('currentHash');
 		
 		if (!currentHash) {					 
-		  articleShape.html(errorArticle);
+		  articleShape.text(errorArticle);
 		} else {
 		   saveHashSession(currentHash);
 		   clearUrlPath();				   
@@ -782,7 +797,7 @@ function initPage(){
 					initProfile();
 				})
 				.catch(error => {
-					articleShape.html(errorArticle);
+					articleShape.text(errorArticle);
 				})
 				.finally(() => {
 					iframeArticle.remove();
