@@ -1,9 +1,23 @@
+let defaultRoutes = {
+	"policy": "/{lng}/policy",
+	"terms": "/{lng}/terms",
+	"error404": "/404"
+};
+
+function getCurrentRoute() {
+  const path = window.location.pathname;
+  return Object.keys(defaultRoutes).find(key => {
+    const pattern = '^' + defaultRoutes[key].replace('{lng}', '[a-z]{2}') + '$';
+    return new RegExp(pattern).test(path);
+  }) || null;
+}
+
 function getCurrentLanguage() {
 	return document.documentElement.lang;	
 }
 
 function addHomeRedirect() {
-  const homeBalise = document.getElementById('home-page');
+  const homeBalise = document.getElementById('index');
   if (homeBalise) {
     homeBalise.addEventListener('click', function() {
 		sessionStorage.clear();
@@ -38,6 +52,8 @@ function initTranslator() {
 }
 
 function initPage(){
+	const idPage = getCurrentRoute();
+	alert(idPage);
 	initTranslator();
 	addHomeRedirect();
 }

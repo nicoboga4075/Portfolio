@@ -8,15 +8,22 @@ let projectsCount = 20;
 let experiencesCount = 5;
 let countriesCount = 14;
 
+let defaultRoutes = {
+	"policy": "/{lng}/policy",
+	"terms": "/{lng}/terms",
+	"error404": "/404"
+};
+
 let appRoutes = {
-  "home-page": "/{lng}",
-  "policy": "/{lng}/policy",
-  "terms": "/{lng}/terms"
+  "index": "/{lng}",
+  "blog": "/{lng}/blog",
+  ...defaultRoutes
 };
 
 let homeSection = "home-section";
 let goHereSection = "resume-section";
 let blogSection = "blog-section";
+let contactSection = "contact-section";
 
 let appMainSections = [
   "about-section",
@@ -24,7 +31,7 @@ let appMainSections = [
   "services-section",
   "projects-section",
   blogSection,
-  "contact-section"
+  contactSection
 ];
 
 let appSubSections = [
@@ -75,6 +82,14 @@ function computeAge() {
 	const d = new Date('1997-11-19');
 	const today = new Date();
 	return today.getFullYear() - d.getFullYear() - (today < new Date(today.getFullYear(), d.getMonth(), d.getDate()) ? 1 : 0);
+}
+
+function getCurrentRoute() {
+  const path = window.location.pathname;
+  return Object.keys(appRoutes).find(key => {
+    const pattern = '^' + appRoutes[key].replace('{lng}', '[a-z]{2}') + '$';
+    return new RegExp(pattern).test(path);
+  }) || null;
 }
 
 function getCurrentLanguage() {
@@ -221,6 +236,93 @@ function initProfile() {
 	$('#projectsCount').attr('data-number', projectsCount);
 	$('#experiencesCount').attr('data-number', experiencesCount);
 	$('#countriesCount').attr('data-number', countriesCount);
+}
+
+function createCircularChart({canvasId, data, backgroundColor, labels, titles, subtitles, cutout = '50%'}) {
+  const total = data.reduce((a, b) => a + b, 0);
+  const currentLanguage = getCurrentLanguage();
+  new Chart($('#' + canvasId)[0].getContext('2d'), {
+    type: 'doughnut',
+    data: {
+	  labels: labels.map(label => {
+          if (typeof label === 'string') return label;
+		  return label[currentLanguage] || label.fr || label.en;
+	  }),
+      datasets: [{
+        data: data,
+        backgroundColor: backgroundColor,
+        borderWidth: 0,
+      }]
+    },
+    options: {
+	  plugins: {
+		  tooltip: {
+            enabled: false
+          },
+		  title: {
+            display: true,
+            text: titles[currentLanguage] || titles.fr || titles.en,
+            font: {
+			  family: 'Poppins',
+              size: 18,
+              weight: 'bold'
+            },
+            padding: {
+			  family: 'Poppins',
+              top: 10,
+              bottom: 20
+            }
+          },
+		  subtitle: {
+			  display: true,
+			  text: subtitles[currentLanguage] || subtitles.fr || subtitles.en,
+			  font: {
+				family: 'Poppins',
+				size: 14,
+				weight: 'normal'
+			  },
+			  padding: {
+				bottom: 15
+			  }
+		  },
+		  legend: {
+			position: 'bottom',
+			align: 'center',
+			labels: {
+			  font: {
+				  family: 'Poppins',
+				  size: 13,
+				  weight: '400'
+			  },
+			  boxWidth: 16,
+              boxHeight: 16,
+              padding: 14,
+              usePointStyle: false,
+              generateLabels: function(chart) {
+                const data = chart.data;
+                return data.labels.map((label, i) => {
+                  const value = chart.data.datasets[0].data[i];
+                  const percentage = ((value / total) * 100).toFixed(0);
+                  return {
+                    text: `${label} (${percentage}%)`,
+                    fillStyle: chart.data.datasets[0].backgroundColor[i],
+                    strokeStyle: '#fff',
+                    lineWidth: 2
+                  };
+                });
+			  }
+			}
+		  }
+	  },
+      cutout: cutout,
+      responsive: true,
+      animation: {
+        animateRotate: true,
+        duration: 2000,
+        easing: 'easeInOutCubic'
+      }
+    }
+  });
 }
 
 AOS.init({
@@ -562,7 +664,7 @@ function initPage(){
 	$(target).trigger('refresh.owl.carousel'); // To avoid glitch switching to other carousel
   });
 
-  const idPage = document.querySelector('head').id;
+  const idPage = getCurrentRoute();
   
   if (idPage === 'index'){
 	$('.nav-link').each(function(index, navLink) {
@@ -613,6 +715,15 @@ function initPage(){
 	loadImages('.articleImage', 'avif');	
 		
 	lastCvUpdate(getCurrentLanguage());
+	
+	createCircularChart({
+	  canvasId: 'skillsChart',
+	  data: [45, 25, 15, 10, 5],
+	  backgroundColor: ['#3e64ff', '#FFA60E', '#8BC34A', '#DC143C', '#000'],
+	  labels: ['Back-end', 'Front-end', {fr: 'Gestion de projet', en: 'Project management'}, 'Support', 'CI/CD'],
+	  titles: {fr: 'Répartition du temps passé sur mes compétences', en: 'Time distribution across my skills'},
+	  subtitles: {fr: 'Données basées sur + 4 années en activité', en: 'Data based on + 4 years in activity'}
+    });
 
 	$('form[name="contactForm"]').on('submit', async (event) => { 
 		event.preventDefault(); // Avoid Netlify default submission

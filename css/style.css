@@ -498,3 +498,10 @@ td strong {
 #profile:hover .bulle-bd {
   display: block;
 }
+
+/* Chart */
+
+.chart-container {
+  min-height: 250px;
+  max-height: 500px;
+}
