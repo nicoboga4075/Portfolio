@@ -791,7 +791,21 @@ function initPage(){
 	 
 					const footer = doc.querySelector('.footer');
 					if (footer) footer.remove();
-														
+					
+					// Remove potential XSS vectors
+					const dangerousTags = doc.querySelectorAll('script, iframe, object, embed, link, style, meta');
+					dangerousTags.forEach(el => el.remove());
+
+					// Sanitize anchor hrefs to prevent open redirects
+					const links = doc.querySelectorAll('a[href]');
+					links.forEach(link => {
+					  const href = link.getAttribute('href');
+					  // Allow only same-origin or relative links
+					  if (href.startsWith('http') && !href.startsWith(window.location.origin)) {
+						link.setAttribute('href', '#');
+					  }
+					});
+													
 					articleShape.html(doc.body.innerHTML + articleShape.html());
 					loadImages('.articleImage','png');
 					initProfile();
