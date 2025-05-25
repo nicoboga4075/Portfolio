@@ -81,3 +81,42 @@ a {
     transform: translateX(25px);
     background-color: var(--main);
 }
+
+/* Blog Article */
+
+.articleContainer h2{
+	color: var(--main);
+}
+
+.titleCenter {
+    font-size: 40px;
+    color: var(--main);
+    font-weight: bold;
+    line-height: 50px;
+    margin-bottom: 25px;
+}
+
+.secondTitle {
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+#qrcode {
+	max-width: 15vw;
+}
+
+#inpi-process {
+    width: 100%;
+    min-width: 20%;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(15, 41, 48, .05);
+}
+
+#mcs-design, #mcs-example{
+	max-width: 70vw;
+	margin-bottom: 15px;
+}

@@ -1,64 +1,87 @@
-<div class="articleContainer">
-   <div class="titleCenter">From the dev vocab</div>
-   <div class="secondTitle">In the software development world, we often cross words like <b>framework, library, package and module</b>... While these words are sometimes, through misuse of language, used as synonyms in technical discussions, they are quite distinct concepts. Each plays a specific role in how developers structure, organize and automate their projects. To better understand these differences, this article provides a clear and accessible overview of these concepts, illustrated through concrete examples such as Angular, Selenium, Numpy and the Python's math module. The goal is to choose the right tool at the right time, based on the needs and context of the project.</div>
-   <h2>Framework</h2>
-   <p>A framework is a complete environment that provides a predefined architecture for developing applications. It imposes rules, conventions and a workflow that the developer must follow. The idea is to <b>standardize</b> development and reduce errors thanks to a <b>rigid structure</b>.</p>
-   <h4>ASP.NET Core (C#)</h4>
-   <p><a target="_blank" href="https://learn.microsoft.com/en-us/aspnet/core/">ASP.NET Core</a> is powerful, flexible and interoperable (Linux, MacOS and Windows), making it an excellent choice for modern development (web applications, APIs, or microservices). It supports large-scale and critical applications for large businesses such as <b>Microsoft</b> and is supported by the large <i>Stack Overflow</i> community. Its modular design allows you to choose the components you need and it has robust security features to protect you from common vulnerabilities (<i>OWASP</i>). However, even if .NET has become easier to use, early-stage developers might find it more difficult than the frameworks associated with languages like Python or Javascript, described below. Since the release of .NET 5 in November 2020, the "Core" has officially disappeared from the name.</p>
-   <h4>Flask (Python)</h4>
-   <p><a target="_blank" href="https://flask.palletsprojects.com/">Flask</a>, used by <b>Netflix</b>, has been known for its ease of use since its inception in 2010. Unlike “battery-included” frameworks like <a target="_blank" href="https://www.djangoproject.com/">Django</a> used by <b>Instagram</b>, Flask has a minimalist kernel, making it adaptable to a variety of projects, from simple <i>REST</i> APIs to microservices to more complex web applications. This gives developers flexibility but also requires them to make more decisions about architecture and component selection. This can be an advantage for experienced developers who take advantage of control but it can be difficult for juniors who are penalized by the lack of built-in features. Furthermore, while Flask adequately addresses common security needs, it requires developers to be more pragmatic in the architecture and security of their applications.</p>
-   <h4>Angular (Javascript)</h4>
-   <p><a target="_blank" href="https://angular.dev/">Angular</a>, developed by <b>Google</b>, is used to create interactive web applications. Notably, it includes tools for state management, data binding and HTTP requests. You work "in" the framework, which controls the organization and execution of your code (<i>reverse control</i>). This makes it a powerful yet demanding environment in terms of compliance with its conventions. AngularJS has been completely at the end of its lifespan since late 2021 and since 2016, any Angular is native Typescript.</p>
-   <h2>Library</h2>
-   <p>A library is a <b>collection of reusable classes or functions</b> that you can call to perform specific tasks. Unlike a framework, you control the integration and execution of features.</p>
-   <h4>Newtonsoft.Json (C#)</h4>
-   <p>This is an open-source library for the .NET framework that enables you to serialize (convert an object to <i>JSON</i>) and deserialize (convert <i>JSON</i> to an object) easily.</p>
-   <h4>Selenium (Python)</h4>
-   <p>Selenium is used to automate the testing of web applications, providing functions to interact with browsers, such as clicking buttons or filling out forms.</p>
-   <h4>Moment (Javascript)</h4>
-   <p>Moment allows manipulation and formatting of dates and times (for example, YYYY-MM-DD).</p>
-   <h4>IronPDF (C#)</h4>
-   <p>IronPDF is specialized in generating, editing and retrieving PDF content.</p>
-   <h4>Numpy (Python)</h4>
-   <p>Numpy is a compelling part of scientific computation, including advanced mathematical functions and tools for manipulating multidimensional<i>arrays</i>.</p>
-   <h4>jQuery (Javascript)</h4>
-   <p><a target="_blank" href="https://jquery.com/">jQuery</a> simplifies interaction with the <i>DOM</i> (Document Object Model) and events on web pages.</p>
-   <h2>Package</h2>
-   <p>A package is an <b>organized set of modules, often grouped together in a single folder</b>, that can be used to structure and organize code in a logical, reusable way. It can also contain other packages (subpackages), configuration files and resources. This is a <i>NuGet</i> (.nupkg) for C#, a <i>pip</i> (folder with __init__.py) for Python and a <i>npm</i> (folder with package.json) for Javascript. For example, the System.Collections.Immutable package in C# provides immutable collections for .NET and the cross-env package in Javascript allows you to set environment variables in a way that is compatible with all platforms.</p>
-   <h2>Module</h2>
-   <p>A module is the smallest of the four components, so you can import it to perform one-time operations. It has no complex dependencies or imposed structure. It is simply a <b>file</b> containing code (with extension <b>.cs</b> for C#, <b>.py</b> for Python and <b>.js</b> for Javascript), such as functions or classes that you can import and use. As a reminder, a <b>variable</b> is a named space in memory that stores a value, a <b>function</b> is a reusable block of code that performs a precise action and a <b>class</b> is a template for creating <b>objects </b>that contain <b>attributes</b> ("proprietary" variables) and <b>methods</b> ("behavioral" functions). For instance, the Python math module contains basic mathematical functions, such as sqrt, sin, or log.</p>
-   <hr></hr>
-   <p>Understanding these differences is key to choosing the right tool for your needs. Use a framework like Angular if you're looking for an all-in-one solution to structure your project. Prefer a library like Selenium for a specialized task or a Numpy for a scientific field. Finally, modules such as math from Python are perfect for light and one-off needs. By mastering these concepts, you will optimize your approach to development, choosing the right tool for each situation. Below is a summary table to share with your software teams:</p>
-   <br>
-   <table border="1" cellpadding="8" cellspacing="0">
-	  <thead>
-		<tr>
-		  <th>Concept</th>
-		  <th>Definition</th>
-		  <th>Use case</th>
-		</tr>
-	  </thead>
-	  <tbody>
-		<tr>
-		  <td><strong>Framework</strong></td>
-		  <td>A structured software component that provides a predefined architecture and controls application progress</td>
-		  <td>Developer writes code to be inserted into the intended locations and the framework executes it according to its own lifecycle.</td>
-		</tr>
-		<tr>
-		  <td><strong>Library</strong></td>
-		  <td>An organized set of software resources (functions, classes, modules) to perform specific tasks without imposing an architecture</td>
-		  <td>Developer imports the library and exploit resources as needed in the application.</td>
-		</tr>
-		<tr>
-		  <td><strong>Package</strong></td>
-		  <td>A collection of files and resources (libraries, modules, configurations) grouped and distributed through a package manager to facilitate their integration into a project</td>
-		  <td>Developer installs the package through the manager and then imports it into its code to use its features.</td>
-		</tr>
-		<tr>
-		  <td><strong>Module</strong></td>
-		  <td>A file containing code (functions, classes, variables) for import and use in other files or programs</td>
-		  <td>Developer imports the module into another file and uses the items it provides.</td>
-		</tr>
-	  </tbody>
-   </table>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+		<title>Portfolio - From the dev vocab</title>
+		<meta charset="utf-8">
+		<meta name="google" content="notranslate">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Nicolas BOGALHEIRO">
+		<meta name="description" content="From the dev vocab">
+		<meta name="theme-color" content="#ffffff">
+		<meta http-equiv="Content-Language" content="en_US">
+		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+		<base href="../../">
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+		<link rel="manifest" href="site.webmanifest">
+		<link rel="stylesheet" href="css/default.css">
+		<script src="js/default.js"></script>
+   </head>
+   <body onload="initArticle()">
+	   <div class="articleContainer">
+		   <div class="titleCenter">From the dev vocab</div>
+		   <div class="secondTitle">In the software development world, we often cross words like <b>framework, library, package and module</b>... While these words are sometimes, through misuse of language, used as synonyms in technical discussions, they are quite distinct concepts. Each plays a specific role in how developers structure, organize and automate their projects. To better understand these differences, this article provides a clear and accessible overview of these concepts, illustrated through concrete examples such as Angular, Selenium, Numpy and the Python's math module. The goal is to choose the right tool at the right time, based on the needs and context of the project.</div>
+		   <h2>Framework</h2>
+		   <p>A framework is a complete environment that provides a predefined architecture for developing applications. It imposes rules, conventions and a workflow that the developer must follow. The idea is to <b>standardize</b> development and reduce errors thanks to a <b>rigid structure</b>.</p>
+		   <h4>ASP.NET Core (C#)</h4>
+		   <p><a target="_blank" href="https://learn.microsoft.com/en-us/aspnet/core/">ASP.NET Core</a> is powerful, flexible and interoperable (Linux, MacOS and Windows), making it an excellent choice for modern development (web applications, APIs, or microservices). It supports large-scale and critical applications for large businesses such as <b>Microsoft</b> and is supported by the large <i>Stack Overflow</i> community. Its modular design allows you to choose the components you need and it has robust security features to protect you from common vulnerabilities (<i>OWASP</i>). However, even if .NET has become easier to use, early-stage developers might find it more difficult than the frameworks associated with languages like Python or Javascript, described below. Since the release of .NET 5 in November 2020, the "Core" has officially disappeared from the name.</p>
+		   <h4>Flask (Python)</h4>
+		   <p><a target="_blank" href="https://flask.palletsprojects.com/">Flask</a>, used by <b>Netflix</b>, has been known for its ease of use since its inception in 2010. Unlike “battery-included” frameworks like <a target="_blank" href="https://www.djangoproject.com/">Django</a> used by <b>Instagram</b>, Flask has a minimalist kernel, making it adaptable to a variety of projects, from simple <i>REST</i> APIs to microservices to more complex web applications. This gives developers flexibility but also requires them to make more decisions about architecture and component selection. This can be an advantage for experienced developers who take advantage of control but it can be difficult for juniors who are penalized by the lack of built-in features. Furthermore, while Flask adequately addresses common security needs, it requires developers to be more pragmatic in the architecture and security of their applications.</p>
+		   <h4>Angular (Javascript)</h4>
+		   <p><a target="_blank" href="https://angular.dev/">Angular</a>, developed by <b>Google</b>, is used to create interactive web applications. Notably, it includes tools for state management, data binding and HTTP requests. You work "in" the framework, which controls the organization and execution of your code (<i>reverse control</i>). This makes it a powerful yet demanding environment in terms of compliance with its conventions. AngularJS has been completely at the end of its lifespan since late 2021 and since 2016, any Angular is native Typescript.</p>
+		   <h2>Library</h2>
+		   <p>A library is a <b>collection of reusable classes or functions</b> that you can call to perform specific tasks. Unlike a framework, you control the integration and execution of features.</p>
+		   <h4>Newtonsoft.Json (C#)</h4>
+		   <p>This is an open-source library for the .NET framework that enables you to serialize (convert an object to <i>JSON</i>) and deserialize (convert <i>JSON</i> to an object) easily.</p>
+		   <h4>Selenium (Python)</h4>
+		   <p>Selenium is used to automate the testing of web applications, providing functions to interact with browsers, such as clicking buttons or filling out forms.</p>
+		   <h4>Moment (Javascript)</h4>
+		   <p>Moment allows manipulation and formatting of dates and times (for example, YYYY-MM-DD).</p>
+		   <h4>IronPDF (C#)</h4>
+		   <p>IronPDF is specialized in generating, editing and retrieving PDF content.</p>
+		   <h4>Numpy (Python)</h4>
+		   <p>Numpy is a compelling part of scientific computation, including advanced mathematical functions and tools for manipulating multidimensional<i>arrays</i>.</p>
+		   <h4>jQuery (Javascript)</h4>
+		   <p><a target="_blank" href="https://jquery.com/">jQuery</a> simplifies interaction with the <i>DOM</i> (Document Object Model) and events on web pages.</p>
+		   <h2>Package</h2>
+		   <p>A package is an <b>organized set of modules, often grouped together in a single folder</b>, that can be used to structure and organize code in a logical, reusable way. It can also contain other packages (subpackages), configuration files and resources. This is a <i>NuGet</i> (.nupkg) for C#, a <i>pip</i> (folder with __init__.py) for Python and a <i>npm</i> (folder with package.json) for Javascript. For example, the System.Collections.Immutable package in C# provides immutable collections for .NET and the cross-env package in Javascript allows you to set environment variables in a way that is compatible with all platforms.</p>
+		   <h2>Module</h2>
+		   <p>A module is the smallest of the four components, so you can import it to perform one-time operations. It has no complex dependencies or imposed structure. It is simply a <b>file</b> containing code (with extension <b>.cs</b> for C#, <b>.py</b> for Python and <b>.js</b> for Javascript), such as functions or classes that you can import and use. As a reminder, a <b>variable</b> is a named space in memory that stores a value, a <b>function</b> is a reusable block of code that performs a precise action and a <b>class</b> is a template for creating <b>objects </b>that contain <b>attributes</b> ("proprietary" variables) and <b>methods</b> ("behavioral" functions). For instance, the Python math module contains basic mathematical functions, such as sqrt, sin, or log.</p>
+		   <hr></hr>
+		   <p>Understanding these differences is key to choosing the right tool for your needs. Use a framework like Angular if you're looking for an all-in-one solution to structure your project. Prefer a library like Selenium for a specialized task or a Numpy for a scientific field. Finally, modules such as math from Python are perfect for light and one-off needs. By mastering these concepts, you will optimize your approach to development, choosing the right tool for each situation. Below is a summary table to share with your software teams:</p>
+		   <br>
+		   <table border="1" cellpadding="8" cellspacing="0">
+			  <thead>
+				<tr>
+				  <th>Concept</th>
+				  <th>Definition</th>
+				  <th>Use case</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <td><strong>Framework</strong></td>
+				  <td>A structured software component that provides a predefined architecture and controls application progress</td>
+				  <td>Developer writes code to be inserted into the intended locations and the framework executes it according to its own lifecycle.</td>
+				</tr>
+				<tr>
+				  <td><strong>Library</strong></td>
+				  <td>An organized set of software resources (functions, classes, modules) to perform specific tasks without imposing an architecture</td>
+				  <td>Developer imports the library and exploit resources as needed in the application.</td>
+				</tr>
+				<tr>
+				  <td><strong>Package</strong></td>
+				  <td>A collection of files and resources (libraries, modules, configurations) grouped and distributed through a package manager to facilitate their integration into a project</td>
+				  <td>Developer installs the package through the manager and then imports it into its code to use its features.</td>
+				</tr>
+				<tr>
+				  <td><strong>Module</strong></td>
+				  <td>A file containing code (functions, classes, variables) for import and use in other files or programs</td>
+				  <td>Developer imports the module into another file and uses the items it provides.</td>
+				</tr>
+			  </tbody>
+		   </table>
+	  </div>
+  </body>
+</html>

@@ -27,6 +27,11 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+	
+  if (event.request.method !== 'GET') { 
+	return;
+  }	
+  
   const url = new URL(event.request.url);
   
   if (url.pathname === '/' || !url.protocol.startsWith('https') || url.pathname.startsWith('/.netlify/functions/') || url.hostname.includes('google.com')) {

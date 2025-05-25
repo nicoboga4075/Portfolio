@@ -9,7 +9,7 @@ function getCurrentRoute() {
   return Object.keys(defaultRoutes).find(key => {
     const pattern = '^' + defaultRoutes[key].replace('{lng}', '[a-z]{2}') + '$';
     return new RegExp(pattern).test(path);
-  }) || null;
+  }) || 'error404';
 }
 
 function getCurrentLanguage() {
@@ -58,8 +58,28 @@ function initTranslator() {
 	}
 }
 
+function loadImages(selector, extension, one = false) {
+  const imgs = document.querySelectorAll(`${selector}`);
+  Array.from(imgs).some((el, index) => {
+	const locationImg = `images/${el.id}.${extension}`;
+	if (el.tagName.toLowerCase() === 'img') {
+		el.src = locationImg;
+	} else {
+		el.style.backgroundImage = `url(${locationImg})`;
+	}
+    // If first iteration, return true to stop further iteration
+    return index === 0 && one;
+  });
+}
+
+function initArticle(){
+	loadImages('.articleImage','png');
+}
+
 function initPage(){
-	const idPage = getCurrentRoute();
+	navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+	.then(reg => console.log('Service Worker registered:', reg.scope))
+	.catch(err => console.error('Service Worker registration failed:', err));
 	initTranslator();
 	addHomeRedirect();
 }

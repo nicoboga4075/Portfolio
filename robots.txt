@@ -1,6 +1,5 @@
 User-agent: Googlebot
-Disallow:
-
+Allow: / 
 Sitemap: https://nicoboga.netlify.app/sitemap.xml
 
 User-agent: *

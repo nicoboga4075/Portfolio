@@ -89,7 +89,7 @@ function getCurrentRoute() {
   return Object.keys(appRoutes).find(key => {
     const pattern = '^' + appRoutes[key].replace('{lng}', '[a-z]{2}') + '$';
     return new RegExp(pattern).test(path);
-  }) || null;
+  }) || 'error404';
 }
 
 function getCurrentLanguage() {
@@ -105,11 +105,11 @@ function toggleVisibility(selector, visibleClass = 'd-flex') {
     }
 }
 
-function getCurrentCompleteDate(){
+function getCurrentCompleteDate() {
 	return new Date().toLocaleString();
 }
 
-function getCurrentDate(){
+function getCurrentDate() {
 	return new Date().toLocaleDateString();
 }
 
@@ -162,7 +162,7 @@ function loadImages(selector, extension, one = false) {
   });
 }
 
-function loadBingo(){
+function loadBingo() {
 	let timer = null;
 	let number = 0;
 	const target = 2713;
@@ -213,7 +213,7 @@ function switchLanguage(url) {
 
 function initTranslator() {
 	const toggle = $('#language-toggle');
-	if(toggle){
+	if(toggle) {
 		toggle.prop('checked', getCurrentLanguage() == 'fr');
 		toggle.on('change', function () {
 			toggle.checked = getCurrentLanguage() == 'fr';
@@ -351,7 +351,7 @@ AOS.init({
 
 	var fullHeight = function() {
 		$('.js-fullheight').css('height', $(window).height());
-		$(window).resize(function(){
+		$(window).resize(function() {
 			$('.js-fullheight').css('height', $(window).height());
 		});
 	};
@@ -369,7 +369,7 @@ AOS.init({
 	$.Scrollax();
 
 	var burgerMenu = function() {
-		$('body').on('click', '.navbar-toggler', function(event){
+		$('body').on('click', '.navbar-toggler', function(event) {
 			event.preventDefault();
 			if ( $('#ftco-nav').is(':visible') ) {
 				$(this).removeClass('active');
@@ -391,7 +391,7 @@ AOS.init({
 	onePageClick();
 
 	var carousel = function() {
-		$(".owl-carousel").each(function(){
+		$(".owl-carousel").each(function() {
 			var itemCount = $(this).children().length;
 			$(this).owlCarousel({
 				loop: true,
@@ -422,18 +422,18 @@ AOS.init({
 	};
 	carousel();
 
-	$('nav .dropdown').hover(function(){
+	$('nav .dropdown').hover(function() {
 		$(this).addClass('show');
 		$(this).find('> a').attr('aria-expanded', true);
 		$(this).find('.dropdown-menu').addClass('show');
-	}, function(){
+	}, function() {
 		$(this).removeClass('show');
 		$(this).find('> a').attr('aria-expanded', false);
 		$(this).find('.dropdown-menu').removeClass('show');
 	});
 
 	var scrollWindow = function() {
-		$(window).scroll(function(){
+		$(window).scroll(function() {
 			var $w = $(this), st = $w.scrollTop(), navbar = $('.ftco_navbar'), sd = $('.js-scroll-wrap');
 			if (st > 150) {
 				if ( !navbar.hasClass('scrolled') ) {
@@ -473,10 +473,10 @@ AOS.init({
 	scrollWindow();
 
 	var counter = function() {
-		$('.ftco-about, .ftco-counter').waypoint( function( direction ) {
+		$('.ftco-about, .ftco-counter').waypoint(function(direction) {
 			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
 				var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
-				$('.number').each(function(){
+				$('.number').each(function() {
 					var num = $(this).data('number');
 					$(this).animateNumber(
 					  {
@@ -492,12 +492,12 @@ AOS.init({
 
 	var contentWayPoint = function() {
 		var i = 0;
-		$('.ftco-animate').waypoint( function( direction ) {
+		$('.ftco-animate').waypoint(function(direction) {
 			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
 				i++;
 				$(this.element).addClass('item-animate');
-				setTimeout(function(){
-					$('body .ftco-animate.item-animate').each(function(k){
+				setTimeout(function() {
+					$('body .ftco-animate.item-animate').each(function(k) {
 						var el = $(this);
 						setTimeout( function () {
 							var effect = el.data('animate-effect');
@@ -549,7 +549,7 @@ AOS.init({
     });
    
     var goHere = function() {
-		$('.mouse-icon').on('click', function(event){
+		$('.mouse-icon').on('click', function(event) {
 			event.preventDefault();
 			$('html,body').animate({
 				scrollTop: $('#'+goHereSection).offset().top
@@ -561,7 +561,7 @@ AOS.init({
 	
 	var copyright = function() {
 		const yearCopyright = $('#year');
-		if (yearCopyright){
+		if (yearCopyright) {
 			yearCopyright.text(new Date().getFullYear());
 		}		
 	}
@@ -581,7 +581,7 @@ AOS.init({
 		  }
 		}
 	});
-	$('.progress-bar').each(function(){
+	$('.progress-bar').each(function() {
 		const valueNow = parseFloat($(this).attr('aria-valuenow'));
 		const valueMin = parseFloat($(this).attr('aria-valuemin'));
 		const valueMax = parseFloat($(this).attr('aria-valuemax'));
@@ -621,7 +621,7 @@ AOS.init({
 
 		  setTimeout(function() { that.tick(); }, delta);
 	};
-	$('.txt-rotate').each(function(){
+	$('.txt-rotate').each(function() {
 		var toRotate = $(this).attr('data-rotate');
 		var period = $(this).attr('data-period');
 		if (toRotate) {
@@ -637,10 +637,14 @@ AOS.init({
 	
 })(jQuery);
 
-function initPage(){
-  navigator.serviceWorker.register('/service-worker.js')
-    .then(reg => console.log('Service Worker registered:', reg.scope))
-    .catch(err => console.error('Service Worker registration failed:', err));
+function initArticle() {
+	loadImages('.articleImage','png');
+}
+
+function initPage() {
+  navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+  .then(reg => console.log('Service Worker registered:', reg.scope))
+  .catch(err => console.error('Service Worker registration failed:', err)); 
 	
   loadImages('.icon.svg','svg'); // Load SVG for all pages
 
@@ -676,7 +680,7 @@ function initPage(){
 
   const idPage = getCurrentRoute();
   
-  if (idPage === 'index'){
+  if (idPage === 'index') {
 	fetch("/.netlify/functions/visit")
       .then(response => response.json())
       .then(data => {
@@ -705,17 +709,17 @@ function initPage(){
 		clearUrlPath();
 	}
 
-	$(window).scroll(function(){
+	$(window).scroll(function() {
 		// Retains the value of the scroll top with the reference at the middle of the page
 		var scrollMiddle = $(this).scrollTop() + ($(window).height()/2);
-		if ($(this).scrollTop() < 150){
+		if ($(this).scrollTop() < 150) {
 			$('a[href*="' + homeSection + '"]').addClass('active');
 			saveHashSession(homeSection);	
 		}
 		for (let appScrollSection of appScrollSections) {
 			var scrollStartZone = appScrollSection.offset().top;
 			var scrollEndZone = scrollStartZone + appScrollSection.outerHeight();
-			if (scrollMiddle >= scrollStartZone && scrollMiddle <= scrollEndZone){
+			if (scrollMiddle >= scrollStartZone && scrollMiddle <= scrollEndZone) {
 				var scrolled_id = appScrollSection.attr('id') ?? homeSection;
 				saveHashSession(scrolled_id);
 			}	
@@ -748,7 +752,7 @@ function initPage(){
 		const formData = new FormData(event.target);
 		try {
 			await sendEmail(formData.get('name'), formData.get('subject'), formData.get('message'));
-			if(window.location.protocol === 'https:'){
+			if(window.location.protocol === 'https:') {
 				$(this).submit(); // Submit form after sending the email
 			}
 		} catch (error) {
@@ -758,7 +762,7 @@ function initPage(){
 
 	loadBingo();
 
-  } else if (idPage === 'blog'){
+  } else if (idPage === 'blog') {
 		
 		$('a[href*="' + blogSection + '"]').addClass('active');
 	  
@@ -770,7 +774,7 @@ function initPage(){
 		const currentHash = hashLink || sessionStorage.getItem('currentHash');
 		
 		if (!currentHash) {					 
-		  articleShape.text(errorArticle);
+		  articleShape.html(errorArticle);
 		} else {
 		   saveHashSession(currentHash);
 		   clearUrlPath();				   
@@ -778,11 +782,11 @@ function initPage(){
 		 
 		   iframeArticle.prop('src', urlArticle);
 		 
-		   iframeArticle.on('load', function(){					 
+		   iframeArticle.on('load', function() {					 
 				fetch(urlArticle)
 				.then(response => response.text())
 				.then(html => {													
-					if(html.includes("It seems you've hit a broken link or the page has moved")){
+					if(html.includes("It seems you've hit a broken link or the page has moved")) {
 						throw new Error("Resource not found"); // Catch directly to show error message when fetch redirects to 404 page
 					}		
 					
@@ -810,18 +814,22 @@ function initPage(){
 					});
 													
 					articleShape.html(doc.body.innerHTML + articleShape.html());
-					loadImages('.articleImage','png');
+					initArticle();
 					initProfile();
 				})
 				.catch(error => {
 					articleShape.text(errorArticle);
 				})
 				.finally(() => {
-					iframeArticle.remove();
+					$('#iframeArticle').remove();
 				});
 			}); 
 	    }  
-    }
+    } else {
+		$('#articleShape').html(getMessage('error-generic'));
+		$('#iframeArticle').remove();
+		sessionStorage.clear();
+	}	
 }
 
 /* Contact Form */
@@ -882,13 +890,13 @@ async function sendEmail(name, subject, message) {
 			})
 		});
 
-		if(response.ok){
+		if (response.ok) {
 			localStorage.setItem('tokenAPI', JSON.stringify(token));
 			callbackForm.text(successMessage);
-			if(window.location.protocol === 'https:'){
+			if(window.location.protocol === 'https:') {
 				sessionStorage.clear();
 			}
-		} else{
+		} else {
 			callbackForm.text(errorMessage);
 			localStorage.clear();
 		}

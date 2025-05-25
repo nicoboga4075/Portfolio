@@ -30,7 +30,7 @@
     accessibility = 0.5
 	best-practices = 0.5
 	seo = 0.5
-	pwa = 0
+	pwa = 0.5
 	
   [[context.production.plugins.inputs.audits]]
 	path = "articles/du-voc-de-dev_en.html"
