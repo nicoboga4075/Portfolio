@@ -638,6 +638,9 @@ AOS.init({
 })(jQuery);
 
 function initPage(){
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(reg => console.log('Service Worker registered:', reg.scope))
+    .catch(err => console.error('Service Worker registration failed:', err));
 	
   loadImages('.icon.svg','svg'); // Load SVG for all pages
 
