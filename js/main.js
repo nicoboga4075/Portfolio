@@ -87,7 +87,7 @@ function computeAge() {
 function getCurrentRoute() {
   const path = window.location.pathname;
   return Object.keys(appRoutes).find(key => {
-    const pattern = '^' + appRoutes[key].replace('{lng}', '[a-z]{2}') + '$';
+    const pattern = '^' + appRoutes[key].replace('{lng}', '[a-z]{2}') + '/?$';
     return new RegExp(pattern).test(path);
   }) || 'error404';
 }
@@ -825,11 +825,7 @@ function initPage() {
 				});
 			}); 
 	    }  
-    } else {
-		$('#articleShape').html(getMessage('error-generic'));
-		$('#iframeArticle').remove();
-		sessionStorage.clear();
-	}	
+    }
 }
 
 /* Contact Form */

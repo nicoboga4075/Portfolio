@@ -7,7 +7,7 @@ let defaultRoutes = {
 function getCurrentRoute() {
   const path = window.location.pathname;
   return Object.keys(defaultRoutes).find(key => {
-    const pattern = '^' + defaultRoutes[key].replace('{lng}', '[a-z]{2}') + '$';
+    const pattern = '^' + defaultRoutes[key].replace('{lng}', '[a-z]{2}') + '/?$';
     return new RegExp(pattern).test(path);
   }) || 'error404';
 }

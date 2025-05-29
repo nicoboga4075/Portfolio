@@ -23,7 +23,7 @@
 	
   [context.production.plugins.inputs.settings]
     preset = "desktop"
-	locale = "en"
+    locale = "en"
 
   [context.production.plugins.inputs.thresholds]
     performance = 0.5
