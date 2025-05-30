@@ -55,6 +55,12 @@ let appAllSections = [
   ...appSecondarySections
 ];
 
+let appSkills = [
+  "hard-skills",
+  "soft-skills",
+  "mad-skills"
+];
+
 let appMessages = {
 	"success-generic": {"fr": "L'opération a été un franc succès.", "en": "The operation was successfully completed."},
 	"error-generic" : {"fr": "Oops ! Une erreur est survenue. Réessayez plus tard.", "en": "Oops ! An error has occurred. Try again later."}	
@@ -398,34 +404,7 @@ AOS.init({
 			$(this).attr('aria-label', 'Go to slide ' + (index + 1));
 		  });
 		});
-		$(".owl-carousel").each(function() {
-			var itemCount = $(this).children().length;
-			$(this).owlCarousel({
-				loop: true,
-				autoplay: true,
-				margin: 10,
-				animateOut: 'fadeOut',
-				animateIn: 'fadeIn',
-				nav: true,
-				autoplayHoverPause: false,
-				items: 4,
-				navText: ['<span class="icon-chevron-circle-left"></span>','<span class="icon-chevron-circle-right"></span>'],
-				responsive: {
-				  0:{
-					items:Math.min(2, itemCount)
-				  },
-				  576:{
-					items:Math.min(3, itemCount)
-				  },
-				  992:{
-					items:Math.min(4, itemCount)
-				  },
-				  1200:{
-					items:Math.min(5, itemCount)  
-				  }
-				}
-			 });
-		});
+		initCarousel("#" + appSkills[0]);
 	};
 	carousel();
 
@@ -648,6 +627,36 @@ function initArticle() {
 	loadImages('.articleImage','png');
 }
 
+function initCarousel(target) {
+	var itemCount = $(target).children().length;
+	$(target).owlCarousel({
+		loop: true,
+		lazyLoad: true,
+		autoplay: true,
+		margin: 10,
+		animateOut: 'fadeOut',
+		animateIn: 'fadeIn',
+		nav: true,
+		autoplayHoverPause: false,
+		items: 4,
+		navText: ['<span class="icon-chevron-circle-left"></span>','<span class="icon-chevron-circle-right"></span>'],
+		responsive: {
+		  0:{
+			items:Math.min(2, itemCount)
+		  },
+		  576:{
+			items:Math.min(3, itemCount)
+		  },
+		  992:{
+			items:Math.min(4, itemCount)
+		  },
+		  1200:{
+			items:Math.min(5, itemCount)  
+		  }
+		}
+	 });
+}
+
 function initPage() {
   navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
   .then(reg => console.log('Service Worker registered:', reg.scope))
@@ -681,8 +690,11 @@ function initPage() {
 	  }
 	  $(this).removeClass('active');
 	});
-	$(target).removeClass('d-none').addClass('active');
-	$(target).trigger('refresh.owl.carousel'); // To avoid glitch switching to other carousel
+	if (!$(target).hasClass('owl-loaded')) {
+      initCarousel(target);
+    }
+	// To avoid glitch switching to other carousel
+	$(target).removeClass('d-none').addClass('active').trigger('refresh.owl.carousel'); 
   });
 
   const idPage = getCurrentRoute();
@@ -814,8 +826,7 @@ function initPage() {
 					const links = doc.querySelectorAll('a[href]');
 					links.forEach(link => {
 					  const href = link.getAttribute('href');
-					  // Allow only same-origin or relative links
-					  if (href.startsWith('http') && !href.startsWith(window.location.origin)) {
+					  if (!href.startsWith('https')) {
 						link.setAttribute('href', '#');
 					  }
 					});

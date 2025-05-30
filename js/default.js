@@ -19,9 +19,9 @@ function getCurrentLanguage() {
 function addHomeRedirect() {
   const homeBalise = document.getElementById('index');
   if (homeBalise) {
+    homeBalise.href = `/${getCurrentLanguage()}`;
     homeBalise.addEventListener('click', function() {
-		sessionStorage.clear();
-        window.location.href = `/${getCurrentLanguage()}`;
+      sessionStorage.clear();
     });
   }
 }

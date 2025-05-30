@@ -3,7 +3,9 @@ const CACHE_ASSETS = [
   '/en',
   '/fr',
   '/css/style.css',
+  '/css/default.css',
   '/js/main.js',
+  '/js/default.js',
   '/favicon.ico'
 ];
 
