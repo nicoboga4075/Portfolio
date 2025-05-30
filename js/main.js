@@ -391,6 +391,13 @@ AOS.init({
 	onePageClick();
 
 	var carousel = function() {
+		$('.owl-carousel').on('initialized.owl.carousel', function() {
+		  $('.owl-prev').attr('aria-label', 'Previous slide');
+		  $('.owl-next').attr('aria-label', 'Next slide');
+		  $('.owl-dot').each(function(index) {
+			$(this).attr('aria-label', 'Go to slide ' + (index + 1));
+		  });
+		});
 		$(".owl-carousel").each(function() {
 			var itemCount = $(this).children().length;
 			$(this).owlCarousel({

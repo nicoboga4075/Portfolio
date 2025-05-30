@@ -417,12 +417,8 @@ td strong {
 
 /* Footer */
 
-.ftco-footer .ftco-footer-widget ul li a span {
-    font-size: 25px;
-    height: 25px;
-    width: 25px;
-    background-size: contain;
-    background-repeat: no-repeat;
+.ftco-footer-social li a {
+	background: var(--main);
 }
 
 #bingoTimer {
