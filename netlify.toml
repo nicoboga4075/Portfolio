@@ -14,6 +14,36 @@
   [context.production.plugins.inputs.minifierOptions]
     removeComments = true
     collapseInlineTagWhitespace = true
+	
+[[context.production.plugins]]
+  package = "netlify-plugin-inline-critical-css"
+
+  [context.production.plugins.inputs]
+    fileFilter = ["*.html"]
+    directoryFilter = ["!node_modules"]
+    extract = false
+    dimensions = [
+      # Mobiles
+      { width = 360, height = 740 },   # Samsung Galaxy S9
+      { width = 375, height = 667 },   # iPhone 6/7/8, SE
+      { width = 375, height = 812 },   # iPhone X / 11 Pro
+      { width = 393, height = 851 },   # Moto G Power
+      { width = 411, height = 731 },   # Pixel 4
+      { width = 414, height = 896 },   # iPhone XR / 11
+
+      # Tablets
+      { width = 768, height = 1024 },  # iPad
+      { width = 800, height = 1280 },  # Samsung Tab S6
+      { width = 1024, height = 1366 }, # iPad Pro 12.9”
+
+      # Desktop
+      { width = 1920, height = 1080 }, # Full HD
+      { width = 2560, height = 1440 }, # QHD
+      { width = 3840, height = 2160 }, # 4K UHD
+
+      # TV
+      { width = 7680, height = 4320 }  # 8K UHD
+    ]
    
 [[context.production.plugins]]
   package = "@netlify/plugin-lighthouse"
