@@ -1,5 +1,8 @@
-# Local Netlify folder
+# Local Netlify configuration
 .netlify
+.env
+# Local Node modules
+/node_modules
+# Local Documents
 /docs/protected
 /docs/private
-.env

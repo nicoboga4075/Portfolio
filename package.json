@@ -6,7 +6,8 @@
     "build": "npm run build-desktop",
     "build-desktop": "npm run uglifyjs",
     "uglifyjs": "for file in js/*.js; do terser \"$file\" --compress --mangle --output \"js/$(basename \"$file\")\"; done",
-    "obfuscate": "javascript-obfuscator js/ --output js/ --compact true --control-flow-flattening true --self-defending true"
+    "obfuscate": "javascript-obfuscator js/ --output js/ --compact true --control-flow-flattening true --self-defending true",
+    "changelog": "auto-changelog -p"
   },
   "author": "Nicolas BOGALHEIRO",
   "license": "ISC",
@@ -29,6 +30,7 @@
     "Netlify"
   ],
   "dependencies": {
+    "auto-changelog": "^2.5.0",
     "javascript-obfuscator": "^4.1.1",
     "terser": "^5.39.0"
   }
