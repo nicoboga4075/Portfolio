@@ -1,6 +1,6 @@
 {
   "name": "Portfolio",
-  "version": "1.0.0",
+  "version": "1.6.0",
   "description": "This project is deployed on **Netlify** : https://nicoboga.netlify.app",
   "scripts": {
     "build": "npm run build-desktop",
@@ -10,7 +10,7 @@
     "changelog": "auto-changelog -p"
   },
   "author": "Nicolas BOGALHEIRO",
-  "license": "ISC",
+  "license": "MIT",
   "keywords": [
     "portfolio",
     "web",
@@ -27,11 +27,15 @@
     "LightHouse",
     "Terser",
     "JavascriptObfuscator",
-    "Netlify"
+    "ChangeLog",
+    "Netlify",
+    "Supabase",
+    "Analytics",
+    "Snyk"
   ],
   "dependencies": {
     "auto-changelog": "^2.5.0",
     "javascript-obfuscator": "^4.1.1",
-    "terser": "^5.39.0"
+    "terser": "^5.41.0"
   }
 }

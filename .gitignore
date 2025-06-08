@@ -3,6 +3,7 @@
 .env
 # Local Node modules
 /node_modules
+package-lock.json
 # Local Documents
 /docs/protected
 /docs/private

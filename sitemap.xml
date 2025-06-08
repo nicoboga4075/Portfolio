@@ -3,126 +3,126 @@
     <!-- Root page -->
 	<url>
         <loc>https://nicoboga.netlify.app</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
 	<url>
         <loc>https://nicoboga.netlify.app/</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
 	<!-- Home pages -->
     <url>
         <loc>https://nicoboga.netlify.app/en</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/en/</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <!-- Blog pages -->
     <url>
         <loc>https://nicoboga.netlify.app/en/blog</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/blog</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/en/blog/</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/blog/</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <!-- Terms pages -->
     <url>
         <loc>https://nicoboga.netlify.app/en/terms</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/terms</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/en/terms/</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/terms/</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <!-- Policy pages -->
     <url>
         <loc>https://nicoboga.netlify.app/en/policy</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/policy</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/en/policy/</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/policy/</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <!-- 404 page -->
     <url>
         <loc>https://nicoboga.netlify.app/404</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>never</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/404/</loc>
-        <lastmod>2025-05-29</lastmod>
+        <lastmod>2025-06-09</lastmod>
         <changefreq>never</changefreq>
         <priority>0.4</priority>
     </url>
