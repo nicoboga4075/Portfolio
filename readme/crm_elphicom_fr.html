@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+	  <title>Portfolio - CRM Elphicom</title>
+	  <meta charset="utf-8">
+	  <meta name="google" content="notranslate">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <meta http-equiv="Content-Language" content="fr_FR">
+      <meta name="author" content="Nicolas BOGALHEIRO">
+      <meta name="theme-color" content="#ffffff">
+      <link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+	  <base href="../../">
+      <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+      <link rel="manifest" href="site.webmanifest">
+	  <link rel="stylesheet" href="css/default.css">
+	  <script src="js/default.js"></script>
+	</head>
+	<body onload="initArticle()">
+	  <div class="read-title">
+			<h1>🖥️ CRM Elphicom</h1>
+			<div class="language-switch d-flex align-items-center justify-content-center">
+				<span class="lang-text">EN</span>
+				<label class="toggle-container">
+				   <input id="language-toggle" type="checkbox">
+				   <span class="toggle-slider"></span>
+				</label>
+				<span class="lang-text on">FR</span>
+		    </div>
+	  </div>
+	  <div class="video-wrapper">
+		  <video controls>
+			  <track label="Français" kind="subtitles" srclang="fr" src="docs/public/CRM_Elphicom_FR.vtt">
+			  <track label="English" kind="subtitles" srclang="en" src="docs/public/CRM_Elphicom_EN.vtt">
+			  <source src="docs/public/CRM_Elphicom.mp4" type="video/mp4">
+		  </video>
+	  </div>
+	  <p><strong>Plateforme CRM développée pendant <i>3 mois</i></strong>, lors de mon stage de fin d’études chez <a target="_blank" href="https://www.soft-concept.com">Soft Concept</a>, éditeur de logiciels lyonnais spécialisé dans les solutions d’enquêtes (satisfaction, baromètres sociaux, enquêtes RH). J’ai ensuite assuré sa <strong>maintenance</strong> durant mon CDI de 2 ans et demi.</p>
+	  <h2>📝 Présentation</h2>
+	  <p><a target="_blank" href="https://elphicom.com">Elphicom</a> est une société spécialisée dans la téléphonie et les services d’opérateur, basée à Avignon et à Vienne. Ce CRM permet de gérer efficacement :</p>
+	  <ul>
+		<li>Les clients et prospects</li>
+		<li>Les contrats et documents associés</li>
+		<li>Le suivi des appels et interventions</li>
+	  </ul>
+	  <h2>🛠️ Technologies utilisées</h2>
+	  <ul>
+		<li><strong>HTML, CSS, JavaScript</strong></li>
+		<li>Outils internes :
+		  <ul>
+			<li><a target="_blank" href="https://www.soft-concept.com/logiciel-enquete-en-ligne-web-on-line-net-survey.html">Net-Survey</a> : création de questionnaires</li>
+			<li><a target="_blank" href="https://www.soft-concept.com/logiciel-traitement-enquetes-ethnos.html">Ethnos</a> : analyse de données collectées</li>
+			<li><a target="_blank" href="https://www.soft-concept.com/logiciel-reporting-resultats-enquete-en-ligne-web-reports.html">Web Reports</a> : développement et déploiement applicatif</li>
+		  </ul>
+		</li>
+	  </ul>
+	  <h2>🗂️ Structure de l’application</h2>
+	  <ul>
+		<li>📇 <strong>Clients et prospects</strong> : consultation, modification, suppression (uniquement pour les prospects)</li>
+		<li>📃 <strong>Contrats</strong> : gestion avec code couleur (expiré, à surveiller, actif), renouvellement et suppression</li>
+		<li>📞 <strong>Appels</strong> : gestion des historiques avec date, interlocuteur, motif, suite à donner</li>
+		<li>📑 <strong>Bibliothèque de documents</strong> : fichiers Word, Excel, PDF, etc.</li>
+	  </ul>
+	  <h2>⚙️ Fonctionnalités complémentaires</h2>
+	  <ul>
+		<li>Gestion des <strong>utilisateurs</strong> et des <strong>listes déroulantes</strong></li>
+		<li>Fiches clients détaillées : interlocuteur, SIRET, applications liées (Zendesk, Forest)</li>
+		<li>Rapports d’intervention terrain via <a target="_blank" href="https://play.google.com/store/apps/details?id=com.soft_concept.mobisurvey2&hl=fr">Mobi-Survey</a> (mode off-line)</li>
+	  </ul>
+	  <h2>📈 Utilisation</h2>
+	  <p>L’application est utilisée quotidiennement par une vingtaine de collaborateurs pour le suivi client et la gestion commerciale et technique.</p>
+	  <hr />
+	  <p>©Soft Concept 2021</p>
+	  <a id="index">Retour à l'accueil</a>
+	</body>
+</html>

@@ -727,6 +727,10 @@ function initPage() {
 		saveHashSession(window.location.hash.substring(1));
 		clearUrlPath();
 	}
+	
+	$('.project a').on('click', function () {
+	  sessionStorage.clear();
+	});
 
 	$(window).scroll(function() {
 		// Retains the value of the scroll top with the reference at the middle of the page

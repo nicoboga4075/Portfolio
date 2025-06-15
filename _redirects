@@ -16,3 +16,4 @@
 /policy_en.html /404 301!
 /policy_fr /404 301!
 /policy_fr.html /404 301!
+/readme/* /404 301!

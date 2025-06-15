@@ -6,7 +6,12 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  text-align: center;
+  opacity: 0;
+  transition: opacity 5s ease;
+}
+
+body.visible {
+  opacity: 1;
 }
 
 a {
@@ -20,8 +25,8 @@ a {
 	display: none!important;
 }
 
-.horizontal-center { 
-  padding: 50px;
+.text-center {
+	text-align: center!important;
 }
 
 /* Language Switcher */
@@ -119,4 +124,36 @@ a {
 #mcs-design, #mcs-example{
 	max-width: 70vw;
 	margin-bottom: 15px;
+}
+
+/* README or Article */
+
+.read-zone {
+	max-width: 50%;
+	margin: 2rem auto;
+}
+
+.read-title {
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+}
+
+/* Video */
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+}
+  
+.video-wrapper video {
+	position: absolute;
+	top: 0; 
+	left: 0;
+	width: 100%;
+	height: 100%;
 }

@@ -7,3 +7,5 @@ package-lock.json
 # Local Documents
 /docs/protected
 /docs/private
+# Video subtitles
+*.srt

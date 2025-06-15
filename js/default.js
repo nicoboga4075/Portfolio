@@ -72,14 +72,21 @@ function loadImages(selector, extension, one = false) {
   });
 }
 
-function initArticle(){
+function initArticle() {
 	loadImages('.articleImage','png');
+	initTranslator();
+	addHomeRedirect();
+	document.body.classList.add('read-zone','visible');
 }
 
-function initPage(){
+function initPage() {
 	navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
 	.then(reg => console.log('Service Worker registered:', reg.scope))
 	.catch(err => console.error('Service Worker registration failed:', err));
 	initTranslator();
 	addHomeRedirect();
+	const idPage = getCurrentRoute();
+	if(idPage in defaultRoutes) {
+		document.body.classList.add('text-center','visible');
+	}
 }

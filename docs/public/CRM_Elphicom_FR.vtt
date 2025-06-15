@@ -1,0 +1,934 @@
+WEBVTT
+
+00:00.280 --> 00:02.960
+Je vais vous présenter la plateforme
+
+00:02.960 --> 00:05.840
+CRM
+
+00:05.840 --> 00:07.440
+Elphicom que j'ai eu l'occasion de
+
+00:07.440 --> 00:09.000
+concevoir pendant mon stage de fin
+
+00:09.000 --> 00:09.560
+d'études à
+
+00:09.560 --> 00:13.040
+Soft Concept,
+
+00:13.040 --> 00:14.600
+un éditeur de logiciels lyonnais
+
+00:14.600 --> 00:15.640
+spécialisé dans les enquêtes de
+
+00:15.640 --> 00:17.440
+satisfaction, les baromètres sociaux, les
+
+00:17.440 --> 00:19.880
+enquêtes RH sur tout type de support,
+
+00:20.160 --> 00:21.680
+mobile, tablette et ordinateur. J'ai
+
+00:21.680 --> 00:22.760
+travaillé 3 mois sur l'application et
+
+00:22.760 --> 00:24.120
+j'ai participé à
+
+00:24.360 --> 00:27.080
+la
+
+00:27.080 --> 00:28.640
+maintenance de celle-ci au cours de mon
+
+00:28.640 --> 00:31.000
+CDI qui a suivi ce stage et qui a duré 2
+
+00:31.000 --> 00:32.880
+ans et demi. Elphicom
+
+00:34.320 --> 00:36.080
+est une société spécialisée dans
+
+00:36.080 --> 00:38.960
+la
+
+00:38.960 --> 00:41.200
+téléphonie, les services d'opérateurs et
+
+00:41.200 --> 00:44.160
+un CRM pour rappel est un logiciel
+
+00:44.800 --> 00:45.880
+ou une application qui permet comme son
+
+00:45.880 --> 00:47.680
+nom l'indique
+
+00:48.720 --> 00:51.160
+CRM (Custom Relation
+
+00:51.160 --> 00:52.760
+Management) de gérer les clients et entre
+
+00:52.760 --> 00:54.040
+autres ici les contrats et les appels quiy
+
+00:54.040 --> 00:58.720
+sont
+
+00:58.720 --> 01:00.600
+liés. Sachant que là 3 briques
+
+01:00.600 --> 01:01.800
+principales donc client contrat
+
+01:01.800 --> 01:03.360
+bibliothèque sur la page d'accueil donc
+
+01:03.360 --> 01:05.000
+tous les clients et prospects, les
+
+01:05.040 --> 01:06.400
+contrats et donc les documents qui vont
+
+01:06.400 --> 01:07.600
+sont rattachés et une bibliothèque  de
+
+01:07.600 --> 01:09.360
+documents supplémentaires pour un
+
+01:09.360 --> 01:10.960
+administrateur. Donc là c'est un c'est un
+
+01:10.960 --> 01:12.280
+administrateur factice. L'administration
+
+01:12.280 --> 01:13.560
+va permettre de gérer du coup les
+
+01:13.560 --> 01:14.880
+utilisateurs de l'application et des
+
+01:15.000 --> 01:15.600
+listes externes qui
+
+01:15.600 --> 01:26.720
+sont
+
+01:26.720 --> 01:28.880
+des listes déroulantes, qui vont
+
+01:28.880 --> 01:30.480
+intervenir dans les questionnaires. Donc
+
+01:31.680 --> 01:34.280
+bien sûr, par souci de confidentialité,
+
+01:34.280 --> 01:35.800
+je ne vais pas cliquer sur utilisateur.
+
+01:35.800 --> 01:37.520
+Donc les bibliothèques, donc des
+
+01:37.520 --> 01:39.840
+documents, donc par exemple, un cashback
+
+01:39.840 --> 01:41.040
+par
+
+01:41.080 --> 01:44.000
+exemple, si
+
+01:44.000 --> 01:46.040
+je clique ici. Donc là je vais avoir un
+
+01:46.040 --> 01:47.720
+doc, un fichier word par
+
+01:48.240 --> 01:50.760
+exemple. Par souci de
+
+01:50.840 --> 01:52.320
+confidentialité, on ne va pas cliquer sur
+
+01:52.320 --> 01:54.880
+le word. On a peut-être une autre image
+
+01:54.880 --> 01:57.640
+ici. Donc là j'ai un fichier
+
+01:57.640 --> 01:59.920
+Excel OK, sachant que l'application peut
+
+01:59.920 --> 02:02.800
+avoir différents types de format. Alors
+
+02:03.040 --> 02:05.280
+bien sûr il y a une taille
+
+02:05.960 --> 02:08.640
+spécifique enfin maximale que j'ai plus
+
+02:08.640 --> 02:10.800
+en tête, mais il y
+
+02:11.120 --> 02:13.680
+en a bien une qui est effective. Alors p
+
+02:13.680 --> 02:14.840
+our rappel, l'application a été conçue
+
+02:14.880 --> 02:16.320
+avec du HTML, du CSS et du
+
+02:16.320 --> 02:19.720
+Javascript
+
+02:19.720 --> 02:21.000
+et avec les différents outils, notamment
+
+02:21.000 --> 02:22.840
+donc les 3, donc les 4 outils majeurs. de
+
+02:22.840 --> 02:25.560
+Soft Concept. Donc 3 pour la partie
+
+02:25.840 --> 02:28.320
+web et 1 pour la
+
+02:28.320 --> 02:30.640
+partie mobile. Je ne mentionnerai pas la
+
+02:30.640 --> 02:31.480
+partie mobile puisque je n'ai pas
+
+02:31.480 --> 02:32.800
+travaillé sur cette partie là. Mais j'ai
+
+02:32.800 --> 02:35.360
+travaillé sur la partie web donc avec les
+
+02:35.360 --> 02:38.240
+3 logiciels phares. Net-Survey, Ethnos et
+
+02:38.240 --> 02:40.040
+Web Reports. Net-Survey étant le logiciel
+
+02:40.040 --> 02:42.560
+qui permet de concevoir des
+
+02:42.560 --> 02:43.760
+questionnaires. Sachant que chaque page
+
+02:43.760 --> 02:46.600
+ici est rattachée à un
+
+02:46.600 --> 02:48.480
+questionnaire. Il y a
+
+02:48.920 --> 02:51.520
+la partie
+
+02:51.880 --> 02:53.320
+Ethnos qui va permettre d'analyser les
+
+02:53.320 --> 02:55.760
+données
+
+02:56.080 --> 02:58.240
+donc récoltées par ces questionnaires et
+
+02:58.240 --> 02:59.880
+enfin Web Reports qui permet de concevoir
+
+02:59.880 --> 03:01.560
+donc une application de la sorte. Donc
+
+03:01.560 --> 03:02.600
+une application de web reporting,
+
+03:02.600 --> 03:03.720
+de restitution de résultats, alors soit
+
+03:03.720 --> 03:05.480
+avec des données qui doivent être
+
+03:05.480 --> 03:07.120
+dynamiques. Donc là il y a pas forcément
+
+03:07.120 --> 03:09.200
+de graphes puisque c'est 1 CRM, sachant
+
+03:09.200 --> 03:11.440
+que l'activité principale de Soft Concept
+
+03:11.520 --> 03:14.360
+est l'enquête. Mais il est possible
+
+03:14.360 --> 03:16.000
+également de faire des
+
+03:16.720 --> 03:19.360
+CRM avec l'outil Web Reports, sachant que
+
+03:19.360 --> 03:21.200
+l'idée c'est de minimaliser le code
+
+03:21.360 --> 03:23.200
+alors. Bien sûr, pour des
+
+03:23.480 --> 03:26.440
+fonctionnalités supplémentaires, on va
+
+03:26.640 --> 03:29.360
+apporter des modifications avec la stack
+
+03:29.360 --> 03:31.720
+classique HTML, CSS et
+
+03:31.720 --> 03:34.480
+Javascript ou éventuellement du C# ou du
+
+03:34.480 --> 03:37.360
+Delphi pour avoir des fonctionnalités qui
+
+03:37.880 --> 03:39.440
+vont être
+
+03:39.680 --> 03:41.920
+spécifiques ou qui vont être
+
+03:41.920 --> 03:44.880
+supplémentaires et un peu
+
+03:44.960 --> 03:47.120
+plus complexes à fortiori.
+
+03:48.000 --> 03:49.680
+Donc là, si je vais dans les clients,
+
+03:56.400 --> 03:58.400
+Donc on rappelle client et prospect, on
+
+03:58.400 --> 03:59.920
+peut sélectionner l'attaché marketing,
+
+04:00.480 --> 04:01.840
+l'Agence
+
+04:02.240 --> 04:05.000
+Avignon /Vienne et le statut
+
+04:05.200 --> 04:06.360
+Client ou Prospect. Alors là j'avais
+
+04:06.360 --> 04:08.040
+laissé par défaut du coup un donc j'avais
+
+04:08.040 --> 04:10.240
+cherché dans la barre de recherche 3P
+
+04:10.240 --> 04:13.120
+profil donc ça a sélectionné. Mais
+
+04:13.120 --> 04:15.200
+bien on sait que on voit bien sûr ici
+
+04:15.200 --> 04:16.960
+qu'il y en a
+
+04:17.360 --> 04:19.840
+7700 au total, mais là on en voit bien
+
+04:19.840 --> 04:21.560
+sûr qu'un sélectionné en gris. Donc là on
+
+04:21.560 --> 04:22.520
+peut avoir des informations
+
+04:22.520 --> 04:23.640
+supplémentaires, qui s'est
+
+04:23.640 --> 04:25.080
+occupé du
+
+04:25.080 --> 04:27.920
+dossier, le numéro de Siret etc.
+
+04:30.000 --> 04:32.960
+On va
+
+04:33.280 --> 04:35.600
+avoir les applications Zendesk et Forest.
+
+04:35.920 --> 04:37.720
+Pour plus de renseignements je vous
+
+04:37.720 --> 04:40.560
+laisse faire les recherches. Donc là la
+
+04:40.800 --> 04:42.800
+fiche récapitulative sur le client. On va
+
+04:42.800 --> 04:45.560
+avoir donc les documents, les contrats,
+
+04:45.680 --> 04:47.720
+les appels, la gestion de dossier
+
+04:47.720 --> 04:50.400
+donc qui va être des informations
+
+04:50.400 --> 04:51.600
+supplémentaires et donc les rapports.
+
+04:52.000 --> 04:54.680
+Donc 4 types de rapports, les prévisites,
+
+04:54.680 --> 04:55.840
+les rapports avenant contrats, les
+
+04:55.840 --> 04:57.200
+rapports SAV, rapports d'installation qui
+
+04:57.360 --> 04:59.840
+vont être liés donc à la à l'application
+
+05:00.000 --> 05:02.520
+mobile. En fait les attachés marketing ou
+
+05:02.520 --> 05:04.640
+donc éventuellement les techniciens vont
+
+05:04.640 --> 05:06.240
+intervenir chez le client et vont pouvoir
+
+05:06.240 --> 05:08.280
+en offline. Enfin en hors ligne de
+
+05:08.560 --> 05:10.040
+pouvoir du coup saisir sur la tablette ou
+
+05:10.040 --> 05:11.600
+sur un téléphone des informations liées à
+
+05:11.600 --> 05:14.560
+l'installation, et cetera par
+
+05:14.880 --> 05:19.760
+exemple,
+
+05:19.760 --> 05:21.200
+et utiliser l'application Mobi-Survey.
+
+05:21.520 --> 05:24.040
+qui est conçu
+
+05:24.040 --> 05:27.760
+par
+
+05:27.760 --> 05:29.200
+Soft Concept et qui va permettre de
+
+05:29.520 --> 05:30.960
+récupérer les informations sous forme de
+
+05:31.040 --> 05:32.480
+rapport à l'issue de l'intervention. Je
+
+05:32.480 --> 05:33.440
+ne pense qu'on n'aurait pas cette
+
+05:34.720 --> 05:37.560
+partie puisque j'ai travaillé
+
+05:37.560 --> 05:40.520
+essentiellement sur la partie web.
+
+05:40.520 --> 05:40.640
+Mon
+
+05:43.440 --> 05:45.520
+maître de stage ayant travaillé sur la
+
+05:46.320 --> 05:48.680
+partie mobile.
+
+05:50.400 --> 05:52.840
+Donc là les clients, donc là par exemple
+
+05:52.840 --> 05:55.600
+la raison sociale, donc avec
+
+05:55.680 --> 05:57.620
+un téléphone multi-sites différents. ou
+
+05:58.220 --> 06:00.940
+pas donc là entre autres ce
+
+06:01.180 --> 06:02.900
+n'est pas forcément le cas. Donc ici
+
+06:02.900 --> 06:04.860
+quand on sélectionne les contrats donc
+
+06:04.860 --> 06:07.740
+les suivis en fait on a
+
+06:07.820 --> 06:10.740
+ici aussi les boutons contrat et suivi
+
+06:10.740 --> 06:12.340
+sauf que là ça va être tous
+
+06:14.220 --> 06:16.100
+les contrats suivis tout confondu alors
+
+06:16.100 --> 06:17.820
+que là ça va être propre aux clients donc
+
+06:17.820 --> 06:19.540
+je ne cliquerai pas forcément contrat
+
+06:19.540 --> 06:21.180
+suivi c'est les mêmes actions que pour un
+
+06:21.180 --> 06:22.100
+client juste que
+
+06:22.100 --> 06:24.620
+la liste
+
+06:25.420 --> 06:26.700
+est bien sûr plus grande.
+
+06:26.980 --> 06:30.460
+On
+
+06:30.460 --> 06:32.140
+est autour de 40000 suivis, enfin 40000
+
+06:32.140 --> 06:33.180
+appels téléphoniques, une à peu près
+
+06:33.900 --> 06:35.420
+10000 contrats depuis la lancement de la
+
+06:35.500 --> 06:36.740
+plateforme. Donc sachant que ça a été
+
+06:36.740 --> 06:38.940
+créé en 2020,
+
+06:38.940 --> 06:40.860
+en 2021,
+
+06:40.860 --> 06:43.580
+on est actuellement en
+
+06:43.580 --> 06:44.140
+2025,
+
+06:47.820 --> 06:49.300
+donc là une fiche récapitulative par
+
+06:49.300 --> 06:51.500
+exemple. Donc là on va avoir du coup
+
+06:51.500 --> 06:52.980
+1 PDF qui va nous donner les
+
+06:52.980 --> 06:54.540
+informations. Surtout le
+
+06:55.900 --> 06:57.820
+contact principal et cetera. Les
+
+06:58.180 --> 06:59.660
+informations du contrat, s'il y a des
+
+06:59.660 --> 07:02.020
+contrats qui sont associés, là je reviens
+
+07:02.020 --> 07:04.300
+donc les documents, donc les documents
+
+07:04.540 --> 07:05.340
+échangés avec le client.
+
+07:06.260 --> 07:10.060
+Donc
+
+07:10.060 --> 07:12.740
+par exemple ,
+
+07:13.100 --> 07:15.660
+au survol du nom, on va avoir l'aperçu du
+
+07:15.900 --> 07:18.780
+document, donc le type de document.
+
+07:18.780 --> 07:20.780
+On peut modifier le
+
+07:20.780 --> 07:22.940
+document, le voir avec l'oeil ou le
+
+07:23.020 --> 07:23.340
+supprimer.
+
+07:31.020 --> 07:33.900
+On va avoir du coup
+
+07:33.980 --> 07:36.100
+les contrats qui sont associés, donc les
+
+07:36.100 --> 07:39.020
+contrats donc ça va être des contrats
+
+07:39.140 --> 07:40.980
+qui vont bientôt expirer, expirer ou qui
+
+07:40.980 --> 07:42.500
+sont en cours.
+
+07:43.180 --> 07:45.500
+Donc là rouge pour expirer ça va être
+
+07:45.500 --> 07:47.820
+orange pour  qui vont
+
+07:48.060 --> 07:50.780
+expirer et sans
+
+07:51.260 --> 07:52.980
+code couleur pour les contrats en cours.
+
+07:53.180 --> 07:54.740
+Donc par exemple celui-là
+
+07:55.100 --> 07:58.020
+bah il a été expiré alors on
+
+07:58.020 --> 07:59.340
+peut-on peut éventuellement le
+
+07:59.340 --> 08:00.860
+renouveler. Avec ce bouton, on peut le
+
+08:00.860 --> 08:02.140
+supprimer. On a les
+
+08:02.140 --> 08:04.980
+documents du contrat, les
+
+08:04.980 --> 08:06.420
+documents opérateurs, les
+
+08:06.420 --> 08:09.140
+documents d'installation et les commandes
+
+08:09.140 --> 08:10.100
+techniques associées ainsi que les
+
+08:10.100 --> 08:12.060
+fichiers qualitatifs pour le contrat. Par
+
+08:12.380 --> 08:17.460
+exemple,
+
+08:17.460 --> 08:20.380
+si je clique ici, on
+
+08:20.380 --> 08:22.580
+attend un petit peu, normalement moins
+
+08:22.580 --> 08:24.660
+d'une minute. On clique ici. C'est une
+
+08:24.660 --> 08:25.260
+fiche supplémentaire.
+
+08:25.940 --> 08:28.260
+On peut
+
+08:28.260 --> 08:31.180
+modifier donc
+
+08:31.180 --> 08:33.180
+là ici, donc là c'est un questionnaire.
+
+08:33.180 --> 08:34.740
+On peut modifier les différentes, les
+
+08:34.740 --> 08:36.060
+différentes informations, sachant que si
+
+08:36.060 --> 08:37.580
+on renouvelle le contrat, ça va dupliquer
+
+08:37.740 --> 08:37.940
+le
+
+08:37.940 --> 08:40.820
+contrat
+
+08:40.820 --> 08:42.580
+avec la date par défaut d'aujourd'hui
+
+08:42.700 --> 08:45.420
+avec la date
+
+08:46.540 --> 08:49.420
+de fin incrémentée d'un certain
+
+08:49.420 --> 08:51.940
+nombre de mois, donc les appels qui sont
+
+08:51.940 --> 08:54.380
+rattachés aux clients. Donc avec qui a
+
+08:54.380 --> 08:56.700
+pris l'appel, à quelle heure, quand,
+
+08:56.940 --> 08:57.860
+quelle date ?Le
+
+08:57.860 --> 09:00.620
+nom de l'interrupteur, la
+
+09:00.620 --> 09:01.660
+raison de l'appel, les suites à
+
+09:01.660 --> 09:04.180
+donner,
+
+09:04.780 --> 09:07.100
+on peut les clôturer ou les supprimer et
+
+09:07.100 --> 09:08.100
+clôturer une fois que l'action
+
+09:08.100 --> 09:09.300
+l'intervention a été faite par exemple ou
+
+09:09.300 --> 09:11.020
+a été traité. Enfin, l'appel a été traité
+
+09:11.020 --> 09:12.060
+et supprimé pour faire de
+
+09:12.060 --> 09:14.460
+l'archivage.
+
+09:15.420 --> 09:18.300
+On peut toujours
+
+09:19.180 --> 09:20.340
+filtrer aussi selon l'agence et cetera.
+
+09:20.340 --> 09:22.620
+On revient en arrière ici. Et enfin du
+
+09:22.620 --> 09:23.820
+coup les informations supplémentaires
+
+09:23.820 --> 09:25.620
+pour ce client par exemple. Voilà SAV par
+
+09:25.700 --> 09:28.620
+exemple. Voilà bon y a une petite
+
+09:28.620 --> 09:30.060
+note, rebrancher l'ordi redémarre 3 fois
+
+09:30.060 --> 09:32.700
+pas je crois. En fait
+
+09:33.420 --> 09:36.060
+on fait d'une tâche supplémentaire et là
+
+09:36.300 --> 09:38.620
+encore y a un questionnaire est
+
+09:38.780 --> 09:41.700
+rattaché, on va pouvoir
+
+09:41.700 --> 09:43.260
+là modifier la date, l'information, et
+
+09:43.500 --> 09:45.860
+cetera. Et pareil pour le client, on va
+
+09:45.860 --> 09:47.660
+pouvoir modifier du coup le client.
+
+09:48.340 --> 09:48.580
+l'attaché
+
+09:48.580 --> 09:52.060
+marqué,
+
+09:52.060 --> 09:54.900
+le nom du contact,
+
+09:54.900 --> 09:56.740
+etc. Le code Zendesk, les différentes
+
+09:57.220 --> 09:58.820
+informations. Je ne vais pas faire
+
+09:58.820 --> 10:00.140
+l'intégralité du questionnaire parce
+
+10:00.140 --> 10:01.340
+qu'il est assez long. Mais voilà, les
+
+10:01.340 --> 10:03.980
+informations principales qui sont
+
+10:03.980 --> 10:06.460
+visibles ici. On peut du coup avoir accès
+
+10:06.460 --> 10:07.540
+au nombre d'enregistrements,
+
+10:07.540 --> 10:10.060
+l'enregistrement total. Donc une
+
+10:10.140 --> 10:11.580
+pagination, bien sûr il n'y en a qu'une.
+
+10:12.340 --> 10:15.180
+Donc c'est
+
+10:15.180 --> 10:17.300
+facile, mais là on peut 50, 10, 25, 100.
+
+10:17.300 --> 10:19.500
+Par exemple si j'enlève de la barre de
+
+10:19.500 --> 10:21.940
+recherche, je vais avoir tous les
+
+10:21.980 --> 10:24.820
+clients. Je vais mettre par exemple 4 x
+
+10:25.100 --> 10:26.380
+4 DESIGN par
+
+10:26.980 --> 10:29.660
+exemple. Sachant que je peux les
+
+10:29.700 --> 10:30.940
+supprimer, les prospects je peux les
+
+10:31.260 --> 10:32.500
+supprimer. Les contrats, les clients ne
+
+10:32.500 --> 10:33.660
+sont pas supprimables. Pour éviter des
+
+10:33.660 --> 10:35.260
+pertes d'informations. Sachant que des
+
+10:35.300 --> 10:36.140
+sauvegardes
+
+10:36.780 --> 10:39.980
+sont
+
+10:40.060 --> 10:42.620
+faites régulièrement au cas où. Donc là
+
+10:42.940 --> 10:44.740
+juste une précision sur les
+
+10:45.740 --> 10:48.260
+contrats et suivis qui ont les mêmes
+
+10:48.260 --> 10:49.340
+informations comme je le disais tout à
+
+10:49.340 --> 10:52.140
+l'heure que les fonctionnalités qui
+
+10:52.700 --> 10:54.780
+sont disponibles sur la raison sociale,
+
+10:55.100 --> 10:58.020
+enfin le client. C'est juste là la notion
+
+10:58.020 --> 10:59.780
+de "à surveiller et expirer"
+
+10:59.780 --> 11:03.020
+donc
+
+11:03.020 --> 11:04.700
+"à surveiller" en orange, jaune orangé et
+
+11:04.700 --> 11:07.660
+"expiré" en rouge. Sachant
+
+11:07.660 --> 11:08.900
+qu'il y a une date, un
+
+11:08.900 --> 11:11.580
+nombre de mois spécifique qui
+
+11:11.580 --> 11:14.140
+est attribué au nombre de mois avant pour
+
+11:14.140 --> 11:15.540
+notifier l'utilisateur qu'il peut
+
+11:15.540 --> 11:17.020
+potentiellement renouveler le contrat
+
+11:17.420 --> 11:19.300
+parce qu'il va bientôt expirer. Il peut
+
+11:19.300 --> 11:21.580
+prévoir. Donc ça permet de gérer les
+
+11:21.580 --> 11:23.700
+clients, les contrats, les suivis dans la
+
+11:23.700 --> 11:24.700
+même application. Et pour tous les
+
+11:24.700 --> 11:27.340
+attachés marketing, il y a
+
+11:27.820 --> 11:28.820
+une vingtaine de personnes à
+
+11:28.820 --> 11:32.620
+Elphicom.
+
+11:32.620 --> 11:34.300
+L'objectif pour l'application c'est
+
+11:34.300 --> 11:36.460
+d'être utilisée quotidiennement. et de
+
+11:36.460 --> 11:38.380
+pouvoir du coup répondre
+
+11:39.740 --> 11:42.060
+aux besoins clients et
+
+11:42.060 --> 11:44.340
+en même temps de faire un suivi pour les
+
+11:44.340 --> 11:46.700
+employés d'Elphicom.
+
+11:48.300 --> 11:49.660
+On peut se déconnecter.

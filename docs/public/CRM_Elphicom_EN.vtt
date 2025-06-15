@@ -1,0 +1,934 @@
+WEBVTT
+
+00:00.280 --> 00:02.960
+I'm going to introduce you to the platform
+
+00:02.960 --> 00:05.840
+CRM
+
+00:05.840 --> 00:07.440
+Elphicom that I had the opportunity to
+
+00:07.440 --> 00:09.000
+design during my end-of-year internship
+
+00:09.000 --> 00:09.560
+of studies at
+
+00:09.560 --> 00:13.040
+Soft Concept,
+
+00:13.040 --> 00:14.600
+A Lyon-based software publisher
+
+00:14.600 --> 00:15.640
+specialized in research investigations
+
+00:15.640 --> 00:17.440
+satisfaction, social barometers,
+
+00:17.440 --> 00:19.880
+HR surveys on all types of media,
+
+00:20.160 --> 00:21.680
+mobile, tablet and computer. I have
+
+00:21.680 --> 00:22.760
+worked 3 months on the application and
+
+00:22.760 --> 00:24.120
+I participated in
+
+00:24.360 --> 00:27.080
+the
+
+00:27.080 --> 00:28.640
+maintenance of it during my
+
+00:28.640 --> 00:31.000
+Permanent contract that followed this internship and lasted 2
+
+00:31.000 --> 00:32.880
+years and a half. Elphicom
+
+00:34.320 --> 00:36.080
+is a company specialising in
+
+00:36.080 --> 00:38.960
+the
+
+00:38.960 --> 00:41.200
+telephony, operator services and
+
+00:41.200 --> 00:44.160
+a CRM as a reminder is a software
+
+00:44.800 --> 00:45.880
+or an application that allows you to
+
+00:45.880 --> 00:47.680
+name indicates
+
+00:48.720 --> 00:51.160
+CRM (Custom Relation)
+
+00:51.160 --> 00:52.760
+Management) to manage customers and between
+
+00:52.760 --> 00:54.040
+other here the contracts and appeals which
+
+00:54.040 --> 00:58.720
+are
+
+00:58.720 --> 01:00.600
+Related. Knowing that there are 3 bricks
+
+01:00.600 --> 01:01.800
+main therefore customer contract
+
+01:01.800 --> 01:03.360
+library on the home page
+
+01:03.360 --> 01:05.000
+all customers and prospects,
+
+01:05.040 --> 01:06.400
+contracts and therefore the documents that will
+
+01:06.400 --> 01:07.600
+are attached and a library of
+
+01:07.600 --> 01:09.360
+Additional documents for a
+
+01:09.360 --> 01:10.960
+administrator. So there it is a it is a
+
+01:10.960 --> 01:12.280
+Dummy administrator. The administration
+
+01:12.280 --> 01:13.560
+will make it possible to manage the
+
+01:13.560 --> 01:14.880
+app users and
+
+01:15.000 --> 01:15.600
+external lists that
+
+01:15.600 --> 01:26.720
+are
+
+01:26.720 --> 01:28.880
+drop-down lists, which will
+
+01:28.880 --> 01:30.480
+intervene in the questionnaires. Therefore
+
+01:31.680 --> 01:34.280
+Of course, for the sake of confidentiality,
+
+01:34.280 --> 01:35.800
+I'm not going to click on user.
+
+01:35.800 --> 01:37.520
+So libraries, so
+
+01:37.520 --> 01:39.840
+Documents, so for example, a cashback
+
+01:39.840 --> 01:41.040
+by
+
+01:41.080 --> 01:44.000
+example, if
+
+01:44.000 --> 01:46.040
+I'll click here. So now I'm going to have a
+
+01:46.040 --> 01:47.720
+doc, a Word file by
+
+01:48.240 --> 01:50.760
+example. For the sake of
+
+01:50.840 --> 01:52.320
+confidentiality, we're not going to click on
+
+01:52.320 --> 01:54.880
+the word. We may have a different image
+
+01:54.880 --> 01:57.640
+So here I have a file
+
+01:57.640 --> 01:59.920
+Excel OK, knowing that the application can
+
+01:59.920 --> 02:02.800
+have different types of format. Then
+
+02:03.040 --> 02:05.280
+Of course there is a size
+
+02:05.960 --> 02:08.640
+specific finally maximum that I have more
+
+02:08.640 --> 02:10.800
+in the lead, but there are
+
+02:11.120 --> 02:13.680
+has one that is effective. So p
+
+02:13.680 --> 02:14.840
+As a reminder, the application was designed
+
+02:14.880 --> 02:16.320
+with HTML, CSS and
+
+02:16.320 --> 02:19.720
+Javascript
+
+02:19.720 --> 02:21.000
+and with the various tools, in particular
+
+02:21.000 --> 02:22.840
+So the 3, so the 4 major tools. from
+
+02:22.840 --> 02:25.560
+Soft Concept. So 3 for the game
+
+02:25.840 --> 02:28.320
+web and 1 for the
+
+02:28.320 --> 02:30.640
+moving part. I will not mention the
+
+02:30.640 --> 02:31.480
+moving part since I don't have
+
+02:31.480 --> 02:32.800
+worked on that part. But I have
+
+02:32.800 --> 02:35.360
+worked on the web part so with the
+
+02:35.360 --> 02:38.240
+3 flagship software. Net-Survey, Ethnos and
+
+02:38.240 --> 02:40.040
+Web Reports. Net-Survey being the software
+
+02:40.040 --> 02:42.560
+which makes it possible to design
+
+02:42.560 --> 02:43.760
+Questionnaires. Knowing that each page
+
+02:43.760 --> 02:46.600
+here is attached to a
+
+02:46.600 --> 02:48.480
+questionnaire. There are
+
+02:48.920 --> 02:51.520
+the part
+
+02:51.880 --> 02:53.320
+Ethnos, which will make it possible to analyze the
+
+02:53.320 --> 02:55.760
+data
+
+02:56.080 --> 02:58.240
+collected by these questionnaires and
+
+02:58.240 --> 02:59.880
+and finally, Web Reports, which allows you to design
+
+02:59.880 --> 03:01.560
+so an application of this kind. Therefore
+
+03:01.560 --> 03:02.600
+a web reporting application,
+
+03:02.600 --> 03:03.720
+restitution of results, then either
+
+03:03.720 --> 03:05.480
+with data that needs to be
+
+03:05.480 --> 03:07.120
+Dynamic. So there is not necessarily
+
+03:07.120 --> 03:09.200
+graphs since it's 1 CRM, knowing
+
+03:09.200 --> 03:11.440
+that Soft Concept's core business
+
+03:11.520 --> 03:14.360
+is the investigation. But it is possible
+
+03:14.360 --> 03:16.000
+also to make
+
+03:16.720 --> 03:19.360
+CRM with the Web Reports tool, knowing that
+
+03:19.360 --> 03:21.200
+The idea is to minimize the code
+
+03:21.360 --> 03:23.200
+then. Of course, for
+
+03:23.480 --> 03:26.440
+additional features, we're going to
+
+03:26.640 --> 03:29.360
+Make changes with the stack
+
+03:29.360 --> 03:31.720
+classic HTML, CSS and
+
+03:31.720 --> 03:34.480
+Javascript or possibly C# or
+
+03:34.480 --> 03:37.360
+Delphi to have features that
+
+03:37.880 --> 03:39.440
+will be
+
+03:39.680 --> 03:41.920
+or that will be
+
+03:41.920 --> 03:44.880
+and a little
+
+03:44.960 --> 03:47.120
+more complex, a fortiori.
+
+03:48.000 --> 03:49.680
+So there, if I go to the customers,
+
+03:56.400 --> 03:58.400
+So we call back customers and prospects, we
+
+03:58.400 --> 03:59.920
+can select the Marketing Attaché,
+
+04:00.480 --> 04:01.840
+the Agency
+
+04:02.240 --> 04:05.000
+Avignon/Vienne and the status
+
+04:05.200 --> 04:06.360
+Customer or Prospect. So there I had
+
+04:06.360 --> 04:08.040
+left by default so one so I had
+
+04:08.040 --> 04:10.240
+searched in the 3P search bar
+
+04:10.240 --> 04:13.120
+profile so it has selected. But
+
+04:13.120 --> 04:15.200
+well we know that we see of course here
+
+04:15.200 --> 04:16.960
+that there are
+
+04:17.360 --> 04:19.840
+7700 in total, but here we can see some
+
+04:19.840 --> 04:21.560
+Sure that one selected in gray. So here we
+
+04:21.560 --> 04:22.520
+may have information
+
+04:22.520 --> 04:23.640
+additional resources, which has been
+
+04:23.640 --> 04:25.080
+occupied with the
+
+04:25.080 --> 04:27.920
+file, Siret number, etc.
+
+04:30.000 --> 04:32.960
+We will
+
+04:33.280 --> 04:35.600
+have the Zendesk and Forest apps.
+
+04:35.920 --> 04:37.720
+For more information I can
+
+04:37.720 --> 04:40.560
+let the research do its thing. So there the
+
+04:40.800 --> 04:42.800
+Customer summary sheet. We will
+
+04:42.800 --> 04:45.560
+therefore have the documents, the contracts,
+
+04:45.680 --> 04:47.720
+Appeals, case management
+
+04:47.720 --> 04:50.400
+so which is going to be information
+
+04:50.400 --> 04:51.600
+and therefore the reports.
+
+04:52.000 --> 04:54.680
+So 4 types of reports, pre-visits,
+
+04:54.680 --> 04:55.840
+the reports on the amendments to the contracts, the
+
+04:55.840 --> 04:57.200
+after-sales reports, installation reports that
+
+04:57.360 --> 04:59.840
+will therefore be linked to the application
+
+05:00.000 --> 05:02.520
+mobile. In fact, marketing or
+
+05:02.520 --> 05:04.640
+so eventually the technicians will
+
+05:04.640 --> 05:06.240
+intervene at the customer's premises and will be able to
+
+05:06.240 --> 05:08.280
+offline. Finally offline from
+
+05:08.560 --> 05:10.040
+power to enter on the tablet or
+
+05:10.040 --> 05:11.600
+on a phone information related to
+
+05:11.600 --> 05:14.560
+installation, et cetera by
+
+05:14.880 --> 05:19.760
+example
+
+05:19.760 --> 05:21.200
+and use the Mobi-Survey app.
+
+05:21.520 --> 05:24.040
+that is designed
+
+05:24.040 --> 05:27.760
+by
+
+05:27.760 --> 05:29.200
+Soft Concept and which will make it possible to
+
+05:29.520 --> 05:30.960
+Retrieve the information in the form of
+
+05:31.040 --> 05:32.480
+report at the end of the intervention. I
+
+05:32.480 --> 05:33.440
+think that we would not have this
+
+05:34.720 --> 05:37.560
+since I worked
+
+05:37.560 --> 05:40.520
+Mainly on the web part.
+
+05:40.520 --> 05:40.640
+My
+
+05:43.440 --> 05:45.520
+internship supervisor who worked on the
+
+05:46.320 --> 05:48.680
+moving part.
+
+05:50.400 --> 05:52.840
+So there the customers, so there for example
+
+05:52.840 --> 05:55.600
+the company name, therefore with
+
+05:55.680 --> 05:57.620
+a phone with multiple different sites. or
+
+05:58.220 --> 06:00.940
+not there, among other things, this
+
+06:01.180 --> 06:02.900
+is not necessarily the case. So here
+
+06:02.900 --> 06:04.860
+when we select the contracts
+
+06:04.860 --> 06:07.740
+the follow-ups in fact we have
+
+06:07.820 --> 06:10.740
+Here too the contract and tracking buttons
+
+06:10.740 --> 06:12.340
+except that here it's going to be all
+
+06:14.220 --> 06:16.100
+the contracts followed all together then
+
+06:16.100 --> 06:17.820
+that there it will be specific to the customers so
+
+06:17.820 --> 06:19.540
+I won't necessarily click contract
+
+06:19.540 --> 06:21.180
+follow-up it's the same actions as for a
+
+06:21.180 --> 06:22.100
+customer just that
+
+06:22.100 --> 06:24.620
+The list
+
+06:25.420 --> 06:26.700
+is of course larger.
+
+06:26.980 --> 06:30.460
+One
+
+06:30.460 --> 06:32.140
+is around 40000 follow-ups, well 40000
+
+06:32.140 --> 06:33.180
+phone calls, about one
+
+06:33.900 --> 06:35.420
+10000 contracts since the launch of the
+
+06:35.500 --> 06:36.740
+platform. So knowing that it was
+
+06:36.740 --> 06:38.940
+created in 2020,
+
+06:38.940 --> 06:40.860
+In 2021,
+
+06:40.860 --> 06:43.580
+we are currently in
+
+06:43.580 --> 06:44.140
+2025,
+
+06:47.820 --> 06:49.300
+so there is a summary sheet by
+
+06:49.300 --> 06:51.500
+example. So now we're going to have a shot
+
+06:51.500 --> 06:52.980
+1 PDF that will give us the
+
+06:52.980 --> 06:54.540
+news. Especially the
+
+06:55.900 --> 06:57.820
+primary contact et cetera. The
+
+06:58.180 --> 06:59.660
+contract information, if there are
+
+06:59.660 --> 07:02.020
+contracts that are associated, here I come back
+
+07:02.020 --> 07:04.300
+So the documents, so the documents
+
+07:04.540 --> 07:05.340
+exchanged with the customer.
+
+07:06.260 --> 07:10.060
+Therefore
+
+07:10.060 --> 07:12.740
+Like what
+
+07:13.100 --> 07:15.660
+When we hover over the name, we will have the preview of the
+
+07:15.900 --> 07:18.780
+document, so the type of document.
+
+07:18.780 --> 07:20.780
+The
+
+07:20.780 --> 07:22.940
+document, see it with the eye or the
+
+07:23.020 --> 07:23.340
+delete.
+
+07:31.020 --> 07:33.900
+We're going to have a bang
+
+07:33.980 --> 07:36.100
+the contracts that are associated, i.e. the
+
+07:36.100 --> 07:39.020
+contracts so it's going to be contracts
+
+07:39.140 --> 07:40.980
+that will soon expire, expire or
+
+07:40.980 --> 07:42.500
+are ongoing.
+
+07:43.180 --> 07:45.500
+So there red to exhale it's going to be
+
+07:45.500 --> 07:47.820
+orange for those who go
+
+07:48.060 --> 07:50.780
+expire and without
+
+07:51.260 --> 07:52.980
+Color code for current contracts.
+
+07:53.180 --> 07:54.740
+So for example this one
+
+07:55.100 --> 07:58.020
+well it has been expired so we
+
+07:58.020 --> 07:59.340
+can we possibly
+
+07:59.340 --> 08:00.860
+renew. With this button, you can
+
+08:00.860 --> 08:02.140
+delete. We have the
+
+08:02.140 --> 08:04.980
+contract documents,
+
+08:04.980 --> 08:06.420
+operator documents,
+
+08:06.420 --> 08:09.140
+Installation documents and orders
+
+08:09.140 --> 08:10.100
+associated techniques as well as the
+
+08:10.100 --> 08:12.060
+qualitative files for the contract. By
+
+08:12.380 --> 08:17.460
+example
+
+08:17.460 --> 08:20.380
+If I click here, we
+
+08:20.380 --> 08:22.580
+wait a little bit, normally less
+
+08:22.580 --> 08:24.660
+of one minute. Click here. It is a
+
+08:24.660 --> 08:25.260
+Additional Sheet.
+
+08:25.940 --> 08:28.260
+We can
+
+08:28.260 --> 08:31.180
+modify therefore
+
+08:31.180 --> 08:33.180
+Here here, so there is a questionnaire.
+
+08:33.180 --> 08:34.740
+We can modify the different, the
+
+08:34.740 --> 08:36.060
+different information, knowing that if
+
+08:36.060 --> 08:37.580
+We renew the contract, it's going to duplicate
+
+08:37.740 --> 08:37.940
+the
+
+08:37.940 --> 08:40.820
+contract
+
+08:40.820 --> 08:42.580
+with today's default date
+
+08:42.700 --> 08:45.420
+with the date
+
+08:46.540 --> 08:49.420
+of an incremented end of a certain
+
+08:49.420 --> 08:51.940
+months, so the calls that are
+
+08:51.940 --> 08:54.380
+attached to customers. So with whom has
+
+08:54.380 --> 08:56.700
+took the call, at what hour, when,
+
+08:56.940 --> 08:57.860
+What date? The
+
+08:57.860 --> 09:00.620
+switch name, the
+
+09:00.620 --> 09:01.660
+reason for the appeal, the consequences of the
+
+09:01.660 --> 09:04.180
+To give
+
+09:04.780 --> 09:07.100
+they can be closed or deleted, and
+
+09:07.100 --> 09:08.100
+close once the stock
+
+09:08.100 --> 09:09.300
+the intervention was carried out for example or
+
+09:09.300 --> 09:11.020
+has been processed. Finally, the appeal was processed
+
+09:11.020 --> 09:12.060
+and deleted to make
+
+09:12.060 --> 09:14.460
+archiving.
+
+09:15.420 --> 09:18.300
+We can always
+
+09:19.180 --> 09:20.340
+Filter also by agency, et cetera.
+
+09:20.340 --> 09:22.620
+Let's go back here. And finally the
+
+09:22.620 --> 09:23.820
+Additional information
+
+09:23.820 --> 09:25.620
+for this customer for example. Here is after-sales service by
+
+09:25.700 --> 09:28.620
+example. That's it, there's a little
+
+09:28.620 --> 09:30.060
+Note, reconnecting the computer restarts 3 times
+
+09:30.060 --> 09:32.700
+Not I think so. In fact
+
+09:33.420 --> 09:36.060
+we do an extra task and there
+
+09:36.300 --> 09:38.620
+There is still a questionnaire is
+
+09:38.780 --> 09:41.700
+attached, we will be able to
+
+09:41.700 --> 09:43.260
+there change the date, information, and
+
+09:43.500 --> 09:45.860
+Cetera. And the same for the customer, we'll
+
+09:45.860 --> 09:47.660
+To be able to modify the client as a result.
+
+09:48.340 --> 09:48.580
+The attaché
+
+09:48.580 --> 09:52.060
+marked
+
+09:52.060 --> 09:54.900
+the name of the contact,
+
+09:54.900 --> 09:56.740
+etc. The Zendesk code, the different
+
+09:57.220 --> 09:58.820
+news. I'm not going to do
+
+09:58.820 --> 10:00.140
+the entire questionnaire because
+
+10:00.140 --> 10:01.340
+that it is quite long. But now, the
+
+10:01.340 --> 10:03.980
+main information which is
+
+10:03.980 --> 10:06.460
+visible here. We can therefore have access to
+
+10:06.460 --> 10:07.540
+the number of records,
+
+10:07.540 --> 10:10.060
+total registration. So a
+
+10:10.140 --> 10:11.580
+pagination, of course there is only one.
+
+10:12.340 --> 10:15.180
+So it's
+
+10:15.180 --> 10:17.300
+Easy, but here we can 50, 10, 25, 100.
+
+10:17.300 --> 10:19.500
+For example, if I remove from the
+
+10:19.500 --> 10:21.940
+research, I'm going to have all the
+
+10:21.980 --> 10:24.820
+Customers. I'm going to put for example 4 x
+
+10:25.100 --> 10:26.380
+4 DESIGN by
+
+10:26.980 --> 10:29.660
+example. Knowing that I can
+
+10:29.700 --> 10:30.940
+delete, the prospects I can
+
+10:31.260 --> 10:32.500
+delete. Contracts, customers do not
+
+10:32.500 --> 10:33.660
+are not removable. To avoid
+
+10:33.660 --> 10:35.260
+loss of information. Knowing that
+
+10:35.300 --> 10:36.140
+Backups
+
+10:36.780 --> 10:39.980
+are
+
+10:40.060 --> 10:42.620
+Do it regularly just in case. So there
+
+10:42.940 --> 10:44.740
+just a clarification on the
+
+10:45.740 --> 10:48.260
+contracts and follow-ups that have the same
+
+10:48.260 --> 10:49.340
+information as I said earlier
+
+10:49.340 --> 10:52.140
+the time that the features that
+
+10:52.700 --> 10:54.780
+are available on the company name,
+
+10:55.100 --> 10:58.020
+and finally the customer. That's just the notion
+
+10:58.020 --> 10:59.780
+from "watch and exhale"
+
+10:59.780 --> 11:03.020
+therefore
+
+11:03.020 --> 11:04.700
+"to be watched" in orange, orange-yellow and
+
+11:04.700 --> 11:07.660
+"expired" in red. Knowing
+
+11:07.660 --> 11:08.900
+that there is a date, a
+
+11:08.900 --> 11:11.580
+specific number of months that
+
+11:11.580 --> 11:14.140
+is assigned to the number of months before for
+
+11:14.140 --> 11:15.540
+notify the user that they can
+
+11:15.540 --> 11:17.020
+potentially renew the contract
+
+11:17.420 --> 11:19.300
+because it will expire soon. It can
+
+11:19.300 --> 11:21.580
+foresee. So it allows you to manage the
+
+11:21.580 --> 11:23.700
+contracts, follow-ups in the
+
+11:23.700 --> 11:24.700
+same application. And for all
+
+11:24.700 --> 11:27.340
+marketing attachés, there are
+
+11:27.820 --> 11:28.820
+About twenty people in
+
+11:28.820 --> 11:32.620
+Elphicom.
+
+11:32.620 --> 11:34.300
+The objective for the application is
+
+11:34.300 --> 11:36.460
+to be used daily. and
+
+11:36.460 --> 11:38.380
+power to answer
+
+11:39.740 --> 11:42.060
+customer needs and
+
+11:42.060 --> 11:44.340
+at the same time to follow up on the
+
+11:44.340 --> 11:46.700
+employees of Elphicom.
+
+11:48.300 --> 11:49.660
+You can disconnect.

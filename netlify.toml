@@ -167,6 +167,22 @@
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
 	path = "en/terms/" 
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/crm_elphicom"
+  
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/crm_elphicom/"
+
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/crm_elphicom"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/crm_elphicom/" 
 
 [[redirects]]
   from = "/en"
@@ -206,4 +222,14 @@
 [[redirects]]
   from = "/fr/policy"
   to = "/policy_fr.html"
+  status = 200
+  
+[[redirects]]
+  from = "/en/crm_elphicom"
+  to = "/readme/crm_elphicom_en.html"
+  status = 200
+
+[[redirects]]
+  from = "/fr/crm_elphicom"
+  to = "/readme/crm_elphicom_fr.html"
   status = 200
