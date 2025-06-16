@@ -1,0 +1,676 @@
+WEBVTT
+
+00:01.320 --> 00:03.240
+Hello, I'm going to introduce you to the
+
+00:03.240 --> 00:04.960
+EBati CartoAmiante platform, renowned
+
+00:04.960 --> 00:07.680
+EBatiSoft,
+
+00:08.040 --> 00:09.760
+that I have had the opportunity to develop
+
+00:09.760 --> 00:11.280
+during my permanent contract at
+
+00:11.280 --> 00:14.640
+Soft Concept
+
+00:14.640 --> 00:15.600
+in pairs. As a reminder,
+
+00:15.760 --> 00:21.160
+Soft Concept
+
+00:21.440 --> 00:24.360
+is a Lyon-based software publisher
+
+00:24.360 --> 00:25.960
+Specialized in investigations of everything
+
+00:26.240 --> 00:27.280
+Media Type: Mobile, Tablet and
+
+00:27.280 --> 00:29.440
+computer. The project lasted about a year
+
+00:30.960 --> 00:31.840
+and was done
+
+00:31.840 --> 00:34.600
+in
+
+00:34.600 --> 00:35.440
+collaboration with
+
+00:36.040 --> 00:39.040
+the company Chevalier Diag,
+
+00:39.040 --> 00:41.920
+which is a company specializing in the
+
+00:42.000 --> 00:45.640
+diagnosis
+
+00:45.640 --> 00:47.400
+technical expertise in various
+
+00:47.400 --> 00:50.080
+areas, including real estate,
+
+00:50.400 --> 00:52.960
+construction and the environment. And a
+
+00:52.960 --> 00:55.120
+holding company specialising in real estate,
+
+00:55.120 --> 00:57.280
+Akinext. The software, for the
+
+00:57.920 --> 00:59.480
+Objective of following the regulations
+
+00:59.480 --> 01:03.640
+asbestos
+
+01:03.640 --> 01:04.800
+and the identification of precautions
+
+01:05.040 --> 01:07.080
+special needs to be taken in the event of work
+
+01:07.080 --> 01:08.800
+on buildings. He is at his destination
+
+01:08.800 --> 01:09.920
+of landlords and property managers
+
+01:09.920 --> 01:11.560
+real estate companies, co-ownership trustees,
+
+01:11.560 --> 01:13.600
+hotel rooms, etc. The
+
+01:13.600 --> 01:15.080
+platform was made in HTML, CSS,
+
+01:15.080 --> 01:17.920
+Javascript, in C#
+
+01:18.000 --> 01:19.760
+for the back-end and with the tools
+
+01:19.880 --> 01:21.880
+specific to Soft Concept that
+
+01:22.080 --> 01:24.240
+are Net-Survey, Ethnos
+
+01:24.640 --> 01:27.080
+and Web Reports. Net-Survey for
+
+01:27.080 --> 01:29.880
+creation of questionnaires, Ethnos for
+
+01:29.880 --> 01:31.480
+data analysis, for
+
+01:31.640 --> 01:33.200
+power
+
+01:33.840 --> 01:36.040
+have stats like
+
+01:36.040 --> 01:38.440
+for example here. For
+
+01:38.720 --> 01:39.520
+Credit by
+
+01:39.520 --> 01:43.280
+example
+
+01:43.440 --> 01:45.800
+the percentage of buildings with asbestos
+
+01:45.800 --> 01:47.920
+known, the
+
+01:49.000 --> 01:50.560
+Different category distributions
+
+01:50.560 --> 01:51.880
+functions of each vessel, the
+
+01:51.880 --> 01:54.560
+number of customers, etc. and Web Reports
+
+01:54.560 --> 01:56.120
+that allows you to design applications
+
+01:56.120 --> 01:58.080
+with less code. The objective
+
+01:58.640 --> 01:59.280
+secondary school
+
+02:02.000 --> 02:05.000
+The platform is
+
+02:05.000 --> 02:06.160
+Of course to dematerialize as much as possible
+
+02:06.160 --> 02:08.040
+possible wealth management,
+
+02:08.040 --> 02:09.400
+particularly in connection with risk monitoring
+
+02:09.400 --> 02:11.200
+asbestos within a
+
+02:11.840 --> 02:14.720
+real estate stock. Must
+
+02:14.720 --> 02:19.160
+in
+
+02:19.160 --> 02:22.120
+enables compliance with obligations
+
+02:22.120 --> 02:23.760
+DTA surveillance files, i.e.
+
+02:23.840 --> 02:25.200
+asbestos techniques and the various
+
+02:25.440 --> 02:27.520
+periodic assessments to prepare for the
+
+02:27.520 --> 02:28.800
+securing a construction site. In fact
+
+02:29.200 --> 02:30.720
+Each building requires management
+
+02:30.800 --> 02:32.840
+all the more complex as the evolutions
+
+02:32.960 --> 02:34.920
+regulatory changes will be frequent.
+
+02:34.920 --> 02:37.440
+So the objective is to digitize on the
+
+02:37.440 --> 02:39.840
+PDF format of the teaching files
+
+02:39.840 --> 02:41.560
+papers. So by
+
+02:42.000 --> 02:42.880
+example
+
+02:45.120 --> 02:46.680
+a vessel may
+
+02:46.720 --> 02:49.280
+belong to a
+
+02:50.640 --> 02:52.320
+area or a theme, so joinery
+
+02:52.680 --> 02:54.000
+infrastructure, infrastructure,
+
+02:54.000 --> 02:56.600
+railings, et cetera. A location,
+
+02:56.600 --> 02:58.400
+in the application, can
+
+02:58.640 --> 03:01.520
+have several buildings and in
+
+03:01.600 --> 03:02.560
+each building, we have several
+
+03:02.760 --> 03:05.280
+equipment. We can do audits and
+
+03:05.360 --> 03:08.280
+we can have
+
+03:08.280 --> 03:09.920
+Deadlines. So the deadlines, it's going to be
+
+03:09.960 --> 03:11.800
+work after an audit that may be
+
+03:11.920 --> 03:14.240
+periodical or not, continued by
+
+03:15.400 --> 03:18.240
+example to a
+
+03:18.400 --> 03:20.400
+Asbestos overview that does not comply with
+
+03:20.680 --> 03:23.120
+not the
+
+03:23.520 --> 03:24.560
+regulations and which imposes a
+
+03:24.680 --> 03:26.320
+intervention. Quite urgent therefore
+
+03:26.800 --> 03:29.120
+The application can therefore have access
+
+03:29.120 --> 03:32.000
+statistics as I
+
+03:32.160 --> 03:33.080
+I showed just now. We can
+
+03:33.080 --> 03:35.920
+also manage
+
+03:36.000 --> 03:37.600
+these settlements. So, for example,
+
+03:37.920 --> 03:41.440
+one
+
+03:41.520 --> 03:42.600
+can go inside a
+
+03:42.600 --> 03:45.080
+location, select to be able to
+
+03:45.080 --> 03:47.800
+to go inside and have
+
+03:48.160 --> 03:49.720
+the different buildings. We can filter
+
+03:49.720 --> 03:51.760
+by address, postcode, city
+
+03:51.760 --> 03:53.520
+or category.
+
+03:55.760 --> 03:58.720
+So there, for example,
+
+03:58.720 --> 04:01.280
+We have 3 locations with a building
+
+04:01.440 --> 04:02.960
+in each of them. We can
+
+04:03.040 --> 04:05.920
+also have a cartographic vision
+
+04:08.480 --> 04:10.040
+of the various buildings.
+
+04:11.440 --> 04:14.000
+So there, for example,
+
+04:14.320 --> 04:17.120
+If we zoom in here, we're going to be able to
+
+04:19.040 --> 04:21.440
+have the Marguerite brewery,
+
+04:21.760 --> 04:23.920
+so the building automatically. The
+
+04:23.920 --> 04:26.760
+attached building, it is the Brasserie la
+
+04:26.760 --> 04:27.040
+brewery
+
+04:27.440 --> 04:30.440
+Marguerite who,
+
+04:30.440 --> 04:32.920
+by the way, is a very
+
+04:32.920 --> 04:35.840
+good address in Lyon. I
+
+04:35.840 --> 04:37.040
+advise you so here are 2 visions,
+
+04:37.040 --> 04:38.120
+a vision with the leaflet, the Google
+
+04:38.120 --> 04:38.720
+Maps and
+
+04:38.720 --> 04:41.680
+The Vision
+
+04:41.680 --> 04:43.040
+with the different
+
+04:46.650 --> 04:47.650
+establishments, therefore, knowing that
+
+04:47.650 --> 04:50.650
+The platform administrator can
+
+04:50.650 --> 04:52.840
+show what's visible for. The
+
+04:52.840 --> 04:54.640
+customer so there for example, we have there
+
+04:54.640 --> 04:56.800
+for example, the themes that
+
+04:56.800 --> 04:59.120
+are grayed out, the themes are not
+
+04:59.120 --> 05:00.520
+audits. neither. According to
+
+05:00.520 --> 05:03.040
+the role of the user, the person
+
+05:03.040 --> 05:05.080
+who uses the app, there will be
+
+05:05.200 --> 05:08.080
+Have shares
+
+05:08.320 --> 05:10.040
+that will be possible. Of course.
+
+05:10.640 --> 05:13.360
+So now, we
+
+05:15.400 --> 05:15.560
+goes
+
+05:20.840 --> 05:23.720
+therefore take an interest in the
+
+05:23.720 --> 05:23.960
+Audits.
+
+05:40.160 --> 05:43.040
+So, in fact, audits are fine
+
+05:43.160 --> 05:45.040
+to finally manage everything that
+
+05:45.040 --> 05:47.440
+will be an asbestos technical file.
+
+05:47.680 --> 05:51.520
+Therefore
+
+05:51.520 --> 05:52.720
+if the work is to be carried out at the
+
+05:52.720 --> 05:54.960
+within the building, we will be able to recover
+
+05:54.960 --> 05:56.480
+all the analyses that will be
+
+05:56.480 --> 05:58.400
+necessary at the beginning of the work. So the
+
+05:58.560 --> 06:01.200
+under the name of the location, the theme,
+
+06:01.200 --> 06:03.960
+the State. So, for example, here we will have
+
+06:03.960 --> 06:06.560
+different states for asbestos.
+
+06:06.560 --> 06:08.680
+So there, for example, the building is
+
+06:08.680 --> 06:11.520
+dilapidation. The cause, the
+
+06:11.520 --> 06:14.080
+As a result, it's going to be wear and tear
+
+06:14.080 --> 06:15.320
+normal in the time of the work.
+
+06:15.320 --> 06:19.760
+The
+
+06:19.760 --> 06:20.600
+next deadline, the work to be carried out
+
+06:20.600 --> 06:23.520
+realize, are they going to be
+
+06:23.600 --> 06:26.320
+urgent or not? So there, among other things,
+
+06:26.320 --> 06:29.080
+they are not urgent and we will
+
+06:29.080 --> 06:31.880
+for example to be able to
+
+06:31.880 --> 06:32.960
+Import images to illustrate
+
+06:32.960 --> 06:34.280
+auditing. There are audits of course,
+
+06:34.280 --> 06:35.040
+completed, audits to be carried out
+
+06:35.040 --> 06:37.280
+In the future, we can always filter.
+
+06:37.760 --> 06:39.680
+By location, et cetera as well
+
+06:39.680 --> 06:41.040
+also the work, because in fact we have
+
+06:41.040 --> 06:42.520
+a location, a building,
+
+06:42.520 --> 06:45.280
+we have areas and themes such as
+
+06:45.280 --> 06:46.480
+saw it just now with the little ones
+
+06:46.480 --> 06:48.720
+icons, and we also have a book. We can
+
+06:48.880 --> 06:50.600
+filter by equipment status.
+
+06:50.600 --> 06:52.960
+So it's not just dilapidated, it's
+
+06:52.960 --> 06:54.560
+several, but in the 7 examples, it is
+
+06:54.600 --> 06:56.880
+That's all there is to it. And the urgency, is it
+
+06:56.880 --> 06:59.680
+the work is urgent or
+
+06:59.680 --> 07:01.880
+not urgent? Do the
+
+07:05.140 --> 07:06.740
+Are the work done or not? So the
+
+07:07.780 --> 07:09.720
+Deadlines. The deadlines will be the
+
+07:09.720 --> 07:12.400
+Controls
+
+07:12.720 --> 07:14.240
+asbestos that
+
+07:14.280 --> 07:17.680
+Will
+
+07:17.920 --> 07:18.600
+soon to arrive, who
+
+07:18.600 --> 07:22.400
+Will
+
+07:22.400 --> 07:23.720
+arrive within 3 months. So there is
+
+07:23.840 --> 07:25.120
+different types of maturities. There are the
+
+07:25.120 --> 07:26.360
+corrective actions and evaluations
+
+07:26.360 --> 07:27.760
+Periodicals. Periodic evaluations,
+
+07:27.760 --> 07:28.720
+As the name suggests, they are
+
+07:28.720 --> 07:29.960
+evaluations that will be made
+
+07:29.960 --> 07:31.640
+regularly, so we'll be able to
+
+07:31.640 --> 07:33.440
+classify according to coming or exceeding. And the
+
+07:33.640 --> 07:34.960
+corrective actions, it will be in particular
+
+07:34.960 --> 07:37.920
+deterioration. By
+
+07:37.920 --> 07:39.080
+Compared to a previous intervention
+
+07:39.080 --> 07:41.480
+so it's going to be filed in this section
+
+07:41.480 --> 07:44.000
+there. Well so the DTAs, it's going to be
+
+07:45.680 --> 07:47.960
+Technical files
+
+07:47.960 --> 07:50.320
+asbestos, so the PDFs that go as a result
+
+07:50.480 --> 07:51.880
+be imported into the application, which
+
+07:51.880 --> 07:53.400
+will respect a certain format and
+
+07:57.880 --> 08:00.640
+so all the information
+
+08:00.840 --> 08:03.800
+will meet here and we
+
+08:03.800 --> 08:05.000
+will be able to find out if there are any
+
+08:05.040 --> 08:06.640
+asbestos or not on the report that will have
+
+08:06.640 --> 08:08.880
+been done. So the objective
+
+08:08.880 --> 08:11.280
+In fact, it's on existing reports
+
+08:11.280 --> 08:12.560
+and on the new PDFs, to be able to
+
+08:12.560 --> 08:14.840
+Integrate directly into the platform
+
+08:14.840 --> 08:15.760
+and have access to all the
+
+08:15.760 --> 08:16.960
+information quickly and at the same time
+
+08:16.960 --> 08:18.840
+place. The objective is also to
+
+08:18.840 --> 08:19.880
+centralize information and
+
+08:19.880 --> 08:22.560
+Automate reporting. So we don't
+
+08:22.800 --> 08:25.440
+more have
+
+08:25.600 --> 08:28.080
+paper files,
+
+08:29.120 --> 08:30.160
+but to have
+
+08:30.320 --> 08:33.600
+Files
+
+08:33.600 --> 08:36.160
+in PDF format. And of the
+
+08:36.800 --> 08:39.680
+to improve knowledge too
+
+08:39.680 --> 08:42.000
+of the patrimony to be able to
+
+08:43.320 --> 08:46.160
+so geolocate the
+
+08:46.160 --> 08:47.480
+Asbestos risk within the building stock
+
+08:47.480 --> 08:49.280
+and to have a more global vision of the
+
+08:49.280 --> 08:50.720
+problem, to know what type of
+
+08:50.720 --> 08:53.520
+category is more impacted by another,
+
+08:53.520 --> 08:54.880
+and so forth. So there the statistics, we
+
+08:55.440 --> 08:58.400
+will find the same statistics here,
+
+08:58.400 --> 09:01.400
+so there it is
+
+09:01.400 --> 09:02.800
+a global follow-up.

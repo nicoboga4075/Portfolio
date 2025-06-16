@@ -1,0 +1,676 @@
+WEBVTT
+
+00:01.320 --> 00:03.240
+Bonjour, je vais vous présenter la
+
+00:03.240 --> 00:04.960
+plateforme EBati CartoAmiante, renommée
+
+00:04.960 --> 00:07.680
+EBatiSoft,
+
+00:08.040 --> 00:09.760
+que j'ai eu l'occasion de développer
+
+00:09.760 --> 00:11.280
+pendant mon CDI à
+
+00:11.280 --> 00:14.640
+Soft Concept
+
+00:14.640 --> 00:15.600
+en binôme. Pour rappel,
+
+00:15.760 --> 00:21.160
+Soft Concept
+
+00:21.440 --> 00:24.360
+est un éditeur de logiciels lyonnais
+
+00:24.360 --> 00:25.960
+spécialisé dans les enquêtes sur tout
+
+00:26.240 --> 00:27.280
+type de support : mobile, tablette et
+
+00:27.280 --> 00:29.440
+ordinateur. Le projet a duré environ un an
+
+00:30.960 --> 00:31.840
+et a été fait
+
+00:31.840 --> 00:34.600
+en
+
+00:34.600 --> 00:35.440
+collaboration avec
+
+00:36.040 --> 00:39.040
+l'entreprise Chevalier Diag,
+
+00:39.040 --> 00:41.920
+qui est une société spécialisée dans le
+
+00:42.000 --> 00:45.640
+diagnostic
+
+00:45.640 --> 00:47.400
+technique et l'expertise dans divers
+
+00:47.400 --> 00:50.080
+domaines, notamment l'immobilier, la
+
+00:50.400 --> 00:52.960
+construction et l'environnement. Et une
+
+00:52.960 --> 00:55.120
+holding spécialisée dans l'immobilier,
+
+00:55.120 --> 00:57.280
+Akinext. Le logiciel,  a pour
+
+00:57.920 --> 00:59.480
+objectif de suivre la réglementation
+
+00:59.480 --> 01:03.640
+amiante
+
+01:03.640 --> 01:04.800
+et l'identification de précautions
+
+01:05.040 --> 01:07.080
+particulières à prendre en cas de travaux
+
+01:07.080 --> 01:08.800
+sur des bâtiments. Il est à destination
+
+01:08.800 --> 01:09.920
+de bailleurs et de gestionnaires de biens
+
+01:09.920 --> 01:11.560
+immobiliers, des syndics de copropriété,
+
+01:11.560 --> 01:13.600
+des chambres hôtelières, etc. La
+
+01:13.600 --> 01:15.080
+plateforme a été faite en HTML, CSS,
+
+01:15.080 --> 01:17.920
+Javascript, en C#
+
+01:18.000 --> 01:19.760
+pour le back-end et avec les outils
+
+01:19.880 --> 01:21.880
+propres à Soft Concept que
+
+01:22.080 --> 01:24.240
+sont Net-Survey, Ethnos
+
+01:24.640 --> 01:27.080
+et Web Reports. Net-Survey pour la
+
+01:27.080 --> 01:29.880
+création de questionnaires, Ethnos pour
+
+01:29.880 --> 01:31.480
+l'analyse de données, pour
+
+01:31.640 --> 01:33.200
+pouvoir
+
+01:33.840 --> 01:36.040
+avoir des statistiques comme
+
+01:36.040 --> 01:38.440
+par exemple ici. Pour
+
+01:38.720 --> 01:39.520
+avoir par
+
+01:39.520 --> 01:43.280
+exemple
+
+01:43.440 --> 01:45.800
+le pourcentage de bâtiments amiantés
+
+01:45.800 --> 01:47.920
+connus, les
+
+01:49.000 --> 01:50.560
+différentes répartitions des catégories
+
+01:50.560 --> 01:51.880
+des fonctions de chaque bâtiment, le
+
+01:51.880 --> 01:54.560
+nombre de clients, etc. Et Web Reports
+
+01:54.560 --> 01:56.120
+qui permet de concevoir des applications
+
+01:56.120 --> 01:58.080
+avec un moindre code. L'objectif
+
+01:58.640 --> 01:59.280
+secondaire de
+
+02:02.000 --> 02:05.000
+la plateforme, c'est
+
+02:05.000 --> 02:06.160
+bien sûr de dématérialiser le plus
+
+02:06.160 --> 02:08.040
+possible les la gestion de patrimoine,
+
+02:08.040 --> 02:09.400
+notamment en lien avec le suivi du risque
+
+02:09.400 --> 02:11.200
+amiante au sein d'un
+
+02:11.840 --> 02:14.720
+parc immobilier. Il faut
+
+02:14.720 --> 02:19.160
+en
+
+02:19.160 --> 02:22.120
+fait pouvoir se conformer aux obligations
+
+02:22.120 --> 02:23.760
+de surveillance DTA, donc les dossiers
+
+02:23.840 --> 02:25.200
+techniques amiante et les différentes
+
+02:25.440 --> 02:27.520
+évaluations périodiques pour préparer la
+
+02:27.520 --> 02:28.800
+sécurisation d'un chantier. En fait,
+
+02:29.200 --> 02:30.720
+chaque bâtiment demande une gestion
+
+02:30.800 --> 02:32.840
+d'autant plus complexe que les évolutions
+
+02:32.960 --> 02:34.920
+réglementaires vont être fréquentes.
+
+02:34.920 --> 02:37.440
+Donc l'objectif c'est de numériser sur le
+
+02:37.440 --> 02:39.840
+format PDF des dossiers enseignements
+
+02:39.840 --> 02:41.560
+papiers. Donc par
+
+02:42.000 --> 02:42.880
+exemple,
+
+02:45.120 --> 02:46.680
+un bâtiment peut
+
+02:46.720 --> 02:49.280
+appartenir à un
+
+02:50.640 --> 02:52.320
+domaine ou un thème, donc les menuiseries
+
+02:52.680 --> 02:54.000
+intérieures, les infrastructures, les
+
+02:54.000 --> 02:56.600
+garde-corps, et cetera. Une implantation,
+
+02:56.600 --> 02:58.400
+dans l'application,  peut
+
+02:58.640 --> 03:01.520
+avoir plusieurs bâtiments et dans
+
+03:01.600 --> 03:02.560
+chaque bâtiment, on a plusieurs
+
+03:02.760 --> 03:05.280
+équipements. On peut faire des audits et
+
+03:05.360 --> 03:08.280
+on peut avoir des
+
+03:08.280 --> 03:09.920
+échéances. Donc les échéances, ça va être
+
+03:09.960 --> 03:11.800
+les travaux après un audit qui peut être
+
+03:11.920 --> 03:14.240
+périodique ou non, suite par
+
+03:15.400 --> 03:18.240
+exemple à un
+
+03:18.400 --> 03:20.400
+aperçu d'amiante qui ne respecte
+
+03:20.680 --> 03:23.120
+pas la
+
+03:23.520 --> 03:24.560
+réglementation et qui impose une
+
+03:24.680 --> 03:26.320
+intervention. Assez urgente donc
+
+03:26.800 --> 03:29.120
+l'application peut avoir donc accès
+
+03:29.120 --> 03:32.000
+aux statistiques comme je le
+
+03:32.160 --> 03:33.080
+montrais tout à l'heure. On peut
+
+03:33.080 --> 03:35.920
+également du coup gérer
+
+03:36.000 --> 03:37.600
+ces implantations. Donc, par exemple,
+
+03:37.920 --> 03:41.440
+on
+
+03:41.520 --> 03:42.600
+peut aller à l'intérieur d'une
+
+03:42.600 --> 03:45.080
+implantation,  sélectionner pour pouvoir
+
+03:45.080 --> 03:47.800
+avoir rentrer à l'intérieur et avoir
+
+03:48.160 --> 03:49.720
+les différents bâtiments. On peut filtrer
+
+03:49.720 --> 03:51.760
+par l'adresse, le code postal, la ville
+
+03:51.760 --> 03:53.520
+ou la catégorie.
+
+03:55.760 --> 03:58.720
+Donc là, par exemple,
+
+03:58.720 --> 04:01.280
+on a 3 implantations avec un bâtiment
+
+04:01.440 --> 04:02.960
+dans chacune d'elles. On peut
+
+04:03.040 --> 04:05.920
+avoir aussi une vision cartographique
+
+04:08.480 --> 04:10.040
+des différents bâtiments.
+
+04:11.440 --> 04:14.000
+Donc là, par exemple,
+
+04:14.320 --> 04:17.120
+si on zoome ici, on va pouvoir
+
+04:19.040 --> 04:21.440
+avoir la brasserie Marguerite,
+
+04:21.760 --> 04:23.920
+donc le bâtiment automatiquement. Le
+
+04:23.920 --> 04:26.760
+bâtiment rattaché, c'est la brasserie la
+
+04:26.760 --> 04:27.040
+brasserie
+
+04:27.440 --> 04:30.440
+Marguerite qui,
+
+04:30.440 --> 04:32.920
+au passage, est une très
+
+04:32.920 --> 04:35.840
+bonne adresse à Lyon. Je
+
+04:35.840 --> 04:37.040
+vous la conseille donc voilà 2 visions,
+
+04:37.040 --> 04:38.120
+une vision avec le leaflet, le Google
+
+04:38.120 --> 04:38.720
+Maps et
+
+04:38.720 --> 04:41.680
+la vision
+
+04:41.680 --> 04:43.040
+classique avec les différents
+
+04:46.650 --> 04:47.650
+implantations donc, sachant que
+
+04:47.650 --> 04:50.650
+l'administrateur de la plateforme peut
+
+04:50.650 --> 04:52.840
+montrer ce qui est visible pour. Le
+
+04:52.840 --> 04:54.640
+client donc là par exemple, on a là
+
+04:54.640 --> 04:56.800
+par exemple les thèmes qui
+
+04:56.800 --> 04:59.120
+sont grisés, les thèmes  ne sont pas
+
+04:59.120 --> 05:00.520
+accessibles, les audits. non plus. Selon
+
+05:00.520 --> 05:03.040
+le rôle de l'utilisateur, de la personne
+
+05:03.040 --> 05:05.080
+qui utilise l'application, il va y
+
+05:05.200 --> 05:08.080
+avoir des actions
+
+05:08.320 --> 05:10.040
+qui seront possibles. Bien entendu.
+
+05:10.640 --> 05:13.360
+Donc maintenant, on
+
+05:15.400 --> 05:15.560
+va
+
+05:20.840 --> 05:23.720
+s'intéresser donc aux
+
+05:23.720 --> 05:23.960
+audits.
+
+05:40.160 --> 05:43.040
+Donc, en fait, les audits, ça va
+
+05:43.160 --> 05:45.040
+permettre finalement de gérer tout ce qui
+
+05:45.040 --> 05:47.440
+va être dossier technique amiante.
+
+05:47.680 --> 05:51.520
+Donc
+
+05:51.520 --> 05:52.720
+si les travaux doivent être réalisés au
+
+05:52.720 --> 05:54.960
+sein du bâtiment, on va pouvoir récupérer
+
+05:54.960 --> 05:56.480
+toutes les analyses qui vont être
+
+05:56.480 --> 05:58.400
+nécessaires au début des travaux. Donc le
+
+05:58.560 --> 06:01.200
+sous nom de l'implantation, le thème,
+
+06:01.200 --> 06:03.960
+l'État. Donc, par exemple, là on va avoir
+
+06:03.960 --> 06:06.560
+différents états pour l'amiante.
+
+06:06.560 --> 06:08.680
+Donc là par exemple le bâtiment est
+
+06:08.680 --> 06:11.520
+vétusté. La cause, la
+
+06:11.520 --> 06:14.080
+conséquence, ça va être de l'usure
+
+06:14.080 --> 06:15.320
+normale dans le temps de l'ouvrage.
+
+06:15.320 --> 06:19.760
+La
+
+06:19.760 --> 06:20.600
+prochaine échéance, les travaux à
+
+06:20.600 --> 06:23.520
+réaliser, est-ce qu'ils vont être
+
+06:23.600 --> 06:26.320
+urgents ou non ?Donc là, entre autres,
+
+06:26.320 --> 06:29.080
+ils ne sont pas urgents et on va
+
+06:29.080 --> 06:31.880
+par exemple pouvoir
+
+06:31.880 --> 06:32.960
+importer des images pour illustrer
+
+06:32.960 --> 06:34.280
+l'audit. Il y a les audits bien sûr,
+
+06:34.280 --> 06:35.040
+terminés, les audits à faire
+
+06:35.040 --> 06:37.280
+prochainement, on peut toujours filtrer.
+
+06:37.760 --> 06:39.680
+Par implantation, et cetera également
+
+06:39.680 --> 06:41.040
+aussi l'ouvrage, parce qu'en fait on a
+
+06:41.040 --> 06:42.520
+une implantation, un bâtiment,
+
+06:42.520 --> 06:45.280
+on a des domaines et des thèmes comme on
+
+06:45.280 --> 06:46.480
+l'a vu tout à l'heure avec les petites
+
+06:46.480 --> 06:48.720
+icônes, et on a aussi un ouvrage. On peut
+
+06:48.880 --> 06:50.600
+filtrer selon l'état de l'équipement.
+
+06:50.600 --> 06:52.960
+Alors il n'y a pas que vétusté, il y en a
+
+06:52.960 --> 06:54.560
+plusieurs, mais dans les 7 exemples, il
+
+06:54.600 --> 06:56.880
+n'y a que cela. Et l'urgence, est-ce que
+
+06:56.880 --> 06:59.680
+les travaux sont urgents ou
+
+06:59.680 --> 07:01.880
+pas urgents ?Est-ce que les
+
+07:05.140 --> 07:06.740
+travaux sont faits ou non ? Donc les
+
+07:07.780 --> 07:09.720
+échéances. Les échéances, ça va être les
+
+07:09.720 --> 07:12.400
+contrôles
+
+07:12.720 --> 07:14.240
+amiante qui
+
+07:14.280 --> 07:17.680
+vont
+
+07:17.920 --> 07:18.600
+bientôt arriver, qui
+
+07:18.600 --> 07:22.400
+vont
+
+07:22.400 --> 07:23.720
+arriver sous 3 mois. Alors il y a
+
+07:23.840 --> 07:25.120
+différents types d'échéances. Il y a les
+
+07:25.120 --> 07:26.360
+actions correctives et les évaluations
+
+07:26.360 --> 07:27.760
+périodiques. Les évaluations périodiques,
+
+07:27.760 --> 07:28.720
+comme son nom l'indique, ce sont des
+
+07:28.720 --> 07:29.960
+évaluations qui vont être faites
+
+07:29.960 --> 07:31.640
+régulièrement, donc on va pouvoir les
+
+07:31.640 --> 07:33.440
+classer selon à venir ou dépasser. Et les
+
+07:33.640 --> 07:34.960
+actions correctives, ça va être notamment
+
+07:34.960 --> 07:37.920
+une détérioration. Par
+
+07:37.920 --> 07:39.080
+rapport à une précédente intervention
+
+07:39.080 --> 07:41.480
+donc ça va être classé dans cette section
+
+07:41.480 --> 07:44.000
+là. Enfin donc les DTA,  ça va être
+
+07:45.680 --> 07:47.960
+les dossiers techniques
+
+07:47.960 --> 07:50.320
+amiante, donc les PDF qui vont du coup
+
+07:50.480 --> 07:51.880
+être importés dans l'application, qui
+
+07:51.880 --> 07:53.400
+vont respecter un certain format et
+
+07:57.880 --> 08:00.640
+donc toutes les informations
+
+08:00.840 --> 08:03.800
+vont se retrouver ici et on
+
+08:03.800 --> 08:05.000
+va pouvoir savoir du coup s'il y a de
+
+08:05.040 --> 08:06.640
+l'amiante ou non sur le rapport qui aura
+
+08:06.640 --> 08:08.880
+été fait. Donc l'objectif
+
+08:08.880 --> 08:11.280
+en fait, c'est sur des rapports existants
+
+08:11.280 --> 08:12.560
+et sur les nouveaux PDF, de pouvoir les
+
+08:12.560 --> 08:14.840
+intégrer directement dans la plateforme
+
+08:14.840 --> 08:15.760
+et d'avoir accès à toutes les
+
+08:15.760 --> 08:16.960
+informations rapidement et au même
+
+08:16.960 --> 08:18.840
+endroit. L'objectif aussi, c'est de
+
+08:18.840 --> 08:19.880
+centraliser les informations et
+
+08:19.880 --> 08:22.560
+d'automatiser les rapports. Donc de ne
+
+08:22.800 --> 08:25.440
+plus avoir des
+
+08:25.600 --> 08:28.080
+dossiers papier,
+
+08:29.120 --> 08:30.160
+mais d'avoir des
+
+08:30.320 --> 08:33.600
+dossiers
+
+08:33.600 --> 08:36.160
+sous format PDF. Et du
+
+08:36.800 --> 08:39.680
+coup d'améliorer la connaissance aussi
+
+08:39.680 --> 08:42.000
+du patrimoine pour pouvoir
+
+08:43.320 --> 08:46.160
+du coup géolocaliser le
+
+08:46.160 --> 08:47.480
+risque amiante au sein du parc immobilier
+
+08:47.480 --> 08:49.280
+et d'avoir une vision plus globale de la
+
+08:49.280 --> 08:50.720
+problématique, savoir quel type de
+
+08:50.720 --> 08:53.520
+catégorie est plus impacté par une autre,
+
+08:53.520 --> 08:54.880
+et cetera. Donc là les statistiques, on
+
+08:55.440 --> 08:58.400
+va retrouver les mêmes statistiques ici,
+
+08:58.400 --> 09:01.400
+donc là c'est
+
+09:01.400 --> 09:02.800
+un suivi global.
