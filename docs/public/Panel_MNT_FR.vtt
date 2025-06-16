@@ -1,0 +1,616 @@
+WEBVTT
+
+00:00.400 --> 00:01.600
+Je vais vous présenter le panel
+
+00:01.600 --> 00:04.161
+Terriscope MNT que j'ai eu
+
+00:04.361 --> 00:06.001
+l'occasion de développer pendant
+
+00:06.401 --> 00:09.362
+mon CDI à
+
+00:09.442 --> 00:11.842
+Soft Concept, un
+
+00:11.842 --> 00:13.722
+logiciel
+
+00:14.082 --> 00:16.963
+lyonnais spécialisé dans tout ce
+
+00:17.043 --> 00:18.803
+qui est enquêtes de satisfaction,
+
+00:18.843 --> 00:20.644
+baromètres sociaux, enquêtes RH sur tout
+
+00:20.644 --> 00:22.404
+type de support : mobile, tablette,
+
+00:23.044 --> 00:24.964
+papier et ordinateur. Alors qu'est ce que
+
+00:24.964 --> 00:27.285
+ça veut dire MNT ?MNT c'est
+
+00:27.285 --> 00:29.845
+l'équivalent de Mutuelle Nationale T
+
+00:29.965 --> 00:31.085
+erritoriale. L'idée, ça va être pour les
+
+00:31.085 --> 00:33.286
+membres de la mutuelle de pouvoir
+
+00:33.286 --> 00:34.566
+participer à des enquêtes, recevoir des
+
+00:34.566 --> 00:37.406
+cadeaux dans l'optique de leur
+
+00:37.406 --> 00:39.287
+participation à ces dernières. Alors tout
+
+00:39.287 --> 00:40.807
+d'abord, l'application a une partie
+
+00:40.807 --> 00:43.127
+back-office, donc la
+
+00:43.487 --> 00:46.448
+partie back-office, ça va être pour
+
+00:46.448 --> 00:48.848
+l'administrateur, la possibilité de
+
+00:48.848 --> 00:51.449
+pouvoir
+
+00:51.609 --> 00:54.489
+gérer du coup les panélistes, créer les
+
+00:54.489 --> 00:56.690
+enquêtes. Et pouvoir savoir celles qui
+
+00:56.690 --> 00:58.050
+vont être à venir, terminées. Donc il y a
+
+00:58.050 --> 00:59.290
+le panel en lui-même,
+
+00:59.290 --> 01:03.291
+donc
+
+01:03.291 --> 01:06.251
+un utilisateur va se connecter
+
+01:06.251 --> 01:08.412
+à son panel et avoir accès à ces
+
+01:08.492 --> 01:09.652
+informations. Il pourra, s'il a besoin,
+
+01:09.652 --> 01:11.292
+contacter le support à l'adresse
+
+01:11.532 --> 01:14.133
+ci-dessous ci-contre et enfin les
+
+01:14.133 --> 01:15.213
+enquêtes. Donc là ça va être aussi
+
+01:15.213 --> 01:17.733
+côté
+
+01:17.773 --> 01:20.494
+administrateur. Donc là, le logiciel
+
+01:20.814 --> 01:22.694
+c'est Survey Manager ou Panel Manager. En
+
+01:22.694 --> 01:24.654
+fait, Panel Manager étant la version de
+
+01:24.654 --> 01:27.575
+Survey Manager, décliné pour les panels.
+
+01:28.015 --> 01:29.295
+Donc là,
+
+01:29.615 --> 01:32.416
+par exemple,
+
+01:32.656 --> 01:34.336
+on a les formulaires qui ont été créés
+
+01:34.416 --> 01:36.937
+pour la MNT avec la possibilité de
+
+01:36.937 --> 01:38.097
+télécharger les données pour chacune
+
+01:38.097 --> 01:40.897
+d'elles. Donc là, par exemple, l'accès
+
+01:40.897 --> 01:42.097
+panel nous dirige directement vers le
+
+01:42.097 --> 01:43.738
+Panel Manager qui est ici. Les enquêtes,
+
+01:43.738 --> 01:45.218
+donc là,
+
+01:45.218 --> 01:47.338
+par
+
+01:47.778 --> 01:49.579
+exemple, on va voir les différentes
+
+01:49.579 --> 01:51.739
+enquêtes. Par exemple, Actions de
+
+01:51.739 --> 01:53.019
+prévention qui a été créée en mars. Le
+
+01:53.019 --> 01:53.659
+statut est terminée.
+
+01:55.620 --> 01:56.500
+Donc
+
+01:57.380 --> 02:00.261
+par exemple,
+
+02:01.141 --> 02:03.781
+on peut créer
+
+02:04.221 --> 02:06.542
+par exemple une nouvelle enquête. Donc si
+
+02:06.542 --> 02:09.222
+on revient, on va pouvoir choisir
+
+02:09.462 --> 02:11.062
+le nom de l'enquête, les détails, le
+
+02:11.062 --> 02:13.063
+mois, l'année, le statut de l'enquête et
+
+02:13.063 --> 02:15.943
+le visuel. Par exemple, ici, une
+
+02:15.943 --> 02:17.143
+image sur l'enquête et le rapport, le
+
+02:17.143 --> 02:19.864
+rapport qui est du coup le récapitulatif
+
+02:22.424 --> 02:25.025
+au format PDF. Donc là
+
+02:25.025 --> 02:27.945
+par exemple, on a
+
+02:27.945 --> 02:30.346
+un récapitulatif Enquête sur la
+
+02:30.346 --> 02:32.866
+prévention. Donc on a eu 33% de
+
+02:32.866 --> 02:34.386
+participation avec du coup 88,6% à savoir
+
+02:34.386 --> 02:35.627
+que les pouvoirs publics transmettent
+
+02:35.627 --> 02:37.067
+régulièrement les messages de prévention
+
+02:37.227 --> 02:38.787
+et d'autres chiffres clés. Le visuel
+
+02:38.787 --> 02:40.667
+étant ici l'image de
+
+02:41.468 --> 02:44.108
+l'enquête. Donc
+
+02:47.229 --> 02:47.789
+on peut
+
+02:50.669 --> 02:53.350
+supprimer l'enquête. On peut
+
+02:53.350 --> 02:56.150
+donc en créer d'autres et ensuite ici on
+
+02:56.150 --> 02:58.671
+va avoir accès aux enquêtes à venir. Donc
+
+02:58.671 --> 03:00.391
+là par exemple le contact téléphonique de
+
+03:00.391 --> 03:03.151
+la MNT et les enquêtes terminées. Donc
+
+03:03.151 --> 03:04.432
+l'ensemble des enquêtes avec leurs dates
+
+03:04.432 --> 03:05.832
+associées. Donc c'est toujours mois
+
+03:05.832 --> 03:06.992
+année, ça c'est
+
+03:08.512 --> 03:10.513
+ce qui est pour du back-office donc
+
+03:11.793 --> 03:13.793
+assez basique. On a montré aussi ici P
+
+03:13.793 --> 03:15.793
+anel Manager, donc là
+
+03:16.634 --> 03:18.474
+c'est tout ce qui est administration, je
+
+03:18.474 --> 03:21.154
+ne vais pas
+
+03:21.154 --> 03:22.195
+rentrer dans le détail.
+
+03:24.915 --> 03:27.796
+Donc là, ici, le portail
+
+03:28.196 --> 03:30.636
+panéliste. Donc on a des conditions
+
+03:30.636 --> 03:31.596
+générales de participation.
+
+03:31.716 --> 03:34.557
+Donc qui peut participer au
+
+03:34.557 --> 03:35.597
+panel, l'objet de l'espace dédié, les
+
+03:35.597 --> 03:37.157
+conditions d'inscription.
+
+03:37.797 --> 03:39.758
+On peut aussi
+
+03:40.038 --> 03:42.838
+avoir la
+
+03:43.038 --> 03:45.959
+possibilité de se retirer de
+
+03:46.199 --> 03:47.639
+l'espace, ne plus participer aux
+
+03:47.639 --> 03:48.919
+enquêtes, ne plus recevoir de mail, le
+
+03:49.159 --> 03:51.400
+droit à l'effacement en quelque sorte,
+
+03:51.960 --> 03:54.520
+les données personnelles,
+
+03:54.720 --> 03:57.681
+etc. Les cookies, donc tout ce qui est
+
+03:57.681 --> 03:57.801
+lié
+
+03:57.801 --> 04:01.721
+aux
+
+04:01.721 --> 04:04.682
+cookies, donc les cookies techniques, les
+
+04:04.682 --> 04:05.962
+cookies de publicité, etc. Les cookies
+
+04:06.042 --> 04:06.882
+des réseaux sociaux, les mentions
+
+04:06.882 --> 04:09.163
+légales, donc
+
+04:09.923 --> 04:12.883
+l'identification de l'éditeur, donc
+
+04:12.883 --> 04:15.044
+l'éditeur ici, ça va être la MNT, mais
+
+04:15.364 --> 04:18.044
+l'hébergeur, ça va être Soft Concept. Les
+
+04:18.044 --> 04:19.364
+différents liens, accès, responsabilités,
+
+04:19.364 --> 04:20.685
+droits applicables. et le
+
+04:20.685 --> 04:23.645
+RGPD,
+
+04:25.445 --> 04:28.206
+donc c'est
+
+04:29.166 --> 04:31.446
+lié à
+
+04:31.646 --> 04:34.287
+la protection des données
+
+04:34.287 --> 04:35.407
+personnelles. Donc
+
+04:37.407 --> 04:39.128
+on va se connecter désormais  sur le
+
+04:39.128 --> 04:42.048
+panel. Donc par exemple, là
+
+04:42.048 --> 04:44.009
+je me
+
+04:44.849 --> 04:46.289
+connecte à l'espace, donc je vais
+
+04:46.929 --> 04:49.810
+avoir accèsmon profil, je peux me
+
+04:49.810 --> 04:52.290
+déconnecter. Je peux aussi envoyer un
+
+04:52.370 --> 04:54.570
+mail au support de la MNT donc là les
+
+04:54.570 --> 04:56.131
+informations. Donc, par exemple, Monsieur
+
+04:56.211 --> 04:58.131
+Louis avec l'adresse mail né le 24
+
+04:58.131 --> 05:00.411
+novembre 1977 avec. une adresse,
+
+05:00.411 --> 05:02.052
+on peut éditer les différentes
+
+05:02.132 --> 05:03.532
+informations, renseigner le code postal,
+
+05:03.532 --> 05:06.812
+la
+
+05:06.812 --> 05:08.853
+ville, le niveau d'étude, donc c'est pour
+
+05:09.253 --> 05:10.693
+avoir des informations sur chaque
+
+05:10.693 --> 05:13.014
+panéliste. On peut aussi
+
+05:13.254 --> 05:14.694
+avoir accès à l'historique de
+
+05:14.774 --> 05:17.694
+participation, donc par exemple, à
+
+05:17.694 --> 05:19.095
+participer à l'étude VYV Avantages, donc
+
+05:19.095 --> 05:21.895
+le 19 janvier 2024, une seule étude
+
+05:22.055 --> 05:25.016
+par exemple. On peut modifier le mot de
+
+05:25.056 --> 05:27.696
+passe et on peut aussi se
+
+05:27.696 --> 05:30.617
+désinscrire du panel. Alors les bons
+
+05:30.617 --> 05:33.017
+cadeaux, donc les bons cadeaux, ça va
+
+05:33.017 --> 05:35.657
+être grâce à Glady, alors je ne sais pas
+
+05:35.657 --> 05:37.298
+si Glady ça vous parle, mais Glady c'est
+
+05:37.298 --> 05:38.938
+une plateforme qui permet de convertir la
+
+05:39.018 --> 05:41.978
+somme qu'on gagne en
+
+05:42.099 --> 05:44.499
+bons dans des enseignes au choix, donc
+
+05:44.499 --> 05:45.939
+activité, culture, maison, mode, etc.
+
+05:45.939 --> 05:48.220
+Donc là on a aperçu du site Glady. Je
+
+05:48.220 --> 05:48.820
+vous laisse faire
+
+05:48.820 --> 05:54.141
+la
+
+05:54.621 --> 05:55.821
+recherche pour plus de détails. L'idée ça
+
+05:56.381 --> 05:58.461
+va être de profiter du partenariat qui
+
+05:58.461 --> 06:00.822
+existe entre la MNT qui fait partie du
+
+06:00.862 --> 06:03.222
+groupe VYVet Glady. Donc le planning des
+
+06:03.662 --> 06:06.343
+enquêtes. Alors les enquêtes, il y a les
+
+06:06.343 --> 06:07.423
+enquêtes à venir et les enquêtes
+
+06:07.423 --> 06:10.343
+terminées, donc les enquêtes à venir, par
+
+06:10.343 --> 06:13.224
+exemple le contact
+
+06:13.224 --> 06:14.824
+téléphonique de la MNT qui aura lieu
+
+06:14.824 --> 06:17.745
+en juin 2025. Pour
+
+06:17.865 --> 06:18.985
+l'instant aucune enquête donc ça on
+
+06:18.985 --> 06:20.025
+revient à ce qu'on a pu voir tout à
+
+06:20.025 --> 06:21.625
+l'heure sur le back-office. Donc pour
+
+06:21.625 --> 06:23.066
+l'instant les enquêtes, les 2 enquêtes
+
+06:23.346 --> 06:26.186
+juillet août ne sont pas encore prêtes.
+
+06:26.186 --> 06:28.346
+Par contre celle de juin. Est prête,
+
+06:28.346 --> 06:31.027
+c'est celle en cours. Donc là
+
+06:31.347 --> 06:33.427
+par exemple, on va voir les détails de
+
+06:33.427 --> 06:35.148
+l'enquête, le titre de l'enquête, la date
+
+06:35.908 --> 06:38.228
+quand elle va avoir lieu. Donc là
+
+06:38.548 --> 06:40.388
+on a le mois de juin 2025, le numéro de
+
+06:40.388 --> 06:42.389
+la MNT, un des principaux canaux, la
+
+06:42.389 --> 06:44.549
+description de l'enquête et les enquêtes
+
+06:44.589 --> 06:47.550
+terminées. Donc là on a 3, on
+
+06:47.550 --> 06:49.590
+a les 3 enquêtes à venir, dont une
+
+06:49.670 --> 06:52.311
+en cours et 15 enquêtes terminées. Donc
+
+06:52.471 --> 06:53.791
+là, on a par exemple du coup,
+
+06:56.151 --> 06:57.671
+le magazine MNT & Vous, le détail, donc
+
+06:57.671 --> 06:59.792
+on retrouve le fameux formalisme que pour
+
+07:00.032 --> 07:00.512
+les enquêtes
+
+07:00.512 --> 07:03.312
+en
+
+07:03.632 --> 07:06.553
+cours et les résultats. Donc là,
+
+07:06.553 --> 07:08.993
+on va avoir un PDF récapitulatif avec les
+
+07:08.993 --> 07:10.074
+chiffres clés, comme on a pu le voir tout
+
+07:10.074 --> 07:12.634
+à l'heure. Et la FAQ, donc la FAQ, c'est
+
+07:12.634 --> 07:14.954
+des questions, donc là c'est
+
+07:15.635 --> 07:18.315
+la première question, donc des questions,
+
+07:18.315 --> 07:19.915
+par exemple, à quoi sert le panel
+
+07:19.915 --> 07:22.436
+Téréscope ?Qu'est-ce qu'un panel ?Un
+
+07:22.436 --> 07:23.476
+panel, c'est un groupe de personnes
+
+07:23.476 --> 07:26.676
+volontaires
+
+07:27.277 --> 07:29.077
+interrogées régulièrement sur leurs
+
+07:29.077 --> 07:30.997
+opinions ou leurs attitudes. Où dépenser
+
+07:30.997 --> 07:32.877
+mon bon cadeau ? Puis-je gagner plusieurs
+
+07:32.877 --> 07:34.358
+fois d'affilée ?Suis-je obligé de
+
+07:34.358 --> 07:36.758
+participer ?Combien de temps ai-je pour
+
+07:36.758 --> 07:38.518
+participer à l'enquête ? Généralement
+
+07:38.518 --> 07:39.679
+deux semaines, sachant qu'il y a une
+
+07:39.679 --> 07:42.279
+relance dans Panel Manager, le logiciel
+
+07:42.279 --> 07:44.319
+de couleur violette que l'on a pu voir
+
+07:44.319 --> 07:46.520
+tout à l'heure et qui est développé par
+
+07:48.840 --> 07:49.680
+Soft Concept, je
+
+07:51.881 --> 07:54.081
+le rappelle et éditeur et hébergeur.
+
+07:55.601 --> 07:58.322
+On peut se déconnecter.
