@@ -1,0 +1,628 @@
+WEBVTT
+
+00:00.360 --> 00:02.440
+This is the Japanese Cuisine Academy
+
+00:02.440 --> 00:03.960
+platfform that I had the opportunity to
+
+00:03.960 --> 00:05.760
+develop during my permanent contract at Soft
+
+00:05.760 --> 00:07.360
+Concept. The platform is a
+
+00:07.360 --> 00:10.360
+bilingual e-learning app
+
+00:10.360 --> 00:12.480
+so French, English at destination
+
+00:12.960 --> 00:15.920
+of sushi machine users
+
+00:16.000 --> 00:18.720
+that are designed by Sushi
+
+00:18.720 --> 00:21.680
+Robots. There are 4 types of profiles
+
+00:21.680 --> 00:24.240
+on the application, so Sushi Robots which
+
+00:24.240 --> 00:26.480
+will be the administrator of the
+
+00:26.480 --> 00:28.880
+training to use the machines.
+
+00:29.720 --> 00:31.360
+There will be the signs, so by
+
+00:31.360 --> 00:34.000
+Sushi Shop et cetera, the
+
+00:35.920 --> 00:37.920
+sites by brand, so for example the
+
+00:37.920 --> 00:40.400
+Sushi Shop in the Cours Vitton
+
+00:41.200 --> 00:44.160
+in Lyon and finally the last,
+
+00:44.160 --> 00:45.840
+The last profile will be the
+
+00:45.840 --> 00:47.840
+employees, i.e. employees who
+
+00:47.840 --> 00:50.240
+use machines that are trained
+
+00:52.160 --> 00:55.120
+via the platform. If I
+
+00:55.120 --> 00:57.120
+connects as Sushi Robots.
+
+01:09.840 --> 01:12.720
+So I have access to the clients, to the board
+
+01:12.720 --> 01:14.880
+and modules. So if I access
+
+01:15.280 --> 01:17.720
+to the customers, I will have the
+
+01:17.720 --> 01:18.880
+company name, so the name by
+
+01:18.880 --> 01:21.680
+example Côté Sushi, the manager email,
+
+01:21.680 --> 01:23.760
+the manager name,
+
+01:23.760 --> 01:26.240
+the maximum number of users, the maximum per
+
+01:26.240 --> 01:27.960
+institution and institution name. If
+
+01:27.960 --> 01:29.280
+for example I add a client Test
+
+01:32.480 --> 01:34.400
+I'm seeing what is
+
+01:34.400 --> 01:36.640
+mandatory, Fast Food by
+
+01:36.640 --> 01:39.040
+example. The maximum number of users
+
+01:40.080 --> 01:41.520
+by shop, then
+
+01:42.880 --> 01:43.520
+the email
+
+01:44.960 --> 01:46.560
+test@gmail.com
+
+01:47.400 --> 01:50.360
+we don't send the notification and a
+
+01:50.360 --> 01:51.840
+user ID. In fact, what is happening
+
+01:51.840 --> 01:53.840
+is that the customer, therefore,
+
+01:53.840 --> 01:55.120
+the brand will receive a code
+
+01:55.120 --> 01:57.120
+user to be able to log in
+
+01:58.160 --> 01:58.960
+to the application.
+
+02:05.840 --> 02:08.480
+So we'll be able to edit
+
+02:08.800 --> 02:11.520
+customer information. One
+
+02:13.280 --> 02:16.240
+will be able to add a establishment
+
+02:18.960 --> 02:21.640
+in this company, by
+
+02:21.640 --> 02:24.080
+example, Test Paris for example,
+
+02:24.960 --> 02:27.360
+the country, the SIRET, the address, the
+
+02:27.440 --> 02:29.520
+main information and email.
+
+02:29.520 --> 02:30.160
+Once again,
+
+02:32.560 --> 02:34.240
+we can delete
+
+02:35.520 --> 02:38.160
+the customer. And we can also
+
+02:38.720 --> 02:40.400
+list the machines that are going to be
+
+02:40.400 --> 02:42.480
+used by this brand,
+
+02:44.000 --> 02:46.400
+so the machines, the entirety
+
+02:46.960 --> 02:49.760
+of the machines from Sushi Robots
+
+02:49.760 --> 02:52.320
+that are available, therefore
+
+02:52.320 --> 02:55.240
+for example, the Oshibori machine.
+
+02:55.240 --> 02:58.080
+So here we have, an image of the
+
+02:58.080 --> 03:00.800
+machine. After that, there are
+
+03:00.800 --> 03:02.120
+different types of machines, there are the
+
+03:02.120 --> 03:03.600
+sushi machines, maki machines, et
+
+03:03.600 --> 03:06.000
+cetera. Gyosa machines,
+
+03:13.220 --> 03:15.060
+then the dashboard. In the dashboard,
+
+03:15.060 --> 03:17.860
+there will be the indicators, so
+
+03:17.860 --> 03:19.540
+there, for example, a global view of
+
+03:19.540 --> 03:22.460
+all the establishments. Therefore,
+
+03:22.460 --> 03:24.060
+we will have, for example, the possibility
+
+03:24.060 --> 03:25.900
+to extract the information in CSV, therefore
+
+03:25.900 --> 03:26.780
+the number of registrants in all the
+
+03:26.780 --> 03:28.860
+establishments (7 for instance). So there,
+
+03:28.860 --> 03:31.140
+it's going to be on the entire cost of
+
+03:31.140 --> 03:32.420
+all customers
+
+03:32.420 --> 03:34.180
+combined, the overall average scores per
+
+03:34.180 --> 03:35.940
+establishment, the distribution of
+
+03:35.940 --> 03:37.140
+registered people by institution.
+
+03:43.160 --> 03:45.480
+We're going to see the modules, so the modules.
+
+03:46.080 --> 03:48.040
+For example, the module on the ASM865 machine
+
+03:48.160 --> 03:50.720
+which is a sushi machine. The
+
+03:50.720 --> 03:52.720
+number of questions. In fact,
+
+03:52.720 --> 03:55.680
+we're actually going to be able to import a
+
+03:55.680 --> 03:57.760
+zip archive which contains the
+
+03:57.760 --> 04:00.240
+questionnaire and which, after deployment,
+
+04:00.400 --> 04:02.480
+will act as
+
+04:03.040 --> 04:03.680
+a survey.
+
+04:05.880 --> 04:07.080
+This is the subject of the module in French,
+
+04:07.080 --> 04:10.080
+English and the zip archive with
+
+04:10.080 --> 04:10.880
+the number of questions.
+
+04:13.560 --> 04:16.280
+If I log out and log in
+
+04:16.800 --> 04:19.680
+as a
+
+04:22.320 --> 04:25.120
+customer therefore a brand (for example,
+
+04:25.120 --> 04:25.280
+Sushi
+
+04:27.920 --> 04:28.160
+Shop).
+
+04:36.070 --> 04:37.990
+So, I have access to the
+
+04:37.990 --> 04:40.390
+establishments, therefore all the brands,
+
+04:40.790 --> 04:42.710
+Sushi Shop sites, the table of
+
+04:42.710 --> 04:44.670
+the indicators, the guide
+
+04:44.670 --> 04:47.200
+and contact. So the
+
+04:47.200 --> 04:49.920
+user guide,so for example there,
+
+04:49.920 --> 04:52.400
+it's going to be the JCA guide,
+
+04:53.040 --> 04:54.880
+here is Japan Food Solutions so
+
+04:54.920 --> 04:57.840
+a manual with the catalogue and
+
+04:57.920 --> 04:59.720
+use of the platform.
+
+05:01.360 --> 05:02.640
+So the establishments, there will be
+
+05:02.640 --> 05:03.480
+for example, the name of
+
+05:03.480 --> 05:04.960
+the establishment, the address, the city,
+
+05:05.080 --> 05:06.080
+same principle. So it's
+
+05:06.080 --> 05:08.320
+really hierarchical. We will be able to
+
+05:08.320 --> 05:10.720
+edit information, on
+
+05:12.400 --> 05:14.080
+will be able to add
+
+05:19.600 --> 05:20.720
+an employee.
+
+05:24.880 --> 05:25.920
+We will be able to be
+
+05:25.920 --> 05:28.480
+log in to follow the
+
+05:28.480 --> 05:30.920
+trainings. Knowing that the training,
+
+05:30.920 --> 05:32.880
+what is it going to be? It's going to be
+
+05:33.200 --> 05:35.040
+investigations. So there will be MCQs, there will be
+
+05:35.280 --> 05:37.600
+videos and there will be
+
+05:37.600 --> 05:39.840
+also images. So, we can add a
+
+05:39.840 --> 05:42.080
+establishment. There you have it, we can add
+
+05:42.080 --> 05:44.320
+a collaborator and we can delete
+
+05:44.800 --> 05:47.680
+the establishment. Then, Dashboard,
+
+05:47.680 --> 05:50.320
+we'll see the level monitoring,
+
+05:50.320 --> 05:53.040
+so we'll be able to know what
+
+05:53.040 --> 05:54.560
+collaborator got, what grade,
+
+05:56.000 --> 05:57.520
+when he participated and a recap sheet.
+
+05:59.160 --> 06:00.760
+We will have the indicators for the
+
+06:00.760 --> 06:02.160
+employee, so which employee has
+
+06:02.160 --> 06:04.400
+spent, how long, on which module and
+
+06:04.400 --> 06:06.080
+the average score he/she obtained.
+
+06:08.400 --> 06:10.960
+And the contact so we will be able to
+
+06:10.960 --> 06:13.000
+contact Sushi Robots
+
+06:14.080 --> 06:16.240
+with email address and phone number
+
+06:16.560 --> 06:17.440
+like a classic email.
+
+06:27.270 --> 06:28.470
+So now if I log in like
+
+06:28.470 --> 06:30.710
+Sushi Shop Vitton which is a site of
+
+06:30.710 --> 06:31.350
+Sushi Shop.
+
+06:39.200 --> 06:40.960
+So, now I'll be able to access
+
+06:42.000 --> 06:44.520
+to employees, to have the
+
+06:44.520 --> 06:45.200
+indicators,
+
+06:46.960 --> 06:48.120
+the user guide and the
+
+06:48.120 --> 06:50.440
+contact. So, the employees.
+
+06:50.440 --> 06:52.400
+We will see Francis
+
+06:52.400 --> 06:54.800
+Roger, Hélène Vitard, Maria Tipo with the
+
+06:54.800 --> 06:56.360
+telephone, email. One
+
+06:58.080 --> 07:00.560
+will be able to modify the
+
+07:00.560 --> 07:01.440
+information.
+
+07:03.600 --> 07:05.200
+So, each time, there is only email.
+
+07:05.200 --> 07:07.360
+It is mandatory to be able to receive
+
+07:11.920 --> 07:14.720
+so the link and we'll have to
+
+07:14.720 --> 07:16.520
+enter the code each time that is
+
+07:16.520 --> 07:18.960
+to be able to connect to the
+
+07:18.960 --> 07:21.440
+platform. So remove the
+
+07:21.440 --> 07:23.440
+collaborator :
+
+07:27.320 --> 07:28.880
+each person who is going to use
+
+07:29.720 --> 07:31.840
+the platform, which will follow the
+
+07:31.840 --> 07:34.240
+training. So there, for example, the
+
+07:34.240 --> 07:36.040
+global indicators, we will have the
+
+07:36.040 --> 07:37.680
+number of hours they have spent.
+
+07:39.280 --> 07:42.080
+So there, it's going to be really filtered
+
+07:42.080 --> 07:43.200
+on employees.
+
+07:44.880 --> 07:46.520
+After the distribution by category, then
+
+07:46.520 --> 07:48.720
+NPS (insufficient, favourable, average),
+
+07:49.040 --> 07:51.040
+distribution of tests by employee
+
+07:54.000 --> 07:56.520
+and for each module. So, we're going to
+
+07:56.520 --> 07:59.280
+to be able to filter and finally the last
+
+08:01.680 --> 08:02.960
+profile that is
+
+08:04.960 --> 08:06.840
+Francis Roger, associate at Sushi
+
+08:06.840 --> 08:08.800
+Shop Vitton. So of course it's
+
+08:08.880 --> 08:10.800
+sites, it's people. Sorry, it's
+
+08:10.800 --> 08:13.520
+fake people. Therefore,
+
+08:16.000 --> 08:17.120
+Francis Roger,
+
+08:20.800 --> 08:23.680
+there the employee will
+
+08:23.680 --> 08:25.200
+have access to its
+
+08:25.200 --> 08:28.160
+training, so as
+
+08:28.160 --> 08:30.240
+to be autonomous. The
+
+08:30.240 --> 08:32.320
+training, assess your level and have
+
+08:32.320 --> 08:34.160
+training that meets its
+
+08:34.160 --> 08:35.760
+questions. So practical and
+
+08:35.760 --> 08:37.760
+theoretical questions.
+
+08:38.480 --> 08:40.240
+So, access my training.
+
+08:41.920 --> 08:43.680
+So now I'm going to have all the
+
+08:43.680 --> 08:44.400
+machines.
+
+08:46.720 --> 08:48.920
+So there, for example, there is only one, for example,
+
+08:48.920 --> 08:50.200
+for the Sushi Shop Vitton, there will be
+
+08:50.200 --> 08:51.480
+have only this machine that is going to be
+
+08:51.480 --> 08:53.160
+selected so we'll be able to
+
+08:53.160 --> 08:54.920
+access, have a description of the
+
+08:54.920 --> 08:57.600
+machine, how run through the
+
+08:57.600 --> 08:59.480
+formation? There will be a minute, a
+
+08:59.480 --> 09:02.000
+one-minute video for introduction, 1 MCQ
+
+09:02.000 --> 09:04.840
+10-minute final, et cetera, and
+
+09:05.120 --> 09:07.920
+we will be able to access it. We show how
+
+09:12.320 --> 09:14.360
+we're going to get our feet back in the machine
+
+09:14.360 --> 09:15.080
+and in which order.
+
+09:17.960 --> 09:20.680
+And at the end, there's a little test then
+
+09:20.680 --> 09:22.840
+for example, the test is in
+
+09:22.920 --> 09:25.880
+English, I put
+
+09:25.880 --> 09:26.680
+randomly.
+
+09:31.920 --> 09:32.640
+End of the test,
+
+09:36.080 --> 09:36.720
+end of the module.
+
+09:40.560 --> 09:43.360
+After that, we have the indicators, so the
+
+09:43.360 --> 09:46.120
+how many tests,
+
+09:46.120 --> 09:47.840
+for how long, the
+
+09:47.840 --> 09:49.120
+average score obtained and the
+
+09:49.120 --> 09:50.720
+distribution of tests by month, time
+
+09:50.720 --> 09:52.480
+passed by test on each module and the
+
+09:52.480 --> 09:53.840
+scores per test.
+
+09:55.880 --> 09:56.880
+We will disconnect.

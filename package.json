@@ -7,7 +7,9 @@
     "build-desktop": "npm run uglifyjs",
     "uglifyjs": "for file in js/*.js; do terser \"$file\" --compress --mangle --output \"js/$(basename \"$file\")\"; done",
     "obfuscate": "javascript-obfuscator js/ --output js/ --compact true --control-flow-flattening true --self-defending true",
-    "changelog": "auto-changelog -p"
+    "changelog": "auto-changelog -p",
+    "list-gitignore" : "bash -c \"shopt -s nullglob; echo gitignore/*.gitignore | tr ' ' '\\n' | grep --color=always 'gitignore/~.gitignore\\|$'\"",
+    "concat-gitignore": "bash -c \"for file in gitignore/*.gitignore; do echo;cat \\\"\\$file\\\"; done > .gitignore\""
   },
   "author": "Nicolas BOGALHEIRO",
   "license": "MIT",
@@ -31,7 +33,10 @@
     "Netlify",
     "Supabase",
     "Analytics",
-    "Snyk"
+    "Snyk",
+    "Git",
+    "GitHub",
+    "GitLab"
   ],
   "dependencies": {
     "auto-changelog": "^2.5.0",

@@ -1,0 +1,628 @@
+WEBVTT
+
+00:00.360 --> 00:02.440
+Voici la plateforme Japanese Cuisine
+
+00:02.440 --> 00:03.960
+Academy que j'ai eu l'occasion de
+
+00:03.960 --> 00:05.760
+développer pendant mon CDI à Soft
+
+00:05.760 --> 00:07.360
+concept. La plateforme est une
+
+00:07.360 --> 00:10.360
+application d'e-learning bilingue
+
+00:10.360 --> 00:12.480
+donc français, anglais à destination
+
+00:12.960 --> 00:15.920
+des utilisateurs de machines
+
+00:16.000 --> 00:18.720
+à sushi qui sont conçues par Sushi R
+
+00:18.720 --> 00:21.680
+obots. Il y a 4 types de profils
+
+00:21.680 --> 00:24.240
+sur l'application, donc Sushi Robots qui
+
+00:24.240 --> 00:26.480
+va être l'administrateur des
+
+00:26.480 --> 00:28.880
+formations pour utiliser les machines.
+
+00:29.720 --> 00:31.360
+Il va y avoir les enseignes, donc par
+
+00:31.360 --> 00:34.000
+exemple Sushi Shop et cetera, les
+
+00:35.920 --> 00:37.920
+sites par enseigne, donc par exemple le S
+
+00:37.920 --> 00:40.400
+ushi Shop dans le cours Vitton
+
+00:41.200 --> 00:44.160
+à Lyon et enfin le dernier,
+
+00:44.160 --> 00:45.840
+le dernier profil, ça va être les
+
+00:45.840 --> 00:47.840
+collaborateurs, donc les employés qui
+
+00:47.840 --> 00:50.240
+utilisent les machines qui sont formés
+
+00:52.160 --> 00:55.120
+via la plateforme. Si je
+
+00:55.120 --> 00:57.120
+me connecte comme Sushi Robots.
+
+01:09.840 --> 01:12.720
+Donc j'ai accès aux clients, au tableau
+
+01:12.720 --> 01:14.880
+de bord et aux modules. Donc si j'accède
+
+01:15.280 --> 01:17.720
+aux clients, je vais avoir une les
+
+01:17.720 --> 01:18.880
+raisons sociales, donc le nom par
+
+01:18.880 --> 01:21.680
+exemple Côté Sushi, l'e mail du
+
+01:21.680 --> 01:23.760
+responsable, le nom du responsable, le
+
+01:23.760 --> 01:26.240
+maximum d'utilisateurs, le maximum par
+
+01:26.240 --> 01:27.960
+établissement et nom d'établissement. Si
+
+01:27.960 --> 01:29.280
+par exemple j'ajoute un client T
+
+01:32.480 --> 01:34.400
+est, je regarde que ce qui est
+
+01:34.400 --> 01:36.640
+obligatoire, Restauration rapide par
+
+01:36.640 --> 01:39.040
+exemple. Le nombre maximum d'utilisateurs
+
+01:40.080 --> 01:41.520
+par shop, alors
+
+01:42.880 --> 01:43.520
+l'email
+
+01:44.960 --> 01:46.560
+test@gmail.com
+
+01:47.400 --> 01:50.360
+on envoie pas la notification et un
+
+01:50.360 --> 01:51.840
+code utilisateur. En fait ce qui se
+
+01:51.840 --> 01:53.840
+passe, c'est que le client donc
+
+01:53.840 --> 01:55.120
+l'enseigne va recevoir un code
+
+01:55.120 --> 01:57.120
+utilisateur pour pouvoir se connecter
+
+01:58.160 --> 01:58.960
+à l'application.
+
+02:05.840 --> 02:08.480
+Donc on va pouvoir éditer
+
+02:08.800 --> 02:11.520
+les informations du client. On
+
+02:13.280 --> 02:16.240
+va pouvoir ajouter un établissement
+
+02:18.960 --> 02:21.640
+à cette enseigne, par
+
+02:21.640 --> 02:24.080
+exemple Test Paris par exemple,
+
+02:24.960 --> 02:27.360
+le pays, le SIRET, l'adresse, les
+
+02:27.440 --> 02:29.520
+informations principales et le mail.
+
+02:29.520 --> 02:30.160
+Encore une fois,
+
+02:32.560 --> 02:34.240
+on peut supprimer
+
+02:35.520 --> 02:38.160
+le client. Et on peut aussi
+
+02:38.720 --> 02:40.400
+lister les machines qui vont être
+
+02:40.400 --> 02:42.480
+utilisées par ce cette enseigne,
+
+02:44.000 --> 02:46.400
+donc les machines, l'intégralité
+
+02:46.960 --> 02:49.760
+des machines que peut
+
+02:49.760 --> 02:52.320
+mettre à disposition Sushi Robots, donc
+
+02:52.320 --> 02:55.240
+par exemple la machine Oshibori.
+
+02:55.240 --> 02:58.080
+Donc là on a, voilà une image de la
+
+02:58.080 --> 03:00.800
+machine. Après il y a
+
+03:00.800 --> 03:02.120
+différents types de machines, il y a les
+
+03:02.120 --> 03:03.600
+machines à sushi, les machines à maki, et
+
+03:03.600 --> 03:06.000
+cetera. Les machines à gyosa,
+
+03:13.220 --> 03:15.060
+ensuite le tableau de bord, le tableau de
+
+03:15.060 --> 03:17.860
+bord, il va y avoir les indicateurs, donc
+
+03:17.860 --> 03:19.540
+là par exemple une vue globale sur
+
+03:19.540 --> 03:22.460
+l'ensemble des établissements. Donc
+
+03:22.460 --> 03:24.060
+on va avoir, par exemple, la possibilité
+
+03:24.060 --> 03:25.900
+d'extraire en CSV les informations, donc
+
+03:25.900 --> 03:26.780
+le nombre d'inscrits dans l'ensemble des
+
+03:26.780 --> 03:28.860
+établissements (7 par exemple). Donc là
+
+03:28.860 --> 03:31.140
+ça va être sur l'intégralité du coût de
+
+03:31.140 --> 03:32.420
+tous les clients, tous les clients
+
+03:32.420 --> 03:34.180
+confondus, les scores moyens globaux par
+
+03:34.180 --> 03:35.940
+établissement, la répartition des
+
+03:35.940 --> 03:37.140
+inscrits par établissement.
+
+03:43.160 --> 03:45.480
+On va voir les modules, donc les modules.
+
+03:46.080 --> 03:48.040
+Par exemple, le module sur la machine ASM
+
+03:48.160 --> 03:50.720
+865 qui est une machine à sushi. Le
+
+03:50.720 --> 03:52.720
+sujet, le nombre de questions. En fait,
+
+03:52.720 --> 03:55.680
+on va en fait, on va pouvoir déposer une
+
+03:55.680 --> 03:57.760
+archive zip qui contient du coup le
+
+03:57.760 --> 04:00.240
+questionnaire et qui après déploiement
+
+04:00.400 --> 04:02.480
+fera office
+
+04:03.040 --> 04:03.680
+d'enquête.
+
+04:05.880 --> 04:07.080
+Voilà le sujet du module en français, en
+
+04:07.080 --> 04:10.080
+anglais et l'archive zip avec
+
+04:10.080 --> 04:10.880
+le nombre de questions.
+
+04:13.560 --> 04:16.280
+Si je me déconnecte et que je me connecte
+
+04:16.800 --> 04:19.680
+comme un
+
+04:22.320 --> 04:25.120
+client donc une enseigne (par exemple, S
+
+04:25.120 --> 04:25.280
+ushi S
+
+04:27.920 --> 04:28.160
+hop).
+
+04:36.070 --> 04:37.990
+Voilà, donc là j'ai accès aux
+
+04:37.990 --> 04:40.390
+établissements donc toutes les enseignes,
+
+04:40.790 --> 04:42.710
+les sites de Sushi Shop, le tableau de
+
+04:42.710 --> 04:44.670
+bord donc les indicateurs, le guide
+
+04:44.670 --> 04:47.200
+d'utilisation et les contacts. Alors le
+
+04:47.200 --> 04:49.920
+guide d'utilisation donc par exemple là
+
+04:49.920 --> 04:52.400
+ça va être le guide JCA donc on
+
+04:53.040 --> 04:54.880
+va avoir voilà Japan Food Solutions donc
+
+04:54.920 --> 04:57.840
+un manuel avec les le catalogue et
+
+04:57.920 --> 04:59.720
+l'utilisation de la plateforme.
+
+05:01.360 --> 05:02.640
+Donc les établissements, il va y avoir
+
+05:02.640 --> 05:03.480
+par exemple, voilà le nom de
+
+05:03.480 --> 05:04.960
+l'établissement, l'adresse, la ville,
+
+05:05.080 --> 05:06.080
+tout le même principe. Donc c'est
+
+05:06.080 --> 05:08.320
+vraiment hiérarchisé. On va pouvoir
+
+05:08.320 --> 05:10.720
+modifier les informations, on
+
+05:12.400 --> 05:14.080
+va pouvoir ajouter
+
+05:19.600 --> 05:20.720
+un collaborateur.
+
+05:24.880 --> 05:25.920
+On va pouvoir se
+
+05:25.920 --> 05:28.480
+connecter pour suivre les
+
+05:28.480 --> 05:30.920
+formations. Sachant que les formations,
+
+05:30.920 --> 05:32.880
+ça va être quoi ? Ça va être des
+
+05:33.200 --> 05:35.040
+enquêtes. Alors il va y avoir des QCM, il
+
+05:35.280 --> 05:37.600
+va y avoir des vidéos et il va y avoir
+
+05:37.600 --> 05:39.840
+aussi des images. Donc on peut ajouter un
+
+05:39.840 --> 05:42.080
+établissement. Là voilà, on peut ajouter
+
+05:42.080 --> 05:44.320
+un collaborateur et on peut supprimer
+
+05:44.800 --> 05:47.680
+l'établissement. Alors Tableau de
+
+05:47.680 --> 05:50.320
+bord, on va voir les suivis de niveau,
+
+05:50.320 --> 05:53.040
+donc on va pouvoir savoir quel
+
+05:53.040 --> 05:54.560
+collaborateur a eu quelle note,
+
+05:56.000 --> 05:57.520
+quand il a participé et une fiche.
+
+05:59.160 --> 06:00.760
+On va avoir les indicateurs pour le
+
+06:00.760 --> 06:02.160
+collaborateur, donc quel collaborateur a
+
+06:02.160 --> 06:04.400
+passé combien de temps sur quel module et
+
+06:04.400 --> 06:06.080
+le score moyen qu'il a obtenu. E
+
+06:08.400 --> 06:10.960
+t le contact donc on va pouvoir
+
+06:10.960 --> 06:13.000
+contacter Sushi Robots
+
+06:14.080 --> 06:16.240
+avec l'adresse mail et le téléphone
+
+06:16.560 --> 06:17.440
+comme un mail classique.
+
+06:27.270 --> 06:28.470
+Donc maintenant, si je me connecte comme S
+
+06:28.470 --> 06:30.710
+ushi Shop Vitton qui est un site de S
+
+06:30.710 --> 06:31.350
+ushi Shop.
+
+06:39.200 --> 06:40.960
+Donc, là je vais pouvoir accéder
+
+06:42.000 --> 06:44.520
+aux collaborateurs, avoir les
+
+06:44.520 --> 06:45.200
+indicateurs
+
+06:46.960 --> 06:48.120
+, le guide d'utilisation et le
+
+06:48.120 --> 06:50.440
+contact. Alors, les collaborateurs.
+
+06:50.440 --> 06:52.400
+On va voir par exemple Francis
+
+06:52.400 --> 06:54.800
+Roger, Helene Vitard, Maria Tipo avec le
+
+06:54.800 --> 06:56.360
+téléphone, le mail. On
+
+06:58.080 --> 07:00.560
+va pouvoir du coup modifier les
+
+07:00.560 --> 07:01.440
+informations.
+
+07:03.600 --> 07:05.200
+Donc, à chaque fois, il y a que le mail.
+
+07:05.200 --> 07:07.360
+C'est obligatoire pour pouvoir recevoir
+
+07:11.920 --> 07:14.720
+donc le lien et on va devoir
+
+07:14.720 --> 07:16.520
+renseigner le code à chaque fois qui est
+
+07:16.520 --> 07:18.960
+donné pour pouvoir se connecter à la
+
+07:18.960 --> 07:21.440
+plateforme. Donc supprimer le
+
+07:21.440 --> 07:23.440
+collaborateur. Le tableau de bord de
+
+07:27.320 --> 07:28.880
+chaque personne qui va utiliser
+
+07:29.720 --> 07:31.840
+la plateforme, enfin qui va suivre les
+
+07:31.840 --> 07:34.240
+formations. Donc là, par exemple, les
+
+07:34.240 --> 07:36.040
+indicateurs globaux, on va avoir le
+
+07:36.040 --> 07:37.680
+nombre d'heures qu' ils ont passé.
+
+07:39.280 --> 07:42.080
+Donc là, ça va être vraiment filtré
+
+07:42.080 --> 07:43.200
+sur les employés.
+
+07:44.880 --> 07:46.520
+Après la répartition par catégorie, donc
+
+07:46.520 --> 07:48.720
+le NPS (insuffisant, passable, favorable),
+
+07:49.040 --> 07:51.040
+la répartition des tests par collaborateur
+
+07:54.000 --> 07:56.520
+et pour chaque module. Du coup, on va
+
+07:56.520 --> 07:59.280
+pouvoir filtrer et enfin le dernier
+
+08:01.680 --> 08:02.960
+profil qui est
+
+08:04.960 --> 08:06.840
+Francis Roger, collaborateur chez Sushi Sh
+
+08:06.840 --> 08:08.800
+op Vitton. Alors bien sûr c'est des
+
+08:08.880 --> 08:10.800
+sites, c'est des personnes. Pardon, c'est
+
+08:10.800 --> 08:13.520
+des personnes factices. Donc
+
+08:16.000 --> 08:17.120
+Francis Roger,
+
+08:20.800 --> 08:23.680
+là le collaborateur va se
+
+08:23.680 --> 08:25.200
+connecter et va avoir accès à ses
+
+08:25.200 --> 08:28.160
+formations, donc c'est
+
+08:28.160 --> 08:30.240
+pour pouvoir être autonome. Les
+
+08:30.240 --> 08:32.320
+formations, évaluer son niveau et avoir
+
+08:32.320 --> 08:34.160
+des formations qui répondent à ses
+
+08:34.160 --> 08:35.760
+questions. Donc questions pratiques et
+
+08:35.760 --> 08:37.760
+questions théoriques.
+
+08:38.480 --> 08:40.240
+Donc, accéder à mes formations.
+
+08:41.920 --> 08:43.680
+Donc là je vais avoir l'ensemble des
+
+08:43.680 --> 08:44.400
+machines.
+
+08:46.720 --> 08:48.920
+Donc là par exemple il y a que pour, par
+
+08:48.920 --> 08:50.200
+exemple le Sushi Shop Vitton, il va y
+
+08:50.200 --> 08:51.480
+avoir que cette machine qui va être
+
+08:51.480 --> 08:53.160
+sélectionnée donc on va pouvoir y
+
+08:53.160 --> 08:54.920
+accéder, avoir une description de la
+
+08:54.920 --> 08:57.600
+machine, comment va se dérouler la
+
+08:57.600 --> 08:59.480
+formation ? Il va y avoir une minute, une
+
+08:59.480 --> 09:02.000
+vidéo d'introduction d'une minute, 1 QCM
+
+09:02.000 --> 09:04.840
+final de 10 minutes, et cetera, et
+
+09:05.120 --> 09:07.920
+on va pouvoir y accéder. On montrecomment
+
+09:12.320 --> 09:14.360
+on va remettre les pieds dans la machine
+
+09:14.360 --> 09:15.080
+et sous quel ordre.
+
+09:17.960 --> 09:20.680
+Et à la fin, il y a un petit test alors
+
+09:20.680 --> 09:22.840
+par exemple, alors là, le test est en
+
+09:22.920 --> 09:25.880
+anglais par exemple, je mets
+
+09:25.880 --> 09:26.680
+au hasard.
+
+09:31.920 --> 09:32.640
+Fin du test,
+
+09:36.080 --> 09:36.720
+fin du module.
+
+09:40.560 --> 09:43.360
+Après, on avoir les indicateurs, donc les
+
+09:43.360 --> 09:46.120
+tests, combien on a
+
+09:46.120 --> 09:47.840
+passé de tests, combien de temps, le
+
+09:47.840 --> 09:49.120
+score moyen qu'on a obtenu et la
+
+09:49.120 --> 09:50.720
+répartition des tests par mois, le temps
+
+09:50.720 --> 09:52.480
+passé par test sur chaque module et les
+
+09:52.480 --> 09:53.840
+notes par test. On
+
+09:55.880 --> 09:56.880
+va pouvoir se déconnecter.

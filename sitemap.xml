@@ -186,6 +186,30 @@
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
+	<url>
+        <loc>https://nicoboga.netlify.app/en/jca_sushirobots</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/fr/jca_sushirobots</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/en/jca_sushirobots/</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/fr/jca_sushirobots/</loc>
+        <lastmod>2025-06-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
     <!-- 404 page -->
     <url>
         <loc>https://nicoboga.netlify.app/404</loc>

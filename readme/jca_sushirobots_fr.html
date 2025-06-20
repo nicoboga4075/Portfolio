@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+	  <title>Portfolio - JCA Sushi Robots</title>
+	  <meta charset="utf-8">
+	  <meta name="google" content="notranslate">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <meta http-equiv="Content-Language" content="fr_FR">
+      <meta name="author" content="Nicolas BOGALHEIRO">
+      <meta name="theme-color" content="#ffffff">
+      <link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+	  <base href="../../">
+      <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+      <link rel="manifest" href="site.webmanifest">
+	  <link rel="stylesheet" href="css/default.css">
+	  <script src="js/default.js"></script>
+	</head>
+	<body onload="initArticle()">
+	  <div class="read-title">
+			<h1>🖥️ JCA Sushi Robots</h1>
+			<div class="language-switch d-flex align-items-center justify-content-center">
+				<span class="lang-text">EN</span>
+				<label class="toggle-container">
+				   <input id="language-toggle" type="checkbox">
+				   <span class="toggle-slider"></span>
+				</label>
+				<span class="lang-text on">FR</span>
+		    </div>
+	  </div>
+	  <div class="video-wrapper">
+		  <video controls>
+			  <track label="Français" kind="subtitles" srclang="fr" src="docs/public/JCA_SushiRobots_FR.vtt">
+			  <track label="English" kind="subtitles" srclang="en" src="docs/public/JCA_SushiRobots_EN.vtt">
+			  <source src="docs/public/JCA_SushiRobots.mp4" type="video/mp4">
+		  </video>
+	  </div>
+	  <p><strong>Plateforme d'e-learning développée pendant 6 mois</strong> pour <a target="_blank" href="https://sushi-robots.eu">Sushi Robots</a>, en CDI chez <a target="_blank" href="https://www.soft-concept.com">Soft Concept</a></p>
+	  <h2>📝 Présentation</h2>
+	  <p>L'application (Japanese Cuisine Academy) a pour but de former les utilisateurs de machines à sushi via des modules interactifs.</p>
+	  <h2>🛠️ Technologies utilisées</h2>
+	  <ul>
+		<li><strong>C#, HTML, CSS, JavaScript</strong></li>
+		<li>Outils internes :
+		  <ul>
+			<li><a target="_blank" href="https://www.soft-concept.com/logiciel-enquete-en-ligne-web-on-line-net-survey.html">Net-Survey</a> : création de questionnaires</li>
+			<li><a target="_blank" href="https://www.soft-concept.com/logiciel-traitement-enquetes-ethnos.html">Ethnos</a> : analyse de données collectées</li>
+			<li><a target="_blank" href="https://www.soft-concept.com/logiciel-reporting-resultats-enquete-en-ligne-web-reports.html">Web Reports</a> : développement et déploiement applicatif</li>
+		  </ul>
+		</li>
+	  </ul>
+	  <h2>🗂️ Structure de l’application</h2>
+		  <h3>👨‍💼 Profil Administrateur (Sushi Robots)</h3>
+		  <ul>
+			  <li>👥 <strong>Clients</strong> : gestion des enseignes</li>
+			  <li>📊 <strong>Tableau de bord</strong> : vue globale sur l’activité de tous les clients</li>
+			  <li>🎓 <strong>Modules</strong> : création et gestion des formations (QCM, vidéos, images)</li>
+		  </ul>
+		  <h3>🏢 Profil Client (ex : Sushi Shop)</h3>
+		  <ul>
+			  <li>🏬 <strong>Établissements</strong> : gestion des restaurants</li>
+			  <li>📊 <strong>Tableau de bord</strong> : indicateurs sur les établissements</li>
+			  <li>📖 <strong>Guide d’utilisation</strong> : documentation et catalogue machine</li>
+			  <li>📧 <strong>Contact</strong> : support de Sushi Robots</li>
+		  </ul>
+		  <h3>🍽️ Profil Établissement (ex : Sushi Shop Vitton)</h3>
+		  <ul>
+			  <li>👤 <strong>Collaborateurs</strong> : gestion des employés</li>
+			  <li>📊 <strong>Tableau de bord</strong> : suivi des scores et progression des collaborateurs</li>
+			  <li>📖 <strong>Guide d’utilisation</strong> : documentation et catalogue machine</li>
+			  <li>📧 <strong>Contact</strong> : support de Sushi Robots</li>
+		  </ul>
+		  <h3>👩‍🍳 Profil Collaborateur</h3>
+		  <ul>
+			  <li>🎓 <strong>Modules</strong> : Consultation des modules de formation attribués, réalisation de QCM notés</li>
+			  <li>📊 <strong>Tableau de bord</strong> : suivi personnel de progression</li>
+		      <li>📖 <strong>Guide d’utilisation</strong> : documentation et catalogue machine</li>
+		  </ul>
+	  <h2>⚙️ Fonctionnalités complémentaires</h2>
+	  <ul>
+		  <li>🌐 Interface bilingue (FR / EN)</li>
+		  <li>🔐 Gestion des droits d'accès (hiérarchie à 4 niveaux)</li>
+		  <li>🛠️ Affectation des machines et des formations</li>
+	  </ul>
+	  <h2>📈 Utilisation</h2>
+	  <ul>
+		<li>👉 Formation en ligne pour les utilisateurs de machines à sushi</li>
+		<li>👉 Suivi des performances par enseigne, établissement et collaborateur</li>
+		<li>👉 Contenus modulables et mis à jour via des archives ZIP</li>
+	  </ul>
+	  <hr />
+	  <p>©Soft Concept 2023</p>
+	  <a id="index">Retour à l'accueil</a>
+	</body>
+</html>

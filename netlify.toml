@@ -215,6 +215,22 @@
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
 	path = "en/panel_mnt/"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/jca_sushirobots"
+  
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/jca_sushirobots/"
+
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/jca_sushirobots"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/jca_sushirobots/"
 
 [[redirects]]
   from = "/en"
@@ -284,4 +300,14 @@
 [[redirects]]
   from = "/fr/panel_mnt"
   to = "/readme/panel_mnt_fr.html"
+  status = 200
+  
+[[redirects]]
+  from = "/en/jca_sushirobots"
+  to = "/readme/jca_sushirobots_en.html"
+  status = 200
+
+[[redirects]]
+  from = "/fr/jca_sushirobots"
+  to = "/readme/jca_sushirobots_fr.html"
   status = 200
