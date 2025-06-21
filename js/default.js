@@ -74,6 +74,7 @@ function loadImages(selector, extension, one = false) {
 
 function initArticle() {
 	loadImages('.articleImage','png');
+	loadImages('.icon.svg','svg');
 	initTranslator();
 	addHomeRedirect();
 	document.body.classList.add('read-zone','visible');
@@ -83,6 +84,7 @@ function initPage() {
 	navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
 	.then(reg => console.log('Service Worker registered:', reg.scope))
 	.catch(err => console.error('Service Worker registration failed:', err));
+	loadImages('.icon.svg','svg');
 	initTranslator();
 	addHomeRedirect();
 	const idPage = getCurrentRoute();

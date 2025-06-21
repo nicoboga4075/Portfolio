@@ -625,6 +625,7 @@ AOS.init({
 
 function initArticle() {
 	loadImages('.articleImage','png');
+	loadImages('.icon.svg','svg');
 }
 
 function initCarousel(target) {

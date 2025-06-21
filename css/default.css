@@ -157,3 +157,61 @@ a {
 	width: 100%;
 	height: 100%;
 }
+
+/* 404 */
+
+#astronaut {
+	position: absolute;
+	top: 50%;
+	right: 15%;
+	animation: rotate-astronaut 200s infinite linear both alternate;
+	width: 70px;
+}
+
+#earth {
+	position: absolute;
+	top: 50%;
+	left: 25%;
+	width: 200px;
+}
+
+#moon {
+	position: absolute;
+	top: 30%;
+	left: 15%;
+	width: 100px;
+}
+
+#rocket {
+	position: absolute;
+	transform: translateX(-50px);
+	top: 75%;
+	pointer-events: none;
+	animation: rocket-movement 200s linear infinite both running;
+	width: 100px;
+	z-index: 1;
+}
+
+@-moz-keyframes rotate-astronaut {
+	100% { -moz-transform: rotate(-720deg);}
+}
+
+@-webkit-keyframes rotate-astronaut {
+	100% { -webkit-transform: rotate(-720deg);}
+}
+
+@keyframes rotate-astronaut {
+	100% { -webkit-transform: rotate(-720deg); transform:rotate(-720deg);}
+}
+
+@-moz-keyframes rocket-movement { 
+	100% { -moz-transform: translate(400px,-100px);} 
+}
+
+@-webkit-keyframes rocket-movement {
+	100% { -webkit-transform: translate(400px,-100px);} 
+}
+
+@keyframes rocket-movement { 
+	100% { transform: translate(400px,-100px);} 
+}
