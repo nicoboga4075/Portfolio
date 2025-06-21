@@ -1,0 +1,700 @@
+WEBVTT
+
+00:00.720 --> 00:02.600
+Je vais vous présenter la plateforme REF
+
+00:02.600 --> 00:04.480
+230 que j'ai eu l'occasion de développer
+
+00:04.480 --> 00:07.040
+pendant 2 ans , en CDI à Soft Concept.
+
+00:07.240 --> 00:09.480
+REF230 est une certification pour un
+
+00:09.480 --> 00:11.600
+engagement de service de qualité en
+
+00:11.600 --> 00:14.400
+optique délivrée par l'AFNOR. Il y a
+
+00:14.400 --> 00:16.000
+3 types de profils sur l'application :
+
+00:16.880 --> 00:18.880
+donc les chargés de clientèle, les
+
+00:18.880 --> 00:21.280
+prestataires (Vitalis et Présence)
+
+00:21.520 --> 00:24.120
+et les enseignes (Lissac, Krys, et
+
+00:24.120 --> 00:26.720
+cetera). L'AFNOR et les
+
+00:26.800 --> 00:29.440
+enseignes vont avoir les mêmes menus.
+
+00:30.080 --> 00:31.760
+Sauf que pour les enseignes, ça va être
+
+00:31.760 --> 00:34.640
+filtré sur les opticiens et les enseignes
+
+00:34.640 --> 00:36.880
+verront les informations, les fiches
+
+00:37.040 --> 00:39.880
+signalétiques en lecture seule. Donc, ici
+
+00:39.880 --> 00:41.680
+la page de login. Si je me connecte comme
+
+00:41.760 --> 00:44.400
+AFNOR, donc comme un chargé de
+
+00:44.480 --> 00:46.240
+clientèle, je vais avoir accès aux
+
+00:46.240 --> 00:48.520
+magasins, aux planifications, aux audits
+
+00:48.960 --> 00:51.240
+et au reporting, alors que pour
+
+00:51.240 --> 00:53.600
+prestataires je vais me retrouver avec A
+
+00:53.920 --> 00:56.560
+udits, Archive, Export Excel.
+
+00:56.800 --> 00:59.200
+Alors pour l'AFNOR, l'AFNOR peut, en tant
+
+00:59.200 --> 01:01.040
+qu'administrateur, définir la liste des
+
+01:01.040 --> 01:02.800
+TC, donc les chargés de clientèle et des
+
+01:02.800 --> 01:05.760
+enseignes, le suivi des mails. Donc
+
+01:05.760 --> 01:07.120
+les magasins. Il y a 2 types de
+
+01:07.120 --> 01:09.120
+magasins : les magasins certifiés et les
+
+01:09.120 --> 01:10.160
+nouveaux magasins. Les magasins
+
+01:10.160 --> 01:11.440
+certifiés, c'est des magasins qui ont
+
+01:11.440 --> 01:13.880
+déjà eu la certification REF230 dans le
+
+01:13.880 --> 01:16.640
+passé. Alors je précise, ici on a une
+
+01:16.640 --> 01:18.960
+version REF. En fait on a 2
+
+01:18.960 --> 01:21.360
+applications, une qui est pour le
+
+01:21.360 --> 01:23.040
+référentiel version 2 et une autre pour
+
+01:23.040 --> 01:25.600
+la version 3. Ici je ne présente que la
+
+01:25.600 --> 01:27.760
+version 2. Donc magasins certifiés et
+
+01:27.760 --> 01:30.160
+nouveaux magasins. Pour un magasin
+
+01:30.160 --> 01:32.400
+on va avoir une raison sociale, le nom
+
+01:32.640 --> 01:34.960
+du TC, un numéro de certificat, une date
+
+01:34.960 --> 01:37.360
+de fin de validité de la certification,
+
+01:37.720 --> 01:39.600
+la version comme mentionnée et les
+
+01:39.880 --> 01:40.720
+différentes actions comme précédemment.
+
+01:42.400 --> 01:43.800
+Ce sont les mêmes pour magasins certifiés
+
+01:43.800 --> 01:45.560
+et nouveaux magasins. Nouveaux magasins,
+
+01:45.600 --> 01:47.280
+étant les magasins qui n'ont pas reçu
+
+01:47.280 --> 01:50.080
+encore la certification. Donc, on peut
+
+01:50.080 --> 01:52.720
+laisser des commentaires sur le
+
+01:52.720 --> 01:55.520
+magasin. On peut modifier la
+
+01:55.520 --> 01:57.840
+fiche du magasin, on peut aussi importer
+
+01:57.840 --> 02:00.080
+les fichiers, on peut renseigner le
+
+02:00.080 --> 02:02.440
+chargé de clientèle de l'AFNOR, on peut
+
+02:02.440 --> 02:05.200
+supprimer le magasin et on peut lancer le
+
+02:05.200 --> 02:07.320
+processus optique. Donc on a également
+
+02:07.320 --> 02:09.120
+des filtres et on peut filtrer par
+
+02:09.120 --> 02:10.800
+l'enseigne, donc par exemple Krys, le
+
+02:10.800 --> 02:13.520
+numéro de dossier, le TC (chargé de
+
+02:13.520 --> 02:14.520
+clientèle) et d'autres
+
+02:14.520 --> 02:16.560
+informations : des filtres avancés (code
+
+02:16.560 --> 02:18.720
+postal, effectif, statut, et cetera,
+
+02:19.200 --> 02:21.080
+engagement 16 17, situation juridique).
+
+02:21.080 --> 02:23.920
+Et on peut aussi du coup sélectionner
+
+02:24.240 --> 02:26.400
+un magasin à la fois. On peut aussi
+
+02:26.400 --> 02:27.680
+lancer plusieurs process en même temps,
+
+02:27.680 --> 02:29.680
+donc on va pouvoir sélectionner
+
+02:29.920 --> 02:32.680
+l'intégralité et cliquer ici pour lancer
+
+02:32.680 --> 02:34.560
+les process optique.  Là, on va faire
+
+02:34.560 --> 02:37.280
+pour un exemple, donc un seul magasin. Il
+
+02:37.280 --> 02:39.000
+va d'abord être nouveau magasin puisqu'il
+
+02:39.000 --> 02:40.880
+n'a pas été certifié à priori. Donc
+
+02:41.560 --> 02:44.400
+on va dans nouveau magasin et on
+
+02:44.400 --> 02:45.120
+va l'ajouter.
+
+02:47.040 --> 02:48.280
+Donc "Test",
+
+02:50.080 --> 02:52.880
+le numéro de FINESS, le type de magasin (
+
+02:52.880 --> 02:53.840
+franchisé ou indépendant).
+
+02:55.400 --> 02:57.520
+On peut renseigner l'effectif du magasin,
+
+02:57.520 --> 03:00.440
+donc par exemple, si on met un employé,
+
+03:00.440 --> 03:02.920
+on va pouvoir renseigner un employé
+
+03:02.920 --> 03:05.800
+ici, donc par
+
+03:06.240 --> 03:07.280
+exemple Roger Federer.
+
+03:08.880 --> 03:09.680
+Fonction ;
+
+03:11.280 --> 03:14.080
+opticien, intitulé des diplômes avec
+
+03:14.080 --> 03:15.440
+l'université, année, nombre d'heures par
+
+03:15.440 --> 03:18.080
+semaine, 35 heures.
+
+03:19.720 --> 03:21.600
+On ne peut pas rajouter d'autres
+
+03:22.000 --> 03:24.120
+puisqu'on a renseigné une personne. On
+
+03:24.120 --> 03:24.400
+revient.
+
+03:27.000 --> 03:29.120
+La ville, Paris par exemple,
+
+03:29.680 --> 03:31.280
+l'email du magasin, je vais mettre mon
+
+03:31.600 --> 03:34.320
+email, on va voir qu'on va recevoir un
+
+03:34.320 --> 03:36.800
+mail au cours du process.
+
+03:38.240 --> 03:40.120
+Après la liste des établissements, les
+
+03:40.120 --> 03:42.040
+horaires d'ouverture du magasin, les
+
+03:42.040 --> 03:44.920
+éventuelles indisponibilités, les
+
+03:44.960 --> 03:46.800
+engagements, les prestations, etc.
+
+03:58.160 --> 04:00.040
+Donc le magasin a bien été ajouté, il est
+
+04:00.040 --> 04:02.520
+ici. Donc
+
+04:02.520 --> 04:05.200
+on va pouvoir à tout moment remodifier la
+
+04:05.200 --> 04:07.400
+fiche magasin, importer des fiches. Là,
+
+04:07.400 --> 04:09.480
+on va rajouter un chargé de clientèle.
+
+04:09.600 --> 04:12.400
+Voilà je valide. Donc je vais
+
+04:12.400 --> 04:14.880
+pouvoir lancer le process optique. Là,
+
+04:15.280 --> 04:16.240
+il est passé
+
+04:18.400 --> 04:20.760
+dans Planification, à traiter. Donc
+
+04:20.800 --> 04:23.120
+on va avoir des dates qui ont été
+
+04:23.120 --> 04:25.440
+auto renseignées
+
+04:26.000 --> 04:28.720
+selon les calculs. On
+
+04:28.960 --> 04:31.840
+va pouvoir filtrer. Il y a
+
+04:31.840 --> 04:34.720
+déjà le filtre Test sur le test. Si
+
+04:35.600 --> 04:38.000
+on enlève, on peut
+
+04:38.480 --> 04:40.480
+tous les avoir. On peut exporter en
+
+04:40.480 --> 04:43.320
+Excel, exporter en PDF.
+
+04:43.320 --> 04:45.200
+On peut aussi filtrer sur les enseignes
+
+04:45.200 --> 04:47.840
+vides. Donc on peut marquer comme lu ou
+
+04:47.840 --> 04:50.480
+non lu, comme sur Outlook par exemple.
+
+04:50.480 --> 04:52.560
+Sur la messagerie, on va pouvoir laisser
+
+04:52.560 --> 04:55.040
+des commentaires sur la prestation. On va
+
+04:55.040 --> 04:56.480
+pouvoir modifier la période d'audit qui
+
+04:56.480 --> 04:58.240
+est programmée parce que là on voit qu'il
+
+04:58.240 --> 05:00.440
+y a des dates théoriques, les dates
+
+05:00.440 --> 05:02.640
+programmées qui pourront éventuellement
+
+05:02.640 --> 05:04.560
+changer, modifier la fiche magasin,
+
+05:05.760 --> 05:07.760
+télécharger la fiche signalétique ou
+
+05:07.760 --> 05:10.160
+importer des fichiers. Pour pouvoir faire
+
+05:10.160 --> 05:13.120
+une demande de candidature, ce qui va se
+
+05:13.120 --> 05:15.840
+passer, c'est que l'opticien va
+
+05:15.840 --> 05:17.720
+devoir renseigner des informations pour
+
+05:18.200 --> 05:20.200
+compléter sa fiche magasin. On va pouvoir
+
+05:20.200 --> 05:22.240
+sauter l'étape si la fiche est déjà
+
+05:22.400 --> 05:24.920
+remplie correctement. Par exemple si je
+
+05:24.920 --> 05:26.960
+fais une demande de candidature.
+
+05:28.800 --> 05:30.640
+En fait je vais envoyer un mail à
+
+05:30.640 --> 05:32.720
+l'opticien entre autre à mon adresse
+
+05:32.960 --> 05:34.440
+puisque c'est celle que j'ai renseignée
+
+05:34.440 --> 05:36.280
+lors de la création du magasin "Test".
+
+05:43.770 --> 05:46.530
+Donc là, le mail est auto
+
+05:47.730 --> 05:50.690
+créé, le modèle validé.
+
+05:52.210 --> 05:54.530
+Il a bien été envoyé à Test donc là il
+
+05:54.530 --> 05:56.290
+est passé dans Envoyés
+
+05:57.410 --> 05:58.610
+ici.
+
+06:03.080 --> 06:05.600
+De mon côté, j'ai reçu un mail
+
+06:06.240 --> 06:08.040
+pour le dossier de candidature à
+
+06:08.040 --> 06:10.920
+renseigner, le mode d'emploi pour remplir
+
+06:10.920 --> 06:13.120
+le dossier de candidature dématérialisé,
+
+06:13.600 --> 06:16.240
+remplir la fiche signalétique. Je dois
+
+06:16.240 --> 06:17.920
+remplir les éventuelles informations que
+
+06:17.920 --> 06:19.800
+je n'aurais pas mentionnées ou remplir
+
+06:19.800 --> 06:22.440
+les documents qui me sont demandés.
+
+06:23.360 --> 06:25.800
+Par exemple, on va avoir une lettre
+
+06:25.800 --> 06:27.520
+d'engagement, un extrait K-bis, une
+
+06:27.600 --> 06:29.040
+attestation d'agrément de sécurité
+
+06:29.040 --> 06:31.360
+sociale, l'attestation d'ADELI, etc.
+
+06:32.320 --> 06:35.200
+Donc on va supposer qu'il a déjà
+
+06:35.200 --> 06:37.600
+rempli correctement ce qu'il fallait. On
+
+06:37.600 --> 06:38.880
+peut éventuellement relancer l'opticien
+
+06:38.880 --> 06:41.440
+s'il n'a pas répondu. On peut
+
+06:41.440 --> 06:42.800
+aussi suspendre à tout moment la
+
+06:42.800 --> 06:44.200
+candidature ou la supprimer. Elle se
+
+06:44.200 --> 06:46.440
+retrouvera dans les onglets ici :
+
+06:46.440 --> 06:48.240
+Suspendus et Supprimés. On peut aussi
+
+06:48.240 --> 06:49.280
+sauter l'étape. Donc c'est ce qu'on va
+
+06:49.280 --> 06:51.280
+faire en fait. On va partir du principe
+
+06:51.280 --> 06:53.440
+que l'opticien a bien rempli sa fichier
+
+06:53.440 --> 06:54.640
+signalétique déjà auparavant.
+
+06:58.240 --> 06:59.680
+Sinon effectivement, il faut qu'il aille
+
+06:59.680 --> 07:01.120
+jusqu'au bout du process dans le mail.
+
+07:04.160 --> 07:06.920
+Donc elle est désormais validée, elle se
+
+07:06.920 --> 07:09.600
+retrouve ici. Donc là on peut modifier
+
+07:09.600 --> 07:11.360
+la période, la date de période d'audit
+
+07:11.680 --> 07:14.040
+programmée, on peut demander des
+
+07:14.040 --> 07:16.200
+compléments après coup, on peut avertir
+
+07:16.200 --> 07:18.960
+l'opticien qu'on va valider sa
+
+07:18.960 --> 07:21.600
+demande ou on peut sauter
+
+07:21.680 --> 07:24.480
+l'étape sans le notifier, donc le
+
+07:24.480 --> 07:27.040
+mettre directement à Demandes d'audit mais
+
+07:27.040 --> 07:29.560
+sans mail. On peut éventuellement
+
+07:29.560 --> 07:31.280
+renseigner les indisponibilités et après
+
+07:31.280 --> 07:33.200
+c'est les mêmes actions que précédemment.
+
+07:33.840 --> 07:36.320
+Donc ce qu'on va faire c'est qu'on va
+
+07:37.040 --> 07:38.800
+valider et avertir l'opticien.
+
+07:41.440 --> 07:43.520
+Donc là je vais recevoir un nouveau mail.
+
+07:47.440 --> 07:50.080
+Là, c'est dans Demandes d'audit. 
+
+07:50.800 --> 07:53.560
+No Reply : recevabilité de la candidature.
+
+07:53.560 --> 07:56.320
+Je reçois bien le mail.
+
+07:56.760 --> 07:58.880
+Si la date nous convient toujours, on va
+
+07:58.880 --> 08:01.600
+devoir renseigner le prestataire donc
+
+08:01.600 --> 08:03.760
+soit Vitalis soit Présence .
+
+08:05.480 --> 08:08.080
+On va mettre Vitalis. Donc
+
+08:08.080 --> 08:10.640
+d'abord il faut valider
+
+08:11.160 --> 08:13.040
+la demande d'audit pour que
+
+08:14.720 --> 08:17.160
+le prestataire puisse avoir accès.
+
+08:18.440 --> 08:20.480
+On est toujours en planification, je le
+
+08:20.560 --> 08:23.480
+rappelle. Une fois la demande
+
+08:23.480 --> 08:25.120
+d'audit faite, en fait ça va passer dans
+
+08:25.120 --> 08:27.600
+Audits. Par souci de confidentialité, je ne
+
+08:27.680 --> 08:29.040
+présenterai pas la partie
+
+08:29.920 --> 08:32.080
+prestataire. Mais l'idée c'est que le
+
+08:32.080 --> 08:34.800
+prestataire va pouvoir, avec son outil
+
+08:34.800 --> 08:37.600
+interne et la plateforme,
+
+08:38.720 --> 08:41.520
+renseigner des informations sur l'audit,
+
+08:41.760 --> 08:44.080
+renseigner les fiches de
+
+08:44.120 --> 08:47.000
+non-conformité et ensuite tout le process
+
+08:47.000 --> 08:48.880
+va être suivi entre Planifiés, Réalisés,
+
+08:48.880 --> 08:50.640
+Non conformes, Validation Rép. Client et
+
+08:50.640 --> 08:53.280
+Prises de décision. Sachant que Planifiés
+
+08:53.520 --> 08:55.400
+, ça va être une fois que la
+
+08:55.440 --> 08:56.960
+planification a été validée,
+
+08:57.680 --> 09:00.320
+Réalisés que la date aura été dépassée.
+
+09:00.560 --> 09:02.400
+Non conformes, il y a des non-conformités
+
+09:02.400 --> 09:04.640
+qui ont été renseignées par le
+
+09:04.640 --> 09:06.400
+prestataire. Validation Rép. Client,
+
+09:06.400 --> 09:07.840
+c'est que les non-conformités ont été
+
+09:07.840 --> 09:10.480
+traitées, ça va être corrigé ou
+
+09:11.520 --> 09:14.240
+directement conforme et
+
+09:14.240 --> 09:15.880
+ensuite ça va être envoyé en Prises de
+
+09:15.880 --> 09:17.680
+décision. Il va y avoir deux experts qui
+
+09:17.680 --> 09:19.720
+pourront valider la décision et après ça
+
+09:19.720 --> 09:21.760
+va boucler. Et ça va revenir dans
+
+09:21.760 --> 09:24.720
+Planification. Il faudra lancer un process
+
+09:24.720 --> 09:26.720
+avec des dates auto-incrémentées.
+
+09:28.520 --> 09:31.040
+Donc, Archive. On va avoir les terminés,
+
+09:31.040 --> 09:33.360
+donc ceux qui ont bouclé, le
+
+09:33.360 --> 09:35.840
+reporting (nombre d'audits certifiés,
+
+09:35.840 --> 09:37.280
+nombre d'audits planifiés, la répartition
+
+09:37.280 --> 09:39.320
+des non conformités, la répartition des
+
+09:39.320 --> 09:40.800
+réalisations par mois, la répartition des
+
+09:40.800 --> 09:42.800
+planifications par mois. Il va y avoir
+
+09:42.800 --> 09:44.800
+aussi une carte avec les différents
+
+09:45.040 --> 09:47.640
+magasins, un fichier XML également.
+
+09:47.800 --> 09:49.960
+On peut toujours filtrer par enseigne, TC
+
+09:49.960 --> 09:52.840
+et type d'audit.
+
+09:53.120 --> 09:54.720
+On va pouvoir se déconnecter.

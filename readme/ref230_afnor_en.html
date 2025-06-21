@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Portfolio - REF230 AFNOR</title>
+		<meta charset="utf-8" />
+		<meta name="google" content="notranslate" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Language" content="en_US" />
+		<meta name="author" content="Nicolas BOGALHEIRO" />
+		<meta name="theme-color" content="#ffffff" />
+		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+		<base href="../../" />
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+		<link rel="manifest" href="site.webmanifest" />
+		<link rel="stylesheet" href="css/default.css" />
+		<script src="js/default.js"></script>
+  </head>
+  <body onload="initArticle()">
+    <div class="read-title">
+		<h1>🖥️ REF230 AFNOR</h1>
+		<div class="language-switch d-flex align-items-center justify-content-center">
+			<span class="lang-text on">EN</span>
+			<label class="toggle-container">
+			   <input id="language-toggle" type="checkbox">
+			   <span class="toggle-slider"></span>
+			</label>
+			<span class="lang-text">FR</span>
+		</div>
+    </div>
+	<div class="video-wrapper">
+	  <video controls>
+		  <track label="Français" kind="subtitles" srclang="fr" src="docs/public/REF230_AFNOR_FR.vtt">
+		  <track label="English" kind="subtitles" srclang="en" src="docs/public/REF230_AFNOR_EN.vtt" default>
+		  <source src="docs/public/REF230_AFNOR.mp4" type="video/mp4">
+	  </video>
+	</div>
+	<p><strong>Audit platform developed over 2 months</strong> for <a target="_blank" href="https://www.afnor.org/en/">AFNOR</a>, on a permanent contract at <a target="_blank" href="https://www.soft-concept.com/index-lang-en.html">Soft Concept</a>, in collaboration with <a target="_blank" href="https://www.vitalisgroup.com/">Vitalis</a></p>
+    <h2>📝 Presentation</h2>
+    <p>This software is a management and monitoring tool for the <a target="_blank" href="https://certification.afnor.org/en/services/service-commitment">REF230</a> certification, delivered by AFNOR, ensuring the quality of the services in the optical sector.</p>
+	<h2>🛠️ Technologies used</h2>
+	<ul>
+		<li><strong>C#, HTML, CSS, JavaScript</strong></li>
+		<li>Internal tools:
+		  <ul>
+			<li><a target="_blank" href="https://www.soft-concept.com/online-questionnaire-software-net-survey-en.html">Net-Survey</a>: questionnaire creation</li>
+			<li><a target="_blank" href="https://www.soft-concept.com/ethnos-survey-data-analysis-reporting-software-en.html">Ethnos</a>: survey data analysis</li>
+			<li><a target="_blank" href="https://www.soft-concept.com/web-reports-software-lang-en.html">Web Reports</a>: application development and deployment</li>
+			<li><a target="_blank" href="https://www.soft-concept.com/survey-manager-software-lang-en.html">Survey-Manager</a>: survey management and mail launcher</li>
+		  </ul>
+		</li>
+	</ul>
+    <h2>🗂️ Application Structure</h2>
+		<h3>👨‍💼 Administrator / Customer Manager Profile (AFNOR)</h3>
+		<ul>
+		  <li>🏬 Store management (certified and new)</li>
+		  <li>📅 Request and scheduling of audits</li>
+		  <li>📑 Reading and editing of data sheets</li>
+		  <li>🔍 Viewing of reports</li>
+		  <li>📍 Certification decision</li>
+		</ul>
+		<h3>📑 Service Provider Profile (Vitalis / Présence)</h3>
+		<ul>
+		  <li>📅 Handling of scheduled audits</li>
+		  <li>📎 Entry of audit reports and summaries</li>
+		  <li>✅ Follow-up of completed audits</li>
+		</ul>
+		<h3>🏪 Brand Profile (e.g. Lissac)</h3>
+		<ul>
+		  <li>🔍 Consultation of certification files</li>
+		  <li>📂 Download of data sheets and related documents</li>
+		  <li>📊 Externalized DataViz</li>
+		</ul>
+	<h2>⚙️ Additional Features</h2>
+	<ul>
+	  <li>📥 Notifications and application status tracking by email</li>
+	  <li>📄 File import: K-bis, ADELI certificate, etc.</li>
+	  <li>🗂️ Custom statistics and interactive map</li>
+	  <li>🔍 Advanced filters: brand, postal code, workforce, legal status, etc.</li>
+	</ul>
+	<h2>📈 Usage</h2>
+	<ul>
+	  <li>👉 <strong>AFNOR:</strong> global administration and user management</li>
+	  <li>👉 <strong>Customer Managers (TC):</strong> store management and audit monitoring</li>
+	  <li>👉 <strong>Service Providers:</strong> audit and report execution (non-compliance and proposition sheets)</li>
+	  <li>👉 <strong>Retail Brands:</strong> read-only store monitoring</li>
+	</ul>
+    <hr />
+    <p>©Soft Concept 2023</p>
+    <a id="index">Go back to the homepage</a>
+  </body>
+</html>

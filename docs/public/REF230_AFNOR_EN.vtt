@@ -1,0 +1,700 @@
+WEBVTT
+
+00:00.720 --> 00:02.600
+I will introduce you to the REF230 platform
+
+00:02.600 --> 00:04.480
+that I have had the opportunity to develop
+
+00:04.480 --> 00:07.040
+for 2 years, on a permanent contract at Soft Concept.
+
+00:07.240 --> 00:09.480
+REF230 is a certification for a
+
+00:09.480 --> 00:11.600
+commitment to quality service
+
+00:11.600 --> 00:14.400
+provided by AFNOR. There are
+
+00:14.400 --> 00:16.000
+3 types of profiles on the app:
+
+00:16.880 --> 00:18.880
+the account managers, the
+
+00:18.880 --> 00:21.280
+service providers (Vitalis and Présence)
+
+00:21.520 --> 00:24.120
+and the brands (Lissac, Krys, et
+
+00:24.120 --> 00:26.720
+cetera). AFNOR and the
+
+00:26.800 --> 00:29.440
+brands will have the same menus.
+
+00:30.080 --> 00:31.760
+Except that for the brands, it's going to be
+
+00:31.760 --> 00:34.640
+filtered on opticians and retailers
+
+00:34.640 --> 00:36.880
+will see the information in
+
+00:37.040 --> 00:39.880
+read-only mode. So, here
+
+00:39.880 --> 00:41.680
+the login page. If I log in like
+
+00:41.760 --> 00:44.400
+AFNOR, therefore as a
+
+00:44.480 --> 00:46.240
+customer service manager, I will have access to the
+
+00:46.240 --> 00:48.520
+stores, planning, audits
+
+00:48.960 --> 00:51.240
+and reporting, while for
+
+00:51.240 --> 00:53.600
+service providers I'm going to end up with
+
+00:53.920 --> 00:56.560
+Audits, Archive, Excel Export.
+
+00:56.800 --> 00:59.200
+So for AFNOR, AFNOR can, as
+
+00:59.200 --> 01:01.040
+administrator, define the list of
+
+01:01.040 --> 01:02.800
+TC, so the account managers and
+
+01:02.800 --> 01:05.760
+follow-up emails.
+
+01:05.760 --> 01:07.120
+The stores. There are 2 types of
+
+01:07.120 --> 01:09.120
+stores: certified stores and
+
+01:09.120 --> 01:10.160
+new stores.
+
+01:10.160 --> 01:11.440
+Certified stores are those that have
+
+01:11.440 --> 01:13.880
+REF230 certification in the
+
+01:13.880 --> 01:16.640
+past. So I would like to point out, here we have a
+
+01:16.640 --> 01:18.960
+version REF. In fact, we have 2
+
+01:18.960 --> 01:21.360
+applications, one that is for the
+
+01:21.360 --> 01:23.040
+version 2 and another for
+
+01:23.040 --> 01:25.600
+version 3. Here I present only the
+
+01:25.600 --> 01:27.760
+version 2. So certified stores and
+
+01:27.760 --> 01:30.160
+new stores. For a store,
+
+01:30.160 --> 01:32.400
+we're going to have a company name, the name
+
+01:32.640 --> 01:34.960
+TC, a certificate number, a end date
+
+01:34.960 --> 01:37.360
+of validity of the certification,
+
+01:37.720 --> 01:39.600
+the version as mentioned and the
+
+01:39.880 --> 01:40.720
+different actions as before.
+
+01:42.400 --> 01:43.800
+These are the same for certified stores
+
+01:43.800 --> 01:45.560
+and new stores. New stores,
+
+01:45.600 --> 01:47.280
+being the stores that did not receive
+
+01:47.280 --> 01:50.080
+certification. So, we can
+
+01:50.080 --> 01:52.720
+make comments on the
+
+01:52.720 --> 01:55.520
+store. The
+
+01:55.520 --> 01:57.840
+store sheet, you can also import
+
+01:57.840 --> 02:00.080
+files, we can fill in the
+
+02:00.080 --> 02:02.440
+AFNOR account manager, you can
+
+02:02.440 --> 02:05.200
+delete the store and you can run the
+
+02:05.200 --> 02:07.320
+optical process. So we also have
+
+02:07.320 --> 02:09.120
+filters and you can filter by
+
+02:09.120 --> 02:10.800
+the sign, so for example Krys, the
+
+02:10.800 --> 02:13.520
+file number, the TC (responsible for
+
+02:13.520 --> 02:14.520
+clientele) and other
+
+02:14.520 --> 02:16.560
+information: advanced filters (postal
+
+02:16.560 --> 02:18.720
+code, staff, status, et cetera,
+
+02:19.200 --> 02:21.080
+commitment 16, commitment 17, legal situation).
+
+02:21.080 --> 02:23.920
+And you can also select
+
+02:24.240 --> 02:26.400
+one store at a time. We can also
+
+02:26.400 --> 02:27.680
+launch several processes at the same time,
+
+02:27.680 --> 02:29.680
+so we'll be able to select
+
+02:29.920 --> 02:32.680
+and click here to launch
+
+02:32.680 --> 02:34.560
+optical processes.  Now, we're going to do
+
+02:34.560 --> 02:37.280
+for an example, a single store. First, it
+
+02:37.280 --> 02:39.000
+will be a new store since it will
+
+02:39.000 --> 02:40.880
+has not been certified a priori. Therefore
+
+02:41.560 --> 02:44.400
+we go to New stores and we
+
+02:44.400 --> 02:45.120
+will add it.
+
+02:47.040 --> 02:48.280
+So "Test",
+
+02:50.080 --> 02:52.880
+FINESS number, store type (
+
+02:52.880 --> 02:53.840
+franchisee or independent).
+
+02:55.400 --> 02:57.520
+You can fill in the number of staff in the store,
+
+02:57.520 --> 03:00.440
+So for example, if we put an employee,
+
+03:00.440 --> 03:02.920
+We will be able to inform an employee
+
+03:02.920 --> 03:05.800
+Here, therefore by
+
+03:06.240 --> 03:07.280
+example Roger Federer.
+
+03:08.880 --> 03:09.680
+Function:
+
+03:11.280 --> 03:14.080
+optician, entitled diplomas with
+
+03:14.080 --> 03:15.440
+university, year, number of hours per
+
+03:15.440 --> 03:18.080
+week, 35 hours.
+
+03:19.720 --> 03:21.600
+We can't add more
+
+03:22.000 --> 03:24.120
+since we have provided information to a person. One
+
+03:24.120 --> 03:24.400
+returns.
+
+03:27.000 --> 03:29.120
+The city, Paris for example,
+
+03:29.680 --> 03:31.280
+store email, I'm going to put my
+
+03:31.600 --> 03:34.320
+email, we'll see that we're going to receive a
+
+03:34.320 --> 03:36.800
+email during the process.
+
+03:38.240 --> 03:40.120
+After the list of establishments, the
+
+03:40.120 --> 03:42.040
+store opening hours,
+
+03:42.040 --> 03:44.920
+any potential unavailability,
+
+03:44.960 --> 03:46.800
+commitments, services, etc.
+
+03:58.160 --> 04:00.040
+So the store has been added, it is
+
+04:00.040 --> 04:02.520
+here. So
+
+04:02.520 --> 04:05.200
+we will be able to modify the
+
+04:05.200 --> 04:07.400
+store sheet, import files. There,
+
+04:07.400 --> 04:09.480
+we are going to add a customer service manager.
+
+04:09.600 --> 04:12.400
+That's it, I validate. So I'm going to
+
+04:12.400 --> 04:14.880
+to be able to start the optical process. There
+
+04:15.280 --> 04:16.240
+it has passed
+
+04:18.400 --> 04:20.760
+in Planning, To be processed. Therefore,
+
+04:20.800 --> 04:23.120
+we're going to have dates that have been
+
+04:23.120 --> 04:25.440
+self-informed
+
+04:26.000 --> 04:28.720
+according to specific calculations. One
+
+04:28.960 --> 04:31.840
+will be able to filter. There are
+
+04:31.840 --> 04:34.720
+already the Test filter on the test. If
+
+04:35.600 --> 04:38.000
+we remove, we can
+
+04:38.480 --> 04:40.480
+have them all. We can export to
+
+04:40.480 --> 04:43.320
+Excel, export to PDF.
+
+04:43.320 --> 04:45.200
+You can also filter on the empty
+
+04:45.200 --> 04:47.840
+brands. So we can mark as read or
+
+04:47.840 --> 04:50.480
+unread, like on Outlook for example,
+
+04:50.480 --> 04:52.560
+on the messaging systems. We will be able to leave
+
+04:52.560 --> 04:55.040
+comments on the service. We will
+
+04:55.040 --> 04:56.480
+be able to change the audit period that
+
+04:56.480 --> 04:58.240
+is programmed because there we see that
+
+04:58.240 --> 05:00.440
+there are theoretical dates, the dates
+
+05:00.440 --> 05:02.640
+programmed that may eventually be
+
+05:02.640 --> 05:04.560
+changed, modify the store record,
+
+05:05.760 --> 05:07.760
+download the data sheet or
+
+05:07.760 --> 05:10.160
+import files. To be able to do
+
+05:10.160 --> 05:13.120
+a request for application, which will be
+
+05:13.120 --> 05:15.840
+is that the optician will
+
+05:15.840 --> 05:17.720
+fill in information to
+
+05:18.200 --> 05:20.200
+complete the store sheet. We will be able to
+
+05:20.200 --> 05:22.240
+skip the step if the sheet is already
+
+05:22.400 --> 05:24.920
+filled correctly. For example, if I
+
+05:24.920 --> 05:26.960
+apply for a certification.
+
+05:28.800 --> 05:30.640
+In fact I'm going to send an email to
+
+05:30.640 --> 05:32.720
+the optician among others at my address
+
+05:32.960 --> 05:34.440
+since it is the one I have filled in
+
+05:34.440 --> 05:36.280
+when creating the "Test" store.
+
+05:43.770 --> 05:46.530
+So there, the email is auto
+
+05:47.730 --> 05:50.690
+created, the validated template.
+
+05:52.210 --> 05:54.530
+It was sent to Test so there he
+
+05:54.530 --> 05:56.290
+has moved to Sent
+
+05:57.410 --> 05:58.610
+here.
+
+06:03.080 --> 06:05.600
+For my part, I received an email
+
+06:06.240 --> 06:08.040
+for the application file to
+
+06:08.040 --> 06:10.920
+fill in, the instructions for filling in
+
+06:10.920 --> 06:13.120
+the dematerialized application file,
+
+06:13.600 --> 06:16.240
+complete the data sheet. I have to
+
+06:16.240 --> 06:17.920
+fill in any information that
+
+06:17.920 --> 06:19.800
+I wouldn't have mentioned or filled in
+
+06:19.800 --> 06:22.440
+the documents that are requested of me.
+
+06:23.360 --> 06:25.800
+For example, we're going to have a letter
+
+06:25.800 --> 06:27.520
+of commitment, a K-bis extract, a
+
+06:27.600 --> 06:29.040
+Security Clearance certificate
+
+06:29.040 --> 06:31.360
+the ADELI certificate, etc.
+
+06:32.320 --> 06:35.200
+So we're going to assume that he already has
+
+06:35.200 --> 06:37.600
+filled in correctly what was needed. One
+
+06:37.600 --> 06:38.880
+can possibly follow up with the optician
+
+06:38.880 --> 06:41.440
+if he has not answered. We can
+
+06:41.440 --> 06:42.800
+also suspend at any time the
+
+06:42.800 --> 06:44.200
+application or delete it. It
+
+06:44.200 --> 06:46.440
+will be found in the tabs here:
+
+06:46.440 --> 06:48.240
+Suspended and Deleted. We can also
+
+06:48.240 --> 06:49.280
+skip the step. So that's what we're going to
+
+06:49.280 --> 06:51.280
+do in fact. We're going to start from the principle
+
+06:51.280 --> 06:53.440
+that the optician has filled in his data
+
+06:53.440 --> 06:54.640
+sheet already before.
+
+06:58.240 --> 06:59.680
+Otherwise, indeed, he has to go
+
+06:59.680 --> 07:01.120
+to the end of the process in the email.
+
+07:04.160 --> 07:06.920
+So it is now validated, we
+
+07:06.920 --> 07:09.600
+find it here. So there, we can modify
+
+07:09.600 --> 07:11.360
+the period, the date of the audit period
+
+07:11.680 --> 07:14.040
+programmed, we can ask for
+
+07:14.040 --> 07:16.200
+complements afterwards, we can warn
+
+07:16.200 --> 07:18.960
+the optician that we are going to validate his
+
+07:18.960 --> 07:21.600
+application or we can jump
+
+07:21.680 --> 07:24.480
+step without notifying it, so the
+
+07:24.480 --> 07:27.040
+put directly to Requests for audit but
+
+07:27.040 --> 07:29.560
+without email. We can possibly
+
+07:29.560 --> 07:31.280
+fill in the unavailabilities and after
+
+07:31.280 --> 07:33.200
+it's the same actions as before.
+
+07:33.840 --> 07:36.320
+So what we're going to do is we're going to
+
+07:37.040 --> 07:38.800
+validate and notify the optician.
+
+07:41.440 --> 07:43.520
+So now I'm going to receive a new email.
+
+07:47.440 --> 07:50.080
+There, it's in Requests for audit.
+
+07:50.800 --> 07:53.560
+No Reply:admissibility of the application
+
+07:53.560 --> 07:56.320
+I received the email.
+
+07:56.760 --> 07:58.880
+If the date still suits us, we will
+
+07:58.880 --> 08:01.600
+therefore have to inform the service provider
+
+08:01.600 --> 08:03.760
+either Vitalis or Presence.
+
+08:05.480 --> 08:08.080
+We're going to put Vitalis. Therefore,
+
+08:08.080 --> 08:10.640
+first of all, you have to validate
+
+08:11.160 --> 08:13.040
+the request for an audit so that
+
+08:14.720 --> 08:17.160
+the service provider can have access.
+
+08:18.440 --> 08:20.480
+We're still in the planning phase, I
+
+08:20.560 --> 08:23.480
+reminds. Once the application is
+
+08:23.480 --> 08:25.120
+audit done, in fact it will pass through
+
+08:25.120 --> 08:27.600
+Audit. For the sake of confidentiality,
+
+08:27.680 --> 08:29.040
+I will not present the part
+
+08:29.920 --> 08:32.080
+provider. But the idea is that the
+
+08:32.080 --> 08:34.800
+service provider will be able to use its
+
+08:34.800 --> 08:37.600
+internal tool and platform to
+
+08:38.720 --> 08:41.520
+provide information about the audit,
+
+08:41.760 --> 08:44.080
+fill in the
+
+08:44.120 --> 08:47.000
+non-conformity sheets and then the whole process
+
+08:47.000 --> 08:48.880
+will be tracked between Planned, Completed,
+
+08:48.880 --> 08:50.640
+Non-compliant, Validation Rep. Client and
+
+08:50.640 --> 08:53.280
+Decision-making. Knowing that Planned,
+
+08:53.520 --> 08:55.400
+it's going to be once the
+
+08:55.440 --> 08:56.960
+planning has been validated,
+
+08:57.680 --> 09:00.320
+Realized that the date has passed.
+
+09:00.560 --> 09:02.400
+Non-compliant, there are non-compliances
+
+09:02.400 --> 09:04.640
+that have been provided by the
+
+09:04.640 --> 09:06.400
+provider. Validation Rep. Client
+
+09:06.400 --> 09:07.840
+is that the non-compliances have been
+
+09:07.840 --> 09:10.480
+treated, it will be corrected or
+
+09:11.520 --> 09:14.240
+directly compliant and
+
+09:14.240 --> 09:15.880
+then it will be sent to Decision-making.
+
+09:15.880 --> 09:17.680
+There will be two experts who
+
+09:17.680 --> 09:19.720
+will be able to validate the decision and after that
+
+09:19.720 --> 09:21.760
+will wrap. And it's going to come back in
+
+09:21.760 --> 09:24.720
+Planification. A process will have to be launched
+
+09:24.720 --> 09:26.720
+with auto-incrementing dates.
+
+09:28.520 --> 09:31.040
+So, Archive. We're going to have the finished,
+
+09:31.040 --> 09:33.360
+So those who have completed, the
+
+09:33.360 --> 09:35.840
+reporting (number of certified audits,
+
+09:35.840 --> 09:37.280
+number of planned audits, non-compliances
+
+09:37.280 --> 09:39.320
+distribution, the distribution of realizations
+
+09:39.320 --> 09:40.800
+by month, the distribution of
+
+09:40.800 --> 09:42.800
+planifications per month. There will be
+
+09:42.800 --> 09:44.800
+also a map with the different
+
+09:45.040 --> 09:47.640
+stores, an XML file as well.
+
+09:47.800 --> 09:49.960
+You can always filter by brand, TC
+
+09:49.960 --> 09:52.840
+and audit type.
+
+09:53.120 --> 09:54.720
+We can disconnect.

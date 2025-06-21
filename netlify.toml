@@ -231,6 +231,22 @@
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
 	path = "en/jca_sushirobots/"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/ref230_afnor"
+  
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/ref230_afnor/"
+
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/ref230_afnor"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/ref230_afnor/"
 
 [[redirects]]
   from = "/en"
@@ -310,4 +326,14 @@
 [[redirects]]
   from = "/fr/jca_sushirobots"
   to = "/readme/jca_sushirobots_fr.html"
+  status = 200
+  
+[[redirects]]
+  from = "/en/ref230_afnor"
+  to = "/readme/ref230_afnor_en.html"
+  status = 200
+
+[[redirects]]
+  from = "/fr/ref230_afnor"
+  to = "/readme/ref230_afnor_fr.html"
   status = 200

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+	  <title>Portfolio - REF230 AFNOR</title>
+	  <meta charset="utf-8">
+	  <meta name="google" content="notranslate">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <meta http-equiv="Content-Language" content="fr_FR">
+      <meta name="author" content="Nicolas BOGALHEIRO">
+      <meta name="theme-color" content="#ffffff">
+      <link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+	  <base href="../../">
+      <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+      <link rel="manifest" href="site.webmanifest">
+	  <link rel="stylesheet" href="css/default.css">
+	  <script src="js/default.js"></script>
+	</head>
+	<body onload="initArticle()">
+	  <div class="read-title">
+			<h1>🖥️ REF230 AFNOR</h1>
+			<div class="language-switch d-flex align-items-center justify-content-center">
+				<span class="lang-text">EN</span>
+				<label class="toggle-container">
+				   <input id="language-toggle" type="checkbox">
+				   <span class="toggle-slider"></span>
+				</label>
+				<span class="lang-text on">FR</span>
+		    </div>
+	  </div>
+	  <div class="video-wrapper">
+		  <video controls>
+			  <track label="Français" kind="subtitles" srclang="fr" src="docs/public/REF230_AFNOR_FR.vtt">
+			  <track label="English" kind="subtitles" srclang="en" src="docs/public/REF230_AFNOR_EN.vtt">
+			  <source src="docs/public/REF230_AFNOR.mp4" type="video/mp4">
+		  </video>
+	  </div>
+	  <p><strong>Plateforme d'audit développée pendant 2 ans</strong> pour l'<a target="_blank" href="https://www.afnor.org/">AFNOR</a>, en CDI chez <a target="_blank" href="https://www.soft-concept.com">Soft Concept</a>, en collaboration avec <a target="_blank" href="https://www.vitalisgroup.com/">Vitalis</a></p>
+	  <h2>📝 Présentation</h2>
+	  <p>C'est un outil de gestion et de suivi pour la certification <a target="_blank" href="https://certification.afnor.org/services/engagement-de-service-qualite-en-optique">REF230</a>, délivrée par l'AFNOR et assurant la qualité des services en optique.</p>
+	  <h2>🛠️ Technologies utilisées</h2>
+	  <ul>
+		<li><strong>C#, HTML, CSS, JavaScript</strong></li>
+		<li>Outils internes :
+		  <ul>
+			<li><a target="_blank" href="https://www.soft-concept.com/logiciel-enquete-en-ligne-web-on-line-net-survey.html">Net-Survey</a> : création de questionnaires</li>
+			<li><a target="_blank" href="https://www.soft-concept.com/logiciel-traitement-enquetes-ethnos.html">Ethnos</a> : analyse de données collectées</li>
+			<li><a target="_blank" href="https://www.soft-concept.com/logiciel-reporting-resultats-enquete-en-ligne-web-reports.html">Web Reports</a> : développement et déploiement applicatif</li>
+			<li><a target="_blank" href="https://www.soft-concept.com/plateforme-enquetes-en-ligne-efm-gestion-panel.html">Survey-Manager</a> : pilotage des enquêtes et utilitaire mail</li>
+		  </ul>
+		</li>
+	  </ul>
+	  <h2>🗂️ Structure de l’application</h2>
+		  <h3>👨‍💼 Profil Administrateur / Chargé de clientèle (AFNOR)</h3>
+		  <ul>
+			  <li>🏬 Gestion des magasins (certifiés et nouveaux)</li>
+			  <li>📅 Demande et planification d’audits</li>
+			  <li>📑 Lecture et modification des fiches signalétiques</li>
+			  <li>🔍 Consultation des rapports</li>
+			  <li>📍 Décision de certification</li>
+		  </ul>
+		  <h3>📑 Profil Prestataire (Vitalis / Présence)</h3>
+		  <ul>
+			  <li>📅 Prise en charge des audits planifiés</li>
+			  <li>📎 Saisie des comptes rendus et rapports d’audit</li>
+			  <li>✅ Suivi des audits réalisés</li>
+		  </ul>
+		  <h3>🏪 Profil Enseigne (ex : Lissac)</h3>
+		  <ul>
+			  <li>🔍 Consultation des dossiers de certification</li>
+			  <li>📂 Téléchargement des fiches signalétiques et documents associés</li>
+			  <li>📊 DataViz externalisée</li>
+		  </ul>
+	  <h2>⚙️ Fonctionnalités complémentaires</h2>
+	  <ul>
+		  <li>📥 Notifications et suivi d'étapes de candidature par mail</li>
+		  <li>📄 Import de fichiers : K-bis, attestation ADELI…</li>
+		  <li>🗂️ Statistiques personnalisés et carte interactive</li>
+		  <li>🔍 Filtres avancés : enseigne, code postal, effectif, statut juridique…</li>
+	  </ul>
+	  <h2>📈 Utilisation</h2>
+	  <ul>
+		<li>👉 <strong>AFNOR :</strong> administration globale et gestion des utilisateurs</li>
+		<li>👉 <strong>Chargés de clientèle (TC) :</strong> pilotage des magasins et gestion des audits</li>
+		<li>👉 <strong>Prestataires :</strong> réalisation d’audits et rapports (fiches de non-conformité et de proposition)</li>
+		<li>👉 <strong>Enseignes :</strong> suivi des magasins en lecture seule</li>
+	  </ul>
+	  <hr />
+	  <p>©Soft Concept 2023</p>
+	  <a id="index">Retour à l'accueil</a>
+	</body>
+</html>
