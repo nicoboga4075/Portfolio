@@ -247,6 +247,22 @@
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
 	path = "en/ref230_afnor/"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/opale_snitem"
+  
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/opale_snitem/"
+
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/opale_snitem"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/opale_snitem/"
 
 [[redirects]]
   from = "/en"
@@ -336,4 +352,14 @@
 [[redirects]]
   from = "/fr/ref230_afnor"
   to = "/readme/ref230_afnor_fr.html"
+  status = 200
+  
+[[redirects]]
+  from = "/en/opale_snitem"
+  to = "/readme/opale_snitem_en.html"
+  status = 200
+
+[[redirects]]
+  from = "/fr/opale_snitem"
+  to = "/readme/opale_snitem_fr.html"
   status = 200

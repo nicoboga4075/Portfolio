@@ -1,0 +1,412 @@
+WEBVTT
+
+00:00.160 --> 00:01.520
+I'm going to introduce you to the platform
+
+00:01.520 --> 00:03.320
+SNITEM OPALE that I had the opportunity to
+
+00:03.320 --> 00:06.000
+during my permanent contract at Soft Concept
+
+00:06.000 --> 00:08.880
+for almost a year. Opale
+
+00:08.880 --> 00:09.800
+is a tool for managing the
+
+00:09.800 --> 00:11.480
+different stages to get the
+
+00:11.480 --> 00:14.200
+MDR certification. So MDR is for
+
+00:14.200 --> 00:16.880
+Medical Device Regulation and
+
+00:16.880 --> 00:18.400
+Snitem is the French National Union of
+
+00:18.400 --> 00:20.040
+the medical technology industry.
+
+00:20.320 --> 00:21.840
+Then it is not the Snitem that provides
+
+00:22.000 --> 00:24.600
+certification, but it is well under its
+
+00:24.600 --> 00:26.960
+initiative that the member manufacturers
+
+00:28.800 --> 00:31.680
+will proceed with the different stages
+
+00:31.920 --> 00:34.160
+in order to obtain this certification.
+
+00:35.680 --> 00:38.240
+Two types of profiles for the application,
+
+00:39.120 --> 00:41.120
+on the one hand, administrator or Snitem and
+
+00:41.120 --> 00:43.880
+on the other hand, manufacturer or adherent.
+
+00:44.880 --> 00:47.400
+The Snitem administrator or user
+
+00:47.440 --> 00:49.600
+will be able to have a macro view
+
+00:51.040 --> 00:53.520
+and possibly have a
+
+00:54.160 --> 00:56.560
+ability to manage access:
+
+00:56.560 --> 00:58.400
+manufacturers and users who
+
+00:59.680 --> 01:02.640
+represent them. The
+
+01:02.640 --> 01:04.640
+manufacturer, he will be able to
+
+01:05.280 --> 01:08.160
+enter data, therefore
+
+01:08.160 --> 01:10.960
+financial data,
+
+01:11.040 --> 01:11.840
+market data,
+
+01:11.840 --> 01:13.920
+general data.
+
+01:15.440 --> 01:17.520
+And with this data that it will provide,
+
+01:18.760 --> 01:21.360
+it will feed a micro dashboard
+
+01:21.760 --> 01:24.640
+that a decision-maker will be able to consult.
+
+01:24.880 --> 01:27.680
+And it will also feed
+
+01:27.920 --> 01:30.040
+the macro table that can be seen by the
+
+01:30.040 --> 01:31.560
+SNITEM users or
+
+01:31.600 --> 01:34.200
+platform administrators.
+
+01:35.040 --> 01:37.440
+If I log in as an administrator.
+
+01:37.440 --> 01:39.240
+So, administrator. The difference
+
+01:39.240 --> 01:40.880
+between the administrator and a SNITEM
+
+01:40.880 --> 01:43.520
+profile, even though the
+
+01:43.520 --> 01:46.000
+functionality remains almost identical,
+
+01:46.800 --> 01:49.360
+the SNITEM will not have
+
+01:50.200 --> 01:52.280
+user management
+
+01:52.280 --> 01:54.200
+,the manufacturers being the
+
+01:54.440 --> 01:56.960
+device Producers
+
+01:56.960 --> 01:58.800
+whether it is medicines,
+
+01:58.960 --> 02:00.840
+prosthetics, et cetera.
+
+02:02.160 --> 02:05.160
+So there the administrator profile will
+
+02:05.160 --> 02:07.120
+have the macro chart
+
+02:07.920 --> 02:09.640
+Diagnostic status compound, decision,
+
+02:09.680 --> 02:12.240
+monitoring and access management. So there
+
+02:12.240 --> 02:13.840
+we have the number of registered
+
+02:13.920 --> 02:15.360
+companies, the number of
+
+02:15.360 --> 02:16.960
+created products, the number of TDs created.
+
+02:16.960 --> 02:18.960
+So a TD is a technical
+
+02:20.480 --> 02:21.120
+documentation
+
+02:23.520 --> 02:26.000
+We also have the decision. So there, it's a
+
+02:26.080 --> 02:28.800
+dynami reporting
+
+02:28.800 --> 02:30.880
+of the status of the TDs for example, the
+
+02:30.880 --> 02:33.840
+piloting, manufacturers
+
+02:34.640 --> 02:37.600
+and users. So, SNITEM,
+
+02:41.220 --> 02:43.180
+we have the same menus
+
+02:44.620 --> 02:47.100
+without access management and
+
+02:47.100 --> 02:49.820
+we also have a guide
+
+02:49.820 --> 02:50.300
+so as to use the platform
+
+02:52.940 --> 02:55.900
+quite detailed with the notions a little
+
+02:55.900 --> 02:57.780
+complicated that are addressed
+
+02:58.880 --> 03:00.400
+in this platform. Knowing that the
+
+03:00.480 --> 03:03.040
+platform is intended to respect
+
+03:03.560 --> 03:05.600
+ISO standard
+
+03:05.920 --> 03:07.440
+13485
+
+03:08.720 --> 03:11.120
+for medical
+
+03:11.760 --> 03:14.400
+software. So for a
+
+03:14.400 --> 03:16.240
+manufacturer, there will be
+
+03:17.360 --> 03:19.960
+the ability to import data via
+
+03:19.960 --> 03:22.920
+an Excel file. So we have a form
+
+03:22.920 --> 03:25.800
+Excel of the model and we will be able to
+
+03:25.800 --> 03:28.240
+download here and drop it off.
+
+03:28.800 --> 03:30.000
+It goes automatically
+
+03:31.520 --> 03:34.000
+feed products, QMS or TD. Then
+
+03:34.000 --> 03:35.440
+QMS in fact is the
+
+03:35.440 --> 03:37.920
+quality management system.
+
+03:39.440 --> 03:40.400
+And TD, as I said earlier,
+
+03:40.400 --> 03:43.360
+it's Technical Documentation, MD
+
+03:43.360 --> 03:45.440
+being Medical Devices.
+
+03:48.640 --> 03:51.200
+So we can create new products.
+
+03:51.360 --> 03:53.560
+You can also display or not the
+
+03:53.560 --> 03:55.920
+different columns. So, for example,
+
+03:55.920 --> 03:56.880
+for a product.
+
+03:59.200 --> 04:01.120
+For example, a suction probe
+
+04:01.120 --> 04:03.600
+tracheal. So here, we
+
+04:05.280 --> 04:07.040
+will be able to fill in the different
+
+04:07.040 --> 04:08.480
+product data, so the data
+
+04:08.480 --> 04:11.320
+for example, the
+
+04:11.320 --> 04:12.560
+market data,
+
+04:12.560 --> 04:13.600
+technical data and
+
+04:13.600 --> 04:14.440
+free comments.
+
+04:19.670 --> 04:21.390
+We will also be able to
+
+04:22.270 --> 04:24.230
+Associate a product with a TD.
+
+04:25.470 --> 04:28.430
+We will also be able to delete
+
+04:29.310 --> 04:30.990
+the different associations.
+
+04:33.800 --> 04:35.680
+You can also remove the product. For
+
+04:35.680 --> 04:38.120
+the QMS, it's going to be the same principle so
+
+04:38.120 --> 04:39.840
+there will also be data to be
+
+04:39.840 --> 04:42.080
+to fill. So financial data,
+
+04:42.080 --> 04:44.240
+technical, regulatory and steering
+
+04:44.640 --> 04:47.120
+for a regulatory
+
+04:47.200 --> 04:50.160
+decision and an audit that
+
+04:50.160 --> 04:52.280
+will take place to make the transition
+
+04:52.280 --> 04:54.480
+between the MDD and the MDR. MDR is the
+
+04:54.480 --> 04:56.400
+new regulation, MDD is
+
+04:56.400 --> 04:56.720
+the old one.
+
+05:00.040 --> 05:02.400
+We will also have data on the
+
+05:02.800 --> 05:05.760
+steering with a percentage
+
+05:05.760 --> 05:08.160
+update. We will be able to delete
+
+05:08.160 --> 05:09.040
+the QMS.
+
+05:11.040 --> 05:13.920
+For the TDs, we will have different
+
+05:13.920 --> 05:15.760
+status, in transition,
+
+05:16.400 --> 05:19.120
+new. We will also be able to
+
+05:19.120 --> 05:21.080
+provide data on the diagnostic
+
+05:21.080 --> 05:24.080
+status, on the SMQ/TD/
+
+05:24.080 --> 05:26.240
+products, managing the TD
+
+05:26.240 --> 05:29.200
+and tracking monitoring
+
+05:29.200 --> 05:29.920
+statistics.
+
+05:35.560 --> 05:38.120
+In the monitoring, we'll see
+
+05:38.160 --> 05:39.800
+the overall progress of the TD, whether
+
+05:39.800 --> 05:41.560
+the deadlines have been met, if
+
+05:41.560 --> 05:43.440
+the evaluation was planned...
+
+05:47.760 --> 05:50.320
+The milestones, so the current date, the
+
+05:51.120 --> 05:52.720
+expiry date of the MDD
+
+05:53.040 --> 05:53.680
+certificate.
+
+05:58.160 --> 06:00.720
+Data can also be filled in
+
+06:00.720 --> 06:02.560
+on the company,
+
+06:05.280 --> 06:08.240
+in particular the size of the company,
+
+06:08.240 --> 06:09.440
+French capitals and
+
+06:09.440 --> 06:10.560
+total business capital.
+
+06:16.680 --> 06:18.320
+We can disconnect.

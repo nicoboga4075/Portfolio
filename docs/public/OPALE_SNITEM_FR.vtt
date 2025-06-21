@@ -1,0 +1,412 @@
+WEBVTT
+
+00:00.160 --> 00:01.520
+Je vais vous présenter la plateforme
+
+00:01.520 --> 00:03.320
+OPALE SNITEM, que j'ai eu l'occasion de
+
+00:03.320 --> 00:06.000
+développer pendant mon CDI à Soft Concept
+
+00:06.000 --> 00:08.880
+pendant près d'un an. Opale,
+
+00:08.880 --> 00:09.800
+c'est un outil de pilotage des
+
+00:09.800 --> 00:11.480
+différentes étapes conduisant à la
+
+00:11.480 --> 00:14.200
+certification RDM. Alors RDM c'est pour
+
+00:14.200 --> 00:16.880
+règlement sur les dispositifs médicaux et
+
+00:16.880 --> 00:18.400
+le Snitem c'est le Syndicat national de
+
+00:18.400 --> 00:20.040
+l'industrie des technologies médicales.
+
+00:20.320 --> 00:21.840
+Alors ce n'est pas le Snitem qui fournit
+
+00:22.000 --> 00:24.600
+la certification mais c'est bien sous son
+
+00:24.600 --> 00:26.960
+initiative que les fabricants adhérents
+
+00:28.800 --> 00:31.680
+vont procéder aux différentes étapes
+
+00:31.920 --> 00:34.160
+en vue d'obtenir cette certification.
+
+00:35.680 --> 00:38.240
+Deux types de profils pour l'application,
+
+00:39.120 --> 00:41.120
+d'une part, administrateur ou Snitem et
+
+00:41.120 --> 00:43.880
+d'autre part, fabricant ou adhérent.
+
+00:44.880 --> 00:47.400
+L'administrateur ou l'utilisateur Snitem
+
+00:47.440 --> 00:49.600
+va pouvoir avoir une vue macro
+
+00:51.040 --> 00:53.520
+et éventuellement avoir une
+
+00:54.160 --> 00:56.560
+possibilité de gérer les accès : les
+
+00:56.560 --> 00:58.400
+fabricants et les utilisateurs qui
+
+00:59.680 --> 01:02.640
+les représentent. Le
+
+01:02.640 --> 01:04.640
+fabricant, lui, va pouvoir
+
+01:05.280 --> 01:08.160
+saisir des données, donc des données
+
+01:08.160 --> 01:10.960
+techniques, des données financières, des
+
+01:11.040 --> 01:11.840
+données de marché, des données
+
+01:11.840 --> 01:13.920
+d'entreprise, des données générales.
+
+01:15.440 --> 01:17.520
+Et avec ces données qu'il va fournir,
+
+01:18.760 --> 01:21.360
+ça va alimenter un tableau de bord micro
+
+01:21.760 --> 01:24.640
+qu'un décisionnaire pourra consulter.
+
+01:24.880 --> 01:27.680
+Et ça va aussi alimenter de surcroît
+
+01:27.920 --> 01:30.040
+le tableau macro que peuvent voir les
+
+01:30.040 --> 01:31.560
+utilisateurs snitem ou les
+
+01:31.600 --> 01:34.200
+administrateurs de la plateforme.
+
+01:35.040 --> 01:37.440
+Si je me connecte comme administrateur.
+
+01:37.440 --> 01:39.240
+Alors, administrateur. La différence
+
+01:39.240 --> 01:40.880
+entre l'administrateur et un profil
+
+01:40.880 --> 01:43.520
+SNITEM, même si les
+
+01:43.520 --> 01:46.000
+fonctionnalités restent quasi identiques,
+
+01:46.800 --> 01:49.360
+le SNITEM ne va pas avoir
+
+01:50.200 --> 01:52.280
+la gestion des utilisateurs et des
+
+01:52.280 --> 01:54.200
+fabricants, les fabricants étant les
+
+01:54.440 --> 01:56.960
+producteurs de dispositifs
+
+01:56.960 --> 01:58.800
+médicaux, que ce soit des médicaments,
+
+01:58.960 --> 02:00.840
+des prothèses, et cetera.
+
+02:02.160 --> 02:05.160
+Donc là le profil administrateur va
+
+02:05.160 --> 02:07.120
+avoir le tableau macro
+
+02:07.920 --> 02:09.640
+composé d'état du diagnostic, décision,
+
+02:09.680 --> 02:12.240
+pilotage et la gestion d'accès. Donc là
+
+02:12.240 --> 02:13.840
+on a le nombre d'entreprises
+
+02:13.920 --> 02:15.360
+enregistrées, le nombre de
+
+02:15.360 --> 02:16.960
+produits créés, le nombre de DT créées.
+
+02:16.960 --> 02:18.960
+Alors une DT c'est une documentation
+
+02:20.480 --> 02:21.120
+technique,
+
+02:23.520 --> 02:26.000
+on a aussi la décision. Donc là, c'est un
+
+02:26.080 --> 02:28.800
+reporting dynamique sur l'état
+
+02:28.800 --> 02:30.880
+global des status des DT par exemple, le
+
+02:30.880 --> 02:33.840
+pilotage, les fabricants
+
+02:34.640 --> 02:37.600
+et les utilisateurs. Alors, SNITEM,
+
+02:41.220 --> 02:43.180
+on a les mêmes menus
+
+02:44.620 --> 02:47.100
+sans la gestion des accès et
+
+02:47.100 --> 02:49.820
+on a aussi un guide d'utilisation de la
+
+02:49.820 --> 02:50.300
+plateforme
+
+02:52.940 --> 02:55.900
+assez détaillé avec les notions un peu
+
+02:55.900 --> 02:57.780
+complexes qui sont abordées
+
+02:58.880 --> 03:00.400
+dans cette plateforme. Sachant que la
+
+03:00.480 --> 03:03.040
+plateforme se veut de respecter
+
+03:03.560 --> 03:05.600
+la norme ISO
+
+03:05.920 --> 03:07.440
+13485
+
+03:08.720 --> 03:11.120
+destinée aux logiciels
+
+03:11.760 --> 03:14.400
+médicaux. Donc pour un
+
+03:14.400 --> 03:16.240
+fabricant, il va y avoir
+
+03:17.360 --> 03:19.960
+la possibilité d'importer des données via
+
+03:19.960 --> 03:22.920
+un fichier Excel. Donc on a un formulaire
+
+03:22.920 --> 03:25.800
+Excel de modèle et on va pouvoir le
+
+03:25.800 --> 03:28.240
+télécharger ici et le déposer.
+
+03:28.800 --> 03:30.000
+Ça va automatiquement
+
+03:31.520 --> 03:34.000
+alimenter les produits, SMQ ou DT. Alors
+
+03:34.000 --> 03:35.440
+SMQ en fait c'est les systèmes de
+
+03:35.440 --> 03:37.920
+management de la qualité.
+
+03:39.440 --> 03:40.400
+Et DT, comme je l'ai dit tout à l'heure,
+
+03:40.400 --> 03:43.360
+c'est Documentation Technique, DM
+
+03:43.360 --> 03:45.440
+étant Dispositifs Médicaux.
+
+03:48.640 --> 03:51.200
+Donc on peut créer de nouveaux produits.
+
+03:51.360 --> 03:53.560
+On peut aussi afficher ou non les
+
+03:53.560 --> 03:55.920
+différentes colonnes. Alors, par exemple,
+
+03:55.920 --> 03:56.880
+pour un produit.
+
+03:59.200 --> 04:01.120
+Par exemple, une sonde d'aspiration
+
+04:01.120 --> 04:03.600
+trachéale. Donc là on
+
+04:05.280 --> 04:07.040
+va pouvoir renseigner les différentes
+
+04:07.040 --> 04:08.480
+données sur le produit, donc les données
+
+04:08.480 --> 04:11.320
+générales par exemple, les
+
+04:11.320 --> 04:12.560
+données de marché, les données
+
+04:12.560 --> 04:13.600
+financières, les données techniques et
+
+04:13.600 --> 04:14.440
+des commentaires libres.
+
+04:19.670 --> 04:21.390
+On va pouvoir aussi
+
+04:22.270 --> 04:24.230
+associer un produit à une DT.
+
+04:25.470 --> 04:28.430
+On va pouvoir aussi supprimer du coup
+
+04:29.310 --> 04:30.990
+les différentes associations.
+
+04:33.800 --> 04:35.680
+On peut aussi supprimer le produit. Pour
+
+04:35.680 --> 04:38.120
+les SMQ, ça va être le même principe donc
+
+04:38.120 --> 04:39.840
+il va y avoir aussi des données à
+
+04:39.840 --> 04:42.080
+remplir. Donc données financières,
+
+04:42.080 --> 04:44.240
+techniques, réglementaires et le pilotage
+
+04:44.640 --> 04:47.120
+pour une
+
+04:47.200 --> 04:50.160
+décision réglementaire et un audit qui
+
+04:50.160 --> 04:52.280
+va avoir lieu pour faire la transition
+
+04:52.280 --> 04:54.480
+entre le MDD et le MDR. MDR c'est la
+
+04:54.480 --> 04:56.400
+nouvelle réglementation, MDD c'est
+
+04:56.400 --> 04:56.720
+l'ancienne.
+
+05:00.040 --> 05:02.400
+On va aussi avoir des données sur le
+
+05:02.800 --> 05:05.760
+pilotage avec un pourcentage
+
+05:05.760 --> 05:08.160
+de mise à jour. On va pouvoir supprimer
+
+05:08.160 --> 05:09.040
+le SMQ.
+
+05:11.040 --> 05:13.920
+Pour les DT, on va avoir différents
+
+05:13.920 --> 05:15.760
+statuts, en transition,
+
+05:16.400 --> 05:19.120
+nouveau. On va pouvoir également
+
+05:19.120 --> 05:21.080
+renseigner des données sur l'état des
+
+05:21.080 --> 05:24.080
+lieux, sur les associations SMQ/DT/
+
+05:24.080 --> 05:26.240
+produits, piloter la DT
+
+05:26.240 --> 05:29.200
+et des statistiques sur le suivi
+
+05:29.200 --> 05:29.920
+de pilotage.
+
+05:35.560 --> 05:38.120
+Dans le suivi de pilotage, on va voir
+
+05:38.160 --> 05:39.800
+l'avancement global de la DT, savoir si
+
+05:39.800 --> 05:41.560
+les délais ont été respectés, si
+
+05:41.560 --> 05:43.440
+l'évaluation a été planifiée...
+
+05:47.760 --> 05:50.320
+Les milestones, donc la date courante, la
+
+05:51.120 --> 05:52.720
+date de fin de validité du certificat M
+
+05:53.040 --> 05:53.680
+DD.
+
+05:58.160 --> 06:00.720
+On peut aussi renseigner les données
+
+06:00.720 --> 06:02.560
+surl'entreprise,
+
+06:05.280 --> 06:08.240
+notamment la taille de la société,
+
+06:08.240 --> 06:09.440
+les capitaux français et le chiffre
+
+06:09.440 --> 06:10.560
+d'affaires total.
+
+06:16.680 --> 06:18.320
+On va pouvoir se déconnecter.
