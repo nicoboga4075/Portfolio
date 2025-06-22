@@ -166,103 +166,7 @@
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
-	path = "en/terms/" 
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/crm_elphicom"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/crm_elphicom/"
-
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/crm_elphicom"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/crm_elphicom/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/ebatisoft"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/ebatisoft/"
-
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/ebatisoft"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/ebatisoft/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/panel_mnt"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/panel_mnt/"
-
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/panel_mnt"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/panel_mnt/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/jca_sushirobots"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/jca_sushirobots/"
-
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/jca_sushirobots"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/jca_sushirobots/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/ref230_afnor"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/ref230_afnor/"
-
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/ref230_afnor"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/ref230_afnor/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/opale_snitem"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/opale_snitem/"
-
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/opale_snitem"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/opale_snitem/"
+	path = "en/terms/"
 
 [[redirects]]
   from = "/en"
@@ -362,4 +266,14 @@
 [[redirects]]
   from = "/fr/opale_snitem"
   to = "/readme/opale_snitem_fr.html"
+  status = 200
+  
+[[redirects]]
+  from = "/en/pragma_surveys"
+  to = "/readme/pragma_surveys_en.html"
+  status = 200
+
+[[redirects]]
+  from = "/fr/pragma_surveys"
+  to = "/readme/pragma_surveys_fr.html"
   status = 200

@@ -48,7 +48,7 @@ Make sure to push changes to the appropriate remote(s) depending on your workflo
 
 No ruleset is declared by default in GitHub but in GitLab, when importing the repo, the `main` branch is set with labels `default` and `protected`. **Push force is not allowed by default in GitLab**.
 
-### Add a video (.mp4 only)
+### Add a video (.mp4 only, < 10 min and < 100Mo)
 
 - Record a video with Windows + Shift + S (Snipping Tool).
 - Edit it possibly with `Movavi Editor`.

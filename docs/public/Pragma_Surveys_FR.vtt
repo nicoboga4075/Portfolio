@@ -1,0 +1,676 @@
+WEBVTT
+
+00:00.160 --> 00:01.680
+Je vais vous présenter la plateforme
+
+00:01.680 --> 00:03.680
+Enquêtes Internes Pragma, que j'ai eu
+
+00:03.680 --> 00:04.960
+l'occasion de développer, pendant mon
+
+00:04.960 --> 00:06.840
+CDI à Soft Concept pendant près de un an
+
+00:06.840 --> 00:09.160
+et demi. La plateforme a vocation à
+
+00:09.160 --> 00:11.040
+administrer une enquête et accéder aux
+
+00:11.040 --> 00:13.120
+résultats dès sa clôture. Il y a 2 types
+
+00:13.120 --> 00:15.080
+de profils sur la plateforme : le profil
+
+00:15.080 --> 00:17.080
+administrateur Pragma et le profil
+
+00:17.080 --> 00:18.440
+responsable d'enquête. Le responsable
+
+00:18.440 --> 00:20.800
+d'enquête va solliciter ses
+
+00:20.800 --> 00:23.600
+collaborateurs soit par mail soit par
+
+00:23.600 --> 00:25.760
+courrier avec 1 QR code. Si je me
+
+00:25.760 --> 00:28.680
+connecte comme Pragma. Pragma va
+
+00:28.680 --> 00:30.480
+avoir la liste des entreprises ou
+
+00:30.480 --> 00:32.120
+services clients avec le responsable
+
+00:32.120 --> 00:34.800
+d'enquête, le login, le mail et quand il
+
+00:34.800 --> 00:36.160
+a été prévenu de la création du compte.
+
+00:36.160 --> 00:38.080
+On peut modifier les informations, les
+
+00:38.080 --> 00:40.160
+supprimer, créer un compte à tout moment,
+
+00:40.160 --> 00:42.720
+télécharger le guide d'utilisation
+
+00:43.200 --> 00:44.080
+de la plateforme,
+
+00:46.640 --> 00:49.600
+avoir une FAQ donc
+
+00:49.600 --> 00:51.120
+par exemple pour les objectifs d'enquête
+
+00:51.120 --> 00:52.800
+interne, ce que propose la plateforme,
+
+00:52.800 --> 00:54.640
+comment on analyse les résultats, comment
+
+00:54.640 --> 00:57.120
+on les présente. Donc, ici les
+
+00:57.120 --> 00:58.280
+questionnaires proposés sur la
+
+00:58.280 --> 00:59.840
+plateforme. Qualité relationnelle,
+
+01:00.240 --> 01:01.680
+qualité des réunions, fonctionnement
+
+01:01.680 --> 01:03.040
+d'équipe, projet de transformation,
+
+01:03.040 --> 01:04.480
+sécurité au travail. Il est possible
+
+01:04.480 --> 01:05.640
+aussi de faire un questionnaire sur
+
+01:05.640 --> 01:07.360
+mesure pour vraiment sonder les
+
+01:07.360 --> 01:08.720
+collaborateurs sur les sujets qui vont
+
+01:08.880 --> 01:11.160
+compter pour l'organisation, l'entreprise
+
+01:11.160 --> 01:13.200
+qui va utiliser la plateforme.
+
+01:15.520 --> 01:17.280
+Pragma va aussi avoir un suivi, donc
+
+01:17.520 --> 01:19.440
+savoir le nombre d'enquêtes qui ont été
+
+01:19.520 --> 01:22.520
+réalisées côté client et la date
+
+01:22.520 --> 01:24.560
+de la dernière enquête. On va avoir aussi
+
+01:24.560 --> 01:25.760
+un rapport consolidé.
+
+01:27.880 --> 01:29.600
+On va choisir 2 dates sur une enquête à
+
+01:29.600 --> 01:31.560
+consolider (par exemple qualité des
+
+01:31.560 --> 01:34.400
+réunions). On va
+
+01:34.400 --> 01:35.800
+sélectionner les responsables d'enquête
+
+01:35.800 --> 01:37.360
+donc par exemple toutes les entreprises
+
+01:37.520 --> 01:40.040
+sur cette enquête là et les dates.
+
+01:45.120 --> 01:46.000
+Voilà, le rapport est en cours de
+
+01:46.000 --> 01:48.200
+génération. Si je n'avais pas sélectionné
+
+01:48.480 --> 01:50.960
+suffisamment de
+
+01:51.280 --> 01:54.240
+répondants, je n'aurais pas eu la
+
+01:54.240 --> 01:56.640
+possibilité de générer le rapport. En
+
+01:56.640 --> 01:58.480
+fait, il y a une notion de
+
+01:58.560 --> 02:01.000
+confidentialité, si un rapport a moins de
+
+02:01.000 --> 02:01.960
+10 répondants, il ne sera pas généré.
+
+02:01.960 --> 02:04.880
+Alors, ici, on est dans une plateforme de
+
+02:04.880 --> 02:07.160
+démonstration, donc le quota a été limité
+
+02:07.160 --> 02:09.760
+à un pour des soucis de test, mais en
+
+02:09.760 --> 02:11.920
+production il est bien de 10. Donc là
+
+02:12.240 --> 02:14.200
+on a un rapport par exemple sur l'enquête
+
+02:14.200 --> 02:16.840
+sur la qualité des réunions ici, donc 4
+
+02:16.840 --> 02:19.680
+enquêtes concernées, 11 répondants. Là ce
+
+02:19.680 --> 02:21.600
+qu'on va faire, c'est que maintenant on
+
+02:21.840 --> 02:24.240
+va créer un compte, on crée un compte
+
+02:24.480 --> 02:26.640
+responsable d'enquête. Donc je vais
+
+02:26.640 --> 02:29.200
+mettre une adresse qui est temporaire.
+
+02:29.920 --> 02:31.200
+Numéro de téléphone, non. Alors, les
+
+02:31.200 --> 02:32.800
+logos et la signature. En fait, on va
+
+02:32.800 --> 02:35.360
+pouvoir personnaliser les enquêtes avec
+
+02:35.360 --> 02:36.880
+le logo, donc par défaut,  c'est le logo
+
+02:36.880 --> 02:38.200
+et la signature de ¨Pragma qui vont être
+
+02:38.200 --> 02:39.440
+utilisés. Alors je vais laisser la
+
+02:39.440 --> 02:40.640
+signature de Pragma, le logo. Je vais
+
+02:40.640 --> 02:43.440
+mettre par exemple ça.  Enfin, il y a la
+
+02:43.440 --> 02:46.160
+notion de consentement, je peux accepter
+
+02:46.160 --> 02:47.480
+ou non que les données de mon entreprise
+
+02:47.480 --> 02:48.880
+puissent être agrégées pour établir des
+
+02:48.880 --> 02:51.680
+résultats globaux. Je valide. J'ai
+
+02:52.000 --> 02:54.760
+bien reçu le mail, je vais pouvoir
+
+02:54.760 --> 02:56.720
+définirmon mot de passe donc il faut au
+
+02:56.720 --> 02:59.200
+minimum 8 caractères par souci de
+
+02:59.200 --> 03:00.080
+sécurité.
+
+03:02.000 --> 03:03.920
+Mon compte a bien été créé. Je peux
+
+03:03.920 --> 03:06.920
+cliquer ici pour directement accéder à la
+
+03:07.520 --> 03:09.440
+plateforme. Donc là je suis redirigé vers
+
+03:09.440 --> 03:10.760
+la page de login de tout à l'heure.
+
+03:13.600 --> 03:15.680
+Je vais pouvoir lancer ma première
+
+03:15.680 --> 03:17.800
+enquête donc pour cela je vais devoir
+
+03:17.800 --> 03:20.760
+définir mes paramètres. Là, je retrouve
+
+03:20.760 --> 03:23.080
+le logo que j'avais défini précédemment.
+
+03:23.080 --> 03:25.680
+Voici la couleur du questionnaire,
+
+03:26.800 --> 03:29.120
+la signature de Pragma, les catégories,
+
+03:29.200 --> 03:30.920
+les questions de signalétique. Donc, par
+
+03:30.920 --> 03:32.640
+exemple, on peut décider de ne pas
+
+03:32.640 --> 03:35.600
+définir de catégories, une catégorie,
+
+03:35.600 --> 03:37.320
+2 catégories ou 3 catégories par exemple
+
+03:37.320 --> 03:38.880
+pour des sites, sachant qu'il faut quand
+
+03:38.880 --> 03:40.560
+même respecter le quota des 10 personnes.
+
+03:40.560 --> 03:43.440
+Alors on peut par exemple
+
+03:43.600 --> 03:46.560
+choisir une catégorie, par exemple, la
+
+03:46.560 --> 03:48.880
+ville et on va sélectionner par exemple
+
+03:49.040 --> 03:50.560
+Paris, Lyon. Donc
+
+03:52.880 --> 03:55.360
+on peut valider ici,
+
+03:58.000 --> 03:59.680
+les paramètres ont bien été enregistrés.
+
+04:01.040 --> 04:02.400
+Là je vais pouvoir ajouter une enquête.
+
+04:02.960 --> 04:04.920
+On peut aussi avoir les informations,
+
+04:04.960 --> 04:07.360
+modifier les informations directement
+
+04:07.360 --> 04:10.160
+ici. Alors, pour l'instant, aucun
+
+04:10.160 --> 04:12.000
+questionnaire enquête n'a été affecté.
+
+04:12.240 --> 04:15.040
+Donc, ici, je reviens affecter
+
+04:15.680 --> 04:16.880
+les questionnaires, donc par exemple je
+
+04:16.880 --> 04:19.200
+les sélectionne tous.
+
+04:19.560 --> 04:21.400
+Voilà, si je reviens
+
+04:21.400 --> 04:24.120
+ici, je vais avoir accès à tous les
+
+04:24.120 --> 04:26.880
+questionnaires. Par contre, si je décide
+
+04:27.200 --> 04:28.400
+de n'affecter par exemple que
+
+04:28.480 --> 04:30.120
+Fonctionnement d'équipe et Sécurité de
+
+04:30.120 --> 04:33.080
+travail, je
+
+04:33.080 --> 04:34.240
+vais pouvoir sélectionner que
+
+04:34.560 --> 04:35.560
+Fonctionnement d'équipe Sécurité de
+
+04:35.560 --> 04:38.280
+travail côté responsable d'enquête. Par
+
+04:38.280 --> 04:40.040
+exemple, je fais Sécurité au travail.
+
+04:40.040 --> 04:41.040
+Alors je sais pas vraiment peut être ce
+
+04:41.040 --> 04:43.840
+qu'est Sécurité au travail. J'ai ici sur
+
+04:43.920 --> 04:45.840
+le point d'interrogation, un aperçu du
+
+04:45.840 --> 04:47.920
+questionnaire au format PDF avec donc en
+
+04:47.920 --> 04:49.680
+général une quinzaine de questions sur le
+
+04:49.680 --> 04:51.520
+formalisme oui, tout à fait, plutôt oui,
+
+04:51.520 --> 04:53.040
+plutôt non, non, pas du tout et sans
+
+04:53.120 --> 04:54.480
+opinion/ non concerné.
+
+04:55.920 --> 04:57.120
+Donc je sélectionne la sécurité au
+
+04:57.120 --> 04:59.040
+travail et je vais pouvoir renseigner les
+
+04:59.040 --> 05:01.800
+informations : le nom,
+
+05:01.800 --> 05:03.200
+la période, la date de début, la date de
+
+05:03.200 --> 05:04.680
+fin, l'heure de fin, ce qui va me
+
+05:04.680 --> 05:06.160
+permettre d'avoir accès aux résultats dès
+
+05:06.160 --> 05:07.600
+que l'horaire sera atteint, un
+
+05:07.600 --> 05:09.640
+commentaire de fin que je vais pouvoir
+
+05:09.640 --> 05:12.400
+personnaliser et le périmètre,
+
+05:12.400 --> 05:14.320
+c'est-à-dire le nombre de personnes qui
+
+05:14.320 --> 05:15.280
+vont être sollicitées pour répondre à
+
+05:15.280 --> 05:16.800
+l'enquête. Ce nombre permet
+
+05:18.320 --> 05:20.080
+principalement de calculer un taux de
+
+05:20.080 --> 05:21.400
+participation pour l'enquête.
+
+05:23.360 --> 05:24.280
+Enquête test,
+
+05:26.400 --> 05:29.120
+date de début, et elle se
+
+05:29.120 --> 05:31.760
+finit par exemple le 30 à
+
+05:31.840 --> 05:34.800
+midi, on peut mettre merci
+
+05:35.600 --> 05:36.160
+à l'enquête
+
+05:38.960 --> 05:40.440
+et par exemple 30 personnes. Donc
+
+05:43.240 --> 05:46.080
+on voit qu'elle apparaît ici. On va
+
+05:46.080 --> 05:47.520
+pouvoir envoyer des mails de
+
+05:47.520 --> 05:49.040
+sollicitation ou générer des courriers
+
+05:49.440 --> 05:51.000
+codes à imprimer pour des collaborateurs
+
+05:51.000 --> 05:52.160
+qui n'auraient pas d'adresse
+
+05:52.400 --> 05:55.280
+professionnelle. Alors
+
+05:55.280 --> 05:58.040
+ici, on peut avoir à tout moment le suivi
+
+05:58.040 --> 05:58.880
+des réponses. Bon là bien sûr, aucun
+
+05:58.880 --> 06:00.960
+collaborateur n'a pour l'instant été
+
+06:00.960 --> 06:03.040
+connecté à l'enquête et on peut modifier
+
+06:03.040 --> 06:05.240
+à tout moment les informations. Alors on
+
+06:05.240 --> 06:06.800
+peut modifier que la date de fin, l'heure
+
+06:06.800 --> 06:08.280
+de fin et le périmètre. Si la date du
+
+06:08.280 --> 06:10.240
+début a été erronée, on supprime
+
+06:10.240 --> 06:12.200
+l'enquête et on revient. La date de fin,
+
+06:12.200 --> 06:14.160
+on va pouvoir éventuellement avancer la
+
+06:14.160 --> 06:15.800
+date de fin pour obtenir le rapport plus
+
+06:15.800 --> 06:18.640
+tôt par exemple, ce qu'on va faire juste
+
+06:18.640 --> 06:20.840
+après. On va pouvoir supprimer aussi du
+
+06:20.840 --> 06:23.680
+coup l'enquête. Alors  générer des codes.
+
+06:25.760 --> 06:27.800
+Ça va être avec des QR codes. On voit que
+
+06:27.800 --> 06:29.480
+le courrier est personnalisable. Donc on
+
+06:29.480 --> 06:30.800
+voit le logo qu'on avait sélectionné
+
+06:30.800 --> 06:32.720
+dans Paramètres précédemment.
+
+06:34.320 --> 06:36.360
+On peut éditer le texte avant et après.
+
+06:36.360 --> 06:38.200
+On retrouve la signature Pragma. En fait
+
+06:38.200 --> 06:40.880
+on va flasher ce QR code ou on va aller
+
+06:40.880 --> 06:42.040
+directement sur l'adresse qu'il y aura
+
+06:42.040 --> 06:44.720
+ici quand on va recevoir le mail et
+
+06:44.720 --> 06:46.960
+on va remplir le code et on pourra
+
+06:46.960 --> 06:49.240
+accéder à l'enquête. On peut générer un
+
+06:49.240 --> 06:50.960
+code, on peut en générer plusieurs.
+
+06:51.600 --> 06:53.600
+On peut en générer un. Donc là je vais
+
+06:53.600 --> 06:54.960
+recevoir un mail ici.
+
+06:56.960 --> 06:58.920
+Voilà vos codes ont été générés [...] .
+
+07:13.000 --> 07:15.520
+Le questionnaire va s'auto-personnaliser
+
+07:15.520 --> 07:17.440
+avec le logo que j'ai mentionné, la
+
+07:17.440 --> 07:19.040
+couleur verte que j'avais définie.
+
+07:21.920 --> 07:24.640
+Suivant. Donc là, on peut remplir
+
+07:25.440 --> 07:26.480
+le questionnaire.
+
+07:39.360 --> 07:41.280
+Et là, je me retrouve avec la question
+
+07:41.280 --> 07:42.440
+signalétique que j'ai définie. J'avais
+
+07:42.440 --> 07:44.840
+défini une catégorie ville, donc j'ai
+
+07:44.840 --> 07:46.000
+soit Lyon, soit Paris.
+
+07:48.240 --> 07:51.040
+Et là, je me retrouve avec le message que
+
+07:51.080 --> 07:53.200
+j'avais modifié avec à l'enquête.
+
+07:55.280 --> 07:58.200
+Et là, j'ai un suivi de réponse actualisé
+
+07:58.200 --> 08:00.400
+avec un collaborateur, donc 3,3% par
+
+08:00.560 --> 08:02.400
+rapport aux 30 personnes que j'attends.
+
+08:03.400 --> 08:06.040
+Alors il y a la notion ici d'exploitable,
+
+08:06.040 --> 08:08.080
+c'est qu'on a au moins répondu à 30% du
+
+08:08.080 --> 08:10.800
+questionnaire. On peut envoyer des
+
+08:11.040 --> 08:12.480
+mails, donc là pareil ça va être
+
+08:12.480 --> 08:14.760
+personnalisable. On va pouvoir copier les
+
+08:14.760 --> 08:17.600
+emails. Donc par exemple si
+
+08:18.080 --> 08:20.720
+je crée une autre adresse mail,
+
+08:23.200 --> 08:24.720
+alors aléatoire,
+
+08:26.480 --> 08:27.040
+nouveau,
+
+08:29.440 --> 08:30.960
+que je mets ça [...].
+
+08:46.720 --> 08:49.280
+J'ai complété l'enquête et j'ai
+
+08:49.280 --> 08:51.280
+clôturé en avançant la date de fin et
+
+08:51.280 --> 08:52.560
+j'ai créé une autre enquête pour pouvoir
+
+08:52.560 --> 08:54.480
+avoir un rapport comparatif. Alors le
+
+08:54.480 --> 08:55.920
+rapport général, ça va être l'intégralité
+
+08:55.920 --> 08:57.160
+des réponses, le rapport par catégories.
+
+08:57.160 --> 08:59.440
+En fait on va pouvoir sélectionner la
+
+08:59.440 --> 09:01.280
+ville (par exemple Lyon)
+
+09:13.960 --> 09:15.800
+et le rapport comparatif pour le même
+
+09:15.800 --> 09:17.120
+template, donc le même type d'enquête,
+
+09:17.320 --> 09:19.280
+c'est-à-dire Sécurité au travail. On va
+
+09:19.280 --> 09:20.680
+pouvoir comparer donc au deuxième,
+
+09:29.040 --> 09:30.640
+à gauche l'enquête sélectionnée, à droite
+
+09:30.640 --> 09:32.400
+l'enquête comparée.
+
+09:34.600 --> 09:36.400
+On va pouvoir se déconnecter.
