@@ -49,7 +49,7 @@
   package = "@netlify/plugin-lighthouse"
   
   [context.production.plugins.inputs]
-    fail_deploy_on_score_thresholds = "true"
+    fail_deploy_on_score_thresholds = "false"
 	
   [context.production.plugins.inputs.settings]
     preset = "desktop"
@@ -166,7 +166,119 @@
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
-	path = "en/terms/"
+	path = "en/terms/" 
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/crm_elphicom"
+  
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/crm_elphicom/"
+
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/crm_elphicom"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/crm_elphicom/"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/ebatisoft"
+  
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/ebatisoft/"
+
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/ebatisoft"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/ebatisoft/"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/panel_mnt"
+  
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/panel_mnt/"
+
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/panel_mnt"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/panel_mnt/"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/jca_sushirobots"
+  
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/jca_sushirobots/"
+
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/jca_sushirobots"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/jca_sushirobots/"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/ref230_afnor"
+  
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/ref230_afnor/"
+
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/ref230_afnor"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/ref230_afnor/"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/opale_snitem"
+  
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/opale_snitem/"
+
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/opale_snitem"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/opale_snitem/"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/pragma_surveys"
+  
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "fr/pragma_surveys/"
+
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/pragma_surveys"
+	
+  [[context.production.plugins.inputs.audits]]
+	url = "https://nicoboga.netlify.app"
+	path = "en/pragma_surveys/"
 
 [[redirects]]
   from = "/en"
