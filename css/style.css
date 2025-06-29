@@ -15,6 +15,10 @@ a {
 	cursor: pointer;
 }
 
+a[href="#"] {
+	cursor: default;
+}
+
 [disabled] {
     pointer-events: none;
     cursor: default;
@@ -33,6 +37,44 @@ td strong {
 .open-mfp:hover, .btn.btn-primary:hover {
 	color: var(--white)!important;
 	opacity: 0.7;
+}
+
+mark.highlight {
+    background-color: lavender;
+	border: 1px solid var(--main);
+}
+
+mark.highlight.current-match {
+  border: 1px solid var(--red);
+}
+
+input[name="search-input"].highlight-flash {
+    box-shadow: 0 0 3px 3px var(--secondary)!important;
+    transition: box-shadow 0.3s ease;
+}
+
+@keyframes pulse-blue {
+  0%, 100% { color: var(--main); filter: drop-shadow(0 0 5px var(--main)); }
+}
+
+.icon-search.search-help {
+  animation: pulse-blue 2s ease-in-out;
+  cursor: pointer;
+  color: var(--main);
+}
+
+#search-info {
+	color: var(--green);
+	font-style: italic;
+}
+
+#search-info.no-result {
+    color: var(--red)!important;
+    font-style: italic;
+}
+
+.search-form .icon-search, .search-form .icon-times {
+	cursor: pointer;
 }
  
 /* Home Section */
@@ -128,7 +170,7 @@ td strong {
     position: relative;
     height: 25px;
     width: 50px;
-    background-color: #EBEFFF;
+    background-color: lavender;
     border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -312,10 +354,6 @@ td strong {
 
 #projects-section {
 	opacity: 0.8;
-}
-
-.project{
-	cursor: pointer;
 }
 
 .project p {
@@ -502,7 +540,7 @@ td strong {
   max-height: 500px;
 }
 
-/* README or Article */
+/* Project or Article */
 
 .read-zone {
 	max-width: 50%;
@@ -513,6 +551,36 @@ td strong {
 	display:flex;
 	align-items:center;
 	justify-content:space-between;
+}
+
+#search-suggestions{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    max-height: 150px;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+    font-size: 0.9em;
+}
+  
+#search-suggestions li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+#search-suggestions li:hover {
+    background-color: #f0f0f0;
+}
+
+input[name="search-input"] {
+	border-color: var(--main)!important;
 }
 
 /* Video */

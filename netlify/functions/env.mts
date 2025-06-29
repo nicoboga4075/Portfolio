@@ -1,6 +1,22 @@
 import { Context } from "@netlify/functions";
 
 export default async (req: Request, context: Context) => {
+  const referer = req.headers.get("referer") || "";
+  const userAgent = req.headers.get("user-agent") || "";
+
+  const allowedReferers = [
+    "http://localhost:8888",
+    "https://nicoboga.netlify.app"
+  ];
+  
+  const error404 = new URL("/404", req.url).toString();
+
+  const isFromSite = allowedReferers.some(origin => referer.startsWith(origin));
+  
+  if (!isFromSite) {
+    return Response.redirect(error404, 302);
+  }
+  
   const filteredEnvVars = Object.entries(process.env)
     .filter(([key, _]) => key.startsWith("ENV_") || key.startsWith("SITE_") || key.startsWith("GITHUB_"))
     .reduce((acc, [key, value]) => {

@@ -35,13 +35,13 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                <ul class="navbar-nav nav ml-auto">
-                  <li class="nav-item"><a href="/en#home-section" class="nav-link"><span>Home</span></a></li>
-                  <li class="nav-item"><a href="/en#about-section" class="nav-link"><span>About</span></a></li>
-                  <li class="nav-item"><a href="/en#resume-section" class="nav-link"><span>Resume</span></a></li>
-                  <li class="nav-item"><a href="/en#services-section" class="nav-link"><span>Services</span></a></li>
-                  <li class="nav-item"><a href="/en#projects-section" class="nav-link"><span>Projects</span></a></li>
-                  <li class="nav-item"><a href="/en#blog-section" class="nav-link"><span>Blog</span></a></li>
-                  <li class="nav-item"><a href="/en#contact-section" class="nav-link"><span>Contact</span></a></li>
+                  <li class="nav-item"><a class="nav-link"><span>Home</span></a></li>
+                  <li class="nav-item"><a class="nav-link"><span>About</span></a></li>
+                  <li class="nav-item"><a class="nav-link"><span>Resume</span></a></li>
+                  <li class="nav-item"><a class="nav-link"><span>Services</span></a></li>
+                  <li class="nav-item"><a class="nav-link"><span>Projects</span></a></li>
+                  <li class="nav-item"><a class="nav-link"><span>Blog</span></a></li>
+                  <li class="nav-item"><a class="nav-link"><span>Contact</span></a></li>
                </ul>
             </div>
             <div class="language-switch d-flex align-items-center justify-content-center">
@@ -59,7 +59,7 @@
             <div class="row">
                <div class="col-lg-8 ftco-animate" id="articleShape">
 				  <iframe id="iframeArticle"></iframe>
-                  <div class="about-author d-flex p-4 bg-light">
+                  <div class="about-author p-4 bg-light d-none">
                      <div class="bio mr-5">
                         <img src="images/profile.webp" class="img-fluid mb-4" alt="Profile Picture" loading="lazy">
                      </div>
@@ -71,6 +71,33 @@
                      </div>
                   </div>
                </div>
+			   <div class="col-lg-4 sidebar">
+					<div class="sidebar-box">
+						<form class="search-form">
+							<div class="form-group">	
+								<input name="search-input" class="form-control" type="text" placeholder="Search..." autocomplete="off" aria-label="Search in the article" />
+								<span class="icon icon-times mr-4"></span>
+								<span class="icon icon-search"></span>
+								<ul id="search-suggestions" role="listbox"></ul>
+							</div>
+						</form>
+						<div id="search-info"></div>
+					</div>
+					<div class="sidebar-box">
+						<h3 class="heading-sidebar">Recent Publications</h3>
+						<div class="block-21 mb-4 d-flex justify-content-center">
+							<a id="crm" class="blog-img mr-4"></a>
+							<div class="text">
+								<h3 class="heading"></h3>
+								<div class="meta"></div>
+							</div>
+						</div>
+					</div>
+					<div class="sidebar-box">
+						<h3 class="heading-sidebar">Tags</h3>
+						<div class="tagcloud"></div>
+					</div>
+			   </div>
             </div>
          </div>
       </section>

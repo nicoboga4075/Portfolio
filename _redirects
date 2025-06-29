@@ -16,4 +16,13 @@
 /policy_en.html /404 301!
 /policy_fr /404 301!
 /policy_fr.html /404 301!
-/readme/* /404 301!
+/articles/* /404 301!
+/projects/* /404 301!
+/changelog.md /404 301!
+/CHANGELOG.md /404 301!
+/contributing.md /404 301!
+/CONTRIBUTING.md /404 301!
+/readme.md /404 301!
+/README.md /404 301!
+/security.md /404 301!
+/SECURITY.md /404 301!

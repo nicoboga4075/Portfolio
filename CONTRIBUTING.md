@@ -33,6 +33,7 @@ This project uses multiple Git remotes to manage code across GitHub and GitLab a
 - Netlify is connected to the GitHub repository only.
 - Every push to the `main` branch triggers an automatic build and deployment on Netlify **if buid status is not set to Stopped and if "Lock auto-publishing" is not enabled**.
 - Netlify does not receive code via Git commands directly, but via repository integration.
+- Netlify automatically serves `index.html` when you visit a directory URL ending with a slash (e.g., /fr/ serves /fr/index.html). It also serves .html files when the extension is omitted in the URL, so /toto_fr will serve /toto_fr.html if that file exists. If a requested path does not match any file or redirect rule, Netlify serves the custom `/404.html` page if it is present in the site root. Otherwise, it displays its default 404 error page. Redirect rules in `_redirects` or `netlify.toml` are applied before this fallback behavior.
 
 ---
 

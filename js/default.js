@@ -1,4 +1,4 @@
-let defaultRoutes = {
+let appDefaultRoutes = {
 	"policy": "/{lng}/policy",
 	"terms": "/{lng}/terms",
 	"error404": "/404"
@@ -6,10 +6,14 @@ let defaultRoutes = {
 
 function getCurrentRoute() {
   const path = window.location.pathname;
-  return Object.keys(defaultRoutes).find(key => {
-    const pattern = '^' + defaultRoutes[key].replace('{lng}', '[a-z]{2}') + '/?$';
+  return Object.keys(appDefaultRoutes).find(key => {
+    const pattern = '^' + appDefaultRoutes[key].replace('{lng}', '[a-z]{2}') + '/?$';
     return new RegExp(pattern).test(path);
   }) || 'error404';
+}
+
+function getHashFromSession() {
+	return sessionStorage.getItem('currentHash');
 }
 
 function getCurrentLanguage() {
@@ -32,7 +36,7 @@ function switchLanguage(url) {
         urlObj.pathname = urlObj.pathname.replace(/^\/(fr|en)/, (match) => {
             return match === '/fr' ? '/en' : '/fr';
         });
-        const currentHash = sessionStorage.getItem('currentHash');
+        const currentHash = getHashFromSession();
         if (currentHash && /^[a-zA-Z0-9-_]+$/.test(currentHash)) {
             urlObj.hash = `#${currentHash}`;
         } else {
@@ -46,7 +50,7 @@ function switchLanguage(url) {
 
 function initTranslator() {
 	const toggle = document.getElementById('language-toggle');
-	if(toggle){
+	if (toggle) {
 		toggle.checked = getCurrentLanguage() == 'fr';
 		toggle.addEventListener('change', function () {
 			toggle.checked = getCurrentLanguage() == 'fr';
@@ -88,7 +92,12 @@ function initPage() {
 	initTranslator();
 	addHomeRedirect();
 	const idPage = getCurrentRoute();
-	if(idPage in defaultRoutes) {
+	if (idPage in appDefaultRoutes) {
 		document.body.classList.add('text-center','visible');
 	}
+	document.querySelectorAll('a[href="#"]').forEach(link => {
+	  link.addEventListener('click', function(event) {
+		event.preventDefault();
+	  });
+	});
 }
