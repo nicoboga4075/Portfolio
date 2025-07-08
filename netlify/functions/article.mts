@@ -10,7 +10,7 @@ export default async (req: Request, context: Context) => {
     const referer = req.headers.get("referer") || "";
     const userAgent = req.headers.get("user-agent") || "";
 	
-	const error404 = new URL("/404", req.url).toString();
+	const error404 = "/404";
 
     const allowedReferers = [
       "http://localhost:8888",

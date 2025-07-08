@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - cleanup
 
 build-job:
   stage: build
@@ -17,3 +18,11 @@ test-job:
   script:
     - echo "Running tests..."
     - echo "All tests passed."
+    
+cleanup-job:
+  stage: cleanup
+  tags:
+    - windows-local
+  script:
+    - Get-ChildItem -Path "C:\GitLab-Runner\builds" -Recurse | Remove-Item -Force -Recurse
+    

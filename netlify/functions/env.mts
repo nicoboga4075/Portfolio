@@ -9,7 +9,7 @@ export default async (req: Request, context: Context) => {
     "https://nicoboga.netlify.app"
   ];
   
-  const error404 = new URL("/404", req.url).toString();
+  const error404 = "/404";
 
   const isFromSite = allowedReferers.some(origin => referer.startsWith(origin));
   
