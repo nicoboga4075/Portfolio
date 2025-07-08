@@ -1,0 +1,19 @@
+stages:
+  - build
+  - test
+
+build-job:
+  stage: build
+  tags: 
+    - windows-local
+  script:
+    - echo "Building..."
+    - echo "Build done!"
+
+test-job:
+  stage: test
+  tags: 
+    - windows-local
+  script:
+    - echo "Running tests..."
+    - echo "All tests passed."
