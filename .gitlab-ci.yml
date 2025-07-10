@@ -1,8 +1,16 @@
 stages:
+  - setup
   - build
   - test
-  - cleanup
-
+  - teardown
+  
+status-job:
+  stage: setup
+  tags: 
+    - windows-local
+  script:
+     - ./runner_status.ps1
+  
 build-job:
   stage: build
   tags: 
@@ -20,7 +28,7 @@ test-job:
     - echo "All tests passed."
     
 cleanup-job:
-  stage: cleanup
+  stage: teardown
   tags:
     - windows-local
   script:
