@@ -1,4 +1,4 @@
-let appDefaultRoutes = {
+const appDefaultRoutes = {
 	"policy": "/{lng}/policy",
 	"terms": "/{lng}/terms",
 	"error404": "/404"
@@ -77,7 +77,7 @@ function loadImages(selector, extension, one = false) {
 }
 
 function initArticle() {
-	loadImages('.articleImage','png');
+	loadImages('.article-image','png');
 	loadImages('.icon.svg','svg');
 	initTranslator();
 	addHomeRedirect();

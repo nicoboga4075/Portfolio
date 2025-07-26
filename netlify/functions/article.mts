@@ -2,7 +2,7 @@ import { Context } from "@netlify/functions";
 import fs from "fs/promises";
 import path from "path";
 
-export default async (req: Request, context: Context) => {
+export default async (req: Request, context: Context) : Promise<Response> => {
   try {
     const url = new URL(req.url);
     const filename = url.searchParams.get("filename");

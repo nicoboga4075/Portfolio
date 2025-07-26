@@ -1,37 +1,37 @@
-let appName = 'Portfolio';
-let appRoot = '/en';
-let appLanguages = ['en', 'fr'];
+const appName = 'Portfolio';
+const appRoot = '/en';
+const appLanguages = ['en', 'fr'];
 
-let xp = 4;
-let cdiCount = 3;
-let internshipsCount = 3;
-let email = 'nicolas.bogalheiro@gmail.com';
-let city = 'Lyon';
-let certifsCount = 3;
-let projectsCount = 20;
-let experiencesCount = 5;
-let countriesCount = 14;
-let dateBirth = '1997-11-19';
+const xp = 4;
+const cdiCount = 3;
+const internshipsCount = 3;
+const email = 'nicolas.bogalheiro@gmail.com';
+const city = 'Lyon';
+const certifsCount = 3;
+const projectsCount = 20;
+const experiencesCount = 5;
+const countriesCount = 14;
+const dateBirth = '1997-11-19';
 
-let appDefaultRoutes = {
+const appDefaultRoutes = {
 	"policy": "/{lng}/policy",
 	"terms": "/{lng}/terms",
 	"error404": "/404"
 };
 
-let appRoutes = {
+const appRoutes = {
   "index": "/{lng}",
   "blog": "/{lng}/blog",
   ...appDefaultRoutes
 };
 
-let appHomeSection = "home-section";
-let appProjectSection = "projects-section";
-let appBlogSection = "blog-section";
-let appContactSection = "contact-section";
-let goHereSection = "resume-section";
+const appHomeSection = "home-section";
+const appProjectSection = "projects-section";
+const appBlogSection = "blog-section";
+const appContactSection = "contact-section";
+const goHereSection = "resume-section";
 
-let appMainSections = [
+const appMainSections = [
   "about-section",
   "resume-section",
   "services-section",
@@ -40,7 +40,7 @@ let appMainSections = [
   appContactSection
 ];
 
-let appSubSections = [
+const appSubSections = [
   "education",
   "experiences",
   "skills",
@@ -48,12 +48,12 @@ let appSubSections = [
   "awards"
 ];
 
-let appSecondarySections = [
+const appSecondarySections = [
   "counter-section",
   "carousel-section"
 ];
 
-let appAllSections = [
+const appAllSections = [
   appHomeSection,
   ...appMainSections,
   goHereSection,
@@ -61,18 +61,18 @@ let appAllSections = [
   ...appSecondarySections
 ];
 
-let appSkills = [
+const appSkills = [
   "hard-skills",
   "soft-skills",
   "mad-skills"
 ];
 
-let appMessages = {
+const appMessages = {
 	"success-generic": {"fr": "L'opération a été un franc succès.", "en": "The operation was successfully completed."},
 	"error-generic" : {"fr": "Oops ! Une erreur est survenue. Réessayez plus tard.", "en": "Oops ! An error has occurred. Try again later."}	
 };
 
-let appProjects = [
+const appProjects = [
 	'https://www.esilv.fr/challenges-citoyens-cgi-2019-deux-premiers-prix-esilv-categories-environnement-et-handicap',
 	'blog#mcs',
 	'crm_elphicom',							
@@ -84,7 +84,7 @@ let appProjects = [
 	'opale_snitem'	
 ];
 
-let appServices = [ 
+const appServices = [ 
 	'https://www.soft-concept.com/sondages-presidentielle/WebReports.dll',
 	'https://www.salesforce.com/fr/resources/definition/gestion-relation-client',
 	'https://github.com/nicoboga4075',
@@ -93,7 +93,7 @@ let appServices = [
 	'https://www.linkedin.com/pulse/fundamentals-support-structures-david-apollon'
 ];
 
-let appArticles = [
+const appArticles = [
   {
     slug: "du-voc-de-dev",
     title: {
@@ -141,7 +141,7 @@ let appArticles = [
   }
 ];
 
-let appKeywords = [
+const appKeywords = [
   // Frontend
   "HTML",
   "CSS",
@@ -380,10 +380,18 @@ let appKeywords = [
 ];
 
 let appGoogleToken;
-let appScrollSections = [];
+const appScrollSections = [];
 let appCheckpointSubSection;
 let originalArticleContent = ''; 
 let indexSearchOccurence = -1;
+
+function debounce(func, delay) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), delay);
+    };
+}
 
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -398,14 +406,22 @@ function capitalizeWords(string, locale) {
   }).join(' ');
 }
 
+function removeTrailingEquals(string) {
+  let end = string.length;
+  while (end > 0 && string[end - 1] === '=') {
+    end--;
+  }
+  return string.substring(0, end);
+}
+
 function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function highlightKeywords(keywords) {
   if (!originalArticleContent) return;
-  $('.articleContainer').html(originalArticleContent);
-  $('.articleContainer').contents().each(function recurse() {
+  $('.article-container').html(originalArticleContent);
+  $('.article-container').contents().each(function recurse() {
     if (this.nodeType === 3) {
       let text = this.nodeValue;
       keywords.forEach(keyword => {
@@ -423,7 +439,7 @@ function highlightKeywords(keywords) {
 }
 
 function scrollToNextHighlight() {
-  const $marks = $('.articleContainer mark.highlight');
+  const $marks = $('.article-container mark.highlight');
   if ($marks.length === 0) return;
   indexSearchOccurence++;
   if (indexSearchOccurence >= $marks.length) {
@@ -435,12 +451,12 @@ function scrollToNextHighlight() {
 }
 
 function convertFrenchToIso(frenchDateString) {
-    const [day, month, year] = frenchDateString.split('/')
+    const [day, month, year] = frenchDateString.split('/');
     return `${year}-${month}-${day}`;
 }
 
 function convertIsoToFrench(isoDateString) {
-    const [year, month, day] = isoDateString.split('-')
+    const [year, month, day] = isoDateString.split('-');
     return `${day}/${month}/${year}`;
 }
 
@@ -449,7 +465,6 @@ function getFullStringFromIso(isoDateString, lang) {
     const date = new Date(isoDateString);
     return capitalizeWords(date.toLocaleDateString(lang, { day: 'numeric', month: 'long', year: 'numeric' }), lang);
 }
-
 
 function getHashFromSession() {
 	return sessionStorage.getItem('currentHash');
@@ -517,6 +532,7 @@ function getCurrentDate() {
 }
 
 function lastCvUpdate(lang) {
+	const lastUpdateDate = $('#last-update-date');
 	fetch('/.netlify/functions/env')
 	  .then(response => response.json())
 	  .then(variables => {
@@ -534,13 +550,13 @@ function lastCvUpdate(lang) {
 		.then(data => {
 		  if (data.length > 0) {
 			const lastUpdate = data[0].commit.committer.date;
-			lastUpdateDate.innerHTML = new Date(lastUpdate).toLocaleString();
+			lastUpdateDate.text(new Date(lastUpdate).toLocaleString());
 		  } else {
-			lastUpdateDate.innerHTML = getCurrentCompleteDate();
+			lastUpdateDate.text(getCurrentCompleteDate());
 		  }
-		})
+		});
 	  })
-	  .catch(error => { lastUpdateDate.innerHTML = getCurrentDate(); return false; });
+	  .catch(error => { lastUpdateDate.text(getCurrentDate()); return false; });
 }
 
 function addRedirectById(elementId) {
@@ -572,25 +588,23 @@ function loadBingo() {
 	let timer = null;
 	let number = 0;
 	const target = 2713;
-	const labelBtn = $('#bingoBtn').text();
+	const labelBtn = $('#bingo-btn').text();
 
-	$('#bingoBtn').click(function() {
+	$('#bingo-btn').click(function() {
 		if (number == 0) {
-			$('#bingoTimer').removeClass();
-			$('#bingoBtn').text('Stop');
+			$('#bingo-timer').removeClass();
+			$('#bingo-btn').text('Stop');
 			timer = setInterval(() => {
 				number++;
-				$('#bingoTimer').text(number);
+				$('#bingo-timer').text(number);
 			}, 10);
+		} else if (number == target) {
+				$('#bingo-timer').addClass('victory');
 		} else {
-			if (number == target) {
-				$('#bingoTimer').addClass('victory');
-			} else {
-				$('#bingoTimer').addClass('defeat');
-				$('#bingoBtn').text(labelBtn);
+				$('#bingo-timer').addClass('defeat');
+				$('#bingo-btn').text(labelBtn);
 				clearInterval(timer);
 				number = 0;
-			}
 		}
 	});
 }
@@ -611,7 +625,7 @@ function switchLanguage(url, langA = 'en', langB = 'fr') {
       return `${urlObj.pathname}${urlObj.search}${urlObj.hash}`;
     }
     throw new Error("Language not recognized in URL");
-  } catch (e) {
+  } catch (error) {
     return appDefaultRoutes['error404'];
   }
 }
@@ -620,7 +634,7 @@ function initTranslator() {
 	const toggle = $('#language-toggle');
 	if (toggle) {
 		toggle.prop('checked', getCurrentLanguage() == 'fr');
-		toggle.on('change', function () {
+		toggle.on('change', function() {
 			toggle.checked = getCurrentLanguage() == 'fr';
 			const newUrl = switchLanguage(window.location.href);
 			if (/^\/(?!\/)/.test(newUrl)) {
@@ -653,7 +667,7 @@ function initProfile() {
 function createCircularChart({canvasId, data, backgroundColor, labels, titles, subtitles, cutout = '50%'}) {
   const total = data.reduce((a, b) => a + b, 0);
   const currentLanguage = getCurrentLanguage();
-  new Chart($(`#${canvasId}`)[0].getContext('2d'), {
+  const chart = new Chart($(`#${canvasId}`)[0].getContext('2d'), {
     type: 'doughnut',
     data: {
 	  labels: labels.map(label => {
@@ -735,12 +749,8 @@ function createCircularChart({canvasId, data, backgroundColor, labels, titles, s
       }
     }
   });
+  return chart;
 }
-
-AOS.init({
-  duration: 800,
-  easing: 'slide'
-});
 
 (function($) {
 	"use strict";
@@ -754,7 +764,7 @@ AOS.init({
 		scrollProperty: 'scroll'
 	});
 
-	var fullHeight = function() {
+	const fullHeight = function() {
 		$('.js-fullheight').css('height', $(window).height());
 		$(window).resize(function() {
 			$('.js-fullheight').css('height', $(window).height());
@@ -762,18 +772,16 @@ AOS.init({
 	};
 	fullHeight();
 
-	var loader = function() {
-		setTimeout(function() { 
-			if ($('#ftco-loader').length > 0) {
-				$('#ftco-loader').removeClass('show');
-			}
-		}, 1);
+	const loader = function() {
+		if ($('#ftco-loader').length > 0) {
+			$('#ftco-loader').removeClass('show');
+		}
 	};
 	loader();
 
 	$.Scrollax();
 
-	var burgerMenu = function() {
+	const burgerMenu = function() {
 		$('body').on('click', '.navbar-toggler', function(event) {
 			event.preventDefault();
 			if ($('#ftco-nav').is(':visible')) {
@@ -785,8 +793,8 @@ AOS.init({
 	};
 	burgerMenu();
 
-	var onePageClick = function() {
-		$(document).on('click', '#ftco-nav a[href^="#"]', function (event) {
+	const onePageClick = function() {
+		$(document).on('click', '#ftco-nav a[href^="#"]', function(event) {
 			event.preventDefault();
 			$('html, body').animate({
 				scrollTop: $($.attr(this, 'href')).offset().top - 70
@@ -795,7 +803,7 @@ AOS.init({
 	};
 	onePageClick();
 
-	var carousel = function() {
+	const carousel = function() {
 		$('.owl-carousel').on('initialized.owl.carousel', function() {
 		  $('.owl-prev').attr('aria-label', 'Previous slide');
 		  $('.owl-next').attr('aria-label', 'Next slide');
@@ -817,9 +825,9 @@ AOS.init({
 		$(this).find('.dropdown-menu').removeClass('show');
 	});
 
-	var scrollWindow = function() {
+	const scrollWindow = function() {
 		$(window).scroll(function() {
-			var $w = $(this), st = $w.scrollTop(), navbar = $('.ftco_navbar'), sd = $('.js-scroll-wrap');
+			const st = $(this).scrollTop(), navbar = $('.ftco_navbar'), sd = $('.js-scroll-wrap');
 			if (st > 150) {
 				if (!navbar.hasClass('scrolled')) {
 					navbar.addClass('scrolled');	
@@ -857,35 +865,34 @@ AOS.init({
 	};
 	scrollWindow();
 
-	var counter = function() {
+	const counter = function() {
 		$('.ftco-about, .ftco-counter').waypoint(function(direction) {
 			if (direction === 'down' && !$(this.element).hasClass('ftco-animated')) {
-				var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
+				const comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',');
 				$('.number').each(function() {
-					var num = $(this).data('number');
 					$(this).animateNumber(
 					  {
-					    number: num,
+					    number: $(this).data('number'),
 					    numberStep: comma_separator_number_step
 					  }, 7000
 					);
 				});	
 			}
 		} , { offset: '95%' } );
-	}
+	};
 	counter();
 
-	var contentWayPoint = function() {
-		var i = 0;
+	const contentWayPoint = function() {
+		let animationCount  = 0;
 		$('.ftco-animate').waypoint(function(direction) {
 			if (direction === 'down' && !$(this.element).hasClass('ftco-animated')) {
-				i++;
+				animationCount++;
 				$(this.element).addClass('item-animate');
 				setTimeout(function() {
 					$('body .ftco-animate.item-animate').each(function(k) {
-						var el = $(this);
-						setTimeout( function () {
-							var effect = el.data('animate-effect');
+						const el = $(this);
+						setTimeout(function() {
+							const effect = el.data('animate-effect');
 							if (effect === 'fadeIn') {
 								el.addClass('fadeIn ftco-animated');
 							} else if (effect === 'fadeInLeft') {
@@ -933,7 +940,7 @@ AOS.init({
 		fixedContentPos: false
     });
    
-    var goHere = function() {
+    const goHere = function() {
 		$('.mouse-icon').on('click', function(event) {
 			event.preventDefault();
 			$('html,body').animate({
@@ -943,25 +950,25 @@ AOS.init({
     };
     goHere();
 	
-	var copyright = function() {
+	const copyright = function() {
 		const yearCopyright = $('#year');
 		if (yearCopyright) {
 			yearCopyright.text(new Date().getFullYear());
 		}		
-	}
+	};
 	copyright();
 	
 	$('.progress').each(function() {
-		var value = $(this).attr('data-value');
-		var left = $(this).find('.progress-left .progress-bar');
-		var right = $(this).find('.progress-right .progress-bar');
+		const value = $(this).attr('data-value');
+		const left = $(this).find('.progress-left .progress-bar');
+		const right = $(this).find('.progress-right .progress-bar');
 
 		if (value > 0) {
 		  if (value <= 50) {
-			right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+			right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)');
 		  } else {
-			right.css('transform', 'rotate(180deg)')
-			left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+			right.css('transform', 'rotate(180deg)');
+			left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)');
 		  }
 		}
 	});
@@ -973,7 +980,7 @@ AOS.init({
 		$(this).css('width', `${widthPercentage}%`);
 	});	
 
-    var TxtRotate = function(el, toRotate, period) {
+    const TxtRotate = function(el, toRotate, period) {
 	  this.toRotate = toRotate;
 	  this.el = el;
 	  this.loopNum = 0;
@@ -983,14 +990,14 @@ AOS.init({
 	  this.isDeleting = false;
     };
 	TxtRotate.prototype.tick = function() {
-		  var i = this.loopNum % this.toRotate.length;
-		  var fullTxt = this.toRotate[i];
+		  const i = this.loopNum % this.toRotate.length;
+		  const fullTxt = this.toRotate[i];
 
 		  this.txt = this.isDeleting ? fullTxt.substring(0, this.txt.length - 1) : fullTxt.substring(0, this.txt.length + 1);
 		  this.el.html('<span class="wrap">' + this.txt + '</span>');
 
-		  var that = this;
-		  var delta = 300 - Math.random() * 100;
+		  const that = this;
+		  let delta = 300 - Math.random() * 100;
 
 		  if (this.isDeleting) { delta /= 2; }
 
@@ -1006,28 +1013,33 @@ AOS.init({
 		  setTimeout(function() { that.tick(); }, delta);
 	};
 	$('.txt-rotate').each(function() {
-		var toRotate = $(this).attr('data-rotate');
-		var period = $(this).attr('data-period');
+		const toRotate = $(this).attr('data-rotate');
+		const period = $(this).attr('data-period');
 		if (toRotate) {
-		  new TxtRotate($(this), JSON.parse(toRotate), period);
+		  const txtRotate = new TxtRotate($(this), JSON.parse(toRotate), period);
 		}
 	});
 	
 	$('[data-bs-toggle="tooltip"]').each(function() {
-      new bootstrap.Tooltip(this);
+      const tooltip = new bootstrap.Tooltip(this);
     });
+	
+	AOS.init({
+	  duration: 800,
+	  easing: 'linear'
+	});
 	
 	initProfile();
 	
 })(jQuery);
 
 function initArticle() {
-	loadImages('.articleImage','png');
+	loadImages('.article-image','png');
 	loadImages('.icon.svg','svg');
 }
 
 function initCarousel(target) {
-	var itemCount = $(target).children().length;
+	const itemCount = $(target).children().length;
 	$(target).owlCarousel({
 		loop: true,
 		lazyLoad: true,
@@ -1057,7 +1069,7 @@ function initCarousel(target) {
 }
 
 function buildSafeRedirection(redirect, langPage) {
-	var safeRedirection = '';
+	let safeRedirection = '';
 	if (redirect.startsWith('https://')) {
 		safeRedirection = redirect;
 	} else if (redirect.startsWith('http://')) {
@@ -1128,7 +1140,7 @@ function initPage() {
 	$('.nav-link').each(function(index, navLink) {	
 		navLink.href = `#${appAllSections[index]}`;
 		appScrollSections.push($($(navLink).attr('href')));
-		navLink.addEventListener('click', function (event) {
+		navLink.addEventListener('click', function(event) {
 			event.preventDefault();
 			// Check if the link is in subsections
 			if ($(this).closest('#navi').length) {
@@ -1149,7 +1161,7 @@ function initPage() {
 		navLink.href = buildSafeRedirection(appProjects[index], langPage);
 	});
 	
-	$('.blog-entry .articleImage').each(function(index, navLink) {
+	$('.blog-entry .article-image').each(function(index, navLink) {
 		navLink.href = `/${langPage}/blog#${appArticles[index].slug}`;
 	});
 	
@@ -1159,16 +1171,17 @@ function initPage() {
 
 	$(window).scroll(function() {
 		// Retains the value of the scroll top with the reference at the middle of the page
-		var scrollMiddle = $(this).scrollTop() + ($(window).height()/2);
+		const scrollMiddle = $(this).scrollTop() + ($(window).height()/2);
 		if ($(this).scrollTop() < 150) {
 			$(`a[href*="${appHomeSection}"]`).addClass('active');
 			saveHashToSession(appHomeSection);	
 		}
-		for (let appScrollSection of appScrollSections) {
-			var scrollStartZone = appScrollSection.offset().top;
-			var scrollEndZone = scrollStartZone + appScrollSection.outerHeight();
+		let scrolled_id;
+		for (const appScrollSection of appScrollSections) {
+			const scrollStartZone = appScrollSection.offset().top;
+			const scrollEndZone = scrollStartZone + appScrollSection.outerHeight();
 			if (scrollMiddle >= scrollStartZone && scrollMiddle <= scrollEndZone) {
-				var scrolled_id = appScrollSection.attr('id') ?? appHomeSection;
+				scrolled_id = appScrollSection.attr('id') ?? appHomeSection;
 				saveHashToSession(scrolled_id);
 				clearUrlPath();
 			}	
@@ -1183,7 +1196,7 @@ function initPage() {
 	loadImages('.logo-school', 'png');
 	loadImages('.blog-img', 'avif');
 	loadImages('.project.img','avif');
-	loadImages('.articleImage', 'avif');	
+	loadImages('.article-image', 'avif');	
 		
 	lastCvUpdate(langPage);
 	
@@ -1214,7 +1227,7 @@ function initPage() {
   } else if (idPage === 'blog') {
 		$('.nav-link').each(function(index, navLink) {	
 			navLink.href = `/${langPage}#${appAllSections[index]}`;
-			navLink.addEventListener('click', function (event) {
+			navLink.addEventListener('click', function(event) {
 				saveHashToSession(appAllSections[index]);
 			});
 		});
@@ -1235,14 +1248,14 @@ function initPage() {
 			$resetSpan.hide();
 			$suggestions.hide();
 
-			$searchInput.on('input', function () {
-				if ($(this).val().length > 0) {
+			const searchHandler = debounce(function() {
+				if ($searchInput.val().length > 0) {
 					$resetSpan.show();
 				  } else {
 					$resetSpan.hide();
 				}
 				
-				const query = $.trim($(this).val().toLowerCase());
+				const query = $.trim($searchInput.val().toLowerCase());
 				$suggestions.empty();
 
 				if (!query) {
@@ -1262,7 +1275,7 @@ function initPage() {
 				matches.forEach(item => {
 				  $('<li>')
 					.text(item)
-					.on('mousedown', function () {
+					.on('mousedown', function() {
 					  $searchInput.val(item);
 					  $suggestions.empty().hide();
 					  highlightKeywords([item]);
@@ -1271,9 +1284,11 @@ function initPage() {
 				});
 
 				$suggestions.stop(true, true).fadeIn(150);
-			});
+			}, 300);
 
-			$searchInput.on('blur', function () {
+			$searchInput.on('input', searchHandler);
+
+			$searchInput.on('blur', function() {
 				$suggestions.fadeOut(150);
 			});
 			
@@ -1288,12 +1303,12 @@ function initPage() {
 					}, 2500);					
 				}	
 			  } else {	
-				$('.articleContainer').html(originalArticleContent)
+				$('.article-container').html(originalArticleContent);
 				$searchInfo.hide().removeClass('no-result').text('');				
 			  }
 			});
 			
-			$searchForm.on('submit', function (event) {
+			$searchForm.on('submit', function(event) {
 				event.preventDefault();
 				const query = $.trim($searchInput.val());
 				if (!query) return;
@@ -1301,9 +1316,9 @@ function initPage() {
 				highlightKeywords([query]);
 				$searchInfo.show().removeClass('no-result');
 				indexSearchOccurence = -1;
-				const countHighLight = $('.articleContainer mark.highlight').length;
+				const countHighLight = $('.article-container mark.highlight').length;
 				if (countHighLight > 0) {
-					const firstMark = $('.articleContainer mark.highlight').first();
+					const firstMark = $('.article-container mark.highlight').first();
 					$searchInfo.text(`${countHighLight} occurrence${countHighLight > 1 ? 's' : ''}`);
 					indexSearchOccurence = 0;
 					firstMark.addClass('current-match')[0].scrollIntoView({ behavior: 'smooth', block: 'center' });	
@@ -1317,7 +1332,7 @@ function initPage() {
 				$searchInput.val('').focus();
 				$suggestions.empty().hide();
 				if (typeof originalArticleContent !== 'undefined') {
-					$('.articleContainer').html(originalArticleContent);
+					$('.article-container').html(originalArticleContent);
 				}
 				$(this).hide();
 				$searchInfo.text('').removeClass('search-no-result');
@@ -1358,7 +1373,7 @@ function initPage() {
 		}
 	  
 		const articleShape = $('#articleShape'); 
-		const iframeArticle = $('#iframeArticle');
+		const iframeArticle = $('#iframe-article');
 		const hashLink = window.location.hash ? getSlugFromUrl() : '';
 		const errorArticle = getMessage('error-generic');
 		const host = window.location.origin;
@@ -1376,8 +1391,8 @@ function initPage() {
 		   iframeArticle.on('load', function() {					 
 				fetch(urlArticle)
 				.then(response => response.text())
-				.then(html => {													
-					if (html.includes("It seems you've hit a broken link or the page has moved")) {
+				.then(html => {
+					if (html.includes("It seems you've hit a broken link or the page has moved") || html.toLowerCase().includes('"error"')) {
 						throw new Error("Resource not found"); // Catch directly to show error message when fetch redirects to 404 page
 					}		
 					
@@ -1411,13 +1426,13 @@ function initPage() {
 					    const articleId = $(this).attr('article-link');
 						$(this).attr('href', `/${langPage}/blog#${articleId}`);
 					});
-					originalArticleContent = $('.articleContainer').html();					
+					originalArticleContent = $('.article-container').html();					
 				})
 				.catch(error => {
 					articleShape.text(errorArticle);
 				})
 				.finally(() => {
-					$('#iframeArticle').remove();
+					$('#iframe-article').remove();
 					$('.about-author').removeClass('d-none').addClass('d-flex');					
 				});
 			}); 
@@ -1438,6 +1453,16 @@ function initPage() {
 		}, 1000);
 	  }
 	});
+	
+	const versionElement = $('#version-badge');
+	fetch('/package.json')
+    .then(response => response.json())
+    .then(data => {
+      if (versionElement && data.version) {
+        versionElement.text(data.version);
+      }
+    })
+    .catch(error =>  versionElement.text(1.0));
 }
 
 /* Contact Form */
@@ -1474,17 +1499,14 @@ async function sendEmail(senderName, subject, message) {
 	].join('\n');
 	const successMessage = getMessage('success-generic');
 	const errorMessage = getMessage('error-generic');
-	const callbackForm = $('#callbackForm');
+	const callbackForm = $('#callback-form');
 	callbackForm.text('');
 
 	// Base64 encode the email in URL-safe format
-	const base64EncodedEmail = btoa(emailString)
-		.replace(/\+/g, '-')
-		.replace(/\//g, '_')
-		.replace(/=+$/, '');
+	const base64EncodedEmail = removeTrailingEquals(btoa(emailString).replace(/\+/g, '-').replace(/\//g, '_'));
 
 	// Check if token exists, otherwise request it
-	let token = JSON.parse(localStorage.getItem('tokenAPI'));
+	const token = JSON.parse(localStorage.getItem('tokenAPI'));
 	
 	async function sendHelper(token) {
 		const response = await fetch('https://www.googleapis.com/gmail/v1/users/me/messages/send', {
@@ -1512,12 +1534,12 @@ async function sendEmail(senderName, subject, message) {
 	
 	async function checkTokenConsent() {
 	  return new Promise((resolve, reject) => {
-		let interval = 3000;
-		let maxRetries = 30 / (interval / 1000);
+		const interval = 3000;
+		const maxRetries = 30 / (interval / 1000);
 		let attempts = 0;
 
-		let checkInterval = setInterval(async () => {
-		  let tokenConsent = gapi.client.getToken();
+		const checkInterval = setInterval(async () => {
+		  const tokenConsent = gapi.client.getToken();
 		  if (tokenConsent) {
 			clearInterval(checkInterval);
 			await sendHelper(tokenConsent);
@@ -1553,7 +1575,7 @@ async function sendEmail(senderName, subject, message) {
 function enableSubmitForm() {
   const submitButton = $('input[type="submit"]');
   const recaptchaResponse = grecaptcha.getResponse();
-  submitButton.prop('disabled', recaptchaResponse.length > 0 ? false : true);
+  submitButton.prop('disabled', !(recaptchaResponse.length));
 }
 
 function initCaptcha() {

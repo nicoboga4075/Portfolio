@@ -16,7 +16,7 @@
       <link rel="dns-prefetch" href="https://www.gstatic.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
       <link rel="preconnect" href="https://apis.google.com">
-      <link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+      <link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
       <base href="../">
       <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -28,12 +28,13 @@
       <link rel="stylesheet" href="css/aos.css">
       <link rel="preload" href="css/flaticon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
       <link rel="preload" href="css/icomoon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <link rel="stylesheet" href="css/bootstrap.min.css">
       <link rel="stylesheet" href="css/style.css">
    </head>
    <body data-spy="scroll" data-target="#ftco-navbar" data-offset="300" onload="initPage()">
-      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
+      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar" aria-label="Main navigation">
          <div class="container">
-            <a id="index" class="navbar-brand"><span>P</span>ortfolio</a>
+            <a id="index" class="navbar-brand"><span>P</span>ortfolio<sup id="version-badge"><i class="icon-history"></i></sup></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-menu"></span> Menu
             </button>
@@ -119,7 +120,7 @@
                            <a target="_blank" href="docs/public/CV_en.pdf" class="btn btn-primary py-3 px-3">Download CV</a>
                         </p>
 						<p>
-						  <h6 class="last-update"><i class="icon-upload"></i>&nbsp;&nbsp;<span id="lastUpdateDate"></span></h6>
+						   <i class="icon-upload"></i>&nbsp;&nbsp;<span id="last-update-date"></span>
 						</p>
                      </div>
                   </div>
@@ -164,7 +165,7 @@
          <div class="container">
             <div class="row">
                <div class="col-md-3">
-                  <nav id="navi">
+                  <nav id="navi" aria-label="Resume navigation">
                      <ul>
                         <li><a class="nav-link">Education</a></li>
                         <li><a class="nav-link">Experiences</a></li>
@@ -374,13 +375,13 @@
 						</div>
 						<div class="col-lg-4 mb-4">
 						   <div class="bg-white rounded-lg shadow p-4">
-							  <h2 class="h5 font-weight-bold text-center mb-4">DevOps</h2>
+							  <h2 class="h5 font-weight-bold text-center mb-4"><a target="_blank" href="https://medium.com/env0/top-devops-tools-for-infrastructure-automation-in-2025-cae2288e8314">DevOps</a></h2>
 							  <div class="block-21 mb-4 d-flex justify-content-center">
 								<a id="devops" class="blog-img" target="_blank" href="https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-devops" aria-label="DevOps"></a>										
 							  </div>
 							  <div class="row text-center mt-4">
 								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">Git</div>
+									<div class="h5 font-weight-bold mb-0"><a target="_blank" href="https://medium.com/@jake.page91/the-guide-to-git-i-never-had-a89048d4703a">Git</a></div>
 									<span class="small text-gray"></span>
 								 </div>
 								 <div class="col-6">
@@ -486,7 +487,7 @@
 									<div class="h5 font-weight-bold mb-0">Pyzo</div>
 								 </div>
 								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">SQL Alchemy</div>
+									<div class="h5 font-weight-bold mb-0"><a target="_blank" href="https://leapcell.medium.com/leapcell-the-next-gen-serverless-platform-for-python-app-hosting-0722d1b32047">SQLAlchemy</a></div>
 									<span class="small text-gray"></span>
 								 </div>
 								 <div class="col-6">
@@ -611,7 +612,7 @@
                <div class="col-md-12 heading-section text-center ftco-animate">
                   <h2 class="mb-4">Services</h2>
 				  <img class="img-fluid" src="images/developer.png" id="developer" alt="Developer Avatar" loading="lazy" height="250" width="150">
-                  <p class="mt-4">Programming, Customer Support & Training</p>			  
+                  <p class="mt-4">Programming, Customer Support &amp; Training</p>			  
                </div>
             </div>
             <div class="row">
@@ -920,7 +921,7 @@
             <div class="row d-flex">
 	          <div class="col-md-4 d-flex ftco-animate">
                   <div class="blog-entry">
-                     <a id="software" class="articleImage block-20"></a>
+                     <a id="software" class="article-image block-20"></a>
                      <div class="text mt-3 float-right d-block">
                         <h3 class="heading">From the dev vocab</h3>
                         <div class="d-flex align-items-center mb-3 meta">
@@ -934,7 +935,7 @@
                </div>
                <div class="col-md-4 d-flex ftco-animate">
                   <div class="blog-entry">
-                     <a id="mcs" class="articleImage block-20"></a>
+                     <a id="mcs" class="article-image block-20"></a>
                      <div class="text mt-3 float-right d-block">
                         <h3 class="heading">What is a MSC application ?</h3>
                         <div class="d-flex align-items-center mb-3 meta">
@@ -948,7 +949,7 @@
                </div>
                <div class="col-md-4 d-flex ftco-animate">
                   <div class="blog-entry">
-                     <a id="work" class="articleImage block-20"></a>
+                     <a id="work" class="article-image block-20"></a>
                      <div class="text mt-3 float-right d-block">
                         <h3 class="heading">My career in few lines</h3>
                         <div class="d-flex align-items-center mb-3 meta">
@@ -962,7 +963,7 @@
                </div>
                <div class="col-md-4 d-flex ftco-animate">
                   <div class="blog-entry">
-                     <a id="agence-web" class="articleImage block-20"></a>
+                     <a id="agence-web" class="article-image block-20"></a>
                      <div class="text mt-3 float-right d-block">
                         <h3 class="heading">How to choose a web agency ?</h3>
                         <div class="d-flex align-items-center mb-3 meta">
@@ -976,7 +977,7 @@
                </div>
                <div class="col-md-4 d-flex ftco-animate">
                   <div class="blog-entry">
-                     <a id="brand" class="articleImage block-20"></a>
+                     <a id="brand" class="article-image block-20"></a>
                      <div class="text mt-3 float-right d-block">
                         <h3 class="heading">5 tips for the perfect brand name</h3>
                         <div class="d-flex align-items-center mb-3 meta">
@@ -1042,7 +1043,7 @@
 							<textarea cols="30" rows="10" class="form-control" placeholder="Message" name="message" required></textarea>
 						</div>
 						<div id="captchaCheck"></div>
-						<div id="callbackForm" class="text-center"></div>
+						<div id="callback-form" class="text-center"></div>
 						<div class="form-group text-right">
 							<input type="submit" value="Send" class="btn btn-primary py-3 px-5" disabled>
 						</div>
@@ -1121,8 +1122,8 @@
 						<h2 class="ftco-heading-2">A bingo ?</h2>
 						<div class="block-23 mb-3 d-flex flex-column align-items-center">
 							<p>If you come across number 2713, you've won !</p>
-							<div id="bingoTimer">0</div>
-							<div id="bingoBtn" class="text-white">Play</div>
+							<div id="bingo-timer">0</div>
+							<div id="bingo-btn" class="text-white">Play</div>
 						</div>
 					</div>
 				</div>
@@ -1130,7 +1131,7 @@
             <div class="row">
                <div class="col-md-12 text-center">
                   <p>
-                     Copyright &copy;<i id="year"></i> All rights reserved | This site is made with <i class="icon-heart" aria-hidden="true"></i>
+                     Copyright &copy;<i id="year"></i> All rights reserved | This site is made with <i class="icon-heart" aria-hidden="true"></i> and <i class="icon-shield" aria-hidden="true"></i> with <a target="_blank"href="https://snyk.io">Snyk</a>
                   </p>
                   <p><a id="policy"><i>Privacy policy</i></a> | <a id="terms"><i>Terms of use</i></a></p>
                </div>

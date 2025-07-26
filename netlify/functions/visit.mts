@@ -1,6 +1,6 @@
 import { Context } from "@netlify/functions";
 
-export default async (req: Request, context: Context) => {
+export default async (req: Request, context: Context) : Promise<Response> => {
   try {
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_ANON_KEY;

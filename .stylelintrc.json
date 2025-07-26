@@ -1,0 +1,21 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "value-keyword-case": [
+      "lower",
+      {
+        "ignoreKeywords": [
+          "Roboto",
+          "Arial"
+        ]
+      }
+    ],
+	"selector-id-pattern": ["^[a-z0-9\\-]+$", { "severity": "warning" }],
+	"declaration-block-single-line-max-declarations": [1, { "severity": "warning" }],
+	"no-descending-specificity": [true, { "severity": "warning" }],
+	"no-duplicate-selectors": [true, { "severity": "warning" }],
+	"at-rule-no-vendor-prefix": null,
+	"property-no-vendor-prefix": null,
+	"media-feature-range-notation": "prefix"
+  }
+}

@@ -9,7 +9,7 @@
 		<meta name="description" content="Une application MCS : Kézako ?">
 		<meta name="theme-color" content="#ffffff">
 		<meta http-equiv="Content-Language" content="fr_FR">
-		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
 		<base href="../../">
 		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -19,9 +19,9 @@
 		<script src="js/default.js"></script>
    </head>
    <body onload="initArticle()">
-	   <div class="articleContainer">
-		   <div class="titleCenter">Une application MCS : Kézako ?</div>
-		   <div class="secondTitle">Avec l’omniprésence du numérique dans nos vies, protéger les systèmes informatiques est devenu indispensable. Mais assurer leur sécurité ne se limite pas à une mise en place initiale de protections : il faut les surveiller et les mettre à jour régulièrement pour éviter les incidents. <b>C’est là qu’intervient le Maintien en Condition de Sécurité (MCS), un processus qui consiste à réduire les failles pouvant être exploitées par des cyberattaques, communément appelées les vulnérabilités</b>. Le Maintien en Condition Opérationnelle (MCO), quant à lui, vise à s’assurer que les équipements informatiques comme les serveurs ou les réseaux fonctionnent correctement et durablement. En résumé, le MCO se concentre sur le bon fonctionnement technique tandis que le MCS se focalise sur la protection contre les menaces extérieures. Les deux sont essentiels : une panne non réglée peut laisser une porte ouverte aux attaques et une vulnérabilité non corrigée peut mettre hors service tout un système. Dans cet article, nous découvrirons ce qu’est une application MCS, pourquoi elle est essentielle pour toute organisation et comment elle contribue à renforcer durablement la sécurité des infrastructures numériques.
+	   <div class="article-container">
+		   <div class="title-center">Une application MCS : Kézako ?</div>
+		   <div class="second-title">Avec l’omniprésence du numérique dans nos vies, protéger les systèmes informatiques est devenu indispensable. Mais assurer leur sécurité ne se limite pas à une mise en place initiale de protections : il faut les surveiller et les mettre à jour régulièrement pour éviter les incidents. <b>C’est là qu’intervient le Maintien en Condition de Sécurité (MCS), un processus qui consiste à réduire les failles pouvant être exploitées par des cyberattaques, communément appelées les vulnérabilités</b>. Le Maintien en Condition Opérationnelle (MCO), quant à lui, vise à s’assurer que les équipements informatiques comme les serveurs ou les réseaux fonctionnent correctement et durablement. En résumé, le MCO se concentre sur le bon fonctionnement technique tandis que le MCS se focalise sur la protection contre les menaces extérieures. Les deux sont essentiels : une panne non réglée peut laisser une porte ouverte aux attaques et une vulnérabilité non corrigée peut mettre hors service tout un système. Dans cet article, nous découvrirons ce qu’est une application MCS, pourquoi elle est essentielle pour toute organisation et comment elle contribue à renforcer durablement la sécurité des infrastructures numériques.
 		   </div>
 		   <p>L'augmentation des menaces de cybersécurité étant de plus en plus accentuée aujourd'hui, l’usage d’outils pour alerter les entreprises et les institutions est devenu incontournable. En effet, d’après un article du Monde datant du 27 mai 2020, les arnaques par courrier et SMS, pendant le confinement, ont pratiquement été multipliées par 5 ! Des applications d'aide au maintien en condition de sécurité (MCS) rentrent alors en jeu pour assurer sécurité, qualité et scalabilité mais c'est quoi au juste ? <b>Une application MCS permet d’alerter une organisation lorsqu’un risque est encouru sur un environnement défini par un de ses collaborateurs, le but étant d’automatiser et de faciliter les mécanismes d’aide à la décision</b>. Elle est généralement articulée en 4 parties :
 		   <ul>
@@ -32,7 +32,7 @@
 		   </ul>
 		   </p>
 		   <p>Elle se base sur une <b>API REST</b> qui envoie des réponses en <b>JSON</b> et utilise un protocole sécurisé pour authentifier les utilisateurs (OAuth2 avec Python par exemple) et le protocole <b>HTTP</b> (HyperText Transfer Protocol) pour communiquer. L’application repose sur une <b>architecture client-serveur</b> et une mise en relation avec à minima une base de données (PostgreSQL ou Elasticsearch par exemple). Le serveur désigne l’ensemble de l’API tandis que le client représente le logiciel qui envoie des requêtes à l’API. Les objectifs majeurs sont les suivants : la <b>confidentialité</b>, la <b>maintenabilité</b> mais aussi une gestion fine des actions que les utilisateurs ont le droit d'effectuer (<b>CRUD</b> : création, lecture, mise à jour ou suppression de ressources) et un paramétrage de l'application depuis la base de données.</p>
-		   <img id="mcs-design" class="articleImage" alt="MCS Design">
+		   <img id="mcs-design" class="article-image" alt="MCS Design">
 		   <p>Pour rappel, six contraintes architecturales définissent un système REST :
 		   <ol>
 			  <li>
@@ -146,7 +146,7 @@
 		   </li>
 		   </ul>
 		   </p>
-		   <img id="mcs-example" class="articleImage" alt="MCS Example">
+		   <img id="mcs-example" class="article-image" alt="MCS Example">
 		   <p>En conclusion, une application MCS incarne une approche structurée et proactive pour anticiper et neutraliser les vulnérabilités informatiques. En alliant veille continue, automatisation des décisions et gestion fine des droits, elle permet aux organisations de mieux maîtriser leurs environnements numériques. Plus qu’un simple outil, elle devient un levier stratégique, indispensable face à l’évolution constante des cyberattaques. En complément de lecture, je vous conseille <a target="_blank" href="https://www.bassetti-group.com/le-maintien-en-condition-de-securite-mcs-un-outil-pour-couvrir-les-risques-de-securite-du-systeme-dinformation-si-dans-la-duree" aria-label="Article supplémentaire sur le MCS">cet article</a>.</p>
 		</div>
 	</body>

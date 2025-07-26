@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+		<title>Portfolio - Bien/Pas Bien</title>
+		<meta charset="utf-8">
+		<meta name="google" content="notranslate">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Nicolas BOGALHEIRO">
+		<meta name="description" content="Mon parcours pro en quelques lignes">
+		<meta name="theme-color" content="#ffffff">
+		<meta http-equiv="Content-Language" content="fr_FR">
+		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+		<base href="../../">
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+		<link rel="manifest" href="site.webmanifest">
+		<link rel="stylesheet" href="css/default.css">
+		<script src="js/default.js"></script>
+	</head>
+	<body>
+	    <div class="article-container">
+	    <div class="title-center">🧐 Bien / Pas Bien</div>
+		<div class="video-wrapper">
+		  <video controls>
+			  <source src="docs/public/Bien_PasBien.mp4" type="video/mp4">
+		  </video>
+		</div>
+		<div class="card pas-bien">
+		  <h2>❌ Pas Bien</h2>
+		  <p>Nommer ses variables en abrégé ou sans signification concrète</p>
+		  <i>❌ Magic Number</i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+let ThirtyOne = 31;
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+ThirtyOne = 31
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+using System;
+
+class Program
+{
+	static void Main()
+	{
+		int ThirtyOne = 31;
+	}
+}
+			</span>
+		  </div> 
+		</div>
+		<div class="card pas-bien">
+		  <h2>❌ Pas Bien</h2>
+		  <p>Ne pas permettre de rollback en cas de crash avant le commit dans la base de données</p>
+		  <i>✅ <b>A</b>CID : Atomicity</i>
+		  <p>Si la première requête passe et que le serveur plante avant la deuxième :
+			<ul>
+				<li>Le compte [id = 1] est débité</li>
+				<li>Le compte [id = 2] n'est pas crédité</li>
+			</ul>
+			➡️ Argent perdu
+		  </p>
+		  <div class="bloc-code">
+			<span class="lang-label">SQL</span>
+			<span class="lang-code">
+UPDATE comptes SET solde = solde - 100 WHERE id = 1;
+-- Panne serveur ici, ou crash de l’appli
+UPDATE comptes SET solde = solde + 100 WHERE id = 2;
+			</span>
+		  </div>
+		</div>
+		<div class="card pas-bien">
+		  <h2>❌ Pas Bien</h2>
+		  <p>Dupliquer du code au lieu de factoriser</p>
+		  <i>✅ DRY : <b>D</b>on't <b>R</b>epeat <b>Y</b>ourself</i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+console.log("Hello world");
+console.log("Hello Jack");
+console.log("Hello John");
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+print("Hello world")
+print("Hello Jack")
+print("Hello John")
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+Console.WriteLine("Hello world");
+Console.WriteLine("Hello Jack");
+Console.WriteLine("Hello John");
+			</span>
+		  </div>
+		</div>
+		<div class="card bien">
+		  <h2>✅ Bien</h2>
+		  <p>Documenter son code et le rendre intuitif</p>
+		  <i>✅ KISS : <b>K</b>eep <b>I</b>t <b>S</b>imple <b>S</b>tupid</i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+function calculerTVA(prixHT) {
+	// Calcule la TVA pour un prix HT
+	return prixHT * 0.2;
+}
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+def calculer_tva(prix_ht):
+"""Calcule la TVA pour un prix HT"""
+   return prix_ht * 0.2
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+public double CalculerTVA(double prixHT)
+{
+   // Calcule la TVA pour un prix HT
+   return prixHT * 0.2;
+}
+			</span>
+		  </div>
+		</div>
+		<div class="card pas-bien">
+		  <h2>❌ Pas Bien</h2>
+		  <p>Trop de logique dans une seule fonction/classe</p>
+		  <i>✅ SRP : Single Responsibility Principle (<b>S</b>OLID)</i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+function processUserData() {
+	// Lire les données
+	// Valider les données
+	// Calculer des trucs
+	// Générer un rapport
+	// Envoyer un mail
+	...
+}
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+def process_user_data():
+	# Lire les données
+	# Valider les données
+	# Calculer des trucs
+	# Générer un rapport
+	# Envoyer un mail
+	...
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+ public void ProcessUserData() {
+	// Lire les données
+	// Valider les données
+	// Calculer des trucs
+	// Générer un rapport
+	// Envoyer un mail
+	...
+ }
+			 </span>
+		  </div>
+		</div>
+		<div class="card bien">
+		  <h2>✅ Bien</h2>
+		  <p>Appliquer des principes de clean code</p>
+		  <i>✅ GRASP : General Responsibility Assignment Software Patterns</i>
+		  <ol>
+			<li>Information Expert — attribuer la responsabilité à la classe qui a l'information nécessaire</li>
+			<li>Creator — la classe qui crée un objet</li>
+			<li>Controller — gérer les événements du système</li>
+			<li>Low Coupling — minimiser les dépendances entre classes (encapsulation)</li>
+			<li>High Cohesion — une classe doit avoir une responsabilité bien ciblée</li>
+			<li>Polymorphism — utiliser le polymorphisme pour gérer les variations</li>
+			<li>Pure Fabrication — créer des classes artificielles pour éviter le couplage fort ou les responsabilités qui n'appartiennent pas aux classes de domaine</li>
+			<li>Indirection — utiliser une classe intermédiaire pour réduire les dépendances</li>
+			<li>Protected Variations — protéger les éléments instables derrière des interfaces ou abstractions</li>	
+		  </ol>
+		</div>
+		<div class="card pas-bien">
+		  <h2>❌ Pas Bien</h2>
+		  <p>Ne pas respecter les contraintes de la base de  données avant et après transaction</p>
+		  <i>✅ A<b>C</b>ID : Consistency</i>
+		  <div class="bloc-code">
+			<span class="lang-label">SQL</span>
+			<span class="lang-code">
+CREATE TABLE comptes (
+  id INTEGER PRIMARY KEY,
+  solde INTEGER
+);
+-- Un solde négatif ne pas être autorisé dans un contexte bancaire
+BEGIN;
+UPDATE comptes SET solde = solde - 200 WHERE id = 1;
+COMMIT;
+			</span>
+		  </div>
+		</div>
+		<div class="card bien">
+		  <h2>✅ Bien</h2>
+		  <p>Capturer les erreurs</p>
+		  <i>✅ Fail Fast </i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+function divideNumbers(dividend, divisor) {
+	try {
+		if (divisor === 0) {
+			throw new Error("Division by zero is not allowed");
+		}
+		const result = dividend / divisor;
+		return result;
+	} catch (error) {
+		return null;
+	} finally {
+		console.log("Request succeeded");
+	}
+}
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+def divide_numbers(dividend, divisor):
+	try:
+		if divisor == 0:
+			raise ValueError("Division by zero is not allowed")
+		result = dividend / divisor
+		return result
+	except ValueError as error:
+		return None
+	finally:
+		print("Request succeeded")
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+static double DivideNumbers(double dividend, double divisor)
+{
+	try
+	{
+		if (divisor == 0)
+		{
+			throw new ArgumentException("Division by zero is not allowed");
+		}
+		double result = dividend / divisor;
+		return result;
+	}
+	catch (ArgumentException error)
+	{
+		return double.NaN;
+	}
+	finally
+	{
+		Console.WriteLine("Request succeeded");
+	}
+}
+		   </span>
+		  </div>		
+		</div>
+		<div class="card pas-bien">
+		  <h2>❌ Pas Bien</h2>
+		  <p>Modification du code existant au lieu de l'étendre</p>
+		  <i>✅ OCP : Open/Closed Principle (S<b>O</b>LID)</i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+function calculerPrix(panier, typeClient) {
+  if (typeClient === "pro") {
+	return panier * 0.9;
+  } else if (typeClient === "vip") {
+	return panier * 0.8;
+  } else {
+	return panier;
+  }
+}
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+def calculer_prix(panier, type_client):
+	if type_client == "pro":
+		return panier * 0.9
+	elif type_client == "vip":
+		return panier * 0.8
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+public static double CalculerPrix(double panier, string typeClient)
+{
+	if (typeClient == "pro")
+	{
+		return panier * 0.9;
+	}
+	else if (typeClient == "vip")
+	{
+		return panier * 0.8;
+	}
+	else
+	{
+		return panier;
+	}
+}
+			</span>
+		  </div>
+		</div>
+		<div class="card bien">
+		  <h2>✅ Bien</h2>
+		  <p>Ne pas hériter une classe qui ne respecte pas le contrat ou comportement attendu de la classe mère</p>
+		  <i>✅ LSP : Liskov Substitution Principle (SO<b>L</b>ID)</i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+class Client {
+  calculerPrix(panier) { return panier; }
+}
+class ClientPro extends Client {
+  calculerPrix(panier) { return panier * 0.9; }
+}
+class ClientVip extends Client {
+  calculerPrix(panier) { return panier * 0.8; }
+}
+
+[ new Client(), new ClientPro(), new ClientVip() ]
+  .forEach(c =&gt; console.log(c.calculerPrix(100)));
+			 </span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+class Client:
+	def calculer_prix(self, panier):
+		return panier
+
+class ClientPro(Client):
+	def calculer_prix(self, panier):
+		return panier * 0.9
+
+class ClientVip(Client):
+	def calculer_prix(self, panier):
+		return panier * 0.8
+
+for client in [Client(), ClientPro(), ClientVip()]:
+	print(client.calculer_prix(100))
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+using System;
+
+class Client {
+  public virtual double CalculerPrix(double panier) =&gt; panier;
+}
+
+class ClientPro : Client {
+  public override double CalculerPrix(double panier) =&gt; panier * 0.9;
+}
+
+class ClientVip : Client {
+  public override double CalculerPrix(double panier) =&gt; panier * 0.8;
+}
+
+class Program {
+  static void Main() {
+	Client[] clients = { new Client(), new ClientPro(), new ClientVip() };
+	foreach (var c in clients)
+	  Console.WriteLine(c.CalculerPrix(100));
+  }
+}
+			</span>
+		  </div>
+		</div>
+		<div class="card pas-bien">
+		  <h2>❌ Pas Bien</h2>
+		  <p>Interface/Classe trop conséquente imposée à tout le monde</p>
+		  <i>✅ ISP : Interface Segregation Principle (SOL<b>I</b>D)</i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+class Animal {
+  eat() { }
+  fly() { }
+}
+
+class Cat extends Animal {
+  fly() {
+	// Inutile pour un chat
+  }
+}
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+class Animal:
+	def eat(self):
+		pass
+
+	def fly(self):
+		pass
+
+class Cat(Animal):
+	def fly(self):
+		# Inutile pour un chat
+		pass
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+public abstract class Animal
+{
+	public abstract void Eat();
+	public abstract void Fly();
+}
+
+/*
+public interface IAnimal
+{
+	void Eat();
+	void Fly();
+}
+*/
+
+public class Cat : Animal
+{
+	public override void Eat()
+	{
+		// Mange normalement
+		Console.WriteLine("Cat is eating");
+	}
+	
+	public void Fly()
+	{
+		// Inutile pour un chat mais doit être implémentée
+	}
+}
+			</span>
+		  </div>
+		</div>
+		<div class="card bien">
+		  <h2>✅ Bien</h2>
+		  <p>Le modèle stocke les données, la vue les affiche et le contrôleur les crée</p>
+		  <i>✅ MVC : Model View Controller</i>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+using System;
+using System.Collections.Generic;
+
+// Model
+class TaskModel {
+	public List&lt;string&gt; Tasks = new List&lt;string&gt;();
+
+	public void AddTask(string task) {
+		Tasks.Add(task);
+	}
+
+	public List&lt;string&gt; GetAll() {
+		return Tasks;
+	}
+}
+
+// View
+class TaskView {
+	public static void Display(List&lt;string&gt; tasks) {
+		for (int i = 0; i &lt; tasks.Count; i++) {
+			Console.WriteLine($"{i+1}. {tasks[i]}");
+		}
+	}
+}
+
+// Controller
+class TaskController {
+	private TaskModel model;
+	private TaskView view;
+
+	public TaskController(TaskModel m, TaskView v) {
+		model = m;
+		view = v;
+	}
+
+	public void AddNewTask(string task) {
+		model.AddTask(task);
+		TaskView.Display(model.GetAll());
+	}
+}
+			</span>
+		  </div>
+		</div>
+		<div class="card pas-bien">
+		  <h2>❌ Pas Bien</h2>
+		  <p> Permettre des "dirty reads" (lecture de données non validées),
+		  "non-repeatable reads" (relecture de données modifiées par une autre transaction),
+		  "phantom reads" (nouvelles lignes apparaissant dans une requête répétée)</p>
+		  <i>✅ AC<b>I</b>D : Isolation</i>
+		  <div class="bloc-code">
+			<span class="lang-label">SQL</span>
+			<span class="lang-code">
+-- Transaction 1
+BEGIN;
+SELECT solde FROM comptes WHERE id=1; -- lit 100
+UPDATE comptes SET solde = solde - 80 WHERE id=1;
+-- Pas encore de commit
+
+-- Transaction 2 (concurente)
+BEGIN;
+SELECT solde FROM comptes WHERE id=1; -- lit aussi 100
+UPDATE comptes SET solde = solde - 80 WHERE id=1;
+COMMIT;
+-- Transaction 1 commit après, écrase modification de T2
+COMMIT;
+			</span>
+		  </div>
+		</div>
+		<div class="card bien">
+		  <h2>✅ Bien</h2>
+		  <p>Une fonction ne doit parler qu'à ses proches (elle-même, ses attributs directs,
+		  les objets qu’on lui passe, les objets qu’elle crée)...</p>
+		  <i>✅ LoD : Law of Demeter</i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+function getCustomerCity(order) {
+  return order.getCustomerCity();
+}
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+def get_customer_city(order):
+	return order.get_customer_city()
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+string GetCustomerCity(Order order)
+{
+	return order.GetCustomerCity();
+}
+			</span>
+		  </div>
+		</div>
+		<div class="card pas-bien">
+		  <h2>❌ Pas Bien</h2>
+		  <p>... pas aux amis des amis (trop d'appels)</p>
+		  <i>✅ LoD : Law of Demeter</i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+function getCustomerCity(order) {
+  return order.customer.address.city;
+}
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+def get_customer_city(order):
+	return order.customer.address.city
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+string GetCustomerCity(Order order) {
+	return order.Customer.Address.City;
+}
+			</span>
+		  </div>
+		</div>
+		<div class="card pas-bien">
+		  <h2>❌ Pas Bien</h2>
+		  <p></p>
+		  <i>✅ ACI<b>D</b> : Durability</i>
+		  <div class="bloc-code">
+			<span class="lang-label">SQL</span>
+			<span class="lang-code">
+BEGIN TRANSACTION
+UPDATE comptes SET solde = solde - 100 WHERE id = 1
+UPDATE comptes SET solde = solde + 100 WHERE id = 2
+COMMIT
+-- Données validées mais crash serveur avant écriture disque 
+-- Il faut mettre en place un mécanisme comme le Write-Ahead Log (WAL)
+-- Même si la machine plante juste après, les modifications peuvent être récupérées au redémarrage en relisant ce journal
+			</span>
+		  </div>
+		</div>
+		<div class="card bien">
+		  <h2>✅ Bien</h2>
+		  <p>Les classes ne doivent pas dépendre d’autres classes mais d’interfaces ou de classes abstraites</p>
+		  <i>✅ DIP : Dependency Inversion Principle (SOLI<b>D</b>)</i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+class MessageService {
+  send(msg) {}
+}
+
+class EmailService extends MessageService {
+  send(msg) { console.log(msg); }
+}
+
+class OrderManager {
+  constructor(service) {
+	this.service = service;
+  }
+
+  notify(message) {
+	this.service.send(message);
+  }
+}
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+class MessageService:
+	def send(self, message):
+		pass
+
+class EmailService(MessageService):
+	def send(self, message):
+		print(f"Email envoyé : {message}")
+
+class OrderManager:
+	def __init__(self, service):
+		self.service = service
+
+	def notify(self):
+		self.service.send("Commande confirmée")
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+public interface IMessageService
+{
+	void Send(string message);
+}
+
+public class EmailService : IMessageService
+{
+	public void Send(string message)
+	{
+		Console.WriteLine($"Email envoyé : {message}");
+	}
+}
+
+public class OrderManager
+{
+	private readonly IMessageService _service;
+
+	public OrderManager(IMessageService service)
+	{
+		_service = service;
+	}
+
+	public void Notify()
+	{
+		_service.Send("Commande confirmée");
+	}
+}
+			</span>
+		  </div>
+		</div>
+		<div class="card pas-bien">
+		  <h2>❌ Pas Bien</h2>
+		  <p>Coder maintenant une fonctionnalité qu'on estime utile pour plus tard</p>
+		  <i>YAGNI : You Aren’t Gonna Need It</i>
+		  <div class="bloc-code">
+			<span class="lang-label">JavaScript</span>
+			<span class="lang-code">
+function calculerTotal(prix, tva, remise = 0, primeAnniversaire = 0) {
+  const total = prix + (prix * tva);
+  // Les autres paramètres ne servent à rien pour le moment
+  return total;
+}
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">Python</span>
+			<span class="lang-code">
+def calculer_total(prix, tva, remise=0, prime_anniversaire=0):
+	total = prix + (prix * tva)
+	# Les autres paramètres ne servent pas encore
+	return total
+			</span>
+		  </div>
+		  <div class="bloc-code">
+			<span class="lang-label">C#</span>
+			<span class="lang-code">
+public decimal CalculerTotal(decimal prix, decimal tva, decimal remise = 0, decimal primeAnniversaire = 0)
+{
+	decimal total = prix + (prix * tva);
+	// Les autres paramètres sont inutiles pour le moment
+	return total;
+}
+			</span>
+		  </div>
+		</div>
+		<div class="card modere">
+		  <h2>⚠️ Bien avec modération</h2>
+		  <p>Utiliser des <a href="https://refactoring.guru/design-patterns">design patterns</a></p>
+		  <i>Utile si adapté, à éviter en excès ou pour faire joli</i>
+		  <img src="images/design.webp" style="width: 100%;margin-top: 20px;" alt="Design">
+		</div>
+	  </div>
+	</body>
+</html>
+ 

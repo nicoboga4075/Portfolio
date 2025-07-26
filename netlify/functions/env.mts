@@ -1,8 +1,7 @@
 import { Context } from "@netlify/functions";
 
-export default async (req: Request, context: Context) => {
+export default async (req: Request, context: Context) : Promise<Response> => {
   const referer = req.headers.get("referer") || "";
-  const userAgent = req.headers.get("user-agent") || "";
 
   const allowedReferers = [
     "http://localhost:8888",
