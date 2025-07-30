@@ -9,7 +9,7 @@ status-job:
   tags: 
     - windows-local
   script:
-     - ./runner_status.ps1
+     - powershell -ExecutionPolicy Bypass -File ./runner_status.ps1
   
 build-job:
   stage: build
@@ -17,6 +17,14 @@ build-job:
     - windows-local
   script:
     - echo "Building..."
+    - |
+      if ($env:CI -eq "true") {
+        echo "> npm ci"
+        npm ci
+      } else {
+        echo "> npm install"
+        npm install
+      }
     - echo "Build done!"
 
 test-job:
@@ -25,7 +33,13 @@ test-job:
     - windows-local
   script:
     - echo "Running tests..."
-    - echo "All tests passed."
+    - npm run jest
+    - echo "Run done!"
+  coverage: '/All files\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+([\d\.]+)/'
+  artifacts:
+    paths:
+      - coverage/
+    expire_in: 1 week
     
 cleanup-job:
   stage: teardown

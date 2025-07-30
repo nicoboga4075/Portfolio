@@ -591,7 +591,7 @@ function loadBingo() {
 	const labelBtn = $('#bingo-btn').text();
 
 	$('#bingo-btn').click(function() {
-		if (number == 0) {
+		if (number === 0) {
 			$('#bingo-timer').removeClass();
 			$('#bingo-btn').text('Stop');
 			timer = setInterval(() => {
@@ -994,7 +994,8 @@ function createCircularChart({canvasId, data, backgroundColor, labels, titles, s
 		  const fullTxt = this.toRotate[i];
 
 		  this.txt = this.isDeleting ? fullTxt.substring(0, this.txt.length - 1) : fullTxt.substring(0, this.txt.length + 1);
-		  this.el.html('<span class="wrap">' + this.txt + '</span>');
+		  this.el.html('<span class="wrap"></span>');
+		  this.el.find('.wrap').text(this.txt);
 
 		  const that = this;
 		  let delta = 300 - Math.random() * 100;

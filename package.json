@@ -18,6 +18,8 @@
     "lint:css": "npx stylelint css/style.css css/default.css",
     "lint:js": "npx eslint js/main.js js/default.js",
     "lint:mts": "npx eslint netlify/functions/*.mts",
+    "jest": "npx jest --coverage --passWithNoTests",
+    "simu:ci": "powershell.exe -Command \"Start-Process powershell.exe -ArgumentList '-NoExit','-Command','Set-Location -LiteralPath \\\"%CD%\\\"; ./simulator_ci.ps1' -Verb RunAs\"",
     "uglify:js": "for file in js/*.js; do terser \"$file\" --compress --mangle --output \"js/$(basename \"$file\")\"; done"
   },
   "auto-changelog": {
@@ -59,6 +61,7 @@
   ],
   "dependencies": {
     "auto-changelog": "^2.5.0",
+    "jest": "^30.0.5",
     "terser": "^5.41.0"
   },
   "devDependencies": {
