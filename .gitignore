@@ -1292,3 +1292,6 @@ xcuserdata/
 
 # Video subtitles
 *.srt
+
+# Reports
+/reports*/
