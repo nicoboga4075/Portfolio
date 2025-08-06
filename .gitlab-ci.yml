@@ -37,8 +37,11 @@ test-job:
     - echo "Run done!"
   coverage: '/All files\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+([\d\.]+)/'
   artifacts:
+    reports:
+      junit: reports/junit.xml
     paths:
       - coverage/
+      - reports/
     expire_in: 1 week
     
 cleanup-job:
