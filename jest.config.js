@@ -6,5 +6,11 @@ module.exports = {
   ],
   testPathIgnorePatterns: ["/node_modules/", "/docs/"],
   modulePathIgnorePatterns: ["/docs/"],
-  coverageDirectory: "coverage"
+  coverageDirectory: "coverage",
+  testEnvironment: "node",
+  verbose: true,
+  reporters: [
+    "default",
+    [ "jest-junit", { outputDirectory: "./reports", outputName: "junit.xml" } ]
+  ]
 };

@@ -9,7 +9,9 @@ status-job:
   tags: 
     - windows-local
   script:
-     - powershell -ExecutionPolicy Bypass -File ./runner_status.ps1
+    - powershell -ExecutionPolicy Bypass -File ./runner_status.ps1
+  artifacts:
+   expire_in: 1 day  
   
 build-job:
   stage: build
@@ -26,6 +28,10 @@ build-job:
         npm install
       }
     - echo "Build done!"
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 month
 
 test-job:
   stage: test
@@ -37,8 +43,11 @@ test-job:
     - echo "Run done!"
   coverage: '/All files\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+([\d\.]+)/'
   artifacts:
+    reports:
+      junit: reports/junit.xml
     paths:
       - coverage/
+      - reports/
     expire_in: 1 week
     
 cleanup-job:
@@ -47,4 +56,6 @@ cleanup-job:
     - windows-local
   script:
     - Get-ChildItem -Path "C:\GitLab-Runner\builds" -Recurse | Remove-Item -Force -Recurse
+  artifacts:
+    expire_in: 1 day 
     
