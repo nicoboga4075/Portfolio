@@ -26,6 +26,9 @@ build-job:
         npm install
       }
     - echo "Build done!"
+  artifacts:
+    paths:
+      - node_modules/
 
 test-job:
   stage: test

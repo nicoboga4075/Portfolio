@@ -11,6 +11,6 @@ module.exports = {
   verbose: true,
   reporters: [
     "default",
-    "jest-junit"
+    [ "jest-junit", { outputDirectory: "./reports", outputName: "junit.xml" } ]
   ]
 };
