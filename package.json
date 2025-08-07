@@ -73,7 +73,7 @@
     "htmllint-cli": "^0.0.7",
     "jest": "^30.0.5",
     "jest-junit": "^16.0.0",
-    "stylelint": "^16.23.0",
+    "stylelint": "^16.23.1",
     "stylelint-config-standard": "^39.0.0",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.39.0"
