@@ -1,6 +1,6 @@
 {
   "name": "Portfolio",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "This project is deployed on **Netlify** : https://nicoboga.netlify.app",
   "scripts": {
     "build": "npm run uglify:js",
