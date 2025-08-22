@@ -1,47 +1,35 @@
+---
+permalink: "policy_fr.html"
+---
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<title>Politique de confidentialité</title>
-		<meta charset="utf-8">
-		<meta name="google" content="notranslate">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="author" content="Nicolas BOGALHEIRO">
-		<meta name="description" content="Politique de confidentialité">
-		<meta name="theme-color" content="#ffffff">
-		<meta http-equiv="Content-Language" content="fr_FR">
-		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
-		<base href="../../">
-		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-		<link rel="manifest" href="site.webmanifest">
-		<link rel="stylesheet" href="css/default.css">
-		<script src="js/default.js"></script>
-	</head>
-	<body onload="initPage()">
-		<h1>Politique de confidentialité</h1>
-		<i>Mis à jour le 7 décembre 2024</i>
-		<div class="language-switch d-flex align-items-center justify-content-center">
-			<span class="lang-text">EN</span>
-			<label class="toggle-container">
-			   <input id="language-toggle" type="checkbox">
-			   <span class="toggle-slider"></span>
-			</label>
-			<span class="lang-text on">FR</span>
+    <head>
+      <title>Portfolio - Politique de confidentialité</title>
+      {% include "metas.html" %}
+      <meta name="description" content="Politique de confidentialité">
+      <meta http-equiv="Content-Language" content="fr_FR">
+      {% include "poppins.html" %}
+      <base href="../../">
+      {% include "manifest.html" %}
+      {% include "default.html" %}
+    </head>
+    <body onload="initPage()">
+        <h1>Politique de confidentialité</h1>
+        <i>Mis à jour le 7 décembre 2024</i>
+        {% include "switcher_fr.html" %}
+        <div>
+            <h2>Quelles données sont collectées ?</h2>
+            <p>Les données personnelles utilisées sont celles que l'utilisateur fournit explicitement dans le formulaire de contact : nom de l'expéditeur, objet du mail et contenu du message. Ces informations sont intégrées dans un email envoyé via l'API Gmail et ne sont pas conservées sur le serveur de l'application. Lors de la connexion via OAuth (authentification manuelle), votre adresse email est récupérée depuis votre compte Google. Aucune autre donnée personnelle ou sensible n'est collectée ou utilisée.</p>
+            <h2>Comment les données sont utilisées ?</h2>
+            <p>Les informations collectées (notamment votre adresse e-mail) sont utilisées exclusivement pour l'envoi du message via le formulaire de contact. Aucune autre utilisation n'est faite de ces données, sauf pour des fins techniques liées à l'envoi de l'email.</p>
+            <h2>Comment les données sont stockées et sécurisées ?</h2>
+            <p>L'adresse email est stockée de manière sécurisée, en conformité avec les normes de sécurité en vigueur, dans votre navigateur sous forme d'un token d'accès nécessaire pour interagir avec l'API Gmail. Ce token n'est accessible qu'aux personnes ou systèmes autorisés dans le cadre de l'envoi du message. Le transfert des données entre votre appareil et l'application se fait par connexion sécurisée (HTTPS).</p>
+            <h2>Partage des données</h2>
+            <p>Les informations collectées (notamment votre adresse e-mail) ne seront pas partagées, vendues ou utilisées à des fins commerciales.</p>
+            <h2>Conservation et suppression des données</h2>
+            <p>Nous conserverons vos renseignements personnels pendant la durée nécessaire pour atteindre les objectifs énoncés dans la présente politique de confidentialité, à moins qu'une période de conservation plus longue ne soit requise ou permise par la loi. Le token d'accès nécessaire à l'authentification via l'API Gmail est conservé de manière sécurisée et est automatiquement supprimé en cas d'erreur ou obsolète après une inactivité prolongée. Vous avez la possibilité de supprimer ces données manuellement en effaçant les cookies ou les données de votre navigateur. Par défaut, le token d'accès expire après 1 heure, conformément aux règles de Google. Aucune donnée n'est conservée une fois le message envoyé. Si vous rencontrez des erreurs répétées pour l'envoi du message, je vous suggère de rafraîchir la page ou d'ouvrir un nouvel onglet.</p>
+            <i>Pour toute question relative à vos données personnelles, vous pouvez me contacter via le formulaire.</i>
         </div>
-		<div>
-			<h2>Quelles données sont collectées ?</h2>
-			<p>Les données personnelles utilisées sont celles que l'utilisateur fournit explicitement dans le formulaire de contact : nom de l'expéditeur, objet du mail et contenu du message. Ces informations sont intégrées dans un email envoyé via l'API Gmail et ne sont pas conservées sur le serveur de l'application. Lors de la connexion via OAuth (authentification manuelle), votre adresse email est récupérée depuis votre compte Google. Aucune autre donnée personnelle ou sensible n'est collectée ou utilisée.</p>
-			<h2>Comment les données sont utilisées ?</h2>
-			<p>Les informations collectées (notamment votre adresse e-mail) sont utilisées exclusivement pour l'envoi du message via le formulaire de contact. Aucune autre utilisation n'est faite de ces données, sauf pour des fins techniques liées à l'envoi de l'email.</p>
-			<h2>Comment les données sont stockées et sécurisées ?</h2>
-			<p>L'adresse email est stockée de manière sécurisée, en conformité avec les normes de sécurité en vigueur, dans votre navigateur sous forme d'un token d'accès nécessaire pour interagir avec l'API Gmail. Ce token n'est accessible qu'aux personnes ou systèmes autorisés dans le cadre de l'envoi du message. Le transfert des données entre votre appareil et l'application se fait par connexion sécurisée (HTTPS).</p>
-			<h2>Partage des données</h2>
-			<p>Les informations collectées (notamment votre adresse e-mail) ne seront pas partagées, vendues ou utilisées à des fins commerciales.</p>
-			<h2>Conservation et suppression des données</h2>
-			<p>Nous conserverons vos renseignements personnels pendant la durée nécessaire pour atteindre les objectifs énoncés dans la présente politique de confidentialité, à moins qu'une période de conservation plus longue ne soit requise ou permise par la loi. Le token d'accès nécessaire à l'authentification via l'API Gmail est conservé de manière sécurisée et est automatiquement supprimé en cas d'erreur ou obsolète après une inactivité prolongée. Vous avez la possibilité de supprimer ces données manuellement en effaçant les cookies ou les données de votre navigateur. Par défaut, le token d'accès expire après 1 heure, conformément aux règles de Google. Aucune donnée n'est conservée une fois le message envoyé. Si vous rencontrez des erreurs répétées pour l'envoi du message, je vous suggère de rafraîchir la page ou d'ouvrir un nouvel onglet.</p>
-			<i>Pour toute question relative à vos données personnelles, vous pouvez me contacter via le formulaire.</i>
-		</div>
-		<a id="index">Retour à l'accueil</a>
-	</body>
+        <a id="index">Retour à l'accueil</a>
+    </body>
 </html>

@@ -1,47 +1,35 @@
+---
+permalink: "terms_en.html"
+---
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Terms of use</title>
-		<meta charset="utf-8">
-		<meta name="google" content="notranslate">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="author" content="Nicolas BOGALHEIRO">
-		<meta name="description" content="Terms of use">
-		<meta name="theme-color" content="#ffffff">
-		<meta http-equiv="Content-Language" content="en_US">
-		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
-		<base href="../../">
-		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-		<link rel="manifest" href="site.webmanifest">
-		<link rel="stylesheet" href="css/default.css">
-		<script src="js/default.js"></script>
-	</head>
-	<body onload="initPage()">
-		<h1>Terms of use</h1>
-		<i>Updated on December 4, 2024</i>
-		<div class="language-switch d-flex align-items-center justify-content-center">
-			<span class="lang-text on">EN</span>
-			<label class="toggle-container">
-			   <input id="language-toggle" type="checkbox">
-			   <span class="toggle-slider"></span>
-			</label>
-			<span class="lang-text">FR</span>
+    <head>
+      <title>Portfolio - Terms of use</title>
+      {% include "metas.html" %}
+      <meta name="description" content="Terms of use">
+      <meta http-equiv="Content-Language" content="en_US">
+      {% include "poppins.html" %}
+      <base href="../../">
+      {% include "manifest.html" %}
+      {% include "default.html" %}
+    </head>
+    <body onload="initPage()">
+        <h1>Terms of use</h1>
+        <i>Updated on December 4, 2024</i>
+        {% include "switcher_en.html" %}
+        <div>
+            <h2>Application access</h2>
+            <p>Use of the application is permitted subject to your compliance with the following conditions. You agree not to use it for any illegal purpose.</p>
+            <h2>Data collection via OAuth</h2>
+            <p>The app only collects your email address when you log in through OAuth to send a message through the form. This data is used only for the communication related to your request. No other personal data is collected or shared.</p>
+            <h2>Intellectual property</h2>
+            <p>All application content (text, images, etc.) is copyrighted. You cannot use it without prior permission.</p>
+            <h2>Condition changes</h2>
+            <p>These conditions can be changed at any time. Any changes will be published on this page with the update date.</p>
+            <h2>Applicable law</h2>
+            <p>These terms are governed by French laws.</p>
+            <i>If you have any questions about these terms, you can contact me via the contact form.</i>
         </div>
-		<div>
-			<h2>Application access</h2>
-			<p>Use of the application is permitted subject to your compliance with the following conditions. You agree not to use it for any illegal purpose.</p>
-			<h2>Data collection via OAuth</h2>
-			<p>The app only collects your email address when you log in through OAuth to send a message through the form. This data is used only for the communication related to your request. No other personal data is collected or shared.</p>
-			<h2>Intellectual property</h2>
-			<p>All application content (text, images, etc.) is copyrighted. You cannot use it without prior permission.</p>
-			<h2>Condition changes</h2>
-			<p>These conditions can be changed at any time. Any changes will be published on this page with the update date.</p>
-			<h2>Applicable law</h2>
-			<p>These terms are governed by French laws.</p>
-			<i>If you have any questions about these terms, you can contact me via the contact form.</i>
-		</div>
-		<a id="index">Go back to the homepage</a>
-	</body>
+        <a id="index">Go back to the homepage</a>
+    </body>
 </html>

@@ -3,7 +3,8 @@
   "version": "1.8.2",
   "description": "This project is deployed on **Netlify** : https://nicoboga.netlify.app",
   "scripts": {
-    "build": "npm run uglify:js",
+    "dev": "npm run eleventy && netlify dev",
+    "build": "npm run eleventy && npm run uglify:js",
     "list-gitignore": "bash -c \"shopt -s nullglob; echo gitignore/*.gitignore | tr ' ' '\\n' | grep --color=always 'gitignore/~.gitignore\\|$'\"",
     "concat-gitignore": "bash -c \"for file in gitignore/*.gitignore; do echo;cat \\\"\\$file\\\"; done > .gitignore\"",
     "set-version": "bash -c \"arg=${1:-}; if [[ $arg =~ ^(patch|minor|major)$ ]]; then npm version $arg --no-git-tag-version > /dev/null; elif [[ -n $arg ]]; then npm version $arg --no-git-tag-version > /dev/null; else echo 'Please provide a version or patch/minor/major'; exit 1; fi; echo $(node -p \\\"require('./package.json').version\\\")\" --",
@@ -20,7 +21,8 @@
     "lint:mts": "npx eslint netlify/functions/*.mts",
     "jest": "npx jest --coverage --passWithNoTests",
     "simu:ci": "powershell.exe -Command \"Start-Process powershell.exe -ArgumentList '-NoExit','-Command','Set-Location -LiteralPath \\\"%CD%\\\"; ./simulator_ci.ps1' -Verb RunAs\"",
-    "uglify:js": "for file in js/*.js; do terser \"$file\" --compress --mangle --output \"js/$(basename \"$file\")\"; done"
+    "uglify:js": "for file in js/*.js; do terser \"$file\" --compress --mangle --output \"js/$(basename \"$file\")\"; done",
+    "eleventy": "npx eleventy"
   },
   "auto-changelog": {
     "output": "CHANGELOG.md",
@@ -57,13 +59,16 @@
     "Codacy",
     "Git",
     "GitHub",
-    "GitLab"
+    "GitLab",
+    "Eleventy",
+    "Linkerz"
   ],
   "dependencies": {
     "auto-changelog": "^2.5.0",
     "terser": "^5.41.0"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
     "@eslint/js": "^9.33.0",
     "@netlify/functions": "^4.2.1",
     "@typescript-eslint/eslint-plugin": "^8.39.1",

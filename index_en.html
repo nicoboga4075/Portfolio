@@ -1,62 +1,23 @@
+---
+permalink: "index_en.html"
+---
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+    <head>
       <title>Portfolio</title>
-      <meta charset="utf-8">
-      <meta name="google" content="notranslate">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta http-equiv="Content-Language" content="en_US">
-      <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://accounts.google.com https://apis.google.com https://www.google.com https://www.gstatic.com https://www.googletagmanager.com 'unsafe-inline'; object-src 'none';">
-      <meta name="author" content="Nicolas BOGALHEIRO">
-      <meta name="title" property="og:title" content="Portfolio">
-      <meta name="image" property="og:image" content="https://nicoboga.netlify.app/images/view.png">
+      {% include "metas.html" %}
       <meta name="description" content="Portfolio of a software engineer showcasing projects, skills and experience in tech and development">
-      <meta name="theme-color" content="#ffffff">
-      <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-      <link rel="dns-prefetch" href="https://www.gstatic.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-      <link rel="preconnect" href="https://apis.google.com">
-      <link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+	  <meta http-equiv="Content-Language" content="en_US">
+      {% include "poppins.html" %}
       <base href="../">
-      <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-      <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-      <link rel="manifest" href="site.webmanifest">
-      <link rel="stylesheet" href="css/animate.css">
-      <link rel="stylesheet" href="css/owl-carousel.css">
-      <link rel="preload" href="css/magnific-popup.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-      <link rel="stylesheet" href="css/aos.css">
-      <link rel="preload" href="css/flaticon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-      <link rel="preload" href="css/icomoon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-      <link rel="stylesheet" href="css/bootstrap.min.css">
-      <link rel="stylesheet" href="css/style.css">
-   </head>
-   <body data-spy="scroll" data-target="#ftco-navbar" data-offset="300" onload="initPage()">
+      {% include "manifest.html" %}
+      {% include "links.html" %}
+    </head>
+    <body data-spy="scroll" data-target="#ftco-navbar" data-offset="300" onload="initPage()">
       <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar" aria-label="Main navigation">
          <div class="container">
-            <a id="index" class="navbar-brand"><span>P</span>ortfolio<sup id="version-badge"><i class="icon-history"></i></sup></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="icon-menu"></span> Menu
-            </button>
-            <div class="collapse navbar-collapse" id="ftco-nav">
-               <ul class="navbar-nav nav ml-auto">
-                  <li class="nav-item"><a class="nav-link"><span>Home</span></a></li>
-                  <li class="nav-item"><a class="nav-link"><span>About</span></a></li>
-                  <li class="nav-item"><a class="nav-link"><span>Resume</span></a></li>
-                  <li class="nav-item"><a class="nav-link"><span>Services</span></a></li>
-                  <li class="nav-item"><a class="nav-link"><span>Projects</span></a></li>
-                  <li class="nav-item"><a class="nav-link"><span>Blog</span></a></li>
-                  <li class="nav-item"><a class="nav-link"><span>Contact</span></a></li>
-               </ul>
-            </div>
-            <div class="language-switch d-flex align-items-center justify-content-center">
-                <span class="lang-text on">EN</span>
-                <label class="toggle-container">
-                   <input id="language-toggle" type="checkbox">
-                   <span class="toggle-slider"></span>
-                </label>
-                <span class="lang-text off">FR</span>
-            </div>
+            {% include "nav_en.html" %}
+            {% include "switcher_en.html" %}
          </div>
       </nav>
       <section class="hero-wrap js-fullheight">
@@ -90,22 +51,22 @@
                   <div class="img-about img d-flex align-items-stretch">
                      <div class="overlay"></div>
                      <div id="profile" class="img d-flex align-self-stretch align-items-center">
-						<div class="bulle-bd text-center bg-white">
-							Faster, Higher, Stronger - Together !
-						</div>
-					 </div>
+                        <div class="bulle-bd text-center bg-white">
+                            Faster, Higher, Stronger - Together !
+                        </div>
+                     </div>
                   </div>
                </div>
                <div class="col-md-6 col-lg-6 pl-md-5 py-5">
                   <div class="row justify-content-start pb-3">
                      <div class="col-md-12 heading-section ftco-animate">
                         <h2 class="mb-4">Who am I ?</h2>
-                        <p>Consultant working for <a target="_blank" href="https://astekgroup.fr/?lang=en">Astek</a> on a assignment at <a target="_blank" href="https://www.alstom.com">Alstom</a></p>
+                        <p>Consultant working for <a target="_blank" rel="noopener" href="https://astekgroup.fr/?lang=en">Astek</a> on a assignment at <a target="_blank" rel="noopener" href="https://www.alstom.com">Alstom</a></p>
                         <ul class="about-info mt-4 px-md-0 px-2">
                            <li class="d-flex"><span>Name :</span> <span class="author"></span></li>
                            <li class="d-flex"><span>Age :</span> <span class="age"></span></li>
                            <li class="d-flex"><span>Job :</span> <span>Engineer</span></li>
-                           <li class="d-flex"><span>School Year :</span> <span><a target="_blank" href="https://www.esilv.fr/en">ESILV</a> 2021</span></li>
+                           <li class="d-flex"><span>School Year :</span> <span><a target="_blank" rel="noopener" href="https://www.esilv.fr/en">ESILV</a> 2021</span></li>
                            <li class="d-flex"><span>Email :</span> <span class="email"></span></li>
                         </ul>
                      </div>
@@ -117,49 +78,29 @@
                            <span>Years of experience</span>
                         </p>
                         <p class="mb-4">
-                           <a target="_blank" href="docs/public/CV_en.pdf" class="btn btn-primary py-3 px-3">Download CV</a>
+                           <a target="_blank" rel="noopener" href="docs/public/CV_en.pdf" class="btn btn-primary py-3 px-3">Download CV</a>
                         </p>
-						<p>
-						   <i class="icon-upload"></i>&nbsp;&nbsp;<span id="last-update-date"></span>
-						</p>
+                        <p>
+                           <i class="icon-upload"></i>&nbsp;&nbsp;<span id="last-update-date"></span>
+                        </p>
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </section>
-      <section class="ftco-section ftco-partner d-none d-sm-flex">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm ftco-animate">
-                  <a class="partner" target="_blank" href="https://www.microsoft.com"><img src="images/partner-1.png" width="1000" height="406" class="img-fluid" alt="Microsoft" loading="lazy"></a>
-               </div>
-               <div class="col-sm ftco-animate">
-                  <a class="partner" target="_blank" href="https://www.android.com"><img src="images/partner-2.png" width="1000" height="406" class="img-fluid" alt="Android" loading="lazy"></a>
-               </div>
-               <div class="col-sm ftco-animate">
-                  <a class="partner" target="_blank" href="https://www.java.com"><img src="images/partner-3.png" width="1000" height="406" class="img-fluid" alt="Java" loading="lazy"></a>
-               </div>
-               <div class="col-sm ftco-animate">
-                  <a class="partner" target="_blank" href="https://www.google.com"><img src="images/partner-4.png" width="1000" height="406" class="img-fluid" alt="Google" loading="lazy"></a>
-               </div>
-               <div class="col-sm ftco-animate">
-                  <a class="partner" target="_blank" href="https://www.adobe.com"><img src="images/partner-5.png" width="1000" height="406" class="img-fluid" alt="Adobe" loading="lazy"></a>
-               </div>
-            </div>
-         </div>
-      </section>
+      {% include "partners.html" %}
       <section class="ftco-section ftco-hireme img d-none d-sm-flex">
-		  <div class="overlay"></div>
-		  <div class="container">
-			  <div class="row justify-content-center">
-				  <div class="col-md-7 ftco-animate text-center">
-					  <h2><span>Attentive to opportunities</span></h2>
-					  <p>In Paris area</p>
-					  <p class="mb-0"><a target="_blank" href="https://www.linkedin.com/messaging/thread/new" class="btn btn-primary py-3 px-5">Contact me</a></p>
-				  </div>
-			  </div>
-		  </div>
+          <div class="overlay"></div>
+          <div class="container">
+              <div class="row justify-content-center">
+                  <div class="col-md-7 ftco-animate text-center">
+                      <h2><span>Attentive to opportunities</span></h2>
+                      <p>In Paris area</p>
+                      <p class="mb-0"><a target="_blank" rel="noopener" href="https://www.linkedin.com/messaging/thread/new" class="btn btn-primary py-3 px-5">Contact me</a></p>
+                  </div>
+              </div>
+          </div>
       </section>
       <section class="ftco-section ftco-no-pb" id="resume-section">
          <div class="container">
@@ -184,7 +125,7 @@
                         <div class="text pl-3">
                            <span class="date">2020 - 2021</span>
                            <h2>University Master in Computer Science</h2>
-                           <span class="position"><a target="_blank" href="https://www.uqac.ca">UQAC</a> (Chicoutimi, CAN)</span>
+                           <span class="position"><a target="_blank" rel="noopener" href="https://www.uqac.ca">UQAC</a> (Chicoutimi, CAN)</span>
                            <p></p>
                         </div>
                      </div>
@@ -193,7 +134,7 @@
                         <div class="text pl-3">
                            <span class="date">2018 - 2021</span>
                            <h2>Engineering Diploma in Informatics</h2>
-                           <span class="position"><a target="_blank" href="https://www.esilv.fr/en">ESILV</a> (Paris La Défense, FRA)</span>
+                           <span class="position"><a target="_blank" rel="noopener" href="https://www.esilv.fr/en">ESILV</a> (Paris La Défense, FRA)</span>
                            <p></p>
                         </div>
                      </div>
@@ -203,21 +144,21 @@
                         <div class="text pl-3">
                            <span class="date">2015 - 2018</span>
                            <h2>Prepa MPSI/MP</h2>
-                           <span class="position"><a target="_blank" href="https://www.janson-de-sailly.fr">Janson de Sailly</a> (Paris 16e, FRA)</span>
+                           <span class="position"><a target="_blank" rel="noopener" href="https://www.janson-de-sailly.fr">Janson de Sailly</a> (Paris 16e, FRA)</span>
                            <p></p>
                         </div>
                      </div>
                   </div>
                   <div id="experiences" class="page">
                      <h2 class="heading">Experiences</h2>
-					 <div class="resume-wrap d-flex ftco-animate">
+                     <div class="resume-wrap d-flex ftco-animate">
                         <div class="icon d-flex align-items-center justify-content-center">
                            <span class="icon-users"></span>
                         </div>
                         <div class="text pl-3">
                            <span class="date">December 2024 - Today</span>
                            <h2>Consultant Engineer</h2>
-                           <span class="position"><a target="_blank" href="https://astekgroup.fr/?lang=en">Astek</a></span>
+                           <span class="position"><a target="_blank" rel="noopener" href="https://astekgroup.fr/?lang=en">Astek</a></span>
                            <p>Lyon</p>
                         </div>
                      </div>
@@ -228,7 +169,7 @@
                         <div class="text pl-3">
                            <span class="date">June 2024 - September 2024</span>
                            <h2>Security Engineer</h2>
-                           <span class="position"><a target="_blank" href="https://www.bassetti-group.com/en">Bassetti Group</a></span>
+                           <span class="position"><a target="_blank" rel="noopener" href="https://www.bassetti-group.com/en">Bassetti Group</a></span>
                            <p>Lyon</p>
                         </div>
                      </div>
@@ -239,7 +180,7 @@
                         <div class="text pl-3">
                            <span class="date">July 2021 - May 2024</span>
                            <h2>Software Engineer</h2>
-                           <span class="position"><a target="_blank" href="https://www.soft-concept.com/index-lang-en.html">Soft Concept</a></span>
+                           <span class="position"><a target="_blank" rel="noopener" href="https://www.soft-concept.com/index-lang-en.html">Soft Concept</a></span>
                            <p>Lyon</p>
                         </div>
                      </div>
@@ -250,7 +191,7 @@
                         <div class="text pl-3">
                            <span class="date">March 2020 - August 2020</span>
                            <h2>Full Stack Developer</h2>
-                           <span class="position"><a target="_blank" href="https://cyberprotect.one">Cyberprotect</a></span>
+                           <span class="position"><a target="_blank" rel="noopener" href="https://cyberprotect.one">Cyberprotect</a></span>
                            <p>Bron</p>
                         </div>
                      </div>
@@ -261,7 +202,7 @@
                         <div class="text pl-3">
                            <span class="date">June 2019 - August 2019</span>
                            <h2>Web Assistant</h2>
-                           <span class="position"><a target="_blank" href="https://en.galadrim.fr">Galadrim</a></span>
+                           <span class="position"><a target="_blank" rel="noopener" href="https://en.galadrim.fr">Galadrim</a></span>
                            <p>Paris</p>
                         </div>
                      </div>
@@ -272,267 +213,163 @@
                         <div class="text pl-3">
                            <span class="date">October 2018 - April 2019</span>
                            <h2>Student Project Manager</h2>
-                           <span class="position"><a target="_blank" href="https://www.cgi.com/fr">CGI</a></span>
+                           <span class="position"><a target="_blank" rel="noopener" href="https://www.cgi.com/fr">CGI</a></span>
                            <p>Paris La Défense</p>
                         </div>
                      </div>
                   </div>
                   <div id="skills" class="page">
-					 <h2 class="heading">Skills</h2>
-					 <div class="chart-container d-flex justify-content-center mb-5"><canvas id="skillsChart"></canvas></div>
-					 <div class="row progress-circle mb-5">
-						<div class="col-lg-4 mb-4">
-						   <div class="bg-white rounded-lg shadow p-4">
-							  <h2 class="h5 font-weight-bold text-center mb-4">C#</h2>
-							  <div class="block-21 mb-4 d-flex justify-content-center">
-								<a id="csharp" class="blog-img main-language" target="_blank" href="https://learn.microsoft.com/en-us/dotnet/csharp" aria-label="C#"></a>										
-							  </div>
-							  <div class="row text-center mt-4">
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">.NET</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">IIS</div>
-									<span class="small text-gray"></span>
-								 </div>
-							  </div>
-						   </div>
-						</div>
-						<div class="col-lg-4 mb-4">
-						   <div class="bg-white rounded-lg shadow p-4">
-							  <h2 class="h5 font-weight-bold text-center mb-4">Python</h2>
-							  <div class="block-21 mb-4 d-flex justify-content-center">
-								<a id="python" class="blog-img main-language" target="_blank" href="https://www.python.org" aria-label="Python"></a>				
-							  </div>
-							  <div class="row text-center mt-4">
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">Flask</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">FastAPI</div>
-									<span class="small text-gray"></span>
-								 </div>
-							  </div>
-						   </div>
-						</div>
-						<div class="col-lg-4 mb-4">
-						   <div class="bg-white rounded-lg shadow p-4">
-							  <h2 class="h5 font-weight-bold text-center mb-4">JavaScript</h2>
-							  <div class="block-21 mb-4 d-flex justify-content-center">
-								<a id="javascript" class="blog-img main-language" target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" aria-label="JavaScript"></a>										
-							  </div>
-							  <div class="row text-center mt-4">
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">Angular</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">React</div>
-									<span class="small text-gray"></span>
-								 </div>
-							  </div>
-						   </div>
-						</div>
-					 </div>
-					 <div class="row progress-circle mb-5">
-						<div class="col-lg-4 mb-4">
-						   <div class="bg-white rounded-lg shadow p-4">
-							  <h2 class="h5 font-weight-bold text-center mb-4">SQL</h2>
-							  <div class="block-21 mb-4 d-flex justify-content-center">
-								<a id="db" class="blog-img" target="_blank" href="https://sql.sh" aria-label="SQL"></a>										
-							  </div>
-							  <div class="row text-center mt-4">
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">Postgre</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">SQLite</div>
-									<span class="small text-gray"></span>
-								 </div>
-							  </div>
-						   </div>
-						</div>
-						<div class="col-lg-4 mb-4">
-						   <div class="bg-white rounded-lg shadow p-4">
-							  <h2 class="h5 font-weight-bold text-center mb-4">Project</h2>
-							  <div class="block-21 mb-4 d-flex justify-content-center">
-								<a id="project" class="blog-img" target="_blank" href="https://www.geeksforgeeks.org/difference-between-agile-model-and-v-model" aria-label="Project"></a>										
-							  </div>
-							  <div class="row text-center mt-4">
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">Agile</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">V Model</div>
-									<span class="small text-gray"></span>
-								 </div>
-							  </div>
-						   </div>
-						</div>
-						<div class="col-lg-4 mb-4">
-						   <div class="bg-white rounded-lg shadow p-4">
-							  <h2 class="h5 font-weight-bold text-center mb-4"><a target="_blank" href="https://medium.com/env0/top-devops-tools-for-infrastructure-automation-in-2025-cae2288e8314">DevOps</a></h2>
-							  <div class="block-21 mb-4 d-flex justify-content-center">
-								<a id="devops" class="blog-img" target="_blank" href="https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-devops" aria-label="DevOps"></a>										
-							  </div>
-							  <div class="row text-center mt-4">
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0"><a target="_blank" href="https://medium.com/@jake.page91/the-guide-to-git-i-never-had-a89048d4703a">Git</a></div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">Docker</div>
-									<span class="small text-gray"></span>
-								 </div>
-							  </div>
-						   </div>
-						</div>
-					 </div>
-					 <div class="row progress-circle mb-5">
-						<div class="col-lg-4 mb-4">
-						   <div class="bg-white rounded-lg shadow p-4">
-							  <h2 class="h5 font-weight-bold text-center mb-4">Design</h2>
-							  <div class="block-21 mb-4 d-flex justify-content-center">
-								<a id="design" class="blog-img" target="_blank" href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure" aria-label="Design"></a>										
-							  </div>
-							  <div class="row text-center mt-4">
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">HTML</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">CSS</div>
-									<span class="small text-gray"></span>
-								 </div>
-							  </div>
-						   </div>
-						</div>
-						<div class="col-lg-4 mb-4">
-						   <div class="bg-white rounded-lg shadow p-4">
-							  <h2 class="h5 font-weight-bold text-center mb-4">Add-ons</h2>
-							  <div class="block-21 mb-4 d-flex justify-content-center">
-								<a id="dark" class="blog-img" target="_blank" href="https://www.geeksforgeeks.org/differences-between-bootstrap-and-jquery-ui" aria-label="Add-ons"></a>										
-							  </div>
-							  <div class="row text-center mt-4">
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">Bootstrap</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">jQuery</div>
-									<span class="small text-gray"></span>
-								 </div>
-							  </div>
-						   </div>
-						</div>
-						<div class="col-lg-4 mb-4">
-						   <div class="bg-white rounded-lg shadow p-4">
-							  <h2 class="h5 font-weight-bold text-center mb-4">Cybersecurity</h2>
-							  <div class="block-21 mb-4 d-flex justify-content-center">
-								<a id="cyber" class="blog-img" target="_blank" href="https://owasp.org/www-community/OWASP_Risk_Rating_Methodology" aria-label="Cybersecurity"></a>										
-							  </div>
-							  <div class="row text-center mt-4">
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">OWASP</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">CVSS</div>
-									<span class="small text-gray"></span>
-								 </div>
-							  </div>
-						   </div>
-						</div>
-					 </div>
-					 <div class="row progress-circle mb-5">
-						<div class="col-lg-12 mb-4">
-						   <div class="bg-white rounded-lg shadow p-4">
-							  <h2 class="h5 font-weight-bold text-center mb-4">+</h2>
-							  <div class="block-21 mb-4 d-flex justify-content-center">
-								<a id="survey" class="blog-img" target="_blank" href="https://www.linkedin.com/in/nicolas-bogalheiro-126a7616b/?locale=en_US" aria-label="+"></a>										
-							  </div>
-							  <div class="row text-center mt-4">
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">Ethnos</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">Teexma</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">Net-Survey</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">Web-Reports</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">Office</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">Postman</div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0">Visual Studio</div>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">Pyzo</div>
-								 </div>
-								 <div class="col-6 border-right">
-									<div class="h5 font-weight-bold mb-0"><a target="_blank" href="https://leapcell.medium.com/leapcell-the-next-gen-serverless-platform-for-python-app-hosting-0722d1b32047">SQLAlchemy</a></div>
-									<span class="small text-gray"></span>
-								 </div>
-								 <div class="col-6">
-									<div class="h5 font-weight-bold mb-0">Powershell</div>
-									<span class="small text-gray"></span>
-								 </div>
-							  </div>
-						   </div>
-						</div>
-					 </div>
-				  </div>
+                     <h2 class="heading">Skills</h2>
+                     <div class="chart-container d-flex justify-content-center mb-5"><canvas id="skillsChart"></canvas></div>
+                     {% include "languages.html" %} 
+                     <div class="row progress-circle mb-5">
+                        <div class="col-lg-4 mb-4">
+                           <div class="bg-white rounded-lg shadow p-4">
+                              <h2 class="h5 font-weight-bold text-center mb-4">SQL</h2>
+                              <div class="block-21 mb-4 d-flex justify-content-center">
+                                <a id="db" class="blog-img" target="_blank" rel="noopener" href="https://sql.sh" aria-label="SQL"></a>
+                              </div>
+                              <div class="row text-center mt-4">
+                                 <div class="col-6 border-right">
+                                    <div class="h5 font-weight-bold mb-0">Postgre</div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                                 <div class="col-6">
+                                    <div class="h5 font-weight-bold mb-0">SQLite</div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                           <div class="bg-white rounded-lg shadow p-4">
+                              <h2 class="h5 font-weight-bold text-center mb-4">Project</h2>
+                              <div class="block-21 mb-4 d-flex justify-content-center">
+                                <a id="project" class="blog-img" target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/difference-between-agile-model-and-v-model" aria-label="Project"></a>
+                              </div>
+                              <div class="row text-center mt-4">
+                                 <div class="col-6 border-right">
+                                    <div class="h5 font-weight-bold mb-0">Agile</div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                                 <div class="col-6">
+                                    <div class="h5 font-weight-bold mb-0">V Model</div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                           <div class="bg-white rounded-lg shadow p-4">
+                              <h2 class="h5 font-weight-bold text-center mb-4"><a target="_blank" rel="noopener" href="https://medium.com/env0/top-devops-tools-for-infrastructure-automation-in-2025-cae2288e8314">DevOps</a></h2>
+                              <div class="block-21 mb-4 d-flex justify-content-center">
+                                <a id="devops" class="blog-img" target="_blank" rel="noopener" href="https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-devops" aria-label="DevOps"></a>
+                              </div>
+                              <div class="row text-center mt-4">
+                                 <div class="col-6 border-right">
+                                    <div class="h5 font-weight-bold mb-0"><a target="_blank" rel="noopener" href="https://medium.com/@jake.page91/the-guide-to-git-i-never-had-a89048d4703a">Git</a></div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                                 <div class="col-6">
+                                    <div class="h5 font-weight-bold mb-0">Docker</div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row progress-circle mb-5">
+                        <div class="col-lg-4 mb-4">
+                           <div class="bg-white rounded-lg shadow p-4">
+                              <h2 class="h5 font-weight-bold text-center mb-4">Design</h2>
+                              <div class="block-21 mb-4 d-flex justify-content-center">
+                                <a id="design" class="blog-img" target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure" aria-label="Design"></a>
+                              </div>
+                              <div class="row text-center mt-4">
+                                 <div class="col-6 border-right">
+                                    <div class="h5 font-weight-bold mb-0">HTML</div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                                 <div class="col-6">
+                                    <div class="h5 font-weight-bold mb-0">CSS</div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                           <div class="bg-white rounded-lg shadow p-4">
+                              <h2 class="h5 font-weight-bold text-center mb-4">Add-ons</h2>
+                              <div class="block-21 mb-4 d-flex justify-content-center">
+                                <a id="dark" class="blog-img" target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/differences-between-bootstrap-and-jquery-ui" aria-label="Add-ons"></a>
+                              </div>
+                              <div class="row text-center mt-4">
+                                 <div class="col-6 border-right">
+                                    <div class="h5 font-weight-bold mb-0">Bootstrap</div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                                 <div class="col-6">
+                                    <div class="h5 font-weight-bold mb-0">jQuery</div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                           <div class="bg-white rounded-lg shadow p-4">
+                              <h2 class="h5 font-weight-bold text-center mb-4">Cybersecurity</h2>
+                              <div class="block-21 mb-4 d-flex justify-content-center">
+                                <a id="cyber" class="blog-img" target="_blank" rel="noopener" href="https://owasp.org/www-community/OWASP_Risk_Rating_Methodology" aria-label="Cybersecurity"></a>
+                              </div>
+                              <div class="row text-center mt-4">
+                                 <div class="col-6 border-right">
+                                    <div class="h5 font-weight-bold mb-0">OWASP</div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                                 <div class="col-6">
+                                    <div class="h5 font-weight-bold mb-0">CVSS</div>
+                                    <span class="small text-gray"></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     {% include "tools.html" %}
+                  </div>
                   <div id="languages" class="page">
-					<h2 class="heading">Languages</h2>
-					<div class="row">
-					   <div class="col-md-12 animate-box">
-						  <div class="progress-wrap ftco-animate">
-							 <h3>French</h3>
-							 <div class="progress">
-								<div class="progress-bar color-1" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-								   <span>C2</span>
-								</div>
-							 </div>
-						  </div>
-					   </div>
-					   <div class="col-md-12 animate-box">
-						  <div class="progress-wrap ftco-animate">
-							 <h3>English</h3>
-							 <div class="progress">
-								<div class="progress-bar color-2" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-								   <span>B2</span>
-								</div>
-							 </div>
-						  </div>
-					   </div>
-					   <div class="col-md-12 animate-box">
-						  <div class="progress-wrap ftco-animate">
-							 <h3>Spanish</h3>
-							 <div class="progress">
-								<div class="progress-bar color-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-								   <span>A2</span>
-								</div>
-							 </div>
-						  </div>
-					   </div>
-					</div>
+                    <h2 class="heading">Languages</h2>
+                    <div class="row">
+                       <div class="col-md-12 animate-box">
+                          <div class="progress-wrap ftco-animate">
+                             <h3>French</h3>
+                             <div class="progress">
+                                <div class="progress-bar color-1" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                   <span>C2</span>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="col-md-12 animate-box">
+                          <div class="progress-wrap ftco-animate">
+                             <h3>English</h3>
+                             <div class="progress">
+                                <div class="progress-bar color-2" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                                   <span>B2</span>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="col-md-12 animate-box">
+                          <div class="progress-wrap ftco-animate">
+                             <h3>Spanish</h3>
+                             <div class="progress">
+                                <div class="progress-bar color-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                                   <span>A2</span>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
                   </div>
                   <div id="awards" class="page">
                      <h2 class="heading">Awards</h2>
@@ -552,7 +389,7 @@
                            <span class="icon-language"></span>
                         </div>
                         <div class="text pl-3">
-                           <span class="date"> January 2019</span>
+                           <span class="date">January 2019</span>
                            <h2>TOEFL</h2>
                            <span class="position">550</span>
                            <p>B2</p>
@@ -611,8 +448,8 @@
             <div class="row justify-content-center py-5 mt-5">
                <div class="col-md-12 heading-section text-center ftco-animate">
                   <h2 class="mb-4">Services</h2>
-				  <img class="img-fluid" src="images/developer.png" id="developer" alt="Developer Avatar" loading="lazy" height="250" width="150">
-                  <p class="mt-4">Programming, Customer Support &amp; Training</p>			  
+                  <img class="img-fluid" src="images/developer.png" id="developer" alt="Developer Avatar" loading="lazy" height="250" width="150">
+                  <p class="mt-4">Programming, Customer Support &amp; Training</p>
                </div>
             </div>
             <div class="row">
@@ -685,230 +522,210 @@
             </div>
          </div>
       </section>
-	  <section class="ftco-section ftco-project" id="projects-section">
+      <section class="ftco-section ftco-project" id="projects-section">
          <div class="container-fluid px-md-0">
-         	<div class="row no-gutters justify-content-center pb-5">
-			   <div class="col-md-12 heading-section text-center ftco-animate">
-				<h2 class="mb-4">Projects</h2>
-				<p>Welcome to my portfolio ! Here you will find a selection of completed projects and articles written as software engineer.</p>
-				<p>They cover a wide variety of technologies, sectors and work environments. Each of them highlights my hard skills and my ability to adapt to different contexts.</p>
-			   </div>
-			</div>
-         	<div class="row no-gutters">
-				<div class="col-md-4">
-         			<div id="esh" class="project img ftco-animate d-flex justify-content-center align-items-center">
-         				<div class="overlay"></div>
-         				<div class="text text-center p-4">
-         					<h3>Easy Student Housing</h3>
-         					<span>
-								<p><u>Context</u> : <i>CGI</i> Student Contest | Monitored, in quartet (ESILV) | 6 months</p>
-								<p><u>Description</u> : Student housing app (prototype)
-								<br><u>Technologies</u> : Power Point</p>
-								<a class="explore btn btn-light py-3 px-3">Explore</a>
-							</span>
-         				</div>
-         			</div>
-         		</div>
-         		<div class="col-md-4">
-         			<div id="cpmcs" class="project img ftco-animate d-flex justify-content-center align-items-center">
-         				<div class="overlay"></div>
-         				<div class="text text-center p-4">
-         					<h3>CPMCS</h3>
-         					<span>
-								<p><u>Context</u> : Internship at <i>Cyberprotect</i> | Monitored, lonely | 6 months</p>
-								<p><u>Description</u> : Application of maintenance in security condition (MSC)
-								<br><u>Technologies</u> : <b>Python</b> (Flask), Angular, PostgreSQL, Elasticsearch</p>
-								<p>For the sake of privacy, I just do a presentation of the concept.</p>
-								<a class="explore btn btn-light py-3 px-3">Explore</a>
-							</span>
-         				</div>
-         			</div>
-         		</div>
-				<div class="col-md-4">
-         			<div id="crm" class="project img ftco-animate d-flex justify-content-center align-items-center">
-         				<div class="overlay"></div>
-         				<div class="text text-center p-4">
-         					<h3>CRM <i>Elphicom</i></h3>
-							<span>
-								<p><u>Context</u> : Internship at <i>Soft Concept</i> | Monitored, lonely | 3 months</p>
-								<p><u>Description</u> : Customer management software (CRM)
-								<br><u>Technologies</u> : <b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, Net-Survey, Ethnos, Web-Reports</p>
-								<a class="explore btn btn-light py-3 px-3">Explore</a>
-							</span>
-         				</div>
-         			</div>
-         		</div>
-				<div class="col-md-4">
-         			<div id="building" class="project img ftco-animate d-flex justify-content-center align-items-center">
-         				<div class="overlay"></div>
-         				<div class="text text-center p-4">
-         					<h3>EBati <i>Carto Amiante</i></h3>
-							<span>
-								<p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | In pairs | 1 year</p>
-								<p><u>Description</u> : Real estate management software
-								<br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
-								<a class="explore btn btn-light py-3 px-3">Explore</a>
-							</span>
-         				</div>
-         			</div>
-         		</div>
-				<div class="col-md-4">
-         			<div id="sushi" class="project img ftco-animate d-flex justify-content-center align-items-center">
-         				<div class="overlay"></div>
-         				<div class="text text-center p-4">
-         					<h3>JCA <i>Sushi Robots</i></h3>
-							<span>
-								<p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | Lonely | 6 months </p>
-								<p><u>Description</u> : E-learning platform for cooking
-								<br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
-								<a class="explore btn btn-light py-3 px-3">Explore</a>
-							</span>
-         				</div>
-         			</div>
-         		</div>
-				<div class="col-md-4">
-         			<div id="pragma" class="project img ftco-animate d-flex justify-content-center align-items-center">
-         				<div class="overlay"></div>
-         				<div class="text text-center p-4">
-         					<h3><i>Pragma</i> Internal Surveys</h3>
-							<span>
-								<p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 1 year and a half</p>
-								<p><u>Description</u> : Software for internal surveys
-								<br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
-								<a class="explore btn btn-light py-3 px-3">Explore</a>
-							</span>
-         				</div>
-         			</div>
-         		</div>
-				<div class="col-md-4">
-         			<div id="smiley" class="project img ftco-animate d-flex justify-content-center align-items-center">
-         				<div class="overlay"></div>
-         				<div class="text text-center p-4">
-         					<h3>REF230 <i>AFNOR</i></h3>
-							<span>
-								<p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 2 years</p>
-								<p><u>Description</u> : Audit management application for optician certification with <i>Vitalis</i>
-								<br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
-								<a class="explore btn btn-light py-3 px-3">Explore</a>
-							</span>
-         				</div>
-         			</div>
-         		</div>
-				<div class="col-md-4">
-         			<div id="satisfaction" class="project img ftco-animate d-flex justify-content-center align-items-center">
-         				<div class="overlay"></div>
-         				<div class="text text-center p-4">
-         					<h3>Panel <i>MNT</i></h3>
-							<span>
-								<p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | Lonely | 3 months</p>
-								<p><u>Description</u> : Panelist site for the mutual
-								<br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
-								<a class="explore btn btn-light py-3 px-3">Explore</a>
-							</span>
-         				</div>
-         			</div>
-         		</div>
-				<div class="col-md-4">
-         			<div id="health" class="project img ftco-animate d-flex justify-content-center align-items-center">
-         				<div class="overlay"></div>
-         				<div class="text text-center p-4">
-         					<h3>OPALE <i>SNITEM</i></h3>
-							<span>
-								<p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 1 year</p>
-								<p><u>Description</u> : Medical piloting tool with <i>Nexialist</i>
-								<br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
-								<a class="explore btn btn-light py-3 px-3">Explore</a>	
-							</span>
-         				</div>
-         			</div>
-         		</div>
-         	</div>
+             <div class="row no-gutters justify-content-center pb-5">
+               <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4">Projects</h2>
+                <p>Welcome to my portfolio ! Here you will find a selection of completed projects and articles written as software engineer.</p>
+                <p>They cover a wide variety of technologies, sectors and work environments. Each of them highlights my hard skills and my ability to adapt to different contexts.</p>
+               </div>
+            </div>
+             <div class="row no-gutters">
+                <div class="col-md-4">
+                     <div id="esh" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                         <div class="overlay"></div>
+                         <div class="text text-center p-4">
+                             <h3>Easy Student Housing</h3>
+                             <span>
+                                <p><u>Context</u> : <i>CGI</i> Student Contest | Monitored, in quartet (ESILV) | 6 months</p>
+                                <p><u>Description</u> : Student housing app (prototype)
+                                <br><u>Technologies</u> : Power Point</p>
+                                <a class="explore btn btn-light py-3 px-3">Explore</a>
+                            </span>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-md-4">
+                     <div id="cpmcs" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                         <div class="overlay"></div>
+                         <div class="text text-center p-4">
+                             <h3>CPMCS</h3>
+                             <span>
+                                <p><u>Context</u> : Internship at <i>Cyberprotect</i> | Monitored, lonely | 6 months</p>
+                                <p><u>Description</u> : Application of maintenance in security condition (MSC)
+                                <br><u>Technologies</u> : <b>Python</b> (Flask), Angular, PostgreSQL, Elasticsearch</p>
+                                <p>For the sake of privacy, I just do a presentation of the concept.</p>
+                                <a class="explore btn btn-light py-3 px-3">Explore</a>
+                            </span>
+                         </div>
+                     </div>
+                 </div>
+                <div class="col-md-4">
+                     <div id="crm" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                         <div class="overlay"></div>
+                         <div class="text text-center p-4">
+                             <h3>CRM <i>Elphicom</i></h3>
+                            <span>
+                                <p><u>Context</u> : Internship at <i>Soft Concept</i> | Monitored, lonely | 3 months</p>
+                                <p><u>Description</u> : Customer management software (CRM)
+                                <br><u>Technologies</u> : <b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, Net-Survey, Ethnos, Web-Reports</p>
+                                <a class="explore btn btn-light py-3 px-3">Explore</a>
+                            </span>
+                         </div>
+                     </div>
+                 </div>
+                <div class="col-md-4">
+                     <div id="building" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                         <div class="overlay"></div>
+                         <div class="text text-center p-4">
+                             <h3>EBati <i>Carto Amiante</i></h3>
+                            <span>
+                                <p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | In pairs | 1 year</p>
+                                <p><u>Description</u> : Real estate management software
+                                <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
+                                <a class="explore btn btn-light py-3 px-3">Explore</a>
+                            </span>
+                         </div>
+                     </div>
+                 </div>
+                <div class="col-md-4">
+                     <div id="sushi" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                         <div class="overlay"></div>
+                         <div class="text text-center p-4">
+                             <h3>JCA <i>Sushi Robots</i></h3>
+                            <span>
+                                <p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | Lonely | 6 months </p>
+                                <p><u>Description</u> : E-learning platform for cooking
+                                <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
+                                <a class="explore btn btn-light py-3 px-3">Explore</a>
+                            </span>
+                         </div>
+                     </div>
+                 </div>
+                <div class="col-md-4">
+                     <div id="pragma" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                         <div class="overlay"></div>
+                         <div class="text text-center p-4">
+                             <h3><i>Pragma</i> Internal Surveys</h3>
+                            <span>
+                                <p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 1 year and a half</p>
+                                <p><u>Description</u> : Software for internal surveys
+                                <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
+                                <a class="explore btn btn-light py-3 px-3">Explore</a>
+                            </span>
+                         </div>
+                     </div>
+                 </div>
+                <div class="col-md-4">
+                     <div id="smiley" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                         <div class="overlay"></div>
+                         <div class="text text-center p-4">
+                             <h3>REF230 <i>AFNOR</i></h3>
+                            <span>
+                                <p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 2 years</p>
+                                <p><u>Description</u> : Audit management application for optician certification with <i>Vitalis</i>
+                                <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
+                                <a class="explore btn btn-light py-3 px-3">Explore</a>
+                            </span>
+                         </div>
+                     </div>
+                 </div>
+                <div class="col-md-4">
+                     <div id="satisfaction" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                         <div class="overlay"></div>
+                         <div class="text text-center p-4">
+                             <h3>Panel <i>MNT</i></h3>
+                            <span>
+                                <p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | Lonely | 3 months</p>
+                                <p><u>Description</u> : Panelist site for the mutual
+                                <br><u>Technologies</u> : <b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, Net-Survey, Ethnos, Web-Reports</p>
+                                <a class="explore btn btn-light py-3 px-3">Explore</a>
+                            </span>
+                         </div>
+                     </div>
+                 </div>
+                <div class="col-md-4">
+                     <div id="health" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                         <div class="overlay"></div>
+                         <div class="text text-center p-4">
+                             <h3>OPALE <i>SNITEM</i></h3>
+                            <span>
+                                <p><u>Context</u> : Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 1 year</p>
+                                <p><u>Description</u> : Medical piloting tool with <i>Nexialist</i>
+                                <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
+                                <a class="explore btn btn-light py-3 px-3">Explore</a>
+                            </span>
+                         </div>
+                     </div>
+                 </div>
+             </div>
          </div>
       </section>
-	  <section class="ftco-section ftco-counter" id="counter-section">
+      <section class="ftco-section ftco-counter" id="counter-section">
          <div class="container-fluid px-md-5">
-         	<div class="row d-md-flex align-items-center">
-			   <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-				<div class="block-18 shadow">
-				  <div class="text">
-					<strong class="number" id="certifsCount">0</strong>
-					<span>Certifications</span>
-				  </div>
-				</div>
-			   </div>
-			   <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-				<div class="block-18 shadow">
-				  <div class="text">
-					<strong class="number" id="projectsCount">0</strong>
-					<span>Delivered projects</span>
-				  </div>
-				</div>
-			   </div>
-			   <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-				<div class="block-18 shadow">
-				  <div class="text">
-					<strong class="number" id="experiencesCount">0</strong>
-					<span>Work experiences</span>
-				  </div>
-				</div>
-			   </div>
-			   <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-				<div class="block-18 shadow">
-				  <div class="text">
-					<strong class="number" id="countriesCount">0</strong>
-					<span>Visited countries</span>
-				  </div>
-				</div>
-			   </div>
-			</div>
+             <div class="row d-md-flex align-items-center">
+               <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 shadow">
+                  <div class="text">
+                    <strong class="number" id="certifsCount">0</strong>
+                    <span>Certifications</span>
+                  </div>
+                </div>
+               </div>
+               <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 shadow">
+                  <div class="text">
+                    <strong class="number" id="projectsCount">0</strong>
+                    <span>Delivered projects</span>
+                  </div>
+                </div>
+               </div>
+               <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 shadow">
+                  <div class="text">
+                    <strong class="number" id="experiencesCount">0</strong>
+                    <span>Work experiences</span>
+                  </div>
+                </div>
+               </div>
+               <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 shadow">
+                  <div class="text">
+                    <strong class="number" id="countriesCount">0</strong>
+                    <span>Visited countries</span>
+                  </div>
+                </div>
+               </div>
+            </div>
           </div>
-	  </section>
-	  <section class="ftco-section ftco-counter img d-none d-sm-flex" id="carousel-section">
-		  <div class="container-fluid px-md-5 pb-3 pt-3 bg-dark text-white text-center">
-			  <h2 class="text-white">Discover my skills</h2>
-			  <div class="owl-menus d-flex justify-content-center">
-				<span class="owl-menu active" data-target="#hard-skills">Hard skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Practical or technical abilities learned through training or experience"></i></span>
-				<span class="owl-menu" data-target="#soft-skills">Soft skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Personal attributes or interpersonal abilities that enhance how you work and interact with others"></i></span>
-				<span class="owl-menu" data-target="#mad-skills">Mad skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Atypical abilities or unique talents, often developed through personal passions"></i></span>
-			  </div>
-			  <div class="owl-carousel owl-theme active" id="hard-skills">
-				  <div class="d-flex flex-column align-items-center"><img src="images/python.png" class="img-fluid" alt="Python" loading="lazy" height="75" width="75"><span>Python</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/csharp.png" class="img-fluid" alt="C#" loading="lazy" height="75" width="75"><span>C#</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/vscode.png" class="img-fluid" alt="VS Code" loading="lazy" height="75" width="75"><span>VS Code</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/vsstudio.png" class="img-fluid" alt="Visual Studio" loading="lazy" height="75" width="75"><span>Visual Studio</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/github.png" class="img-fluid" alt="GitHub" loading="lazy" height="75" width="75"><span>GitHub</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/gitlab.png" class="img-fluid" alt="GitLab" loading="lazy" height="75" width="75"><span>GitLab</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/html.png" class="img-fluid" alt="HTML" loading="lazy" height="75" width="75"><span>HTML</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/css.png" class="img-fluid" alt="CSS" loading="lazy" height="75" width="75"><span>CSS</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/javascript.png" class="img-fluid" alt="JS" loading="lazy" height="75" width="75"><span>JS</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/jquery.png" class="img-fluid" alt="jQuery" loading="lazy" height="75" width="75"><span>jQuery</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/sql.png" class="img-fluid" alt="SQL" loading="lazy" height="75" width="75"><span>SQL</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/powershell.png" class="img-fluid" alt="Powershell" loading="lazy" height="75" width="75"><span>Powershell</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/postman.png" class="img-fluid" alt="Postman" loading="lazy" height="75" width="75"><span>Postman</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/docker.png" class="img-fluid" alt="Docker" loading="lazy" height="75" width="75"><span>Docker</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/robot.png" class="img-fluid" alt="Robot Framework" loading="lazy" height="75" width="75"><span>Robot Framework</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/office.png" class="img-fluid" alt="Office" loading="lazy" height="75" width="75"><span>Office</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/netsurvey.png" class="img-fluid" alt="Net-Survey" loading="lazy" height="75" width="75"><span>Net-Survey</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/ethnos.png" class="img-fluid" alt="Ethnos" loading="lazy" height="75" width="75"><span>Ethnos</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/webreports.png" class="img-fluid" alt="Web-Reports" loading="lazy" height="75" width="75"><span>Web-Reports</span></div>
-			 </div>
-			 <div class="owl-carousel owl-theme d-none" id="soft-skills">
-				  <div class="d-flex flex-column align-items-center"><img src="images/team.png" class="img-fluid" alt="Team spirit" loading="lazy" height="75" width="75"><span>Team spirit</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/leadership.png" class="img-fluid" alt="Leadership" loading="lazy" height="75" width="75"><span>Leadership</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/communication.png" class="img-fluid" alt="Communication" loading="lazy" height="75" width="75"><span>Communication</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/adaptability.png" class="img-fluid" alt="Adaptability" loading="lazy" height="75" width="75"><span>Adaptability</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/proactivity.png" class="img-fluid" alt="Proactivity" loading="lazy" height="75" width="75"><span>Proactivity</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/independence.png" class="img-fluid" alt="Independence" loading="lazy" height="75" width="75"><span>Independence</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/empathy.png" class="img-fluid" alt="Empathy" loading="lazy" height="75" width="75"><span>Empathy</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/creativity.png" class="img-fluid" alt="Creativity" loading="lazy" height="75" width="75"><span>Creativity</span></div>
-			 </div>
-			 <div class="owl-carousel owl-theme d-none" id="mad-skills">
-				  <div class="d-flex flex-column align-items-center"><img src="images/tennis.png" class="img-fluid" alt="Tennis" loading="lazy" height="75" width="75"><span>Tennis</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/chess.png" class="img-fluid" alt="Chess" height="75" loading="lazy" width="75"><span>Chess</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/travel.png" class="img-fluid" alt="Travel" loading="lazy" height="75" width="75"><span>Travel</span></div>
-				  <div class="d-flex flex-column align-items-center"><img src="images/writing.png" class="img-fluid" alt="Writing" loading="lazy" height="75" width="75"><span>Writing</span></div>
-			 </div>
-		 </div>
+      </section>
+      <section class="ftco-section ftco-counter img d-none d-sm-flex" id="carousel-section">
+          <div class="container-fluid px-md-5 pb-3 pt-3 bg-dark text-white text-center">
+              <h2 class="text-white">Discover my skills</h2>
+              <div class="owl-menus d-flex justify-content-center">
+                <span class="owl-menu" data-target="#hard-skills">Hard skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Practical or technical abilities learned through training or experience"></i></span>
+                <span class="owl-menu" data-target="#soft-skills">Soft skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Personal attributes or interpersonal abilities that enhance how you work and interact with others"></i></span>
+                <span class="owl-menu" data-target="#mad-skills">Mad skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Atypical abilities or unique talents, often developed through personal passions"></i></span>
+              </div>
+              {% include "hardskills.html" %}
+              <div class="owl-carousel owl-theme d-none" id="soft-skills">
+                  <div class="d-flex flex-column align-items-center"><img src="images/team.png" class="img-fluid" alt="Team spirit" loading="lazy" height="75" width="75"><span>Team spirit</span></div>
+                  <div class="d-flex flex-column align-items-center"><img src="images/leadership.png" class="img-fluid" alt="Leadership" loading="lazy" height="75" width="75"><span>Leadership</span></div>
+                  <div class="d-flex flex-column align-items-center"><img src="images/communication.png" class="img-fluid" alt="Communication" loading="lazy" height="75" width="75"><span>Communication</span></div>
+                  <div class="d-flex flex-column align-items-center"><img src="images/adaptability.png" class="img-fluid" alt="Adaptability" loading="lazy" height="75" width="75"><span>Adaptability</span></div>
+                  <div class="d-flex flex-column align-items-center"><img src="images/proactivity.png" class="img-fluid" alt="Proactivity" loading="lazy" height="75" width="75"><span>Proactivity</span></div>
+                  <div class="d-flex flex-column align-items-center"><img src="images/independence.png" class="img-fluid" alt="Independence" loading="lazy" height="75" width="75"><span>Independence</span></div>
+                  <div class="d-flex flex-column align-items-center"><img src="images/empathy.png" class="img-fluid" alt="Empathy" loading="lazy" height="75" width="75"><span>Empathy</span></div>
+                  <div class="d-flex flex-column align-items-center"><img src="images/creativity.png" class="img-fluid" alt="Creativity" loading="lazy" height="75" width="75"><span>Creativity</span></div>
+              </div>
+              <div class="owl-carousel owl-theme d-none" id="mad-skills">
+                  <div class="d-flex flex-column align-items-center"><img src="images/tennis.png" class="img-fluid" alt="Tennis" loading="lazy" height="75" width="75"><span>Tennis</span></div>
+                  <div class="d-flex flex-column align-items-center"><img src="images/chess.png" class="img-fluid" alt="Chess" height="75" loading="lazy" width="75"><span>Chess</span></div>
+                  <div class="d-flex flex-column align-items-center"><img src="images/travel.png" class="img-fluid" alt="Travel" loading="lazy" height="75" width="75"><span>Travel</span></div>
+                  <div class="d-flex flex-column align-items-center"><img src="images/writing.png" class="img-fluid" alt="Writing" loading="lazy" height="75" width="75"><span>Writing</span></div>
+              </div>
+         </div>
       </section>
       <section class="ftco-section" id="blog-section">
          <div class="container">
@@ -919,7 +736,7 @@
                </div>
             </div>
             <div class="row d-flex">
-	          <div class="col-md-4 d-flex ftco-animate">
+                <div class="col-md-4 d-flex ftco-animate">
                   <div class="blog-entry">
                      <a id="software" class="article-image block-20"></a>
                      <div class="text mt-3 float-right d-block">
@@ -994,102 +811,79 @@
       </section>
       <section class="contact-section ftco-section ftco-no-pb" id="contact-section">
          <div class="container">
-			 <div class="row justify-content-center mb-5 pb-3">
-			  <div class="col-md-7 heading-section text-center ftco-animate">
-				<h2 class="mb-4">Contact</h2>
-				<p>Career opportunities, projects to suggest, ideas to share...</p>
-				<p>Don't hesitate !</p>
-			  </div>
-			 </div>
-			 <div class="row contact-info mb-5 d-none d-sm-flex">
-			   <div class="col-md-12 col-lg-6 d-flex ftco-animate">
-				  <div class="align-self-stretch box text-center p-4 shadow">
-					<div class="icon d-flex align-items-center justify-content-center">
-						<span class="icon-map-signs"></span>
-					</div>
-					<div>
-						<h3 class="mb-4">Address</h3>
-						<p id="city"></p>
-					</div>
-				  </div>
-			   </div>
-			   <div class="col-md-12 col-lg-6 d-flex ftco-animate">
-				  <div class="align-self-stretch box text-center p-4 shadow">
-					<div class="icon d-flex align-items-center justify-content-center">
-						<span class="icon-paper-plane"></span>
-					</div>
-					<div>
-						<h3 class="mb-4">Email</h3>
-						<p class="email"></p>
-					</div>
-				  </div>
-			   </div>
-			 </div>
-			 <div class="row no-gutters block-9 justify-content-center mb-5 pb-3">
-				<div class="col-md-6 order-md-last d-flex">
-					<form class="bg-light p-4 p-md-5 contact-form" name="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
-						<p hidden>
-							<label>
-							  Do not fill this out if you are human : <input name="bot-field">
-							</label>
-						</p>
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Name" name="name" required>
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Subject" name="subject" required>
-						</div>
-						<div class="form-group">
-							<textarea cols="30" rows="10" class="form-control" placeholder="Message" name="message" required></textarea>
-						</div>
-						<div id="captchaCheck"></div>
-						<div id="callback-form" class="text-center"></div>
-						<div class="form-group text-right">
-							<input type="submit" value="Send" class="btn btn-primary py-3 px-5" disabled>
-						</div>
-					</form>
-				</div>
-				<div class="col-md-6 d-flex d-lg-none">
-					<div id="profile" class="img">
-						<div class="bulle-bd text-center bg-white">
-							Faster, Higher, Stronger - Together !
-						</div>
-					</div>
-				</div>
-			 </div>
+             <div class="row justify-content-center mb-5 pb-3">
+              <div class="col-md-7 heading-section text-center ftco-animate">
+                <h2 class="mb-4">Contact</h2>
+                <p>Career opportunities, projects to suggest, ideas to share...</p>
+                <p>Don't hesitate !</p>
+              </div>
+             </div>
+             <div class="row contact-info mb-5 d-none d-sm-flex">
+               <div class="col-md-12 col-lg-6 d-flex ftco-animate">
+                  <div class="align-self-stretch box text-center p-4 shadow">
+                    <div class="icon d-flex align-items-center justify-content-center">
+                        <span class="icon-map-signs"></span>
+                    </div>
+                    <div>
+                        <h3 class="mb-4">Address</h3>
+                        <p id="city"></p>
+                    </div>
+                  </div>
+               </div>
+               <div class="col-md-12 col-lg-6 d-flex ftco-animate">
+                  <div class="align-self-stretch box text-center p-4 shadow">
+                    <div class="icon d-flex align-items-center justify-content-center">
+                        <span class="icon-paper-plane"></span>
+                    </div>
+                    <div>
+                        <h3 class="mb-4">Email</h3>
+                        <p class="email"></p>
+                    </div>
+                  </div>
+               </div>
+             </div>
+             <div class="row no-gutters block-9 justify-content-center mb-5 pb-3">
+                <div class="col-md-6 order-md-last d-flex">
+                    <form class="bg-light p-4 p-md-5 contact-form" name="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+                        <p hidden>
+                            <label>Do not fill this out if you are human : <input name="bot-field"></label>
+                        </p>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea cols="30" rows="10" class="form-control" placeholder="Message" name="message" required></textarea>
+                        </div>
+                        <div id="captchaCheck"></div>
+                        <div id="callback-form" class="text-center"></div>
+                        <div class="form-group text-right">
+                            <input type="submit" value="Send" class="btn btn-primary py-3 px-5" disabled>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 d-flex d-lg-none">
+                    <div id="profile" class="img">
+                        <div class="bulle-bd text-center bg-white">
+                            Faster, Higher, Stronger - Together !
+                        </div>
+                    </div>
+                </div>
+             </div>
          </div>
       </section>
       <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" data-target="#contact-window">
             <span class="icon-user"></span>
       </div>
       <div id="contact-window" class="mfp flex-column bg-white" hidden>
-		<div id="contact-header" class="d-flex align-items-center justify-content-between text-white">
-			<h6>Contact me</h6>
-			<span class="mfp-close">×</span>
-		</div>
-		<div id="contact-link" class="text-dark">
-			<p class="d-flex align-items-center">
-				<i class="icon-envelope"></i> 
-				<span class="email"></span>
-			</p>
-			<p class="d-flex align-items-center">
-				<i class="icon-linkedin"></i> 
-				<a target="_blank" href="https://www.linkedin.com/in/nicolas-bogalheiro-126a7616b/?locale=en_US">LinkedIn</a>
-			</p>
-			<p class="d-flex align-items-center">
-				<i class="icon-github"></i> 
-				<a target="_blank" href="https://github.com/nicoboga4075">GitHub</a>
-			</p>
-			<p class="d-flex align-items-center">
-				<i class="icon-gamepad"></i> 
-				<a target="_blank" href="https://www.codingame.com/profile/8755914e3c5aeab435bb5ec921b9237e8911643">CodingGame</a>
-			</p>
-			<p class="d-flex align-items-center">
-				<i class="icon-chessboard"></i> 
-				<a target="_blank" href="https://www.chess.com/member/bogathebestchess">Chess</a>
-			</p>
-		</div>       
-      </div>	  
+        <div id="contact-header" class="d-flex align-items-center justify-content-between text-white">
+            <h6>Contact me</h6>
+            <span class="mfp-close">×</span>
+        </div>
+        {% include "social_modal.html" %}
+      </div>
       <footer class="ftco-footer ftco-section">
          <div class="container">
             <div class="row mb-5">
@@ -1107,60 +901,30 @@
                            <li><span class="icon-envelope"></span>&nbsp;&nbsp;<span class="text email"></span></li>
                         </ul>
                      </div>
-                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
-                        <li class="ftco-animate"><a target="_blank" href="https://www.linkedin.com/in/nicolas-bogalheiro-126a7616b/?locale=en_US" aria-label="LinkedIn"><span class="icon-linkedin"></span></a></li>
-                        <li class="ftco-animate"><a target="_blank" href="https://github.com/nicoboga4075" aria-label="GitHub"><span class="icon-github"></span></a></li>
-                        <li class="ftco-animate"><a target="_blank" href="https://www.codingame.com/profile/8755914e3c5aeab435bb5ec921b9237e8911643" aria-label="CodinGame"><span class="icon-gamepad"></span></a></li>
-                        <li class="ftco-animate"><a target="_blank" href="https://www.chess.com/member/bogathebestchess" aria-label="Chess.com"><span class="icon-king-outlined"></span></a></li>
-                     </ul>
+                     {% include "social.html" %}
                   </div>
                </div>
             </div>
-			<div class="row mb-5">
-				<div class="col-md-12 text-center">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">A bingo ?</h2>
-						<div class="block-23 mb-3 d-flex flex-column align-items-center">
-							<p>If you come across number 2713, you've won !</p>
-							<div id="bingo-timer">0</div>
-							<div id="bingo-btn" class="text-white">Play</div>
-						</div>
-					</div>
-				</div>
-			</div>
-            <div class="row">
-               <div class="col-md-12 text-center">
-                  <p>
-                     Copyright &copy;<i id="year"></i> All rights reserved | This site is made with <i class="icon-heart" aria-hidden="true"></i> and <i class="icon-shield" aria-hidden="true"></i> with <a target="_blank"href="https://snyk.io">Snyk</a>
-                  </p>
-                  <p><a id="policy"><i>Privacy policy</i></a> | <a id="terms"><i>Terms of use</i></a></p>
-               </div>
+            <div class="row mb-5">
+                <div class="col-md-12 text-center">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">A bingo ?</h2>
+                        <div class="block-23 mb-3 d-flex flex-column align-items-center">
+                            <p>If you come across number 2713, you've won !</p>
+                            <div id="bingo-timer">0</div>
+                            <div id="bingo-btn" class="text-white">Play</div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            {% include "copyright_en.html" %}
          </div>
       </footer>
-      <div id="ftco-loader" class="show fullscreen">
-         <svg class="circular" width="48" height="48">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#ebefff"/>
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#3e64ff"/>
-         </svg>
-      </div>
-	  <div id="ftco-visitor" hidden></div>
-      <script src="js/jquery.min.js"></script>
-      <script src="js/jquery-migrate-3.0.1.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/jquery.easing.1.3.js"></script>
-      <script src="js/jquery.waypoints.min.js"></script>
-      <script src="js/jquery.stellar.min.js"></script>
-      <script src="js/owl.carousel.min.js"></script>
-      <script src="js/jquery.magnific-popup.min.js"></script>
-      <script src="js/aos.js"></script>
-      <script src="js/jquery.animateNumber.min.js"></script>
-      <script src="js/scrollax.min.js"></script>
-      <script defer src="js/chart.js"></script>
-      <script src="js/main.js"></script>
+      {% include "loading.html" %}
+      <div id="ftco-visitor" hidden></div>
+      {% include "scripts.html" %}
       <script defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()" crossorigin="anonymous"></script>
       <script defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
-	  <script async defer src="https://www.google.com/recaptcha/api.js?hl=en&onload=initCaptcha&render=explicit"></script>
-   </body>
+      <script async defer src="https://www.google.com/recaptcha/api.js?hl=en&onload=initCaptcha&render=explicit"></script>
+    </body>
 </html>

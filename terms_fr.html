@@ -1,47 +1,35 @@
+---
+permalink: "terms_fr.html"
+---
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<title>Conditions d'utilisation</title>
-		<meta charset="utf-8">
-		<meta name="google" content="notranslate">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="author" content="Nicolas BOGALHEIRO">
-		<meta name="description" content="Conditions d'utilisation">
-		<meta name="theme-color" content="#ffffff">
-		<meta http-equiv="Content-Language" content="fr_FR">
-		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
-		<base href="../../">
-		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-		<link rel="manifest" href="site.webmanifest">
-		<link rel="stylesheet" href="css/default.css">
-		<script src="js/default.js"></script>
-	</head>
-	<body onload="initPage()">
-		<h1>Conditions d'utilisation</h1>
-		<i>Mis à jour le 4 décembre 2024</i>
-		<div class="language-switch d-flex align-items-center justify-content-center">
-			<span class="lang-text">EN</span>
-			<label class="toggle-container">
-			   <input id="language-toggle" type="checkbox">
-			   <span class="toggle-slider"></span>
-			</label>
-			<span class="lang-text on">FR</span>
+    <head>
+      <title>Porfolio - Conditions d'utilisation</title>
+      {% include "metas.html" %}
+      <meta name="description" content="Conditions d'utilisation">
+      <meta http-equiv="Content-Language" content="fr_FR">
+      {% include "poppins.html" %}
+      <base href="../../">
+      {% include "manifest.html" %}
+      {% include "default.html" %}
+    </head>
+    <body onload="initPage()">
+        <h1>Conditions d'utilisation</h1>
+        <i>Mis à jour le 4 décembre 2024</i>
+        {% include "switcher_fr.html" %}
+        <div>
+            <h2>Accès à l'application</h2>
+            <p>L'utilisation de l'application est autorisée sous réserve de votre respect des conditions suivantes. Vous vous engagez à ne pas l'utiliser à des fins illégales.</p>
+            <h2>Collecte de données via OAuth</h2>
+            <p>L'application collecte uniquement votre adresse e-mail lorsque vous vous connectez via OAuth pour envoyer un message via le formulaire. Cette donnée est utilisée uniquement pour la communication liée à votre demande. Aucune autre donnée personnelle n'est collectée ni partagée.</p>
+            <h2>Propriété intellectuelle</h2>
+            <p>Tout le contenu de l'application (textes, images, etc.) est protégé par des droits d'auteur. Vous ne pouvez pas l'utiliser sans autorisation préalable.</p>
+            <h2>Modifications des conditions</h2>
+            <p>Ces conditions peuvent être modifiées à tout moment. Toute modification sera publiée sur cette page avec la date de mise à jour.</p>
+            <h2>Loi applicable</h2>
+            <p>Ces conditions sont régies par les lois françaises.</p>
+            <i>Pour toute question relative à ces conditions, vous pouvez me contacter via le formulaire de contact.</i>
         </div>
-		<div>
-			<h2>Accès à l'application</h2>
-			<p>L'utilisation de l'application est autorisée sous réserve de votre respect des conditions suivantes. Vous vous engagez à ne pas l'utiliser à des fins illégales.</p>
-			<h2>Collecte de données via OAuth</h2>
-			<p>L'application collecte uniquement votre adresse e-mail lorsque vous vous connectez via OAuth pour envoyer un message via le formulaire. Cette donnée est utilisée uniquement pour la communication liée à votre demande. Aucune autre donnée personnelle n'est collectée ni partagée.</p>
-			<h2>Propriété intellectuelle</h2>
-			<p>Tout le contenu de l'application (textes, images, etc.) est protégé par des droits d'auteur. Vous ne pouvez pas l'utiliser sans autorisation préalable.</p>
-			<h2>Modifications des conditions</h2>
-			<p>Ces conditions peuvent être modifiées à tout moment. Toute modification sera publiée sur cette page avec la date de mise à jour.</p>
-			<h2>Loi applicable</h2>
-			<p>Ces conditions sont régies par les lois françaises.</p>
-			<i>Pour toute question relative à ces conditions, vous pouvez me contacter via le formulaire de contact.</i>
-		</div>
-		<a id="index">Retour à l'accueil</a>
-	</body>
+        <a id="index">Retour à l'accueil</a>
+    </body>
 </html>
