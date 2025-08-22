@@ -1067,6 +1067,8 @@ function initCarousel(target) {
 		  }
 		}
 	 });
+	 $(`.owl-menu[data-target="${target}"]`).addClass("active").siblings('.owl-menu').removeClass('active');
+	 $(target).addClass('active');	 
 }
 
 function buildSafeRedirection(redirect, langPage) {
@@ -1111,8 +1113,6 @@ function initPage() {
   
   $('.owl-menu').click(function() {
     const target = $(this).data('target');
-	$('.owl-menu.active').removeClass('active');
-	$(this).addClass('active');
 	$('.owl-carousel').not(target).each(function() {
 	  if (!$(this).hasClass('d-none')) {
 		$(this).addClass('d-none');
@@ -1121,9 +1121,11 @@ function initPage() {
 	});
 	if (!$(target).hasClass('owl-loaded')) {
       initCarousel(target);
-    }
+    } else {
+	  $(`.owl-menu[data-target="${target}"]`).addClass("active").siblings('.owl-menu').removeClass('active');
+	}
 	// To avoid glitch switching to other carousel
-	$(target).removeClass('d-none').addClass('active').trigger('refresh.owl.carousel'); 
+	$(target).removeClass('d-none').trigger('refresh.owl.carousel'); 
   });
   
   if (idPage === 'index') {
