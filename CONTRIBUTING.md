@@ -77,7 +77,7 @@ You may add the attribute default for one track so as to have automatically the 
 
 | Action                              | Command                           |
 |-------------------------------------|-----------------------------------|
-| Run all tests						  | `robot <pathToFolder>			  |
+| Run all tests						  | `robot <pathToFolder>`			  |
 | Include tagged tests                | `robot -i <tag> <pathToFolder>`   |
 | Exclude tagged tests                | `robot -e <tag> <pathToFolder>`   |
 | Run an entire suite by name		  | `robot -s <name> <pathToFolder>`  |
