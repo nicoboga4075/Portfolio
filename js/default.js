@@ -81,7 +81,7 @@ function initArticle() {
 	loadImages('.icon.svg','svg');
 	initTranslator();
 	addHomeRedirect();
-	document.body.classList.add('read-zone','visible');
+	document.body.classList.add('read-zone');
 }
 
 function initPage() {
@@ -93,7 +93,7 @@ function initPage() {
 	addHomeRedirect();
 	const idPage = getCurrentRoute();
 	if (idPage in appDefaultRoutes) {
-		document.body.classList.add('text-center','visible');
+		document.body.classList.add('text-center');
 	}
 	document.querySelectorAll('a[href="#"]').forEach(link => {
 	  link.addEventListener('click', function(event) {
