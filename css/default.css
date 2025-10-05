@@ -1,19 +1,18 @@
 /* General */
 
 :root {
-  --main:#3e64ff
+    --main: #3e64ff;
 }
 
 body {
-  font-family: Poppins, sans-serif;
-  transition: opacity 5s ease;
+    font-family: Poppins, sans-serif;
 }
 
 a {
-  text-decoration: none;
-  color: var(--main);
-  font-weight: bold;
-  cursor: pointer;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--main);
+    font-weight: bold;   
 }
 
 a[href="#"] {
@@ -29,6 +28,7 @@ th, td {
 	text-align: center;
 	color: var(--dark);
 	font-size: 14px;
+	border: 1px solid var(--dark);
 }
 
 td strong {
