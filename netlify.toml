@@ -49,7 +49,7 @@
   package = "@netlify/plugin-lighthouse"
   
   [context.production.plugins.inputs]
-    fail_deploy_on_score_thresholds = "false"
+    fail_deploy_on_score_thresholds = "true"
 	
   [context.production.plugins.inputs.settings]
     preset = "desktop"
