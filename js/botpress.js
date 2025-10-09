@@ -20,7 +20,7 @@
 		"feedbackEnabled": false,
 		"footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
 		"soundEnabled": false,
-		"proactiveMessageEnabled": true,
+		"proactiveMessageEnabled": false,
 		"proactiveBubbleMessage": "Hi! 👋 Need help?",
 		"proactiveBubbleTriggerType": "afterDelay",
 		"proactiveBubbleDelayTime": 10

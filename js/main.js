@@ -1122,7 +1122,7 @@ function initPage() {
 	if (!$(target).hasClass('owl-loaded')) {
       initCarousel(target);
     } else {
-	  $(`.owl-menu[data-target="${target}"]`).addClass("active").siblings('.owl-menu').removeClass('active');
+	  $(`.owl-menu[data-target="${target}"]`).addClass('active').siblings('.owl-menu').removeClass('active');
 	}
 	// To avoid glitch switching to other carousel
 	$(target).removeClass('d-none').trigger('refresh.owl.carousel'); 
