@@ -69,7 +69,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@eslint/js": "^9.37.0",
-    "@netlify/functions": "^4.2.7",
+    "@netlify/functions": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^8.46.0",
     "@typescript-eslint/parser": "^8.46.0",
     "eslint": "^9.37.0",
