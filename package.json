@@ -60,7 +60,8 @@
     "GitHub",
     "GitLab",
     "Eleventy",
-    "Linkerz"
+    "Linkerz",
+	"Beacons"
   ],
   "dependencies": {
     "auto-changelog": "^2.5.0",
