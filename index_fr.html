@@ -4,934 +4,951 @@ permalink: "index_fr.html"
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-      <title>Portfolio</title>
-      {% include "metas.html" %}
-      <meta name="description" content="Portfolio d’un ingénieur logiciel présentant projets, compétences et expérience en technologie et développement">
-	  <meta http-equiv="Content-Language" content="fr_FR">
-      {% include "poppins.html" %}
-      <base href="../">
-      {% include "manifest.html" %}
-      {% include "links.html" %}
-      <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
+        <title>Portfolio</title>
+        {% include "metas.html" %}
+        <meta name="description" content="Portfolio d’un ingénieur logiciel présentant projets, compétences et expérience en technologie et développement">
+        <meta http-equiv="Content-Language" content="fr_FR">
+        {% include "poppins.html" %}
+        <base href="../">
+        {% include "manifest.html" %}
+        {% include "links.html" %}
+        {% if viewport == "desktop" %}		
+        <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
+        {% endif %}
     </head>
     <body data-spy="scroll" data-target="#ftco-navbar" data-offset="300" onload="initPage()">
-      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar" aria-label="Main navigation">
-         <div class="container">
-            {% include "nav_fr.html" %}
-            {% include "switcher_fr.html" %}
-         </div>
-      </nav>
-      <section class="hero-wrap js-fullheight">
-         <div class="overlay"></div>
-         <div class="container">
-            <div class="row no-gutters slider-text js-fullheight justify-content-center align-items-center">
-               <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-center">
-                  <div class="text text-center">
-                     <span class="subheading">Bonjour ! Je m'appelle</span>
-                     <h1 class="author"></h1>
-                     <h2>Je suis un 
-                        <span
-                           class="txt-rotate"
-                           data-period="2000"
-                           data-rotate='[ "Ingénieur Logiciel.", "Développeur Full Stack.","Ingénieur Support.", "Consultant IT.", "Développeur Front-End.", "Développeur Back-End." ]'></span>
-                     </h2>
-                  </div>
-               </div>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar" aria-label="Main navigation">
+            <div class="container">
+                {% include "nav_fr.html" %}
+                {% include "switcher_fr.html" %}
             </div>
-         </div>
-         <div class="mouse">
-            <a class="mouse-icon nav-link" aria-label="Go to Resume Section">
-               <div class="mouse-wheel"><span class="icon-long-arrow-down"></span></div>
-            </a>
-         </div>
-      </section>
-      <section class="ftco-section ftco-about ftco-no-pt ftco-no-pb img" id="about-section">
-         <div class="container">
-            <div class="row d-flex no-gutters">
-               <div class="col-md-6 col-lg-6 d-flex">
-                  <div class="img-about img d-flex align-items-stretch">
-                     <div class="overlay"></div>
-                     <div id="profile" class="img d-flex align-self-stretch align-items-center">
-                        <div class="bulle-bd text-center bg-white">
-                            Toujours plus loin, toujours plus haut, toujours plus fort !
+        </nav>
+        <section class="hero-wrap js-fullheight">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text js-fullheight justify-content-center align-items-center">
+                    <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-center">
+                        <div class="text text-center">
+                            <span class="subheading">Bonjour ! Je m'appelle</span>
+                            <h1 class="author"></h1>
+                            <h2>Je suis un 
+                                <span
+                                    class="txt-rotate"
+                                    data-period="2000"
+                                    data-rotate='[ "Ingénieur Logiciel.", "Développeur Full Stack.","Ingénieur Support.", "Consultant IT.", "Développeur Front-End.", "Développeur Back-End." ]'></span>
+                            </h2>
                         </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-6 col-lg-6 pl-md-5 py-5">
-                  <div class="row justify-content-start pb-3">
-                     <div class="col-md-12 heading-section ftco-animate">
-                        <h2 class="mb-4">Qui suis-je ?</h2>
-                        <p>Consultant <a target="_blank" rel="noopener" href="https://astekgroup.fr">Astek</a> en mission chez <a target="_blank" rel="noopener" href="https://www.alstom.com/fr">Alstom</a></p>
-                        <ul class="about-info mt-4 px-md-0 px-2">
-                           <li class="d-flex"><span>Nom :</span> <span class="author"></span></li>
-                           <li class="d-flex"><span>Âge :</span> <span class="age"></span></li>
-                           <li class="d-flex"><span>Profession :</span> <span>Ingénieur</span></li>
-                           <li class="d-flex"><span>Promotion :</span> <span><a target="_blank" rel="noopener" href="https://www.esilv.fr">ESILV</a> 2021</span></li>
-                           <li class="d-flex"><span>Email :</span> <span class="email"></span></li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="counter-wrap ftco-animate d-flex mt-md-3">
-                     <div class="text">
-                        <p class="mb-4">
-                           <span class="number xp">0</span>
-                           <span>Années d'expérience</span>
-                        </p>
-                        <p class="mb-4">
-                           <a target="_blank" rel="noopener" href="docs/public/CV_fr.pdf" class="btn btn-primary py-3 px-3">Télécharger le CV</a>
-                        </p>
-                        <p>
-                           <i class="icon-upload"></i>&nbsp;&nbsp;<span id="last-update-date"></span>
-                        </p>
-                     </div>
-                  </div>
-               </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </section>
-      {% include "partners.html" %}
-      <section class="ftco-section ftco-hireme img d-none d-sm-flex">
-          <div class="overlay"></div>
-          <div class="container">
-              <div class="row justify-content-center">
-                  <div class="col-md-7 ftco-animate text-center">
-                      <h2><span>À l'écoute d'opportunités</span></h2>
-                      <p>En région parisienne</p>
-                      <p class="mb-0"><a target="_blank" rel="noopener" href="https://www.linkedin.com/messaging/thread/new" class="btn btn-primary py-3 px-5">Me contacter</a></p>
-                  </div>
-              </div>
-          </div>
-      </section>
-      <section class="ftco-section ftco-no-pb" id="resume-section">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-3">
-                  <nav id="navi" aria-label="Resume navigation">
-                     <ul>
-                        <li><a class="nav-link">Éducation</a></li>
-                        <li><a class="nav-link">Expériences</a></li>
-                        <li><a class="nav-link">Compétences</a></li>
-                        <li><a class="nav-link">Langues</a></li>
-                        <li><a class="nav-link">Récompenses</a></li>
-                     </ul>
-                  </nav>
-               </div>
-               <div class="col-md-9">
-                  <div id="education" class="page">
-                     <h2 class="heading">Éducation</h2>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div id="UQAC" class="icon logo-school d-flex align-items-center justify-content-center">
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">2020 - 2021</span>
-                           <h2>Master universitaire en Informatique</h2>
-                           <span class="position"><a target="_blank" rel="noopener" href="https://www.uqac.ca">UQAC</a> (Chicoutimi, CAN)</span>
-                           <p></p>
-                        </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div id="ESILV" class="icon logo-school d-flex align-items-center justify-content-center"></div>
-                        <div class="text pl-3">
-                           <span class="date">2018 - 2021</span>
-                           <h2>Diplôme d'ingénieurs en Informatique</h2>
-                           <span class="position"><a target="_blank" rel="noopener" href="https://www.esilv.fr">ESILV</a> (Paris La Défense, FRA)</span>
-                           <p></p>
-                        </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div id="JS" class="icon logo-school d-flex align-items-center justify-content-center">
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">2015 - 2018</span>
-                           <h2>Prépa MPSI/MP</h2>
-                           <span class="position"><a target="_blank" rel="noopener" href="https://www.janson-de-sailly.fr">Janson de Sailly</a> (Paris 16e, FRA)</span>
-                           <p></p>
-                        </div>
-                     </div>
-                  </div>
-                  <div id="experiences" class="page">
-                     <h2 class="heading">Expériences</h2>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                           <span class="icon-users"></span>
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">Décembre 2024 - Aujourd'hui</span>
-                           <h2>Ingénieur Consultant</h2>
-                           <span class="position"><a target="_blank" rel="noopener" href="https://astekgroup.fr">Astek</a></span>
-                           <p>Lyon</p>
-                        </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                           <span class="icon-security"></span>
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">Juin 2024 - Septembre 2024</span>
-                           <h2>Ingénieur Sécurité</h2>
-                           <span class="position"><a target="_blank" rel="noopener" href="https://www.bassetti-group.com">Bassetti Group</a></span>
-                           <p>Lyon</p>
-                        </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                           <span class="icon-gears"></span>
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">Juillet 2021 - Mai 2024</span>
-                           <h2>Ingénieur Logiciel</h2>
-                           <span class="position"><a target="_blank" rel="noopener" href="https://www.soft-concept.com">Soft Concept</a></span>
-                           <p>Lyon</p>
-                        </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                           <span class="icon-clipboard"></span>
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">Mars 2020 - Août 2020</span>
-                           <h2>Développeur Full Stack</h2>
-                           <span class="position"><a target="_blank" rel="noopener" href="https://cyberprotect.one">Cyberprotect</a></span>
-                           <p>Bron</p>
-                        </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                           <span class="icon-build"></span>
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">Juin 2019 - Août 2019</span>
-                           <h2>Assistant Web</h2>
-                           <span class="position"><a target="_blank" rel="noopener" href="https://galadrim.fr">Galadrim</a></span>
-                           <p>Paris</p>
-                        </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                           <span class="icon-user-secret"></span>
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">Octobre 2018 - Avril 2019</span>
-                           <h2>Chef de projet étudiant</h2>
-                           <span class="position"><a target="_blank" rel="noopener" href="https://www.cgi.com/fr">CGI</a></span>
-                           <p>Paris La Défense</p>
-                        </div>
-                     </div>
-                  </div>
-                  <div id="skills" class="page">
-                     <h2 class="heading">Compétences</h2>
-                     <div class="chart-container d-flex justify-content-center mb-5"><canvas id="skillsChart"></canvas></div>
-                     {% include "languages.html" %}
-                     <div class="row progress-circle mb-5">
-                        <div class="col-lg-4 mb-4">
-                           <div class="bg-white rounded-lg shadow p-4">
-                              <h2 class="h5 font-weight-bold text-center mb-4">SQL</h2>
-                              <div class="block-21 mb-4 d-flex justify-content-center">
-                                <a id="db" class="blog-img" target="_blank" rel="noopener" href="https://sql.sh" aria-label="SQL"></a>
-                              </div>
-                              <div class="row text-center mt-4">
-                                 <div class="col-6 border-right">
-                                    <div class="h5 font-weight-bold mb-0">Postgre</div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                                 <div class="col-6">
-                                    <div class="h5 font-weight-bold mb-0">SQLite</div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-4 mb-4">
-                           <div class="bg-white rounded-lg shadow p-4">
-                              <h2 class="h5 font-weight-bold text-center mb-4">Projet</h2>
-                              <div class="block-21 mb-4 d-flex justify-content-center">
-                                <a id="project" class="blog-img" target="_blank" rel="noopener" href="https://blog.hubspot.fr/marketing/difference-cycle-en-v-et-methode-agile" aria-label="Projet"></a>
-                              </div>
-                              <div class="row text-center mt-4">
-                                 <div class="col-6 border-right">
-                                    <div class="h5 font-weight-bold mb-0">Agile</div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                                 <div class="col-6">
-                                    <div class="h5 font-weight-bold mb-0">Cycle V</div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-4 mb-4">
-                           <div class="bg-white rounded-lg shadow p-4">
-                              <h2 class="h5 font-weight-bold text-center mb-4"><a target="_blank" rel="noopener" href="https://medium.com/env0/top-devops-tools-for-infrastructure-automation-in-2025-cae2288e8314">DevOps</a></h2>
-                              <div class="block-21 mb-4 d-flex justify-content-center">
-                                <a id="devops" class="blog-img" target="_blank" rel="noopener" href="https://azure.microsoft.com/fr-fr/resources/cloud-computing-dictionary/what-is-devops" aria-label="DevOps"></a>
-                              </div>
-                              <div class="row text-center mt-4">
-                                 <div class="col-6 border-right">
-                                    <div class="h5 font-weight-bold mb-0"><a target="_blank" rel="noopener" href="https://medium.com/@jake.page91/the-guide-to-git-i-never-had-a89048d4703a">Git</a></div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                                 <div class="col-6">
-                                    <div class="h5 font-weight-bold mb-0">Docker</div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row progress-circle mb-5">
-                        <div class="col-lg-4 mb-4">
-                           <div class="bg-white rounded-lg shadow p-4">
-                              <h2 class="h5 font-weight-bold text-center mb-4">Design</h2>
-                              <div class="block-21 mb-4 d-flex justify-content-center">
-                                <a id="design" class="blog-img" target="_blank" rel="noopener" href="https://developer.mozilla.org/fr/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure" aria-label="Design"></a>
-                              </div>
-                              <div class="row text-center mt-4">
-                                 <div class="col-6 border-right">
-                                    <div class="h5 font-weight-bold mb-0">HTML</div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                                 <div class="col-6">
-                                    <div class="h5 font-weight-bold mb-0">CSS</div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-4 mb-4">
-                           <div class="bg-white rounded-lg shadow p-4">
-                              <h2 class="h5 font-weight-bold text-center mb-4">Extensions</h2>
-                              <div class="block-21 mb-4 d-flex justify-content-center">
-                                <a id="dark" class="blog-img" target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/differences-between-bootstrap-and-jquery-ui" aria-label="Extensions"></a>
-                              </div>
-                              <div class="row text-center mt-4">
-                                 <div class="col-6 border-right">
-                                    <div class="h5 font-weight-bold mb-0">Bootstrap</div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                                 <div class="col-6">
-                                    <div class="h5 font-weight-bold mb-0">jQuery</div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-4 mb-4">
-                           <div class="bg-white rounded-lg shadow p-4">
-                              <h2 class="h5 font-weight-bold text-center mb-4">Cybersécurité</h2>
-                              <div class="block-21 mb-4 d-flex justify-content-center">
-                                <a id="cyber" class="blog-img" target="_blank" rel="noopener" href="https://owasp.org/www-community/OWASP_Risk_Rating_Methodology" aria-label="Cybersécurité"></a>
-                              </div>
-                              <div class="row text-center mt-4">
-                                 <div class="col-6 border-right">
-                                    <div class="h5 font-weight-bold mb-0">OWASP</div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                                 <div class="col-6">
-                                    <div class="h5 font-weight-bold mb-0">CVSS</div>
-                                    <span class="small text-gray"></span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     {% include "tools.html" %}
-                  </div>
-                  <div id="languages" class="page">
-                    <h2 class="heading">Langues</h2>
-                    <div class="row">
-                       <div class="col-md-12 animate-box">
-                          <div class="progress-wrap ftco-animate">
-                             <h3>Français</h3>
-                             <div class="progress">
-                                <div class="progress-bar color-1" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                   <span>C2</span>
+            <div class="mouse">
+                <a class="mouse-icon nav-link" aria-label="Go to Resume Section">
+                    <div class="mouse-wheel"><span class="icon-long-arrow-down"></span></div>
+                </a>
+            </div>
+        </section>
+        <section class="ftco-section ftco-about ftco-no-pt ftco-no-pb img" id="about-section">
+            <div class="container">
+                <div class="row d-flex no-gutters">
+                    <div class="col-md-6 col-lg-6 d-flex">
+                        <div class="img-about img d-flex align-items-stretch">
+                            <div class="overlay"></div>
+                            <div id="profile" class="img d-flex align-self-stretch align-items-center">
+                                <div class="bulle-bd text-center bg-white">
+                                    Toujours plus loin, toujours plus haut, toujours plus fort !
                                 </div>
-                             </div>
-                          </div>
-                       </div>
-                       <div class="col-md-12 animate-box">
-                          <div class="progress-wrap ftco-animate">
-                             <h3>Anglais</h3>
-                             <div class="progress">
-                                <div class="progress-bar color-2" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                                   <span>B2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 pl-md-5 py-5">
+                        <div class="row justify-content-start pb-3">
+                            <div class="col-md-12 heading-section ftco-animate">
+                                <h2 class="mb-4">Qui suis-je ?</h2>
+                                <p>Consultant <a target="_blank" rel="noopener" href="https://astekgroup.fr">Astek</a> en mission chez <a target="_blank" rel="noopener" href="https://www.alstom.com/fr">Alstom</a></p>
+                                <ul class="about-info mt-4 px-md-0 px-2">
+                                    <li class="d-flex"><span>Nom :</span> <span class="author"></span></li>
+                                    <li class="d-flex"><span>Âge :</span> <span class="age"></span></li>
+                                    <li class="d-flex"><span>Profession :</span> <span>Ingénieur</span></li>
+                                    <li class="d-flex"><span>Promotion :</span> <span><a target="_blank" rel="noopener" href="https://www.esilv.fr">ESILV</a> 2021</span></li>
+                                    <li class="d-flex"><span>Email :</span> <span class="email"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="counter-wrap ftco-animate d-flex mt-md-3">
+                            <div class="text">
+                                <p class="mb-4">
+                                    <span class="number xp">0</span>
+                                    <span>Années d'expérience</span>
+                                </p>
+                                <p class="mb-4">
+                                    <a target="_blank" rel="noopener" href="docs/public/CV_fr.pdf" class="btn btn-primary py-3 px-3">Télécharger le CV</a>
+                                </p>
+                                <p>
+                                    <i class="icon-upload"></i>&nbsp;&nbsp;<span id="last-update-date"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% include "partners.html" %}
+        <section class="ftco-section ftco-hireme img d-none d-sm-flex">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-7 ftco-animate text-center">
+                        <h2><span>À l'écoute d'opportunités</span></h2>
+                        <p>En région parisienne</p>
+                        <p class="mb-0"><a target="_blank" rel="noopener" href="https://www.linkedin.com/messaging/thread/new" class="btn btn-primary py-3 px-5">Me contacter</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="ftco-section ftco-no-pb" id="resume-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <nav id="navi" aria-label="Resume navigation">
+                            <ul>
+                                <li><a class="nav-link">Éducation</a></li>
+                                <li><a class="nav-link">Expériences</a></li>
+                                <li><a class="nav-link">Compétences</a></li>
+                                <li><a class="nav-link">Langues</a></li>
+                                <li><a class="nav-link">Récompenses</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-md-9">
+                        <div id="education" class="page">
+                            <h2 class="heading">Éducation</h2>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div id="UQAC" class="icon logo-school d-flex align-items-center justify-content-center">
                                 </div>
-                             </div>
-                          </div>
-                       </div>
-                       <div class="col-md-12 animate-box">
-                          <div class="progress-wrap ftco-animate">
-                             <h3>Espagnol</h3>
-                             <div class="progress">
-                                <div class="progress-bar color-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-                                   <span>A2</span>
+                                <div class="text pl-3">
+                                    <span class="date">2020 - 2021</span>
+                                    <h2>Master universitaire en Informatique</h2>
+                                    <span class="position"><a target="_blank" rel="noopener" href="https://www.uqac.ca">UQAC</a> (Chicoutimi, CAN)</span>
+                                    <p></p>
                                 </div>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-                  </div>
-                  <div id="awards" class="page">
-                     <h2 class="heading">Récompenses</h2>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                           <span class="icon-language"></span>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div id="ESILV" class="icon logo-school d-flex align-items-center justify-content-center"></div>
+                                <div class="text pl-3">
+                                    <span class="date">2018 - 2021</span>
+                                    <h2>Diplôme d'ingénieurs en Informatique</h2>
+                                    <span class="position"><a target="_blank" rel="noopener" href="https://www.esilv.fr">ESILV</a> (Paris La Défense, FRA)</span>
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div id="JS" class="icon logo-school d-flex align-items-center justify-content-center">
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">2015 - 2018</span>
+                                    <h2>Prépa MPSI/MP</h2>
+                                    <span class="position"><a target="_blank" rel="noopener" href="https://www.janson-de-sailly.fr">Janson de Sailly</a> (Paris 16e, FRA)</span>
+                                    <p></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="text pl-3">
-                           <span class="date">Janvier 2020</span>
-                           <h2>TOEIC</h2>
-                           <span class="position">810</span>
-                           <p>B2</p>
+                        <div id="experiences" class="page">
+                            <h2 class="heading">Expériences</h2>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <span class="icon-users"></span>
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Décembre 2024 - Aujourd'hui</span>
+                                    <h2>Ingénieur Consultant</h2>
+                                    <span class="position"><a target="_blank" rel="noopener" href="https://astekgroup.fr">Astek</a></span>
+                                    <p>Lyon</p>
+                                </div>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <span class="icon-security"></span>
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Juin 2024 - Septembre 2024</span>
+                                    <h2>Ingénieur Sécurité</h2>
+                                    <span class="position"><a target="_blank" rel="noopener" href="https://www.bassetti-group.com">Bassetti Group</a></span>
+                                    <p>Lyon</p>
+                                </div>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <span class="icon-gears"></span>
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Juillet 2021 - Mai 2024</span>
+                                    <h2>Ingénieur Logiciel</h2>
+                                    <span class="position"><a target="_blank" rel="noopener" href="https://www.soft-concept.com">Soft Concept</a></span>
+                                    <p>Lyon</p>
+                                </div>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <span class="icon-clipboard"></span>
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Mars 2020 - Août 2020</span>
+                                    <h2>Développeur Full Stack</h2>
+                                    <span class="position"><a target="_blank" rel="noopener" href="https://cyberprotect.one">Cyberprotect</a></span>
+                                    <p>Bron</p>
+                                </div>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <span class="icon-build"></span>
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Juin 2019 - Août 2019</span>
+                                    <h2>Assistant Web</h2>
+                                    <span class="position"><a target="_blank" rel="noopener" href="https://galadrim.fr">Galadrim</a></span>
+                                    <p>Paris</p>
+                                </div>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <span class="icon-user-secret"></span>
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Octobre 2018 - Avril 2019</span>
+                                    <h2>Chef de projet étudiant</h2>
+                                    <span class="position"><a target="_blank" rel="noopener" href="https://www.cgi.com/fr">CGI</a></span>
+                                    <p>Paris La Défense</p>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                           <span class="icon-language"></span>
+                        <div id="skills" class="page">
+                            <h2 class="heading">Compétences</h2>
+                            <div class="chart-container d-flex justify-content-center mb-5">
+                                <canvas id="skillsChart"></canvas>
+                            </div>
+                            {% include "languages.html" %}
+                            <div class="row progress-circle mb-5">
+                                <div class="col-lg-4 mb-4">
+                                    <div class="bg-white rounded-lg shadow p-4">
+                                        <h2 class="h5 font-weight-bold text-center mb-4">SQL</h2>
+                                        <div class="block-21 mb-4 d-flex justify-content-center">
+                                            <a id="db" class="blog-img" target="_blank" rel="noopener" href="https://sql.sh" aria-label="SQL"></a>
+                                        </div>
+                                        <div class="row text-center mt-4">
+                                            <div class="col-6 border-right">
+                                                <div class="h5 font-weight-bold mb-0">Postgre</div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="h5 font-weight-bold mb-0">SQLite</div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <div class="bg-white rounded-lg shadow p-4">
+                                        <h2 class="h5 font-weight-bold text-center mb-4">Projet</h2>
+                                        <div class="block-21 mb-4 d-flex justify-content-center">
+                                            <a id="project" class="blog-img" target="_blank" rel="noopener" href="https://blog.hubspot.fr/marketing/difference-cycle-en-v-et-methode-agile" aria-label="Projet"></a>
+                                        </div>
+                                        <div class="row text-center mt-4">
+                                            <div class="col-6 border-right">
+                                                <div class="h5 font-weight-bold mb-0">Agile</div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="h5 font-weight-bold mb-0">Cycle V</div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <div class="bg-white rounded-lg shadow p-4">
+                                        <h2 class="h5 font-weight-bold text-center mb-4"><a target="_blank" rel="noopener" href="https://medium.com/env0/top-devops-tools-for-infrastructure-automation-in-2025-cae2288e8314">DevOps</a></h2>
+                                        <div class="block-21 mb-4 d-flex justify-content-center">
+                                            <a id="devops" class="blog-img" target="_blank" rel="noopener" href="https://azure.microsoft.com/fr-fr/resources/cloud-computing-dictionary/what-is-devops" aria-label="DevOps"></a>
+                                        </div>
+                                        <div class="row text-center mt-4">
+                                            <div class="col-6 border-right">
+                                                <div class="h5 font-weight-bold mb-0"><a target="_blank" rel="noopener" href="https://medium.com/@jake.page91/the-guide-to-git-i-never-had-a89048d4703a">Git</a></div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="h5 font-weight-bold mb-0">Docker</div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row progress-circle mb-5">
+                                <div class="col-lg-4 mb-4">
+                                    <div class="bg-white rounded-lg shadow p-4">
+                                        <h2 class="h5 font-weight-bold text-center mb-4">Design</h2>
+                                        <div class="block-21 mb-4 d-flex justify-content-center">
+                                            <a id="design" class="blog-img" target="_blank" rel="noopener" href="https://developer.mozilla.org/fr/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure" aria-label="Design"></a>
+                                        </div>
+                                        <div class="row text-center mt-4">
+                                            <div class="col-6 border-right">
+                                                <div class="h5 font-weight-bold mb-0">HTML</div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="h5 font-weight-bold mb-0">CSS</div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <div class="bg-white rounded-lg shadow p-4">
+                                        <h2 class="h5 font-weight-bold text-center mb-4">Extensions</h2>
+                                        <div class="block-21 mb-4 d-flex justify-content-center">
+                                            <a id="dark" class="blog-img" target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/differences-between-bootstrap-and-jquery-ui" aria-label="Extensions"></a>
+                                        </div>
+                                        <div class="row text-center mt-4">
+                                            <div class="col-6 border-right">
+                                                <div class="h5 font-weight-bold mb-0">Bootstrap</div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="h5 font-weight-bold mb-0">jQuery</div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <div class="bg-white rounded-lg shadow p-4">
+                                        <h2 class="h5 font-weight-bold text-center mb-4">Cybersécurité</h2>
+                                        <div class="block-21 mb-4 d-flex justify-content-center">
+                                            <a id="cyber" class="blog-img" target="_blank" rel="noopener" href="https://owasp.org/www-community/OWASP_Risk_Rating_Methodology" aria-label="Cybersécurité"></a>
+                                        </div>
+                                        <div class="row text-center mt-4">
+                                            <div class="col-6 border-right">
+                                                <div class="h5 font-weight-bold mb-0">OWASP</div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="h5 font-weight-bold mb-0">CVSS</div>
+                                                <span class="small text-gray"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% include "tools.html" %}
                         </div>
-                        <div class="text pl-3">
-                           <span class="date">Janvier 2019</span>
-                           <h2>TOEFL</h2>
-                           <span class="position">550</span>
-                           <p>B2</p>
+                        <div id="languages" class="page">
+                            <h2 class="heading">Langues</h2>
+                            <div class="row">
+                                <div class="col-md-12 animate-box">
+                                    <div class="progress-wrap ftco-animate">
+                                        <h3>Français</h3>
+                                        <div class="progress">
+                                            <div class="progress-bar color-1" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                                <span>C2</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 animate-box">
+                                    <div class="progress-wrap ftco-animate">
+                                        <h3>Anglais</h3>
+                                        <div class="progress">
+                                            <div class="progress-bar color-2" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                                                <span>B2</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 animate-box">
+                                    <div class="progress-wrap ftco-animate">
+                                        <h3>Espagnol</h3>
+                                        <div class="progress">
+                                            <div class="progress-bar color-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                                                <span>A2</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                           <span class="icon-web"></span>
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">Juin 2019</span>
-                           <h2>Challenge étudiant CGI</h2>
-                           <span class="position">Finaliste</span>
-                           <p>Solidarité : Easy Student Housing</p>
-                        </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                           <span class="icon-drivers-license"></span>
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">Juillet 2016</span>
-                           <h2>Permis de conduire</h2>
-                           <span class="position">24</span>
-                           <p>B</p>
-                        </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                           <span class="icon-certificate"></span>
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">Juillet 2015</span>
-                           <h2>Bac</h2>
-                           <span class="position">TB</span>
-                           <p>Scientifique : St Jacques de Compostelle (Dax)</p>
-                        </div>
-                     </div>
-                     <div class="resume-wrap d-flex ftco-animate">
-                        <div id="FFT" class="icon svg d-flex align-items-center justify-content-center">
-                        </div>
-                        <div class="text pl-3">
-                           <span class="date">Août 2012</span>
-                           <h2>TNJA</h2>
-                           <span class="position">Finaliste</span>
-                           <p>Arbitre de Tennis : CBBL</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      <section class="ftco-section" id="services-section">
-         <div class="container-fluid px-md-5">
-            <div class="row justify-content-center py-5 mt-5">
-               <div class="col-md-12 heading-section text-center ftco-animate">
-                  <h2 class="mb-4">Services</h2>
-                  <img class="img-fluid" src="images/developer.png" id="developer" alt="Developer Avatar" loading="lazy" height="250" width="150">
-                  <p class="mt-4">Programmation, Assistance Technique &amp; Formation</p>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow" aria-label="Data Viz">
-                     <span class="icon">
-                     <i class="flaticon-analysis"></i>
-                     </span>
-                     <div class="desc">
-                        <h3 class="mb-5">Data Viz</h3>
-                        <p></p>
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow" aria-label="Relation Client">
-                     <span class="icon">
-                     <i class="flaticon-flasks"></i>
-                     </span>
-                     <div class="desc">
-                        <h3 class="mb-5">Relation Client</h3>
-                        <p></p>
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow" aria-label="Développement Web">
-                     <span class="icon">
-                     <i class="flaticon-ideas"></i>
-                     </span>
-                     <div class="desc">
-                        <h3 class="mb-5">Développement Web</h3>
-                        <p></p>
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow" aria-label="Transformation Digitale">
-                     <span class="icon">
-                     <i class="flaticon-innovation"></i>
-                     </span>
-                     <div class="desc">
-                        <h3 class="mb-5">Transformation Digitale</h3>
-                        <p></p>
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow" aria-label="Gestion de Projet">
-                     <span class="icon">
-                     <i class="flaticon-ux-design"></i>
-                     </span>
-                     <div class="desc">
-                        <h3 class="mb-5">Gestion De Projet</h3>
-                        <p></p>
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 text-center d-flex ftco-animate">
-                  <a class="services-1 shadow" aria-label="Support technique">
-                     <span class="icon">
-                     <i class="flaticon-idea"></i>
-                     </span>
-                     <div class="desc">
-                        <h3 class="mb-5">Support Technique</h3>
-                        <p></p>
-                     </div>
-                  </a>
-               </div>
-            </div>
-         </div>
-      </section>
-      <section class="ftco-section ftco-project" id="projects-section">
-         <div class="container-fluid px-md-0">
-             <div class="row no-gutters justify-content-center pb-5">
-               <div class="col-md-12 heading-section text-center ftco-animate">
-                <h2 class="mb-4">Projets</h2>
-                <p>Bienvenue sur mon portfolio ! Vous y trouverez une sélection de projets réalisés et d'articles rédigés en tant qu'ingénieur logiciel.</p>
-                <p>Ils couvrent une grande variété de technologies, de secteurs et d'environnements de travail. Chacun d'entre eux met en avant mes compétences techniques et ma capacité à m'adapter à des contextes divers.</p>
-               </div>
-            </div>
-             <div class="row no-gutters">
-                <div class="col-md-4">
-                     <div id="esh" class="project img ftco-animate d-flex justify-content-center align-items-center">
-                         <div class="overlay"></div>
-                         <div class="text text-center p-4">
-                             <h3>Easy Student Housing</h3>
-                             <span>
-                                <p><u>Contexte</u> : Concours étudiant <i>CGI</i> | Supervisé, en quatuor (ESILV) | 6 mois</p>
-                                <p><u>Description</u> : Application de logement étudiant (Prototype) 
-                                <br><u>Technologies</u> : Power Point</p>
-                                <a class="explore btn btn-light py-3 px-3">Explorer</a>
-                            </span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-md-4">
-                     <div id="cpmcs" class="project img ftco-animate d-flex justify-content-center align-items-center">
-                         <div class="overlay"></div>
-                         <div class="text text-center p-4">
-                             <h3>CPMCS</h3>
-                             <span>
-                                <p><u>Contexte</u> : Stage chez <i>Cyberprotect</i> | Supervisé, en autonomie | 6 mois</p>
-                                <p><u>Description</u> : Application de maintien en condition de sécurité (MCS)
-                                <br><u>Technologies</u> : <b>Python</b> (Flask), Angular, PostgreSQL, Elasticsearch</p>
-                                <p>Par soucis de confidentialité, je me limite à une présentation du concept.</p>
-                                <a class="explore btn btn-light py-3 px-3">Explorer</a>
-                            </span>
-                         </div>
-                     </div>
-                 </div>
-                <div class="col-md-4">
-                     <div id="crm" class="project img ftco-animate d-flex justify-content-center align-items-center">
-                         <div class="overlay"></div>
-                         <div class="text text-center p-4">
-                             <h3>CRM <i>Elphicom</i></h3>
-                            <span>
-                                <p><u>Contexte</u> : Stage chez <i>Soft Concept</i> | Supervisé, en autonomie | 3 mois</p>
-                                <p><u>Description</u> : Logiciel de gestion de la clientèle (CRM)
-                                <br><u>Technologies</u> : <b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, Net-Survey, Ethnos, Web-Reports</p>
-                                <a class="explore btn btn-light py-3 px-3">Explorer</a>
-                            </span>
-                         </div>
-                     </div>
-                 </div>
-                <div class="col-md-4">
-                     <div id="building" class="project img ftco-animate d-flex justify-content-center align-items-center">
-                         <div class="overlay"></div>
-                         <div class="text text-center p-4">
-                             <h3>EBati <i>Carto Amiante</i></h3>
-                            <span>
-                                <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En binôme | 1 an</p>
-                                <p><u>Description</u> : Logiciel de gestion de biens immobiliers
-                                <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
-                                <a class="explore btn btn-light py-3 px-3">Explorer</a>
-                            </span>
-                         </div>
-                     </div>
-                 </div>
-                <div class="col-md-4">
-                     <div id="sushi" class="project img ftco-animate d-flex justify-content-center align-items-center">
-                         <div class="overlay"></div>
-                         <div class="text text-center p-4">
-                             <h3>JCA <i>Sushi Robots</i></h3>
-                            <span>
-                                <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En autonomie | 6 mois</p>
-                                <p><u>Description</u> : Plateforme d'e-learning culinaire
-                                <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
-                                <a class="explore btn btn-light py-3 px-3">Explorer</a>
-                            </span>
-                         </div>
-                     </div>
-                 </div>
-                <div class="col-md-4">
-                     <div id="pragma" class="project img ftco-animate d-flex justify-content-center align-items-center">
-                         <div class="overlay"></div>
-                         <div class="text text-center p-4">
-                             <h3>Enquêtes Internes <i>Pragma</i></h3>
-                            <span>
-                                <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 1 an et demi</p>
-                                <p><u>Description</u> : Plateforme d'enquêtes internes
-                                <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
-                                <a class="explore btn btn-light py-3 px-3">Explorer</a>
-                            </span>
-                         </div>
-                     </div>
-                 </div>
-                <div class="col-md-4">
-                     <div id="smiley" class="project img ftco-animate d-flex justify-content-center align-items-center">
-                         <div class="overlay"></div>
-                         <div class="text text-center p-4">
-                             <h3>REF230 <i>AFNOR</i></h3>
-                            <span>
-                                <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 2 ans</p>
-                                <p><u>Description</u> : Application de gestion d'audits pour la certification des opticiens avec <i>Vitalis</i>
-                                <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
-                                <a class="explore btn btn-light py-3 px-3">Explorer</a>
-                            </span>
-                         </div>
-                     </div>
-                 </div>
-                <div class="col-md-4">
-                     <div id="satisfaction" class="project img ftco-animate d-flex justify-content-center align-items-center">
-                         <div class="overlay"></div>
-                         <div class="text text-center p-4">
-                             <h3>Panel <i>MNT</i></h3>
-                            <span>
-                                <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En autonomie | 3 mois</p>
-                                <p><u>Description</u> : Site panéliste pour la mutuelle
-                                <br><u>Technologies</u> : <b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, Net-Survey, Ethnos, Web-Reports</p>
-                                <a class="explore btn btn-light py-3 px-3">Explorer</a>
-                            </span>
-                         </div>
-                     </div>
-                 </div>
-                <div class="col-md-4">
-                     <div id="health" class="project img ftco-animate d-flex justify-content-center align-items-center">
-                         <div class="overlay"></div>
-                         <div class="text text-center p-4">
-                             <h3>OPALE <i>SNITEM</i></h3>
-                            <span>
-                                <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 1 an et demi</p>
-                                <p><u>Description</u> : Outil de pilotage médical avec <i>Nexialist</i>
-                                <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports</p>
-                                <a class="explore btn btn-light py-3 px-3">Explorer</a>
-                            </span>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-      </section>
-      <section class="ftco-section ftco-counter" id="counter-section">
-         <div class="container-fluid px-md-5">
-             <div class="row d-md-flex align-items-center">
-               <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-                <div class="block-18 shadow">
-                  <div class="text">
-                    <strong class="number" id="certifsCount">0</strong>
-                    <span>Certifications</span>
-                  </div>
-                </div>
-               </div>
-               <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-                <div class="block-18 shadow">
-                  <div class="text">
-                    <strong class="number" id="projectsCount">0</strong>
-                    <span>Projets livrés</span>
-                  </div>
-                </div>
-               </div>
-               <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-                <div class="block-18 shadow">
-                  <div class="text">
-                    <strong class="number" id="experiencesCount">0</strong>
-                    <span>Expériences pros</span>
-                  </div>
-                </div>
-               </div>
-               <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-                <div class="block-18 shadow">
-                  <div class="text">
-                    <strong class="number" id="countriesCount">0</strong>
-                    <span>Pays visités</span>
-                  </div>
-                </div>
-               </div>
-            </div>
-          </div>
-      </section>
-      {% if viewport == "desktop" %}
-      <section class="ftco-section ftco-counter img d-none d-sm-flex" id="carousel-section">
-          <div class="container-fluid px-md-5 pb-3 pt-3 bg-dark text-white text-center">
-              <h2 class="text-white">Découvrez mes compétences</h2>
-              <div class="owl-menus d-flex justify-content-center">
-                <span class="owl-menu" data-target="#hard-skills">Hard skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Compétences techniques ou pratiques, acquises par la formation ou l'expérience"></i></span>
-                <span class="owl-menu" data-target="#soft-skills">Soft skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Compétences personnelles ou interpersonnelles, améliorant la manière de travailler et d’interagir avec les autres"></i></span>
-                <span class="owl-menu" data-target="#mad-skills">Mad skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Compétences atypiques ou talents uniques, souvent développées à travers des passions personnelles"></i></span>
-              </div>
-              {% include "hardskills.html" %}
-              <div class="owl-carousel owl-theme d-none" id="soft-skills">
-                  <div class="d-flex flex-column align-items-center"><img src="images/team.png" class="img-fluid" alt="Team spirit" loading="lazy" height="75" width="75"><span>Esprit d'équipe</span></div>
-                  <div class="d-flex flex-column align-items-center"><img src="images/leadership.png" class="img-fluid" alt="Leadership" loading="lazy" height="75" width="75"><span>Leadership</span></div>
-                  <div class="d-flex flex-column align-items-center"><img src="images/communication.png" class="img-fluid" alt="Communication" loading="lazy" height="75" width="75"><span>Communication</span></div>
-                  <div class="d-flex flex-column align-items-center"><img src="images/adaptability.png" class="img-fluid" alt="Adaptability" loading="lazy" height="75" width="75"><span>Adaptabilité</span></div>
-                  <div class="d-flex flex-column align-items-center"><img src="images/proactivity.png" class="img-fluid" alt="Proactivity" loading="lazy" height="75" width="75"><span>Proactivité</span></div>
-                  <div class="d-flex flex-column align-items-center"><img src="images/independence.png" class="img-fluid" alt="Independence" loading="lazy" height="75" width="75"><span>Autonomie</span></div>
-                  <div class="d-flex flex-column align-items-center"><img src="images/empathy.png" class="img-fluid" alt="Empathy" loading="lazy" height="75" width="75"><span>Empathie</span></div>
-                  <div class="d-flex flex-column align-items-center"><img src="images/creativity.png" class="img-fluid" alt="Creativity" loading="lazy" height="75" width="75"><span>Créativité</span></div>
-              </div>
-              <div class="owl-carousel owl-theme d-none" id="mad-skills">
-                  <div class="d-flex flex-column align-items-center"><img src="images/tennis.png" class="img-fluid" alt="Tennis" loading="lazy" height="75" width="75"><span>Tennis</span></div>
-                  <div class="d-flex flex-column align-items-center"><img src="images/chess.png" class="img-fluid" alt="Chess" loading="lazy" height="75" width="75"><span>Échecs</span></div>
-                  <div class="d-flex flex-column align-items-center"><img src="images/travel.png" class="img-fluid" alt="Trip" loading="lazy" height="75" width="75"><span>Voyage</span></div>
-                  <div class="d-flex flex-column align-items-center"><img src="images/writing.png" class="img-fluid" alt="Writing" loading="lazy" height="75" width="75"><span>Écriture</span></div>
-              </div>
-         </div>
-      </section>
-      {% endif %}
-      <section class="ftco-section" id="blog-section">
-         <div class="container">
-            <div class="row justify-content-center mb-5 pb-5">
-               <div class="col-md-7 heading-section text-center ftco-animate">
-                  <h2 class="mb-4">Blog</h2>
-                  <p>Loin, très loin, au-delà des montagnes de code</p>
-               </div>
-            </div>
-            <div class="row d-flex">
-                <div class="col-md-4 d-flex ftco-animate">
-                  <div class="blog-entry">
-                     <a id="software" class="article-image block-20"></a>
-                     <div class="text mt-3 float-right d-block">
-                        <h3 class="heading">Du voc' de dev</h3>
-                        <div class="d-flex align-items-center mb-3 meta">
-                           <p class="mb-0">
-                              <span>5 Mai 2025&nbsp;&nbsp;<i class="icon-clock-o"></i>&nbsp;3 min</span>
-                           </p>
-                        </div>
-                        <p>Le développement logiciel repose sur des outils variés, chacun ayant un rôle bien défini pour faciliter le travail des développeurs. Les termes <b>framework, librairie, bibliothèque, package et module</b> sont souvent utilisés, parfois de manière interchangeable mais que signifient-ils ?</p>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4 d-flex ftco-animate">
-                  <div class="blog-entry">
-                     <a id="mcs" class="article-image block-20"></a>
-                     <div class="text mt-3 float-right d-block">
-                        <h3 class="heading">Une application MCS : Kézako ?</h3>
-                        <div class="d-flex align-items-center mb-3 meta">
-                           <p class="mb-0">
-                              <span>23 Décembre 2024&nbsp;&nbsp;<i class="icon-clock-o"></i>&nbsp;6 min</span>
-                           </p>
-                        </div>
-                        <p>Avec l’omniprésence du numérique dans nos vies, protéger les systèmes informatiques est devenu indispensable. Mais assurer leur sécurité ne se limite pas à une mise en place initiale de protections : il faut les surveiller et les mettre à jour régulièrement pour éviter les incidents. C’est là qu’intervient le Maintien en Condition de Sécurité (MCS), un processus qui consiste à réduire les vulnérabilités...</p>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4 d-flex ftco-animate">
-                  <div class="blog-entry">
-                     <a id="work" class="article-image block-20"></a>
-                     <div class="text mt-3 float-right d-block">
-                        <h3 class="heading">Mon parcours pro en quelques lignes</h3>
-                        <div class="d-flex align-items-center mb-3 meta">
-                           <p class="mb-0">
-                              <span>1er Décembre 2024&nbsp;&nbsp;<i class="icon-clock-o"></i>&nbsp;4 min</span>
-                           </p>
-                        </div>
-                        <p>Je suis développeur but what else ? Stages, contrats, projets, langages... Une page recto pour en savoir un peu plus sur mes expériences.</p>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4 d-flex ftco-animate">
-                  <div class="blog-entry">
-                     <a id="agence-web" class="article-image block-20"></a>
-                     <div class="text mt-3 float-right d-block">
-                        <h3 class="heading">Sur quels critères choisir une agence web ?</h3>
-                        <div class="d-flex align-items-center mb-3 meta">
-                           <p class="mb-0">
-                              <span>31 Juillet 2019&nbsp;&nbsp;<i class="icon-clock-o"></i>&nbsp;4 min</span>
-                           </p>
-                        </div>
-                        <p>Depuis plusieurs décennies, l'informatique est devenue omniprésente dans le monde de l'entreprise. C'est pourquoi de nombreux entrepreneurs décident de déléguer la communication et le marketing à des agences spécialisées dans le numérique.</p>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4 d-flex ftco-animate">
-                  <div class="blog-entry">
-                     <a id="brand" class="article-image block-20"></a>
-                     <div class="text mt-3 float-right d-block">
-                        <h3 class="heading">5 conseils pour un nom de marque parfait</h3>
-                        <div class="d-flex align-items-center mb-3 meta">
-                           <p class="mb-0">
-                              <span>3 Juillet 2019&nbsp;&nbsp;<i class="icon-clock-o"></i>&nbsp;6 min</span>
-                           </p>
-                        </div>
-                        <p>Vous vous êtes réveillé avec une idée révolutionnaire ? Vous voulez devenir entrepreneur ? Pas de temps à perdre ! Mais avant toute chose, il va falloir vous trouver un nom de marque.</p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      {% if viewport == "desktop" %}	  
-      <section class="contact-section ftco-section ftco-no-pb" id="contact-section">
-         <div class="container">
-             <div class="row justify-content-center mb-5 pb-3">
-              <div class="col-md-7 heading-section text-center ftco-animate">
-                <h2 class="mb-4">Contact</h2>
-                <p>Opportunités de carrière, propositions de projets, idées à partager...</p>
-                <p>N'hésitez pas !</p>
-              </div>
-             </div>
-             <div class="row contact-info mb-5 d-none d-sm-flex">
-               <div class="col-md-12 col-lg-6 d-flex ftco-animate">
-                  <div class="align-self-stretch box text-center p-4 shadow">
-                    <div class="icon d-flex align-items-center justify-content-center">
-                        <span class="icon-map-signs"></span>
-                    </div>
-                    <div>
-                        <h3 class="mb-4">Adresse</h3>
-                        <p id="city"></p>
-                    </div>
-                  </div>
-               </div>
-               <div class="col-md-12 col-lg-6 d-flex ftco-animate">
-                  <div class="align-self-stretch box text-center p-4 shadow">
-                    <div class="icon d-flex align-items-center justify-content-center">
-                        <span class="icon-paper-plane"></span>
-                    </div>
-                    <div>
-                        <h3 class="mb-4">Email</h3>
-                        <p class="email"></p>
-                    </div>
-                  </div>
-               </div>
-             </div>
-             <div class="row no-gutters block-9 justify-content-center mb-5 pb-3">
-                <div class="col-md-6 order-md-last d-flex">
-                    <form class="bg-light p-4 p-md-5 contact-form" name="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
-                        <p hidden>
-                            <label>Ne remplis pas ce champ si tu es humain : <input name="bot-field"></label>
-                        </p>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nom" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Objet" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea cols="30" rows="10" class="form-control" placeholder="Message" name="message" required></textarea>
-                        </div>
-                        <div id="captchaCheck"></div>
-                        <div id="callback-form" class="text-center"></div>
-                        <div class="form-group text-right">
-                            <input type="submit" value="Envoyer" class="btn btn-primary py-3 px-5" disabled>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-6 d-flex d-lg-none">
-                    <div id="profile" class="img">
-                        <div class="bulle-bd text-center bg-white">
-                            Toujours plus loin, toujours plus haut, toujours plus fort !
+                        <div id="awards" class="page">
+                            <h2 class="heading">Récompenses</h2>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <span class="icon-language"></span>
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Janvier 2020</span>
+                                    <h2>TOEIC</h2>
+                                    <span class="position">810</span>
+                                    <p>B2</p>
+                                </div>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <span class="icon-language"></span>
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Janvier 2019</span>
+                                    <h2>TOEFL</h2>
+                                    <span class="position">550</span>
+                                    <p>B2</p>
+                                </div>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <span class="icon-web"></span>
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Juin 2019</span>
+                                    <h2>Challenge étudiant CGI</h2>
+                                    <span class="position">Finaliste</span>
+                                    <p>Solidarité : Easy Student Housing</p>
+                                </div>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <span class="icon-drivers-license"></span>
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Juillet 2016</span>
+                                    <h2>Permis de conduire</h2>
+                                    <span class="position">24</span>
+                                    <p>B</p>
+                                </div>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <span class="icon-certificate"></span>
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Juillet 2015</span>
+                                    <h2>Bac</h2>
+                                    <span class="position">TB</span>
+                                    <p>Scientifique : St Jacques de Compostelle (Dax)</p>
+                                </div>
+                            </div>
+                            <div class="resume-wrap d-flex ftco-animate">
+                                <div id="FFT" class="icon svg d-flex align-items-center justify-content-center">
+                                </div>
+                                <div class="text pl-3">
+                                    <span class="date">Août 2012</span>
+                                    <h2>TNJA</h2>
+                                    <span class="position">Finaliste</span>
+                                    <p>Arbitre de Tennis : CBBL</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-             </div>
-         </div>
-      </section>
-      {% endif %}
-      <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" data-target="#contact-window">
+            </div>
+        </section>
+        <section class="ftco-section" id="services-section">
+            <div class="container-fluid px-md-5">
+                <div class="row justify-content-center py-5 mt-5">
+                    <div class="col-md-12 heading-section text-center ftco-animate">
+                        <h2 class="mb-4">Services</h2>
+                        <img class="img-fluid" src="images/developer.png" id="developer" alt="Developer Avatar" loading="lazy" height="250" width="150">
+                        <p class="mt-4">Programmation, Assistance Technique &amp; Formation</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 text-center d-flex ftco-animate">
+                        <a class="services-1 shadow" aria-label="Data Viz">
+                            <span class="icon">
+                            <i class="flaticon-analysis"></i>
+                            </span>
+                            <div class="desc">
+                                <h3 class="mb-5">Data Viz</h3>
+                                <p></p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center d-flex ftco-animate">
+                        <a class="services-1 shadow" aria-label="Relation Client">
+                            <span class="icon">
+                            <i class="flaticon-flasks"></i>
+                            </span>
+                            <div class="desc">
+                                <h3 class="mb-5">Relation Client</h3>
+                                <p></p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center d-flex ftco-animate">
+                        <a class="services-1 shadow" aria-label="Développement Web">
+                            <span class="icon">
+                            <i class="flaticon-ideas"></i>
+                            </span>
+                            <div class="desc">
+                                <h3 class="mb-5">Développement Web</h3>
+                                <p></p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center d-flex ftco-animate">
+                        <a class="services-1 shadow" aria-label="Transformation Digitale">
+                            <span class="icon">
+                            <i class="flaticon-innovation"></i>
+                            </span>
+                            <div class="desc">
+                                <h3 class="mb-5">Transformation Digitale</h3>
+                                <p></p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center d-flex ftco-animate">
+                        <a class="services-1 shadow" aria-label="Gestion de Projet">
+                            <span class="icon">
+                            <i class="flaticon-ux-design"></i>
+                            </span>
+                            <div class="desc">
+                                <h3 class="mb-5">Gestion De Projet</h3>
+                                <p></p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center d-flex ftco-animate">
+                        <a class="services-1 shadow" aria-label="Support technique">
+                            <span class="icon">
+                            <i class="flaticon-idea"></i>
+                            </span>
+                            <div class="desc">
+                                <h3 class="mb-5">Support Technique</h3>
+                                <p></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="ftco-section ftco-project" id="projects-section">
+            <div class="container-fluid px-md-0">
+                <div class="row no-gutters justify-content-center pb-5">
+                    <div class="col-md-12 heading-section text-center ftco-animate">
+                        <h2 class="mb-4">Projets</h2>
+                        <p>Bienvenue sur mon portfolio ! Vous y trouverez une sélection de projets réalisés et d'articles rédigés en tant qu'ingénieur logiciel.</p>
+                        <p>Ils couvrent une grande variété de technologies, de secteurs et d'environnements de travail. Chacun d'entre eux met en avant mes compétences techniques et ma capacité à m'adapter à des contextes divers.</p>
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <div id="esh" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                            <div class="overlay"></div>
+                            <div class="text text-center p-4">
+                                <h3>Easy Student Housing</h3>
+                                <span>
+                                    <p><u>Contexte</u> : Concours étudiant <i>CGI</i> | Supervisé, en quatuor (ESILV) | 6 mois</p>
+                                    <p><u>Description</u> : Application de logement étudiant (Prototype) 
+                                        <br><u>Technologies</u> : Power Point
+                                    </p>
+                                    <a class="explore btn btn-light py-3 px-3">Explorer</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="cpmcs" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                            <div class="overlay"></div>
+                            <div class="text text-center p-4">
+                                <h3>CPMCS</h3>
+                                <span>
+                                    <p><u>Contexte</u> : Stage chez <i>Cyberprotect</i> | Supervisé, en autonomie | 6 mois</p>
+                                    <p><u>Description</u> : Application de maintien en condition de sécurité (MCS)
+                                        <br><u>Technologies</u> : <b>Python</b> (Flask), Angular, PostgreSQL, Elasticsearch
+                                    </p>
+                                    <p>Par soucis de confidentialité, je me limite à une présentation du concept.</p>
+                                    <a class="explore btn btn-light py-3 px-3">Explorer</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="crm" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                            <div class="overlay"></div>
+                            <div class="text text-center p-4">
+                                <h3>CRM <i>Elphicom</i></h3>
+                                <span>
+                                    <p><u>Contexte</u> : Stage chez <i>Soft Concept</i> | Supervisé, en autonomie | 3 mois</p>
+                                    <p><u>Description</u> : Logiciel de gestion de la clientèle (CRM)
+                                        <br><u>Technologies</u> : <b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, Net-Survey, Ethnos, Web-Reports
+                                    </p>
+                                    <a class="explore btn btn-light py-3 px-3">Explorer</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="building" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                            <div class="overlay"></div>
+                            <div class="text text-center p-4">
+                                <h3>EBati <i>Carto Amiante</i></h3>
+                                <span>
+                                    <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En binôme | 1 an</p>
+                                    <p><u>Description</u> : Logiciel de gestion de biens immobiliers
+                                        <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports
+                                    </p>
+                                    <a class="explore btn btn-light py-3 px-3">Explorer</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="sushi" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                            <div class="overlay"></div>
+                            <div class="text text-center p-4">
+                                <h3>JCA <i>Sushi Robots</i></h3>
+                                <span>
+                                    <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En autonomie | 6 mois</p>
+                                    <p><u>Description</u> : Plateforme d'e-learning culinaire
+                                        <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports
+                                    </p>
+                                    <a class="explore btn btn-light py-3 px-3">Explorer</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="pragma" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                            <div class="overlay"></div>
+                            <div class="text text-center p-4">
+                                <h3>Enquêtes Internes <i>Pragma</i></h3>
+                                <span>
+                                    <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 1 an et demi</p>
+                                    <p><u>Description</u> : Plateforme d'enquêtes internes
+                                        <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports
+                                    </p>
+                                    <a class="explore btn btn-light py-3 px-3">Explorer</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="smiley" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                            <div class="overlay"></div>
+                            <div class="text text-center p-4">
+                                <h3>REF230 <i>AFNOR</i></h3>
+                                <span>
+                                    <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 2 ans</p>
+                                    <p><u>Description</u> : Application de gestion d'audits pour la certification des opticiens avec <i>Vitalis</i>
+                                        <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports
+                                    </p>
+                                    <a class="explore btn btn-light py-3 px-3">Explorer</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="satisfaction" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                            <div class="overlay"></div>
+                            <div class="text text-center p-4">
+                                <h3>Panel <i>MNT</i></h3>
+                                <span>
+                                    <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En autonomie | 3 mois</p>
+                                    <p><u>Description</u> : Site panéliste pour la mutuelle
+                                        <br><u>Technologies</u> : <b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, Net-Survey, Ethnos, Web-Reports
+                                    </p>
+                                    <a class="explore btn btn-light py-3 px-3">Explorer</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="health" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                            <div class="overlay"></div>
+                            <div class="text text-center p-4">
+                                <h3>OPALE <i>SNITEM</i></h3>
+                                <span>
+                                    <p><u>Contexte</u> : CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 1 an et demi</p>
+                                    <p><u>Description</u> : Outil de pilotage médical avec <i>Nexialist</i>
+                                        <br><u>Technologies</u> : <b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports
+                                    </p>
+                                    <a class="explore btn btn-light py-3 px-3">Explorer</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% if viewport == "desktop" %}
+        <section class="ftco-section ftco-counter" id="counter-section">
+            <div class="container-fluid px-md-5">
+                <div class="row d-md-flex align-items-center">
+                    <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18 shadow">
+                            <div class="text">
+                                <strong class="number" id="certifsCount">0</strong>
+                                <span>Certifications</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18 shadow">
+                            <div class="text">
+                                <strong class="number" id="projectsCount">0</strong>
+                                <span>Projets livrés</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18 shadow">
+                            <div class="text">
+                                <strong class="number" id="experiencesCount">0</strong>
+                                <span>Expériences pros</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                        <div class="block-18 shadow">
+                            <div class="text">
+                                <strong class="number" id="countriesCount">0</strong>
+                                <span>Pays visités</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+        {% if viewport == "desktop" %}
+        <section class="ftco-section ftco-counter img d-none d-sm-flex" id="carousel-section">
+            <div class="container-fluid px-md-5 pb-3 pt-3 bg-dark text-white text-center">
+                <h2 class="text-white">Découvrez mes compétences</h2>
+                <div class="owl-menus d-flex justify-content-center">
+                    <span class="owl-menu" data-target="#hard-skills">Hard skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Compétences techniques ou pratiques, acquises par la formation ou l'expérience"></i></span>
+                    <span class="owl-menu" data-target="#soft-skills">Soft skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Compétences personnelles ou interpersonnelles, améliorant la manière de travailler et d’interagir avec les autres"></i></span>
+                    <span class="owl-menu" data-target="#mad-skills">Mad skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Compétences atypiques ou talents uniques, souvent développées à travers des passions personnelles"></i></span>
+                </div>
+                {% include "hardskills.html" %}
+                <div class="owl-carousel owl-theme d-none" id="soft-skills">
+                    <div class="d-flex flex-column align-items-center"><img src="images/team.png" class="img-fluid" alt="Team spirit" loading="lazy" height="75" width="75"><span>Esprit d'équipe</span></div>
+                    <div class="d-flex flex-column align-items-center"><img src="images/leadership.png" class="img-fluid" alt="Leadership" loading="lazy" height="75" width="75"><span>Leadership</span></div>
+                    <div class="d-flex flex-column align-items-center"><img src="images/communication.png" class="img-fluid" alt="Communication" loading="lazy" height="75" width="75"><span>Communication</span></div>
+                    <div class="d-flex flex-column align-items-center"><img src="images/adaptability.png" class="img-fluid" alt="Adaptability" loading="lazy" height="75" width="75"><span>Adaptabilité</span></div>
+                    <div class="d-flex flex-column align-items-center"><img src="images/proactivity.png" class="img-fluid" alt="Proactivity" loading="lazy" height="75" width="75"><span>Proactivité</span></div>
+                    <div class="d-flex flex-column align-items-center"><img src="images/independence.png" class="img-fluid" alt="Independence" loading="lazy" height="75" width="75"><span>Autonomie</span></div>
+                    <div class="d-flex flex-column align-items-center"><img src="images/empathy.png" class="img-fluid" alt="Empathy" loading="lazy" height="75" width="75"><span>Empathie</span></div>
+                    <div class="d-flex flex-column align-items-center"><img src="images/creativity.png" class="img-fluid" alt="Creativity" loading="lazy" height="75" width="75"><span>Créativité</span></div>
+                </div>
+                <div class="owl-carousel owl-theme d-none" id="mad-skills">
+                    <div class="d-flex flex-column align-items-center"><img src="images/tennis.png" class="img-fluid" alt="Tennis" loading="lazy" height="75" width="75"><span>Tennis</span></div>
+                    <div class="d-flex flex-column align-items-center"><img src="images/chess.png" class="img-fluid" alt="Chess" loading="lazy" height="75" width="75"><span>Échecs</span></div>
+                    <div class="d-flex flex-column align-items-center"><img src="images/travel.png" class="img-fluid" alt="Trip" loading="lazy" height="75" width="75"><span>Voyage</span></div>
+                    <div class="d-flex flex-column align-items-center"><img src="images/writing.png" class="img-fluid" alt="Writing" loading="lazy" height="75" width="75"><span>Écriture</span></div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+        <section class="ftco-section" id="blog-section">
+            <div class="container">
+                <div class="row justify-content-center mb-5 pb-5">
+                    <div class="col-md-7 heading-section text-center ftco-animate">
+                        <h2 class="mb-4">Blog</h2>
+                        <p>Loin, très loin, au-delà des montagnes de code</p>
+                    </div>
+                </div>
+                <div class="row d-flex">
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry">
+                            <a id="software" class="article-image block-20"></a>
+                            <div class="text mt-3 float-right d-block">
+                                <h3 class="heading">Du voc' de dev</h3>
+                                <div class="d-flex align-items-center mb-3 meta">
+                                    <p class="mb-0">
+                                        <span>5 Mai 2025&nbsp;&nbsp;<i class="icon-clock-o"></i>&nbsp;3 min</span>
+                                    </p>
+                                </div>
+                                <p>Le développement logiciel repose sur des outils variés, chacun ayant un rôle bien défini pour faciliter le travail des développeurs. Les termes <b>framework, librairie, bibliothèque, package et module</b> sont souvent utilisés, parfois de manière interchangeable mais que signifient-ils ?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry">
+                            <a id="mcs" class="article-image block-20"></a>
+                            <div class="text mt-3 float-right d-block">
+                                <h3 class="heading">Une application MCS : Kézako ?</h3>
+                                <div class="d-flex align-items-center mb-3 meta">
+                                    <p class="mb-0">
+                                        <span>23 Décembre 2024&nbsp;&nbsp;<i class="icon-clock-o"></i>&nbsp;6 min</span>
+                                    </p>
+                                </div>
+                                <p>Avec l’omniprésence du numérique dans nos vies, protéger les systèmes informatiques est devenu indispensable. Mais assurer leur sécurité ne se limite pas à une mise en place initiale de protections : il faut les surveiller et les mettre à jour régulièrement pour éviter les incidents. C’est là qu’intervient le Maintien en Condition de Sécurité (MCS), un processus qui consiste à réduire les vulnérabilités...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry">
+                            <a id="work" class="article-image block-20"></a>
+                            <div class="text mt-3 float-right d-block">
+                                <h3 class="heading">Mon parcours pro en quelques lignes</h3>
+                                <div class="d-flex align-items-center mb-3 meta">
+                                    <p class="mb-0">
+                                        <span>1er Décembre 2024&nbsp;&nbsp;<i class="icon-clock-o"></i>&nbsp;4 min</span>
+                                    </p>
+                                </div>
+                                <p>Je suis développeur but what else ? Stages, contrats, projets, langages... Une page recto pour en savoir un peu plus sur mes expériences.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry">
+                            <a id="agence-web" class="article-image block-20"></a>
+                            <div class="text mt-3 float-right d-block">
+                                <h3 class="heading">Sur quels critères choisir une agence web ?</h3>
+                                <div class="d-flex align-items-center mb-3 meta">
+                                    <p class="mb-0">
+                                        <span>31 Juillet 2019&nbsp;&nbsp;<i class="icon-clock-o"></i>&nbsp;4 min</span>
+                                    </p>
+                                </div>
+                                <p>Depuis plusieurs décennies, l'informatique est devenue omniprésente dans le monde de l'entreprise. C'est pourquoi de nombreux entrepreneurs décident de déléguer la communication et le marketing à des agences spécialisées dans le numérique.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry">
+                            <a id="brand" class="article-image block-20"></a>
+                            <div class="text mt-3 float-right d-block">
+                                <h3 class="heading">5 conseils pour un nom de marque parfait</h3>
+                                <div class="d-flex align-items-center mb-3 meta">
+                                    <p class="mb-0">
+                                        <span>3 Juillet 2019&nbsp;&nbsp;<i class="icon-clock-o"></i>&nbsp;6 min</span>
+                                    </p>
+                                </div>
+                                <p>Vous vous êtes réveillé avec une idée révolutionnaire ? Vous voulez devenir entrepreneur ? Pas de temps à perdre ! Mais avant toute chose, il va falloir vous trouver un nom de marque.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% if viewport == "desktop" %}
+        <section class="contact-section ftco-section ftco-no-pb" id="contact-section">
+            <div class="container">
+                <div class="row justify-content-center mb-5 pb-3">
+                    <div class="col-md-7 heading-section text-center ftco-animate">
+                        <h2 class="mb-4">Contact</h2>
+                        <p>Opportunités de carrière, propositions de projets, idées à partager...</p>
+                        <p>N'hésitez pas !</p>
+                    </div>
+                </div>
+                <div class="row contact-info mb-5 d-none d-sm-flex">
+                    <div class="col-md-12 col-lg-6 d-flex ftco-animate">
+                        <div class="align-self-stretch box text-center p-4 shadow">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <span class="icon-map-signs"></span>
+                            </div>
+                            <div>
+                                <h3 class="mb-4">Adresse</h3>
+                                <p id="city"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6 d-flex ftco-animate">
+                        <div class="align-self-stretch box text-center p-4 shadow">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <span class="icon-paper-plane"></span>
+                            </div>
+                            <div>
+                                <h3 class="mb-4">Email</h3>
+                                <p class="email"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-gutters block-9 justify-content-center mb-5 pb-3">
+                    <div class="col-md-6 order-md-last d-flex">
+                        <form class="bg-light p-4 p-md-5 contact-form" name="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+                            <p hidden>
+                                <label>Ne remplis pas ce champ si tu es humain : <input name="bot-field"></label>
+                            </p>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Nom" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Objet" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea cols="30" rows="10" class="form-control" placeholder="Message" name="message" required></textarea>
+                            </div>
+                            <div id="captchaCheck"></div>
+                            <div id="callback-form" class="text-center"></div>
+                            <div class="form-group text-right">
+                                <input type="submit" value="Envoyer" class="btn btn-primary py-3 px-5" disabled>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6 d-flex d-lg-none">
+                        <div id="profile" class="img">
+                            <div class="bulle-bd text-center bg-white">
+                                Toujours plus loin, toujours plus haut, toujours plus fort !
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+        <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" data-target="#contact-window">
             <span class="icon-user"></span>
-      </div>
-      <div id="contact-window" class="mfp flex-column bg-white" hidden>
-        <div id="contact-header" class="d-flex align-items-center justify-content-between text-white">
-            <h6>Me contacter</h6>
-            <span class="mfp-close">×</span>
         </div>
-        {% include "social_modal.html" %}
-      </div>
-      <div id="webchat"></div>
-      <footer class="ftco-footer ftco-section">
-         <div class="container">
-            <div class="row mb-5">
-               <div class="col-md-8">
-                  <div class="ftco-footer-widget mb-4">
-                     <h2 class="ftco-heading-2">Synopsis</h2>
-                     <p>Loin, très loin, au-delà des montagnes de code, loin des terres de designs dépassés et d’interfaces obsolètes, ici gît le développeur web. Visant des expériences utilisateurs fluides, construisant des sites web adaptatifs et insufflant la vie à des lignes de code, l'ingénieur transforme les idées en réalité numérique.</p>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="ftco-footer-widget mb-4">
-                     <h2 class="ftco-heading-2">Une question ?</h2>
-                     <div class="block-23 mb-3">
-                        <ul>
-                           <li><span class="icon-envelope"></span>&nbsp;&nbsp;<span class="text email"></span></li>
-                        </ul>
-                     </div>
-                     {% include "social.html" %}
-                  </div>
-               </div>
+        <div id="contact-window" class="mfp flex-column bg-white" hidden>
+            <div id="contact-header" class="d-flex align-items-center justify-content-between text-white">
+                <h6>Me contacter</h6>
+                <span class="mfp-close">×</span>
             </div>
-            <div class="row mb-5">
-                <div class="col-md-12 text-center">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Un bingo ?</h2>
-                        <div class="block-23 mb-3 d-flex flex-column align-items-center">
-                            <p>Si tu tombes sur le numéro 2713, tu as gagné !</p>
-                            <div id="bingo-timer">0</div>
-                            <div id="bingo-btn" class="text-white">Jouer</div>
+            {% include "social_modal.html" %}
+        </div>
+        <div id="webchat"></div>
+        <footer class="ftco-footer ftco-section">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-md-8">
+                        <div class="ftco-footer-widget mb-4">
+                            <h2 class="ftco-heading-2">Synopsis</h2>
+                            <p>Loin, très loin, au-delà des montagnes de code, loin des terres de designs dépassés et d’interfaces obsolètes, ici gît le développeur web. Visant des expériences utilisateurs fluides, construisant des sites web adaptatifs et insufflant la vie à des lignes de code, l'ingénieur transforme les idées en réalité numérique.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="ftco-footer-widget mb-4">
+                            <h2 class="ftco-heading-2">Une question ?</h2>
+                            <div class="block-23 mb-3">
+                                <ul>
+                                    <li><span class="icon-envelope"></span>&nbsp;&nbsp;<span class="text email"></span></li>
+                                </ul>
+                            </div>
+                            {% include "social.html" %}
                         </div>
                     </div>
                 </div>
+                <div class="row mb-5">
+                    <div class="col-md-12 text-center">
+                        <div class="ftco-footer-widget mb-4">
+                            <h2 class="ftco-heading-2">Un bingo ?</h2>
+                            <div class="block-23 mb-3 d-flex flex-column align-items-center">
+                                <p>Si tu tombes sur le numéro 2713, tu as gagné !</p>
+                                <div id="bingo-timer">0</div>
+                                <div id="bingo-btn" class="text-white">Jouer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% include "copyright_fr.html" %}
             </div>
-            {% include "copyright_fr.html" %}
-         </div>
-      </footer>
-      {% include "loading.html" %}
-      <div id="ftco-visitor" hidden></div>
-      {% include "scripts.html" %}
-      <script defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()" crossorigin="anonymous"></script>
-      <script defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
-      <script async defer src="https://www.google.com/recaptcha/api.js?hl=fr&onload=initCaptcha&render=explicit"></script>
-      <script defer src="js/botpress.js"></script>
+        </footer>
+        {% include "loading.html" %}
+        <div id="ftco-visitor" hidden></div>
+        {% include "scripts.html" %}
+        {% if viewport == "desktop" %}
+        <script defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()" crossorigin="anonymous"></script>
+        <script defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+        <script async defer src="https://www.google.com/recaptcha/api.js?hl=fr&onload=initCaptcha&render=explicit"></script>
+        <script defer src="js/botpress.js"></script>
+        {% endif %}
     </body>
 </html>
