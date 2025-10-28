@@ -4,69 +4,70 @@ permalink: "projects/opale_snitem_fr.html"
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-      <title>Portfolio - OPALE SNITEM</title>
-      {% include "metas.html" %}
-	  <meta name="description" content="OPALE SNITEM">
-      <meta http-equiv="Content-Language" content="fr_FR">
-      {% include "poppins.html" %}
-      <base href="../../">
-      {% include "manifest.html" %}
-      {% include "default.html" %}
+        <title>Portfolio - OPALE SNITEM</title>
+        {% include "metas.html" %}
+        <meta name="description" content="OPALE SNITEM">
+        <meta http-equiv="Content-Language" content="fr_FR">
+        {% include "poppins.html" %}
+        <base href="../../">
+        {% include "manifest.html" %}
+        {% include "default.html" %}
     </head>
     <body onload="initArticle()">
-      <div class="read-title">
-        <h1>🖥️ OPALE SNITEM</h1>
-        {% include "switcher_fr.html" %}
-      </div>
-      <div class="video-wrapper">
-        <video controls>
-          <track label="Français" kind="subtitles" srclang="fr" src="docs/public/OPALE_SNITEM_FR.vtt">
-          <track label="English" kind="subtitles" srclang="en" src="docs/public/OPALE_SNITEM_EN.vtt">
-          <source src="docs/public/OPALE_SNITEM.mp4" type="video/mp4">
-        </video>
-      </div>
-      <p><strong>Plateforme d'audit développée pendant 1 an</strong> pour le <a target="_blank" rel="noopener" href="https://www.snitem.fr">SNITEM</a>, en CDI chez <a target="_blank" rel="noopener" href="https://www.soft-concept.com">Soft Concept</a>, en collaboration avec <a target="_blank" rel="noopener" href="https://nexialist.fr">Nexialist</a></p>
-      <h2>📝 Présentation</h2>
-      <p>C'est un outil de pilotage des différentes étapes en vue de la certification <a target="_blank" rel="noopener" href="https://www.snitem.fr/le-dispositif-medical-dm/dm-et-cadre-reglementaire/la-reglementation-des-dispositifs-medicaux">RDM</a> (Réglement sur les Dispositifs Médicaux), à l'initiative du SNITEM (Syndicat National de l’Industrie des Technologies Médicales).</p>
-      <h2>🛠️ Technologies utilisées</h2>
-      <ul>
-        <li><strong>C#, HTML, CSS, JavaScript</strong></li>
-        <li>Outils internes :
-          <ul>
-            <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-enquete-en-ligne-web-on-line-net-survey.html">Net-Survey</a> : création de questionnaires</li>
-            <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-traitement-enquetes-ethnos.html">Ethnos</a> : analyse de données collectées</li>
-            <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-reporting-resultats-enquete-en-ligne-web-reports.html">Web Reports</a> : développement et déploiement applicatif</li>
-          </ul>
-        </li>
-      </ul>
-      <h2>🗂️ Structure de l’application</h2>
+        <div class="read-title">
+            <h1>🖥️ OPALE SNITEM</h1>
+            {% include "switcher_fr.html" %}
+        </div>
+        <div class="video-wrapper">
+            <video controls>
+                <track label="Français" kind="subtitles" srclang="fr" src="docs/public/OPALE_SNITEM_FR.vtt">
+                <track label="English" kind="subtitles" srclang="en" src="docs/public/OPALE_SNITEM_EN.vtt">
+                <source src="docs/public/OPALE_SNITEM.mp4" type="video/mp4">
+            </video>
+        </div>
+        <p><strong>Plateforme d'audit développée pendant 1 an</strong> pour le <a target="_blank" rel="noopener" href="https://www.snitem.fr">SNITEM</a>, en CDI chez <a target="_blank" rel="noopener" href="https://www.soft-concept.com">Soft Concept</a>, en collaboration avec <a target="_blank" rel="noopener" href="https://nexialist.fr">Nexialist</a></p>
+        <h2>📝 Présentation</h2>
+        <p>C'est un outil de pilotage des différentes étapes en vue de la certification <a target="_blank" rel="noopener" href="https://www.snitem.fr/le-dispositif-medical-dm/dm-et-cadre-reglementaire/la-reglementation-des-dispositifs-medicaux">RDM</a> (Réglement sur les Dispositifs Médicaux), à l'initiative du SNITEM (Syndicat National de l’Industrie des Technologies Médicales).</p>
+        <h2>🛠️ Technologies utilisées</h2>
+        <ul>
+            <li><strong>C#, HTML, CSS, JavaScript</strong></li>
+            <li>
+                Outils internes :
+                <ul>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-enquete-en-ligne-web-on-line-net-survey.html">Net-Survey</a> : création de questionnaires</li>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-traitement-enquetes-ethnos.html">Ethnos</a> : analyse de données collectées</li>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-reporting-resultats-enquete-en-ligne-web-reports.html">Web Reports</a> : développement et déploiement applicatif</li>
+                </ul>
+            </li>
+        </ul>
+        <h2>🗂️ Structure de l’application</h2>
         <h3>👨‍💼 Profil Administrateur (SNITEM)</h3>
         <ul>
-          <li>🔍 <strong>Etat des lieux - Diagnostic </strong>: consultation des indicateurs permettant de connaître la répartition globale des DT (Documentation Technique)</li>
-          <li>✅ <strong>Décision </strong>: synthèse des décisions prises au sein de la société sur le portefeuille des produits</li>
-          <li>🕹️ <strong>Pilotage </strong>: synthèse des éléments de pilotage entrés par les fabricants</li>
-          <li>🔐 <strong>Gestion d'accès </strong>: gestion des droits pour les fabricants et l'ensemble des utilisateurs</li>
+            <li>🔍 <strong>Etat des lieux - Diagnostic </strong>: consultation des indicateurs permettant de connaître la répartition globale des DT (Documentation Technique)</li>
+            <li>✅ <strong>Décision </strong>: synthèse des décisions prises au sein de la société sur le portefeuille des produits</li>
+            <li>🕹️ <strong>Pilotage </strong>: synthèse des éléments de pilotage entrés par les fabricants</li>
+            <li>🔐 <strong>Gestion d'accès </strong>: gestion des droits pour les fabricants et l'ensemble des utilisateurs</li>
         </ul>
         <h3>👨‍🏭 Profil Fabricant (Adhérent)</h3>
         <ul>
-          <li>📦 <strong>Produits </strong>: renseignement de données (marché, financières, techniques...)</li>
-          <li>📋 <strong>SMQ </strong>: gestion des systèmes de management de la qualité (ISO 13485)</li>
-          <li>📁 <strong>DT </strong>: saisie de données et décision réglementaire dans le cadre de la transition MDD/MDR </li>
-          <li>🏢 <strong>Données sur l'entreprise </strong>: raison sociale, effectif, capital</li>
+            <li>📦 <strong>Produits </strong>: renseignement de données (marché, financières, techniques...)</li>
+            <li>📋 <strong>SMQ </strong>: gestion des systèmes de management de la qualité (ISO 13485)</li>
+            <li>📁 <strong>DT </strong>: saisie de données et décision réglementaire dans le cadre de la transition MDD/MDR </li>
+            <li>🏢 <strong>Données sur l'entreprise </strong>: raison sociale, effectif, capital</li>
         </ul>
-      <h2>⚙️ Fonctionnalités complémentaires</h2>
-      <ul>
-         <li>📄 <strong>Import de données</strong> via formulaire Excel</li>
-         <li>📊 <strong>DataViz</strong> "micro/macro"</li>
-         <li>📖 <strong>Guide d’utilisation</strong> (documentation et approfondissement des notions)</li>
-      </ul>
-      <h2>📈 Utilisation</h2>
-      <ul>
-        <li>👉 <strong>Administrateur / SNITEM </strong>: gestion des utilisateurs et accès au "tableau macro"</li>
-        <li>👉 <strong>Fabricants </strong>: saisie des données et accès au "tableau micro"</li>
-      </ul>
-      <hr />
-      <p>©Soft Concept 2023</p>
-      <a id="index">Retour à l'accueil</a>
+        <h2>⚙️ Fonctionnalités complémentaires</h2>
+        <ul>
+            <li>📄 <strong>Import de données</strong> via formulaire Excel</li>
+            <li>📊 <strong>DataViz</strong> "micro/macro"</li>
+            <li>📖 <strong>Guide d’utilisation</strong> (documentation et approfondissement des notions)</li>
+        </ul>
+        <h2>📈 Utilisation</h2>
+        <ul>
+            <li>👉 <strong>Administrateur / SNITEM </strong>: gestion des utilisateurs et accès au "tableau macro"</li>
+            <li>👉 <strong>Fabricants </strong>: saisie des données et accès au "tableau micro"</li>
+        </ul>
+        <hr>
+        <p>©Soft Concept 2023</p>
+        <a id="index">Retour à l'accueil</a>
     </body>
 </html>

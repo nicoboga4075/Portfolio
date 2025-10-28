@@ -4,14 +4,14 @@ permalink: "projects/ebatisoft_fr.html"
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-      <title>Portfolio - EBatiSoft</title>
-      {% include "metas.html" %}
-	  <meta name="description" content="EBatiSoft">	  
-      <meta http-equiv="Content-Language" content="fr_FR">
-      {% include "poppins.html" %}
-      <base href="../../">
-      {% include "manifest.html" %}
-      {% include "default.html" %}
+        <title>Portfolio - EBatiSoft</title>
+        {% include "metas.html" %}
+        <meta name="description" content="EBatiSoft">
+        <meta http-equiv="Content-Language" content="fr_FR">
+        {% include "poppins.html" %}
+        <base href="../../">
+        {% include "manifest.html" %}
+        {% include "default.html" %}
     </head>
     <body onload="initArticle()">
         <div class="read-title">
@@ -20,9 +20,9 @@ permalink: "projects/ebatisoft_fr.html"
         </div>
         <div class="video-wrapper">
             <video controls>
-              <track label="Français" kind="subtitles" srclang="fr" src="docs/public/EBatiSoft_FR.vtt">
-              <track label="English" kind="subtitles" srclang="en" src="docs/public/EBatiSoft_EN.vtt">
-              <source src="docs/public/EBatiSoft.mp4" type="video/mp4">
+                <track label="Français" kind="subtitles" srclang="fr" src="docs/public/EBatiSoft_FR.vtt">
+                <track label="English" kind="subtitles" srclang="en" src="docs/public/EBatiSoft_EN.vtt">
+                <source src="docs/public/EBatiSoft.mp4" type="video/mp4">
             </video>
         </div>
         <p><strong>Plateforme DataViz développée pendant 1 an en binôme </strong> (avec <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/pauleudeline">Paul EUDELINE</a>) en CDI chez <a target="_blank" rel="noopener" href="https://www.soft-concept.com">Soft Concept</a>, en collaboration avec la société de diagnostics techniques <a target="_blank" rel="noopener" href="https://chevalierdiag.fr">Chevalier Diag</a> et la holding immobilière <a target="_blank" rel="noopener" href="https://www.groupe-baelen.fr/admin-pxl-38_70.html">Akinext</a></p>
@@ -31,36 +31,37 @@ permalink: "projects/ebatisoft_fr.html"
         <h2>🛠️ Technologies utilisées</h2>
         <ul>
             <li><strong>C#, HTML, CSS, JavaScript</strong></li>
-            <li>Outils internes :
-              <ul>
-                <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-enquete-en-ligne-web-on-line-net-survey.html">Net-Survey</a> : création de questionnaires</li>
-                <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-traitement-enquetes-ethnos.html">Ethnos</a> : analyse de données collectées</li>
-                <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-reporting-resultats-enquete-en-ligne-web-reports.html">Web Reports</a> : développement et déploiement applicatif</li>
-              </ul>
+            <li>
+                Outils internes :
+                <ul>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-enquete-en-ligne-web-on-line-net-survey.html">Net-Survey</a> : création de questionnaires</li>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-traitement-enquetes-ethnos.html">Ethnos</a> : analyse de données collectées</li>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-reporting-resultats-enquete-en-ligne-web-reports.html">Web Reports</a> : développement et déploiement applicatif</li>
+                </ul>
             </li>
         </ul>
         <h2>🗂️ Structure de l’application</h2>
         <ul>
-          <li>🏠 <strong>Implantations</strong> : pilotage des sites avec géolocalisation et gestion contextualisée</li>
-          <li>🏢 <strong>Bâtiments</strong> : suivi des caractéristiques et documents des bâtiments</li>
-          <li>⚙️ <strong>Équipements</strong> : inventaire et suivi technique des équipements par bâtiment</li>
-          <li>📝 <strong>Audits</strong> : planification, réalisation et suivi des audits de conformité et de sécurité</li>
-          <li>📅 <strong>Échéances</strong> : gestion des contrôles périodiques et alertes sur les interventions à venir</li>
-          <li>📑 <strong>Dossier Technique Amiante (DTA)</strong> : gestion des diagnostics amiante et zones à risque</li>
-          <li>📊 <strong>Statistiques</strong> : tableaux de bord et indicateurs pour le suivi global de l’activité</li>
-          <li>📸 <strong>Photothèque</strong> : stockage et consultation des photos liées aux bâtiments et interventions</li>
+            <li>🏠 <strong>Implantations</strong> : pilotage des sites avec géolocalisation et gestion contextualisée</li>
+            <li>🏢 <strong>Bâtiments</strong> : suivi des caractéristiques et documents des bâtiments</li>
+            <li>⚙️ <strong>Équipements</strong> : inventaire et suivi technique des équipements par bâtiment</li>
+            <li>📝 <strong>Audits</strong> : planification, réalisation et suivi des audits de conformité et de sécurité</li>
+            <li>📅 <strong>Échéances</strong> : gestion des contrôles périodiques et alertes sur les interventions à venir</li>
+            <li>📑 <strong>Dossier Technique Amiante (DTA)</strong> : gestion des diagnostics amiante et zones à risque</li>
+            <li>📊 <strong>Statistiques</strong> : tableaux de bord et indicateurs pour le suivi global de l’activité</li>
+            <li>📸 <strong>Photothèque</strong> : stockage et consultation des photos liées aux bâtiments et interventions</li>
         </ul>
         <h2>⚙️ Fonctionnalités complémentaires</h2>
         <ul>
-          <li>📑 Import et analyse de rapports PDF </li>
-          <li>🗺️ Cartographie des implantations (Leaflet, Google Maps)</li>
-          <li>🔐 Gestion des droits et rôles utilisateurs</li>
-          <li>🖼️ Import d’images pour les audits et actions à suivre</li>
-          <li>🔍 Filtres avancés : adresse, état, priorité des travaux</li>
+            <li>📑 Import et analyse de rapports PDF </li>
+            <li>🗺️ Cartographie des implantations (Leaflet, Google Maps)</li>
+            <li>🔐 Gestion des droits et rôles utilisateurs</li>
+            <li>🖼️ Import d’images pour les audits et actions à suivre</li>
+            <li>🔍 Filtres avancés : adresse, état, priorité des travaux</li>
         </ul>
         <h2>📈 Utilisation</h2>
         <p>L’application permet de suivre et gérer les audits amiante, planifier les travaux avec prise en compte de leur urgence, et anticiper les contrôles et évaluations périodiques. Elle facilite la centralisation des informations pour sécuriser le patrimoine immobilier tout en assurant un suivi réglementaire rigoureux.</p>
-        <hr />
+        <hr>
         <p>©Soft Concept 2022</p>
         <a id="index">Retour à l'accueil</a>
     </body>

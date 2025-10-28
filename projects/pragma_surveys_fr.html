@@ -4,42 +4,43 @@ permalink: "projects/pragma_surveys_fr.html"
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-      <title>Portfolio - Enquêtes Internes Pragma</title>
-      {% include "metas.html" %}
-	  <meta name="description" content="Enquêtes Internes Pragma">
-      <meta http-equiv="Content-Language" content="fr_FR">
-      {% include "poppins.html" %}
-      <base href="../../">
-      {% include "manifest.html" %}
-      {% include "default.html" %}
+        <title>Portfolio - Enquêtes Internes Pragma</title>
+        {% include "metas.html" %}
+        <meta name="description" content="Enquêtes Internes Pragma">
+        <meta http-equiv="Content-Language" content="fr_FR">
+        {% include "poppins.html" %}
+        <base href="../../">
+        {% include "manifest.html" %}
+        {% include "default.html" %}
     </head>
     <body onload="initArticle()">
-      <div class="read-title">
-        <h1>🖥️ Enquêtes Internes Pragma</h1>
-        {% include "switcher_fr.html" %}
-      </div>
-      <div class="video-wrapper">
-       <video controls>
-         <track label="Français" kind="subtitles" srclang="fr" src="docs/public/Pragma_Surveys_FR.vtt">
-         <track label="English" kind="subtitles" srclang="en" src="docs/public/Pragma_Surveys_EN.vtt">
-         <source src="docs/public/Pragma_Surveys.mp4" type="video/mp4">
-       </video>
-      </div>
-      <p><strong>Webapp d'enquêtes développée pendant 1 an et demi</strong>, en CDI chez <a target="_blank" rel="noopener" href="https://www.soft-concept.com">Soft Concept</a>, en collaboration avec <a target="_blank" rel="noopener" href="https://www.pragma-management.fr/prestations/les-plateformes-d-enquetes-internes-7">Pragma</a></p>
-      <h2>📝 Présentation</h2>
-      <p>C'est une plateforme d’enquêtes internes pour recueillir et analyser les perceptions de collaborateurs sur les sujets qui comptent pour l'organisation ou la société qui l'utilise (sécurité au travail, qualité relationnelle, fonctionnement d'équipe...). Elle permet de lancer une enquête en quelques minutes et d’en obtenir les résultats dès sa clôture. Les utilisateurs peuvent bénéficer de l’expertise de Pragma en amont, pour identifier les besoins et en aval, pour aider à analyser et restituer les résultats.</p>
-      <h2>🛠️ Technologies utilisées</h2>
-      <ul>
-        <li><strong>C#, HTML, CSS, JavaScript</strong></li>
-        <li>Outils internes :
-          <ul>
-            <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-enquete-en-ligne-web-on-line-net-survey.html">Net-Survey</a> : création de questionnaires</li>
-            <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-traitement-enquetes-ethnos.html">Ethnos</a> : analyse de données collectées</li>
-            <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-reporting-resultats-enquete-en-ligne-web-reports.html">Web Reports</a> : développement et déploiement applicatif</li>
-          </ul>
-        </li>
-      </ul>
-      <h2>🗂️ Structure de l’application</h2>
+        <div class="read-title">
+            <h1>🖥️ Enquêtes Internes Pragma</h1>
+            {% include "switcher_fr.html" %}
+        </div>
+        <div class="video-wrapper">
+            <video controls>
+                <track label="Français" kind="subtitles" srclang="fr" src="docs/public/Pragma_Surveys_FR.vtt">
+                <track label="English" kind="subtitles" srclang="en" src="docs/public/Pragma_Surveys_EN.vtt">
+                <source src="docs/public/Pragma_Surveys.mp4" type="video/mp4">
+            </video>
+        </div>
+        <p><strong>Webapp d'enquêtes développée pendant 1 an et demi</strong>, en CDI chez <a target="_blank" rel="noopener" href="https://www.soft-concept.com">Soft Concept</a>, en collaboration avec <a target="_blank" rel="noopener" href="https://www.pragma-management.fr/prestations/les-plateformes-d-enquetes-internes-7">Pragma</a></p>
+        <h2>📝 Présentation</h2>
+        <p>C'est une plateforme d’enquêtes internes pour recueillir et analyser les perceptions de collaborateurs sur les sujets qui comptent pour l'organisation ou la société qui l'utilise (sécurité au travail, qualité relationnelle, fonctionnement d'équipe...). Elle permet de lancer une enquête en quelques minutes et d’en obtenir les résultats dès sa clôture. Les utilisateurs peuvent bénéficer de l’expertise de Pragma en amont, pour identifier les besoins et en aval, pour aider à analyser et restituer les résultats.</p>
+        <h2>🛠️ Technologies utilisées</h2>
+        <ul>
+            <li><strong>C#, HTML, CSS, JavaScript</strong></li>
+            <li>
+                Outils internes :
+                <ul>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-enquete-en-ligne-web-on-line-net-survey.html">Net-Survey</a> : création de questionnaires</li>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-traitement-enquetes-ethnos.html">Ethnos</a> : analyse de données collectées</li>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-reporting-resultats-enquete-en-ligne-web-reports.html">Web Reports</a> : développement et déploiement applicatif</li>
+                </ul>
+            </li>
+        </ul>
+        <h2>🗂️ Structure de l’application</h2>
         <h3>👨‍💼 Back Office (Pragma)</h3>
         <ul>
             <li>🏢 Gestion des entreprises clientes et suivi global (rapport consolidé)</li>
@@ -51,25 +52,25 @@ permalink: "projects/pragma_surveys_fr.html"
             <li>🎯 Suivi de participation</li>
             <li>📊 Accès aux résultats : rapport général, restitution par catégories, comparatif, consolidation</li>
         </ul>
-      <h2>⚙️ Fonctionnalités complémentaires</h2>
-      <ul>
-        <li>📣 Envoi de notifications (import d'emails, sollicitation, relance)</li>
-        <li>📇 Gestion de courriers avec codes d'accès (PDF avec QR Code)</li>
-        <li>❓ Guide d'utilisation et FAQ pour accompagner les utilisateurs</li>
-      </ul>
-      <h2>📈 Utilisation</h2>
-      <ol>
-        <li>Une entreprise qui veut utiliser la plateforme contacte Pragma.</li>
-        <li>Pragma l’inscrit dans la base.</li>
-        <li>L’entreprise reçoit un lien avec login et mot de passe.</li>
-        <li>Elle peut alors initier l’enquête : définir des dates, ajuster les messages, entrer les mails ou éditer les codes et personnaliser les questions signalétiques (service, direction...).</li>
-        <li>L’enquête est alors lancée puis clôturée.</li>
-        <li>L’entreprise peut sortir les résultats de la vague N ou avec comparatif vague N-1.</li>
-        <li>Pragma peut éditer annuellement un rapport consolidé global.</li>
-        <li>Pragma peut suivre la consommation d’enquête (voir la liste des enquêtes effectuées).</li>
-      </ol>
-      <hr />
-      <p>©Soft Concept 2023</p>
-      <a id="index">Retour à l'accueil</a>
+        <h2>⚙️ Fonctionnalités complémentaires</h2>
+        <ul>
+            <li>📣 Envoi de notifications (import d'emails, sollicitation, relance)</li>
+            <li>📇 Gestion de courriers avec codes d'accès (PDF avec QR Code)</li>
+            <li>❓ Guide d'utilisation et FAQ pour accompagner les utilisateurs</li>
+        </ul>
+        <h2>📈 Utilisation</h2>
+        <ol>
+            <li>Une entreprise qui veut utiliser la plateforme contacte Pragma.</li>
+            <li>Pragma l’inscrit dans la base.</li>
+            <li>L’entreprise reçoit un lien avec login et mot de passe.</li>
+            <li>Elle peut alors initier l’enquête : définir des dates, ajuster les messages, entrer les mails ou éditer les codes et personnaliser les questions signalétiques (service, direction...).</li>
+            <li>L’enquête est alors lancée puis clôturée.</li>
+            <li>L’entreprise peut sortir les résultats de la vague N ou avec comparatif vague N-1.</li>
+            <li>Pragma peut éditer annuellement un rapport consolidé global.</li>
+            <li>Pragma peut suivre la consommation d’enquête (voir la liste des enquêtes effectuées).</li>
+        </ol>
+        <hr>
+        <p>©Soft Concept 2023</p>
+        <a id="index">Retour à l'accueil</a>
     </body>
 </html>

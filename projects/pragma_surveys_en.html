@@ -4,43 +4,44 @@ permalink: "projects/pragma_surveys_en.html"
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <title>Portfolio - Pragma Internal Surveys</title>
-      {% include "metas.html" %}
-	  <meta name="description" content="Pragma Internal Surveys">
-      <meta http-equiv="Content-Language" content="en_US">
-      {% include "poppins.html" %}
-      <base href="../../">
-      {% include "manifest.html" %}
-      {% include "default.html" %}
+        <title>Portfolio - Pragma Internal Surveys</title>
+        {% include "metas.html" %}
+        <meta name="description" content="Pragma Internal Surveys">
+        <meta http-equiv="Content-Language" content="en_US">
+        {% include "poppins.html" %}
+        <base href="../../">
+        {% include "manifest.html" %}
+        {% include "default.html" %}
     </head>
     <body onload="initArticle()">
-      <div class="read-title">
-        <h1>🖥️ Pragma Internal Surveys</h1>
-        {% include "switcher_en.html" %}
-      </div>
-      <div class="video-wrapper">
-       <video controls>
-         <track label="Français" kind="subtitles" srclang="fr" src="docs/public/Pragma_Surveys_FR.vtt">
-         <track label="English" kind="subtitles" srclang="en" src="docs/public/Pragma_Surveys_EN.vtt" default>
-         <source src="docs/public/Pragma_Surveys.mp4" type="video/mp4">
-       </video>
-      </div>
-      <p><strong>Survey webapp developed over 1 year and a half</strong>, on a permanent contract at <a target="_blank" rel="noopener" href="https://www.soft-concept.com/index-lang-en.html">Soft Concept</a>, in collaboration with <a target="_blank" rel="noopener" href="https://www.pragma-management.fr/prestations/les-plateformes-d-enquetes-internes-7">Pragma</a></p>
-      <h2>📝 Presentation</h2>
-      <p>It’s a platform for internal surveys designed to collect and analyze employees’ perceptions on topics that matter to the organization or the business which uses it (such as workplace safety, quality of relationships, team dynamics, etc.). It allows users to launch a survey in just a few minutes and access the results as soon as it closes. Users can also benefit from Pragma’s expertise both upstream — to help identify their needs — and downstream, to support the analysis and presentation of the results.</p>
-      <h2>🛠️ Technologies used</h2>
-      <ul>
-        <li><strong>C#, HTML, CSS, JavaScript</strong></li>
-        <li>Internal tools:
-          <ul>
-            <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/online-questionnaire-software-net-survey-en.html">Net-Survey</a>: questionnaire creation</li>
-            <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/ethnos-survey-data-analysis-reporting-software-en.html">Ethnos</a>: survey data analysis</li>
-            <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/web-reports-software-lang-en.html">Web Reports</a>: application development and deployment</li>
-          </ul>
-        </li>
-      </ul>
-      <h2>🗂️ Application structure</h2>
-        <h3>👨‍💼 Back Office (Pragma)</h3> 
+        <div class="read-title">
+            <h1>🖥️ Pragma Internal Surveys</h1>
+            {% include "switcher_en.html" %}
+        </div>
+        <div class="video-wrapper">
+            <video controls>
+                <track label="Français" kind="subtitles" srclang="fr" src="docs/public/Pragma_Surveys_FR.vtt">
+                <track label="English" kind="subtitles" srclang="en" src="docs/public/Pragma_Surveys_EN.vtt" default>
+                <source src="docs/public/Pragma_Surveys.mp4" type="video/mp4">
+            </video>
+        </div>
+        <p><strong>Survey webapp developed over 1 year and a half</strong>, on a permanent contract at <a target="_blank" rel="noopener" href="https://www.soft-concept.com/index-lang-en.html">Soft Concept</a>, in collaboration with <a target="_blank" rel="noopener" href="https://www.pragma-management.fr/prestations/les-plateformes-d-enquetes-internes-7">Pragma</a></p>
+        <h2>📝 Presentation</h2>
+        <p>It’s a platform for internal surveys designed to collect and analyze employees’ perceptions on topics that matter to the organization or the business which uses it (such as workplace safety, quality of relationships, team dynamics...). It allows users to launch a survey in just a few minutes and access the results as soon as it closes. Users can also benefit from Pragma’s expertise both upstream — to help identify their needs — and downstream, to support the analysis and presentation of the results.</p>
+        <h2>🛠️ Technologies used</h2>
+        <ul>
+            <li><strong>C#, HTML, CSS, JavaScript</strong></li>
+            <li>
+                Internal tools:
+                <ul>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/online-questionnaire-software-net-survey-en.html">Net-Survey</a>: questionnaire creation</li>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/ethnos-survey-data-analysis-reporting-software-en.html">Ethnos</a>: survey data analysis</li>
+                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/web-reports-software-lang-en.html">Web Reports</a>: application development and deployment</li>
+                </ul>
+            </li>
+        </ul>
+        <h2>🗂️ Application structure</h2>
+        <h3>👨‍💼 Back Office (Pragma)</h3>
         <ul>
             <li>🏢 Client company management and global monitoring (consolidated report)</li>
             <li>📝 Survey questionnaire administration</li>
@@ -51,25 +52,25 @@ permalink: "projects/pragma_surveys_en.html"
             <li>🎯 Participation tracking</li>
             <li>📊 Access to results : general report, breakdown by category, comparison, consolidation</li>
         </ul>
-      <h2>⚙️ Additional features</h2>
-      <ul>
-        <li>📣 Notifications sending (email import, invitations, reminders)</li>
-        <li>📇 Mailing management with access codes (PDF with QR Code)</li>
-        <li>❓ User manual and FAQ to assist users</li> 
-      </ul>
-      <h2>📈 Usage</h2>
-      <ol>
-        <li>A company wishing to use the platform contacts Pragma.</li>
-        <li>Pragma registers the company in the database.</li>
-        <li>The company receives a link with a login and a password.</li>
-        <li>The head of survey can then initiate the survey: set dates, adjust messages, enter emails or generate code and customize demographic questions (department, division, etc.).</li>
-        <li>The survey is then launched and subsequently closed.</li>
-        <li>The company can export the results of the current wave (N) or compare them with the previous wave (N-1).</li>
-        <li>Pragma can produce an annual consolidated global report.</li>
-        <li>Pragma can also monitor survey usage (view the list of conducted surveys).</li>
-      </ol>
-      <hr />
-      <p>©Soft Concept 2023</p>
-      <a id="index">Go back to the homepage</a>
+        <h2>⚙️ Additional features</h2>
+        <ul>
+            <li>📣 Notifications sending (email import, invitations, reminders)</li>
+            <li>📇 Mailing management with access codes (PDF with QR Code)</li>
+            <li>❓ User manual and FAQ to assist users</li>
+        </ul>
+        <h2>📈 Usage</h2>
+        <ol>
+            <li>A company wishing to use the platform contacts Pragma.</li>
+            <li>Pragma registers the company in the database.</li>
+            <li>The company receives a link with a login and a password.</li>
+            <li>The head of survey can then initiate the survey: set dates, adjust messages, enter emails or generate code and customize demographic questions (department, division...).</li>
+            <li>The survey is then launched and subsequently closed.</li>
+            <li>The company can export the results of the current wave (N) or compare them with the previous wave (N-1).</li>
+            <li>Pragma can produce an annual consolidated global report.</li>
+            <li>Pragma can also monitor survey usage (view the list of conducted surveys).</li>
+        </ol>
+        <hr>
+        <p>©Soft Concept 2023</p>
+        <a id="index">Go back to the homepage</a>
     </body>
 </html>
