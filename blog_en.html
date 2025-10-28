@@ -4,94 +4,94 @@ permalink: "blog_en.html"
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <title>Portfolio - Blog</title>
-      {% include "metas.html" %}
-      <meta name="description" content="Blog articles and insight from a software engineer on tech and coding">
-      <meta http-equiv="Content-Language" content="en_US">
-      {% include "poppins.html" %}
-      <base href="../../">
-      {% include "manifest.html" %}
-      {% include "links.html" %}
+        <title>Portfolio - Blog</title>
+        {% include "metas.html" %}
+        <meta name="description" content="Blog articles and insight from a software engineer on tech and coding">
+        <meta http-equiv="Content-Language" content="en_US">
+        {% include "poppins.html" %}
+        <base href="../../">
+        {% include "manifest.html" %}
+        {% include "links.html" %}
     </head>
     <body data-spy="scroll" data-target="#ftco-navbar" data-offset="300" onload="initPage()">
-      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar" aria-label="Main navigation">
-         <div class="container">
-            {% include "nav_en.html" %}
-            {% include "switcher_en.html" %}
-         </div>
-      </nav>
-      <section class="ftco-section">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-8 ftco-animate" id="articleShape">
-                  <iframe id="iframe-article" title="Article Content"></iframe>
-                  <div class="about-author p-4 bg-light d-none">
-                     <div class="bio mr-5">
-                        <img src="images/profile.webp" class="img-fluid mb-4" alt="Profile" loading="lazy">
-                     </div>
-                     <div class="desc text-center">
-                        <h3 class="author"></h3>
-                        <p>Software Engineer</p>
-                        <p>Scan me</p>
-                        <img src="images/qrcode.png" id="qrcode" alt="Linkerz QR Code" loading="lazy">
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-4 sidebar">
-                    <div class="sidebar-box">
-                        <form class="search-form">
-                            <div class="form-group">    
-                                <input name="search-input" class="form-control" type="text" placeholder="Search..." autocomplete="off" aria-label="Search in the article">
-                                <span class="icon icon-times mr-4"></span>
-                                <span class="icon icon-search"></span>
-                                <ul id="search-suggestions" aria-label="Search suggestions"></ul>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar" aria-label="Main navigation">
+            <div class="container">
+                {% include "nav_en.html" %}
+                {% include "switcher_en.html" %}
+            </div>
+        </nav>
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 ftco-animate" id="articleShape">
+                        <iframe id="iframe-article" title="Article Content"></iframe>
+                        <div class="about-author p-4 bg-light d-none">
+                            <div class="bio mr-5">
+                                <img src="images/profile.webp" class="img-fluid mb-4" alt="Profile" loading="lazy">
                             </div>
-                        </form>
-                        <div id="search-info"></div>
-                    </div>
-                    <div class="sidebar-box">
-                        <h3 class="heading-sidebar">Recent Publications</h3>
-                        <div class="block-21 mb-4 d-flex justify-content-center">
-                            <a id="crm" class="blog-img mr-4"></a>
-                            <div class="text">
-                                <h3 class="heading"></h3>
-                                <div class="meta"></div>
+                            <div class="desc text-center">
+                                <h3 class="author"></h3>
+                                <p>Software Engineer</p>
+                                <p>Scan me</p>
+                                <img src="images/qrcode.png" id="qrcode" alt="Linkerz QR Code" loading="lazy">
                             </div>
                         </div>
                     </div>
-                    <div class="sidebar-box">
-                        <h3 class="heading-sidebar">Tags</h3>
-                        <div class="tagcloud"></div>
+                    <div class="col-lg-4 sidebar">
+                        <div class="sidebar-box">
+                            <form class="search-form">
+                                <div class="form-group">
+                                    <input name="search-input" class="form-control" type="text" placeholder="Search..." autocomplete="off" aria-label="Search in the article">
+                                    <span class="icon icon-times mr-4"></span>
+                                    <span class="icon icon-search"></span>
+                                    <ul id="search-suggestions" aria-label="Search suggestions"></ul>
+                                </div>
+                            </form>
+                            <div id="search-info"></div>
+                        </div>
+                        <div class="sidebar-box">
+                            <h3 class="heading-sidebar">Recent Publications</h3>
+                            <div class="block-21 mb-4 d-flex justify-content-center">
+                                <a id="crm" class="blog-img mr-4"></a>
+                                <div class="text">
+                                    <h3 class="heading"></h3>
+                                    <div class="meta"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-box">
+                            <h3 class="heading-sidebar">Tags</h3>
+                            <div class="tagcloud"></div>
+                        </div>
                     </div>
-               </div>
+                </div>
             </div>
-         </div>
-      </section>
-      <footer class="ftco-footer ftco-section">
-         <div class="container">
-            <div class="row mb-5">
-               <div class="col-md-8">
-                  <div class="ftco-footer-widget mb-4">
-                     <h2 class="ftco-heading-2">Synopsis</h2>
-                     <p>Far far away, beyond the mountains of code, far from the lands of outdated designs and clunky interfaces, there lives the web developer. Crafting seamless user experiences, building responsive websites and breathing life into lines of code, the engineer turns ideas into digital reality.</p>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="ftco-footer-widget mb-4">
-                     <h2 class="ftco-heading-2">Have a question ?</h2>
-                     <div class="block-23 mb-3">
-                        <ul>
-                           <li><span class="icon icon-envelope"></span>&nbsp;&nbsp;<span class="text email"></span></li>
-                        </ul>
-                     </div>
-                     {% include "social.html" %}
-                  </div>
-               </div>
+        </section>
+        <footer class="ftco-footer ftco-section">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-md-8">
+                        <div class="ftco-footer-widget mb-4">
+                            <h2 class="ftco-heading-2">Synopsis</h2>
+                            <p>Far far away, beyond the mountains of code, far from the lands of outdated designs and clunky interfaces, there lives the web developer. Crafting seamless user experiences, building responsive websites and breathing life into lines of code, the engineer turns ideas into digital reality.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="ftco-footer-widget mb-4">
+                            <h2 class="ftco-heading-2">Have a question ?</h2>
+                            <div class="block-23 mb-3">
+                                <ul>
+                                    <li><span class="icon icon-envelope"></span>&nbsp;&nbsp;<span class="text email"></span></li>
+                                </ul>
+                            </div>
+                            {% include "social.html" %}
+                        </div>
+                    </div>
+                </div>
+                {% include "copyright_en.html" %}
             </div>
-            {% include "copyright_en.html" %}
-         </div>
-      </footer>
-      {% include "loading.html" %}
-      {% include "scripts.html" %}
+        </footer>
+        {% include "loading.html" %}
+        {% include "scripts.html" %}
     </body>
 </html>

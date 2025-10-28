@@ -4,258 +4,768 @@ permalink: "articles/du-voc-de-dev_fr.html"
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-      <title>Portfolio - Du voc' de dev'</title>
-      {% include "metas.html" %}
-      <meta name="description" content="Du voc' de dev'">
-      <meta http-equiv="Content-Language" content="fr_FR">
-      {% include "poppins.html" %}
-      <base href="../../">
-      {% include "manifest.html" %}
-      {% include "default.html" %}
+        <title>Portfolio - Du voc' de dev'</title>
+        {% include "metas.html" %}
+        <meta name="description" content="Du voc' de dev'">
+        <meta http-equiv="Content-Language" content="fr_FR">
+        {% include "poppins.html" %}
+        <base href="../../">
+        {% include "manifest.html" %}
+        {% include "default.html" %}
     </head>
     <body onload="initArticle()">
-       	<div class="article-container">
-           <div class="title-center">Du voc' de dev'</div>
-           <div class="second-title">Dans le monde du développement logiciel, on croise souvent des termes comme <b>framework, librairie, bibliothèque, package, module</b>... Si ces mots sont parfois utilisés, par abus de langage, comme des synonymes dans les discussions techniques, ils désignent pourtant des concepts bien distincts. Chacun joue un rôle spécifique dans la façon dont les développeurs structurent, organisent et automatisent leurs projets. Pour mieux comprendre ces différences, cet article propose un tour d’horizon clair et accessible de ces notions, illustrées à travers des exemples concrets comme Angular, Selenium, Numpy et le module math de Python. L’objectif : choisir l'outil adapté aux besoins et au contexte du projet.</div>
-           <h2>Framework</h2>
-           <p>Un framework est un cadre de travail complet qui fournit une architecture prédéfinie pour développer des applications. Il impose des règles, des conventions et un flux de travail que le développeur doit suivre. L'idée est de <b>standardiser</b> le développement et de réduire les erreurs grâce à une <b>structure rigide</b>.</p>
-           <h3>ASP.NET Core (C#)</h3>
-           <p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/fr-fr/aspnet/core">ASP.NET Core</a> est performant, flexible et interopérable (Linux, MacOS et Windows), ce qui en fait un excellent choix pour le développement moderne (applications web, APIs ou microservices). Il prend en charge des applications critiques et à grande échelle pour les grandes entreprises telles que <b>Microsoft</b> et bénéficie du support de la grande communauté <i>Stack Overflow</i>. Sa conception modulaire vous permet de choisir les composants dont vous avez besoin et il dispose de fonctionnalités de sécurité solides pour vous protéger contre les failles courantes (<i>OWASP</i>). Cependant, même si .NET est devenu plus facile à utiliser, les développeurs débutants pourraient le trouver plus difficile que les frameworks associés à des langages comme Python ou JavaScript, décrits ci-dessous. Depuis la sortie de .NET 5 en novembre 2020, le "Core" a officiellement disparu du nom.</p>
-           <h3>Flask (Python)</h3>
-           <p><a target="_blank" rel="noopener" href="https://flask.palletsprojects.com">Flask</a>, utilisé par <b>Netflix</b>, est connu pour sa facilité d'utilisation depuis ses débuts en 2010. Contrairement aux frameworks « batteries incluses » comme <a target="_blank" rel="noopener" href="https://www.djangoproject.com">Django</a> utilisé par <b>Instagram</b>, Flask a un noyau minimaliste, le rendant adaptable à divers projets, qu'il s'agisse de simples APIs <i>REST</i>, de microservices ou d'applications Web plus complexes. Cela donne aux développeurs la flexibilité mais exige également qu'ils prennent plus de décisions sur l'architecture et le choix des composants. Cela peut être un avantage pour les développeurs expérimentés qui profitent du contrôle mais cela peut être difficile pour les juniors qui se voient pénalisés par le manque de fonctionnalités intégrées. Par ailleurs, bien que Flask répond convenablement aux besoins de sécurité communs, il exige des développeurs qu'ils soient plus pragmatiques dans l'architecture et la sécurisation de leurs applications.</p>
-           <h3>Angular (JavaScript)</h3>
-           <p><a target="_blank" rel="noopener" href="https://angular.dev">Angular</a>, développé par <b>Google</b>, est utilisé pour créer des applications web interactives. Il intègre notamment des outils pour la gestion de l'état, la liaison de données et les requêtes HTTP. Vous travaillez "dans" le framework, qui contrôle l'organisation et l'exécution de votre code (<i>inversion de contrôle</i>). Cela en fait un environnement puissant mais exigeant en termes de respect de ses conventions. AngularJS est totalement en fin de vie depuis fin 2021, et depuis 2016, tout Angular est Typescript natif.</p>
-           <h2>Librairie</h2>
-           <p>Une librairie est une <b>collection de fonctions ou de classes réutilisables</b> que vous pouvez appeler pour accomplir des tâches spécifiques. Contrairement à un framework, c'est vous qui contrôlez l'intégration et l'exécution des fonctionnalités.</p>
-           <h3>Newtonsoft.Json (C#)</h3>
-           <p>C’est une librairie open-source pour le framework .NET qui permet de sérialiser (convertir un objet en <i>JSON</i>) et désérialiser (convertir du <i>JSON</i> en objet) facilement.</p>
-           <h3>Selenium (Python)</h3>
-           <p>Selenium sert à automatiser les tests des applications web, en fournissant des fonctions pour interagir avec les navigateurs, comme cliquer sur des boutons ou remplir des formulaires.</p>
-           <h3>Moment (JavaScript)</h3>
-           <p>Moment permet la manipulation et le formatage des dates et heures (YYYY-MM-DD par exemple).</p>
-           <h2>Bibliothèque</h2>
-           <p>Le terme bibliothèque est souvent utilisé comme <b>synonyme de librairie</b>, mais il peut également désigner une <b>collection plus large qui regroupe plusieurs librairies ou modules</b>. Une bibliothèque peut inclure des outils divers pour différents usages.</p>
-           <h3>IronPDF (C#)</h3>
-           <p>IronPDF se spécialise dans la génération, l'édition et l'extraction de contenu PDF.</p>
-           <h3>Numpy (Python)</h3>
-           <p>Numpy est incontournable pour le calcul scientifique, elle contient notamment des fonctions mathématiques avancées et des outils pour la manipulation d’<i>arrays</i> (tableaux) multidimensionnels.</p>
-           <h3>jQuery (JavaScript)</h3>
-           <p><a target="_blank" rel="noopener" href="https://jquery.com">jQuery</a> simplifie l'interaction avec le <i>DOM</i> (Document Object Model) et les événements sur les pages web.</p>
-           <h2>Package</h2>
-           <p>Un package est un <b>ensemble organisé de modules, souvent regroupés dans un même dossier</b>, qui permet de structurer et de organiser du code de manière logique et réutilisable. Il peut aussi contenir d’autres packages (des sous-packages), des fichiers de configuration et des ressources. C'est un <i>NuGet</i> (.nupkg) pour C# , un <i>pip</i> (dossier avec __init__.py) pour Python et un <i>npm</i> (dossier avec package.json) pour JavaScript. Par exemple, le package System.Collections.Immutable de C# fournit des collections immuables pour .NET et le package cross-env de JavaScript permet de définir des variables d'environnement de manière compatible avec toutes les plateformes.</p>
-           <h2>Module</h2>
-           <p>Un module est le plus petit composant parmi les cinq, vous pouvez l'importer pour effectuer des opérations ponctuelles. Il n'a pas de dépendances complexes ni de structure imposée. C'est simplement un <b>fichier</b> contenant du code (avec comme extension <b>.cs</b> pour C#, <b>.py</b> pour Python et <b>.js</b> pour JavaScript), comme des fonctions ou des classes, que vous pouvez importer et utiliser. Pour rappel, une <b>variable</b> est un espace nommé dans la mémoire qui permet de stocker une valeur, une <b>fonction</b> est un bloc de code réutilisable qui effectue une action précise et une <b>classe</b> est un modèle pour créer des <b>objets </b>regroupant des <b>attributs</b> (variables "propriétaires") et des <b>méthodes</b> (fonctions "comportementales"). Par exemple, le module math de Python contient des fonctions mathématiques de base, comme sqrt, sin ou log.</p>
-           <hr></hr>
-           <p>Comprendre ces différences est essentiel pour choisir le bon outil selon vos besoins. Utilisez un framework comme Angular si vous cherchez une solution tout-en-un pour structurer votre projet. Préférez une librairie comme Selenium pour une tâche spécialisée ou une bibliothèque comme Numpy pour un domaine scientifique. Enfin, les modules comme math de Python sont parfaits pour des besoins ponctuels et légers. En maîtrisant ces concepts, vous optimiserez votre approche du développement, en choisissant l'outil adapté à chaque situation. Ci-dessous un tableau récapitulatif à partager avec vos équipes logicielles :</p>
-           <br>
-           <table>
-              <thead>
-                <tr>
-                  <th>Concept</th>
-                  <th>Définition</th>
-                  <th>Utilisation</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Framework</strong></td>
-                  <td>Composant logiciel structuré qui fournit une architecture prédéfinie et contrôle le déroulement de l’application</td>
-                  <td>Le développeur écrit du code à insérer dans les emplacements prévus et le framework l’exécute selon son propre cycle de vie.</td>
-                </tr>
-                <tr>
-                  <td><strong>Librairie</strong></td>
-                  <td>Ensemble de fonctions et classes prêtes à l’emploi qu’un développeur peut utiliser pour effectuer des tâches spécifiques sans imposer d’architecture</td>
-                  <td>Le développeur importe la librairie et appelle directement ses fonctionnalités au moment voulu dans son code.</td>
-                </tr>
-                <tr>
-                  <td><strong>Bibliothèque</strong></td>
-                  <td>Ensemble organisé de ressources logicielles (fonctions, classes, modules) conçues pour être réutilisées dans des projets, souvent utilisé comme synonyme de librairie</td>
-                  <td>Le développeur importe la bibliothèque et exploite ses ressources selon ses besoins dans l’application.</td>
-                </tr>
-                <tr>
-                  <td><strong>Package</strong></td>
-                  <td>Ensemble de fichiers et ressources (librairies, modules, configurations) regroupés et distribués via un gestionnaire de packages pour faciliter leur intégration dans un projet</td>
-                  <td>Le développeur installe le package via le gestionnaire et l’importe ensuite dans son code pour utiliser ses fonctionnalités.</td>
-                </tr>
-                <tr>
-                  <td><strong>Module</strong></td>
-                  <td>Fichier contenant du code (fonctions, classes, variables) destiné à être importé et utilisé dans d’autres fichiers ou programmes</td>
-                  <td>Le développeur importe le module dans un autre fichier et utilise les éléments qu’il propose.</td>
-                </tr>
-              </tbody>
-           </table>
-		   <br>
-		   <p>Pour aller plus loin...</p>
-		   <div class="accordion">
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q1">
-					<label for="q1">Algorithme</label>
-				</div>
-				<div class="card-body">Ensemble de processus ou de règles à suivre dans les calculs ou d'autres opérations de résolution de problèmes</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q2">
-					<label for="q2">Assembleur</label>
-				</div>
-				<div class="card-body">Programme qui prend des instructions informatiques de base et les convertit en un modèle de bits que le processeur de l'ordinateur peut utiliser pour effectuer ses opérations de base</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q3">
-					<label for="q3">Bug</label>
-				</div>
-				<div class="card-body">Erreur dans un programme qui empêche le programme de s'éxécuter comme prévu</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q4">
-					<label for="q4">Chatbot</label>
-				</div>
-				<div class="card-body">Programme informatique qui tente de simuler la conversation d'un être humain via des interactions textuelles ou vocales</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q5">
-					<label for="q5">Classe</label>
-				</div>
-				<div class="card-body">Ensemble d'objets ayant le même comportement (mais dont l'état est généralement différent) ou un modèle définissant un tel ensemble</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q6">
-					<label for="q6">Code</label>
-				</div>
-				<div class="card-body">Langage que les programmeurs créent et utilisent pour dire à un ordinateur quoi faire (qualifié de spaghetti lorsqu'il est confusant et compliqué)</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q7">
-					<label for="q7">Compilateur</label>
-				</div>
-				<div class="card-body">Programme qui transforme un code source (généralement écrit dans un langage de programmation , de haut niveau d'abstraction et facilement compréhensible par l'humain) en un code machine (ou binaire)</div>
-			  </div>  
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q8">
-					<label for="q8">Déploiement</label>
-				</div>
-				<div class="card-body">Ensemble des activités qui rendent un système logiciel disponible pour l'utilisation</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q9">
-					<label for="q9">Deprecated</label>
-				</div>
-				<div class="card-body">Toléré ou pris en charge mais non recommandé car obsolète</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q10">
-					<label for="q10">DNS</label>
-				</div>
-				<div class="card-body">Service qui traduit les URL en adresses IP</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q11">
-					<label for="q11">Fonction</label>
-				</div>
-				<div class="card-body">Routine qui reçoit un ou plusieurs arguments, qui les traite et renvoie un résultat</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q12">
-					<label for="q12">Full Stack Developer</label>
-				</div>
-				<div class="card-body">Ingénieur logiciel polyvalent qui a le savoir-faire pour créer de manière autonome des plateformes entièrement fonctionnelles, du front (côté client) au back (côté serveur)</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q13">
-					<label for="q13">Goto</label>
-				</div>
-				<div class="card-body">Déclaration dans le code source qui transfère le contrôle inconditionnellement à une autre partie d'un programme</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q14">
-					<label for="q14">Heap</label>
-				</div>
-				<div class="card-body">Zone de mémoire réservée aux objets de données alloués dynamiquement</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q15">
-					<label for="q15">IDE</label>
-				</div>
-				<div class="card-body">Outil visuel permmettant aux programmeurs de développer des programmes plus efficacement</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q16">
-					<label for="q16">Identifiant</label>
-				</div>
-				<div class="card-body">Nom formel utilisé dans le code source pour désigner une variable, une fonction, une procédure, un paquet...</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q17">
-					<label for="q17">Interpréteur</label>
-				</div>
-				<div class="card-body">Programme qui exécute un autre pogramme écrit dans un langage de programmation autre que le code machine</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q18">
-					<label for="q18">Paradigme</label>
-				</div>
-				<div class="card-body">Style fondamental de programmation informatique auquel la conception d'un langage de programmation doit généralement répondre (ex : impératif, déclaratif, fonctionnel, logique, orienté objet)</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q19">
-					<label for="q19">Paramètre</label>
-				</div>
-				<div class="card-body">Donnée transmise à une fonction ou un sous-programme lorsque la fonction ou le sous-programme est appelé</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q20">
-					<label for="q20">Procédure</label>
-				</div>
-				<div class="card-body">Sous-programme ou fonction codée pour exécuter une tâche spécifique</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q21">
-					<label for="q21">Programme</label>
-				</div>
-				<div class="card-body">Algorithme qui a été codé dans le langage qui peut être exécuté par une machine</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q22">
-					<label for="q22">Stack</label>
-				</div>
-				<div class="card-body">Partie de la mémoire de l'ordinateur utilisé pour garder une trace des procédures appelées ou des instructions d'appel</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q23">
-					<label for="q23">URL</label>
-				</div>
-				<div class="card-body">Adresse facile à mémoriser pour appeler une page Web (comme wwww.wikipedia.org)</div>
-			  </div>
-			  <div class="card">
-				<div class="card-header">
-					<input type="checkbox" id="q24">
-					<label for="q24">Variable</label>
-				</div>
-				<div class="card-body">Emplacement mémoire nommé dans lequel un programme peut stocker des résultats intermédiaires et à partir duquel il peut les lire</div>
-			  </div>
-			</div>
+        <div class="article-container">
+            <div class="title-center">Du voc' de dev'</div>
+            <div class="second-title">Dans le monde du développement logiciel, on croise souvent des termes comme <b>framework, librairie, bibliothèque, package, module</b>... Si ces mots sont parfois utilisés, par abus de langage, comme des synonymes dans les discussions techniques, ils désignent pourtant des concepts bien distincts. Chacun joue un rôle spécifique dans la façon dont les développeurs structurent, organisent et automatisent leurs projets. Pour mieux comprendre ces différences, cet article propose un tour d’horizon clair et accessible de ces notions, illustrées à travers des exemples concrets comme Angular, Selenium, Numpy et le module math de Python. L’objectif : choisir l'outil adapté aux besoins et au contexte du projet.</div>
+            <h2>Framework</h2>
+            <p>Un framework est un cadre de travail complet qui fournit une architecture prédéfinie pour développer des applications. Il impose des règles, des conventions et un flux de travail que le développeur doit suivre. L'idée est de <b>standardiser</b> le développement et de réduire les erreurs grâce à une <b>structure rigide</b>.</p>
+            <h3>ASP.NET Core (C#)</h3>
+            <p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/fr-fr/aspnet/core">ASP.NET Core</a> est performant, flexible et interopérable (Linux, MacOS et Windows), ce qui en fait un excellent choix pour le développement moderne (applications web, APIs ou microservices). Il prend en charge des applications critiques et à grande échelle pour les grandes entreprises telles que <b>Microsoft</b> et bénéficie du support de la grande communauté <i>Stack Overflow</i>. Sa conception modulaire vous permet de choisir les composants dont vous avez besoin et il dispose de fonctionnalités de sécurité solides pour vous protéger contre les failles courantes (<i>OWASP</i>). Cependant, même si .NET est devenu plus facile à utiliser, les développeurs débutants pourraient le trouver plus difficile que les frameworks associés à des langages comme Python ou JavaScript, décrits ci-dessous. Depuis la sortie de .NET 5 en novembre 2020, le "Core" a officiellement disparu du nom.</p>
+            <h3>Flask (Python)</h3>
+            <p><a target="_blank" rel="noopener" href="https://flask.palletsprojects.com">Flask</a>, utilisé par <b>Netflix</b>, est connu pour sa facilité d'utilisation depuis ses débuts en 2010. Contrairement aux frameworks « batteries incluses » comme <a target="_blank" rel="noopener" href="https://www.djangoproject.com">Django</a> utilisé par <b>Instagram</b>, Flask a un noyau minimaliste, le rendant adaptable à divers projets, qu'il s'agisse de simples APIs <i>REST</i>, de microservices ou d'applications Web plus complexes. Cela donne aux développeurs la flexibilité mais exige également qu'ils prennent plus de décisions sur l'architecture et le choix des composants. Cela peut être un avantage pour les développeurs expérimentés qui profitent du contrôle mais cela peut être difficile pour les juniors qui se voient pénalisés par le manque de fonctionnalités intégrées. Par ailleurs, bien que Flask répond convenablement aux besoins de sécurité communs, il exige des développeurs qu'ils soient plus pragmatiques dans l'architecture et la sécurisation de leurs applications.</p>
+            <h3>Angular (JavaScript)</h3>
+            <p><a target="_blank" rel="noopener" href="https://angular.dev">Angular</a>, développé par <b>Google</b>, est utilisé pour créer des applications web interactives. Il intègre notamment des outils pour la gestion de l'état, la liaison de données et les requêtes HTTP. Vous travaillez "dans" le framework, qui contrôle l'organisation et l'exécution de votre code (<i>inversion de contrôle</i>). Cela en fait un environnement puissant mais exigeant en termes de respect de ses conventions. AngularJS est totalement en fin de vie depuis fin 2021, et depuis 2016, tout Angular est TypeScript natif.</p>
+            <h2>Librairie</h2>
+            <p>Une librairie est une <b>collection de fonctions ou de classes réutilisables</b> que vous pouvez appeler pour accomplir des tâches spécifiques. Contrairement à un framework, c'est vous qui contrôlez l'intégration et l'exécution des fonctionnalités.</p>
+            <h3>Newtonsoft.Json (C#)</h3>
+            <p>C’est une librairie open-source pour le framework .NET qui permet de sérialiser (convertir un objet en <i>JSON</i>) et désérialiser (convertir du <i>JSON</i> en objet) facilement.</p>
+            <h3>Selenium (Python)</h3>
+            <p>Selenium sert à automatiser les tests des applications web, en fournissant des fonctions pour interagir avec les navigateurs, comme cliquer sur des boutons ou remplir des formulaires.</p>
+            <h3>Moment (JavaScript)</h3>
+            <p>Moment permet la manipulation et le formatage des dates et heures (YYYY-MM-DD par exemple).</p>
+            <h2>Bibliothèque</h2>
+            <p>Le terme bibliothèque est souvent utilisé comme <b>synonyme de librairie</b>, mais il peut également désigner une <b>collection plus large qui regroupe plusieurs librairies ou modules</b>. Une bibliothèque peut inclure des outils divers pour différents usages.</p>
+            <h3>IronPDF (C#)</h3>
+            <p>IronPDF se spécialise dans la génération, l'édition et l'extraction de contenu PDF.</p>
+            <h3>Numpy (Python)</h3>
+            <p>Numpy est incontournable pour le calcul scientifique, elle contient notamment des fonctions mathématiques avancées et des outils pour la manipulation d’<i>arrays</i> (tableaux) multidimensionnels.</p>
+            <h3>jQuery (JavaScript)</h3>
+            <p><a target="_blank" rel="noopener" href="https://jquery.com">jQuery</a> simplifie l'interaction avec le <i>DOM</i> (Document Object Model) et les événements sur les pages web.</p>
+            <h2>Package</h2>
+            <p>Un package est un <b>ensemble organisé de modules, souvent regroupés dans un même dossier</b>, qui permet de structurer et de organiser du code de manière logique et réutilisable. Il peut aussi contenir d’autres packages (des sous-packages), des fichiers de configuration et des ressources. C'est un <i>NuGet</i> (.nupkg) pour C# , un <i>pip</i> (dossier avec __init__.py) pour Python et un <i>npm</i> (dossier avec package.json) pour JavaScript. Par exemple, le package System.Collections.Immutable de C# fournit des collections immuables pour .NET et le package cross-env de JavaScript permet de définir des variables d'environnement de manière compatible avec toutes les plateformes.</p>
+            <h2>Module</h2>
+            <p>Un module est le plus petit composant parmi les cinq, vous pouvez l'importer pour effectuer des opérations ponctuelles. Il n'a pas de dépendances complexes ni de structure imposée. C'est simplement un <b>fichier</b> contenant du code (avec comme extension <b>.cs</b> pour C#, <b>.py</b> pour Python et <b>.js</b> pour JavaScript), comme des fonctions ou des classes, que vous pouvez importer et utiliser. Pour rappel, une <b>variable</b> est un espace nommé dans la mémoire qui permet de stocker une valeur, une <b>fonction</b> est un bloc de code réutilisable qui effectue une action précise et une <b>classe</b> est un modèle pour créer des <b>objets </b>regroupant des <b>attributs</b> (variables "propriétaires") et des <b>méthodes</b> (fonctions "comportementales"). Par exemple, le module math de Python contient des fonctions mathématiques de base, comme sqrt, sin ou log.</p>
+            <hr>
+            <p>Comprendre ces différences est essentiel pour choisir le bon outil selon vos besoins. Utilisez un framework comme Angular si vous cherchez une solution tout-en-un pour structurer votre projet. Préférez une librairie comme Selenium pour une tâche spécialisée ou une bibliothèque comme Numpy pour un domaine scientifique. Enfin, les modules comme math de Python sont parfaits pour des besoins ponctuels et légers. En maîtrisant ces concepts, vous optimiserez votre approche du développement, en choisissant l'outil adapté à chaque situation. Ci-dessous un tableau récapitulatif à partager avec vos équipes logicielles :</p>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Définition</th>
+                        <th>Utilisation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Framework</strong></td>
+                        <td>Composant logiciel structuré qui fournit une architecture prédéfinie et contrôle le déroulement de l’application</td>
+                        <td>Le développeur écrit du code à insérer dans les emplacements prévus et le framework l’exécute selon son propre cycle de vie.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Librairie</strong></td>
+                        <td>Ensemble de fonctions et classes prêtes à l’emploi qu’un développeur peut utiliser pour effectuer des tâches spécifiques sans imposer d’architecture</td>
+                        <td>Le développeur importe la librairie et appelle directement ses fonctionnalités au moment voulu dans son code.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bibliothèque</strong></td>
+                        <td>Ensemble organisé de ressources logicielles (fonctions, classes, modules) conçues pour être réutilisées dans des projets, souvent utilisé comme synonyme de librairie</td>
+                        <td>Le développeur importe la bibliothèque et exploite ses ressources selon ses besoins dans l’application.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Package</strong></td>
+                        <td>Ensemble de fichiers et ressources (librairies, modules, configurations) regroupés et distribués via un gestionnaire de packages pour faciliter leur intégration dans un projet</td>
+                        <td>Le développeur installe le package via le gestionnaire et l’importe ensuite dans son code pour utiliser ses fonctionnalités.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Module</strong></td>
+                        <td>Fichier contenant du code (fonctions, classes, variables) destiné à être importé et utilisé dans d’autres fichiers ou programmes</td>
+                        <td>Le développeur importe le module dans un autre fichier et utilise les éléments qu’il propose.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <p>Pour aller plus loin...</p>
+            <div class="accordion">
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q1">
+                        <label for="q1">Algorithme</label>
+                    </div>
+                    <div class="card-body">Ensemble de processus ou de règles à suivre dans les calculs ou d'autres opérations de résolution de problèmes</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q2">
+                        <label for="q2">Assembleur</label>
+                    </div>
+                    <div class="card-body">Programme qui prend des instructions informatiques de base et les convertit en un modèle de bits que le processeur de l'ordinateur peut utiliser pour effectuer ses opérations de base</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q3">
+                        <label for="q3">Assembly</label>
+                    </div>
+                    <div class="card-body">Fichier compilé (.exe ou .dll) contenant le code et les ressources d’une application .NET, utilisé pour exécuter ou partager des composants</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q4">
+                        <label for="q4">Bug</label>
+                    </div>
+                    <div class="card-body">Erreur dans un programme qui empêche le programme de s'éxécuter comme prévu</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q5">
+                        <label for="q5">Chatbot</label>
+                    </div>
+                    <div class="card-body">Programme informatique qui tente de simuler la conversation d'un être humain via des interactions textuelles ou vocales</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q6">
+                        <label for="q6">Classe</label>
+                    </div>
+                    <div class="card-body">Ensemble d'objets ayant le même comportement (mais dont l'état est généralement différent) ou un modèle définissant un tel ensemble</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q7">
+                        <label for="q7">Code</label>
+                    </div>
+                    <div class="card-body">Langage que les programmeurs créent et utilisent pour dire à un ordinateur quoi faire (qualifié de spaghetti lorsqu'il est confusant et compliqué)</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q8">
+                        <label for="q8">Compilateur</label>
+                    </div>
+                    <div class="card-body">Programme qui transforme un code source (généralement écrit dans un langage de programmation , de haut niveau d'abstraction et facilement compréhensible par l'humain) en un code machine (ou binaire)</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q9">
+                        <label for="q9">Déploiement</label>
+                    </div>
+                    <div class="card-body">Ensemble des activités qui rendent un système logiciel disponible pour l'utilisation</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q10">
+                        <label for="q10">Deprecated</label>
+                    </div>
+                    <div class="card-body">Toléré ou pris en charge mais non recommandé car obsolète</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q11">
+                        <label for="q11">DNS</label>
+                    </div>
+                    <div class="card-body">Service qui traduit les URL en adresses IP</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q12">
+                        <label for="q12">Fonction</label>
+                    </div>
+                    <div class="card-body">Routine qui reçoit un ou plusieurs arguments, qui les traite et renvoie un résultat</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q13">
+                        <label for="q13">Full Stack Developer</label>
+                    </div>
+                    <div class="card-body">Ingénieur logiciel polyvalent qui a le savoir-faire pour créer de manière autonome des plateformes entièrement fonctionnelles, du front (côté client) au back (côté serveur)</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q14">
+                        <label for="q14">Goto</label>
+                    </div>
+                    <div class="card-body">Déclaration dans le code source qui transfère le contrôle inconditionnellement à une autre partie d'un programme</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q15">
+                        <label for="q15">Heap</label>
+                    </div>
+                    <div class="card-body">Zone de mémoire réservée aux objets de données alloués dynamiquement</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q16">
+                        <label for="q16">IDE</label>
+                    </div>
+                    <div class="card-body">Outil visuel permmettant aux programmeurs de développer des programmes plus efficacement</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q17">
+                        <label for="q17">Identifiant</label>
+                    </div>
+                    <div class="card-body">Nom formel utilisé dans le code source pour désigner une variable, une fonction, une procédure, un paquet...</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q18">
+                        <label for="q18">Interpréteur</label>
+                    </div>
+                    <div class="card-body">Programme qui exécute un autre pogramme écrit dans un langage de programmation autre que le code machine</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q19">
+                        <label for="q19">Paradigme</label>
+                    </div>
+                    <div class="card-body">Style fondamental de programmation informatique auquel la conception d'un langage de programmation doit généralement répondre (ex : impératif, déclaratif, fonctionnel, logique, orienté objet)</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q20">
+                        <label for="q20">Paramètre</label>
+                    </div>
+                    <div class="card-body">Donnée transmise à une fonction ou un sous-programme</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q21">
+                        <label for="q21">Procédure</label>
+                    </div>
+                    <div class="card-body">Sous-programme ou fonction codée pour exécuter une tâche spécifique</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q22">
+                        <label for="q22">Programme</label>
+                    </div>
+                    <div class="card-body">Algorithme qui a été codé dans le langage qui peut être exécuté par une machine</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q23">
+                        <label for="q23">Stack</label>
+                    </div>
+                    <div class="card-body">Partie de la mémoire de l'ordinateur utilisé pour garder une trace des procédures appelées ou des instructions d'appel</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q24">
+                        <label for="q24">URL</label>
+                    </div>
+                    <div class="card-body">Adresse uniforme facile à mémoriser pour appeler une page Web (comme wwww.linkedin.com ou www.github.com)</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q25">
+                        <label for="q25">Variable</label>
+                    </div>
+                    <div class="card-body">Emplacement mémoire nommé dans lequel un programme peut stocker des résultats intermédiaires et à partir duquel il peut les lire</div>
+                </div>
+                <hr>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q26">
+                        <label for="q26">Modificateurs d'accès (C#)</label>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><b>public</b> : accessible partout</li>
+                            <li><b>internal</b> : accessible seulement dans l'assembly</li>
+                            <li><b>protected</b> : accessible seulement dans la classe et ses dérivées</li>
+                            <li><b>private</b> : accessible seulement dans la classe</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q27">
+                        <label for="q27">Static (C#)</label>
+                    </div>
+                    <div class="card-body">Une classe static définit des classes utilitaires et ne peut être ni instanciée ni héritée. Toutes ses méthodes et propriétés doivent être static. Par contre, une méthode static peut exister dans n’importe quelle classe.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q28">
+                        <label for="q28">Sealed (C#)</label>
+                    </div>
+                    <div class="card-body">Une classe sealed bloque tout héritage comme une classe static mais est instanciable. Une méthode sealed empêche de redéfinir un comportement dans les classes dérivées. Elle n’a donc jamais de sens dans une classe sealed.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q29">
+                        <label for="q29">Classe abstraite vs Interface (C#)</label>
+                    </div>
+                    <div class="card-body">Une classe ou méthode abstract permet de créer un modèle commun avec certaines méthodes déjà implémentées, tandis qu’une interface définit uniquement un <i>contrat</i> que différentes classes peuvent implémenter, même si elles ne sont pas liées par héritage. Une méthode abstraite ne peut exister que dans une classe abstraite mais une classe abstraite peut ne contenir aucune méthode abstraite. Une classe (non sealed et non static) ne peut hériter que d’une seule autre classe (non sealed et non static), mais peut implémenter plusieurs interfaces pour combiner différents comportements.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q30">
+                        <label for="q30">Polymorphisme (C#)</label>
+                    </div>
+                    <div class="card-body">
+                        Le polymorphisme permet à une même méthode d’avoir plusieurs comportements selon le type réel de l’objet qui l’utilise.
+                        <ul>
+                            <li><b>virtual</b> : permet à une méthode d’être redéfinie dans une classe dérivée</li>
+                            <li><b>override</b> : sert à remplacer une méthode virtual ou abstract de la classe de base par une nouvelle implémentation</li>
+                            <li><b>new</b> : permet de masquer volontairement une méthode héritée sans modifier celle d’origine</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q31">
+                        <label for="q31">Type valeur vs Type référence (C#)</label>
+                    </div>
+                    <div class="card-body">Les valeurs (int, double, float, bool, char, struct, enum) sont copiées indépendamment et stockées dans la <b>stack</b> tandis que les références (class, string, array, object, delegate) pointent vers le même objet en mémoire et sont stockées dans le <b>heap</b>. La modification d’une variable (type valeur) n’affecte pas une autre mais modifier un objet (type référence) impacte toutes les références (adresses) pointant sur cet objet.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q32">
+                        <label for="q32">Copie superficielle vs Copie profonde (C#)</label>
+                    </div>
+                    <div class="card-body">Une copie superficielle (shallow copy) crée un nouvel objet mais les objets internes restent partagés avec l’original. Une copie profonde (deep copy) crée un nouvel objet et copie également tous les objets internes, rendant la copie totalement indépendante. En C#, MemberwiseClone() fait une copie superficielle, tandis qu’une méthode personnalisée ou la sérialisation peut être utilisée pour une copie profonde.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q33">
+                        <label for="q33">Delegate vs Lambda (C#)</label>
+                    </div>
+                    <div class="card-body">
+                        Un delegate est un type qui peut contenir la référence d’une ou plusieurs méthodes ayant la même signature tandis qu'une expression lambda est une méthode anonyme (sans nom) que l’on écrit en ligne de manière courte et expressive. Une fonction lambda en C# est typée selon le delegate auquel elle est associée : Action si elle ne retourne rien, Func si elle retourne une valeur, Predicate si elle retourne un booléen ou un delegate personnalisé si on définit soi-même le type de la fonction (par exemple delegate int Operation(int a, int b)).
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q34">
+                        <label for="q34">Thread vs Task (C#)</label>
+                    </div>
+                    <div class="card-body">Un Thread est une unité d’exécution bas niveau, gérée directement par le système d’exploitation et démarrée avec Start(). Une Task est une abstraction haut niveau basée sur le ThreadPool, créée et démarrée avec Task.Run() et utilisée facilement avec async/await. Le ThreadPool exécute des tâches de manière automatique et réutilisable via QueueUserWorkItem(), sans créer de nouveaux threads à chaque fois.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q35">
+                        <label for="q35">Garbage Collector (C#)</label>
+                    </div>
+                    <div class="card-body">Le garbage collector gère automatiquement la mémoire en libérant les objets inaccessibles pour éviter les fuites de mémoire. Il suit les références aux objets et récupère ceux qui ne sont plus utilisés, en optimisant les performances via un système de générations ⚠ Il ne libère pas les ressources non managées (fichiers, connexions...). Pour celles-ci, il faut utiliser Dispose() ou un bloc using, qui garantissent la libération explicite et immédiate de ces ressources.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q36">
+                        <label for="q36">SEO vs SEA</label>
+                    </div>
+                    <div class="card-body">Le SEO vise à améliorer la visibilité naturelle d’un site sur les moteurs de recherche grâce à l'utilisation de backlinks (liens provenant d’un autre site web pointant vers le vôtre) et à l’<i>optimisation</i> du contenu et de la structure, avec des résultats durables mais progressifs. Le SEA consiste à acheter des annonces payantes (<i>advertising</i>) pour générer du trafic immédiat, avec des résultats rapides mais dépendants du budget.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q37">
+                        <label for="q37">B2B vs B2C</label>
+                    </div>
+                    <div class="card-body">Le B2B (Business to Business) désigne les ventes entre entreprises, comme Salesforce ou SAP, avec des décisions longues et réfléchies, tandis que le B2C (Business to Consumer) cible directement les consommateurs, comme Amazon, Zara ou Netflix, avec des achats rapides et souvent émotionnels. »</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q38">
+                        <label for="q38">Client-Serveur vs Serveur-Serveur</label>
+                    </div>
+                    <div class="card-body">Le modèle Client-Serveur correspond à une communication où un client, comme un navigateur web demandant une page à un serveur web ou une application mobile interrogeant une API, envoie des requêtes pour obtenir des données ou des services. À l’inverse, le modèle Serveur-Serveur désigne l’échange automatique d’informations entre deux serveurs, par exemple lorsqu’un serveur web interroge un serveur de base de données pour afficher du contenu, ou lorsqu’un serveur d’authentification valide les accès d’un autre serveur applicatif.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q39">
+                        <label for="q39">On-Premise vs Cloud Computing</label>
+                    </div>
+                    <div class="card-body">
+                        Le on-premise désigne un modèle où les serveurs, logiciels et infrastructures sont installés et gérés directement dans l’entreprise (bureautique, ERP, bases de données SQL ou Oracle, fichiers), sur un serveur local ou un PC plutôt que dans le cloud. L’entreprise s’occupe de la maintenance, la sécurité et les mises à jour, avec un contrôle total mais des coûts et responsabilités plus élevés.<br>
+                        Le cloud computing propose, quant à lui, des modèles virtuels (« as a Service »). Chaque modèle se distingue par le niveau de contrôle laissé au client et le degré de gestion assuré par le fournisseur :
+                        <ul>
+                            <li>Le <b>SaaS</b> (Software) fournit des applications prêtes à l’emploi comme Google Drive, gérées entièrement par le fournisseur</li>
+                            <li>Le <b>PaaS</b> (Platform), comme Netlify ou AWS Elastic Beanstalk, offre un environnement pour développer et déployer des applications, où le développeur se concentre sur le code</li>
+                            <li>Le <b>IaaS</b> (Infrastructure), comme OVHcloud ou AWS EC2, loue des ressources informatiques virtualisées laissant la gestion du système au client</li>
+                            <li>Le <b>BaaS</b> (Backend), comme Supabase ou AWS Amplify, fournit un backend prêt à l’usage pour applications mobiles ou web</li>
+                            <li>Le <b>FaaS</b> (Function), comme Azure Fonctions ou AWS Lambda exécute du code à la demande, sans gérer de serveur</li>
+                            <li>Le <b>CaaS</b> (Container), comme Azure AKS ou AWS ECS, orchestre et déploie des conteneurs</li>
+                            <li>Le <b>NaaS</b> (Network), comme AWS Direct Connect ou AWS Wavelenght, fournit des services réseau à la demande, sans devoir acheter ni maintenir le matériel physique</li>
+                            <li>Le <b>MaaS</b> (Monitoring), comme Datadog, fournit des services de surveillance et de suivi des systèmes, applications et infrastructures</li>
+                            <li>L’<b>AIaaS</b> (Artificial Intelligence), comme OpenAI API ou IBM Watson, propose des services d’IA via le cloud</li>
+                            <li>Le <b>DBaaS</b> (Database), comme MongoDB Atlas ou Amazon RDS, gère les bases de données pour le client</li>
+                            <li>Le <b>DEaaS</b> (Desktop), comme Windows 365 ou Amazon WorkSpaces, fournit un bureau virtuel complet, accessible depuis n’importe quel appareil</li>
+                            <li>Le <b>SECaaS</b> (Security), comme Cloudflare, fournit des services de sécurité informatique</li>
+                            <li>Le <b>BPMaaS</b> (Business Process Management), comme IBM BPM ou Oracle BPM, fournit une plateforme pour automatiser, gérer et optimiser les processus métier des entreprises</li>
+                            <li>Le <b>STaaS</b> (Storage), comme Dropbox ou Amazon S3, fournit un espace de stockage, accessible à la demande, avec gestion de la maintenance, de la sauvegarde et de la scalabilité</li>
+                            <li>Le <b>DAaaS</b> (Data Analytics), comme Google BigQuery ou AWS Redshift, fournit des données ou services analytiques accessibles à la demande</li>
+                            <li>Le <b>UCaaS</b> (Unified Communication), comme Zoom, fournit des services de communication comme la voix, la vidéo, le chat ou les SMS</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q40">
+                        <label for="q40">Chiffrement symétrique vs Chiffrement asymétrique</label>
+                    </div>
+                    <div class="card-body">Le chiffrement symétrique (AES par exemple) est rapide mais nécessite le partage d’une clé secrète pour chiffrer et déchiffrer, tandis que le chiffrement asymétrique (RSA par exemple) est plus sécurisé car il utilise une paire de clés (publique/privée), au prix d’une vitesse moindre.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q41">
+                        <label for="q41">Sérialisation vs Désérialisation</label>
+                    </div>
+                    <div class="card-body">
+                        La sérialisation consiste à convertir un objet en un format transférable ou stockable (JSON, XML, binaire), tandis que la désérialisation fait l’inverse : elle reconstruit l’objet à partir de ce format. En Python, json.dumps(obj) sérialise un objet en JSON, et json.loads(json_str) le désérialise. En C#, JsonSerializer.Serialize(obj) et JsonSerializer.Deserialize(json) et en JavaScript, JSON.stringify et JSON.parse font respectivement la même chose.
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q42">
+                        <label for="q42">Frontend vs Backend</label>
+                    </div>
+                    <div class="card-body">Le frontend est la partie visible d’un site ou d’une application avec laquelle l’utilisateur interagit (boutons, menus, formulaires), réalisée avec HTML, CSS, JavaScript (Vanilla, React, Angular, Vue...) ou TypeScript. Le backend fonctionne en arrière-plan pour gérer les données, la logique et la communication avec le frontend, en utilisant des langages comme PHP, Python, C# ou Node et des bases de données (SQL Server, PostgreSQL, MongoDB, Elasticsearch,...). Ensemble, ils permettent à un site ou une application de fonctionner correctement en suivant le modèle Client-Serveur : le frontend affiche et reçoit les actions, le backend traite et stocke les informations.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q43">
+                        <label for="q43">Vertical Scaling vs Horizontal Scaling</label>
+                    </div>
+                    <div class="card-body">Le vertical scaling consiste à rendre un serveur plus puissant en ajoutant CPU, RAM ou stockage; simple mais limité par le matériel. Le horizontal scaling consiste à ajouter plusieurs serveurs pour répartir la charge (load balancing); très scalable et résilient mais plus complexe à gérer.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q44">
+                        <label for="q44">CPU vs RAM</label>
+                    </div>
+                    <div class="card-body">CPU (processeur), c’est le « cerveau » de l’ordinateur ou du serveur. Il exécute les instructions, fait les calculs et traite les données. Sa vitesse et le nombre de cœurs déterminent combien de tâches peuvent être effectuées rapidement.
+                        <br>RAM (mémoire vive), c’est la mémoire temporaire où le CPU stocke les données et programmes en cours d’utilisation. Plus de RAM permet de gérer plus de programmes ou de données simultanément, mais elle ne traite rien par elle-même.
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q45">
+                        <label for="q45">SQL vs NoSQL</label>
+                    </div>
+                    <div class="card-body">
+                        Le SQL et le NoSQL sont deux types de bases de données, avec des approches différentes :
+                        <ul>
+                            <li>SQL (Structured Query Language) : bases de données relationnelles organisées en tables avec des relations entre elles (MySQL, PostgreSQL par exemple). Les données ont une structure fixe (schéma). Cela s'assimile à un classeur bien organisé avec des tableaux et des règles strictes dans un langage commun, idéal pour les applications nécessitant une forte cohérence et des relations complexes.</li>
+                            <li>NoSQL (Not Only SQL) : bases de données non relationnelles, souvent plus flexibles et scalables. Les données peuvent être stockées sous forme de <b>documents</b> (MongoDB, Elasticsearch), <b>clés-valeurs</b> (Redis), <b>colonnes</b> (Cassandra) ou <b>graphes</b> (Neo4j), sans schéma fixe. Cela s'assimile à une boîte de rangement plus libre où il est possible de stocker des documents variés sans structure rigide, idéal pour les données massives ou non structurées.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q46">
+                        <label for="q46">ACID vs BASE</label>
+                    </div>
+                    <div class="card-body">ACID (Atomicity, Consistency, Isolation, Durability) garantit que les transactions sont fiables et cohérentes (une banque ou un hôpital par exemple), typique des bases SQL.<br>BASE (Basically Available, Soft state, Eventually consistent) privilégie la disponibilité, la scalabilité et la performance (un réseau social ou une plateforme de streaming par exemple) : le système reste accessible, l’état peut évoluer et la cohérence est atteinte à terme, typique des bases NoSQL.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q47">
+                        <label for="q47">REST vs GraphQL</label>
+                    </div>
+                    <div class="card-body">REST (Representational State Transfer) utilise plusieurs endpoints (URL) pour accéder aux données, et chaque requête retourne un ensemble fixe d’informations (par exemple une carte de restaurant, où le consommateur choisit un menu puis éventuellement des plats dans ce dernier). Ce style architectural est simple et largement utilisé pour créer des API utilisant HTTP, mais il peut renvoyer trop ou pas assez de données (<b>over/under-fetching</b>). GraphQL utilise à l'inverse un endpoint unique et permet de demander exactement les champs dont on a besoin, réduisant la surcharge (par exemple un buffet, où le consommateur choisit ses ingrédients une seule fois pour remplir son assiette). Ce langage de requête, utilisant généralement HTTP, est plus flexible mais plus complexe à mettre en place.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q48">
+                        <label for="q48">API Key vs Token</label>
+                    </div>
+                    <div class="card-body">
+                        Une API key et un token servent tous deux à authentifier et autoriser l’accès à une API, mais ils diffèrent dans leur usage :
+                        <ul>
+                            <li>Une API key est une valeur statique, souvent utilisée par des applications pour identifier un client et accéder à des ressources fixes. Elle convient aux échanges automatisés sur le modèle Serveur-Serveur. C’est comme une clé passe-partout qu’un employé permanent utilise pour entrer dans un bâtiment : elle ouvre toujours les mêmes portes et reste valable longtemps.</li>
+                            <li>Un token est généré dynamiquement après authentification et représente une session utilisateur temporaire, avec des permissions limitées. Il est préféré pour les connexions utilisateur et les accès contrôlés. C’est comme un badge temporaire donné à un visiteur : il permet d’accéder uniquement à certaines zones pendant un temps limité puis il expire.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q49">
+                        <label for="q49">Test nominal vs Test dégradé</label>
+                    </div>
+                    <div class="card-body">Les tests nominaux assurent que l’application fonctionne dans les conditions idéales (conduire une voiture sur une route parfaitement goudronnée avec tous les panneaux respectés). À l'inverse, les tests dégradés vérifient sa robustesse, sa résilience et sa tolérance aux pannes (conduire la même voiture sous la pluie ou la neige, sur une route glissante ou avec un pneu crevé). Par exemple, un test nominal peut être de soumettre un formulaire web avec toutes les données correctement renseignées et un test dégradé est la saisie de données incorrectes ou manquantes dans ce formulaire.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q50">
+                        <label for="q50">FIFO vs LIFO</label>
+                    </div>
+                    <div class="card-body">Dans la structure FIFO (First In, First Out), le premier élément inséré est le premier traité, comme dans une file d’attente (queue). FIFO est utilisé pour une file de requêtes, un buffer ou un message réseau.
+                        <br>Dans la structure LIFO (Last In, First Out), le dernier élément inséré est le premier traité, comme une pile d’assiettes (stack). LIFO est employé pour la pile d’exécution, la navigation (undo/redo) ou un algorithme récursif (par exemple la factorielle).
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q51">
+                        <label for="q51">Point-to-Point vs Publish/Subscribe</label>
+                    </div>
+                    <div class="card-body">En Point-to-Point, un producteur envoie un message à une file d’attente et un seul consommateur le récupère, garantissant un traitement unique et fiable des tâches, comme le traitement de commandes ou de jobs, avec des technologies telles que RabbitMQ Queue ou IBM MQ. En Publish/Subscribe, un producteur publie un message sur un topic et tous les abonnés le reçoivent, permettant la diffusion simultanée d’événements à plusieurs consommateurs, comme des notifications ou flux en temps réel, avec des technologies comme Kafka, MQTT ou Redis Pub/Sub. Un broker ou hub (ORB) peut éventuellement centraliser la gestion des messages, offrant persistance, routage et découplage entre producteurs et consommateurs.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q52">
+                        <label for="q52">Exchange</label>
+                    </div>
+                    <div class="card-body">
+                        Un exchange dans un broker de messagerie agit comme un postier qui redistribue les messages aux bonnes boîtes aux lettres (queues) :
+                        <ul>
+                            <li><b>Direct</b> : le postier remet le courrier exactement à la boîte correspondant à l’adresse (routing key précise)</li>
+                            <li><b>Topic</b> : le postier utilise des adresses avec des motifs, envoyant le courrier aux boîtes qui correspondent à des catégories ou régions spécifiques (wildcards * et #)</li>
+                            <li><b>Fanout</b> : le postier copie le message à toutes les boîtes reliées, comme une annonce diffusée à tout le monde, sans se soucier de l’adresse</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q53">
+                        <label for="q53">Paradigme</label>
+                    </div>
+                    <div class="card-body">
+                        Un paradigme est un style ou une approche de programmation qui définit comment organiser le code, représenter les données et structurer l’exécution d’un programme. Chaque paradigme offre une manière différente de penser et d’organiser un programme, et le choix dépend des besoins en modularité, réutilisabilité, réactivité et maintenabilité.
+                        Les principaux sont :
+                        <ul>
+                            <li><b>Procédural</b> : il organise le code en fonctions ou procédures, exécutées séquentiellement, comme suivre une recette de cuisine</li>
+                            <li><b>Orienté Objet</b> : il structure le code autour d’objets combinant données et comportements, comme des appareils autonomes avec leurs propres fonctions</li>
+                            <li><b>Orienté Aspect</b> : il sépare les préoccupations transversales (logging, sécurité…) du code principal, comme un fil invisible qui traverse plusieurs objets (décorateur)</li>
+                            <li><b>Orienté Composant</b> : il construit des applications à partir de composants modulaires réutilisables, comme des modules Lego assemblés pour créer un système</li>
+                            <li><b>Orienté Événement</b> : le programme réagit aux événements (clics, messages, signaux), comme des détecteurs qui déclenchent automatiquement des actions</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q54">
+                        <label for="q54">Design pattern</label>
+                    </div>
+                    <div class="card-body">
+                        Un patron de conception (design pattern) est une description identifiée d'un problème fréquent de conception orientée objet et de sa solution que l'on peut appliquer dans des contextes nouveaux. Le GoF (Gang of Four) réunit un ensemble de 23 patrons dans le livre “Design Patterns: Elements of Reusable Object-Oriented Software” (1994) d'Erich Gamma, Richard Helm, Ralph Johnson et John Vlissides.
+                        Il existe 3 catégories de patrons :
+                        <ul>
+                            <li>
+                                <b>Création</b> (Creational) : Manière d’instancier des objets
+                                <ul>
+                                    <li><i>Singleton</i> : Garantir qu’une classe n’a qu’une seule instance (la crée si elle n'existe pas, la retourner sinon) =&gt; À l'opéra, il n'y a qu'un seul chef d’orchestre (le Singleton).</li>
+                                    <li><i>Factory</i> : Déléguer la création d’objets à des sous-classes pour ne pas exposer la logique =&gt; Au restaurant, le client commande un plat au serveur (la Factory) sans savoir comment il est préparé. Le chef cuisinier (le Creator) choisit les bons ingrédients et la méthode selon la commande.</li>
+                                    <li><i>Abstract Factory</i> : Fournir une interface pour créer des familles d’objets =&gt; Au restaurant, la carte (l'Abstract Factory) propose des menus (les Concrete Factories) et chacun fournit un ensemble de plats assortis, sans que le client ait à connaître les détails de préparation.</li>
+                                    <li><i>Builder</i> : Construire un objet complexe étape par étape =&gt; Sur un chantier, l’architecte (le Director) décrit les étapes de construction dans un plan mais l’ouvrier (le Builder) décide comment les réaliser.</li>
+                                    <li><i>Prototype</i> : Créer un nouvel objet en clonant un objet existant =&gt; À l'imprimante, il est possible de faire une photocopie (le Clone) d'un document (le Prototype).</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>Structure</b> (Structural) : Composition des classes et objets pour former des structures plus grandes
+                                <ul>
+                                    <li><i>Adapter</i> : Permet à des interfaces incompatibles de travailler ensemble =&gt; Dans une conférence, si deux personnes (les Adaptees) parlent des langues différentes, un interprète (l'Adapter) traduit les messages pour qu’elles puissent se comprendre.</li>
+                                    <li><i>Bridge</i> : Séparer une abstraction (ce qu'un objet fait) de son implémentation (comment il le fait), afin qu’elles puissent évoluer indépendamment =&gt; Dans une voiture (l'Abstraction), on peut changer de moteur (l'Implémentation) en diesel, essence, électrique ou hybride sans tout refaire.</li>
+                                    <li><i>Composite</i> : Traiter de manière uniforme des objets individuels et des ensembles d’objets =&gt; Dans un répertoire de travail (le Component), un dossier (le Composite ou Container) peut contenir des fichiers (les Leafs) ou d’autres dossiers, et on peut parcourir toute la hiérarchie de la même façon (comme dans un arbre).</li>
+                                    <li><i>Decorator</i> : Ajouter dynamiquement des fonctionnalités à un objet sans modifier sa classe d’origine =&gt; Sur une voiture (la Base), on peut ajouter un sticker (le Decorator), cela n'altère en rien sa fonction de base.</li>
+                                    <li><i>Facade</i> : Fournir une interface simple et unifiée à un sous-système complexe composé de nombreuses classes, modules ou API =&gt; Au téléphone, le standard (la Facade) centralise toutes les communications entrantes, ce qui permet au client de ne pas connaître le numéro exact de chaque service (le Subsystem) et d'être redirigé automatiquement vers celui qui convient en fonction de sa demande.</li>
+                                    <li><i>Flyweight</i> : Partager des objets pour économiser de la mémoire lorsqu’on a un grand nombre d’objets similaires =&gt; Sur un échiquier, il y a plusieurs "Pion noir/blanc" (le Flyweight) mais leur position est différente.</li>
+                                    <li><i>Proxy</i> : Substituer ou intermédier un objet en contrôlant l'accès à ce dernier dans une optique d'optimisation =&gt; Un garde du corps ou une secrétaire (le Proxy) protège ou assiste son patron (le Service).</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>Comportement</b> (Behavioral) : Communication et comportement des objets
+                                <ul>
+                                    <li><i>Observer</i> : Permettre à un objet de notifier automatiquement un ou plusieurs autres objets lorsqu’il change d’état =&gt; Sur un réseau social, quand un utilisateur (le Subject ou Observee) poste un nouveau contenu, tous les followers (les Observers) sont notifiés automatiquement dans leur fil d’actualité.</li>
+                                    <li><i>Strategy</i> : Modifier dynamiquement un algorithme ou une stratégie qu’un objet utilise, sans toucher au code de l’objet lui-même =&gt; En voiture, un GPS peut changer l’itinéraire selon une méthode de calcul particulière (la Strategy) : itinéraire le plus court, le plus rapide, sans péage/travaux/trafic.</li>
+                                    <li><i>Command</i> : Encapsuler une requête ou une action (un todo) sous forme d’objet, permettant de la paramétrer, la stocker, la passer ou la rejouer =&gt; À l'armée, un officier (l'Invoker) émet un ordre écrit ou verbal (la Command). Les soldats (les Receivers) exécutent l’ordre au moment et de la manière prévue.</li>
+                                    <li><i>Iterator</i> : Accéder séquentiellement aux éléments d’une collection sans exposer sa structure interne =&gt; Le bouton up/down (l'Iterator) sur la télécommande permet de parcourir l'ensemble des chaînes TV (la Collection) une à une.</li>
+                                    <li><i>Mediator</i> : Centraliser la communication entre plusieurs objets afin de réduire les dépendances directes entre eux =&gt; Les développeurs (les Components) rapportent indiviuellement leurs actions au chef de projet (le Mediator) qui centralise les décisions, affecte les tâches et gère les conflits au sein de l'équipe.</li>
+                                    <li><i>Memento</i> : Sauvegarder et restaurer l’état interne d’un objet (undo/rollback) sans exposer sa structure interne aux autres objets =&gt; Lors d'une sauvegarde (le Memento ou Snapshot) d'une VM (l'Originator), l’état est enregistré dans le gestionnaire (le Caretaker) pour restaurer le système en cas de problème.</li>
+                                    <li><i>State</i> : Changer dynamiquement le comportement d’un objet en fonction de son état interne =&gt; Un ordinateur (le Context) peuvent avoir plusieurs états (les States) : s'il est allumé → toutes les applications fonctionnent, s'il est en veille → certaines tâches se font en arrière-plan même si l'écran est éteint et s'il est éteint → aucune opération n'est possible.</li>
+                                    <li><i>Template</i> : Définir le squelette d’un algorithme dans une classe mère, tout en laissant certaines étapes personnalisables aux classes filles =&gt; Un quotidien (l'Abstract) suit toujours la même structure ou mise en page (le Template) mais chaque rédacteur en chef décide du contenu des sections (les Subclasses).</li>
+                                    <li><i>Visitor</i> : Ajouter de nouvelles opérations à un ensemble d’objets sans modifier leurs classes =&gt; Le guide touristique (le Visitor) parcourt plusieurs monuments (les Elements) et applique une action spécifique à chaque type de monument (prendre une photo, raconter l’histoire…).</li>
+                                    <li><i>Chain of Responsibility</i> : Faire circuler une requête le long d’une chaîne d’objets, où chaque maillon peut soit traiter la requête, soit la transmettre au suivant =&gt; Un client appelle le support technique (la Chain) : l’agent (l'Handler) de niveau 1 essaie d’aider. S’il ne peut pas, il transfère au niveau 2, puis au superviseur.</li>
+                                    <li><i>Interpreter</i> : Définir une grammaire et fournir un interpréteur pour analyser et exécuter des expressions écrites dans ce langage =&gt; Une calculatrice (l'Interpreter) lit par exemple “2 + 3 × 5” (l'Expression) et la décompose en expressions selon les règles de priorité (terminales ou non terminales) pour donner le résultat récursivement en suivant un arbre synthaxique (AST).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        On ajoute parfois une 4ᵉ catégorie : <b>Concurrence</b> (Concurrency). Ces patrons ne figuraient pas explicitement dans le livre original, mais ils sont utiles dans les systèmes multi-threads ou distribués pour gérer la synchronisation et la coordination entre tâches concurrentes.
+                        <ul>
+                            <li><i>Active Object</i> : Déléguer une action à un objet qui exécutera la tâche de manière asynchrone, en utilisant une file d’attente (queue) et des threads séparés =&gt; Le client demande un plat au serveur (le Proxy) qui place le bon de commande dans la cuisine. Le chef de brigade (le Scheduler) décide dans quel ordre les plats seront préparés et en fait part au chef cuisinier (le Servant). Ce dernier prépare le plat et une fois prêt, il informe le serveur par la sonnette (la Future ou Notification) pour qu'il aillle le donner au client.</li>
+                            <li><i>Thread Pool</i> : Réutiliser un ensemble fixe de threads gérés par un système ou une librairie, destiné à exécuter des tâches concurrentes =&gt;  Sur Deliveroo, un nombre limité de livreurs (threads) prend les commandes (tâches) dans une file d’attente (queue) et, une fois la livraison effectuée, est réassigné pour une nouvelle commande, évitant ainsi la création de threads supplémentaires et permettant de gérer efficacement la charge de travail.</li>
+                            <li><i>Future / Promise</i> : Représenter un résultat qui n’est pas encore disponible, mais qui le sera à un moment futur =&gt; Au tabac, vous achetez un ticket de Loto (Future) en attendant le tirage. La loterie (Promise) annote le ticket avec le résultat à la fin du tirage : gros lot, petit lot ou aucun lot.</li>
+                            <li><i>Scheduler / Timer</i> : Permettre d’exécuter des tâches à des moments précis ou de façon périodique, idéal pour gérer des jobs planifiés, des rappels, des tâches répétitives ou des événements différés =&gt; Un minuteur de micro-ondres (le Timer) qui sonne après X min ou bien un agenda éléctronique (le Scheduler) qui exécute différentes tâches selon l’heure ou le jour.</li>
+                            <li><i>Guarded Suspension</i> : Permettre à un thread d’attendre qu’une certaine condition soit remplie avant de poursuivre son exécution =&gt; La voiture (le Suspended Thread) veut traverser l’intersection (la Protected Resource) mais reste bloquée au feu (le Guard) tant qu'il est rouge (le Predicate). La voiture ne peut passer qu'au vert (le Trigger Thread).</li>
+                            <li><i>Monitor Object</i> : Encapsuler une ressource partagée avec synchronisation et fournir un accès sécurisé par plusieurs threads =&gt; Un distributeur de billets (le Monitor Object) ne peut servir qu’un client à la fois et le code secret est saisi discrètement. Les autres clients attendent derrière.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q55">
+                        <label for="q55">Architecture</label>
+                    </div>
+                    <div class="card-body">
+                        Une architecture peut être définie comme l’organisation structurée d’un système logiciel, qui détermine comment ses composants interagissent, communiquent et évoluent. Elle sert de plan directeur pour concevoir des applications robustes, modulaires et maintenables, tout en répondant aux besoins fonctionnels et techniques.
+                        On dénombre 6 catégories : 
+                        <ul>
+                            <li>
+                                <b>Orientée Service/Flux</b> : Organiser les systèmes autour des services et des événements, favorisant la communication et la réactivité
+                                <ul>
+                                    <li><i>Couches (Layered)</i> : Séparer en couches ou layers (présentation, logique métier, données) =&gt; Un restaurant suit une architecture 3 tiers : la salle pour accueillir les clients (l'UI), la cuisine qui prépare les plats (le Business) et la réserve pour stocker les ingrédients (la Database).</li>
+                                    <li><i>Microservices</i> : Décomposer en petits services indépendants (REST), chacun ayant une responsabilité spécifique et pouvant fonctionner, évoluer et se déployer de manière autonome =&gt; Au fast-food, il y a la cuisson des burgers, la préparation des frites, le service au comptoir. De même, au restaurant avec l'ardoise, la carte, les plats du jour proposés par le serveur. Chaque service fonctionne indépendamment mais tous contribuent au service global.</li>
+                                    <li><i>SOA (Service-Oriented)</i> : Décomposer en services indépendants et interopérables (SOAP), chacun ayant une fonction précise et pouvant être réutilisé par différentes applications =&gt; Une compagnie de transport avec différents véhicules pour chaque type de marchandise.</li>
+                                    <li><i>EDA (Event-Driven)</i> : Réagir aux événements avec un traitement asynchrone =&gt; Un domino qui tombe fait tomber le suivant : un événement déclenche une série d’actions.</li>
+                                    <li><i>Serverless</i> Exécuter des fonctions à la demande (FaaS) =&gt; Pour un dépannage, tu appelles un professionnel uniquement quand tu en as besoin. Il vient, fait le travail et repart. Tu ne paies rien quand il ne travaille pas.</li>
+                                    <li><i>Message-Driven (Queue-Based)</i> : Communiquer de manière asynchrone via une file (queue) ou un broker de messages (RabbitMQ, Kafka, AWS SQS) =&gt; À la Poste, les lettres sont triées avant d’arriver au destinataire.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>Orientée Composant</b> : Structurer les applications en modules ou extensions indépendants, améliorant la modularité et la maintenabilité
+                                <ul>
+                                    <li><i>Monolitique</i> : Compacter toutes les fonctionnalités dans un seul bloc =&gt; Un couteau suisse contient plusieurs outils dans un seul objet : lame, tournevis, ciseaux, lime, tire-bouchon… Très pratique au départ (polyvalent et simple à transporter), il est difficile à faire évoluer ou à réparer.</li>
+                                    <li><i>Modulaire (Component-Based)</i> : Diviser en modules indépendants et réutilisables à l’intérieur d’un même déploiement =&gt; Avec un robot de cuisine, il est possible de changer le mixeur, le hachoir ou le presse-agrumes (les Components) selon le besoin. De même, au restaurant, une carte avec plusieurs menus (déjeuner, dîner, enfant).</li>
+                                    <li><i>Plug-in</i> : Ajouter des extensions à un noyau minimal =&gt; De même que pour un téléphone et ses applications, un navigateur web (le Microkernel) fonctionne même sans extensions, mais on peut lui en ajouter pour enrichir ses fonctionnalités sans modifier son coeur.</li>
+                                    <li><i>Hexagonale</i> : Isoler le cœur métier des dépendances et tout échanger via des interfaces et des implémentations concrètes =&gt; Le cerveau prend les décisions tandis que les nerfs (les Ports) transmettent les signaux et les organes (les Adapters) exécutent les actions, le cerveau restant inchangé peu importe quels organes répondent.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>Orientée Modèle</b> : Séparer les responsabilités garantissant clarté et réutilisabilité					
+                                <ul>
+                                    <li><i>MVC (Model View Controller)</i> : Séparer la logique métier, l’interface utilisateur (qui utilise les données et observe le modèle) et la gestion des interactions =&gt; Un théâtre : le script de la pièce (le Model), le metteur en scène (le Controller) qui guide les acteurs (les Endpoints), le spectacle sur scène que le public voit (la View)</li>
+                                    <li><i>MVP (Model View Presenter)</i> : Variante de MVC avec un Presenter qui gère la logique de la View, qui elle devient passive =&gt; Au restaurant, le serveur (le Presenter) prend la commande, traduit en actions pour le chef cuisinier, ramène le plat au client Le client ne parle jamais directement à la cuisine, tout passe par le serveur.</li>
+                                    <li><i>MVVM (Model View ViewModel)</i> : Permettre un binding bidirectionnel (ViewModel) entre l’interface et la logique métier, simplifiant la synchronisation des données =&gt; Une télécommande (le ViewModel) qui contrôle la télévision sans toucher l’écran.</li>
+                                    <li><i>MVU (Model View Update)</i> : Créer un cycle répétitif et unidirectionnel pour gérer l’interface et l’état d’une application =&gt; Dans une feuille de calcul Excel, vous ne changez pas directement l’affichage, toute modification faite (l'Update) sur les données dans les cellules entraîne un rafraîchissement automatique de l'affichage.</li>
+                                    <li><i>MDA (Model-Driven)</i> : Générer le code ou le système à partir de modèles abstraits plutôt que d’écrire directement le code =&gt; Un architecte qui crée des plans avant la construction.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>Orientée Domaine</b> : Centrer la conception sur le métier, en isolant la logique critique et en structurant le code autour du domaine fonctionnel
+                                <ul>
+                                    <li><i>DDD (Domain-Driven Design)</i> : Organiser la conception du logiciel autour du vocabulaire et des règles du métier, afin que la logique du code reflète la logique du domaine =&gt; Dans une biblothèque, chaque rayon (bounded context) traite un domaine particulier (la logistique, la facturation...). Les livres (entités et agrégats) suivent des règles propres à ce rayon, sans confusion avec les autres.</li>
+                                    <li><i>Onion</i> : Organiser une application pour protéger le cœur métier (le domaine) des couches externes (frameworks, bases de données, interfaces utilisateur,...) =&gt; Dans le corps humain, le coeur pompe le sang : il est au centre des décisions et abrite les données vitales. Son fonctionnement est indépendant de l’organe ou vaisseau (adaptateur) qui reçoit le sang.</li>
+                                    <li><i>Clean</i> : Isoler strictement les dépendances de la logique métier =&gt; Une forteresse avec le trésor au centre et des murs autour pour protection.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>Spécialisée</b> : Répondre à des besoins particuliers comme la gestion des événements, la réactivité ou la séparation des commandes et requêtes
+                                <ul>
+                                    <li><i>CQRS (Command Query Responsibility Segregation)</i> : Séparer les opérations écriture (commandes) et lecture (requêtes) =&gt; À la banque, déposer ou retirer de l’argent (commandes) se fait au guichet. Consulter le solde (requêtes) peut se faire sur un écran ou une application optimisée pour cet usage.</li>
+                                    <li><i>Event Sourcing</i> : Stocker tous les événements pour reconstruire l’état =&gt; Dans un historique Git, vous ne stockez pas seulement la version finale du code, mais chaque commit. L’état actuel du projet peut être reconstruit à partir de tous les commits. Idem pour un carnet de santé.</li>
+                                    <li><i>Chain of Responsibility</i> : Créer une suite d’étapes de traitement =&gt; Dans une pipeline CI/CD, chaque étape (tests unitaires, tests d’intégration, linting, build) vérifie une partie du code et bloque ou valide pour passer à l’étape suivante. </li>
+                                    <li><i>Reactive</i> : Réagir automatiquement aux changements (données, événements, ou charge du système) sans intervention manuelle =&gt; Le système immunitaire du corps humain détecte des menaces (virus, bactéries) et réagit automatiquement pour protéger le corps. De même, une application dite "responsive" s’adapte automatiquement à différentes tailles et types d’écrans, tout en conservant une expérience utilisateur optimale.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>Distribuée / Cloud</b> : Concevoir des systèmes répartis et évolutifs, optimisés pour le cloud et les échanges entre noeuds
+                                <ul>
+                                    <li><i>Client-Server</i> : Centraliser le service global sur un serveur chargé du traiment, sollicité par un ou plusieurs clients (applications ou utilisateurs) demandant des services ou des données =&gt; À la pharmacie, le patient (le Client) demande un médicament ou un renseignement et le pharmacien (le Server) fournit exactement ce qu’il faut.</li>
+                                    <li><i>P2P (Peer-to-Peer)</i> : Assurer des échanges directs entre tous les noeuds égaux d'un réseau (graphe) =&gt; Chaque conducteur peut proposer un trajet et chaque passager peut le réserver directement. Un utilisateur peut être conducteur sur un trajet et passager sur un autre, sans qu’il y ait de serveur central gérant tous les trajets. La plateforme facilite juste la mise en relation entre covoitureurs (pairs).</li>
+                                    <li><i>Middleware</i> : Positionner un intermédiaire pour acheminer les messages entre applications =&gt; Une agence de voyage (le Middleware ou Broker) reçoit les demandes des clients (vols, hôtels) et organise les réservations auprès de différents prestataires sans que le client ait à contacter chaque fournisseur.</li>
+                                    <li><i>Cloud-Native (<a target="_blank" rel="noopener" href="https://developer.ibm.com/articles/creating-a-12-factor-application-with-open-liberty">12-Factor Apps</a>)</i> : Optimiser pour le "cloud" permettant scalabilité, résilience et déploiement simplifié =&gt; Une boutique éphémère (pop-up store) qui peut s’installer rapidement n’importe où, avec tous les équipements nécessaires pour fonctionner, puis se démonter facilement. Chaque processus ou microservice est comme un stand indépendant qui peut disparaître ou être déplacé sans interrompre le reste de l’opération.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q56">
+                        <label for="q56">Cycle de vie</label>
+                    </div>
+                    <div class="card-body">Comme pour une application, un composant ou un objet, un service possède un cycle de vie propre à son contexte d’utilisation, qui définit quand il est créé, combien de temps il reste actif et quand il est détruit. Un service <b>Transient</b> est créé à chaque utilisation, comme commander un café à emporter, idéal pour les services sans état (stateless). Un service <b>Scoped</b> reste actif pendant un contexte particulier, par exemple une requête HTTP, comme un abonnement journalier à un club utilisé toute la journée. Un service <b>Singleton</b> existe en une seule instance pour toute la durée de vie de l’application, semblable à un frigo familial partagé, utile pour des ressources globales ou coûteuses à créer.<br>
+                        D’autres cycles existent : <b>Per Thread</b>, qui crée une instance par thread, comme chaque employé ayant son propre stylo pour la journée ; <b>Per Session/Request</b>, qui dure tout au long d’une session ou d’une requête, comme un ticket de métro valable pour un trajet ; <b>Per Call (Factory-Based)</b>, où l’instance est générée sur demande, comme un plat préparé sur mesure à chaque repas et <b>Lazy (On-Demand)</b>, qui ne crée l’instance qu’au premier usage, à l’image d’allumer la lumière seulement en entrant dans la pièce.
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q57">
+                        <label for="q57">Version</label>
+                    </div>
+                    <div class="card-body">
+                        Le versionnage sémantique se compose de trois parties : 
+                        <ul>
+                            <li><b>Major</b> (par exemple v1.0.0) : indique des changements majeurs qui cassent la compatibilité avec les versions précédentes.</li>
+                            <li><b>Minor</b> (par exemple v0.1.0) : correspond à l’ajout de nouvelles fonctionnalités qui restent compatibles avec les versions antérieures.</li>
+                            <li><b>Patch</b> (par exemple v0.0.1) : concerne des corrections de bugs ou des améliorations mineures sans impact sur la compatibilité.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q58">
+                        <label for="q58">Test</label>
+                    </div>
+                    <div class="card-body">
+                        Un test est une procédure permettant de vérifier qu’un programme fonctionne comme prévu. Il consiste à comparer le comportement réel du code avec le comportement attendu (spécifié dans les exigences). Il en existe 7 catégories :
+                        <ul>
+                            <li><b>Fonctionnel</b> : vérifie que la fonctionnalité répond correctement aux exigences (par exemple POST /users crée bien un utilisateur)</li>
+                            <li><b>Intégration</b> : s’assure que la fonctionnalité s'intègre correctement avec d’autres services (par exemple le paiement et la gestion de commande)</li>
+                            <li><b>Charge / Performance</b> : mesure la performance sous forte sollicitation (par exemple 10 000 requêtes simultanées)</li>
+                            <li><b>Sécurité</b> : détecte les failles comme l’injection SQL ou l’accès non autorisé</li>
+                            <li><b>Validation</b> : vérifie la conformité des réponses avec le schéma attendu (champs obligatoires, types de données)</li>
+                            <li><b>Bout en Bout (End-to-End)</b> : simule un scénario complet impliquant plusieurs fonctionnalités (par exemple la connexion puis la récupération de données)</li>
+                            <li><b>Régression</b> : confirme que les nouvelles mises à jour n’ont pas altéré les fonctionnalités existantes</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q59">
+                        <label for="q59">Requête</label>
+                    </div>
+                    <div class="card-body">
+                        Une requête HTTP est un message envoyé par un client (souvent un navigateur ou une application) à un serveur pour demander une ressource, exécuter une action ou envoyer des données.
+                        Elle se compose généralement de plusieurs éléments :
+                        <ul>
+                            <li>L’<b>URL</b> représente l’adresse de la ressource demandée =&gt; https://api.exemple.com/users</li>
+                            <li>La <b>méthode</b> indique le type d’action à effectuer : GET pour récupérer une ressource, POST pour la créer, PUT pour la modifier et DELETE pour la supprimer</li>
+                            <li>Les <b>headers</b> contiennent des informations supplémentaires (authentification, type de contenu, langue...).</li>
+                            <li>Le <b>body</b> contient les données envoyées au serveur (souvent en JSON pour les API REST)</li>
+                            <li>
+                                Les <b>paramètres</b> permettent de transmettre des informations supplémentaires à la requête :
+                                <ul>
+                                    <li>Query : placés dans l’URL après un “?” pour filtrer, trier ou préciser la requête =&gt; GET https://api.exemple.com/users?age=25&amp;ville=Paris</li>
+                                    <li>Path / Route : intégrés directement dans le chemin de l’URL pour identifier une ressource =&gt; GET https://api.exemple.com/users/123</li>
+                                    <li>Header : placés dans les en-tête pour l’authentification, le format de données ou des informations de session =&gt; Authorization: Bearer {token} Content-Type: application/json</li>
+                                    <li>Body : transmis dans le corps de la requête (principalement avec POST ou PUT) pour envoyer des données complexes (JSON, XML, formulaire...) =&gt; {"nom": "Dupont", "email": "dupont@example.com"}</li>
+                                    <li>Form : utilisés lorsque les données sont envoyées sous format formulaire HTML (application/x-www-form-urlencoded ou multipart/form-data)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q60">
+                        <label for="q60">Réponse</label>
+                    </div>
+                    <div class="card-body">
+                        Une réponse HTTP est le message renvoyé par le serveur à la suite d’une requête HTTP envoyée par un client (navigateur, application, API...). Elle indique le résultat du traitement de la requête (succès, erreur, redirection...) et peut contenir des données ou des métadonnées.
+                        Elle se compose de trois parties principales :
+                        <ul>
+                            <li>
+                            Le <b>statut</b> contient le code et le message associé =&gt; HTTP/1.1 200 OK<br>
+                            Les codes sont regroupés par catégories :
+                                <ul>
+                                    <li>1xx : informations (rarement utilisées) =&gt; 100 Continue</li>
+                                    <li>2xx : succès =&gt; 200 OK, 201 Created, 204 No Content</li>
+                                    <li>3xx : redirection =&gt; 300 Redirection, 301 Moved Permanently, 302 Moved Temporarily</li>
+                                    <li>4xx : erreur côté client =&gt; 400 Bad Request, 401 Unauthorized, 402 Payment Required, 403 Forbidden, 404 Not Found</li>
+                                    <li>5xx : erreur côté serveur =&gt; 500 Internal Server Error, 501 Not Implemented, 502 Bad Gateway, 503 Service Unavailable, 504 Gateway Timeout</li>
+                                </ul>
+                            </li>
+                            <li>Les <b>headers</b> fournissent des informations supplémentaires : format du contenu, taille de la réponse, cookies envoyés au client, gestion du cache</li>
+                            <li>Le <b>body</b> contient les données renvoyées par le serveur (souvent en JSON ou HTML) =&gt; {"id": 1, "nom": "Dupont", "email": "dupont@example.com"}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q61">
+                        <label for="q61">Promesse</label>
+                    </div>
+                    <div class="card-body">
+                        Une promesse est un objet (en JavaScript ou dans d’autres langages asynchrones) qui représente le résultat futur d’une opération asynchrone.
+                        Elle peut être dans l’un de ces trois états :
+                        <ul>
+                            <li><b>Pending</b> (en attente) : l’opération n’est pas encore terminée</li>
+                            <li><b>Fulfilled</b> (résolue) : l’opération s’est terminée avec succès, un résultat est disponible</li>
+                            <li><b>Rejected</b> (rejetée) : l’opération a échoué, une erreur est retournée</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
