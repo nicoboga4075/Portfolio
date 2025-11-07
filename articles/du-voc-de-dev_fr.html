@@ -266,7 +266,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q26">
-                        <label for="q26">Modificateurs d'accès (C#)</label>
+                        <label for="q26">Modificateurs d'accès [C#]</label>
                     </div>
                     <div class="card-body">
                         <ul>
@@ -280,28 +280,28 @@ permalink: "articles/du-voc-de-dev_fr.html"
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q27">
-                        <label for="q27">Static (C#)</label>
+                        <label for="q27">Static [C#]</label>
                     </div>
                     <div class="card-body">Une classe static définit des classes utilitaires et ne peut être ni instanciée ni héritée. Toutes ses méthodes et propriétés doivent être static. Par contre, une méthode static peut exister dans n’importe quelle classe.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q28">
-                        <label for="q28">Sealed (C#)</label>
+                        <label for="q28">Sealed [C#]</label>
                     </div>
                     <div class="card-body">Une classe sealed bloque tout héritage comme une classe static mais est instanciable. Une méthode sealed empêche de redéfinir un comportement dans les classes dérivées. Elle n’a donc jamais de sens dans une classe sealed.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q29">
-                        <label for="q29">Classe abstraite vs Interface (C#)</label>
+                        <label for="q29">Classe abstraite vs Interface [C#]</label>
                     </div>
                     <div class="card-body">Une classe ou méthode abstract permet de créer un modèle commun avec certaines méthodes déjà implémentées, tandis qu’une interface définit uniquement un <i>contrat</i> que différentes classes peuvent implémenter, même si elles ne sont pas liées par héritage. Une méthode abstraite ne peut exister que dans une classe abstraite mais une classe abstraite peut ne contenir aucune méthode abstraite. Une classe (non sealed et non static) ne peut hériter que d’une seule autre classe (non sealed et non static), mais peut implémenter plusieurs interfaces pour combiner différents comportements.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q30">
-                        <label for="q30">Polymorphisme (C#)</label>
+                        <label for="q30">Polymorphisme [C#]</label>
                     </div>
                     <div class="card-body">
                         Le polymorphisme permet à une même méthode d’avoir plusieurs comportements selon le type réel de l’objet qui l’utilise.
@@ -315,21 +315,21 @@ permalink: "articles/du-voc-de-dev_fr.html"
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q31">
-                        <label for="q31">Type valeur vs Type référence (C#)</label>
+                        <label for="q31">Type valeur vs Type référence [C#]</label>
                     </div>
                     <div class="card-body">Les valeurs (int, double, float, bool, char, struct, enum) sont copiées indépendamment et stockées dans la <b>stack</b> tandis que les références (class, string, array, object, delegate) pointent vers le même objet en mémoire et sont stockées dans le <b>heap</b>. La modification d’une variable (type valeur) n’affecte pas une autre mais modifier un objet (type référence) impacte toutes les références (adresses) pointant sur cet objet.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q32">
-                        <label for="q32">Copie superficielle vs Copie profonde (C#)</label>
+                        <label for="q32">Copie superficielle vs Copie profonde [C#]</label>
                     </div>
                     <div class="card-body">Une copie superficielle (shallow copy) crée un nouvel objet mais les objets internes restent partagés avec l’original. Une copie profonde (deep copy) crée un nouvel objet et copie également tous les objets internes, rendant la copie totalement indépendante. En C#, MemberwiseClone() fait une copie superficielle, tandis qu’une méthode personnalisée ou la sérialisation peut être utilisée pour une copie profonde.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q33">
-                        <label for="q33">Delegate vs Lambda (C#)</label>
+                        <label for="q33">Delegate vs Lambda [C#]</label>
                     </div>
                     <div class="card-body">
                         Un delegate est un type qui peut contenir la référence d’une ou plusieurs méthodes ayant la même signature tandis qu'une expression lambda est une méthode anonyme (sans nom) que l’on écrit en ligne de manière courte et expressive. Une fonction lambda en C# est typée selon le delegate auquel elle est associée : Action si elle ne retourne rien, Func si elle retourne une valeur, Predicate si elle retourne un booléen ou un delegate personnalisé si on définit soi-même le type de la fonction (par exemple delegate int Operation(int a, int b)).
@@ -338,14 +338,14 @@ permalink: "articles/du-voc-de-dev_fr.html"
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q34">
-                        <label for="q34">Thread vs Task (C#)</label>
+                        <label for="q34">Thread vs Task [C#]</label>
                     </div>
                     <div class="card-body">Un Thread est une unité d’exécution bas niveau, gérée directement par le système d’exploitation et démarrée avec Start(). Une Task est une abstraction haut niveau basée sur le ThreadPool, créée et démarrée avec Task.Run() et utilisée facilement avec async/await. Le ThreadPool exécute des tâches de manière automatique et réutilisable via QueueUserWorkItem(), sans créer de nouveaux threads à chaque fois.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q35">
-                        <label for="q35">Garbage Collector (C#)</label>
+                        <label for="q35">Garbage Collector [C#]</label>
                     </div>
                     <div class="card-body">Le garbage collector gère automatiquement la mémoire en libérant les objets inaccessibles pour éviter les fuites de mémoire. Il suit les références aux objets et récupère ceux qui ne sont plus utilisés, en optimisant les performances via un système de générations ⚠ Il ne libère pas les ressources non managées (fichiers, connexions...). Pour celles-ci, il faut utiliser Dispose() ou un bloc using, qui garantissent la libération explicite et immédiate de ces ressources.</div>
                 </div>
@@ -482,7 +482,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q49">
                         <label for="q49">Test nominal vs Test dégradé</label>
                     </div>
-                    <div class="card-body">Les tests nominaux assurent que l’application fonctionne dans les conditions idéales (conduire une voiture sur une route parfaitement goudronnée avec tous les panneaux respectés). À l'inverse, les tests dégradés vérifient sa robustesse, sa résilience et sa tolérance aux pannes (conduire la même voiture sous la pluie ou la neige, sur une route glissante ou avec un pneu crevé). Par exemple, un test nominal peut être de soumettre un formulaire web avec toutes les données correctement renseignées et un test dégradé est la saisie de données incorrectes ou manquantes dans ce formulaire.</div>
+                    <div class="card-body">Un test nominal assure que l’application fonctionne dans les conditions idéales (conduire une voiture sur une route parfaitement goudronnée avec tous les panneaux respectés). À l'inverse, un test dégradé vérifie sa robustesse, sa résilience et sa tolérance aux pannes (conduire la même voiture sous la pluie ou la neige, sur une route glissante ou avec un pneu crevé). Par exemple, un test nominal peut être de soumettre un formulaire web avec toutes les données correctement renseignées et un test dégradé est la saisie de données incorrectes ou manquantes dans ce formulaire.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -537,7 +537,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q54">Design pattern</label>
                     </div>
                     <div class="card-body">
-                        Un patron de conception (design pattern) est une description identifiée d'un problème fréquent de conception orientée objet et de sa solution que l'on peut appliquer dans des contextes nouveaux. Le GoF (Gang of Four) réunit un ensemble de 23 patrons dans le livre “Design Patterns: Elements of Reusable Object-Oriented Software” (1994) d'Erich Gamma, Richard Helm, Ralph Johnson et John Vlissides.
+                        Un design pattern (ou patron de conception) est une description identifiée d'un problème fréquent de conception orientée objet et de sa solution que l'on peut appliquer dans des contextes nouveaux. Le GoF (Gang of Four) réunit un ensemble de 23 patrons dans le livre “Design Patterns: Elements of Reusable Object-Oriented Software” (1994) d'Erich Gamma, Richard Helm, Ralph Johnson et John Vlissides.
                         Il existe 3 catégories de patrons :
                         <ul>
                             <li>
@@ -620,7 +620,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                                 </ul>
                             </li>
                             <li>
-                                <b>Orientée Modèle</b> : Séparer les responsabilités garantissant clarté et réutilisabilité					
+                                <b>Orientée Modèle</b> : Séparer les responsabilités garantissant clarté et réutilisabilité                    
                                 <ul>
                                     <li><i>MVC (Model View Controller)</i> : Séparer la logique métier, l’interface utilisateur (qui utilise les données et observe le modèle) et la gestion des interactions =&gt; Un théâtre : le script de la pièce (le Model), le metteur en scène (le Controller) qui guide les acteurs (les Endpoints), le spectacle sur scène que le public voit (la View)</li>
                                     <li><i>MVP (Model View Presenter)</i> : Variante de MVC avec un Presenter qui gère la logique de la View, qui elle devient passive =&gt; Au restaurant, le serveur (le Presenter) prend la commande, traduit en actions pour le chef cuisinier, ramène le plat au client Le client ne parle jamais directement à la cuisine, tout passe par le serveur.</li>
@@ -642,7 +642,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                                 <ul>
                                     <li><i>CQRS (Command Query Responsibility Segregation)</i> : Séparer les opérations écriture (commandes) et lecture (requêtes) =&gt; À la banque, déposer ou retirer de l’argent (commandes) se fait au guichet. Consulter le solde (requêtes) peut se faire sur un écran ou une application optimisée pour cet usage.</li>
                                     <li><i>Event Sourcing</i> : Stocker tous les événements pour reconstruire l’état =&gt; Dans un historique Git, vous ne stockez pas seulement la version finale du code, mais chaque commit. L’état actuel du projet peut être reconstruit à partir de tous les commits. Idem pour un carnet de santé.</li>
-                                    <li><i>Chain of Responsibility</i> : Créer une suite d’étapes de traitement =&gt; Dans une pipeline CI/CD, chaque étape (tests unitaires, tests d’intégration, linting, build) vérifie une partie du code et bloque ou valide pour passer à l’étape suivante. </li>
+                                    <li><i>Chain of Responsibility</i> : Créer une suite d’étapes de traitement =&gt; Dans une pipeline CI/CD, chaque étape (tests unitaires, tests d’intégration, linting, build) vérifie une partie du code et bloque ou valide pour passer à l’étape suivante.</li>
                                     <li><i>Reactive</i> : Réagir automatiquement aux changements (données, événements, ou charge du système) sans intervention manuelle =&gt; Le système immunitaire du corps humain détecte des menaces (virus, bactéries) et réagit automatiquement pour protéger le corps. De même, une application dite "responsive" s’adapte automatiquement à différentes tailles et types d’écrans, tout en conservant une expérience utilisateur optimale.</li>
                                 </ul>
                             </li>
@@ -675,9 +675,9 @@ permalink: "articles/du-voc-de-dev_fr.html"
                     <div class="card-body">
                         Le versionnage sémantique se compose de trois parties : 
                         <ul>
-                            <li><b>Major</b> (par exemple v1.0.0) : indique des changements majeurs qui cassent la compatibilité avec les versions précédentes.</li>
-                            <li><b>Minor</b> (par exemple v0.1.0) : correspond à l’ajout de nouvelles fonctionnalités qui restent compatibles avec les versions antérieures.</li>
-                            <li><b>Patch</b> (par exemple v0.0.1) : concerne des corrections de bugs ou des améliorations mineures sans impact sur la compatibilité.</li>
+                            <li><b>Major</b> (par exemple v1.0.0) : indique des changements majeurs qui cassent la compatibilité avec les versions précédentes</li>
+                            <li><b>Minor</b> (par exemple v0.1.0) : correspond à l’ajout de nouvelles fonctionnalités qui restent compatibles avec les versions antérieures</li>
+                            <li><b>Patch</b> (par exemple v0.0.1) : concerne des corrections de bugs ou des améliorations mineures sans impact sur la compatibilité</li>
                         </ul>
                     </div>
                 </div>
@@ -764,6 +764,725 @@ permalink: "articles/du-voc-de-dev_fr.html"
                             <li><b>Rejected</b> (rejetée) : l’opération a échoué, une erreur est retournée</li>
                         </ul>
                     </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q62">
+                        <label for="q62">Analyse de risques</label>
+                    </div>
+                    <div class="card-body">L’analyse de risques est une activité consistant à identifier les valeurs métier à protéger, évaluer les sources de risque (les menaces), leurs motivations à compromettre (les objectifs visés), leurs impacts (financier, opérationnel, réputationnel, juridique) et leur gravité (mineur, significatif, grave, critique), élaborer des scénarios de risques (les événements redoutés) et définir des mesures de protection adaptées. La méthode EBIOS (Expression des Besoins et Identification des Objectifs de Sécurité), développée par l’ANSSI (Agence nationale de la sécurité des systèmes d’information) en est un excellent exemple : anticipation, priorisation, décision.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q63">
+                        <label for="q63">Valeur métier</label>
+                    </div>
+                    <div class="card-body">Dans la méthode EBIOS, une valeur métier désigne une activité, un processus, une information ou un service critique contribuant directement au succès et aux objects stratégiques d'une organisation.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q64">
+                        <label for="q64">Bien support</label>
+                    </div>
+                    <div class="card-body">Dans la méthode EBIOS, un bien support désigne une infrastructure matérielle, logicielle ou humaine qui soutient directement les valeurs métier d’une organisation.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q65">
+                        <label for="q65">Source de risque</label>
+                    </div>
+                    <div class="card-body">Dans la méthode EBIOS, une source de risque est une personne ou une entité externe, malveillante, à l’origine d’événements redoutés pouvant impacter l’activité d'une organisation.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q66">
+                        <label for="q66">Partie prenante</label>
+                    </div>
+                    <div class="card-body">Dans la méthode EBIOS, une partie prenante est une entité (personne, système d’information, société) dans l'écosystème d'une organisation, en interaction directe ou indirecte avec elle, ayant un intérêt ou une influence sur ses activités, décisions ou résultats. Elle peut constituer un vecteur d’attaque, intentionnel ou non, direct ou indirect, auquel on associe un indice de dangerosité.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q67">
+                        <label for="q67">Scénario stratégique</label>
+                    </div>
+                    <div class="card-body">Dans la méthode EBIOS, un scénario stratégique est un événement redouté dans lequel une source de risque exploite une partie prenante ou une vulnérabilité afin de porter atteinte aux valeurs métier d'une organisation.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q68">
+                        <label for="q68">Scénario opérationnel</label>
+                    </div>
+                    <div class="card-body">Dans la méthode EBIOS, un scénario opérationnel est une situation où une source de risque réalise une suite d’actions pour atteindre un objectif visé sur une organisation. Évaluer sa vraisemblance (fréquence d’événements similaires, motivation et capacité de l’acteur, niveau de vulnérabilité de la cible) ainsi que sa faisabilité (ressources nécessaires, niveau d’expertise exigé, existence de contre-mesures ou de protections) permet d’identifier les vulnérabilités et dresser des plans d’actions adaptés, cohérents et efficaces. Une attaque physique d'une personne externe (vol, sabotage, espionnage industriel, intrusion) est beaucoup moins probable qu'une attaque virtuelle sur une ressource exposée ou une compromission par un tiers (vengeance, corruption ou intérêt personnel). En effet, la personne s'expose à davantage de risques (identification physique ou numérique, blessures ou accidents, perte de réputation) pouvant conduire à des sanctions professionnelles (licenciement, dédommagement, rétrogradation) ou des poursuites judiciaires (amende, prison).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q69">
+                        <label for="q69">Synthèse des risques</label>
+                    </div>
+                    <div class="card-body">Dans la méthode EBIOS, une synthèse des risques est un état de l'art offrant une vue macroscopique permettant de soutenir la prise de décision au sein d'une organisation. Elle constitue un levier d’action en hiérarchisant les risques selon leur criticité (faible, modérée, forte) en fonction de leur gravité et de leur probabilité. Cette hiérarchisation doit être évaluée au regard de la tolérance aux risques de l’organisation, c’est-à-dire le niveau de risque jugé acceptable pour atteindre ses objectifs, afin de déterminer les actions prioritaires de prévention, de mitigation ou de maîtrise (détection et correction).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q70">
+                        <label for="q70">Mesure de sécurité</label>
+                    </div>
+                    <div class="card-body">Dans la méthode EBIOS, une mesure de sécurité (ou de traitement) est une action, un dispositif ou un processus mis en place pour partager, réduire à un niveau acceptable ou éliminer les risques identifiés de sorte à protéger les valeurs métiers d'une organisation. Cela se traduit par un renforcement de la résilience des systèmes, soit par l’ajout de multiples couches pour ralentir ou décourager les attaques, soit par la mise en place d’une mesure unique mais très robuste (mise à jour, innovation, maintenance, sauvegarde) visant à neutraliser complètement la source de risque. Elle peut être physique (contrôle d’accès par badge, portes blindées ou verrouillées, caméras, gardiennage), logique/informatique (mots de passe, chiffrement des données, pare-feu, antivirus, authentification multifactorielle), organisationnelle (chartes et procédures de sécurité, formation du personnel, audits réguliers, plan de continuité d’activité) ou technique/environnementale (capteurs et alarmes, sauvegardes automatiques, auto-verrouillage, auto-destruction).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q71">
+                        <label for="q71">Risque résiduel</label>
+                    </div>
+                    <div class="card-body">Dans la méthode EBIOS, un risque résiduel est un scénario de risque persistant après la mise en oeuvre des mesures de sécurité et devant être accepté de manière continue (surveillance, pilotage, intégration). Contrairement à un risque latent issu d'une menace souvent émergente (0-day), il a été identifié lors de l’analyse initiale mais n'a pas pu être entièrement éliminé. Il peut s'agir d'une blessure (physique), d'une faille de configuration (logique), d'une interruption de service (informatique), d'une erreur humaine (organisationnelle), d'une panne d'éléctricité (technique) ou d'une catastrophe naturelle (environnementale). Installer un système de secours sur le même site que le système principal renforce la résilience en cas de défaillance mais le risque résiduel demeure non négligeable face à des incidents affectant le site lui-même. L'évaluer correctement permet l'élévation du niveau de maturité cyber d'une organisation.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q72">
+                        <label for="q72">HTTP vs HTTPS</label>
+                    </div>
+                    <div class="card-body">HTTP (Hyper Text Transfer Protocol) est un protocole de transfert de données non sécurisé utilisé sur le port 80, tandis que HTTPS (Secure) est sa version sécurisée sur le port 443. En effet, il ajoute un chiffrement SSL (Secure Sockets Layer) ou TLS (Transport Layer Security) pour protéger les informations échangées entre le navigateur et le site, TLS étant la version moderne et plus sécurisée de SSL. HTTPS garantit la confidentialité, l’intégrité et l'authenticité des données et est aujourd’hui le standard pour tous les sites web, surtout ceux manipulant des informations sensibles. Un site HTTPS montre souvent un cadenas dans la barre d’adresse et un certificat valide. HTTP et HTTPS sont utilisés pour accéder à des pages web ou à des ressources en ligne depuis un navigateur. Ils ne sont pas utilisés pour des transferts massifs de fichiers bruts (où FTP, FTPS, SFTP seront privilégiés sur les ports 20, 21 et 22) mais pour consulter, télécharger ou interagir avec des contenus web.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q73">
+                        <label for="q73">APK vs AAB</label>
+                    </div>
+                    <div class="card-body">Un APK (Android Package) est un fichier exécutable contenant tout le code et les ressources nécessaires à l’installation d’une application Android sur un appareil tandis qu'un AAB (Android App Bundle) est un format de publication utilisé par le Play Store (et imposé depuis août 2021 par Google) pour générer automatiquement des APKs adaptés (les Split APKs), optimisant ainsi la taille et la distribution des applications, selon le type d’appareil, la densité d’écran, la langue...</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q74">
+                        <label for="q74">Build vs Run</label>
+                    </div>
+                    <div class="card-body">Le build est une étape de développement où le code source est transformé en un exécutable ou en une forme que la machine peut comprendre. Pour un langage compilé (comme C++, C#, Java, Go), le build crée des fichiers binaires ou bytecode. Pour un langage interprété (comme Python, JavaScript), il peut s’agir d’une étape optionnelle, comme le bundling ou la transpilation. Le run, c’est le moment où le programme est réellement lancé. Le système exécute le code déjà construit et produit un résultat (affichage, calcul, interaction...). En bref, le build prépare le programme qui sera exécuté par le run.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q75">
+                        <label for="q75">Agent IA</label>
+                    </div>
+                    <div class="card-body">Un agent IA est un système informatique capable de percevoir son environnement, de collecter ou traiter des informations et d’agir de manière autonome (sans intervention humaine directe) pour atteindre des objectifs spécifiques. Il fait preuve de raisonnement, de planification et de mémoire pour prendre des décisions, appprendre et s’adapter, contrairement à une automatisation qui suit des règles fixes et prédéfinies (une pipeline CI/CD par exemple). Un agent IA se caractérise par un trigger ou input (prompt ou vocal), un LLM (Large Language Model) comme ChatGPT ou Gemini, une mémoire (une base de connaissances à court ou long terme), des outils et un output (texte, image, graphique, prédiction, classification). Un agent conversationnel est un sous-ensemble spécialisé d’agent IA, centré sur la communication humaine.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q76">
+                        <label for="q76">MCP Server</label>
+                    </div>
+                    <div class="card-body">Un MCP  (Model Context Protocol) server est un serveur exposant des outils, des ressources (fichiers, bases de données, API externes) ou des fonctionnalités à un modèle d’IA (généralement un LLM) via un protocole standard. Autrement dit, quand un agent IA a besoin d’accéder à des données ou d’exécuter une action externe, il peut appeler un MCP server pour obtenir ces capacités. Le LLM reste concentré sur la compréhension du langage et la planification, tandis que le MPC server s’occupe de l’exécution technique.</div>
+                </div>                
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q77">
+                        <label for="q77">Prompt Engineering vs Context Engineering</label>
+                    </div>
+                    <div class="card-body">Le prompt engineering se définit par la conception et la formulation d'une requête que l’on envoie à un modèle d’IA pour obtenir une réponse précise et qualitative dans un format particulier. Le context engineering va au-delà du simple prompt : c'est la gestion et l'optimisation du contexte que l’IA utilise pour produire sa réponse, l'objectif étant de fournir les informations nécessaires (mémoire, documents, historique, données externes) pour améliorer la cohérence et la pertinence des résultats sur plusieurs interactions.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q78">
+                        <label for="q78">Social Engineering</label>
+                    </div>
+                    <div class="card-body">Le social engineering désigne l’ensemble des techniques de manipulation psychologique utilisées pour amener une personne à divulguer des informations confidentielles ou à effectuer une action compromettante, souvent à son insu.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q79">
+                        <label for="q79">Reverse Engineering</label>
+                    </div>
+                    <div class="card-body">Le reverse engineering est un processus consistant à analyser un logiciel ou un système existant pour en comprendre le fonctionnement interne. Il s'avère utile pour améliorer la sécurité, corriger des bugs ou apprendre des structures techniques complexes.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q80">
+                        <label for="q80">MSI vs vs EXE</label>
+                    </div>
+                    <div class="card-body">Un fichiers MSI (Microsoft Installer) est un installateur standard de Windows, créé via le Windows Installer, automatisant l’installation, la réparation et la désinstallation d’un logiciel. Un fichier EXE (Executable) peut aussi servir d’installateur, mais offre plus de flexibilité et peut contenir un script d’installation personnalisé. En bref, MSI est plus structuré et géré par Windows, tandis que EXE est plus libre et adaptable.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q81">
+                        <label for="q81">Black Hat vs White Hat</label>
+                    </div>
+                    <div class="card-body">Un <b>black hat</b> est un hacker malveillant exploitant les failles de sécurité à des fins illégales ou personnelles. Un <b>white hat</b> est un hacker éthique utilisant ses compétences pour identifier et corriger les vulnérabilités afin de renforcer la sécurité. À la frontière entre l’éthique et l’illégalité, le <b>grey hat</b> peut identifier des vulnérabilités sans autorisation mais sans intention malveillante, parfois pour alerter l’entreprise concernée ou pour tester ses compétences.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q82">
+                        <label for="q82">Blue Team vs Red Team</label>
+                    </div>
+                    <div class="card-body">Une Blue Team défend les systèmes et réseaux contre les attaques en assurant la sécurité et la surveillance tandis qu'une Red Team simule des attaques pour tester la résistance et identifier les failles des systèmes.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q83">
+                        <label for="q83">Compilation vs Transpilation</label>
+                    </div>
+                    <div class="card-body">La compilation consiste à traduire du code source écrit dans un langage de haut niveau (comme C, C++, Java, C#) vers un langage de plus bas niveau, souvent du code machine ou du bytecode. La transpilation consiste à traduire du code source d’un langage vers un autre langage de même niveau d’abstraction (TypeScript vers JavaScript), le but étant de produire un programme compatible pour être exécutable par la machine ou par une machine virtuelle.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q84">
+                        <label for="q84">Bundling</label>
+                    </div>
+                    <div class="card-body">Le bundling est une étape qui consiste à rassembler plusieurs fichiers de code source et de dépendances en un seul fichier (ou quelques fichiers optimisés). Il est souvent combiné avec la minification (réduction de la taille du code) et le tree shaking (élimination du code inutile).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q85">
+                        <label for="q85">Cybersécurité</label>
+                    </div>
+                    <div class="card-body">La cybersécurité désigne la pratique assurant la confidentialité, l'intégrité et la disponibilité des informations en protégeant les réseaux, les appareils, les personnes et les données contre tout accès non autorisé ou toute exploitation criminelle.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q86">
+                        <label for="q86">Malware</label>
+                    </div>
+                    <div class="card-body">Logiciel malveillant conçu pour nuire aux appareils ou aux réseaux dans un objectif souvent financier ou d'intérêt personnel (activisme, arrivisme ou vengeance)</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q87">
+                        <label for="q87">Virus</label>
+                    </div>
+                    <div class="card-body">Un virus est un code malveillant écrit pour interférer avec les opérations de l'ordinateur et causer des dommages aux données et aux logiciels. Il a besoin d'être initialisé via le téléchargement d'un fichier ou le lancement d'un exécutable.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q88">
+                        <label for="q88">Worm</label>
+                    </div>
+                    <div class="card-body">Un worm (ou ver) est un logiciel malveillant capable de se dupliquer et de se propager de lui-même dans les systèmes. Contrairement à un virus, un ver n'a pas besoin d'être installé préalablement par un utilisateur : il s'appuie sur un appareil déjà infecté.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q89">
+                        <label for="q89">Spyware</label>
+                    </div>
+                    <div class="card-body">Un spyware (ou logiciel espion) est un logiciel malveillant utilisé pour recueillir et vendre des informations sans consentement.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q90">
+                        <label for="q90">Ransomware</label>
+                    </div>
+                    <div class="card-body">Un ransomware (ou rançongiciel) est une attaque malveillante chiffrant les données d'une organisation et exigeant un paiement pour en restaurer l'accès.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q91">
+                        <label for="q91">Phishing</label>
+                    </div>
+                    <div class="card-body">Le phishing (ou hameçonnage) désigne l'utilisation de communications numériques pour inciter les gens à révéler des données sensibles ou à déployer des logiciels malveillants. On parle de spear phishing (harponnage) quand ce dernier est ciblé et de whaling s'il s'agit d'une personnes influente de l'organisation ciblée.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q92">
+                        <label for="q92">Hacker</label>
+                    </div>
+                    <div class="card-body">Un hacker est une personne utilisant un ordinateur ou un appareil pour accéder à des systèmes informatiques, des réseaux ou des données, souvent de manière illégale et dans un but financier.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q93">
+                        <label for="q93">Confidentialité</label>
+                    </div>
+                    <div class="card-body">Dans la triade DIC (ou CIA en anglais), la confidentialité désigne le fait de s'assurer qu'une information n'est accessible que par les entités qui en ont le droit.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q94">
+                        <label for="q94">Intégrité</label>
+                    </div>
+                    <div class="card-body">Dans la triade DIC (ou CIA en anglais), l'intégrité désigne le fait de s'assurer qu'une information est correcte, authentique et fiable.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q95">
+                        <label for="q95">Disponibilité</label>
+                    </div>
+                    <div class="card-body">Dans la triade DIC (ou CIA en anglais), la disponibilité désigne le fait de s'assurer qu'une information est toujours accessible pour les entités habilitées.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q96">
+                        <label for="q96">Conformité</label>
+                    </div>
+                    <div class="card-body">La conformité (ou compliance en anglais) désigne le fait pour une organisation de respecter les standards internes et les régulations externes qui s’appliquent à son activité. Cela inclut les lois, les règles éthiques, les politiques internes ainsi que les standards internationaux. Par exemple, les normes ISO (International Organization for Standardization) ou IEC (International Electrotechnical Commission) comme ISO 9001 (qualité), ISO 14001 (environnement), ISO 27001 (sécurité de l’information) ou ISO 42001 (IA) aident les entreprises à structurer leurs pratiques pour rester conformes et améliorer leurs performances. En matière de protection des données, la conformité au RGPD (Règlement général sur la protection des données) est essentielle.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q97">
+                        <label for="q97">Log</label>
+                    </div>
+                    <div class="card-body">Un log est un journal d'enregistrement ou fichier de traces qui conserve des informations sur les événements qui sont survenus dans un système, une application ou un serveur. Il permet souvent d'identifier des vulnérabilités et des potentielles failles de sécurité ou de performance.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q98">
+                        <label for="q98">Playbook</label>
+                    </div>
+                    <div class="card-body">En cybersécurité, un playbook (ou guide opérationnel) est un plan d’action structuré décrivant les étapes à suivre pour répondre à un incident ou exécuter une opération de sécurité donnée.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q99">
+                        <label for="q99">SIEM</label>
+                    </div>
+                    <div class="card-body">Un outil SIEM (Security Information and Event Management) est une application collectant et analysant des logs de sorte à superviser les activités critiques d'une organisation. Il peut être on-premise comme Splunk ou cloud-native comme Chronicle de Google.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q100">
+                        <label for="q100">Analyseur de paquets</label>
+                    </div>
+                    <div class="card-body">Un analyseur de paquets (ou packet sniffer en anglais) est un outil qui capture et inspecte le trafic réseau circulant sur une interface (filaire ou sans fil). Il permet d’observer en détail les paquets de données échangés entre machines, pour des usages légitimes (diagnostic, sécurité, analyse réseau) ou malveillants (espionnage, vol d’informations). Le plus connu est Wireshark.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q101">
+                        <label for="q101">Chaîne de possession</label>
+                    </div>
+                    <div class="card-body">En cybersécurité et en criminalistique, la chaîne de possession (ou chain of custody en anglais) désigne l’ensemble des étapes assurant la traçabilité et l’intégrité d’une preuve numérique depuis sa collecte jusqu’à sa présentation éventuelle en justice.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q102">
+                        <label for="q102">Dashboard</label>
+                    </div>
+                    <div class="card-body">Un dashboard (ou tableau de bord) est un outil utilisé pour communiquer visuellement des informations ou des données.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q103">
+                        <label for="q103">Programmation</label>
+                    </div>
+                    <div class="card-body">La programmation désigne l'activité consistant à écrire des instructions (du code) pour qu’un ordinateur exécute automatiquement des tâches définies pour répondre à une problématique ou un besoin.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q104">
+                        <label for="q104">Automatisation</label>
+                    </div>
+                    <div class="card-body">L’automatisation est l’utilisation de la technologie pour réduire l’effort humain et manuel dans l’exécution de tâches courantes et répétitives. Elle permet également de diminuer le risque d’erreurs humaines.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q105">
+                        <label for="q105">Pentest</label>
+                    </div>
+                    <div class="card-body">Un pentest (ou test de pénétration) est un test qui simule une attaque permettant d’identifier les vulnérabilités des systèmes, réseaux, sites web, applications et processus. Il s’agit d’une évaluation approfondie des risques, axée sur les menaces (externes et internes) ainsi que les faiblesses existantes.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q106">
+                        <label for="q106">Vulnérabilité</label>
+                    </div>
+                    <div class="card-body">Faille spécifique dans une application qu’une source de risque pourrait exploiter (en utilisant du code par exemple), afin d’obtenir un accès non autorisé, voler des données ou déployer des logiciels malveillants</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q107">
+                        <label for="q107">Système d'exploitation</label>
+                    </div>
+                    <div class="card-body">Un système d’exploitation désigne l’interface entre le matériel informatique (hardware) et l’utilisateur. Les plus connus sont Linux, MacOS et Windows.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q108">
+                        <label for="q108">Open source</label>
+                    </div>
+                    <div class="card-body">On qualifie d'open source un logiciel dont le code source est accessible au public, ce qui permet à quiconque d'étudier son fonctionnement, modifier le code pour l’adapter à ses besoins, partager librement ses modifications ou contribuer à son amélioration.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q109">
+                        <label for="q109">Chiffrement vs Encodage</label>
+                    </div>
+                    <div class="card-body">Le chiffrement (encryption en anglais) rend les données illisibles et difficiles à déchiffrer pour un utilisateur non autorisé, son objectif principal étant d’assurer la confidentialité des données privées. L'encodage, quant à lui, utilise un algorithme de conversion public pour permettre à des systèmes ayant des représentations de données différentes de partager l’information.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q110">
+                        <label for="q110">Logiciel</label>
+                    </div>
+                    <div class="card-body">Programme ou application permettant à un ordinateur d’exécuter des tâches spécifiques</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q111">
+                        <label for="q111">Trojan</label>
+                    </div>
+                    <div class="card-body">Un trojan (ou "cheval de Troie") est un type de malware qui se fait passer pour un logiciel légitime afin de tromper l’utilisateur et l’inciter à l’exécuter. Une fois installé, il permet à un attaquant d’accéder à distance au système, de voler des données, d’installer d’autres logiciels malveillants ou de contrôler la machine à l’insu de l’utilisateur.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q112">
+                        <label for="q112">OWASP Top Ten</label>
+                    </div>
+                    <div class="card-body">OWASP (Open Web Application Security Project) est une organisation à but non lucratif axée sur l'essor de la sécurité logicielle.
+                        Publié pour la première fois en 2003, le Top 10 est un document de référence destiné à sensibiliser les développeurs à la sécurité des applications web :
+                        <ul>
+                            <li><b>Broken Access Control</b> : Le contrôle d’accès définit les ressources qu’un utilisateur peut consulter ou modifier (ce que peut faire un utilisateur une fois connecté). Quand il est défaillant, un utilisateur peut accéder à des données ou systèmes non autorisés, y compris des comptes administrateurs (en modifiant simplement l'URL par exemple). Pour réduire ce risque, il faut appliquer le principe du moindre privilège, auditer régulièrement serveurs et sites web, supprimer les utilisateurs ou services inactifs et utiliser des jetons d’autorisation (tokens) invalidés après déconnexion.</li>
+                            <li><b>Cryptographic Failures</b> : Une faille cryptographique concerne la mauvaise protection des données sensibles lors du stockage ou de la transmission. Ce risque survient quand la cryptographie est absente (mots de passe en clair dans une base de données), mal utilisée (divulgation par erreur de clés de chiffrement ou certificats privés) ou obsolète (MD5, SHA-1). Il faut donc chiffrer toute données sensible et utile, protéger les clés, renouveler régulièrement les certificats et utiliser HTTPS ainsi que des algorithmes modernes comme AES (pour le chiffrement) ou SHA-256 (pour le hachage).</li>
+                            <li><b>Injection</b> : Une attaque par injection survient lorsque des données non fiables sont introduites via des formulaires ou d’autres entrées dans une application web. Un exemple courant est l’injection SQL (SQLi), où un attaquant insère du code SQL dans un formulaire en ligne pour manipuler la base de données. Il faut donc valider et désinfecter les données (champs obligatoires, types, white list, black list) et limiter les actions possibles (droits, intervalle et fréquence de soumissions, transactions).</li>
+                            <li><b>Insecure Design</b> : Une conception non sécurisée laisse des failles dans la logique même du système comme, par exemple, ne pas prévoir de limites de tentative de connexion (brute force possible),concevoir des rôles d’utilisateur trop permissifs ou oublier la validation côté serveur d’un formulaire.</li>
+                            <li><b>Security Misconfiguration</b> : Une erreur de configuration de la sécurité survient souvent lorsque une organisation conserve les paramètres par défaut de leurs sites ou CMS (Content Management System). Elle peut survenir à tous les niveaux : serveurs, bases de données, réseaux, code, frameworks ou conteneurs. Il faut donc modifier les paramètres par défaut, supprimer les composants inutiles, contrôler les contenus et informations visibles, segmenter l’architecture et automatiser la gestion des configurations.</li>
+                            <li><b>Vulnerable and Outdated Components</b> : Une applications web utilise des composants comme des frameworks ou bibliothèques (partage d’icônes, tests A/B), mais ceux-ci peuvent créer des vulnérabilités exploitées par des attaques 0-day. Il faut donc maintenir les composants à jour, supprimer les inutilisés, utiliser des sources fiables et recourir à des protections comme des WAF ou IDS.</li>
+                            <li><b>Identification and Authentication Failures</b> : Une vulnérabilité de la sorte permet aux attaquants d’accéder aux comptes utilisateurs, y compris les comptes administrateurs, et de compromettre les systèmes. Elle survient souvent à cause de failles dans le mécanisme d’authentification ou la gestion des sessions, exploitées par des attaques par brute force ou social engineering pour deviner les identifiants. Il faut donc abolir les mots de passe faibles ou par défaut, déployer l'authentification multifactorielle (MFA), ne pas exposer des ID de session dans l'URL et gérer correctement rotation et invalidation après inactivité. L’utilisateur doit prouver qu’il est bien celui qu’il prétend être.</li>
+                            <li><b>Software and Data Integrity Failures</b> : Le code ou les données d’une application peuvent être altérés de manière non autorisée, volontairement ou accidentellement. Il faut veiller à utiliser des sources fiables pour les bibliothèques et les dépendances, mettre en place des mécanismes de contrôle d'intégrité (hachage, checksum) et vérifier la signature numérique des composants et les mises à jours.</li>
+                            <li><b>Security Logging and Monitoring Failures</b> : Les activités critiques d’une application ne sont pas correctement enregistrées ou surveillées, ce qui empêche de détecter rapidement les attaques. Il faut mettre des alertes sur des élévations de privilèges, mettre à jour des logs complets pour les événéments importants (connexion, sauvegarde, suppression, ajout) et les conserver de manière sécurisée et auditable.</li>
+                            <li><b>Server-Side Request Forgery (SSRF)</b> : Une attaque SSRF se produit lorsqu’un serveur est amené à effectuer des requêtes HTTP vers des ressources internes ou externes sans contrôle adéquat par un utilisateur malveillant. Il faut valider et filtrer strictement toutes les URL soumises par les utilisateurs, restreindre les requêtes sortantes du serveur aux seuls domaines ou adresses approuvées et utiliser des passerelles sécurisées pour les requêtes externes.</li>                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q113">
+                        <label for="q113">OSI</label>
+                    </div>
+                    <div class="card-body">OSI (Open Systems Interconnection) est un framework qui décrit les fonctions d’un système réseau (ISO 7498). Il catégorise les fonctions informatiques des différents composants du réseau, en décrivant les règles et les exigences nécessaires pour prendre en charge l’interopérabilité du logiciel et du matériel qui composent le réseau.
+                        Les 7 couches de modèle sont particulièrement utiles pour visualiser le flux de données de l’expéditeur au destinataire. La communication d’une personne à une autre passe de la couche 7 à la couche 1. Chaque couche effectue une tâche spécifique avant d’envoyer les données à la couche suivante.
+                        <ul>
+                            <li><b>Physique</b> : Elle concerne le matériel et le support de transmission. Elle définit comment les bits (0 et 1) sont codés et transmis, ainsi que les normes électriques ou optiques pour les signaux. Exemple : câbles, ondes radio, ports, Wi-Fi, fibres optiques.</li>
+                            <li><b>Liaison de données</b> : Elle assure la transmission fiable des données sur un réseau local. Elle divise les paquets en trames, gère le contrôle d’accès au support, la détection et la correction d’erreurs. Ses sous-couches sont MAC (Media Access Control) et LLC (Logical Link Control). Exemple : Ethernet.</li>
+                            <li><b>Réseau</b> : Elle permet le transfert de données entre différents réseaux et détermine le chemin optimal pour leur acheminement (routage). Elle encapsule les segments en paquets et utilise des adresses logiques. Exemple : IPv4, IPv6.</li>
+                            <li><b>Transport</b> : Elle assure la communication de bout en bout entre les machines. Elle segmente les données, les réassemble à la réception, contrôle les erreurs et gère le flux. Exemple : TCP (fiable, orienté connexion) et UDP (rapide, non fiable).</li>
+                            <li><b>Session</b> : Elle gère l’ouverture, la synchronisation et la fermeture des connexions entre applications. Elle établit des points de contrôle pour permettre la reprise de transmissions interrompues et assure que les sessions ne gaspillent pas de ressources inutilement. Exemple : NFS (Network File System)</li>
+                            <li><b>Présentation</b> : Elle s’occupe de la traduction et de la mise en forme des données pour qu’elles soient compréhensibles par la couche applicative. Elle gère le chiffrement, la compression et la conversion des formats de données. Exemple : JSON, HTML, CSV.</li>
+                            <li><b>Application</b> : Elle est le point de contact direct avec l’utilisateur en permettant aux applications (navigateurs, messageries...) d’accéder au réseau et de communiquer. Elle gère la présentation des données et les protocoles applicatifs. Exemple : HTTP, HTTPS, SMTP.</li>                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q113">
+                        <label for="q113">TCP/IP</label>
+                    </div>
+                    <div class="card-body">TCP/IP (Transmission Control Protocol/) est un modèle alternatif au modèle OSI. TCP et IP sont des protocoles distincts qui permettent ensemble de garantir la transmission effective des données à leur destination prévue au sein d’un réseau :  IP obtient et définit l’adresse de l’application ou du périphérique auquel les données doivent être envoyées et TCP est ensuite chargé du transport et du routage des données à travers l’architecture réseau. 
+                        Les 4 couches du modèle sont : 
+                        <ul>
+                            <li><b>Liaison de données</b> : Elle combine les fonctions physique et liaison du modèle OSI, gérant la transmission fiable des trames, la signalisation, l’adressage matériel et le contrôle des erreurs via les périphériques et technologies réseau comme les cartes NIC, câbles Ethernet et Wi‑Fi.</li>
+                            <li><b>Internet</b> : Elle correspond à la couche réseau du modèle OSI. Elle est responsable de l’adressage logique (IP) et du routage des paquets entre différents réseaux, le transfert des données d’un réseau à l’autre, en s’assurant que les paquets atteignent leur destination, ainsi que la fragmentation et le réassemblage des paquets si nécessaire.</li>
+                            <li><b>Transport</b> : Elle correspond à la couche transport du modèle OSI. Elle garantit la communication fiable de bout en bout entre deux hôtes : segmentation des données en paquets ou segments, numérotation et réassemblage, contrôle du flux pour éviter de saturer le destinataire et détection/correction des erreurs, retransmission si nécessaire.</li>
+                            <li><b>Application</b> : Elle regroupe les fonctions des couches session, présentation et application du modèle OSI. Elle fournit l’interface entre les applications et le réseau : elle permet aux logiciels et utilisateurs d’envoyer et recevoir des données sur Internet, gère les protocoles applicatifs et s’occupe de la mise en forme et de l’interprétation des données pour que les applications puissent les utiliser.</li>                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q114">
+                        <label for="q114">Database</label>
+                    </div>
+                    <div class="card-body">Ensemble organisé (base) d’informations ou de données stockées de manière structurée, afin de pouvoir les gérer, les retrouver et les manipuler facilement</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q115">
+                        <label for="q115">Volatilité</label>
+                    </div>
+                    <div class="card-body">En informatique, la volatilité désigne le degré de fragilité ou de temporalité d’une donnée : plus une donnée est volatile, plus elle disparaît rapidement lorsque le système est éteint ou redémarré. Le contenu de la mémoire vive (RAM), les caches CPU et les registres sont très volatiles contrairement aux fichiers sur disque dur, SSD (Solid-State Drive) ou dans le cloud qui le sont peu.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q116">
+                        <label for="q116">Interopérabilité</label>
+                    </div>
+                    <div class="card-body">Capacité de systèmes, logiciels ou dispositifs différents à communiquer, échanger des informations et fonctionner ensemble de manière efficace sans restriction ni perte de données</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q117">
+                        <label for="q117">XSS</label>
+                    </div>
+                    <div class="card-body">Une XSS (Cross Site Scripting) est une vulnérabilité qui se produit lorsque les applications Web permettent aux utilisateurs de soumettre un code personnalisé (souvent en JavaScript) dans des chemins d’URL, altérant l’affichage ou les interactions d'un site Web. L’attaquant s’appuie ensuite sur les victimes qui visitent la page à partir d’un navigateur pour exécuter le code. Une organisation peut prévenir la vulnérabilité en utilisant un WAF (Web Application Firewall) pour atténuer et bloquer les attaques, tandis que les développeurs peuvent déployer une CSP (Content Security Policy) et utiliser des requêtes conditionnelles HTTP.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q118">
+                        <label for="q118">White list vs Black list</label>
+                    </div>
+                    <div class="card-body">Dans une white list (ou liste blanche), seule un ensemble d'éléments explicitement autorisés (car connues et fiables) est accepté : tout ce qui n'est pas dans la liste est rejeté. Dans une black list, tous les éléments sont autorisés sauf ceux explicitement interdits. Cela est moins sûr car de nouvelles menaces ou entrées malveillantes peuvent passer si elles ne sont pas encore sur la liste. En bref, la white list autorise seulement ce qui est sûr tandis que la black list interdit ce qui est dangereux.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q119">
+                        <label for="q119">Pare-feu</label>
+                    </div>
+                    <div class="card-body">Un pare-feu (firewall en anglais) est un dispositif de sécurité qui contrôle le trafic réseau entre un ordinateur, un réseau interne et Internet. Son rôle principal est de bloquer les connexions non autorisées tout en permettant celles qui sont légitimes.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q120">
+                        <label for="q120">Hachage</label>
+                    </div>
+                    <div class="card-body">Le hachage est une opération mathématique qui transforme une donnée (comme un mot de passe) en une empreinte unique et irréversible appelée valeur de hachage. Cela permet de vérifier l'intégrité d'une donnée et son stockage sans la garder en clair. En effet, lors d'une connexion, le mot de passe saisi est haché puis le résultat est comparé à celui enregistré.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q121">
+                        <label for="q121">Sel</label>
+                    </div>
+                    <div class="card-body">Valeur aléatoire unique ajoutée au mot de passe avant le hachage pour empêcher les attaques par dictionnaire ou tables arc-en-ciel</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q122">
+                        <label for="q122">CMS</label>
+                    </div>
+                    <div class="card-body">Application qui permet de créer, gérer et publier facilement du contenu sur un site web, sans avoir besoin de programmer (WordPress, Magento, Drupal)</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q123">
+                        <label for="q123">Site web</label>
+                    </div>
+                    <div class="card-body">Un site web est un ensemble de pages liées entre elles, accessibles via une adresse (ou nom de domaine) sur Internet. Ces pages contiennent généralement du texte, des images, des vidéos ou d’autres éléments interactifs et sont hébergées sur un serveur. Un site web peut avoir de nombreux objectifs : informer (blog, forum), vendre (vitrine, e-commerce), divertir (streaming, jeux, musique) ou permettre des échanges entre utilisateurs (réseaux sociaux en intranet ou extranet).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q124">
+                        <label for="q124">E-commerce</label>
+                    </div>
+                    <div class="card-body">Achat et vente de biens ou de services via Internet pouvant inclure différents modèles , comme la vente directe aux consommateurs (B2C), entre entreprises (B2B), ou encore les places de marché en ligne</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q125a">
+                        <label for="q125a">Image vs Conteneur [Docker]</label>
+                    </div>
+                    <div class="card-body">Une image Docker est un modèle statique et immuable (en lecture seule) qui contient le système de fichiers, le code de l’application, les dépendances et les configurations nécessaires pour exécuter un conteneur. Un conteneur est une instance en cours d’exécution d’une image. Il partage le même noyau (kernel) mais peut avoir son propre état et système de fichiers modifiable. Les changements dans un conteneur ne modifient pas l’image source, sauf si l’on crée une nouvelle image à partir de ce conteneur.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q125b">
+                        <label for="q125b">Conteneur vs VM [Docker]</label>
+                    </div>
+                    <div class="card-body">Un conteneur Docker permettent de déployer rapidement des applications web de manière légère et portable, tandis qu'une VM (Virtual Machine) offre une isolation complète mais est plus lourde et lente. L’utilisation de conteneurs est idéale pour les environnements de développement modernes et les microservices. À l'inverse, les machines virtuelles sont utiles pour tester différentes configurations ou exécuter plusieurs OS (Operating System) sur un même serveur.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q126">
+                        <label for="q126">Test A/B</label>
+                    </div>
+                    <div class="card-body">Méthode souvent utilisée en marketing et en SEO pour comparer deux versions d’un élément (page web, bouton, email, etc.) afin de déterminer laquelle est la plus efficace</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q127">
+                        <label for="q127">IDS</label>
+                    </div>
+                    <div class="card-body">Un IDS (Intrusion Detection System) est un outil qui surveille le trafic réseau ou les activités d’un système pour détecter des comportements suspects ou des attaques. L’IDS n’empêche pas directement les attaques (c’est le rôle d’un WAF), mais il alerte les administrateurs pour qu’ils réagissent rapidement.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q128">
+                        <label for="q128">XXE</label>
+                    </div>
+                    <div class="card-body">Une XXE (XML External Entities) cible les analyseurs XML (Extensible Markup Language) mal configurés et se produit lorsque des entrées contiennent des références à des entités externes (fichiers sur le disque par exemple). Par défaut, les développeurs doivent désactiver manuellement cette fonctionnalité. Pour se protéger, il est préférable d'utiliser des formats de données plus simples comme JSON (JavaScript Object Notation), des WAF ou des passerelles API.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q129">
+                        <label for="q129">API</label>
+                    </div>
+                    <div class="card-body">Une API (Application Programming Interface) est une interface (point d'accès) exposée par une application, un service ou un système, permettant à d’autres applications de consommer ses fonctionnalités ou ses données de manière standardisée, sans connaître l’implémentation interne (en boîte grise).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q130">
+                        <label for="q130">Passerelle API</label>
+                    </div>
+                    <div class="card-body">Une passerelle API (API gateway en anglais) est un service qui agit comme un intermédiaire entre les clients (applications, navigateurs...) et les API d’un serveur. Elle centralise et sécurise les échanges, contrôle l’accès, limite le trafic et peut filtrer les requêtes malveillantes.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q131">
+                        <label for="q131">Checksum</label>
+                    </div>
+                    <div class="card-body">Un checksum (ou somme de contrôle) est une valeur calculée à partir d’un fichier ou d’un ensemble de données qui permet de vérifier l’intégrité de ces données. On applique un algorithme (eMD5, SHA-256) au fichier pour obtenir une valeur unique. Si le fichier est modifié, même légèrement, le checksum change. On peut donc comparer le checksum d’origine avec celui du fichier reçu pour détecter toute altération.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q132">
+                        <label for="q132">Secure Design</label>
+                    </div>
+                    <div class="card-body">Le secure design désigne l’intégration de la sécurité dès les premières étapes du développement d’une application, plutôt que d’ajouter des protections après coup.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q133">
+                        <label for="q133">Élévation de privilège</label>
+                    </div>
+                    <div class="card-body">Une élévation de privilège est une attaque où un utilisateur ou un programme obtient des droits plus élevés que ceux qui lui sont normalement accordés, lui permettant d’exécuter des actions normalement interdites. Elle peut être verticale (un utilisateur standard devient administrateur ou root) ou verticale (un utilisateur accède aux données ou fonctionnalités d’un autre utilisateur avec le même niveau de privilège).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q134">
+                        <label for="q134">Hyperviseur</label>
+                    </div>
+                    <div class="card-body">Un hyperviseur est un logiciel qui permet de créer et gérer des machines virtuelles (VM) sur un même serveur physique. Il virtualise le matériel (CPU, mémoire, stockage) pour que chaque VM puisse fonctionner comme un ordinateur indépendant avec son propre système d’exploitation. Il est soit bare-metal (installé directement sur le matériel, très performant et sécurisé) comme Hyper-V soit hosted (installé sur un OS existant, plus facile à utiliser mais moins performant) comme VirtualBox. Le Type 1 est idéal pour la production et le Type 2 pour le développement ou les tests.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q135">
+                        <label for="q135">Hook</label>
+                    </div>
+                    <div class="card-body">Point d’accroche (crochet) dans un logiciel ou un système qui permet d’exécuter automatiquement du code lorsqu’un événement spécifique se produit</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q136">
+                        <label for="q136">TCP vs UDP</label>
+                    </div>
+                    <div class="card-body">TCP (Transmission Control Protocol) est un protocole orienté connexion qui assure la transmission fiable et ordonnée des données entre deux dispositifs sur un réseau, avec contrôle d’erreurs et retransmissions si nécessaire (emails, transfert de fichiers, navigation web). À l'inverse, UDP (User Datagram Protocol) est un  protocole sans connexion qui permet l’envoi rapide de paquets indépendants, sans garantie de livraison ni ordre, adapté aux applications nécessitant faible latence (streaming, jeux vidéo, VoIP).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q137">
+                        <label for="q137">IP</label>
+                    </div>
+                    <div class="card-body">IP (Internet Protocol) est un protocole de communication de la couche réseau qui permet d’identifier les dispositifs sur un réseau et de transmettre des paquets de données d’une machine à une autre en utilisant des adresses logiques uniques (IPv4 ou IPv6). En bref, IP définit où envoyer les données et comment les acheminer à travers les réseaux.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138">Feature</label>
+                    </div>
+                    <div class="card-body">En informatique, une feature est une fonction ou une amélioration spécifique apportée à un programme ou une application. En IA ou data science, une feature est une variable ou un attribut utilisé pour entraîner un modèle.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q139">
+                        <label for="q139">Identification</label>
+                    </div>
+                    <div class="card-body">Action par laquelle un utilisateur décline son identité à un système (nom d'utilisateur, adresse mail)</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q140">
+                        <label for="q140">Authentification</label>
+                    </div>
+                    <div class="card-body">Action par laquelle un système vérifie que l'identité déclarée par un utilisateur est bien la bonne (mot de passe, code envoyé par SMS, empreinte digitale)</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q141">
+                        <label for="q141">Autorisation</label>
+                    </div>
+                    <div class="card-body">Action par laquelle un système détermine ce qu'un utilisateur a le droit de faire, une fois authentifié</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q142">
+                        <label for="q142">Cybersécurité</label>
+                    </div>
+                    <div class="card-body">Ensemble des pratiques, technologies et processus visant à protéger les systèmes informatiques, les réseaux, les applications et les données contre les attaques, les accès non autorisés, les fuites ou les dommages</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q138">
+                        <label for="q138"></label>
+                    </div>
+                    <div class="card-body"></div>
                 </div>
             </div>
         </div>
