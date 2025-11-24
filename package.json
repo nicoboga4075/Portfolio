@@ -4,9 +4,9 @@
   "description": "This project is deployed on **Netlify** : https://nicoboga.netlify.app",
   "scripts": {
     "dev": "npm run eleventy && netlify dev",
+    "dev:live": "npm run eleventy && netlify dev --live=dev",
     "build": "npm run eleventy && npm run uglify:js",
-    "list-gitignore": "bash -c \"shopt -s nullglob; echo gitignore/*.gitignore | tr ' ' '\\n' | grep --color=always 'gitignore/~.gitignore\\|$'\"",
-    "concat-gitignore": "bash -c \"for file in gitignore/*.gitignore; do echo;cat \\\"\\$file\\\"; done > .gitignore\"",
+    "kill": "taskkill /IM node.exe /F",
     "tag-version": "bash -c \"version=$(node -p \\\"require('./package.json').version\\\"); if git status --porcelain | grep -vE '^.M (package.json|CHANGELOG.md)' | grep -q .; then echo 'Uncommitted or unstaged changes detected. Please commit or stash your changes before tagging.'; else git tag v$version; echo 'v'$version; fi\" --",
     "changelog": "auto-changelog",
     "fix-version-commit": "bash -c \"level=${1:-patch}; CURRENT_VERSION=$(node -p \\\"require('./package.json').version\\\"); LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo '0.0.0'); if [[ \\\"$CURRENT_VERSION\\\" == \\\"$LAST_TAG\\\" ]]; then echo 'Version and changelog already at latest tag $LAST_TAG, nothing to fix.'; else UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo ''); if [[ -n \\\"$UPSTREAM\\\" ]] && git merge-base --is-ancestor HEAD \\\"$UPSTREAM\\\"; then npm version $level --no-git-tag-version > /dev/null; git add package.json; PREV_MSG=$(git log -1 --pretty=%B); git reset --soft HEAD~1; git commit -m \\\"$PREV_MSG\\\"; NEW_VERSION=$(node -p \\\"require('./package.json').version\\\"); git tag -f v$NEW_VERSION; npm run changelog; git add CHANGELOG.md; git commit --amend --no-edit; git tag -f v$NEW_VERSION; git push --force; git push --tags --force; else npm version $level --no-git-tag-version > /dev/null; git add package.json; git commit --amend --no-edit; NEW_VERSION=$(node -p \\\"require('./package.json').version\\\"); git tag -f v$NEW_VERSION; npm run; git add CHANGELOG.md; git commit --amend --no-edit; git tag -f v$NEW_VERSION; fi; fi\" --",
@@ -19,9 +19,15 @@
     "lint:js": "npx eslint js/main.js js/default.js",
     "lint:mts": "npx eslint netlify/functions/*.mts",
     "jest": "npx jest --coverage --passWithNoTests",
+    "playwright": "npx playwright test",
+    "cypress": "npx cypress run",
     "simu:ci": "powershell.exe -Command \"Start-Process powershell.exe -ArgumentList '-NoExit','-Command','Set-Location -LiteralPath \\\"%CD%\\\"; ./simulator_ci.ps1' -Verb RunAs\"",
     "uglify:js": "for file in js/*.js; do terser \"$file\" --compress --mangle --output \"js/$(basename \"$file\")\"; done",
-    "eleventy": "npx eleventy"
+    "eleventy": "npx eleventy",
+    "capacitor:add": "npx cap add android",
+    "capacitor:sync": "npx cap sync",
+    "capacitor:open": "npx cap open android",
+    "capacitor:run": "npx cap run android"
   },
   "auto-changelog": {
     "output": "CHANGELOG.md",
@@ -61,7 +67,10 @@
     "GitLab",
     "Eleventy",
     "Linkerz",
-    "Beacons"
+    "Beacons",
+    "Jest",
+    "Playwright",
+    "Cypress"
   ],
   "dependencies": {
     "auto-changelog": "^2.5.0",
@@ -71,17 +80,25 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
-    "@eslint/js": "^9.39.0",
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/cli": "^7.4.4",
+    "@capacitor/core": "^7.4.4",
+    "@eslint/js": "^9.39.1",
     "@netlify/functions": "^5.1.0",
-    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@playwright/test": "^1.56.1",
+    "@types/jest": "^30.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
+    "cypress": "^15.5.0",
     "eslint": "^9.39.1",
     "globals": "^16.3.0",
-    "htmllint-cli": "^0.0.7",
-    "jest": "^30.2.0",
+    "htmllint-cli": "^0.0.6",
+    "jest": "^29.7.0",
+    "jest-html-reporter": "^4.1.0",
     "jest-junit": "^16.0.0",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
+    "ts-jest": "^29.4.5",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.4"
   }
