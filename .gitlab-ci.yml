@@ -44,10 +44,14 @@ test-job:
   coverage: '/All files\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+([\d\.]+)/'
   artifacts:
     reports:
-      junit: reports/junit.xml
+      junit:
+      - reports/jest/junit.xml
+      - reports/playwright/junit.xml
     paths:
-      - coverage/
-      - reports/
+      - reports/jest/html/
+      - reports/jest/coverage/
+      - reports/playwright/html/
+      - reports/playwright/test-results/
     expire_in: 1 week
     
 cleanup-job:

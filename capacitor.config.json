@@ -1,0 +1,10 @@
+{
+  "appId": "com.nicoboga.app",
+  "appName": "Portfolio",
+  "webDir": ".eleventy",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "http://localhost:8888",
+    "cleartext": true
+  }
+}

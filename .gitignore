@@ -1295,3 +1295,7 @@ xcuserdata/
 
 # Reports
 /reports*/
+
+# Mobile
+android
+ios
