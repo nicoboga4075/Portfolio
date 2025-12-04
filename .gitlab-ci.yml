@@ -41,7 +41,7 @@ test-job:
     - echo "Running Jest tests..."
     - npm run jest
     - echo "Running Playwright tests..."
-    - npx playwright test > /dev/null 2>&1 || echo "No tests found, skipping..."
+    - npx playwright test *> $null -ErrorAction SilentlyContinue; if ($LASTEXITCODE -ne 0) { echo "No tests found, skipping..." }
     - echo "Run done!"
   coverage: '/All files\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+([\d\.]+)/'
   artifacts:
