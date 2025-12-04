@@ -3,7 +3,7 @@ const appRoot = '/en';
 const appLanguages = ['en', 'fr'];
 
 const xp = 4;
-const cdiCount = 3;
+const cdiCount = 4;
 const internshipsCount = 3;
 const email = 'nicolas.bogalheiro@gmail.com';
 const city = 'Lyon';
