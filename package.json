@@ -103,5 +103,11 @@
     "ts-jest": "^29.4.6",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.50.1"
+  },
+  "overrides": {
+    "braces": "3.0.3",
+    "tar": "7.5.3",
+    "micromatch": "4.0.8",
+    "yargs-parser": "21.1.1"
   }
 }

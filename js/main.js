@@ -1086,7 +1086,8 @@ function buildSafeRedirection(redirect, langPage) {
 }
 
 function initPage() {
-  navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+  const version = window.NETLIFY_COMMIT_REF || Date.now();
+  navigator.serviceWorker.register(`/service-worker.js?v=${version}`, { scope: '/' })
   .then(reg => console.log("Service Worker registered:", reg.scope))
   .catch(error => console.error("Service Worker registration failed:", error)); 
   
