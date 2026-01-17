@@ -42,16 +42,11 @@ self.addEventListener('fetch', event => {
 
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
-      if (cachedResponse) return cachedResponse;
-
-      return fetch(event.request).then(networkResponse => {
-        return caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, networkResponse.clone());
-          return networkResponse;
-        });
-      });
-    }).catch(() =>
-      new Response('Offline and resource not cached.', { status: 503 })
-    )
+      const fetchPromise = fetch(event.request).then(networkResponse => {
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, networkResponse.clone()));
+        return networkResponse;
+      }).catch(() => null);
+      return cachedResponse || fetchPromise || new Response('Ressource indisponible.', { status: 503 });
+    });
   );
 });

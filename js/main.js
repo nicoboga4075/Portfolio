@@ -1088,7 +1088,7 @@ function buildSafeRedirection(redirect, langPage) {
 function initPage() {
   navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
   .then(reg => console.log("Service Worker registered:", reg.scope))
-  .catch(err => console.error("Service Worker registration failed:", err)); 
+  .catch(error => console.error("Service Worker registration failed:", error)); 
   
   const idPage = getCurrentRoute();
   const langPage = getCurrentLanguage();
