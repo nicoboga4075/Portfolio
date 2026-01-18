@@ -6,6 +6,7 @@ const STATIC_ASSETS = [
   '/en',
   '/fr',
   '/en/crm_elphicom',
+  'projects/crm_elphicom_en.html',
   '/fr/crm_elphicom',
   '/en/ebatisoft',
   '/fr/ebatisoft',
