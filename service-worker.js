@@ -2,13 +2,31 @@ const VERSION = new URL(self.location).searchParams.get('v') || 'dev';
 const CACHE_NAME = `site-cache-${VERSION}`;
 
 const STATIC_ASSETS = [
+  '/',
   '/en',
   '/fr',
+  '/en/crm_elphicom',
+  '/fr/crm_elphicom',
+  '/en/ebatisoft',
+  '/fr/ebatisoft',
+  '/en/panel_mnt',
+  '/fr/panel_mnt',
+  '/en/jca_sushirobots',
+  '/fr/jca_sushirobots',
+  '/en/ref230_afnor',
+  '/fr/ref230_afnor',
+  '/en/opale_snitem',
+  '/fr/opale_snitem',
+  '/en/pragma_surveys',
+  '/fr/pragma_surveys',
+  '/site.webmanifest',
   '/css/style.css',
   '/css/default.css',
   '/js/main.js',
   '/js/default.js',
-  '/favicon.ico'
+  '/favicon.ico',
+  '/index_en.html',
+  '/index_fr.html'
 ];
 
 // INSTALL
@@ -49,14 +67,19 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
-  // Ignore Netlify functions & externes
+  // Ignore Netlify functions & external
+  let requestTarget = event.request;
+  if (url.pathname.endsWith('/') && url.pathname.length > 1) {
+    const cleanUrl = url.origin + url.pathname.slice(0, -1) + url.search;
+    requestTarget = cleanUrl;
+  }
   if (
     url.pathname.startsWith('/.netlify/functions') ||
     url.hostname !== self.location.hostname
   ) {
     return;
   }
-  // API → network first, sans fallback offline
+  // API → network first without fallback offline
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(networkFirst(event.request));
     return;
