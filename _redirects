@@ -17,7 +17,6 @@
 /policy_fr /404 301!
 /policy_fr.html /404 301!
 /articles/* /404 301!
-/projects/* /404 301!
 /changelog.md /404 301!
 /CHANGELOG.md /404 301!
 /contributing.md /404 301!
