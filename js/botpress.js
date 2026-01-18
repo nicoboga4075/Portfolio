@@ -15,7 +15,7 @@
 		"variant": "solid",
 		"headerVariant": "glass",
 		"themeMode": "light",
-		"fontFamily": "inter",
+		"fontFamily": "Poppins",
 		"radius": 2.5,
 		"feedbackEnabled": false,
 		"footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
