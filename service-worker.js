@@ -5,29 +5,12 @@ const STATIC_ASSETS = [
   '/',
   '/en',
   '/fr',
-  '/en/crm_elphicom',
-  'projects/crm_elphicom_en.html',
-  '/fr/crm_elphicom',
-  '/en/ebatisoft',
-  '/fr/ebatisoft',
-  '/en/panel_mnt',
-  '/fr/panel_mnt',
-  '/en/jca_sushirobots',
-  '/fr/jca_sushirobots',
-  '/en/ref230_afnor',
-  '/fr/ref230_afnor',
-  '/en/opale_snitem',
-  '/fr/opale_snitem',
-  '/en/pragma_surveys',
-  '/fr/pragma_surveys',
   '/site.webmanifest',
   '/css/style.css',
   '/css/default.css',
   '/js/main.js',
   '/js/default.js',
-  '/favicon.ico',
-  '/index_en.html',
-  '/index_fr.html'
+  '/favicon.ico'
 ];
 
 // INSTALL
