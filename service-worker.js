@@ -2,14 +2,7 @@ const VERSION = new URL(self.location).searchParams.get('v') || 'dev';
 const CACHE_NAME = `site-cache-${VERSION}`;
 
 const STATIC_ASSETS = [
-  '/',
-  '/en',
-  '/fr',
   '/site.webmanifest',
-  '/css/style.css',
-  '/css/default.css',
-  '/js/main.js',
-  '/js/default.js',
   '/favicon.ico'
 ];
 
