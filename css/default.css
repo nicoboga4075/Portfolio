@@ -16,44 +16,44 @@ a {
 }
 
 a[href="#"] {
-	cursor: default;
+    cursor: default;
 }
 
 table {
-	border-collapse: collapse;
-	border-width: 1px;
+    border-collapse: collapse;
+    border-width: 1px;
 }
 
 th, td {
-	text-align: center;
-	color: var(--dark);
-	font-size: 14px;
-	border: 1px solid var(--dark);
+    text-align: center;
+    color: var(--dark);
+    font-size: 14px;
+    border: 1px solid var(--dark);
 }
 
 td strong {
-	color: var(--main);
+    color: var(--main);
 }
 
 sup {
-	background-color: var(--dark);
-	color: var(--white);
-	font-size: 10px;
+    background-color: var(--dark);
+    color: var(--white);
+    font-size: 10px;
     padding: 4px;
     margin: 2px;
-	top: -16px!important;
+    top: -16px!important;
 }
 
 sup:hover {
-	background-color: var(--main);
+    background-color: var(--main);
 }
 
 [hidden] {
-	display: none!important;
+    display: none!important;
 }
 
 .text-center {
-	text-align: center!important;
+    text-align: center!important;
 }
 
 /* Language Switcher */
@@ -77,9 +77,9 @@ sup:hover {
 }
 
 @media(max-width: 991.98px){
-	.lang-text.off.top-scroll {
-		color: white;
-	}
+    .lang-text.off.top-scroll {
+        color: white;
+    }
 }
 
 .toggle-container {
@@ -117,7 +117,7 @@ sup:hover {
 /* Blog Article */
 
 .article-container h2{
-	color: var(--main);
+    color: var(--main);
 }
 
 .title-center {
@@ -134,7 +134,7 @@ sup:hover {
 }
 
 #qrcode {
-	max-width: 15vw;
+    max-width: 15vw;
 }
 
 #inpi-process {
@@ -149,21 +149,21 @@ sup:hover {
 }
 
 #mcs-design, #mcs-example{
-	max-width: 70vw;
-	margin-bottom: 15px;
+    max-width: 70vw;
+    margin-bottom: 15px;
 }
 
 /* Project or Article */
 
 .read-zone {
-	max-width: 50%;
-	margin: 2rem auto;
+    max-width: 50%;
+    margin: 2rem auto;
 }
 
 .read-title {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* Video */
@@ -178,69 +178,69 @@ sup:hover {
 }
   
 .video-wrapper video {
-	position: absolute;
-	top: 0; 
-	left: 0;
-	width: 100%;
-	height: 100%;
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 /* 404 */
 
 #astronaut {
-	position: absolute;
-	top: 50%;
-	right: 15%;
-	animation: rotate-astronaut 200s infinite linear both alternate;
-	width: 70px;
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    animation: rotate-astronaut 200s infinite linear both alternate;
+    width: 70px;
 }
 
 #earth {
-	position: absolute;
-	top: 50%;
-	left: 25%;
-	width: 200px;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    width: 200px;
 }
 
 #moon {
-	position: absolute;
-	top: 30%;
-	left: 15%;
-	width: 100px;
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    width: 100px;
 }
 
 #rocket {
-	position: absolute;
-	transform: translateX(-50px);
-	top: 75%;
-	pointer-events: none;
-	animation: rocket-movement 200s linear infinite both running;
-	width: 100px;
-	z-index: 1;
+    position: absolute;
+    transform: translateX(-50px);
+    top: 75%;
+    pointer-events: none;
+    animation: rocket-movement 200s linear infinite both running;
+    width: 100px;
+    z-index: 1;
 }
 
 @-moz-keyframes rotate-astronaut {
-	100% { -moz-transform: rotate(-720deg);}
+    100% { -moz-transform: rotate(-720deg);}
 }
 
 @-webkit-keyframes rotate-astronaut {
-	100% { -webkit-transform: rotate(-720deg);}
+    100% { -webkit-transform: rotate(-720deg);}
 }
 
 @keyframes rotate-astronaut {
-	100% { transform:rotate(-720deg);}
+    100% { transform:rotate(-720deg);}
 }
 
 @-moz-keyframes rocket-movement { 
-	100% { -moz-transform: translate(400px,-100px);} 
+    100% { -moz-transform: translate(400px,-100px);} 
 }
 
 @-webkit-keyframes rocket-movement {
-	100% { -webkit-transform: translate(400px,-100px);} 
+    100% { -webkit-transform: translate(400px,-100px);} 
 }
 
 @keyframes rocket-movement { 
-	100% { transform: translate(400px,-100px);} 
+    100% { transform: translate(400px,-100px);} 
 }
 
 /* Cards */
@@ -253,51 +253,51 @@ sup:hover {
 }
 
 .card {
-	background: #fff;
-	border-radius: 1rem;
-	box-shadow: 0 0 4px rgb(0 0 0 / 10%);
-	padding: 1.5rem;
-	margin: 20px 0;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 4px rgb(0 0 0 / 10%);
+    padding: 1.5rem;
+    margin: 20px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-	transform: translateY(-8px);
-	box-shadow: 0 0 12px rgb(0 0 0 / 30%);
+    transform: translateY(-8px);
+    box-shadow: 0 0 12px rgb(0 0 0 / 30%);
 }
 
 .bien {
-	border-left: 5px solid var(--green);
+    border-left: 5px solid var(--green);
 }
 
 .pas-bien {
-	border-left: 5px solid var(--red);
+    border-left: 5px solid var(--red);
 }
 
 .modere {
-	border-left: 5px solid var(--yellow);
+    border-left: 5px solid var(--yellow);
 }
 
 .bloc-code {
-	position: relative;
-	background: var(--dark);
-	padding: 0.75rem;
-	border-radius: 0.5rem;
-	margin: 1rem 0;
-	overflow-x: auto;
+    position: relative;
+    background: var(--dark);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    overflow-x: auto;
 }
 
 .bloc-code .lang-label {
-	position: absolute;
-	top: 5px;
-	left: 10px;
-	color: var(--gray);
-	font-size: 10px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    color: var(--gray);
+    font-size: 10px;
 }
 
 .bloc-code .lang-code {
-	white-space: pre;
-	color: var(--white);
+    white-space: pre;
+    color: var(--white);
 }
 
 /* Badges */
@@ -310,5 +310,11 @@ sup:hover {
     font-size: 0.75em;
     padding: 5px 10p;
     border-radius: 20px;
-	background-color: var(--main);
+    background-color: var(--main);
+}
+
+.badge-definition {
+    top: 35px!important;
+    right: 70px!important;
+    left: inherit!important;
 }

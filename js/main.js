@@ -1440,7 +1440,17 @@ function initPage() {
 					$('.about-author').removeClass('d-none').addClass('d-flex');					
 				});
 			}); 
-	    }  
+	    }
+		
+	    if (currentHash === "presentation") {
+	        const $imgDiploma = $('<img>', {
+	          src: 'images/diploma.png',
+	          class: 'img-fluid m-5',
+	          css: { height: '400px', display: 'none' }
+	        });
+	        $('.sidebar').append($imgDiploma);
+	        $imgDiploma.fadeIn(600);
+	    }
     }
 	
 	$('a[href="#"]').click(function(event) {

@@ -1,19 +1,19 @@
 /* General */
 
 :root {
-	--main: #3e64ff;
+    --main: #3e64ff;
 }
 
 body {
-	font-family: Poppins, sans-serif;
+    font-family: Poppins, sans-serif;
 }
  
 a {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 a[href="#"] {
-	cursor: default;
+    cursor: default;
 }
 
 [disabled] {
@@ -22,42 +22,42 @@ a[href="#"] {
 }
 
 table {
-	border-collapse: collapse;
-	border-width: 1px;
+    border-collapse: collapse;
+    border-width: 1px;
 }
 
 th, td {
-	text-align: center;
-	color: var(--dark);
-	font-size: 14px;
-	border: 1px solid var(--dark);
+    text-align: center;
+    color: var(--dark);
+    font-size: 14px;
+    border: 1px solid var(--dark);
 }
 
 td strong {
-	color: var(--main);
+    color: var(--main);
 }
 
 sup {
-	background-color: var(--dark);
-	color: var(--white);
-	font-size: 10px;
+    background-color: var(--dark);
+    color: var(--white);
+    font-size: 10px;
     padding: 4px;
     margin: 2px;
-	top: -16px!important;
+    top: -16px!important;
 }
 
 sup:hover {
-	background-color: var(--main);
+    background-color: var(--main);
 }
 
 .open-mfp:hover, .btn.btn-primary:hover {
-	color: var(--white)!important;
-	opacity: 0.7;
+    color: var(--white)!important;
+    opacity: 0.7;
 }
 
 mark.highlight {
     background-color: lavender;
-	border: 1px solid var(--main);
+    border: 1px solid var(--main);
 }
 
 mark.highlight.current-match {
@@ -70,10 +70,10 @@ input[name="search-input"].highlight-flash {
 }
 
 @keyframes pulse-blue {
-  0%, 100% {
-    color: var(--main);
-    filter: drop-shadow(0 0 5px var(--main));
-  }
+    0%, 100% {
+        color: var(--main);
+        filter: drop-shadow(0 0 5px var(--main));
+    }
 }
 
 .icon-search.search-help {
@@ -83,8 +83,8 @@ input[name="search-input"].highlight-flash {
 }
 
 #search-info {
-	color: var(--green);
-	font-style: italic;
+    color: var(--green);
+    font-style: italic;
 }
 
 #search-info.no-result {
@@ -93,37 +93,37 @@ input[name="search-input"].highlight-flash {
 }
 
 .search-form .icon-search, .search-form .icon-times {
-	cursor: pointer;
+    cursor: pointer;
 }
  
 /* Home Section */
 
 .txt-rotate > .wrap { 
-	border-right: 0.08em solid var(--dark);
+    border-right: 0.08em solid var(--dark);
 } 
  
 /* About Section */
 
 #profile {
-	background-image: url("/images/profile.webp");
+    background-image: url("/images/profile.webp");
 }
 
 #profile:hover {
-	opacity: 0.9;
+    opacity: 0.9;
 }
 
 .ftco-hireme {
-	background-image: url("/images/background.webp");
+    background-image: url("/images/background.webp");
 }
 
 .ftco-hireme .overlay {
-	opacity: 0.5!important;
+    opacity: 0.5!important;
 }
 
 /* Resume Section */
 
 .logo-school {
-	background-size: cover!important;
+    background-size: cover!important;
 }
 
 #last-update-date {
@@ -410,8 +410,9 @@ input[name="search-input"].highlight-flash {
     box-shadow: 0 4px 10px var(--dark);
 }
 
-.project-title h3 {
-	font-weight: bold;
+.project-title h5 {
+    font-weight: 600;
+    color: var(--main);
 }
 
 .project:hover .project-title {
@@ -789,12 +790,13 @@ input[name="search-input"] {
     font-size: 0.75em;
     padding: 5px 10px!important;
     border-radius: 20px;
-	background-color: var(--main);
+    background-color: var(--main);
 }
 
 .badge-definition {
-	top: 35px!important;
-	right: 70px!important;
+    top: 35px!important;
+    right: 70px!important;
+    left: inherit!important;
 }
 
 /* Rotating box  */
@@ -814,7 +816,7 @@ input[name="search-input"] {
 
 .img-rotate {
     height: 100%;
-	width: 100%;
+    width: 100%;
     object-fit: cover;
     border-radius: 25px;
 }
