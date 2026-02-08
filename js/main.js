@@ -288,7 +288,7 @@ const appKeywords = [
   "Robot Framework",
   "Selenium",
   "Postman",
-  "Powershell",
+  "PowerShell",
   // OS
   "Windows",
   "Linux",

@@ -61,7 +61,7 @@ mark.highlight {
 }
 
 mark.highlight.current-match {
-  border: 1px solid var(--red);
+    border: 1px solid var(--red);
 }
 
 input[name="search-input"].highlight-flash {
@@ -77,9 +77,9 @@ input[name="search-input"].highlight-flash {
 }
 
 .icon-search.search-help {
-  animation: pulse-blue 2s ease-in-out;
-  cursor: pointer;
-  color: var(--main);
+    animation: pulse-blue 2s ease-in-out;
+    cursor: pointer;
+    color: var(--main);
 }
 
 #search-info {
@@ -402,6 +402,27 @@ input[name="search-input"].highlight-flash {
     }
 }
 
+.project-title {
+    bottom: 0px;
+    width: 100%;
+    position: absolute;
+    background: var(--white);
+    box-shadow: 0 4px 10px var(--dark);
+}
+
+.project-title h3 {
+	font-weight: bold;
+}
+
+.project:hover .project-title {
+	display: none;
+}
+
+.project:hover .badge {
+    background-color: var(--dark);
+    transition: background-color 0.3s ease;
+}
+
 /* Carousel Section */
 
 .owl-menus {
@@ -510,28 +531,28 @@ input[name="search-input"].highlight-flash {
 }
 
 .victory {
-  color: var(--success);
-  border-radius: 10px;
-  animation: blink 0.5s alternate 5;
+    color: var(--success);
+    border-radius: 10px;
+    animation: blink 0.5s alternate 5;
 }
 
 .defeat {
-  color: var(--danger);
-  border-radius: 10px;
-  animation: shake 0.5s;
+    color: var(--danger);
+    border-radius: 10px;
+    animation: shake 0.5s;
 }
 
 @keyframes blink {
-  from { opacity: 1; }
-  to { opacity: 0.3; }
+    from { opacity: 1; }
+    to { opacity: 0.3; }
 }
 
 @keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
 }
 
 .icon-heart {
@@ -539,36 +560,36 @@ input[name="search-input"].highlight-flash {
 }
 
 .bulle-bd {
-  display: none;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  border: 2px solid var(--main);
-  border-radius: 10px;
-  padding: 10px;
-  max-width: 200px;
-  box-shadow: 2px 2px 5px rgb(0 0 0 / 30%);
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 2px solid var(--main);
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 200px;
+    box-shadow: 2px 2px 5px rgb(0 0 0 / 30%);
 }
 
 .bulle-bd::after {
-  content: "";
-  position: absolute;
-  bottom: -18px;
-  left: 20px;
-  border-width: 8px;
-  border-style: solid;
-  border-color: var(--main) transparent transparent transparent;
+    content: "";
+    position: absolute;
+    bottom: -18px;
+    left: 20px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: var(--main) transparent transparent transparent;
 }
 
 #profile:hover .bulle-bd {
-  display: block;
+    display: block;
 }
 
 /* Chart */
 
 .chart-container {
-  min-height: 250px;
-  max-height: 500px;
+    min-height: 250px;
+    max-height: 500px;
 }
 
 /* Project or Article */
@@ -579,9 +600,9 @@ input[name="search-input"].highlight-flash {
 }
 
 .read-title {
-	display:flex;
-	align-items:center;
-	justify-content:space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 #search-suggestions{
@@ -636,10 +657,10 @@ input[name="search-input"] {
 /* Cards */
 
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 20px;
-  padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
 .card {
@@ -756,4 +777,59 @@ input[name="search-input"] {
 	height: 55px!important;
     width: 55px!important;  
     border-radius: 50%!important;
+}
+
+/* Badges */
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: var(--white);
+    font-size: 0.75em;
+    padding: 5px 10px!important;
+    border-radius: 20px;
+	background-color: var(--main);
+}
+
+.badge-definition {
+	top: 35px!important;
+	right: 70px!important;
+}
+
+/* Rotating box  */
+
+#future {
+	margin: 30px;
+	place-items:center;
+}
+
+.box-rotate {
+    position: relative;
+    width: 300px;
+    aspect-ratio: 1;
+    animation: rotate 8s infinite alternate;
+    transform-style: preserve-3d;
+}
+
+.img-rotate {
+    height: 100%;
+	width: 100%;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.span-inside {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--white);
+    font-size: 20px;
+    text-shadow: 0 2px 5px var(--dark);
+}
+
+@keyframes rotate {
+    from { transform: rotateX(20deg) rotateY(20deg); }
+    to { transform: rotateX(-15deg) rotateY(-40deg); }
 }
