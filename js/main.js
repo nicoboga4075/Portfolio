@@ -7,9 +7,9 @@ const cdiCount = 4;
 const internshipsCount = 3;
 const email = 'nicolas.bogalheiro@gmail.com';
 const city = 'Paris';
-const certifsCount = 3;
+const certifsCount = 5;
 const projectsCount = 20;
-const experiencesCount = 5;
+const experiencesCount = 6;
 const countriesCount = 14;
 const dateBirth = '1997-11-19';
 
@@ -1086,10 +1086,11 @@ function buildSafeRedirection(redirect, langPage) {
 }
 
 function initPage() {
-  const version = window.NETLIFY_COMMIT_REF || Date.now();
-  navigator.serviceWorker.register(`/service-worker.js?v=${version}`, { scope: '/' })
-  .then(reg => console.log("Service Worker registered:", reg.scope))
-  .catch(error => console.error("Service Worker registration failed:", error)); 
+  if ('serviceWorker' in navigator) {
+  	navigator.serviceWorker.getRegistrations().then(registrations => {
+	  registrations.forEach(reg => reg.unregister());
+	});
+  }
   
   const idPage = getCurrentRoute();
   const langPage = getCurrentLanguage();
