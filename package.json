@@ -90,7 +90,7 @@
     "@playwright/test": "^1.58.1",
     "@types/jest": "^30.0.0",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
-    "@typescript-eslint/parser": "^8.53.1",
+    "@typescript-eslint/parser": "^8.55.0",
     "cypress": "^15.10.0",
     "eslint": "^9.39.2",
     "globals": "^17.3.0",
