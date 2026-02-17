@@ -2,17 +2,40 @@
 
 :root {
     --main: #3e64ff;
+    --green: #28a745;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --dark: #343a40;
+    --light: #f8f9fa;
+    --white: #ffffff;
+    --black: #000000;
+    --gray: #868e96;
+    --background: var(--white);
+    --text-color: var(--black);
+}
+
+html.dark-mode {
+    --background: var(--black);
+    --text-color: var(--white);
+}
+
+html.dark-mode .card h2,
+html.dark-mode .author {
+    color: initial !important;
 }
 
 body {
-    font-family: Poppins, sans-serif;
+    font-family: Poppins, sans-serif !important;
+    background-color: var(--background);
+    color: var(--text-color);
 }
 
 a {
     cursor: pointer;
     text-decoration: none;
     color: var(--main);
-    font-weight: bold;   
+    font-weight: bold;
 }
 
 a[href="#"] {
@@ -24,11 +47,12 @@ table {
     border-width: 1px;
 }
 
-th, td {
+th,
+td {
     text-align: center;
-    color: var(--dark);
+    color: var(--text-color);
     font-size: 14px;
-    border: 1px solid var(--dark);
+    border: 1px solid var(--text-color);
 }
 
 td strong {
@@ -41,7 +65,7 @@ sup {
     font-size: 10px;
     padding: 4px;
     margin: 2px;
-    top: -16px!important;
+    top: -16px !important;
 }
 
 sup:hover {
@@ -49,15 +73,14 @@ sup:hover {
 }
 
 [hidden] {
-    display: none!important;
+    display: none !important;
 }
 
 .text-center {
-    text-align: center!important;
+    text-align: center !important;
 }
 
 /* Language Switcher */
-
 .language-switch {
     padding: 10px;
 }
@@ -73,20 +96,14 @@ sup:hover {
 }
 
 .lang-text.off {
-    color: black;
-}
-
-@media(max-width: 991.98px){
-    .lang-text.off.top-scroll {
-        color: white;
-    }
+    color: var(--text-color);
 }
 
 .toggle-container {
     position: relative;
     height: 25px;
     width: 50px;
-    background-color: #EBEFFF;
+    background-color: lavender;
     border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -109,14 +126,13 @@ sup:hover {
     visibility: hidden;
 }
 
-#language-toggle:checked + .toggle-slider {
+#language-toggle:checked+.toggle-slider {
     transform: translateX(25px);
     background-color: var(--main);
 }
 
 /* Blog Article */
-
-.article-container h2{
+.article-container h2 {
     color: var(--main);
 }
 
@@ -148,7 +164,8 @@ sup:hover {
     box-shadow: 0 4px 8px 0 rgb(15 41 48 / 5%);
 }
 
-#mcs-design, #mcs-example{
+#mcs-design,
+#mcs-example {
     max-width: 70vw;
     margin-bottom: 15px;
 }
@@ -174,12 +191,11 @@ sup:hover {
     height: 0;
     overflow: hidden;
     max-width: 100%;
-    background: #000;
 }
-  
+
 .video-wrapper video {
     position: absolute;
-    top: 0; 
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
@@ -220,27 +236,39 @@ sup:hover {
 }
 
 @-moz-keyframes rotate-astronaut {
-    100% { -moz-transform: rotate(-720deg);}
+    100% {
+        -moz-transform: rotate(-720deg);
+    }
 }
 
 @-webkit-keyframes rotate-astronaut {
-    100% { -webkit-transform: rotate(-720deg);}
+    100% {
+        -webkit-transform: rotate(-720deg);
+    }
 }
 
 @keyframes rotate-astronaut {
-    100% { transform:rotate(-720deg);}
+    100% {
+        transform: rotate(-720deg);
+    }
 }
 
-@-moz-keyframes rocket-movement { 
-    100% { -moz-transform: translate(400px,-100px);} 
+@-moz-keyframes rocket-movement {
+    100% {
+        -moz-transform: translate(400px, -100px);
+    }
 }
 
 @-webkit-keyframes rocket-movement {
-    100% { -webkit-transform: translate(400px,-100px);} 
+    100% {
+        -webkit-transform: translate(400px, -100px);
+    }
 }
 
-@keyframes rocket-movement { 
-    100% { transform: translate(400px,-100px);} 
+@keyframes rocket-movement {
+    100% {
+        transform: translate(400px, -100px);
+    }
 }
 
 /* Cards */
@@ -253,7 +281,7 @@ sup:hover {
 }
 
 .card {
-    background: #fff;
+    background: var(--white);
     border-radius: 1rem;
     box-shadow: 0 0 4px rgb(0 0 0 / 10%);
     padding: 1.5rem;
@@ -289,15 +317,16 @@ sup:hover {
 
 .bloc-code .lang-label {
     position: absolute;
-    top: 5px;
+    top: 1px;
     left: 10px;
-    color: var(--gray);
+    color: var(--yellow);
     font-size: 10px;
 }
 
 .bloc-code .lang-code {
     white-space: pre;
     color: var(--white);
+    font-size: 13px;
 }
 
 /* Badges */
@@ -308,13 +337,13 @@ sup:hover {
     left: 10px;
     color: var(--white);
     font-size: 0.75em;
-    padding: 5px 10p;
+    padding: 5px 10px !important;
     border-radius: 20px;
     background-color: var(--main);
 }
 
 .badge-definition {
-    top: 35px!important;
-    right: 70px!important;
-    left: inherit!important;
+    top: 35px !important;
+    right: 70px !important;
+    left: inherit !important;
 }

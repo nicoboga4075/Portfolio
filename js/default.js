@@ -1,33 +1,33 @@
 const appDefaultRoutes = {
-	"policy": "/{lng}/policy",
-	"terms": "/{lng}/terms",
-	"error404": "/404"
+    "policy": "/{lng}/policy",
+    "terms": "/{lng}/terms",
+    "error404": "/404"
 };
 
 function getCurrentRoute() {
-  const path = window.location.pathname;
-  return Object.keys(appDefaultRoutes).find(key => {
-    const pattern = '^' + appDefaultRoutes[key].replace('{lng}', '[a-z]{2}') + '/?$';
-    return new RegExp(pattern).test(path);
-  }) || 'error404';
+    const path = window.location.pathname;
+    return Object.keys(appDefaultRoutes).find(key => {
+        const pattern = '^' + appDefaultRoutes[key].replace('{lng}', '[a-z]{2}') + '/?$';
+        return new RegExp(pattern).test(path);
+    }) || 'error404';
 }
 
 function getHashFromSession() {
-	return sessionStorage.getItem('currentHash');
+    return sessionStorage.getItem('currentHash');
 }
 
 function getCurrentLanguage() {
-	return document.documentElement.lang;	
+    return document.documentElement.lang;
 }
 
 function addHomeRedirect() {
-  const homeBalise = document.getElementById('index');
-  if (homeBalise) {
-    homeBalise.href = `/${getCurrentLanguage()}`;
-    homeBalise.addEventListener('click', function() {
-      sessionStorage.clear();
-    });
-  }
+    const homeBalise = document.getElementById('index');
+    if (homeBalise) {
+        homeBalise.href = `/${getCurrentLanguage()}`;
+        homeBalise.addEventListener('click', function () {
+            sessionStorage.clear();
+        });
+    }
 }
 
 function switchLanguage(url) {
@@ -49,55 +49,65 @@ function switchLanguage(url) {
 }
 
 function initTranslator() {
-	const toggle = document.getElementById('language-toggle');
-	if (toggle) {
-		toggle.checked = getCurrentLanguage() == 'fr';
-		toggle.addEventListener('change', function () {
-			toggle.checked = getCurrentLanguage() == 'fr';
-			const newUrl = switchLanguage(window.location.href);
-			if (/^\/(?!\/)/.test(newUrl)) {
-				window.location.href = newUrl;
-			}
-		});
-	}
+    const toggle = document.getElementById('language-toggle');
+    if (toggle) {
+        toggle.checked = getCurrentLanguage() == 'fr';
+        toggle.addEventListener('change', function () {
+            toggle.checked = getCurrentLanguage() == 'fr';
+            const newUrl = switchLanguage(window.location.href);
+            if (/^\/(?!\/)/.test(newUrl)) {
+                window.location.href = newUrl;
+            }
+        });
+    }
 }
 
 function loadImages(selector, extension, one = false) {
-  const imgs = document.querySelectorAll(`${selector}`);
-  Array.from(imgs).some((el, index) => {
-	const locationImg = `images/${el.id}.${extension}`;
-	if (el.tagName.toLowerCase() === 'img') {
-		el.src = locationImg;
-	} else {
-		el.style.backgroundImage = `url(${locationImg})`;
-	}
-    // If first iteration, return true to stop further iteration
-    return index === 0 && one;
-  });
+    const imgs = document.querySelectorAll(`${selector}`);
+    Array.from(imgs).some((el, index) => {
+        const locationImg = `images/${el.id}.${extension}`;
+        if (el.tagName.toLowerCase() === 'img') {
+            el.src = locationImg;
+        } else {
+            el.style.backgroundImage = `url(${locationImg})`;
+        }
+        // If first iteration, return true to stop further iteration
+        return index === 0 && one;
+    });
 }
 
 function initArticle() {
-	loadImages('.article-image','png');
-	loadImages('.icon.svg','svg');
-	initTranslator();
-	addHomeRedirect();
-	document.body.classList.add('read-zone');
+    loadImages('.article-image', 'png');
+    loadImages('.icon.svg', 'svg');
+    initTranslator();
+    addHomeRedirect();
+    document.body.classList.add('read-zone');
 }
 
 function initPage() {
-	navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
-	.then(reg => console.log('Service Worker registered:', reg.scope))
-	.catch(error => console.error('Service Worker registration failed:', error));
-	loadImages('.icon.svg','svg');
-	initTranslator();
-	addHomeRedirect();
-	const idPage = getCurrentRoute();
-	if (idPage in appDefaultRoutes) {
-		document.body.classList.add('text-center');
-	}
-	document.querySelectorAll('a[href="#"]').forEach(link => {
-	  link.addEventListener('click', function(event) {
-		event.preventDefault();
-	  });
-	});
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+            registrations.forEach(reg => reg.unregister());
+        });
+    }
+    loadImages('.icon.svg', 'svg');
+    initTranslator();
+    addHomeRedirect();
+    const idPage = getCurrentRoute();
+    if (idPage in appDefaultRoutes) {
+        document.body.classList.add('text-center');
+    }
+    document.querySelectorAll('a[href="#"]').forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+        });
+    });
+}
+
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark-mode');
+    if (typeof legendLabelColor !== 'undefined' && typeof chart !== 'undefined') {
+        legendLabelColor = legendLabelColor === '#000000' ? '#ffffff' : '#000000';
+        chart.update();
+    }
 }
