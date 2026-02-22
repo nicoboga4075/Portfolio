@@ -3,19 +3,19 @@ stages:
   - build
   - test
   - teardown
-  
+
 status-job:
   stage: setup
-  tags: 
+  tags:
     - windows-local
   script:
     - powershell -ExecutionPolicy Bypass -File ./runner_status.ps1
   artifacts:
-   expire_in: 1 day  
-  
+    expire_in: 1 day
+
 build-job:
   stage: build
-  tags: 
+  tags:
     - windows-local
   script:
     - echo "Building..."
@@ -28,15 +28,19 @@ build-job:
         npm install
       }
     - echo "Build done!"
-  artifacts:
+  cache:
+    key: npm-cache
     paths:
       - node_modules/
-    expire_in: 1 month
 
 test-job:
   stage: test
-  tags: 
+  tags:
     - windows-local
+  cache:
+    key: npm-cache
+    paths:
+      - node_modules/
   script:
     - echo "Running Jest tests..."
     - npm run jest
@@ -47,15 +51,15 @@ test-job:
   artifacts:
     reports:
       junit:
-      - reports/jest/junit.xml
-      - reports/playwright/junit.xml
+        - reports/jest/junit.xml
+        - reports/playwright/junit.xml
     paths:
       - reports/jest/html/
       - reports/jest/coverage/
       - reports/playwright/html/
       - reports/playwright/test-results/
     expire_in: 1 week
-    
+
 cleanup-job:
   stage: teardown
   tags:
@@ -63,5 +67,4 @@ cleanup-job:
   script:
     - Get-ChildItem -Path "C:\GitLab-Runner\builds" -Recurse | Remove-Item -Force -Recurse
   artifacts:
-    expire_in: 1 day 
-    
+    expire_in: 1 day
