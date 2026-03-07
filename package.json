@@ -106,7 +106,7 @@
   },
   "overrides": {
     "braces": "3.0.3",
-    "tar": "7.5.3",
+    "tar": "7.5.10",
     "micromatch": "4.0.8",
     "yargs-parser": "21.1.1"
   }
