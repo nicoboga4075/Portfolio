@@ -22,7 +22,7 @@ permalink: "articles/du-voc-de-dev_en.html"
             <h3>ASP.NET Core (C#)</h3>
             <p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/aspnet/core">ASP.NET Core</a> is powerful, flexible and interoperable (Linux, MacOS and Windows), making it an excellent choice for modern development (web applications, APIs or microservices). It supports large-scale and critical applications for large businesses such as <b>Microsoft</b> and is supported by the large <i>Stack Overflow</i> community. Its modular design allows you to choose the components you need and it has robust security features to protect you from common vulnerabilities (<i>OWASP</i>). However, even if .NET has become easier to use, early-stage developers might find it more difficult than the frameworks associated with languages like Python or JavaScript, described below. Since the release of .NET 5 in November 2020, the "Core" has officially disappeared from the name.</p>
             <h3>Flask (Python)</h3>
-            <p><a target="_blank" rel="noopener" href="https://flask.palletsprojects.com">Flask</a>, used by <b>Netflix</b>, has been known for its ease of use since its inception in 2010. Unlike "battery-included" frameworks like <a target="_blank" rel="noopener" href="https://www.djangoproject.com">Django</a> used by <b>Instagram</b>, Flask has a minimalist kernel, making it adaptable to a variety of projects, from simple <i>REST</i> APIs to microservices to more complex web applications. This gives developers flexibility but also requires them to make more decisions about architecture and component selection. This can be an advantage for experienced developers who take advantage of control but it can be difficult for juniors who are penalized by the lack of built-in features. Furthermore, while Flask adequately addresses common security needs, it requires developers to be more pragmatic in the architecture and security of their applications.</p>
+            <p><a target="_blank" rel="noopener" href="https://flask.palletsprojects.com">Flask</a>, used by <b>Netflix</b>, has been known for its ease of use since its inception in 2010. Unlike "battery-included" frameworks like <a target="_blank" rel="noopener" href="https://www.djangoproject.com">Django</a> used by <b>Instagram</b>, Flask has a minimalist kernel, making it adaptable to a variety of projects, from simple <i>REST</i> APIs to microservices to more complex web applications. This gives developers flexibility but also requires them to make more decisions about architecture and component selection. This can be an advantage for experienced developers but it can be difficult for juniors who are penalized by the lack of built-in features. Furthermore, while Flask adequately addresses common security needs, it requires developers to be more pragmatic in the architecture and security of their applications.</p>
             <h3>Angular (JavaScript)</h3>
             <p><a target="_blank" rel="noopener" href="https://angular.dev">Angular</a>, developed by <b>Google</b>, is used to create interactive web applications. Notably, it includes tools for state management, data binding and HTTP requests. You work "in" the framework, which controls the organization and execution of your code (<i>reverse control</i>). This makes it a powerful yet demanding environment in terms of compliance with its conventions. AngularJS has been completely at the end of its lifespan since late 2021 and since 2016, any Angular is native TypeScript.</p>
             <h2>Library</h2>
@@ -880,7 +880,7 @@ permalink: "articles/du-voc-de-dev_en.html"
                         <input type="checkbox" id="q74">
                         <label for="q74">Build vs Run</label>
                     </div>
-                    <div class="card-body">Build is a development step where source code is transformed into an executable or a form that the machine can understand. For compiled languages (such as C++, C#, Java, Go), the build produces binary files or bytecode. For interpreted languages (such as Python or JavaScript), it may be an optional step, such as bundling or transpilation. Run is when the program is actually executed. The system runs the previously built code and produces a result (display, computation, interaction...). In short, the build prepares the program that will be executed during the run.</div>
+                    <div class="card-body">Build is a development step where source code is transformed into an executable or a form that the machine can understand. For compiled languages (such as C++, C#, Java, Go), the build produces binary files or bytecode. For interpreted languages (such as Python or JavaScript), it may be an optional step, such as bundling or transpilation. Run is when the program is actually executed (the compilation). The system runs the previously built code and produces a result (display, computation, interaction...). In short, the build prepares the program that will be executed during the run.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -888,7 +888,7 @@ permalink: "articles/du-voc-de-dev_en.html"
                         <label for="q75">AI Agent</label>
                         <span class="badge badge-definition">AI</span>
                     </div>
-                    <div class="card-body">An AI agent is a computing system capable of perceiving its environment, collecting or processing information and acting autonomously (without direct human intervention) to achieve specific goals. It demonstrates reasoning, planning and memory to make decisions, learn and adapt, unlike automation systems that follow fixed, predefined rules (such as a CI/CD pipeline). An AI agent is characterized by a trigger or input (prompt or voice), an LLM (Large Language Model) such as ChatGPT or Gemini, memory (a short- or long-term knowledge base), tools and an output (text, image, chart, prediction, classification). A conversational agent is a specialized subset of AI agents focused on human communication.</div>
+                    <div class="card-body">An AI agent is a computing system capable of perceiving its environment, collecting or processing information and acting autonomously (without direct human intervention) to achieve specific goals. It demonstrates reasoning, planning and memory to make decisions, learn and adapt, unlike automation systems that follow fixed, predefined rules (such as a CI/CD pipeline). An AI agent is characterized by a trigger or input (prompt or voice), an LLM (Large Language Model) such as ChatGPT or Gemini, memory (a short- or long-term knowledge base), tools and an output (text, image, chart, prediction, classification). An AI agent goes beyond a simple language model: where a traditional AI thinks and generates content, it acts like a "brain with hands": it uses tools or a knowledge base, chains logical steps together and carries out complex tasks autonomously. Concretely, it relies on three key ingredients: a clear objective, tools at its disposal (Internet, APIs, software) and a decision engine that allows it to adapt its strategy in real time. It is, in short, an autonomous digital assistant capable of handling repetitive or complex tasks, while remaining governed by the rules and boundaries set by the user. A conversational agent is a specialized subset of AI agents focused on human communication.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -904,7 +904,7 @@ permalink: "articles/du-voc-de-dev_en.html"
                         <label for="q77">Prompt engineering vs Context engineering</label>
                         <span class="badge badge-definition">AI</span>
                     </div>
-                    <div class="card-body">Prompt engineering refers to the design and formulation of a request sent to an AI model in order to obtain a precise and high-quality response in a specific format. Context engineering goes beyond the prompt itself: it involves managing and optimizing the context used by the AI to generate its response, with the goal of providing the necessary information (memory, documents, history, external data) to improve consistency and relevance across multiple interactions.</div>
+                    <div class="card-body">Prompt engineering refers to the design and formulation of a request (a prompt) sent to an AI model in order to obtain a precise and high-quality response in a specific format. Context engineering goes beyond the prompt itself: it involves managing and optimizing the context used by the AI to generate its response, with the goal of providing the necessary information (memory, documents, history, external data) to improve consistency and relevance across multiple interactions.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1242,7 +1242,13 @@ permalink: "articles/du-voc-de-dev_en.html"
                         <label for="q117">XSS</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">XSS (Cross-Site Scripting) occurs when web applications allow users to submit custom code (often JavaScript) in URLs, altering a site’s display or interactions. The attacker relies on victims visiting the page to execute the code. Mitigation: use a WAF to block attacks, implement CSP and use conditional HTTP requests.</div>
+                    <div class="card-body">XSS (Cross-Site Scripting) occurs when web applications allow users to submit custom code (often JavaScript) in URLs, altering a site’s display or interactions. The attacker relies on victims visiting the page to execute the code. Mitigation: use a WAF to block attacks, implement CSP and use conditional HTTP requests. Here are the three types of XSS:
+                        <ul>
+                            <li><b>Stored</b>: the malicious script is stored on the server (database, comments, profile, forum, blog...) and executes automatically when a user views the page</li>
+                            <li><b>Reflected</b>: the script comes from the user’s request (URL, form) and is immediately returned in the response without being stored</li>
+                            <li><b>DOM-based</b>: the attack occurs on the browser side (client) through the JavaScript of the page and the server is not directly involved</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1294,7 +1300,7 @@ permalink: "articles/du-voc-de-dev_en.html"
                     <div class="card-header">
                         <input type="checkbox" id="q124">
                         <label for="q124">Image vs Container</label>
-                        <span class="badge badge-definition">Docker</span>
+                        <span class="badge badge-definition">DevOps</span>
                     </div>
                     <div class="card-body">A Docker image is a static, immutable (read-only) template containing the filesystem, application code, dependencies and configuration needed to run a container. A container is a running instance of an image. It shares the same kernel but can have its own state and writable filesystem. Changes in a container do not affect the source image unless a new image is created from that container.</div>
                 </div>
@@ -1302,9 +1308,9 @@ permalink: "articles/du-voc-de-dev_en.html"
                     <div class="card-header">
                         <input type="checkbox" id="q125">
                         <label for="q125">Container vs VM</label>
-                        <span class="badge badge-definition">Docker</span>
+                        <span class="badge badge-definition">DevOps</span>
                     </div>
-                    <div class="card-body">A Docker container allows rapid deployment of web applications in a lightweight and portable way, whereas a VM (Virtual Machine) provides full isolation but is heavier and slower. Containers are ideal for modern development environments and microservices. Virtual machines are useful for testing different configurations or running multiple operating systems on the same server.</div>
+                    <div class="card-body">A container allows rapid deployment of web applications in a lightweight and portable way, whereas a VM (Virtual Machine) provides full isolation but is heavier and slower. Containers are ideal for modern development environments and microservices. Virtual machines are useful for testing different configurations or running multiple operating systems on the same server.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1399,6 +1405,7 @@ permalink: "articles/du-voc-de-dev_en.html"
                     <div class="card-header">
                         <input type="checkbox" id="q138">
                         <label for="q138">Feature</label>
+                        <span class="badge badge-definition">AI</span>
                     </div>
                     <div class="card-body">In computing, a feature is a specific function or enhancement added to a program or application. In AI or data science, a feature is a variable or attribute used to train a model.</div>
                 </div>
@@ -1952,7 +1959,17 @@ permalink: "articles/du-voc-de-dev_en.html"
                         <label for="q213">SQLi</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">SQLi (SQL injection) is an attack that executes unexpected queries against a database.</div>
+                    <div class="card-body">SQLi (SQL injection) is an attack that executes unexpected queries against a database. Here are some classic examples:
+                        <ul>
+                            <li><b>Error-based</b>: trigger an SQL error to display information</li>
+                            <li><b>Union-based</b>: add a UNION to display data from another table</li>
+                            <li><b>Blind boolean</b>: guess information based on true/false page responses</li>
+                            <li><b>Blind time-based</b>: use a response delay to test a condition</li>
+                            <li><b>Out-of-band</b>: data is sent through another external channel</li>
+                            <li><b>Stored</b>: the injection is saved and executed later</li>
+                            <li><b>Second-order</b>: injected data becomes dangerous when reused</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -2215,6 +2232,186 @@ permalink: "articles/du-voc-de-dev_en.html"
                         <label for="q250">Eager loading vs Lazy loading</label>
                     </div>
                     <div class="card-body">Eager loading loads all associated data upfront to avoid repetitive queries, whereas lazy loading only loads associated data when it is actually requested, saving memory and initial loading time.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q251">
+                        <label for="q251">Docker vs Kubernetes</label>
+                        <span class="badge badge-definition">DevOps</span>
+                    </div>
+                    <div class="card-body">Docker and Kubernetes are related but serve different purposes. Docker is used to create and run containers. It allows you to package an application with everything it needs (code, dependencies, configuration) so it runs the same way regardless of the environment. Kubernetes, on the other hand, is used to manage and orchestrate containers at scale. It handles tasks such as automatically starting containers, distributing them across servers, restarting them if they fail and managing scaling.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q252">
+                        <label for="q252">Jenkins vs Artifactory</label>
+                        <span class="badge badge-definition">DevOps</span>
+                    </div>
+                    <div class="card-body">Jenkins and Artifactory are often used together but serve very different purposes. Jenkins is a CI/CD tool that automates development cycle steps such as compiling code, running tests, building Docker images and triggering deployments. Artifactory, on the other hand, is an artifact repository manager used to store, version and distribute the files produced by builds (packages, libraries, images, binaries).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q253">
+                        <label for="q253">Classic AI vs Generative AI</label>
+                        <span class="badge badge-definition">AI</span>
+                    </div>
+                    <div class="card-body">Classic AI analyzes data to identify patterns, classify information and make predictions, much like a librarian who organizes and quickly retrieves the location of books and the desired content. Generative AI, on the other hand, produces new content (text, images or code) based on what it has learned, similar to an author who draws inspiration from their readings to create something original. To craft an effective prompt so as to get a clear, precise and actionable response (rather than a vague or general one, often complex and unpredictable), there are six key rules: be specific, provide context, indicate the expected format (tables, images, bullet points), assign a role (beginner, intermediate, expert) and/or define the target audience, refine through iteration and provide models or examples. A detailed recipe yields far better results than a simple "bake me a cake", just as a properly briefed colleague will produce far more relevant and polished work than one left without clear direction. With a hybrid approach, an AI agent can be seen as equipped with a pair of glasses to observe and better understand its environment and with a pencil to innovate based on its learning (or training).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q254">
+                        <label for="q254">Malloc</label>
+                        <span class="badge badge-definition">C</span>
+                    </div>
+                    <div class="card-body">The malloc function (memory allocation) is a C function that allows dynamic memory allocation during program execution. It reserves a block of memory on the heap and returns a pointer to that block. Memory allocated with malloc is not freed automatically: you must use free().</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q255">
+                        <label for="q255">Machine learning vs Deep learning</label>
+                        <span class="badge badge-definition">AI</span>
+                    </div>
+                    <div class="card-body">Machine learning allows algorithms to learn from data to make predictions or decisions without being explicitly programmed. It often relies on simple models such as decision trees, regressions or SVMs (Support Vector Machine). Deep learning is a subcategory of machine learning that uses deep neural networks to process complex data such as images, text or voice.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q256">
+                        <label for="q256">Supervised learning vs Unsupervised learning</label>
+                        <span class="badge badge-definition">AI</span>
+                    </div>
+                    <div class="card-body">Supervised learning involves training a model with labeled data: it is shown examples along with the correct answers so it can learn to predict accurately. For example, classifying emails as "spam" or "not spam". Unsupervised learning, on the other hand, uses unlabeled data. The model must discover structures, clusters or hidden patterns in the data on its own, such as segmenting customers into groups based on their behavior.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q257">
+                        <label for="q257">Training</label>
+                        <span class="badge badge-definition">AI</span>
+                    </div>
+                    <div class="card-body">Training refers to the process by which a model learns from data. Concretely, it is provided with many examples so that it gradually adjusts its internal parameters to better recognize patterns, make predictions or perform a given task. Training is the phase where a model learns from data to become effective. Here are the six steps of training an AI model:
+                        <ol>
+                            <li><b>Collection</b>: gathering relevant data for the task (texts, images, measurements...)</li>
+                            <li><b>Preparation</b>: cleaning, formatting, and sometimes labeling the data to make it usable</li>
+                            <li><b>Model selection</b>: choosing a model type suitable for the problem (classification, prediction, generation...)</li>
+                            <li><b>Learning</b>: analyzing data, making predictions, and adjusting to reduce errors</li>
+                            <li><b>Evaluation</b>: testing the model on new data to verify performance</li>
+                            <li><b>Fine-tuning</b>: adjusting parameters, data or the model to achieve better results</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q258">
+                        <label for="q258">Reinforcement learning</label>
+                        <span class="badge badge-definition">AI</span>
+                    </div>
+                    <div class="card-body">Reinforcement learning is a type of learning where an AI agent adjusts its strategy to maximize cumulative reward based on the rewards and penalties received. Each step of updating its policy can be considered a lemma (a minor or intermediate result) guiding its learning, and the combination of these updates ultimately leads to a theorem (a major result or conclusion) representing the optimal behavior demonstrated by the agent.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q259">
+                        <label for="q259">Neural network</label>
+                        <span class="badge badge-definition">AI</span>
+                    </div>
+                    <div class="card-body">A neural network is a machine learning model inspired by the human brain, composed of interconnected layers of artificial neurons. Each connection between neurons has a weight determining the importance of the transmitted information. During training, the network adjusts these weights to learn relationships in the data and make predictions or recognize patterns.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q260">
+                        <label for="q260">Game theory</label>
+                    </div>
+                    <div class="card-body">Game theory is a branch of mathematics studying decision-making strategies among multiple interacting actors (players), where each player’s choice affects the outcomes of the others. It is used to analyze situations of cooperation or competition, from economics to social sciences. The prisoner’s dilemma is a classic example: two suspects are interrogated separately. If both remain silent, they each receive a light sentence. If they betray each other, they both receive a heavier sentence, but if only one betrays, the traitor is freed while the other receives the maximum sentence. This scenario illustrates how individual rationality can lead to a suboptimal outcome for the collective interest (the common good).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q261">
+                        <label for="q261">LLM</label>
+                        <span class="badge badge-definition">AI</span>
+                    </div>
+                    <div class="card-body">A LLM (Large Language Model) such as ChatGPT, Copilot, Gemini, Claude or Mistral is a giant statistical model trained on massive amounts of text to understand and generate human language. It works by predicting the most probable next word in a sentence—similar to writing a text message—which allows it to write, explain, translate, or rephrase content, while still requiring human verification of its outputs. Thousands of open-source LLMs are available on Hugging Face, a platform that allows users to download and test them. It also serves as a hub for documentation, datasets, and the tools needed to use and deploy these models. Another example is Ollama, a tool that lets you run LLMs locally on your computer without relying on the cloud. It simplifies downloading, installing and using open-source models (such as Llama) through simple commands, much like a "model manager" for AI.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q262">
+                        <label for="q262">Hallucination</label>
+                        <span class="badge badge-definition">AI</span>
+                    </div>
+                    <div class="card-body">An AI agent is often seen as a virtual assistant available 24/7 for professional or educational purposes, capable of automating repetitive and time-consuming tasks, analyzing and structuring information and stimulating creativity as well as learning. However, it is not always reliable or guided by common sense, which is why human verification of the information and sources it provides is necessary. A hallucination refers to an error that occurs while generating information that is false, invented or unverifiable, but presented as if it were credible.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q263">
+                        <label for="q263">Vibe coding</label>
+                        <span class="badge badge-definition">AI</span>
+                    </div>
+                    <div class="card-body">Vibe coding refers to an informal and intuitive way of programming that focuses more on the idea, the feeling and the overall result than on immediate technical rigor. Concretely, it often involves coding quickly through trial and error, frequently with the help of an AI agent, by generating code, refining it along the way and prioritizing creativity and fluidity over a highly structured design from the start.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q264">
+                        <label for="q264">Clearance</label>
+                    </div>
+                    <div class="card-body">In accordance with IGI 1300, anyone wishing to access classified information must receive a clearance appropriate to their level of responsibility. A clearance refers to the official right or authorization to perform certain actions or to access specific locations, information or systems.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q265">
+                        <label for="q265">Iframe</label>
+                    </div>
+                    <div class="card-body">An iframe (inline frame) is an HTML element that allows you to embed a Web page or HTML document inside another Web page.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q266">
+                        <label for="q266">Case sensitivity</label>
+                    </div>
+                    <div class="card-body">Case sensitivity refers to the fact that a system distinguishes between uppercase and lowercase letters as different characters. Concretely, a case-sensitive system (Linux or PostgreSQL for example) considers myFile.js, MyFile.js and MYFILE.JS to be three distinct entities. Conversely, a case-insensitive system (Windows or SQL Server for example) treats them as identical.
+                        <ul>
+                            <li><b>camelCase</b>: words are joined together, the first starts with a lowercase letter, the following ones with an uppercase letter (getUserData, firstName, isLoggedIn) → variables and functions in JavaScript</li>
+                            <li><b>PascalCase</b> (or UpperCamelCase): identical to camelCase, but the first word also starts with an uppercase letter (PlayStation, MyPortfolio, PowerShell) → used in C#, React and classes in JavaScript or TypeScript</li>
+                            <li><b>snake_case</b>: words are separated by underscores, all in lowercase (user_name, background_color, max_length) → common in Python, SQL and sometimes PHP</li>
+                            <li><b>SCREAMING_SNAKE_CASE</b>: similar to snake_case but all in uppercase (API_KEY, MAX_RETRIES, BASE_URL) → reserved for constants or environment variables (.env)</li>
+                            <li><b>kebab-case</b>: words are separated by hyphens, all in lowercase (main-header, btn-primary, user-profile) → CSS classes and custom properties, URLs</li>
+                            <li><b>UPPERCASE</b>: all in uppercase (SELECT, MAX, MIN, API, EOF, DTO, PI) → SQL keywords, acronyms, single-word constants</li>
+                            <li><b>lowercase</b>: all in lowercase (id, div, var, let, color) → HTML attributes and tags, keywords, CSS properties</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q267">
+                        <label for="q267">Model vs DTO</label>
+                    </div>
+                    <div class="card-body">A model represents a business entity as it exists in the database. It reflects the actual structure and can contain logic. A DTO (Data Transfer Object), on the other hand, is an object whose sole purpose is to carry data from one place to another, with no business logic. It is a simple structure that defines the shape of data exchanged between two layers of an application, for example between the backend and the frontend or between a service and a database. In practice, a single model can generate multiple DTOs depending on the context. Each one exposes only what is relevant for its specific use case, which strengthens the security and clarity of an API.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q268">
+                        <label for="q268">var vs let</label>
+                    </div>
+                    <div class="card-body">var and let are both used to declare variables in JavaScript, but var has a function scope (the variable exists throughout the entire function) while let has a block scope (the variable only exists within the {} block where it is declared). Furthermore, var is considered outdated and can cause unexpected behavior, which is why let (or const) is always preferred in modern JavaScript. let was introduced with ES6 (ECMAScript 2015), the major JavaScript update that also brought const, arrow functions, classes, template literals, and many other modern features.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q269">
+                        <label for="q269">Heuristic</label>
+                    </div>
+                    <div class="card-body">A heuristic is an empirical rule used in programming to make a quick decision without exhaustive analysis, at the cost of imperfect reliability (for example, detecting that a video is music because its title contains the word "clip"). Unlike a deterministic algorithm, it sacrifices precision for simplicity, at the risk of a false positive (accepting a case that should not have been) or a false negative (rejecting a case that should have been accepted).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q270">
+                        <label for="q270">GIGO</label>
+                        <span class="badge badge-definition">AI</span>
+                    </div>
+                    <div class="card-body">The performance of an AI system depends first and foremost on the quality of the data that powers it: incomplete, inaccurate or biased data will inevitably produce distorted or even unfair results : it's the principle known as GIGO ("Garbage in, Garbage out"), if data are bad in input, result will be bad too. Three major risks threaten inadequately prepared AI projects: incomplete data that excludes certain groups, inaccurate data that misleads the model and biased data that perpetuates human prejudices. This is why "data preparation" (cleaning, deduplication, balancing/diversifying and anonymization) is the most crucial step in any AI initiative, because it is data, not the algorithms that perform computations or the computers that supply processing power, that creates true intelligence.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q271">
+                        <label for="q271">GDPR vs AI Act</label>
+                        <span class="badge badge-definition">AI</span>
+                    </div>
+                    <div class="card-body">The GDPR (General Data Protection Regulation) of 2018 protects personal data by requiring user consent and giving individuals the right to access, correct or delete their data, constituting the first regulatory foundation for AI in Europe. The AI Act, adopted in 2024, is the first comprehensive framework in the world dedicated to AI, classifying systems into four risk categories (unacceptable, high, limited, minimal) with tailored requirements for transparency and traceability. Together, the GDPR and the AI Act establish a unique European approach aimed at creating responsible, transparent and trustworthy AI, rather than simply fast and powerful AI. Using AI ethically means adopting a responsible approach that places humans at the center of the process. This approach is based on five essential principles: transparency (which requires clearly stating when content has been created by an AI), respect for privacy, fairness to avoid potential bias and discrimination, human responsibility (which requires being able to justify its use and reasoning) and finally, social and environmental impact, involving limiting energy consumption by using lightweight models for simple tasks. The ethics of AI is not a brake on innovation, but rather what gives it meaning, because ethical AI must remain useful and in service of humanity.</div>
                 </div>
             </div>
         </div>

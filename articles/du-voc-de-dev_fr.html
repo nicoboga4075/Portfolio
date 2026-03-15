@@ -18,23 +18,23 @@ permalink: "articles/du-voc-de-dev_fr.html"
             <div class="title-center">Du voc' de dev'</div>
             <div class="second-title">Dans le monde du développement logiciel, on croise souvent des termes comme <b>framework, librairie, bibliothèque, package, module</b>... Si ces mots sont parfois utilisés, par abus de langage, comme des synonymes dans les discussions techniques, ils désignent pourtant des concepts bien distincts. Chacun joue un rôle spécifique dans la façon dont les développeurs structurent, organisent et automatisent leurs projets. Pour mieux comprendre ces différences, cet article propose un tour d’horizon clair et accessible de ces notions, illustrées à travers des exemples concrets comme Angular, Selenium, Numpy et le module math de Python. L’objectif : choisir l'outil adapté aux besoins et au contexte du projet.</div>
             <h2>Framework</h2>
-            <p>Un framework est un cadre de travail complet qui fournit une architecture prédéfinie pour développer des applications. Il impose des règles, des conventions et un flux de travail que le développeur doit suivre. L'idée est de <b>standardiser</b> le développement et de réduire les erreurs grâce à une <b>structure rigide</b>.</p>
+            <p>Un framework est un cadre de travail complet fournissant une architecture prédéfinie pour développer des applications. Il impose des règles, des conventions et un flux de travail que le développeur doit suivre. L'idée est de <b>standardiser</b> le développement et de réduire les erreurs grâce à une <b>structure rigide</b>.</p>
             <h3>ASP.NET Core (C#)</h3>
             <p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/fr-fr/aspnet/core">ASP.NET Core</a> est performant, flexible et interopérable (Linux, MacOS et Windows), ce qui en fait un excellent choix pour le développement moderne (applications Web, APIs ou microservices). Il prend en charge des applications critiques et à grande échelle pour les grandes entreprises telles que <b>Microsoft</b> et bénéficie du support de la grande communauté <i>Stack Overflow</i>. Sa conception modulaire vous permet de choisir les composants dont vous avez besoin et il dispose de fonctionnalités de sécurité solides pour vous protéger contre les failles courantes (<i>OWASP</i>). Cependant, même si .NET est devenu plus facile à utiliser, les développeurs débutants pourraient le trouver plus difficile que les frameworks associés à des langages comme Python ou JavaScript, décrits ci-dessous. Depuis la sortie de .NET 5 en novembre 2020, le "Core" a officiellement disparu du nom.</p>
             <h3>Flask (Python)</h3>
-            <p><a target="_blank" rel="noopener" href="https://flask.palletsprojects.com">Flask</a>, utilisé par <b>Netflix</b>, est connu pour sa facilité d'utilisation depuis ses débuts en 2010. Contrairement aux frameworks "batteries incluses" comme <a target="_blank" rel="noopener" href="https://www.djangoproject.com">Django</a> utilisé par <b>Instagram</b>, Flask a un noyau minimaliste, le rendant adaptable à divers projets, qu'il s'agisse de simples APIs <i>REST</i>, de microservices ou d'applications Web plus complexes. Cela donne aux développeurs la flexibilité mais exige également qu'ils prennent plus de décisions sur l'architecture et le choix des composants. Cela peut être un avantage pour les développeurs expérimentés qui profitent du contrôle mais cela peut être difficile pour les juniors qui se voient pénalisés par le manque de fonctionnalités intégrées. Par ailleurs, bien que Flask répond convenablement aux besoins de sécurité communs, il exige des développeurs qu'ils soient plus pragmatiques dans l'architecture et la sécurisation de leurs applications.</p>
+            <p><a target="_blank" rel="noopener" href="https://flask.palletsprojects.com">Flask</a>, utilisé par <b>Netflix</b>, est connu pour sa facilité d'utilisation depuis ses débuts en 2010. Contrairement aux frameworks "batteries incluses" comme <a target="_blank" rel="noopener" href="https://www.djangoproject.com">Django</a> utilisé par <b>Instagram</b>, Flask a un noyau minimaliste, le rendant adaptable à divers projets, qu'il s'agisse de simples APIs <i>REST</i>, de microservices ou d'applications Web plus complexes. Cela donne aux développeurs la flexibilité mais exige également qu'ils prennent plus de décisions sur l'architecture et le choix des composants. Cela peut être un avantage pour les développeurs expérimentés mais cela peut être difficile pour les juniors qui se voient pénalisés par le manque de fonctionnalités intégrées. Par ailleurs, bien que Flask répond convenablement aux besoins de sécurité communs, il exige des développeurs qu'ils soient plus pragmatiques dans l'architecture et la sécurisation de leurs applications.</p>
             <h3>Angular (JavaScript)</h3>
             <p><a target="_blank" rel="noopener" href="https://angular.dev">Angular</a>, développé par <b>Google</b>, est utilisé pour créer des applications Web interactives. Il intègre notamment des outils pour la gestion de l'état, la liaison de données et les requêtes HTTP. Vous travaillez "dans" le framework, qui contrôle l'organisation et l'exécution de votre code (<i>inversion de contrôle</i>). Cela en fait un environnement puissant mais exigeant en termes de respect de ses conventions. AngularJS est totalement en fin de vie depuis fin 2021, et depuis 2016, tout Angular est TypeScript natif.</p>
             <h2>Librairie</h2>
             <p>Une librairie est une <b>collection de fonctions ou de classes réutilisables</b> que vous pouvez appeler pour accomplir des tâches spécifiques. Contrairement à un framework, c'est vous qui contrôlez l'intégration et l'exécution des fonctionnalités.</p>
             <h3>Newtonsoft.Json (C#)</h3>
-            <p>C’est une librairie open-source pour le framework .NET qui permet de sérialiser (convertir un objet en <i>JSON</i>) et désérialiser (convertir du <i>JSON</i> en objet) facilement.</p>
+            <p>C’est une librairie open-source pour le framework .NET permettant de sérialiser (convertir un objet en <i>JSON</i>) et désérialiser (convertir du <i>JSON</i> en objet) facilement.</p>
             <h3>Selenium (Python)</h3>
             <p>Selenium sert à automatiser les tests des applications Web, en fournissant des fonctions pour interagir avec les navigateurs, comme cliquer sur des boutons ou remplir des formulaires.</p>
             <h3>Moment (JavaScript)</h3>
             <p>Moment permet la manipulation et le formatage des dates et heures (YYYY-MM-DD par exemple).</p>
             <h2>Bibliothèque</h2>
-            <p>Le terme bibliothèque est souvent utilisé comme <b>synonyme de librairie</b>, mais il peut également désigner une <b>collection plus large qui regroupe plusieurs librairies ou modules</b>. Une bibliothèque peut inclure des outils divers pour différents usages.</p>
+            <p>Le terme bibliothèque est souvent utilisé comme <b>synonyme de librairie</b>, mais il peut également désigner une <b>collection plus large regroupant plusieurs librairies ou modules</b>. Une bibliothèque peut inclure des outils divers pour différents usages.</p>
             <h3>IronPDF (C#)</h3>
             <p>IronPDF se spécialise dans la génération, l'édition et l'extraction de contenu PDF.</p>
             <h3>Numpy (Python)</h3>
@@ -42,9 +42,9 @@ permalink: "articles/du-voc-de-dev_fr.html"
             <h3>jQuery (JavaScript)</h3>
             <p><a target="_blank" rel="noopener" href="https://jquery.com">jQuery</a> simplifie l'interaction avec le <i>DOM</i> (Document Object Model) et les événements sur les pages Web.</p>
             <h2>Package</h2>
-            <p>Un package est un <b>ensemble organisé de modules, souvent regroupés dans un même dossier</b>, qui permet de structurer et de organiser du code de manière logique et réutilisable. Il peut aussi contenir d’autres packages (des sous-packages), des fichiers de configuration et des ressources. C'est un <i>NuGet</i> (.nupkg) pour C#, un <i>pip</i> (dossier avec __init__.py) pour Python et un <i>npm</i> (dossier avec package.json) pour JavaScript. Par exemple, le package System.Collections.Immutable de C# fournit des collections immuables pour .NET et le package cross-env de JavaScript permet de définir des variables d'environnement de manière compatible avec toutes les plateformes.</p>
+            <p>Un package est un <b>ensemble organisé de modules, souvent regroupés dans un même dossier</b>, permettant de structurer et de organiser du code de manière logique et réutilisable. Il peut aussi contenir d’autres packages (des sous-packages), des fichiers de configuration et des ressources. C'est un <i>NuGet</i> (.nupkg) pour C#, un <i>pip</i> (dossier avec __init__.py) pour Python et un <i>npm</i> (dossier avec package.json) pour JavaScript. Par exemple, le package System.Collections.Immutable de C# fournit des collections immuables pour .NET et le package cross-env de JavaScript permet de définir des variables d'environnement de manière compatible avec toutes les plateformes.</p>
             <h2>Module</h2>
-            <p>Un module est le plus petit composant parmi les cinq, vous pouvez l'importer pour effectuer des opérations ponctuelles. Il n'a pas de dépendances complexes ni de structure imposée. C'est simplement un <b>fichier</b> contenant du code (avec comme extension <b>.cs</b> pour C#, <b>.py</b> pour Python et <b>.js</b> pour JavaScript), comme des fonctions ou des classes, que vous pouvez importer et utiliser. Pour rappel, une <b>variable</b> est un espace nommé dans la mémoire qui permet de stocker une valeur, une <b>fonction</b> est un bloc de code réutilisable qui effectue une action précise et une <b>classe</b> est un modèle pour créer des <b>objets </b>regroupant des <b>attributs</b> (variables "propriétaires") et des <b>méthodes</b> (fonctions "comportementales"). Par exemple, le module math de Python contient des fonctions mathématiques de base, comme sqrt, sin ou log.</p>
+            <p>Un module est le plus petit composant parmi les cinq, vous pouvez l'importer pour effectuer des opérations ponctuelles. Il n'a pas de dépendances complexes ni de structure imposée. C'est simplement un <b>fichier</b> contenant du code (avec comme extension <b>.cs</b> pour C#, <b>.py</b> pour Python et <b>.js</b> pour JavaScript), comme des fonctions ou des classes, que vous pouvez importer et utiliser. Pour rappel, une <b>variable</b> est un espace nommé dans la mémoire permettant de stocker une valeur, une <b>fonction</b> est un bloc de code réutilisable effectuant une action précise et une <b>classe</b> est un modèle pour créer des <b>objets </b>regroupant des <b>attributs</b> (variables "propriétaires") et des <b>méthodes</b> (fonctions "comportementales"). Par exemple, le module math de Python contient des fonctions mathématiques de base, comme sqrt, sin ou log.</p>
             <hr>
             <p>Comprendre ces différences est essentiel pour choisir le bon outil selon vos besoins. Utilisez un framework comme Angular si vous cherchez une solution tout-en-un pour structurer votre projet. Préférez une librairie comme Selenium pour une tâche spécialisée ou une bibliothèque comme Numpy pour un domaine scientifique. Enfin, les modules comme math de Python sont parfaits pour des besoins ponctuels et légers. En maîtrisant ces concepts, vous optimiserez votre approche du développement, en choisissant l'outil adapté à chaque situation. Ci-dessous un tableau récapitulatif à partager avec vos équipes logicielles :</p>
             <br>
@@ -59,7 +59,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                 <tbody>
                     <tr>
                         <td><strong>Framework</strong></td>
-                        <td>Composant logiciel structuré qui fournit une architecture prédéfinie et contrôle le déroulement de l’application</td>
+                        <td>Composant logiciel structuré fournissant une architecture prédéfinie et contrôlant le déroulement de l’application</td>
                         <td>Le développeur écrit du code à insérer dans les emplacements prévus et le framework l’exécute selon son propre cycle de vie.</td>
                     </tr>
                     <tr>
@@ -99,7 +99,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q2">
                         <label for="q2">Assembleur</label>
                     </div>
-                    <div class="card-body">Programme qui prend des instructions informatiques de base et les convertit en un modèle de bits que le processeur de l'ordinateur peut utiliser pour effectuer ses opérations de base</div>
+                    <div class="card-body">Programme prenant des instructions informatiques de base et les convertissant en un modèle de bits que le processeur de l'ordinateur peut utiliser pour effectuer ses opérations de base</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -114,7 +114,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q4">
                         <label for="q4">Bug</label>
                     </div>
-                    <div class="card-body">Erreur dans un programme qui empêche le programme de s'exécuter comme prévu</div>
+                    <div class="card-body">Erreur dans un programme empêchant le programme de s'exécuter comme prévu</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -122,7 +122,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q5">Chatbot</label>
                         <span class="badge badge-definition">IA</span>
                     </div>
-                    <div class="card-body">Programme informatique qui tente de simuler la conversation d'un être humain via des interactions textuelles ou vocales</div>
+                    <div class="card-body">Programme informatique tentant de simuler la conversation d'un être humain via des interactions textuelles ou vocales</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -143,14 +143,14 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q8">
                         <label for="q8">Compilateur</label>
                     </div>
-                    <div class="card-body">Programme qui transforme un code source (généralement écrit dans un langage de programmation, de haut niveau d'abstraction et facilement compréhensible par l'humain) en un code machine (ou binaire)</div>
+                    <div class="card-body">Programme transformant un code source (généralement écrit dans un langage de programmation, de haut niveau d'abstraction et facilement compréhensible par l'humain) en un code machine (ou binaire)</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q9">
                         <label for="q9">Déploiement</label>
                     </div>
-                    <div class="card-body">Ensemble des activités qui rendent un système logiciel disponible pour l'utilisation</div>
+                    <div class="card-body">Ensemble des activités rendant un système logiciel disponible pour l'utilisation</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -164,28 +164,28 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q11">
                         <label for="q11">DNS</label>
                     </div>
-                    <div class="card-body">Service qui traduit les URL en adresses IP</div>
+                    <div class="card-body">Service traduisant les URL en adresses IP</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q12">
                         <label for="q12">Fonction</label>
                     </div>
-                    <div class="card-body">Routine ou morceau de code réutilisable, qui reçoit un ou plusieurs paramètres (ou arguments), les traite et renvoie un résultat</div>
+                    <div class="card-body">Routine ou morceau de code réutilisable, recevant un ou plusieurs paramètres (ou arguments), les traite et renvoie un résultat</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q13">
                         <label for="q13">Full Stack Developer</label>
                     </div>
-                    <div class="card-body">Développeur polyvalent qui a le savoir-faire pour créer de manière autonome des plateformes entièrement fonctionnelles, du front (côté client) au back (côté serveur), en passant par la base de données</div>
+                    <div class="card-body">Développeur polyvalent ayant le savoir-faire pour créer de manière autonome des plateformes entièrement fonctionnelles, du front (côté client) au back (côté serveur), en passant par la base de données</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q14">
                         <label for="q14">Goto</label>
                     </div>
-                    <div class="card-body">Déclaration dans le code source qui transfère le contrôle inconditionnellement à une autre partie d'un programme</div>
+                    <div class="card-body">Déclaration dans le code source transférant le contrôle inconditionnellement à une autre partie d'un programme</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -213,7 +213,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q18">
                         <label for="q18">Interpréteur</label>
                     </div>
-                    <div class="card-body">Programme qui exécute un autre programme écrit dans un langage de programmation autre que le code machine</div>
+                    <div class="card-body">Programme exécutant un autre programme écrit dans un langage de programmation autre que le code machine</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -241,7 +241,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q22">
                         <label for="q22">Programme</label>
                     </div>
-                    <div class="card-body">Algorithme qui a été codé dans un langage pouvant être exécuté par une machine</div>
+                    <div class="card-body">Algorithme ayant été codé dans un langage pouvant être exécuté par une machine</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -342,7 +342,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <span class="badge badge-definition">C#</span>
                     </div>
                     <div class="card-body">
-                        Un delegate est un type qui peut contenir la référence d’une ou plusieurs méthodes ayant la même signature tandis qu'une expression lambda est une méthode anonyme (sans nom) que l’on écrit en ligne de manière courte et expressive. Une fonction lambda en C# est typée selon le delegate auquel elle est associée : Action si elle ne retourne rien, Func si elle retourne une valeur, Predicate si elle retourne un booléen ou un delegate personnalisé si on définit soi-même le type de la fonction (par exemple delegate int Operation(int a, int b)).
+                        Un delegate est un type pouvant contenir la référence d’une ou plusieurs méthodes ayant la même signature tandis qu'une expression lambda est une méthode anonyme (sans nom) que l’on écrit en ligne de manière courte et expressive. Une fonction lambda en C# est typée selon le delegate auquel elle est associée : Action si elle ne retourne rien, Func si elle retourne une valeur, Predicate si elle retourne un booléen ou un delegate personnalisé si on définit soi-même le type de la fonction (par exemple delegate int Operation(int a, int b)).
                     </div>
                 </div>
                 <div class="card">
@@ -521,10 +521,10 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q52">Exchange</label>
                     </div>
                     <div class="card-body">
-                        Un exchange dans un broker de messagerie agit comme un postier qui redistribue les messages aux bonnes boîtes aux lettres (queues) :
+                        Un exchange dans un broker de messagerie agit comme un postier redistribuant les messages aux bonnes boîtes aux lettres (queues) :
                         <ul>
                             <li><b>Direct</b> : le postier remet le courrier exactement à la boîte correspondant à l’adresse (routing key précise)</li>
-                            <li><b>Topic</b> : le postier utilise des adresses avec des motifs, envoyant le courrier aux boîtes qui correspondent à des catégories ou régions spécifiques (wildcards * et #)</li>
+                            <li><b>Topic</b> : le postier utilise des adresses avec des motifs, envoyant le courrier aux boîtes correspondant à des catégories ou régions spécifiques (wildcards * et #)</li>
                             <li><b>Fanout</b> : le postier copie le message à toutes les boîtes reliées, comme une annonce diffusée à tout le monde, sans se soucier de l’adresse</li>
                         </ul>
                     </div>
@@ -535,14 +535,14 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q53">Paradigme</label>
                     </div>
                     <div class="card-body">
-                        Un paradigme est un style ou une approche de programmation qui définit comment organiser le code, représenter les données et structurer l’exécution d’un programme. Chaque paradigme offre une manière différente de penser et d’organiser un programme, et le choix dépend des besoins en modularité, réutilisabilité, réactivité et maintenabilité.
+                        Un paradigme est un style ou une approche de programmation définissant comment organiser le code, représenter les données et structurer l’exécution d’un programme. Chaque paradigme offre une manière différente de penser et d’organiser un programme, et le choix dépend des besoins en modularité, réutilisabilité, réactivité et maintenabilité.
                         Les principaux sont :
                         <ul>
                             <li><b>Procédural</b> : il organise le code en fonctions ou procédures, exécutées séquentiellement, comme suivre une recette de cuisine</li>
                             <li><b>Orienté Objet</b> : il structure le code autour d’objets combinant données et comportements, comme des appareils autonomes avec leurs propres fonctions</li>
-                            <li><b>Orienté Aspect</b> : il sépare les préoccupations transversales (logging, sécurité…) du code principal, comme un fil invisible qui traverse plusieurs objets (décorateur)</li>
+                            <li><b>Orienté Aspect</b> : il sépare les préoccupations transversales (logging, sécurité…) du code principal, comme un fil invisible traversant plusieurs objets (décorateur)</li>
                             <li><b>Orienté Composant</b> : il construit des applications à partir de composants modulaires réutilisables, comme des modules Lego assemblés pour créer un système</li>
-                            <li><b>Orienté Événement</b> : le programme réagit aux événements (clics, messages, signaux), comme des détecteurs qui déclenchent automatiquement des actions</li>
+                            <li><b>Orienté Événement</b> : le programme réagit aux événements (clics, messages, signaux), comme des détecteurs déclenchant automatiquement des actions</li>
                         </ul>
                     </div>
                 </div>
@@ -809,7 +809,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q64">Bien support</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Dans la méthode EBIOS, un bien support désigne une infrastructure matérielle, logicielle ou humaine qui soutient directement les valeurs métier d’une organisation.</div>
+                    <div class="card-body">Dans la méthode EBIOS, un bien support désigne une infrastructure matérielle, logicielle ou humaine soutenant directement les valeurs métier d’une organisation.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -887,7 +887,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q74">
                         <label for="q74">Build vs Run</label>
                     </div>
-                    <div class="card-body">Le build est une étape de développement où le code source est transformé en un exécutable ou en une forme que la machine peut comprendre. Pour un langage compilé (comme C++, C#, Java, Go), le build crée des fichiers binaires ou bytecode. Pour un langage interprété (comme Python, JavaScript), il peut s’agir d’une étape optionnelle, comme le bundling ou la transpilation. Le run, c’est le moment où le programme est réellement lancé. Le système exécute le code déjà construit et produit un résultat (affichage, calcul, interaction...). En bref, le build prépare le programme qui sera exécuté par le run.</div>
+                    <div class="card-body">Le build est une étape de développement où le code source est transformé en un exécutable ou en une forme que la machine peut comprendre. Pour un langage compilé (comme C++, C#, Java, Go), le build crée des fichiers binaires ou bytecode. Pour un langage interprété (comme Python, JavaScript), il peut s’agir d’une étape optionnelle, comme le bundling ou la transpilation. Le run, c’est le moment où le programme est réellement lancé (la compilation). Le système exécute le code déjà construit et produit un résultat (affichage, calcul, interaction...). En bref, le build prépare le programme qui sera exécuté par le run.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -895,7 +895,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q75">Agent IA</label>
                         <span class="badge badge-definition">IA</span>
                     </div>
-                    <div class="card-body">Un agent IA est un système informatique capable de percevoir son environnement, de collecter ou traiter des informations et d’agir de manière autonome (sans intervention humaine directe) pour atteindre des objectifs spécifiques. Il fait preuve de raisonnement, de planification et de mémoire pour prendre des décisions, apprendre et s’adapter, contrairement à une automatisation qui suit des règles fixes et prédéfinies (une pipeline CI/CD par exemple). Un agent IA se caractérise par un trigger ou input (prompt ou vocal), un LLM (Large Language Model) comme ChatGPT ou Gemini, une mémoire (une base de connaissances à court ou long terme), des outils et un output (texte, image, graphique, prédiction, classification). Un agent conversationnel est un sous-ensemble spécialisé d’agent IA, centré sur la communication humaine.</div>
+                    <div class="card-body">Un agent IA est un système informatique capable de percevoir son environnement, de collecter ou traiter des informations et d’agir de manière autonome (sans intervention humaine directe) pour atteindre des objectifs spécifiques. Il fait preuve de raisonnement, de planification et de mémoire pour prendre des décisions, apprendre et s’adapter, contrairement à une automatisation qui suit des règles fixes et prédéfinies (une pipeline CI/CD par exemple). Un agent IA se caractérise par un trigger ou input (prompt ou vocal), un LLM (Large Language Model) comme ChatGPT ou Gemini, une mémoire (une base de connaissances à court ou long terme), des outils et un output (texte, image, graphique, prédiction, classification). Un agent IA va au-delà du simple modèle de langage : là où une IA classique pense et génère du contenu, lui agit comme un "cerveau avec des mains" : il utilise des outils ou une base de connaissances, enchaîne des étapes logiques et réalise des tâches complexes de manière autonome. Concrètement, il repose sur trois ingrédients clés : un objectif clair, des outils à disposition (Internet, API, logiciels) et un moteur de décision qui lui permet d'adapter sa stratégie en temps réel. C'est en somme un assistant numérique autonome capable de prendre en charge des tâches répétitives ou complexes, tout en restant encadré par les règles et les limites que l'utilisateur lui fixe. Un agent conversationnel est un sous-ensemble spécialisé d’agent IA, centré sur la communication humaine.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -911,7 +911,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q77">Prompt engineering vs Context engineering</label>
                         <span class="badge badge-definition">IA</span>
                     </div>
-                    <div class="card-body">Le prompt engineering se définit par la conception et la formulation d'une requête que l’on envoie à un modèle d’IA pour obtenir une réponse précise et qualitative dans un format particulier. Le context engineering va au-delà du simple prompt : c'est la gestion et l'optimisation du contexte que l’IA utilise pour produire sa réponse, l'objectif étant de fournir les informations nécessaires (mémoire, documents, historique, données externes) pour améliorer la cohérence et la pertinence des résultats sur plusieurs interactions.</div>
+                    <div class="card-body">Le prompt engineering se définit par la conception et la formulation d'une requête (un prompt) que l’on envoie à un modèle d’IA pour obtenir une réponse précise et qualitative dans un format particulier. Le context engineering va au-delà du simple prompt : c'est la gestion et l'optimisation du contexte que l’IA utilise pour produire sa réponse, l'objectif étant de fournir les informations nécessaires (mémoire, documents, historique, données externes) pour améliorer la cohérence et la pertinence des résultats sur plusieurs interactions.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -965,7 +965,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q84">
                         <label for="q84">Bundling</label>
                     </div>
-                    <div class="card-body">Le bundling est une étape qui consiste à rassembler plusieurs fichiers de code source et de dépendances en un seul fichier (ou quelques fichiers optimisés). Il est souvent combiné avec la minification (réduction de la taille du code) et le tree shaking (élimination du code inutile).</div>
+                    <div class="card-body">Le bundling est une étape consistant à rassembler plusieurs fichiers de code source et de dépendances en un seul fichier (ou quelques fichiers optimisés). Il est souvent combiné avec la minification (réduction de la taille du code) et le tree shaking (élimination du code inutile).</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1059,14 +1059,14 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q96">
                         <label for="q96">Conformité</label>
                     </div>
-                    <div class="card-body">La conformité (ou compliance en anglais) désigne le fait pour une organisation de respecter les standards internes et les régulations externes qui s’appliquent à son activité. Cela inclut les lois, les règles éthiques, les politiques internes ainsi que les standards internationaux. Par exemple, les normes ISO (International Organization for Standardization) ou IEC (International Electrotechnical Commission) comme ISO 9001 (qualité), ISO 14001 (environnement), ISO 27001 (sécurité de l’information) ou ISO 42001 (IA) aident les entreprises à structurer leurs pratiques pour rester conformes et améliorer leurs performances. En matière de protection des données, la conformité au RGPD (Règlement général sur la protection des données) est essentielle.</div>
+                    <div class="card-body">La conformité (ou compliance en anglais) désigne le fait pour une organisation de respecter les standards internes et les régulations externes s’appliquant à son activité. Cela inclut les lois, les règles éthiques, les politiques internes ainsi que les standards internationaux. Par exemple, les normes ISO (International Organization for Standardization) ou IEC (International Electrotechnical Commission) comme ISO 9001 (qualité), ISO 14001 (environnement), ISO 27001 (sécurité de l’information) ou ISO 42001 (IA) aident les entreprises à structurer leurs pratiques pour rester conformes et améliorer leurs performances. En matière de protection des données, la conformité au RGPD (Règlement général sur la protection des données) est essentielle.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q97">
                         <label for="q97">Log</label>
                     </div>
-                    <div class="card-body">Un log est un journal d'enregistrement ou fichier de traces qui conserve des informations sur les événements qui sont survenus dans un système, une application ou un serveur. Il permet souvent d'identifier des vulnérabilités et des potentielles failles de sécurité ou de performance.</div>
+                    <div class="card-body">Un log est un journal d'enregistrement ou fichier de traces conservant des informations sur les événements qui sont survenus dans un système, une application ou un serveur. Il permet souvent d'identifier des vulnérabilités et des potentielles failles de sécurité ou de performance.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1090,7 +1090,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q100">Analyseur de paquets</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Un analyseur de paquets (ou packet sniffer en anglais) est un outil qui capture et inspecte le trafic réseau circulant sur une interface (filaire ou sans fil). Il permet d’observer en détail les paquets de données échangés entre machines, pour des usages légitimes (diagnostic, sécurité, analyse réseau) ou malveillants (espionnage, vol d’informations). Le plus connu est Wireshark.</div>
+                    <div class="card-body">Un analyseur de paquets (ou packet sniffer en anglais) est un outil capturant et inspectant le trafic réseau circulant sur une interface (filaire ou sans fil). Il permet d’observer en détail les paquets de données échangés entre machines, pour des usages légitimes (diagnostic, sécurité, analyse réseau) ou malveillants (espionnage, vol d’informations). Le plus connu est Wireshark.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1127,7 +1127,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q105">Pentest</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Un pentest (ou test de pénétration) est un test qui simule une attaque permettant d’identifier les vulnérabilités des systèmes, réseaux, sites Web, applications et processus. Il s’agit d’une évaluation approfondie des risques, axée sur les menaces (externes et internes) ainsi que les faiblesses existantes.</div>
+                    <div class="card-body">Un pentest (ou test de pénétration) est un test simulant une attaque permettant d’identifier les vulnérabilités des systèmes, réseaux, sites Web, applications et processus. Il s’agit d’une évaluation approfondie des risques, axée sur les menaces (externes et internes) ainsi que les faiblesses existantes.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1172,7 +1172,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q111">Trojan</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Un trojan (ou "cheval de Troie") est un type de malware qui se fait passer pour un logiciel légitime afin de tromper l’utilisateur et l’inciter à l’exécuter. Une fois installé, il permet à un attaquant d’accéder à distance au système, de voler des données, d’installer d’autres logiciels malveillants ou de contrôler la machine à l’insu de l’utilisateur.</div>
+                    <div class="card-body">Un trojan (ou "cheval de Troie") est un type de malware se faisant passer pour un logiciel légitime afin de tromper l’utilisateur et l’inciter à l’exécuter. Une fois installé, il permet à un attaquant d’accéder à distance au système, de voler des données, d’installer d’autres logiciels malveillants ou de contrôler la machine à l’insu de l’utilisateur.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1201,7 +1201,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q113">
                         <label for="q113">OSI</label>
                     </div>
-                    <div class="card-body">OSI (Open Systems Interconnection) est un framework qui décrit les fonctions d’un système réseau (ISO 7498). Il catégorise les fonctions informatiques des différents composants du réseau, en décrivant les règles et les exigences nécessaires pour prendre en charge l’interopérabilité du logiciel et du matériel qui composent le réseau.
+                    <div class="card-body">OSI (Open Systems Interconnection) est un framework décrivant les fonctions d’un système réseau (ISO 7498). Il catégorise les fonctions informatiques des différents composants du réseau, en décrivant les règles et les exigences nécessaires pour prendre en charge l’interopérabilité du logiciel et du matériel qui composent le réseau.
                         Les 7 couches de modèle sont particulièrement utiles pour visualiser le flux de données de l’expéditeur au destinataire. La communication d’une personne à une autre passe de la couche 7 à la couche 1. Chaque couche effectue une tâche spécifique avant d’envoyer les données à la couche suivante.
                         <ul>
                             <li><b>Physique</b> : Elle concerne le matériel et le support de transmission. Elle définit comment les bits (0 et 1) sont codés et transmis, ainsi que les normes électriques ou optiques pour les signaux. Exemple : câbles, ondes radio, ports, Wi-Fi, fibres optiques.</li>
@@ -1219,10 +1219,10 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q114">
                         <label for="q114">TCP/IP</label>
                     </div>
-                    <div class="card-body">TCP/IP (Transmission Control Protocol/) est un modèle alternatif au modèle OSI. TCP et IP sont des protocoles distincts qui permettent ensemble de garantir la transmission effective des données à leur destination prévue au sein d’un réseau :  IP obtient et définit l’adresse de l’application ou du périphérique auquel les données doivent être envoyées et TCP est ensuite chargé du transport et du routage des données à travers l’architecture réseau. 
+                    <div class="card-body">TCP/IP (Transmission Control Protocol/) est un modèle alternatif au modèle OSI. TCP et IP sont des protocoles distincts permettant ensemble de garantir la transmission effective des données à leur destination prévue au sein d’un réseau :  IP obtient et définit l’adresse de l’application ou du périphérique auquel les données doivent être envoyées et TCP est ensuite chargé du transport et du routage des données à travers l’architecture réseau. 
                         Les 4 couches du modèle sont : 
                         <ul>
-                            <li><b>Liaison de données</b> : Elle combine les fonctions physique et liaison du modèle OSI, gérant la transmission fiable des trames, la signalisation, l’adressage matériel et le contrôle des erreurs via les périphériques et technologies réseau comme les cartes NIC, câbles Ethernet et Wi‑Fi.</li>
+                            <li><b>Liaison de données</b> : Elle combine les fonctions physique et liaison du modèle OSI, gérant la transmission fiable des trames, la signalisation, l’adressage matériel et le contrôle des erreurs via les périphériques et technologies réseau comme les cartes NIC, câbles Ethernet et Wi-Fi.</li>
                             <li><b>Internet</b> : Elle correspond à la couche réseau du modèle OSI. Elle est responsable de l’adressage logique (IP) et du routage des paquets entre différents réseaux, le transfert des données d’un réseau à l’autre, en s’assurant que les paquets atteignent leur destination, ainsi que la fragmentation et le réassemblage des paquets si nécessaire.</li>
                             <li><b>Transport</b> : Elle correspond à la couche transport du modèle OSI. Elle garantit la communication fiable de bout en bout entre deux hôtes : segmentation des données en paquets ou segments, numérotation et réassemblage, contrôle du flux pour éviter de saturer le destinataire et détection/correction des erreurs, retransmission si nécessaire.</li>
                             <li><b>Application</b> : Elle regroupe les fonctions des couches session, présentation et application du modèle OSI. Elle fournit l’interface entre les applications et le réseau : elle permet aux logiciels et utilisateurs d’envoyer et recevoir des données sur Internet, gère les protocoles applicatifs et s’occupe de la mise en forme et de l’interprétation des données pour que les applications puissent les utiliser.</li>                            
@@ -1249,7 +1249,13 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q117">XSS</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Une XSS (Cross Site Scripting) est une vulnérabilité qui se produit lorsque les applications Web permettent aux utilisateurs de soumettre un code personnalisé (souvent en JavaScript) dans des chemins d’URL, altérant l’affichage ou les interactions d'un site Web. L’attaquant s’appuie ensuite sur les victimes qui visitent la page à partir d’un navigateur pour exécuter le code. Une organisation peut prévenir la vulnérabilité en utilisant un WAF (Web Application Firewall) pour atténuer et bloquer les attaques, tandis que les développeurs peuvent déployer une CSP (Content Security Policy) et utiliser des requêtes conditionnelles HTTP.</div>
+                    <div class="card-body">Une XSS (Cross Site Scripting) est une vulnérabilité se produisant lorsque les applications Web permettent aux utilisateurs de soumettre un code personnalisé (souvent en JavaScript) dans des chemins d’URL, altérant l’affichage ou les interactions d'un site Web. L’attaquant s’appuie ensuite sur les victimes qui visitent la page à partir d’un navigateur pour exécuter le code. Une organisation peut prévenir la vulnérabilité en utilisant un WAF (Web Application Firewall) pour atténuer et bloquer les attaques, tandis que les développeurs peuvent déployer une CSP (Content Security Policy) et utiliser des requêtes conditionnelles HTTP. Voici les trois types de XSS :
+                        <ul>
+                            <li><b>Stored</b> (persistant) : le script malveillant est enregistré sur le serveur (base de données, commentaires, profil, forum, blog...) et s’exécute automatiquement quand un utilisateur consulte la page</li>
+                            <li><b>Reflected</b> (non persistant) : le script vient de la requête utilisateur (URL, formulaire) et est immédiatement renvoyé dans la réponse sans être stocké</li>
+                            <li><b>DOM-based</b> : l’attaque se produit côté navigateur (client) via le JavaScript de la page, le serveur n’est pas directement impliqué</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1265,7 +1271,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q119">Pare-feu</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Un pare-feu (firewall en anglais) est un dispositif de sécurité qui contrôle le trafic réseau entre un ordinateur, un réseau interne et Internet. Son rôle principal est de bloquer les connexions non autorisées tout en permettant celles qui sont légitimes. Il peut être physique, logiciel ou cloud-native.</div>
+                    <div class="card-body">Un pare-feu (firewall en anglais) est un dispositif de sécurité contrôlant le trafic réseau entre un ordinateur, un réseau interne et Internet. Son rôle principal est de bloquer les connexions non autorisées tout en permettant celles qui sont légitimes. Il peut être physique, logiciel ou cloud-native.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1273,7 +1279,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q120">Hachage</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Le hachage est une opération mathématique qui transforme une donnée (comme un mot de passe) en une empreinte unique et irréversible appelée valeur de hachage. Cela permet de vérifier l'intégrité d'une donnée et son stockage sans la garder en clair. En effet, lors d'une connexion, le mot de passe saisi est haché puis le résultat est comparé à celui enregistré.</div>
+                    <div class="card-body">Le hachage est une opération mathématique transformant une donnée (comme un mot de passe) en une empreinte unique et irréversible appelée valeur de hachage. Cela permet de vérifier l'intégrité d'une donnée et son stockage sans la garder en clair. En effet, lors d'une connexion, le mot de passe saisi est haché puis le résultat est comparé à celui enregistré.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1288,7 +1294,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q122">
                         <label for="q122">CMS</label>
                     </div>
-                    <div class="card-body">Application qui permet de créer, gérer et publier facilement du contenu sur un site Web, sans avoir besoin de programmer (WordPress, Magento, Drupal)</div>
+                    <div class="card-body">Application permettant de créer, gérer et publier facilement du contenu sur un site Web, sans avoir besoin de programmer (WordPress, Magento, Drupal)</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1301,17 +1307,17 @@ permalink: "articles/du-voc-de-dev_fr.html"
                     <div class="card-header">
                         <input type="checkbox" id="q124">
                         <label for="q124">Image vs Conteneur</label>
-                        <span class="badge badge-definition">Docker</span>
+                        <span class="badge badge-definition">DevOps</span>
                     </div>
-                    <div class="card-body">Une image Docker est un modèle statique et immuable (en lecture seule) qui contient le système de fichiers, le code de l’application, les dépendances et les configurations nécessaires pour exécuter un conteneur. Un conteneur est une instance en cours d’exécution d’une image. Il partage le même noyau (kernel) mais peut avoir son propre état et système de fichiers modifiable. Les changements dans un conteneur ne modifient pas l’image source, sauf si l’on crée une nouvelle image à partir de ce conteneur.</div>
+                    <div class="card-body">Une image Docker est un modèle statique et immuable (en lecture seule) contenant le système de fichiers, le code de l’application, les dépendances et les configurations nécessaires pour exécuter un conteneur. Un conteneur (ou container en anglais) est une instance en cours d’exécution d’une image. Il partage le même noyau (kernel) mais peut avoir son propre état et système de fichiers modifiable. Les changements dans un conteneur ne modifient pas l’image source, sauf si l’on crée une nouvelle image à partir de ce conteneur.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q125">
                         <label for="q125">Conteneur vs VM</label>
-                        <span class="badge badge-definition">Docker</span>
+                        <span class="badge badge-definition">DevOps</span>
                     </div>
-                    <div class="card-body">Un conteneur Docker permettent de déployer rapidement des applications Web de manière légère et portable, tandis qu'une VM (Virtual Machine) offre une isolation complète mais est plus lourde et lente. L’utilisation de conteneurs est idéale pour les environnements de développement modernes et les microservices. À l'inverse, les machines virtuelles sont utiles pour tester différentes configurations ou exécuter plusieurs OS (Operating System) sur un même serveur.</div>
+                    <div class="card-body">Un conteneur permettent de déployer rapidement des applications Web de manière légère et portable, tandis qu'une VM (Virtual Machine) offre une isolation complète mais est plus lourde et lente. L’utilisation de conteneurs est idéale pour les environnements de développement modernes et les microservices. À l'inverse, les machines virtuelles sont utiles pour tester différentes configurations ou exécuter plusieurs OS (Operating System) sur un même serveur.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1326,7 +1332,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q127">IDS</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Un IDS (Intrusion Detection System) est un outil qui surveille le trafic réseau ou les activités d’un système pour détecter des comportements suspects ou des attaques. L’IDS n’empêche pas directement les attaques (c’est le rôle d’un WAF), mais il alerte les administrateurs pour qu’ils réagissent rapidement.</div>
+                    <div class="card-body">Un IDS (Intrusion Detection System) est un outil surveillant le trafic réseau ou les activités d’un système pour détecter des comportements suspects ou des attaques. L’IDS n’empêche pas directement les attaques (c’est le rôle d’un WAF), mais il alerte les administrateurs pour qu’ils réagissent rapidement.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1348,7 +1354,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q130">
                         <label for="q130">Passerelle API</label>
                     </div>
-                    <div class="card-body">Une passerelle API (API gateway en anglais) est un service qui agit comme un intermédiaire entre les clients (applications, navigateurs...) et les API d’un serveur. Elle centralise et sécurise les échanges, contrôle l’accès, limite le trafic et peut filtrer les requêtes malveillantes.</div>
+                    <div class="card-body">Une passerelle API (API gateway en anglais) est un service agissant comme un intermédiaire entre les clients (applications, navigateurs...) et les API d’un serveur. Elle centralise et sécurise les échanges, contrôle l’accès, limite le trafic et peut filtrer les requêtes malveillantes.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1379,33 +1385,34 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q134">
                         <label for="q134">Hyperviseur</label>
                     </div>
-                    <div class="card-body">Un hyperviseur est un logiciel qui permet de créer et gérer des machines virtuelles (VM) sur un même serveur physique. Il virtualise le matériel (CPU, mémoire, stockage) pour que chaque VM puisse fonctionner comme un ordinateur indépendant avec son propre système d’exploitation. Il est soit bare-metal (installé directement sur le matériel, très performant et sécurisé) comme Hyper-V soit hosted (installé sur un OS existant, plus facile à utiliser mais moins performant) comme VirtualBox. Le Type 1 est idéal pour la production et le Type 2 pour le développement ou les tests.</div>
+                    <div class="card-body">Un hyperviseur est un logiciel permettant de créer et gérer des machines virtuelles (VM) sur un même serveur physique. Il virtualise le matériel (CPU, mémoire, stockage) pour que chaque VM puisse fonctionner comme un ordinateur indépendant avec son propre système d’exploitation. Il est soit bare-metal (installé directement sur le matériel, très performant et sécurisé) comme Hyper-V soit hosted (installé sur un OS existant, plus facile à utiliser mais moins performant) comme VirtualBox. Le Type 1 est idéal pour la production et le Type 2 pour le développement ou les tests.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q135">
                         <label for="q135">Hook</label>
                     </div>
-                    <div class="card-body">Point d’accroche (crochet) dans un logiciel ou un système qui permet d’exécuter automatiquement du code lorsqu’un événement spécifique se produit</div>
+                    <div class="card-body">Point d’accroche (crochet) dans un logiciel ou un système permettant d’exécuter automatiquement du code lorsqu’un événement spécifique se produit</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q136">
                         <label for="q136">TCP vs UDP</label>
                     </div>
-                    <div class="card-body">TCP (Transmission Control Protocol) est un protocole orienté connexion qui assure la transmission fiable et ordonnée des données entre deux dispositifs sur un réseau, avec contrôle d’erreurs et retransmissions si nécessaire (emails, transfert de fichiers, navigation Web). À l'inverse, UDP (User Datagram Protocol) est un  protocole sans connexion qui permet l’envoi rapide de paquets indépendants, sans garantie de livraison ni ordre, adapté aux applications nécessitant faible latence (streaming, jeux vidéo, VoIP).</div>
+                    <div class="card-body">TCP (Transmission Control Protocol) est un protocole orienté connexion assurant la transmission fiable et ordonnée des données entre deux dispositifs sur un réseau, avec contrôle d’erreurs et retransmissions si nécessaire (emails, transfert de fichiers, navigation Web). À l'inverse, UDP (User Datagram Protocol) est un  protocole sans connexion qui permet l’envoi rapide de paquets indépendants, sans garantie de livraison ni ordre, adapté aux applications nécessitant faible latence (streaming, jeux vidéo, VoIP).</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q137">
                         <label for="q137">IP</label>
                     </div>
-                    <div class="card-body">IP (Internet Protocol) est un protocole de communication de la couche réseau qui permet d’identifier les dispositifs sur un réseau et de transmettre des paquets de données d’une machine à une autre en utilisant des adresses logiques uniques (IPv4 ou IPv6). En bref, IP définit où envoyer les données et comment les acheminer à travers les réseaux.</div>
+                    <div class="card-body">IP (Internet Protocol) est un protocole de communication de la couche réseau permettant d’identifier les dispositifs sur un réseau et de transmettre des paquets de données d’une machine à une autre en utilisant des adresses logiques uniques (IPv4 ou IPv6). En bref, IP définit où envoyer les données et comment les acheminer à travers les réseaux.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q138">
                         <label for="q138">Feature</label>
+                        <span class="badge badge-definition">IA</span>
                     </div>
                     <div class="card-body">En informatique, une feature est une fonction ou une amélioration spécifique apportée à un programme ou une application. En IA ou data science, une feature est une variable ou un attribut utilisé pour entraîner un modèle.</div>
                 </div>
@@ -1519,7 +1526,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q153">
                         <label for="q153">IPv4 vs IPv6</label>
                     </div>
-                    <div class="card-body">Le DHCP (Dynamic Host Configuration Protocol) est un protocole réseau qui permet à un appareil (ordinateur, smartphone, imprimante...) d’obtenir automatiquement une adresse IP et d’autres informations de configuration réseau nécessaires pour communiquer sur un réseau. Une adresse IPv4 est composée de 4 nombres (0-255) séparés par des points tandis qu'une adresse IPv6 est composée de 8 groupes de 4 caractères hexadécimaux séparés par des deux points. IPv6 a été créé pour résoudre la pénurie d’adresses IPv4. Il offre des améliorations en sécurité, mobilité et efficacité de routage. Dans les réseaux modernes, les deux protocoles cœxistent souvent grâce à des mécanismes de transition.</div>
+                    <div class="card-body">Le DHCP (Dynamic Host Configuration Protocol) est un protocole réseau permettant à un appareil (ordinateur, smartphone, imprimante...) d’obtenir automatiquement une adresse IP et d’autres informations de configuration réseau nécessaires pour communiquer sur un réseau. Une adresse IPv4 est composée de 4 nombres (0-255) séparés par des points tandis qu'une adresse IPv6 est composée de 8 groupes de 4 caractères hexadécimaux séparés par des deux points. IPv6 a été créé pour résoudre la pénurie d’adresses IPv4. Il offre des améliorations en sécurité, mobilité et efficacité de routage. Dans les réseaux modernes, les deux protocoles cœxistent souvent grâce à des mécanismes de transition.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1627,14 +1634,14 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q168">
                         <label for="q168">Sandbox</label>
                     </div>
-                    <div class="card-body">Une sandbox (bac à sable en français) est un type d’environnement de test qui permet d’exécuter des logiciels ou des programmes séparément du réseau principal. Elle est couramment utilisée pour tester des correctifs (patchs), identifier et corriger des bugs ou détecter des vulnérabilités. Elle peut également servir à évaluer des logiciels suspects, analyser des fichiers contenant du code malveillant et simuler des scénarios d’attaque.</div>
+                    <div class="card-body">Une sandbox (bac à sable en français) est un type d’environnement de test permettant d’exécuter des logiciels ou des programmes séparément du réseau principal. Elle est couramment utilisée pour tester des correctifs (patchs), identifier et corriger des bugs ou détecter des vulnérabilités. Elle peut également servir à évaluer des logiciels suspects, analyser des fichiers contenant du code malveillant et simuler des scénarios d’attaque.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q169">
                         <label for="q169">Application</label>
                     </div>
-                    <div class="card-body">Programme qui réalise une tâche spécifique</div>
+                    <div class="card-body">Programme réalisant une tâche spécifique</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1662,14 +1669,14 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q173">
                         <label for="q173">Utilisateur</label>
                     </div>
-                    <div class="card-body">Personne qui interagit avec un ordinateur, une tablette ou un téléphone portable</div>
+                    <div class="card-body">Personne interagissant avec un ordinateur, une tablette ou un téléphone portable</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q174">
                         <label for="q174">Shell</label>
                     </div>
-                    <div class="card-body">Un shell est un programme qui sert d’interface entre l’utilisateur et le système d’exploitation (OS). Il permet de lancer des commandes, exécuter des programmes, gérer des fichiers et automatiser des tâches.</div>
+                    <div class="card-body">Un shell est un programme servant d’interface entre l’utilisateur et le système d’exploitation (OS). Il permet de lancer des commandes, exécuter des programmes, gérer des fichiers et automatiser des tâches.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1677,14 +1684,14 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q175">Kernel</label>
                         <span class="badge badge-definition">Linux</span>
                     </div>
-                    <div class="card-body">Un kernel (ou noyau) est le composant du système d’exploitation Linux qui gère les processus et la mémoire. Il communique avec les applications pour transmettre et traiter leurs commandes. Il contrôle les principales fonctions du matériel, ce qui permet d’exécuter les tâches de manière plus efficace.</div>
+                    <div class="card-body">Un kernel (ou noyau) est le composant du système d’exploitation Linux gérant les processus et la mémoire. Il communique avec les applications pour transmettre et traiter leurs commandes. Il contrôle les principales fonctions du matériel, ce qui permet d’exécuter les tâches de manière plus efficace.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <input type="checkbox" id="q176">
                         <label for="q176">Répertoire</label>
                     </div>
-                    <div class="card-body">Un répertoire (directory en anglais) est un fichier spécial qui sert à organiser l’emplacement des autres fichiers. On l’appelle aussi parfois un dossier (folder en anglais). Un répertoire peut contenir des fichiers, mais aussi d’autres répertoires, formant ainsi une structure hiérarchique.</div>
+                    <div class="card-body">Un répertoire (directory en anglais) est un fichier spécial servant à organiser l’emplacement des autres fichiers. On l’appelle aussi parfois un dossier (folder en anglais). Un répertoire peut contenir des fichiers, mais aussi d’autres répertoires, formant ainsi une structure hiérarchique.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1719,7 +1726,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q181">
                         <label for="q181">Carte graphique</label>
                     </div>
-                    <div class="card-body">Une carte graphique est un composant matériel qui gère l’affichage des images et des vidéos sur l’écran. Elle possède son propre processeur, appelé GPU (Graphics Processing Unit), qui accélère le rendu graphique, notamment pour les jeux, le montage vidéo ou les logiciels de modélisation 3D. Certaines cartes graphiques sont intégrées au processeur, d’autres sont dédiées pour plus de puissance.</div>
+                    <div class="card-body">Une carte graphique est un composant matériel gérant l’affichage des images et des vidéos sur l’écran. Elle possède son propre processeur, appelé GPU (Graphics Processing Unit), qui accélère le rendu graphique, notamment pour les jeux, le montage vidéo ou les logiciels de modélisation 3D. Certaines cartes graphiques sont intégrées au processeur, d’autres sont dédiées pour plus de puissance.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1754,7 +1761,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q186">
                         <label for="q186">Commande</label>
                     </div>
-                    <div class="card-body">Instruction qui communique à un ordinateur de réaliser une tâche</div>
+                    <div class="card-body">Instruction communiquant à un ordinateur de réaliser une tâche</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1776,7 +1783,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q189">
                         <label for="q189">Plugin</label>
                     </div>
-                    <div class="card-body">Un plugin (ou extension) est un module complémentaire qui s’intègre à un logiciel pour lui ajouter des fonctionnalités spécifiques, souvent de manière optionnelle, sans modifier le programme principal.</div>
+                    <div class="card-body">Un plugin (ou extension) est un module complémentaire s’intégrant à un logiciel pour lui ajouter des fonctionnalités spécifiques, souvent de manière optionnelle, sans modifier le programme principal.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1784,7 +1791,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q190">Permission</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Règle qui définit ce qu’un utilisateur ou un groupe a le droit de faire sur un fichier, un dossier ou une ressource : lire (r), modifier (w), exécuter ou accéder (x)</div>
+                    <div class="card-body">Règle définissant ce qu’un utilisateur ou un groupe a le droit de faire sur un fichier, un dossier ou une ressource : lire (r), modifier (w), exécuter ou accéder (x)</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1814,7 +1821,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q194">
                         <label for="q194">Opérateur</label>
                     </div>
-                    <div class="card-body">Symbole ou mot clé qui représente une opération</div>
+                    <div class="card-body">Symbole ou mot clé représentant une opération</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1844,7 +1851,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q198">
                         <label for="q198">Syntaxe</label>
                     </div>
-                    <div class="card-body">Ensemble des règles qui détermine ce qui est correctement structuré dans un langage de programmation</div>
+                    <div class="card-body">Ensemble des règles déterminant ce qui est correctement structuré dans un langage de programmation</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1866,7 +1873,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q201">
                         <label for="q201">Gouvernance</label>
                     </div>
-                    <div class="card-body">La gouvernance désigne l'ensemble de processus qui définissent la manière dont une organisation gère l’information. Elle comprend souvent des politiques qui précisent comment maintenir la confidentialité, l’exactitude, la disponibilité et la sécurité des données tout au long de leur cycle de vie.</div>
+                    <div class="card-body">La gouvernance désigne l'ensemble de processus définissant la manière dont une organisation gère l’information. Elle comprend souvent des politiques qui précisent comment maintenir la confidentialité, l’exactitude, la disponibilité et la sécurité des données tout au long de leur cycle de vie.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1959,7 +1966,17 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q213">SQLi</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Une SQLi (ou injection SQL) est une attaque qui exécute des requêtes inattendues vers une base de données.</div>
+                    <div class="card-body">Une SQLi (ou injection SQL) est une attaque exécutant des requêtes inattendues vers une base de données. Voici des exemples classiques :
+                        <ul>
+                            <li><b>Error-based</b> : provoquer une erreur SQL pour afficher des infos</li>
+                            <li><b>Union-based</b> : ajouter un UNION pour afficher des données d’une autre table</li>
+                            <li><b>Blind boolean</b> : deviner les infos selon les réponses vrai/faux de la page</li>
+                            <li><b>Blind time-based</b> : utiliser un délai de réponse pour tester une condition</li>
+                            <li><b>Out-of-band</b> : les données sont envoyées via un autre canal externe.</li>
+                            <li><b>Stored</b> : l’injection est enregistrée puis exécutée plus tard</li>
+                            <li><b>Second-order</b>  : la donnée injectée devient dangereuse quand elle est réutilisée</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -2008,7 +2025,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q220">
                         <label for="q220">Mapping</label>
                     </div>
-                    <div class="card-body">En informatique, un mapping désigne l’action d’établir une correspondance entre deux ensembles d’éléments. C’est une sorte de "table de relation" qui indique comment un élément d’un système correspond à un élément d’un autre système.</div>
+                    <div class="card-body">En informatique, un mapping désigne l’action d’établir une correspondance entre deux ensembles d’éléments. C’est une sorte de "table de relation" indiquant comment un élément d’un système correspond à un élément d’un autre système.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -2031,7 +2048,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q223">Signature</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Donnée chiffrée qui garantit l’authenticité et l’intégrité d’un message</div>
+                    <div class="card-body">Donnée chiffrée garantissant l’authenticité et l’intégrité d’un message</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -2137,7 +2154,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <input type="checkbox" id="q238">
                         <label for="q238">Breakpoint</label>
                     </div>
-                    <div class="card-body">Marqueur (point d'arrêt en français) placé dans le code qui indique au débogueur où arrêter l’exécution d'un programme</div>
+                    <div class="card-body">Marqueur (point d'arrêt en français) placé dans le code indiquant au débogueur où arrêter l’exécution d'un programme</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -2222,6 +2239,187 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q250">Eager loading vs Lazy loading</label>
                     </div>
                     <div class="card-body">L'eager loading charge toutes les données associées dès le départ, pour éviter les requêtes répétitives tandis que le lazy loading ne charge les données associées que lorsqu’elles sont réellement demandées, économisant mémoire et temps de chargement initial.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q251">
+                        <label for="q251">Docker vs Kubernetes</label>
+                        <span class="badge badge-definition">DevOps</span>
+                    </div>
+                    <div class="card-body">Docker et Kubernetes sont liés mais n’ont pas le même rôle. Docker sert à créer et exécuter des conteneurs. Il permet d’emballer une application avec tout ce dont elle a besoin (code, dépendances, configuration) pour qu’elle fonctionne de la même manière quel que soit l'environnement. Kubernetes, lui, sert à gérer et orchestrer des conteneurs à grande échelle. Il s’occupe par exemple de démarrer automatiquement les conteneurs, les répartir sur des serveurs, les redémarrer en cas de panne et gérer la montée en charge.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q252">
+                        <label for="q252">Jenkins vs Artifactory</label>
+                        <span class="badge badge-definition">DevOps</span>
+                    </div>
+                    <div class="card-body">Jenkins et Artifactory sont souvent utilisés ensemble mais ont des rôles très différents. Jenkins est un outil de CI/CD automatisant les étapes du cycle de développement comme compiler le code, lancer les tests, construire des images Docker et déclencher les déploiements. Artifactory, quant à lui, est un gestionnaire de dépôts d’artefacts servant à stocker, versionner et distribuer les fichiers produits par les builds (packages, librairies, images, binaires).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q253">
+                        <label for="q253">IA classique vs IA générative</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">L’IA classique analyse des données pour repérer des schémas, classer des informations et faire des prédictions, un peu comme une bibliothécaire qui organise et retrouve rapidement la localisation des livres et les contenus désirés. L’IA générative, quant à elle, produit du contenu inédit (textes, images ou code) à partir de ce qu’elle a appris, à la manière d’un auteur s’inspirant de ses lectures pour créer quelque chose de nouveau. Pour formuler un prompt efficace de sorte à avoir une réponse claire, précise et exploitable (et non une réponse vague ou générale, souvent complexe et imprévisible), il y a six règles clés : être précis, donner du contexte, indiquer le format attendu (tableaux, images, diagrammes, listes à puces, résumé de texte), attribuer un rôle (débutant, confirmé, expert) et/ou le public visé, affiner par itération et fournir des modèles ou des exemples. Une recette de cuisine détaillée a plus de valeur ajoutée qu'un simple "fais-moi un gâteau" de même qu'un collaborateur correctement briefé produira un travail bien plus pertinent et abouti que s'il est laissé sans directive claire. Avec une approche hybride, un agent IA se voit muni d'une paire de lunettes lui permettant d'observer pour mieux comprendre son environnement et d'un crayon pour pouvoir innover à partir de son apprentissage (ou entraînement).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q254">
+                        <label for="q254">Malloc</label>
+                        <span class="badge badge-definition">C</span>
+                    </div>
+                    <div class="card-body">La fonction malloc (memory allocation) est une fonction du langage C permettant d’allouer dynamiquement de la mémoire pendant l’exécution d’un programme. Elle réserve un bloc de mémoire dans le tas (heap) et renvoie un pointeur vers ce bloc. La mémoire allouée avec malloc n’est pas libérée automatiquement : il faut utiliser free().</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q255">
+                        <label for="q255">Machine learning vs Deep learning</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">Le machine learning permet aux algorithmes d’apprendre à partir de données pour faire des prédictions ou prendre des décisions sans être explicitement programmés. Cela repose souvent sur des modèles relativement simples comme les arbres de décision, les régressions ou les SVM (Support Vector Machine). Le deep learning est une sous-catégorie du machine learning utilisant des réseaux de neurones profonds pour traiter des données complexes comme des images, du texte ou de la voix.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q256">
+                        <label for="q256">Apprentissage supervisé vs Apprentissage non-supervisé</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">L’apprentissage supervisé consiste à entraîner un modèle avec des données étiquetées : on lui montre des exemples accompagnés de la bonne réponse afin qu’il apprenne à prédire correctement. Par exemple, classer des emails en "spam" ou "non spam". L’apprentissage non supervisé, quant à lui, utilise des données sans étiquettes. Le modèle doit découvrir seul des structures, des regroupements ou des relations cachées (patterns) dans les données, comme segmenter des clients en groupes selon leurs comportements.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q257">
+                        <label for="q257">Entraînement</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">L’entraînement (ou training) désigne le processus par lequel un modèle apprend à partir de données. Concrètement, on lui fournit de nombreux exemples afin qu’il ajuste progressivement ses paramètres internes pour mieux reconnaître des schémas, faire des prédictions ou accomplir une tâche donnée. L’entraînement, c’est la phase où un modèle apprend à partir des données pour devenir performant. Voici les 6 étapes de l'entraînement d'un modèle d'IA :
+                        <ol>
+                            <li><b>Collecte</b> : rassemblement des données pertinentes pour la tâche (textes, images, mesures...)</li>
+                            <li><b>Préparation</b> : nettoyage, formatage et parfois étiquetage pour rendre les données exploitables</li>
+                            <li><b>Choix du modèle</b> : sélection d'une catégorie de modèle adapté au problème (classification, prédiction, génération...)</li>
+                            <li><b>Apprentissage</b> : analyse des données, prédection et réflexion pour réduire ses erreurs</li>
+                            <li><b>Évaluation</b> : test du modèle sur de nouvelles données pour vérifier ses performances</li>
+                            <li><b>Affinage (ou fine-tuning)</b> : ajustement des paramètres, des données ou du modèle pour obtenir de meilleurs résultats</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q258">
+                        <label for="q258">Apprentissage par récompense</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">L’apprentissage par récompense (reinforcement learning) est un type d’apprentissage où un agent IA ajuste sa stratégie pour maximiser le gain cumulé en fonction des récompenses et des pénalités reçues. Chaque étape de mise à jour de sa politique peut être considérée comme un lemme (résultat mineur ou intermédiaire) guidant son apprentissage et l’ensemble de ces mises à jour conduit finalement à un théorème (résultat majeur ou conclusion) représentant le comportement optimal démontré par l’agent.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q259">
+                        <label for="q259">Réseau de neurones</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">Un réseau de neurones est un modèle de machine learning inspiré du cerveau humain, composé de couches de neurones artificiels interconnectés. Chaque connexion entre neurones possède un poids (weight) déterminant l’importance de l’information transmise. Lors de l’entraînement, le réseau ajuste ces poids pour apprendre les relations dans les données et faire des prédictions ou reconnaître des motifs.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q260">
+                        <label for="q260">Théorie des jeux</label>
+                    </div>
+                    <div class="card-body">La théorie des jeux est une branche des mathématiques étudiant les stratégies de décision entre plusieurs acteurs (joueurs) en interaction, où le choix de chacun influence le résultat des autres. Elle est utilisée pour analyser des situations de coopération ou de compétition, de l’économie aux sciences sociales. Le dilemme du prisonnier est un exemple classique : deux suspects sont interrogés séparément. S’ils restent silencieux, ils écopent chacun d’une peine légère. S’ils se dénoncent mutuellement, ils ont une peine plus lourde, mais si un seul trahit l’autre, le traître est libéré tandis que l’autre subit la peine maximale. Ce scénario montre comment la rationalité individuelle peut conduire à un résultat sous-optimal pour l'intérêt collectif (le bien commun).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q261">
+                        <label for="q261">LLM</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">Un LLM (Large Language Model) comme ChatGPT, Copilot, Gemini, Claude ou Mistral est un modèle statistique géant entraîné sur d’immenses volumes de textes pour comprendre et générer du langage humain. Il fonctionne en prédisant mot après mot la suite la plus probable d’une phrase comme lors de l'écriture d'un SMS, ce qui lui permet de rédiger, expliquer, traduire ou reformuler du contenu, tout en nécessitant une vérification humaine des résultats. Des milliers de LLM open source sont sur Hugging Face, une plateforme permettant de les télécharger et de les tester. Elle sert aussi de hub pour la documentation, les jeux de données et les outils nécessaires à leur utilisation et à leur déploiement. On peut citer aussi Ollama, un outil permettant d’exécuter des LLM en local sur son ordinateur, sans dépendre du cloud. Il simplifie le téléchargement, l’installation et l’utilisation de modèles open source (comme Llama) via des commandes simples, un peu comme un "gestionnaire de modèles" pour l’IA.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q262">
+                        <label for="q262">Hallucination</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">Un agent IA est souvent assimilé à un assistant virtuel disponible 24h sur 24, à visée professionnelle ou pédagogique, automatisant les tâches répétitives et chronophages, analysant et structurant l’information et stimulant la créativité ainsi que l’apprentissage. Cependant, elle n'est pas toujours fiable et de bon sens, d'où la nécessité d'une vérification humaine des informations fournies et des sources exploitées. On qualifie d'hallucination une erreur lors de la génération d'une information s'avérant fausse, inventée ou non vérifiable, mais présentée comme crédible.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q263">
+                        <label for="q263">Vibe coding</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">Le vibe coding désigne une façon informelle et intuitive de programmer en se concentrant davantage sur l’idée, le ressenti et le résultat global que sur la rigueur technique immédiate. Concrètement, cela consiste souvent à coder rapidement par essais-erreurs, souvent avec l’aide d’un agent IA, en générant du code, en l’ajustant au fur et à mesure ainsi qu'en privilégiant la créativité et la fluidité plutôt qu’une conception très structurée dès le départ.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q264">
+                        <label for="q264">Habilitation</label>
+                    </div>
+                    <div class="card-body">Conformément à l’IGI 1300, toute personne souhaitant accéder à des informations classifiées doit recevoir une habilitation adaptée à son niveau de responsabilité. Une habilitation désigne le droit ou l’autorisation officielle d’effectuer certaines actions ou d’accéder à certains lieux, informations ou systèmes.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q265">
+                        <label for="q265">Iframe</label>
+                    </div>
+                    <div class="card-body">Un iframe (inline frame) est un élément HTML permettant d'intégrer une page Web ou un document HTML à l'intérieur d'une autre page Web.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q266">
+                        <label for="q266">Sensibilité à la casse</label>
+                    </div>
+                    <div class="card-body">La sensibilité à la casse (case sensitivity en anglais) désigne le fait qu'un système distingue les lettres majuscules et minuscules comme des caractères différents. Concrètement, un système sensible à la casse (Linux ou PostgreSQL par exemple) considère que monFichier.js, MonFichier.js et MONFICHIER.JS sont trois entités distinctes. À l'inverse, un système (Windows ou SQL Server par exemple) insensible à la casse les traite comme identiques.
+                        <ul>
+                            <li><b>camelCase</b> : les mots sont collés, le premier commence en minuscule, les suivants en majuscule (getUserData, firstName, isLoggedIn) → variables et fonctions en JavaScript</li>
+                            <li><b>PascalCase</b> (ou UpperCamelCase) : identique au camelCase, mais le premier mot commence aussi en majuscule (PlayStation, MyPortfolio, PowerShell) → utilisé en C#, React et les classes en JavaScript ou TypeScript</li>
+                            <li><b>snake_case</b> : les mots sont séparés par des underscores, tout en minuscules (user_name, background_color, max_length) → courant en Python, SQL et parfois PHP</li>
+                            <li><b>SCREAMING_SNAKE_CASE</b> : similaire au  snake_case mais tout en majuscules (API_KEY, MAX_RETRIES, BASE_URL) → réservé aux constantes  ou variables d'environnement (.env)</li>
+                            <li><b>kebab-case</b> : les mots sont séparés par des tirets, tout en minuscules (main-header, btn-primary, user-profile) → classes et propriétés custom en CSS, URLs</li>
+                            <li><b>UPPERCASE</b> : tout en majuscules (SELECT, MAX, MIN, API, EOF, DTO, PI) → mots clés SQL, acronymes, constantes en un seul mot</li>
+                            <li><b>lowercase</b> : tout en minuscules (id, div, var, let, color) → attributs et balises HTML, keywords, propriétés CSS</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q267">
+                        <label for="q267">Modèle vs DTO</label>
+                    </div>
+                    <div class="card-body">Un modèle représente une entité métier telle qu'elle existe en base de données. Il reflète la structure réelle et peut contenir de la logique. Un DTO (Data Transfer Object), quant à lui, est un objet dont le seul rôle est de transporter des données d'un endroit à un autre, sans aucune logique métier. C'est une structure simple qui définit la forme des données échangées entre deux couches d'une application, par exemple entre le backend et le frontend ou entre un service et une base de données. En pratique, un même modèle peut générer plusieurs DTOs selon le contexte. Chacun expose uniquement ce qui est pertinent pour son cas d'usage, ce qui renforce la sécurité et la clarté d'une API.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q268">
+                        <label for="q268">var vs let</label>
+                        <span class="badge badge-definition">JavaScript</span>
+                    </div>
+                    <div class="card-body">var et let servent tous les deux à déclarer des variables en JavaScript, mais var a une portée fonctionnelle (la variable existe dans toute la fonction) tandis que let a une portée de bloc (la variable n'existe que dans le bloc {} où elle est déclarée). De plus, var est considéré comme obsolète et peut provoquer des comportements inattendus, c'est pourquoi on lui préfère toujours let (ou const) dans le JavaScript moderne. let a été introduit avec ES6 (ECMAScript 2015), la grande mise à jour de JavaScript qui a également apporté const, les arrow functions, les classes, les template literals, et bien d'autres fonctionnalités modernes.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q269">
+                        <label for="q269">Heuristique</label>
+                    </div>
+                    <div class="card-body">Une heuristique est une règle empirique utilisée en programmation pour prendre une décision rapide sans analyse exhaustive, au prix d'une fiabilité imparfaite (par exemple, détecter qu'une vidéo est musicale parce que son titre contient le mot "clip"). Contrairement à un algorithme déterministe, elle sacrifie la précision pour gagner en simplicité, avec pour risque le faux positif (accepter un cas qui n'aurait pas dû l'être) ou le faux négatif (rejeter un cas qui aurait dû être accepté).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q270">
+                        <label for="q270">GIGO</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">La performance d'une IA repose avant tout sur la qualité des données qui la nourrissent : des données incomplètes, erronées ou biaisées produiront inévitablement des résultats faussés, voire injustes : c'est le principe du GIGO ("Garbage in, Garbage out"), si les données sont mauvaises en entrée alors le résultat sera lui aussi mauvais. Trois risques majeurs guettent les projets IA mal préparés : des données incomplètes excluant certains groupes, des données erronées induisant le modèle en erreur et des données biaisées reproduisant les préjugés humains. C'est pourquoi la "data preparation" (nettoyage, déduplication, équilibrage/diversification et anonymisation) est l'étape la plus déterminante d'un projet IA, car ce sont les données, bien plus que les algorithmes qui font le calcul ou les ordinateurs qui donnent la puissance et la performance, qui font toute l'intelligence.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q271">
+                        <label for="q271">RGPD vs AI Act</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">Le RGPD (Règlement Général pour la Protection des Données) de 2018 protège les données personnelles en exigeant le consentement des utilisateurs et leur donnant le droit de consulter, corriger ou supprimer leurs données, constituant la première brique réglementaire pour l'IA en Europe. L'AI Act, adopté en 2024, est le premier cadre complet au monde dédié à l'IA, classant les systèmes en quatre catégories de risque (inacceptable, élevé, limité, minimal) avec des obligations adaptées de transparence et de traçabilité. Ensemble, le RGPD et l'AI Act établissent une approche européenne unique visant à créer une IA responsable, transparente et digne de confiance, plutôt que simplement rapide et puissante. Utiliser l'IA de manière éthique signifie adopter une approche responsable qui place l'humain au cœur du processus. Cette démarche repose sur cinq principes essentiels : la transparence (qui exige d'annoncer clairement quand un contenu a été créé par une IA), le respect de la vie privée, l'équité pour éviter les biais potentiels et la discrimination, la responsabilité de l'humain qui doit être capable d'en justifier l'utilisation et le raisonnement et enfin, l'impact social et environnemental, impliquant de limiter la consommation d'énergie en utilisant des modèles légers pour des tâches simples. L'éthique de l'IA n'est pas un frein à l'innovation, mais bien ce qui lui donne du sens, car une IA éthique doit rester utile et au service de l'humain.</div>
                 </div>
             </div>
         </div>
