@@ -92,7 +92,7 @@
     "@typescript-eslint/eslint-plugin": "^8.57.2",
     "@typescript-eslint/parser": "^8.58.0",
     "cypress": "^15.13.0",
-    "eslint": "^10.1.0",
+    "eslint": "^10.2.0",
     "globals": "^17.4.0",
     "htmllint-cli": "^0.0.7",
     "jest": "^30.3.0",
