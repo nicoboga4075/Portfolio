@@ -96,7 +96,7 @@
     "globals": "^17.4.0",
     "htmllint-cli": "^0.0.7",
     "jest": "^30.3.0",
-    "jest-html-reporter": "^4.1.0",
+    "jest-html-reporter": "^4.4.0",
     "jest-junit": "^16.0.0",
     "stylelint": "^17.7.0",
     "stylelint-config-standard": "^40.0.0",
