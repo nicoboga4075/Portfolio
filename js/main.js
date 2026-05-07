@@ -2,7 +2,7 @@ const appName = 'Portfolio';
 const appRoot = '/en';
 const appLanguages = ['en', 'fr'];
 
-const xp = 4;
+const xp = 5;
 const cdiCount = 4;
 const internshipsCount = 3;
 const email = 'nicolas.bogalheiro@gmail.com';
