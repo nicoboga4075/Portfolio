@@ -21,8 +21,7 @@ export default async (req: Request, context: Context): Promise < Response > => {
         .reduce((acc, [key, value]) => {
                 acc[key] = key.includes("SECRET") ? "HIDDEN" : value;
                 return acc;
-            }, {}
-            as Record < string, string > );
+            }, {} as Record<string, string>);
 
     return new Response(JSON.stringify(filteredEnvVars), {
         headers: {
