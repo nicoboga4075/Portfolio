@@ -24,7 +24,7 @@ html.dark-mode #navi li a:not(.current) {
 }
 
 html.dark-mode .card h2,
-html.dark-mode .author {
+html.dark-mode #articleShape .author {
     color: initial !important;
 }
 
@@ -82,6 +82,10 @@ sup {
 
 sup:hover {
     background-color: var(--main);
+}
+
+span#dark-icon {
+    color: var(--main);
 }
 
 .open-mfp:hover,

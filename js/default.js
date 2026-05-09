@@ -104,8 +104,15 @@ function initPage() {
     });
 }
 
-function toggleDarkMode() {
+function toggleDarkMode(event) {
+	if (event) {
+		event.preventDefault();
+		event.stopPropagation();
+    }
     document.documentElement.classList.toggle('dark-mode');
+    var icon = document.getElementById('dark-icon');
+    var isDark = document.documentElement.classList.contains('dark-mode');
+    icon.className = isDark ? 'icon-moon-o' : 'icon-sun-o';
     if (typeof legendLabelColor !== 'undefined' && typeof chart !== 'undefined') {
         legendLabelColor = legendLabelColor === '#000000' ? '#ffffff' : '#000000';
         chart.update();
