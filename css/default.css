@@ -74,6 +74,7 @@ sup:hover {
 
 span#dark-icon {
     color: var(--main);
+    margin: 10px;
 }
 
 [hidden] {
