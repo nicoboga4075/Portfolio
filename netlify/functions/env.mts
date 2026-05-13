@@ -1,6 +1,6 @@
 import { Context } from "@netlify/functions";
 
-export default async (req: Request, context: Context): Promise < Response > => {
+export default async function handler (req: Request, context: Context): Promise<Response> {
     const referer = req.headers.get("referer") || "";
 
     const allowedReferers = [
@@ -26,6 +26,6 @@ export default async (req: Request, context: Context): Promise < Response > => {
     return new Response(JSON.stringify(filteredEnvVars), {
         headers: {
             "Content-Type": "application/json"
-        },
+        }
     });
 };

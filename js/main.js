@@ -1724,8 +1724,8 @@ function toggleDarkMode(event) {
 		event.stopPropagation();
     }
     $('html').toggleClass('dark-mode');
-	var $icon = $('#dark-icon');
-	var isDark = $('html').hasClass('dark-mode');
+	const $icon = $('#dark-icon');
+	const isDark = $('html').hasClass('dark-mode');
 	$icon.attr('class', isDark ? 'icon-moon-o' : 'icon-sun-o');
     if (typeof legendLabelColor !== 'undefined' && typeof chart !== 'undefined') {
         legendLabelColor = legendLabelColor === '#000000' ? '#ffffff' : '#000000';
