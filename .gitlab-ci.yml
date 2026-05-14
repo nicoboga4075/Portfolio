@@ -65,16 +65,16 @@ sonar-job:
     - test-job
   script:
     - echo "Running SonarCloud analysis..."
-    - |
-      npm run sonar -- \
-        -Dsonar.projectKey=nicoboga4075_Portfolio \
-        -Dsonar.organization=nicoboga4075 \
-        -Dsonar.sources=. \
-        -Dsonar.tests=tests,cypress \
-        -Dsonar.javascript.lcov.reportPaths=reports/jest/coverage/lcov.info \
-        -Dsonar.testExecutionReportPaths=reports/jest/junit.xml \
-        -Dsonar.exclusions=node_modules/**,reports/**,images/**,videos/**,fonts/** \
-        -Dsonar.host.url=https://sonarcloud.io \
+    - >
+      npm run sonar --
+        -Dsonar.projectKey=nicoboga4075_Portfolio
+        -Dsonar.organization=nicoboga4075
+        -Dsonar.sources=.
+        -Dsonar.tests=tests,cypress
+        -Dsonar.javascript.lcov.reportPaths=reports/jest/coverage/lcov.info
+        -Dsonar.testExecutionReportPaths=reports/jest/junit.xml
+        -Dsonar.exclusions=node_modules/**,reports/**,images/**,videos/**,fonts/**
+        -Dsonar.host.url=https://sonarcloud.io
         -Dsonar.token=$SONAR_TOKEN
     - echo "Sonar analysis done!"
 
