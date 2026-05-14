@@ -1,13 +1,16 @@
+default:
+  tags:
+    - windows-local
+
 stages:
   - setup
   - build
   - test
+  - sonar
   - teardown
 
 status-job:
   stage: setup
-  tags:
-    - windows-local
   script:
     - powershell -ExecutionPolicy Bypass -File ./runner_status.ps1
   artifacts:
@@ -15,8 +18,6 @@ status-job:
 
 build-job:
   stage: build
-  tags:
-    - windows-local
   script:
     - echo "Building..."
     - |
@@ -35,8 +36,6 @@ build-job:
 
 test-job:
   stage: test
-  tags:
-    - windows-local
   cache:
     key: npm-cache
     paths:
@@ -59,11 +58,28 @@ test-job:
       - reports/playwright/html/
       - reports/playwright/test-results/
     expire_in: 1 week
+    
+sonar-job:
+  stage: sonar
+  dependencies:
+    - test-job
+  script:
+    - echo "Running SonarCloud analysis..."
+    - |
+      npm run sonar -- \
+        -Dsonar.projectKey=nicoboga4075_Portfolio \
+        -Dsonar.organization=nicoboga4075 \
+        -Dsonar.sources=. \
+        -Dsonar.tests=tests,cypress \
+        -Dsonar.javascript.lcov.reportPaths=reports/jest/coverage/lcov.info \
+        -Dsonar.testExecutionReportPaths=reports/jest/junit.xml \
+        -Dsonar.exclusions=node_modules/**,reports/**,images/**,videos/**,fonts/** \
+        -Dsonar.host.url=https://sonarcloud.io \
+        -Dsonar.token=$SONAR_TOKEN
+    - echo "Sonar analysis done!"
 
 cleanup-job:
   stage: teardown
-  tags:
-    - windows-local
   script:
     - Get-ChildItem -Path "C:\GitLab-Runner\builds" -Recurse | Remove-Item -Force -Recurse
   artifacts:

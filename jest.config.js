@@ -6,6 +6,7 @@ module.exports = {
   testPathIgnorePatterns: ["/node_modules/", "/docs/"],
   modulePathIgnorePatterns: ["/docs/"],
   coverageDirectory: "reports/jest/coverage",
+  coverageReporters: ["lcov", "text", "html"],
   testEnvironment: "node",
   verbose: true,
   reporters: [

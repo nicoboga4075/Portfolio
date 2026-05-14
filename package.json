@@ -26,7 +26,8 @@
     "capacitor:add": "npx cap add android",
     "capacitor:sync": "npx cap sync",
     "capacitor:open": "npx cap open android",
-    "capacitor:run": "npx cap run android"
+    "capacitor:run": "npx cap run android",
+    "sonar": "sonar-scanner"
   },
   "auto-changelog": {
     "output": "CHANGELOG.md",
@@ -99,7 +100,8 @@
     "stylelint-config-standard": "^40.0.0",
     "ts-jest": "^29.4.9",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.3"
+    "typescript-eslint": "^8.59.3",
+	"sonarqube-scanner": "^4.0.0"
   },
   "overrides": {
     "braces": "3.0.3",
