@@ -96,7 +96,7 @@
     "jest": "^30.4.2",
     "jest-html-reporter": "^4.4.0",
     "jest-junit": "^17.0.0",
-    "stylelint": "^17.11.0",
+    "stylelint": "^17.11.1",
     "stylelint-config-standard": "^40.0.0",
     "ts-jest": "^29.4.9",
     "typescript": "^6.0.3",
