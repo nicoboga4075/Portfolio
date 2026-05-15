@@ -2,6 +2,9 @@ default:
   tags:
     - windows-local
 
+variables:
+  GIT_CLEAN_FLAGS: -ffdx --exclude=node_modules/
+
 stages:
   - setup
   - build
@@ -30,31 +33,41 @@ build-job:
       }
     - echo "Build done!"
   cache:
-    key: npm-cache
+    key:
+      files:
+        - package-lock.json
     paths:
       - node_modules/
-    policy: push 
+    policy: pull-push 
 
 test-job:
   stage: test
   script:
+    - New-Item -ItemType Directory -Force -Path reports/jest/html, reports/jest/coverage, reports/playwright/html, reports/playwright/test-results | Out-Null
+    - Set-Content -Path reports/jest/junit.xml -Value '<?xml version="1.0" encoding="UTF-8"?><testsuites></testsuites>'
+    - Set-Content -Path reports/playwright/junit.xml -Value '<?xml version="1.0" encoding="UTF-8"?><testsuites></testsuites>'
     - echo "Running Jest tests..."
     - npm run jest
     - echo "Running Playwright tests..."
     - npx playwright test *> $null -ErrorAction SilentlyContinue; if ($LASTEXITCODE -ne 0) { echo "No tests found, exiting with code 0" }
     - echo "Run done!"
   cache:
-    key: npm-cache
+    key:
+      files:
+        - package-lock.json
     paths:
       - node_modules/
     policy: pull 
   coverage: '/All files\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+([\d\.]+)/'
   artifacts:
+    when: always
     reports:
       junit:
         - reports/jest/junit.xml
         - reports/playwright/junit.xml
     paths:
+      - reports/jest/junit.xml
+      - reports/playwright/junit.xml
       - reports/jest/html/
       - reports/jest/coverage/
       - reports/playwright/html/
@@ -63,6 +76,13 @@ test-job:
     
 sonar-job:
   stage: sonar
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules/
+    policy: pull
   dependencies:
     - test-job
   script:
