@@ -4,6 +4,7 @@ default:
 
 variables:
   GIT_CLEAN_FLAGS: -ffdx --exclude=node_modules/
+  GIT_DEPTH: 0
 
 stages:
   - setup

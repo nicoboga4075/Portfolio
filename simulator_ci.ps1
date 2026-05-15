@@ -1,4 +1,4 @@
-﻿function Invoke-WithTimestamp {
+function Invoke-WithTimestamp {
     param(
         [string]$Command,
         $LogPath

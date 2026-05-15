@@ -1,3 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 *.mp4 !text !filter !merge !diff
+*.ps1 text eol=lf

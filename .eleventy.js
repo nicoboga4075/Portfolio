@@ -1,12 +1,12 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 const toml = require("toml");
 const prettier = require("prettier");
 const outputFolder = ".eleventy";
 const includesFolder = "_includes";
 const allowedDirs = [".", includesFolder, "articles", "projects"];
 
-module.exports = function (eleventyConfig) {
+module.exports = function configureEleventy(eleventyConfig) {
     for (const name of fs.readdirSync(".")) {
         const fullPath = path.join(".", name);
         if (fs.statSync(fullPath).isDirectory() && !allowedDirs.includes(name)) {
@@ -16,10 +16,10 @@ module.exports = function (eleventyConfig) {
     const lighthousePlugin = toml.parse(fs.readFileSync("./netlify.toml", "utf-8")).context.production.plugins.find(p => p.package === "@netlify/plugin-lighthouse");
     const preset = lighthousePlugin.inputs.settings.preset ?? "mobile";
     eleventyConfig.addGlobalData("viewport", preset);
-    eleventyConfig.addTransform("prettify", function (content, outputPath) {
-        if (outputPath && outputPath.endsWith(".html")) {
+    eleventyConfig.addTransform("prettify", async function (content, outputPath) {
+        if (outputPath?.endsWith(".html")) {
             try {
-                return prettier.format(content, {
+                return await prettier.format(content, {
                     parser: "html",
                     tabWidth: 4,
                     useTabs: false,
