@@ -1,6 +1,6 @@
 import { Context } from "@netlify/functions";
 
-export default async function handler (req: Request, context: Context): Promise<Response> {
+export default async function handler_env(req: Request, context: Context): Promise<Response> {
     const referer = req.headers.get("referer") || "";
 
     const allowedReferers = [

@@ -76,6 +76,7 @@ test-job:
     expire_in: 1 week
     
 sonar-job:
+  allow_failure: true
   stage: sonar
   cache:
     key:

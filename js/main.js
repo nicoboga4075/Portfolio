@@ -738,11 +738,11 @@ function createCircularChart({
     subtitles,
     cutout = '50%'
 }) {
-	const canvas = $(`#${canvasId}`)[0];
-	const context = canvas.getContext('2d');
+    const canvas = $(`#${canvasId}`)[0];
+    const context = canvas.getContext('2d');
     const total = data.reduce((a, b) => a + b, 0);
     const currentLanguage = getCurrentLanguage();
-	
+    
     chart = new Chart(context, {
         type: 'doughnut',
         data: {
@@ -810,7 +810,7 @@ function createCircularChart({
                                     fillStyle: chart.data.datasets[0].backgroundColor[i],
                                     strokeStyle: '#ffffff',
                                     lineWidth: 2,
-									fontColor: legendLabelColor
+                                    fontColor: legendLabelColor
                                 };
                             });
                         }
@@ -826,7 +826,7 @@ function createCircularChart({
             }
         }
     });
-	
+    
     return chart;
 }
 
@@ -1207,10 +1207,10 @@ function initPage() {
             }
             $(this).removeClass('active');
         });
-        if (!$(target).hasClass('owl-loaded')) {
-            initCarousel(target);
-        } else {
+        if ($(target).hasClass('owl-loaded')) {
             $(`.owl-menu[data-target="${target}"]`).addClass('active').siblings('.owl-menu').removeClass('active');
+        } else {
+            initCarousel(target);
         }
         // To avoid glitch switching to other carousel
         $(target).removeClass('d-none').trigger('refresh.owl.carousel');
@@ -1482,9 +1482,7 @@ function initPage() {
         const host = window.location.origin;
         const currentHash = hashLink || getHashFromSession();
 
-        if (!currentHash) {
-            articleShape.text(errorArticle);
-        } else {
+        if (currentHash) {
             saveHashToSession(currentHash);
             clearUrlPath();
             const urlArticle = `${host}/.netlify/functions/article?filename=${currentHash}_${langPage}.html`;
@@ -1539,6 +1537,8 @@ function initPage() {
                         $('.about-author').removeClass('d-none').addClass('d-flex');
                     });
             });
+        } else {
+            articleShape.text(errorArticle);
         }
 
         if (currentHash === "presentation") {
@@ -1674,7 +1674,14 @@ async function sendEmail(senderName, subject, message) {
         });
     }
 
-    if (!token) {
+    if (token) {
+        try {
+            await sendHelper(token);
+        } catch (error) {
+            callbackForm.text(errorMessage);
+            localStorage.clear();
+        }
+    } else {
         callbackForm.text('');
         // Request access token and wait for user consent with Google Identity Services
         try {
@@ -1682,13 +1689,6 @@ async function sendEmail(senderName, subject, message) {
                 prompt: 'consent'
             });
             await checkTokenConsent();
-        } catch (error) {
-            callbackForm.text(errorMessage);
-            localStorage.clear();
-        }
-    } else {
-        try {
-            await sendHelper(token);
         } catch (error) {
             callbackForm.text(errorMessage);
             localStorage.clear();
@@ -1719,14 +1719,14 @@ function initCaptcha() {
 /* Dark Mode */
 
 function toggleDarkMode(event) {
-	if (event) {
-		event.preventDefault();
-		event.stopPropagation();
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
     }
     $('html').toggleClass('dark-mode');
-	const $icon = $('#dark-icon');
-	const isDark = $('html').hasClass('dark-mode');
-	$icon.attr('class', isDark ? 'icon-moon-o' : 'icon-sun-o');
+    const $icon = $('#dark-icon');
+    const isDark = $('html').hasClass('dark-mode');
+    $icon.attr('class', isDark ? 'icon-moon-o' : 'icon-sun-o');
     if (typeof legendLabelColor !== 'undefined' && typeof chart !== 'undefined') {
         legendLabelColor = legendLabelColor === '#000000' ? '#ffffff' : '#000000';
         chart.update();
