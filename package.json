@@ -108,5 +108,10 @@
     "micromatch": "4.0.8",
     "yargs-parser": "21.1.1",
     "yauzl": "^3.2.1"
+  },
+  "allowScripts": {
+    "cypress@15.15.0": true,
+    "sonar-scanner@3.1.0": true,
+    "unrs-resolver@1.11.1": true
   }
 }
