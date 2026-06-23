@@ -1090,7 +1090,7 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <label for="q100">Analyseur de paquets</label>
                         <span class="badge badge-definition">Cyber</span>
                     </div>
-                    <div class="card-body">Un analyseur de paquets (ou packet sniffer en anglais) est un outil capturant et inspectant le trafic réseau circulant sur une interface (filaire ou sans fil). Il permet d’observer en détail les paquets de données échangés entre machines, pour des usages légitimes (diagnostic, sécurité, analyse réseau) ou malveillants (espionnage, vol d’informations). Le plus connu est Wireshark.</div>
+                    <div class="card-body">Un analyseur de paquets (ou packet sniffer en anglais) est un outil capturant et inspectant le trafic réseau circulant sur une interface (filaire ou sans fil). Il permet d’observer en détail les paquets de données échangés entre machines, pour des usages légitimes (diagnostic, sécurité, analyse réseau) ou malveillants (espionnage, vol d’informations). Le plus connu est Wireshark pour analyser des fichiers pcap ou pcapng.</div>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -2420,6 +2420,206 @@ permalink: "articles/du-voc-de-dev_fr.html"
                         <span class="badge badge-definition">IA</span>
                     </div>
                     <div class="card-body">Le RGPD (Règlement Général pour la Protection des Données) de 2018 protège les données personnelles en exigeant le consentement des utilisateurs et leur donnant le droit de consulter, corriger ou supprimer leurs données, constituant la première brique réglementaire pour l'IA en Europe. L'AI Act, adopté en 2024, est le premier cadre complet au monde dédié à l'IA, classant les systèmes en quatre catégories de risque (inacceptable, élevé, limité, minimal) avec des obligations adaptées de transparence et de traçabilité. Ensemble, le RGPD et l'AI Act établissent une approche européenne unique visant à créer une IA responsable, transparente et digne de confiance, plutôt que simplement rapide et puissante. Utiliser l'IA de manière éthique signifie adopter une approche responsable qui place l'humain au cœur du processus. Cette démarche repose sur cinq principes essentiels : la transparence (qui exige d'annoncer clairement quand un contenu a été créé par une IA), le respect de la vie privée, l'équité pour éviter les biais potentiels et la discrimination, la responsabilité de l'humain qui doit être capable d'en justifier l'utilisation et le raisonnement et enfin, l'impact social et environnemental, impliquant de limiter la consommation d'énergie en utilisant des modèles légers pour des tâches simples. L'éthique de l'IA n'est pas un frein à l'innovation, mais bien ce qui lui donne du sens, car une IA éthique doit rester utile et au service de l'humain.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q272">
+                        <label for="q272">Context window</label>
+                        <span class="badge badge-definition">IA</span>
+                    </div>
+                    <div class="card-body">Nombre maximal de tokens (mots ou fragments de mots) qu'un large modèle de langage (LLM) peut traiter simultanément en entrée et en sortie pour comprendre et traiter un prompt</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q273">
+                        <label for="q273">LFI</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Une faille LFI (Local File Inclusion) est une vulnérabilité Web survenant quand une application inclut dynamiquement des fichiers côté serveur sans valider correctement les entrées fournies par l'utilisateur. Par exemple, en PHP, <i>include($_GET['page'] . '.php')</i> doit être protégé par la désactivation des fonctionnalités dangereuses <i>allow_url_include</i> et <i>allow_url_fopen</i>.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q274">
+                        <label for="q274">Path traversal</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Le Path traversal (ou Directory traversal) est une vulnérabilité permettant à un attaquant de sortir du dossier prévu par l'application pour accéder à des fichiers ailleurs sur le serveur, en manipulant un chemin de fichier. Il est souvent le mécanisme utilisé pour exploiter une LFI en remplaçant le paramètre par des séquences comme ../etc/passwd ou ../etc/shadow.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q275">
+                        <label for="q275">RBAC vs ABAC</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Dans le RBAC (Role-Based Access Control), les permissions sont attribuées à des rôles et les utilisateurs héritent des permissions en fonction de leur(s) rôle(s), tandis que dans l'ABAC (Attribute-Based Access Control), les permissions dépendent d'attributs (utilisateur, ressource, environnement, action) évalués via des règles/politiques. Beaucoup de systèmes réels combinent les deux (RBAC pour la base, ABAC pour une granularité fine). Le ABAC couvre des besoins dynamiques/contextuels mais est plus complexe à mettre en place que le RBAC. Par exemple, un(e) adolescent(e) a le rôle Enfant vis-à-vis de ses parents donc des restrictions telles que TV limitée et sorties encadrées. Ce rôle, déclaré dans le RBAC, lui donne des droits prédéfinis, peu importe la situation précise. Cependant, les droits peuvent varier selon l'heure, la présence des parents et éventuellement d'autres règles inscrites dans le ABAC.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q276">
+                        <label for="q276">MFA</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Le MFA (Multi-Factor Authentication) ou authentification multifacteur exige au moins deux preuves d'identité différentes pour se connecter à une application ou à un site, par exemple un mot de passe (facteur de connaissance) + un code envoyé par mail/SMS/Microsoft Authenticator (facteur de possession) ou une empreinte digitale (facteur biométrique ou inhérence).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q277">
+                        <label for="q277">Cracking</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Le cracking désigne le fait de casser ou contourner une protection, le plus souvent appliqué au cassage de mots de passe. Cela consiste à retrouver un mot de passe en clair à partir de son hash, via brute-force, dictionnaire ou rainbow tables. Les outils les plus connus sont John the Ripper et <i>stegseek</i>. Pour s'en protéger, on utilise des algorithmes de hachage lents et salés comme <i>bcrypt</i> ou <i>argon2</i>, combinés à une politique de mots de passe robuste et au MFA.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q278">
+                        <label for="q278">Inforensique</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">L'inforensique (ou forensique numérique) est la discipline consistant à collecter, analyser et préserver des preuves numériques après un incident (cyberattaque, fraude, crime) dans un but d'investigation. Son principe clé est la chaîne de custody documentant rigoureusement chaque examen des traces ou manipulation des preuves pour qu'elles restent recevables devant un tribunal. L'inforensique s'appuie sur un ensemble d'outils couvrant plusieurs niveaux d'analyse : <i>file</i>, <i>exiftool</i>, <i>strings</i> et <i>Get-Content</i> permettent d'identifier et lire des fichiers suspects, <i>ipconfig</i>/<i>ifconfig</i>/<i>ip</i>, <i>uname</i> (-a) et <i>netstat</i> reconstituent le contexte réseau de la machine, <i>binwalk</i> et <i>foremost</i> servent à extraire et récupérer des fichiers cachés ou supprimés, <i>dd</i> permet de copier fidèlement un disque pour analyse, et <i>ghidra</i>, <i>x64dbg</i>, <i>ilspy</i>, <i>dnspy</i>, <i>monodis</i> et <i>dotpeek</i> assurent le reverse engineering des binaires et applications .NET.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q279">
+                        <label for="q279">OSINT</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">L'OSINT (Open Source Intelligence) désigne la collecte et l'analyse d'informations accessibles publiquement (réseaux sociaux, sites web, bases de données) pour produire du renseignement exploitable. Elle sert aussi bien en reconnaissance avant un test d'intrusion qu'en investigation ou en veille, à l'aide d'outils comme Sherlock/Maigret, Wayback Machine, Maltego, Shodan/Censys, theHarvester, Whois/DNSdumpster, SpiderFoot, Recon-ng ou Google Dorks.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q280">
+                        <label for="q280">Pwnage</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Le pwnage (ou pwning) est un mot d'argot couramment utilisé dans les cercles de pirates pour décrire l’acte d’obtenir un contrôle non autorisé sur l’ordinateur ou une autre technologie d’une autre personne (réseau, téléphone, voiture...), généralement par le biais de logiciels malveillants. Vous pouvez vérifier si une adresse e-mail est dans une fuite de données avec le site <a target="_blank" rel="noopener" href="https://haveibeenpwned.com">haveibeenpwned</a>. Le pwnage regroupe les outils de reconnaissance et d'exploitation : <i>ping</i>, <i>nmap</i> (scans -sW, -sS, -sV, -sT), <i>ipconfig</i>/<i>ifconfig</i>/<i>ip</i> et <i>netstat</i> permettent de cartographier les machines, interfaces réseau et connexions actives, <i>netcat</i> (nc -nv) sert à établir des shells distants (bind ou reverse), tandis que <i>wsl -u root</i> et <i>sudo -s</i> visent l'élévation de privilèges pour obtenir un accès root sur le système ciblé.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q281">
+                        <label for="q281">Stéganographie</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">La stéganographie est une technique consistant à dissimuler un message ou un fichier à l'intérieur d'un autre support (image, audio, vidéo, texte) de façon à ce que sa présence même passe inaperçue. La cryptographie rend un message illisible mais visible, la stéganographie cache le fait même qu'un message existe. L'exemple le plus courant est modifier légèrement les bits de pixels d'une image (LSB - Least Significant Bit) pour y encoder du texte, sans changement visible à l'œil nu. Les outils <i>zsteg</i> (PNG, BMP) et <i>binwalk</i> (tous formats, recherche de fichiers embarqués) servent à détecter des données cachées, <i>pngcheck</i> (PNG) vérifie l'intégrité et révèle des anomalies suspectes, <i>steghide</i> (JPEG, BMP, WAV, AU) permet de cacher ou extraire des données dans des fichiers multimédias, <i>stegsnow</i> (TXT) fait de même dans des fichiers texte via les espaces/tabulations, et <i>stegseek</i> (JPEG, BMP, WAV, AU) sert à casser le mot de passe protégeant des données cachées avec <i>steghide</i>.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q282">
+                        <label for="q282">SSO</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Le SSO (Single Sign-On) permet à un utilisateur de s'authentifier une seule fois pour accéder à plusieurs applications/services différent(e)s, sans avoir à ressaisir ses identifiants à chaque fois. Les protocoles courants sont SAML (Security Assertion Markup Language), OAuth 2.0 et OpenID Connect. Il y a moins de mots de passe à gérer ou à retenir grâce à l'IdP (Identity Provider) mais un seul compte compromis donne accès à l'écosystème entier.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q283">
+                        <label for="q283">Active Directory</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Active Directory (AD) est un service d'annuaire Microsoft centralisant la gestion des utilisateurs, ordinateurs, groupes et permissions au sein d'un réseau d'entreprise, via des composants comme le contrôleur de domaine (DC), les GPO (Group Policy Objects) et le protocole LDAP (Lightweight Directory Access Protocol). C'est une cible privilégiée des attaquants car sa compromission peut donner accès à tout le réseau (Kerberoasting, Pass-the-Hash, Golden Ticket) et il sert souvent de base d'identité pour le SSO en entreprise, via ADFS (Active Directory Federation Services) ou Azure AD/Entra ID.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q284">
+                        <label for="q284">Watermarking </label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Le watermarking (ou filigrane numérique en français) consiste à insérer une marque discrète dans un fichier (image, audio, vidéo, document) pour en identifier l'origine ou le propriétaire, sans altérer visiblement le contenu. Cela peut être visible par copyright ou invisible par stéganographie.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q285">
+                        <label for="q285">Metasploit</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Metasploit est un framework open-source utilisé pour un test d'intrusion (pentest) : il regroupe des exploits (code exploitant une vulnérabilité connue), des payloads (code exécuté après une exploitation réussie) et des outils comme la msfconsole pour identifier, exploiter et valider des vulnérabilités sur des systèmes.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q286">
+                        <label for="q286">RCE</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">RCE (Remote Code Execution) désigne la capacité d'un attaquant à exécuter du code arbitraire à distance sur un système cible, généralement la conséquence la plus grave d'une exploitation réussie.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q287">
+                        <label for="q287">Fuzzing</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Le fuzzing est une technique de test consistant à envoyer automatiquement des données aléatoires, malformées ou inattendues à une application pour détecter des comportements anormaux (crashs, fuites mémoire, erreurs non gérées) révélateurs de vulnérabilités. Les outils les plus connus sont AFL (American Fuzzy Lop), Peach Fuzzer, Boofuzz et libFuzzer.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q288">
+                        <label for="q288">Payload</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Un payload est le code délivré et exécuté grâce à un exploit, une fois la vulnérabilité tirée à profit, afin de réaliser l'action concrète (RCE) voulue par l'attaquant comme ouvrir un accès distant, exécuter des commandes ou exfiltrer des données.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q289">
+                        <label for="q289">Ping</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Ping est une commande réseau envoyant des paquets ICMP (Internet Control Message Protocol) Echo Request vers une machine cible pour vérifier qu'elle est joignable et mesurer le temps de réponse (latence).</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q290">
+                        <label for="q290">Handcheck</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Un handshake (poignée de main en français) est un échange initial de messages entre deux systèmes pour établir une connexion ou une session de façon fiable, avant tout transfert de données réel. Le TCP Handshake en est un exemple en 3 étapes (SYN, SYN-ACK, ACK) qui établit une connexion fiable entre client et serveur, et sert de base au scan -sS de <i>nmap</i> qui s'arrête après le SYN pour rester discret. Le WPA/WPA2 Handshake en est un autre exemple, un échange de 4 paquets entre un client et un point d'accès Wi-Fi pour établir une connexion chiffrée, souvent capturé par un attaquant puis cassé hors ligne avec <i>aircrack-ng</i> ou <i>hashcat</i> pour retrouver le mot de passe du réseau.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q291">
+                        <label for="q291">sudo vs su</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">La commande <i>sudo</i> ("superuser do") permet à un utilisateur autorisé d'exécuter une commande avec les privilèges d'un autre utilisateur, généralement root. Une mauvaise configuration du fichier /etc/sudoers est une cible fréquente d'élévation de privilèges lors d'un pentest. sudo demande ton propre mot de passe (si autorisé via sudoers) pour exécuter une commande ponctuelle avec privilèges, alors que su demande le mot de passe du compte cible (souvent root) pour basculer entièrement dessus.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q292">
+                        <label for="q292">Bind shell vs Reverse shell</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Un bind shell ouvre un port d'écoute sur la machine cible, que l'attaquant contacte ensuite, tandis qu'un reverse shell fait l'inverse : c'est la cible qui initie la connexion vers l'attaquant en écoute. Le reverse shell est plus utilisé en pratique car les pare-feux bloquent souvent les connexions entrantes mais laissent plus facilement passer les connexions sortantes.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q293">
+                        <label for="q293">WSL</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">WSL (Windows Subsystem for Linux) est une fonctionnalité Windows permettant d'exécuter un environnement Linux directement sur Windows, sans machine virtuelle ni dual-boot. La commande <i>wsl -u root</i> permet de lancer un shell root sans mot de passe sur certaines configurations, ce qui en fait un vecteur d'élévation de privilèges sur des machines Windows mal configurées. Un attaquant ayant accès à une session Windows peut potentiellement obtenir un shell root Linux via WSL.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q294">
+                        <label for="q294">Dual boot</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">Le dual boot est une configuration permettant d'installer deux systèmes d'exploitation sur un même ordinateur et de choisir lequel démarrer à l'allumage par exemple Windows et Linux sur le même disque dur, avec un menu de sélection au démarrage (bootloader). En dual boot, les deux systèmes sont complètement séparés et ne tournent pas simultanément, alors que WSL fait tourner Linux en parallèle de Windows, directement depuis une session Windows ouverte.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q295">
+                        <label for="q295">BitLocker</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">BitLocker est un outil de chiffrement de disque complet intégré à Windows protégeant les données d'un disque dur ou d'une clé USB en les chiffrant, rendant les données inaccessibles sans la clé de déchiffrement, même si le disque est physiquement volé. Il utilise l'algorithme AES (128 ou 256 bits), génère une clé de récupération (recovery key) et s'appuie sur le TPM (Trusted Platform Module), une puce matérielle stockant la clé de chiffrement et vérifiant l'intégrité du système au démarrage. À ne pas confondre avec Bitdefender, un antivirus tiers protégeant contre les malwares, ransomwares et menaces en temps réel.</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <input type="checkbox" id="q296">
+                        <label for="q296">EXIF</label>
+                        <span class="badge badge-definition">Cyber</span>
+                    </div>
+                    <div class="card-body">EXIF (Exchangeable Image File Format) est un standard stockant des métadonnées dans les fichiers image (JPEG, TIFF, RAW) au moment de la prise de vue, comme des informations invisibles intégrées directement dans le fichier. L'outil en ligne de commande <i>exiftool</i> permet de lire, écrire et supprimer les métadonnées (EXIF, IPTC, XMP) d'un fichier image, audio, vidéo ou document.</div>
                 </div>
             </div>
         </div>
