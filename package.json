@@ -113,6 +113,6 @@
   "allowScripts": {
     "sonar-scanner@3.1.0": true,
     "unrs-resolver@1.11.1": true,
-    "cypress@15.18.0": true
+    "cypress@15.18.1": true
   }
 }
