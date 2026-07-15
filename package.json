@@ -79,7 +79,7 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
-    "@capacitor/android": "^8.4.0",
+    "@capacitor/android": "^8.4.2",
     "@capacitor/cli": "^8.4.1",
     "@capacitor/core": "^8.4.2",
     "@eslint/js": "^9.39.2",
