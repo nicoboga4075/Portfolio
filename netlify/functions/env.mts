@@ -8,7 +8,7 @@ export default async function handler_env(req: Request, context: Context): Promi
         "https://nicoboga.netlify.app"
     ];
 
-    const error404 = "/404";
+    const error404 = new URL("/404", req.url).toString();
 
     const isFromSite = allowedReferers.some(origin => referer.startsWith(origin));
 
