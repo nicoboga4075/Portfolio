@@ -424,6 +424,9 @@ Backup of *.doc*
 .netlify
 .env
 
+# Eleventy local preview output (npm run dev) - never committed
+/.eleventy/
+
 # Logs
 logs
 *.log

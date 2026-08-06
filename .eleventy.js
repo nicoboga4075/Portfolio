@@ -5,6 +5,26 @@ const prettier = require("prettier");
 const outputFolder = ".eleventy";
 const includesFolder = "_includes";
 const allowedDirs = [".", includesFolder, "articles", "projects"];
+// Local preview (npm run dev) serves straight from the output folder instead of
+// compiling html back over the tracked source files. Production (npm run build)
+// keeps the historical in-place compile, since netlify/functions/article.mts
+// reads the compiled articles/*.html straight off disk at request time.
+const isPreview = !!process.env.ELEVENTY_PREVIEW;
+const passthroughDirs = ["images", "css", "js", "fonts"];
+const passthroughFiles = [
+    "_redirects",
+    "_headers",
+    "site.webmanifest",
+    "robots.txt",
+    "sitemap.xml",
+    "favicon.ico",
+    "favicon-16x16.png",
+    "favicon-32x32.png",
+    "apple-touch-icon.png",
+    "android-chrome-192x192.png",
+    "android-chrome-512x512.png",
+    "package.json"
+];
 
 module.exports = function configureEleventy(eleventyConfig) {
     for (const name of fs.readdirSync(".")) {
@@ -16,6 +36,16 @@ module.exports = function configureEleventy(eleventyConfig) {
     const lighthousePlugin = toml.parse(fs.readFileSync("./netlify.toml", "utf-8")).context.production.plugins.find(p => p.package === "@netlify/plugin-lighthouse");
     const preset = lighthousePlugin.inputs.settings.preset ?? "mobile";
     eleventyConfig.addGlobalData("viewport", preset);
+    for (const dir of passthroughDirs) {
+        if (fs.existsSync(dir)) {
+            eleventyConfig.addPassthroughCopy(dir);
+        }
+    }
+    for (const file of passthroughFiles) {
+        if (fs.existsSync(file)) {
+            eleventyConfig.addPassthroughCopy(file);
+        }
+    }
     eleventyConfig.addTransform("prettify", async function (content, outputPath) {
         if (outputPath?.endsWith(".html")) {
             try {
@@ -33,7 +63,16 @@ module.exports = function configureEleventy(eleventyConfig) {
         }
         return content;
     });
+    eleventyConfig.on("eleventy.before", () => {
+        // Always start from a clean output folder so a stale preview build
+        // can never leak into a production (in-place) compile, or vice versa.
+        fs.rmSync(path.join(__dirname, outputFolder), {
+            recursive: true,
+            force: true
+        });
+    });
     eleventyConfig.on("eleventy.after", () => {
+        if (isPreview) return;
         const publicDir = path.join(__dirname, outputFolder);
         if (!fs.existsSync(publicDir)) return;
         for (const dir of allowedDirs) {
