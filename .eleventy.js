@@ -4,7 +4,7 @@ const toml = require("toml");
 const prettier = require("prettier");
 const outputFolder = ".eleventy";
 const includesFolder = "_includes";
-const allowedDirs = [".", includesFolder, "articles", "projects"];
+const allowedDirs = new Set([".", includesFolder, "articles", "projects"]);
 // Local preview (npm run dev) serves straight from the output folder instead of
 // compiling html back over the tracked source files. Production (npm run build)
 // keeps the historical in-place compile, since netlify/functions/article.mts
@@ -29,7 +29,7 @@ const passthroughFiles = [
 module.exports = function configureEleventy(eleventyConfig) {
     for (const name of fs.readdirSync(".")) {
         const fullPath = path.join(".", name);
-        if (fs.statSync(fullPath).isDirectory() && !allowedDirs.includes(name)) {
+        if (fs.statSync(fullPath).isDirectory() && !allowedDirs.has(name)) {
             eleventyConfig.ignores.add(name);
         }
     }

@@ -40,13 +40,13 @@ const appMainSections = [
     appContactSection
 ];
 
-const appSubSections = [
+const appSubSections = new Set([
     "education",
     "experiences",
     "skills",
     "languages",
     "awards"
-];
+]);
 
 const appSecondarySections = [
     "counter-section",
@@ -1277,7 +1277,7 @@ function initPage() {
                     clearUrlPath();
                 }
             }
-            if (scrolled_id !== appCheckpointSubSection && appSubSections.includes(scrolled_id)) {
+            if (scrolled_id !== appCheckpointSubSection && appSubSections.has(scrolled_id)) {
                 appCheckpointSubSection = scrolled_id;
                 $('#navi a').removeClass('current').filter(`a[href="#${appCheckpointSubSection}"]`).addClass('current');
                 saveHashToSession(appCheckpointSubSection);
