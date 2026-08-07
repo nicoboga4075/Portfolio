@@ -240,33 +240,9 @@ span#dark-icon {
     z-index: 1;
 }
 
-@-moz-keyframes rotate-astronaut {
-    100% {
-        -moz-transform: rotate(-720deg);
-    }
-}
-
-@-webkit-keyframes rotate-astronaut {
-    100% {
-        -webkit-transform: rotate(-720deg);
-    }
-}
-
 @keyframes rotate-astronaut {
     100% {
         transform: rotate(-720deg);
-    }
-}
-
-@-moz-keyframes rocket-movement {
-    100% {
-        -moz-transform: translate(400px, -100px);
-    }
-}
-
-@-webkit-keyframes rocket-movement {
-    100% {
-        -webkit-transform: translate(400px, -100px);
     }
 }
 
