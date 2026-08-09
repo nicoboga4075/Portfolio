@@ -595,31 +595,16 @@ function getCurrentDate() {
 
 function lastCvUpdate(lang) {
     const lastUpdateDate = $('#last-update-date');
-    fetch('/.netlify/functions/env')
-        .then(response => response.json())
-        .then(variables => {
-            const url = `https://api.github.com/repos/nicoboga4075/${appName}/commits?path=docs/public/CV_${lang}.pdf&per_page=1`;
-            fetch(url, {
-                    headers: {
-                        'Authorization': `Bearer ${variables.GITHUB_API_TOKEN}`,
-                        'Accept': 'application/vnd.github+json'
-                    }
-                })
-                .then(res => {
-                    if (!res.ok) throw new Error("GitHub fetch failed");
-                    return res.json();
-                })
-                .then(data => {
-                    if (data.length > 0) {
-                        const lastUpdate = data[0].commit.committer.date;
-                        lastUpdateDate.text(new Date(lastUpdate).toLocaleString());
-                    } else {
-                        lastUpdateDate.text(getCurrentCompleteDate());
-                    }
-                });
+    fetch(`/.netlify/functions/env?lang=${lang}`)
+        .then(res => {
+            if (!res.ok) throw new Error("GitHub fetch failed");
+            return res.json();
+        })
+        .then(data => {
+            lastUpdateDate.text(data.date ? new Date(data.date).toLocaleString() : getCurrentCompleteDate());
         })
         .catch(error => {
-            lastUpdateDate.text(getCurrentDate());
+            lastUpdateDate.text(getCurrentCompleteDate());
             return false;
         });
 }
