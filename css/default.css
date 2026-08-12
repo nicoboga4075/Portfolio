@@ -72,9 +72,13 @@ sup:hover {
     background-color: var(--main);
 }
 
-span#dark-icon {
+#dark-icon {
     color: var(--main);
     margin: 10px;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
 }
 
 [hidden] {

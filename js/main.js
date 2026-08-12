@@ -1610,7 +1610,7 @@ async function sendEmail(senderName, subject, message) {
     callbackForm.text('');
 
     // Base64 encode the email in URL-safe format
-    const base64EncodedEmail = removeTrailingEquals(btoa(emailString).replace(/\+/g, '-').replace(/\//g, '_'));
+    const base64EncodedEmail = removeTrailingEquals(btoa(emailString).replaceAll('+', '-').replaceAll('/', '_'));
 
     // Check if token exists, otherwise request it
     const token = JSON.parse(localStorage.getItem('tokenAPI'));
@@ -1712,7 +1712,7 @@ function toggleDarkMode(event) {
     const $icon = $('#dark-icon');
     const isDark = $('html').hasClass('dark-mode');
     $icon.attr('class', isDark ? 'icon-moon-o' : 'icon-sun-o');
-    if (typeof legendLabelColor !== 'undefined' && typeof chart !== 'undefined') {
+    if (chart) {
         legendLabelColor = legendLabelColor === '#000000' ? '#ffffff' : '#000000';
         chart.update();
     }
