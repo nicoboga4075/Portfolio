@@ -1712,7 +1712,7 @@ function toggleDarkMode(event) {
     const $icon = $('#dark-icon');
     const isDark = $('html').hasClass('dark-mode');
     $icon.attr('class', isDark ? 'icon-moon-o' : 'icon-sun-o');
-    if (legendLabelColor !== undefined && chart !== undefined) {
+    if (chart) {
         legendLabelColor = legendLabelColor === '#000000' ? '#ffffff' : '#000000';
         chart.update();
     }
