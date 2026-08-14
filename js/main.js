@@ -879,57 +879,27 @@ function createCircularChart({
     };
     carousel();
 
-    $('nav .dropdown').hover(function () {
-        $(this).addClass('show');
-        $(this).find('> a').attr('aria-expanded', true);
-        $(this).find('.dropdown-menu').addClass('show');
-    }, function () {
-        $(this).removeClass('show');
-        $(this).find('> a').attr('aria-expanded', false);
-        $(this).find('.dropdown-menu').removeClass('show');
+    $('nav .dropdown').hover(function (event) {
+        const isOpen = event.type === 'mouseenter';
+        $(this).toggleClass('show', isOpen);
+        $(this).find('> a').attr('aria-expanded', isOpen);
+        $(this).find('.dropdown-menu').toggleClass('show', isOpen);
     });
 
-    const scrollWindow = function () {
-        $(window).scroll(function () {
-            const st = $(this).scrollTop(),
-                navbar = $('.ftco_navbar'),
-                sd = $('.js-scroll-wrap');
-            if (st > 150) {
-                if (!navbar.hasClass('scrolled')) {
-                    navbar.addClass('scrolled');
-                }
-            }
-            if (st < 150) {
-                if (navbar.hasClass('scrolled')) {
-                    navbar.removeClass('scrolled sleep');
-                }
-            }
-            if (st > 350) {
-                if (!navbar.hasClass('awake')) {
-                    navbar.addClass('awake');
-                }
-                if (sd.length > 0) {
-                    sd.addClass('sleep');
-                }
-            }
-            if (st < 350) {
-                if (navbar.hasClass('awake')) {
-                    navbar.removeClass('awake');
-                    navbar.addClass('sleep');
-                }
-                if (sd.length > 0) {
-                    sd.removeClass('sleep');
-                }
-            }
-            // For small screens, the header becomes dark
-            if (window.scrollY < 150) {
-                $('.off').first().addClass('top-scroll');
-            } else {
-                $('.off').first().removeClass('top-scroll');
-            }
-        });
-    };
-    scrollWindow();
+    $(window).scroll(function () {
+        const scrollTop = $(this).scrollTop(),
+            navbar = $('.ftco_navbar'),
+            wasAwake = navbar.hasClass('awake');
+        // Fixed, opaque navbar past 150px
+        navbar.toggleClass('scrolled', scrollTop >= 150);
+        // Brand/lang text switches from light to theme color past 350px
+        navbar.toggleClass('awake', scrollTop >= 350);
+        // Smooths the awake -> scrolled transition only when scrolling back
+        // up out of the awake zone (not when first scrolling down into it)
+        navbar.toggleClass('sleep', scrollTop >= 150 && scrollTop < 350 && wasAwake);
+        // For small screens, the header becomes dark
+        $('.off').first().toggleClass('top-scroll', window.scrollY < 150);
+    });
 
     const counter = function () {
         $('.ftco-about, .ftco-counter').waypoint(function (direction) {
@@ -949,29 +919,21 @@ function createCircularChart({
     counter();
 
     const contentWayPoint = function () {
-        let animationCount = 0;
+        const revealQueuedItems = function () {
+            $('body .ftco-animate.item-animate').each(function (k) {
+                const el = $(this);
+                setTimeout(() => {
+                    const effect = el.data('animate-effect') || 'fadeInUp';
+                    el.addClass(`${effect} ftco-animated`);
+                    el.removeClass('item-animate');
+                }, k * 50, 'easeInOutExpo');
+            });
+        };
+
         $('.ftco-animate').waypoint(function (direction) {
             if (direction === 'down' && !$(this.element).hasClass('ftco-animated')) {
-                animationCount++;
                 $(this.element).addClass('item-animate');
-                setTimeout(function () {
-                    $('body .ftco-animate.item-animate').each(function (k) {
-                        const el = $(this);
-                        setTimeout(function () {
-                            const effect = el.data('animate-effect');
-                            if (effect === 'fadeIn') {
-                                el.addClass('fadeIn ftco-animated');
-                            } else if (effect === 'fadeInLeft') {
-                                el.addClass('fadeInLeft ftco-animated');
-                            } else if (effect === 'fadeInRight') {
-                                el.addClass('fadeInRight ftco-animated');
-                            } else {
-                                el.addClass('fadeInUp ftco-animated');
-                            }
-                            el.removeClass('item-animate');
-                        }, k * 50, 'easeInOutExpo');
-                    });
-                }, 100);
+                setTimeout(revealQueuedItems, 100);
             }
         }, {
             offset: '95%'
@@ -1080,12 +1042,12 @@ function createCircularChart({
         const toRotate = $(this).attr('data-rotate');
         const period = $(this).attr('data-period');
         if (toRotate) {
-            new TxtRotate($(this), JSON.parse(toRotate), period);
+            this.txtRotate = new TxtRotate($(this), JSON.parse(toRotate), period);
         }
     });
 
     $('[data-bs-toggle="tooltip"]').each(function () {
-        new bootstrap.Tooltip(this);
+        this.tooltip = new bootstrap.Tooltip(this);
     });
 
     AOS.init({
