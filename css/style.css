@@ -93,6 +93,10 @@ sup:hover {
     cursor: pointer;
 }
 
+#dark-icon:focus {
+    outline: unset;
+}
+
 .open-mfp:hover,
 .btn.btn-primary:hover {
     color: var(--white) !important;

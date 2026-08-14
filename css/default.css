@@ -81,6 +81,10 @@ sup:hover {
     cursor: pointer;
 }
 
+#dark-icon:focus {
+    outline: unset;
+}
+
 [hidden] {
     display: none !important;
 }
