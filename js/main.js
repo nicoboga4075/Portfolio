@@ -1165,52 +1165,7 @@ function buildSafeRedirection(redirect, langPage) {
     return safeRedirection;
 }
 
-function initPage() {
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(registrations => {
-            registrations.forEach(reg => reg.unregister());
-        });
-    }
-
-    const idPage = getCurrentRoute();
-    const langPage = getCurrentLanguage();
-
-    loadImages('.icon.svg', 'svg');
-
-    $.each(appRoutes, function (appRoute) {
-        addRedirectById(appRoute);
-    });
-
-    initTranslator();
-
-    $('.open-mfp').click(function () {
-        const target = $(this).data('target');
-        toggleVisibility(target);
-    });
-
-    $('.mfp-close').click(function () {
-        const modalId = $(this).closest('.mfp')[0].id;
-        toggleVisibility(`#${modalId}`);
-    });
-
-    $('.owl-menu').click(function () {
-        const target = $(this).data('target');
-        $('.owl-carousel').not(target).each(function () {
-            if (!$(this).hasClass('d-none')) {
-                $(this).addClass('d-none');
-            }
-            $(this).removeClass('active');
-        });
-        if ($(target).hasClass('owl-loaded')) {
-            $(`.owl-menu[data-target="${target}"]`).addClass('active').siblings('.owl-menu').removeClass('active');
-        } else {
-            initCarousel(target);
-        }
-        // To avoid glitch switching to other carousel
-        $(target).removeClass('d-none').trigger('refresh.owl.carousel');
-    });
-
-    if (idPage === 'index') {
+function initIndexPage(langPage) {
         if (window.location.protocol === 'https:') {
             fetch('/.netlify/functions/visit')
                 .then(response => response.json())
@@ -1318,8 +1273,9 @@ function initPage() {
         });
 
         loadBingo();
+}
 
-    } else if (idPage === 'blog') {
+function initBlogPage(langPage) {
         $('.nav-link').each(function (index, navLink) {
             navLink.href = `/${langPage}#${appAllSections[index]}`;
             navLink.addEventListener('click', function (event) {
@@ -1552,6 +1508,57 @@ function initPage() {
             $('.sidebar').append($sidebarBox);
             $imgDiploma.fadeIn(600);
         }
+}
+
+function initPage() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+            registrations.forEach(reg => reg.unregister());
+        });
+    }
+
+    const idPage = getCurrentRoute();
+    const langPage = getCurrentLanguage();
+
+    loadImages('.icon.svg', 'svg');
+
+    $.each(appRoutes, function (appRoute) {
+        addRedirectById(appRoute);
+    });
+
+    initTranslator();
+
+    $('.open-mfp').click(function () {
+        const target = $(this).data('target');
+        toggleVisibility(target);
+    });
+
+    $('.mfp-close').click(function () {
+        const modalId = $(this).closest('.mfp')[0].id;
+        toggleVisibility(`#${modalId}`);
+    });
+
+    $('.owl-menu').click(function () {
+        const target = $(this).data('target');
+        $('.owl-carousel').not(target).each(function () {
+            if (!$(this).hasClass('d-none')) {
+                $(this).addClass('d-none');
+            }
+            $(this).removeClass('active');
+        });
+        if ($(target).hasClass('owl-loaded')) {
+            $(`.owl-menu[data-target="${target}"]`).addClass('active').siblings('.owl-menu').removeClass('active');
+        } else {
+            initCarousel(target);
+        }
+        // To avoid glitch switching to other carousel
+        $(target).removeClass('d-none').trigger('refresh.owl.carousel');
+    });
+
+    if (idPage === 'index') {
+        initIndexPage(langPage);
+    } else if (idPage === 'blog') {
+        initBlogPage(langPage);
     }
 
     $('a[href="#"]').click(function (event) {
