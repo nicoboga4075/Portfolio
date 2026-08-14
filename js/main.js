@@ -1268,7 +1268,7 @@ function initBlogPage(langPage) {
                     $resetSpan.hide();
                 }
 
-                const query = $.trim($searchInput.val().toLowerCase());
+                const query = $searchInput.val().toLowerCase().trim();
                 $suggestions.empty();
 
                 if (!query) {
@@ -1323,7 +1323,7 @@ function initBlogPage(langPage) {
 
             $searchForm.on('submit', function (event) {
                 event.preventDefault();
-                const query = $.trim($searchInput.val());
+                const query = $searchInput.val().trim();
                 if (!query) return;
                 $suggestions.empty().hide();
                 highlightKeywords([query]);
