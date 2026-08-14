@@ -36,6 +36,7 @@ module.exports = function configureEleventy(eleventyConfig) {
     const lighthousePlugin = toml.parse(fs.readFileSync("./netlify.toml", "utf-8")).context.production.plugins.find(p => p.package === "@netlify/plugin-lighthouse");
     const preset = lighthousePlugin.inputs.settings.preset ?? "mobile";
     eleventyConfig.addGlobalData("viewport", preset);
+    eleventyConfig.addGlobalData("author", "Nicolas BOGALHEIRO");
     for (const dir of passthroughDirs) {
         if (fs.existsSync(dir)) {
             eleventyConfig.addPassthroughCopy(dir);

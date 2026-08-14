@@ -30,7 +30,7 @@ permalink: "blog_fr.html"
                                 <img src="images/profile.webp" class="img-fluid mb-4" alt="Profil" loading="lazy">
                             </div>
                             <div class="desc text-center">
-                                <h3 class="author"></h3>
+                                <h3 class="author">{{ author }}</h3>
                                 <p>Ingénieur Logiciel</p>
                                 <p>Scanne-moi</p>
                                 <img src="images/qrcode.png" id="qrcode" alt="Linkerz QR Code" loading="lazy">
@@ -52,9 +52,9 @@ permalink: "blog_fr.html"
                         <div class="sidebar-box">
                             <h3 class="heading-sidebar">Récents</h3>
                             <div class="block-21 mb-4 d-flex justify-content-center">
-                                <a id="crm" class="blog-img mr-4"></a>
+                                <a id="crm" class="blog-img mr-4" aria-labelledby="recent-article-heading" aria-label="Publication récente"></a>
                                 <div class="text">
-                                    <h3 class="heading"></h3>
+                                    <h3 id="recent-article-heading" class="heading">Publication récente</h3>
                                     <div class="meta"></div>
                                 </div>
                             </div>

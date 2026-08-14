@@ -1,6 +1,6 @@
 const appName = 'Portfolio';
 const appRoot = '/en';
-const appLanguages = ['en', 'fr'];
+const appLanguages = new Set(['en', 'fr']);
 
 const xp = 5;
 const cdiCount = 4;
@@ -470,7 +470,7 @@ function removeTrailingEquals(string) {
 }
 
 function escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return string.replace(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
 }
 
 function highlightKeywords(keywords) {
@@ -480,7 +480,7 @@ function highlightKeywords(keywords) {
         if (this.nodeType === 3) {
             let text = this.nodeValue;
             keywords.forEach(keyword => {
-                const regex = new RegExp(`(^|\\s|[.,!?;:"'()\\[\\]{}<>])(${escapeRegExp(keyword)})(?=\\s|[.,!?;:"'()\\[\\]{}<>]|$)`, 'gi');
+                const regex = new RegExp(String.raw`(^|\s|[.,!?;:"'()\[\]{}<>])(${escapeRegExp(keyword)})(?=\s|[.,!?;:"'()\[\]{}<>]|$)`, 'gi');
                 text = text.replace(regex, (match, p1, p2) => `${p1}<mark class="highlight">${p2}</mark>`);
             });
             if (text !== this.nodeValue) {
@@ -667,7 +667,7 @@ function switchLanguage(url, langA = 'en', langB = 'fr') {
     try {
         const urlObj = new URL(url, window.location.origin);
         const pathParts = urlObj.pathname.split('/').filter(Boolean);
-        if (pathParts.length > 0 && appLanguages.includes(pathParts[0])) {
+        if (pathParts.length > 0 && appLanguages.has(pathParts[0])) {
             pathParts[0] = pathParts[0] === langA ? langB : langA;
             urlObj.pathname = `/${pathParts.join('/')}`;
             const hash = getHashFromSession();
@@ -676,6 +676,7 @@ function switchLanguage(url, langA = 'en', langB = 'fr') {
         }
         throw new Error("Language not recognized in URL");
     } catch (error) {
+        console.error(error);
         return appDefaultRoutes['error404'];
     }
 }
@@ -1039,19 +1040,11 @@ function createCircularChart({
             }
         }
     });
-    $('.progress-bar').each(function () {
-        const valueNow = parseFloat($(this).attr('aria-valuenow'));
-        const valueMin = parseFloat($(this).attr('aria-valuemin'));
-        const valueMax = parseFloat($(this).attr('aria-valuemax'));
-        const widthPercentage = ((valueNow - valueMin) / (valueMax - valueMin)) * 100;
-        $(this).css('width', `${widthPercentage}%`);
-    });
-
     const TxtRotate = function (el, toRotate, period) {
         this.toRotate = toRotate;
         this.el = el;
         this.loopNum = 0;
-        this.period = parseInt(period, 10) || 2000;
+        this.period = Number.parseInt(period, 10) || 2000;
         this.txt = '';
         this.tick();
         this.isDeleting = false;
@@ -1088,12 +1081,12 @@ function createCircularChart({
         const toRotate = $(this).attr('data-rotate');
         const period = $(this).attr('data-period');
         if (toRotate) {
-            const txtRotate = new TxtRotate($(this), JSON.parse(toRotate), period);
+            void new TxtRotate($(this), JSON.parse(toRotate), period);
         }
     });
 
     $('[data-bs-toggle="tooltip"]').each(function () {
-        const tooltip = new bootstrap.Tooltip(this);
+        void new bootstrap.Tooltip(this);
     });
 
     AOS.init({
@@ -1303,6 +1296,7 @@ function initPage() {
                     $(this).submit(); // Submit form after sending the email
                 }
             } catch (error) {
+                console.error(error);
                 return false;
             }
         });
@@ -1419,7 +1413,7 @@ function initPage() {
                 indexSearchOccurence = -1;
                 $searchInput.val('').focus();
                 $suggestions.empty().hide();
-                if (typeof originalArticleContent !== 'undefined') {
+                if (originalArticleContent != undefined) {
                     $('.article-container').html(originalArticleContent);
                 }
                 $(this).hide();
@@ -1663,6 +1657,7 @@ async function sendEmail(senderName, subject, message) {
         try {
             await sendHelper(token);
         } catch (error) {
+            console.error(error);
             callbackForm.text(errorMessage);
             localStorage.clear();
         }
@@ -1675,6 +1670,7 @@ async function sendEmail(senderName, subject, message) {
             });
             await checkTokenConsent();
         } catch (error) {
+            console.error(error);
             callbackForm.text(errorMessage);
             localStorage.clear();
         }

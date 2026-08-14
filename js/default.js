@@ -4,6 +4,9 @@ const appDefaultRoutes = {
     "error404": "/404"
 };
 
+let legendLabelColor = '#000000';
+let chart;
+
 function getCurrentRoute() {
     const path = window.location.pathname;
     return Object.keys(appDefaultRoutes).find(key => {
@@ -44,6 +47,7 @@ function switchLanguage(url) {
         }
         return urlObj.pathname + urlObj.search + urlObj.hash;
     } catch (error) {
+        console.error(error);
         return '/';
     }
 }
@@ -113,7 +117,7 @@ function toggleDarkMode(event) {
     const icon = document.getElementById('dark-icon');
     const isDark = document.documentElement.classList.contains('dark-mode');
     icon.className = isDark ? 'icon-moon-o' : 'icon-sun-o';
-    if (typeof legendLabelColor !== 'undefined' && typeof chart !== 'undefined') {
+    if (chart) {
         legendLabelColor = legendLabelColor === '#000000' ? '#ffffff' : '#000000';
         chart.update();
     }

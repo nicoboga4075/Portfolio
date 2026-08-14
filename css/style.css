@@ -151,13 +151,15 @@ input[name="search-input"].highlight-flash {
 
 /* About Section */
 
-#profile {
+.profile-photo {
     background-image: url("/images/profile.webp");
 }
 
-#profile:hover {
+.profile-photo:hover {
     opacity: 0.9;
 }
+
+/* Hire Me */
 
 .ftco-hireme {
     background-image: url("/images/background.webp");
@@ -192,6 +194,31 @@ input[name="search-input"].highlight-flash {
     background-color: var(--yellow);
     background-repeat: no-repeat;
     background-position: center;
+}
+
+/* Progress Bars */
+
+progress {
+    appearance: none;
+    width: 100%;
+    height: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #edf5ff;
+    border-radius: 0.5rem;
+}
+
+progress::-moz-progress-bar {
+    border-radius: 0.5rem;
+    background-color: var(--main);
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--main);
 }
 
 /* Language Switcher */
@@ -658,7 +685,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     border-color: var(--main) transparent transparent transparent;
 }
 
-#profile:hover .bulle-bd {
+.profile-photo:hover .bulle-bd {
     display: block;
 }
 
