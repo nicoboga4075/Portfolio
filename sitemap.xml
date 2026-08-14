@@ -3,63 +3,63 @@
     <!-- Root page -->
 	<url>
         <loc>https://nicoboga.netlify.app</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
 	<url>
         <loc>https://nicoboga.netlify.app/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
 	<!-- Home pages -->
     <url>
         <loc>https://nicoboga.netlify.app/en</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/en/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <!-- Blog pages -->
     <url>
         <loc>https://nicoboga.netlify.app/en/blog</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/blog</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/en/blog/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://nicoboga.netlify.app/fr/blog/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
