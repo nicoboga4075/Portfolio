@@ -1057,7 +1057,6 @@ function createCircularChart({
         this.el.html('<span class="wrap"></span>');
         this.el.find('.wrap').text(this.txt);
 
-        const that = this;
         let delta = 300 - Math.random() * 100;
 
         if (this.isDeleting) {
@@ -1073,20 +1072,20 @@ function createCircularChart({
             delta = 500;
         }
 
-        setTimeout(function () {
-            that.tick();
+        setTimeout(() => {
+            this.tick();
         }, delta);
     };
     $('.txt-rotate').each(function () {
         const toRotate = $(this).attr('data-rotate');
         const period = $(this).attr('data-period');
         if (toRotate) {
-            void new TxtRotate($(this), JSON.parse(toRotate), period);
+            new TxtRotate($(this), JSON.parse(toRotate), period);
         }
     });
 
     $('[data-bs-toggle="tooltip"]').each(function () {
-        void new bootstrap.Tooltip(this);
+        new bootstrap.Tooltip(this);
     });
 
     AOS.init({
