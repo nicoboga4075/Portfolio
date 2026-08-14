@@ -326,6 +326,84 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     margin-bottom: 20px;
 }
 
+/* Career Timeline */
+
+.animation-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin: 40px 0;
+    padding-left: 50px;
+}
+
+.road {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 4px;
+    background: repeating-linear-gradient(to bottom, var(--main) 0, var(--main) 10px, transparent 10px, transparent 20px);
+    border-radius: 2px;
+}
+
+.car {
+    position: absolute;
+    left: 22px;
+    top: 0;
+    font-size: 28px;
+    line-height: 1;
+    transform: translate(-50%, -50%);
+    transition: top 0.1s linear;
+    z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .car {
+        transition: none;
+    }
+}
+
+.city {
+    position: relative;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--main);
+}
+
+.city::before {
+    content: '';
+    position: absolute;
+    left: -35px;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    background: var(--main);
+    border: 3px solid var(--background);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--main);
+    transform: translateY(-50%);
+}
+
+.step {
+    position: relative;
+    font-size: 15px;
+    padding-left: 4px;
+}
+
+.step::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background: var(--background);
+    border: 2px solid var(--main);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
 #qrcode {
     max-width: 15vw;
 }

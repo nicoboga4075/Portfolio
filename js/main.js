@@ -1098,9 +1098,26 @@ function createCircularChart({
 
 })(jQuery);
 
+function initCareerAnimation() {
+    const container = document.querySelector('.animation-container');
+    const car = document.getElementById('car');
+    if (!container || !car) {
+        return;
+    }
+    const updateCarPosition = () => {
+        const rect = container.getBoundingClientRect();
+        const progress = Math.min(Math.max((window.innerHeight / 2 - rect.top) / rect.height, 0), 1);
+        car.style.top = `${progress * 100}%`;
+    };
+    window.addEventListener('scroll', updateCarPosition, { passive: true });
+    window.addEventListener('resize', updateCarPosition);
+    updateCarPosition();
+}
+
 function initArticle() {
     loadImages('.article-image', 'png');
     loadImages('.icon.svg', 'svg');
+    initCareerAnimation();
 }
 
 function initCarousel(target) {
