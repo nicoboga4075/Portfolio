@@ -21,7 +21,7 @@
     "playwright": "npx playwright test",
     "cypress": "npx cypress run",
     "simu:ci": "powershell.exe -Command \"Start-Process powershell.exe -ArgumentList '-NoExit','-Command','Set-Location -LiteralPath \\\"%CD%\\\"; ./simulator_ci.ps1' -Verb RunAs\"",
-    "uglify:js": "for file in js/*.js; do terser \"$file\" --compress --mangle --output \"js/$(basename \"$file\")\"; done",
+    "uglify:js": "node uglify.js",
     "eleventy": "npx eleventy",
     "capacitor:add": "npx cap add android",
     "capacitor:sync": "npx cap sync",

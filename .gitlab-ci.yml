@@ -23,7 +23,7 @@ status-job:
 build-job:
   stage: build
   script:
-    - echo "Building..."
+    - echo "Installing dependencies..."
     - |
       if ($env:CI -eq "true") {
         echo "> npm ci"
@@ -32,6 +32,9 @@ build-job:
         echo "> npm install"
         npm install
       }
+    - echo "Building application..."
+    - echo "> npm run build"
+    - npm run build
     - echo "Build done!"
   cache:
     key:
