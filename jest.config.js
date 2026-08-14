@@ -1,10 +1,11 @@
 module.exports = {
+  roots: ["<rootDir>/js", "<rootDir>/netlify"],
   collectCoverageFrom: [
     "js/default.js",
     "js/main.js"
   ],
   testPathIgnorePatterns: ["/node_modules/", "/docs/"],
-  modulePathIgnorePatterns: ["/docs/"],
+  modulePathIgnorePatterns: ["/node_modules/", "/docs/"],
   coverageDirectory: "reports/jest/coverage",
   coverageReporters: ["lcov", "text", "html"],
   testEnvironment: "node",
