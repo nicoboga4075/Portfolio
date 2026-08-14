@@ -10,7 +10,7 @@ const allowedDirs = new Set([".", includesFolder, "articles", "projects"]);
 // keeps the historical in-place compile, since netlify/functions/article.mts
 // reads the compiled articles/*.html straight off disk at request time.
 const isPreview = !!process.env.ELEVENTY_PREVIEW;
-const passthroughDirs = ["images", "css", "js", "fonts"];
+const passthroughDirs = ["images", "css", "js", "fonts", "videos", "docs/public"];
 const passthroughFiles = [
     "_redirects",
     "_headers",

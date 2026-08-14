@@ -29,7 +29,22 @@ export default async function handlerArticle(req: Request, context: Context): Pr
             return Response.redirect(error404, 302);
         }
 
+        // Local preview (npm run dev) compiles to .eleventy/ instead of in-place,
+        // so prefer that compiled copy when present; production builds compile
+        // articles/*.html in place and never leave a .eleventy/ folder behind.
+        const previewFilePath = path.join(process.cwd(), ".eleventy", "articles", filename);
         const filePath = path.join(process.cwd(), "articles", filename);
+
+        try {
+            const fileContent = await fs.readFile(previewFilePath, "utf-8");
+            return new Response(fileContent, {
+                headers: {
+                    "Content-Type": "text/html"
+                },
+            });
+        } catch {
+            // Fall through to the production path below
+        }
 
         try {
             const fileContent = await fs.readFile(filePath, "utf-8");
