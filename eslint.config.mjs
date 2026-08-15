@@ -4,6 +4,8 @@ import tseslint from "typescript-eslint";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
+  // Generated Jest coverage reports, regenerated on every test run
+  { ignores: ["reports/"] },
   // JS config
   {
     files: ["js/main.js", "js/default.js"],
