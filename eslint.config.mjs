@@ -24,10 +24,12 @@ export default defineConfig([
       },
     },
 	rules : {
-	  "no-unused-vars": ["warn", { varsIgnorePattern: "^(initPage|initCaptcha|initArticle|gapiLoaded|gisLoaded)$" }],
+	  // Called from inline HTML or external callbacks, so ESLint can't see the usage
+	  "no-unused-vars": ["warn", { varsIgnorePattern: "^(initPage|initCaptcha|initArticle|gapiLoaded|gisLoaded|toggleDarkMode)$" }],
 	  "no-undef": "error",
 	  "no-var": "warn",
-	  "no-console": "warn",
+	  // warn/error are trusted as real diagnostics; only console.log is flagged
+	  "no-console": ["warn", { allow: ["warn", "error"] }],
 	  "no-debugger": "warn",
 	  "prefer-const": "warn",
 	  "semi": "error",

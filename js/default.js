@@ -4,8 +4,8 @@ const appDefaultRoutes = {
     "error404": "/404"
 };
 
-let legendLabelColor = '#000000';
-let chart;
+const cdiCount = 4;
+const internshipsCount = 3;
 
 function getCurrentRoute() {
     const path = window.location.pathname;
@@ -96,13 +96,31 @@ function initCareerAnimation() {
     updateCarPosition();
 }
 
+function applyDarkModePreference() {
+    const isDark = localStorage.getItem('darkMode') === 'true';
+    document.documentElement.classList.toggle('dark-mode', isDark);
+}
+
+function fillCareerCounts() {
+    const cdiCountEl = document.getElementById('cdiCount');
+    if (cdiCountEl) {
+        cdiCountEl.textContent = cdiCount;
+    }
+    const internshipsCountEl = document.getElementById('internshipsCount');
+    if (internshipsCountEl) {
+        internshipsCountEl.textContent = internshipsCount;
+    }
+}
+
 function initArticle() {
+    applyDarkModePreference();
     loadImages('.article-image', 'png');
     loadImages('.icon.svg', 'svg');
     initTranslator();
     addHomeRedirect();
     document.body.classList.add('read-zone');
     initCareerAnimation();
+    fillCareerCounts();
 }
 
 function initPage() {
@@ -111,6 +129,7 @@ function initPage() {
             registrations.forEach(reg => reg.unregister());
         });
     }
+    applyDarkModePreference();
     loadImages('.icon.svg', 'svg');
     initTranslator();
     addHomeRedirect();
@@ -123,19 +142,4 @@ function initPage() {
             event.preventDefault();
         });
     });
-}
-
-function toggleDarkMode(event) {
-	if (event) {
-		event.preventDefault();
-		event.stopPropagation();
-    }
-    document.documentElement.classList.toggle('dark-mode');
-    const icon = document.getElementById('dark-icon');
-    const isDark = document.documentElement.classList.contains('dark-mode');
-    icon.className = isDark ? 'icon-moon-o' : 'icon-sun-o';
-    if (chart) {
-        legendLabelColor = legendLabelColor === '#000000' ? '#ffffff' : '#000000';
-        chart.update();
-    }
 }

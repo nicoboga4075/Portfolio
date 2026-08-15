@@ -448,11 +448,10 @@ function debounce(func, delay) {
     };
 }
 
-function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function capitalizeWords(string, locale) {
+function capitalize(string, locale, allWords = true) {
+    if (!allWords) {
+        return string.charAt(0).toLocaleUpperCase(locale) + string.slice(1);
+    }
     return string.split(' ').map(word => {
         if (word.length === 0) return word;
         const first = word[0].toLocaleUpperCase(locale);
@@ -508,20 +507,18 @@ function scrollToNextHighlight() {
     });
 }
 
-function convertFrenchToIso(frenchDateString) {
-    const [day, month, year] = frenchDateString.split('/');
-    return `${year}-${month}-${day}`;
-}
-
-function convertIsoToFrench(isoDateString) {
-    const [year, month, day] = isoDateString.split('-');
-    return `${day}/${month}/${year}`;
-}
-
-function getFullStringFromIso(isoDateString, lang) {
-    // Transform 2000-01-01 into 1 Janvier 2000 or January 1, 2020
-    const date = new Date(isoDateString);
-    return capitalizeWords(date.toLocaleDateString(lang, {
+function convertDate(dateString, target = 'iso', lang) {
+    if (target === 'iso') {
+        const [day, month, year] = dateString.split('/');
+        return `${year}-${month}-${day}`;
+    }
+    if (target === 'fr') {
+        const [year, month, day] = dateString.split('-');
+        return `${day}/${month}/${year}`;
+    }
+    // target === 'readable': Transform 2000-01-01 into 1 Janvier 2000 or January 1, 2020
+    const date = new Date(dateString);
+    return capitalize(date.toLocaleDateString(lang, {
         day: 'numeric',
         month: 'long',
         year: 'numeric'
@@ -585,12 +582,8 @@ function toggleVisibility(selector, visibleClass = 'd-flex') {
     }
 }
 
-function getCurrentCompleteDate() {
-    return new Date().toLocaleString();
-}
-
-function getCurrentDate() {
-    return new Date().toLocaleDateString();
+function getCurrentDate(complete = true) {
+    return complete ? new Date().toLocaleString() : new Date().toLocaleDateString();
 }
 
 function lastCvUpdate(lang) {
@@ -601,10 +594,11 @@ function lastCvUpdate(lang) {
             return res.json();
         })
         .then(data => {
-            lastUpdateDate.text(data.date ? new Date(data.date).toLocaleString() : getCurrentCompleteDate());
+            lastUpdateDate.text(data.date ? new Date(data.date).toLocaleString() : getCurrentDate());
         })
         .catch(error => {
-            lastUpdateDate.text(getCurrentCompleteDate());
+            console.error(error);
+            lastUpdateDate.text(getCurrentDate());
             return false;
         });
 }
@@ -708,6 +702,7 @@ function initProfile() {
         }
     });
     $('#cdiCount').text(cdiCount);
+    $('#internshipsCount').text(internshipsCount);
     $('#experiences .resume-wrap a:first').addClass('victory');
     $('#certifsCount').attr('data-number', certifsCount);
     $('#projectsCount').attr('data-number', projectsCount);
@@ -1240,7 +1235,7 @@ function initIndexPage(langPage) {
 function initBlogPage(langPage) {
         $('.nav-link').each(function (index, navLink) {
             navLink.href = `/${langPage}#${appAllSections[index]}`;
-            navLink.addEventListener('click', function (event) {
+            navLink.addEventListener('click', function () {
                 saveHashToSession(appAllSections[index]);
             });
         });
@@ -1364,12 +1359,12 @@ function initBlogPage(langPage) {
 
             if (recentArticle) {
                 loadImages('.blog-img', 'avif', true);
-                $('.blog-img').on('click', function (event) {
+                $('.blog-img').on('click', function () {
                     window.location.href = `/${langPage}/blog#${recentArticle.slug}`;
                     setTimeout(() => location.reload(), 150);
                 });
                 $('.heading').text(recentArticle.title[langPage]);
-                $('.meta').html('<i class="icon-calendar"></i> ' + getFullStringFromIso(recentArticle.date, langPage));
+                $('.meta').html('<i class="icon-calendar"></i> ' + convertDate(recentArticle.date, 'readable', langPage));
             }
 
             const $tagCloud = $('.tagcloud');
@@ -1443,6 +1438,7 @@ function initBlogPage(langPage) {
                         originalArticleContent = $('.article-container').html();
                     })
                     .catch(error => {
+                        console.error(error);
                         articleShape.text(errorArticle);
                     })
                     .finally(() => {
@@ -1478,6 +1474,8 @@ function initPage() {
             registrations.forEach(reg => reg.unregister());
         });
     }
+
+    applyDarkModePreference();
 
     const idPage = getCurrentRoute();
     const langPage = getCurrentLanguage();
@@ -1546,7 +1544,10 @@ function initPage() {
                 versionElement.text(data.version);
             }
         })
-        .catch(error => versionElement.text(1.0));
+        .catch(error => {
+            console.error(error);
+            versionElement.text(1.0);
+        });
 }
 
 /* Contact Form */
@@ -1678,11 +1679,18 @@ function initCaptcha() {
             });
         })
         .catch(error => {
+            console.error(error);
             return false;
         });
 }
 
 /* Dark Mode */
+
+function applyDarkModePreference() {
+    const isDark = localStorage.getItem('darkMode') === 'true';
+    $('html').toggleClass('dark-mode', isDark);
+    $('#dark-icon').attr('class', isDark ? 'icon-moon-o' : 'icon-sun-o');
+}
 
 function toggleDarkMode(event) {
     if (event) {
@@ -1693,6 +1701,7 @@ function toggleDarkMode(event) {
     const $icon = $('#dark-icon');
     const isDark = $('html').hasClass('dark-mode');
     $icon.attr('class', isDark ? 'icon-moon-o' : 'icon-sun-o');
+    localStorage.setItem('darkMode', isDark);
     if (chart) {
         legendLabelColor = legendLabelColor === '#000000' ? '#ffffff' : '#000000';
         chart.update();
