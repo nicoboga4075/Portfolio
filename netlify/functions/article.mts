@@ -57,6 +57,7 @@ export default async function handlerArticle(req: Request, context: Context): Pr
             return Response.redirect(error404, 302);
         }
     } catch (error) {
+        console.error(`[${context.requestId}]`, error);
         return new Response(
             JSON.stringify({
                 error: (error as Error).message

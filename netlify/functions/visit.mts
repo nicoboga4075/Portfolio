@@ -29,6 +29,7 @@ export default async function handlerVisit(req: Request, context: Context): Prom
             }
         );
     } catch (error) {
+        console.error(`[${context.requestId}] Referer: ${req.headers.get("referer") || "unknown"}`, error);
         return new Response(
             JSON.stringify({
                 error: (error as Error).message

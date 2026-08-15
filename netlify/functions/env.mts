@@ -83,6 +83,7 @@ export default async function handlerEnv(req: Request, context: Context): Promis
             }
         });
     } catch (error) {
+        console.error(`[${context.requestId}]`, error);
         return new Response(JSON.stringify({ error: (error as Error).message }), {
             status: 500,
             headers: {
