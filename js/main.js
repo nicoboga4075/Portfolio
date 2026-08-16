@@ -1470,9 +1470,8 @@ function initBlogPage(langPage) {
 
 function initPage() {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(registrations => {
-            registrations.forEach(reg => reg.unregister());
-        });
+        navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+            .catch(error => console.error(error));
     }
 
     applyDarkModePreference();
