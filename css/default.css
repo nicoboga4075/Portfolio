@@ -8,8 +8,8 @@
     --yellow: #ffc107;
     --dark: #343a40;
     --light: #f8f9fa;
-    --white: #ffffff;
-    --black: #000000;
+    --white: #fff;
+    --black: #000;
     --gray: #868e96;
     --background: var(--white);
     --text-color: var(--black);
