@@ -100,6 +100,31 @@ const appServices = [
 ];
 
 const appArticles = [{
+        slug: "bien-pasbien",
+        title: {
+            "fr": "Bien / Pas Bien : bonnes et mauvaises pratiques de code",
+            "en": "Good / Not Good: good and bad coding practices"
+        },
+        date: "2025-07-26",
+        tags: [{
+            "Clean Code": "#"
+        }, {
+            "SOLID": "#"
+        }, {
+            "Design Patterns": "https://refactoring.guru/design-patterns"
+        }, {
+            "DRY": "#"
+        }, {
+            "KISS": "#"
+        }, {
+            "C#": "#"
+        }, {
+            "Python": "#"
+        }, {
+            "JavaScript": "#"
+        }]
+    },
+    {
         slug: "du-voc-de-dev",
         title: {
             "fr": "Du voc' de dev",

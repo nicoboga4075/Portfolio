@@ -4,16 +4,16 @@ permalink: "articles/bien-pasbien_fr.html"
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>Portfolio - Bien/Pas Bien</title>
+        <title>Portfolio - Bien / Pas Bien : bonnes et mauvaises pratiques de code</title>
         {% include "metas.html" %}      
-        <meta name="description" content="Mon parcours pro en quelques lignes">
+        <meta name="description" content="Bien / Pas Bien : bonnes et mauvaises pratiques de code">
         <meta http-equiv="Content-Language" content="fr_FR">
         {% include "poppins.html" %}
         <base href="../../">
         {% include "manifest.html" %}
         {% include "default.html" %}
     </head>
-    <body>
+    <body onload="initArticle()">
         <div class="article-container">
             <div class="title-center">🧐 Bien / Pas Bien</div>
             <div class="video-wrapper">
@@ -693,7 +693,7 @@ public decimal CalculerTotal(decimal prix, decimal tva, decimal remise = 0, deci
                 <h2>⚠️ Bien avec modération</h2>
                 <p>Utiliser des <a href="https://refactoring.guru/design-patterns">design patterns</a></p>
                 <i>Utile si adapté, à éviter en excès ou pour faire joli</i>
-                <img src="images/design.webp" class="img-fluid mt-4" alt="Design">
+                <img id="pattern" class="article-image" alt="Patterns">
             </div>
         </div>
     </body>
