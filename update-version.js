@@ -18,4 +18,4 @@ const escapedVersion = version.replaceAll('.', String.raw`\.`);
 const regex = new RegExp(String.raw`(#### v${escapedVersion}\r\n\r\n> )[^\r\n]*`);
 changelog = changelog.replace(regex,`$1${releaseDate}`);
 fs.writeFileSync(changelogPath, changelog);
-console.log(`CHANGELOG.md updated -> v${version} / ${releaseDate}`);
+console.warn(`CHANGELOG.md updated -> v${version} / ${releaseDate}`);

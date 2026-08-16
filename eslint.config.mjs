@@ -3,18 +3,38 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 import { defineConfig } from "eslint/config";
 
+// Third-party bundles in js/, never linted (minified/vendored, not ours to fix)
+const vendorJs = [
+  "js/aos.js",
+  "js/bootstrap.min.js",
+  "js/chart.js",
+  "js/jquery-migrate-3.0.1.min.js",
+  "js/jquery.animateNumber.min.js",
+  "js/jquery.easing.1.3.js",
+  "js/jquery.magnific-popup.min.js",
+  "js/jquery.min.js",
+  "js/jquery.stellar.min.js",
+  "js/jquery.waypoints.min.js",
+  "js/owl.carousel.min.js",
+  "js/popper.min.js",
+  "js/scrollax.min.js"
+];
+
 export default defineConfig([
-  // Generated Jest coverage reports, regenerated on every test run
-  { ignores: ["reports/"] },
+  // Generated build/test output, regenerated on every run
+  { ignores: ["reports/", ".eleventy/", ".netlify/"] },
   // JS config
   {
-    files: ["js/main.js", "js/default.js"],
+    files: ["**/*.js"],
+    ignores: vendorJs,
     plugins: { js },
     extends: ["js/recommended"],
     languageOptions: {
 	  sourceType: "script",
       globals: {
         ...globals.browser,
+        ...globals.node,
+        ...globals.serviceworker,
         $: "readonly",
         jQuery: "readonly",
 		grecaptcha: "readonly",

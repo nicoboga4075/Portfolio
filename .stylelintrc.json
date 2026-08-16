@@ -1,5 +1,18 @@
 {
   "extends": "stylelint-config-standard",
+  "ignoreFiles": [
+    "node_modules/**",
+    ".netlify/**",
+    ".eleventy/**",
+    "reports/**",
+    "css/animate.css",
+    "css/aos.css",
+    "css/bootstrap.min.css",
+    "css/flaticon.css",
+    "css/icomoon.css",
+    "css/magnific-popup.css",
+    "css/owl-carousel.css"
+  ],
   "rules": {
     "value-keyword-case": [
       "lower",
