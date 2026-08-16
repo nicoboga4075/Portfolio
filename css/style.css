@@ -671,11 +671,11 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 
 /* Footer */
 
-.ftco-footer-social li a {
+.ftco-footer-links li a {
     background: var(--main);
 }
 
-.ftco-footer-social li a span {
+.ftco-footer-links li a span {
     color: var(--white) !important;
 }
 
