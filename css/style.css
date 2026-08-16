@@ -967,6 +967,20 @@ input[name="search-input"] {
     border-radius: 50% !important;
 }
 
+#webchat-placeholder {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    height: 55px;
+    width: 55px;
+    background-color: var(--main);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgb(0 0 0 / 50%);
+    z-index: 1000;
+    font-size: 25px;
+}
+
 /* Badges */
 
 .badge {
