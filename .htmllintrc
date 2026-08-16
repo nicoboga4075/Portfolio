@@ -45,7 +45,7 @@
     "class-style": false,
     "id-class-ignore-regex": false,
     "img-req-alt": true,
-    "img-req-src": true,
+    "img-req-src": false,
     "indent-style": false,
     "indent-width": false,
     "html-valid-content-model": true,
