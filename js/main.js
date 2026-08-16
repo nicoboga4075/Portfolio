@@ -1383,7 +1383,7 @@ function initBlogPage(langPage) {
             $('.sidebar').remove();
         }
 
-        const articleShape = $('#articleShape');
+        const articleShape = $('#article-shape');
         const iframeArticle = $('#iframe-article');
         const hashLink = window.location.hash ? getSlugFromUrl() : '';
         const errorArticle = getMessage('error-generic');

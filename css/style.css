@@ -24,7 +24,7 @@ html.dark-mode #navi li a:not(.current) {
 }
 
 html.dark-mode .card h2,
-html.dark-mode #articleShape .author {
+html.dark-mode #article-shape .author {
     color: initial !important;
 }
 
@@ -188,12 +188,12 @@ input[name="search-input"].highlight-flash {
     padding: 0;
 }
 
-#JS {
+#js {
     background-position: center;
     border: 1px solid var(--cyan);
 }
 
-#FFT {
+#fft {
     background-size: 30px;
     background-color: var(--yellow);
     background-repeat: no-repeat;

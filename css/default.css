@@ -21,7 +21,7 @@ html.dark-mode {
 }
 
 html.dark-mode .card h2,
-html.dark-mode #articleShape .author {
+html.dark-mode #article-shape .author {
     color: initial !important;
 }
 
