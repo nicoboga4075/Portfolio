@@ -5,7 +5,11 @@ const { minify } = require('terser');
 const ENCODING = 'utf-8';
 
 async function main() {
-    const jsDir = path.join(__dirname, process.argv[2] || 'js');
+    const projectRoot = path.resolve(__dirname);
+    const jsDir = path.resolve(projectRoot, process.argv[2] || 'js');
+    if (jsDir !== projectRoot && !jsDir.startsWith(projectRoot + path.sep)) {
+        throw new Error(`Refusing to run outside the project root: ${jsDir}`);
+    }
     const files = fs.readdirSync(jsDir).filter(file => file.endsWith('.js'));
 
     for (const file of files) {
