@@ -14,6 +14,7 @@ const passthroughDirs = ["images", "css", "js", "fonts", "videos", "docs/public"
 const passthroughFiles = [
     "_redirects",
     "_headers",
+    "service-worker.js",
     "site.webmanifest",
     "robots.txt",
     "sitemap.xml",

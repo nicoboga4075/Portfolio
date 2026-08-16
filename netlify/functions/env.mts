@@ -56,7 +56,8 @@ export default async function handlerEnv(req: Request, context: Context): Promis
             "https://nicoboga.netlify.app"
         ];
 
-        const isFromSite = allowedReferers.some(origin => referer.startsWith(origin));
+        const isFromSite = allowedReferers.some(origin => referer.startsWith(origin)) ||
+            /^https:\/\/[^/]+\.netlify\.live\//.test(referer);
         const isFromLighthouse = /Lighthouse|Chrome-Lighthouse/i.test(userAgent);
 
         if (!isFromSite && !isFromLighthouse) {
