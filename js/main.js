@@ -532,7 +532,7 @@ function scrollToNextHighlight() {
     });
 }
 
-function convertDate(dateString, target = 'iso', lang) {
+function convertDate(dateString, lang, target = 'iso') {
     if (target === 'iso') {
         const [day, month, year] = dateString.split('/');
         return `${year}-${month}-${day}`;
@@ -607,7 +607,7 @@ function toggleVisibility(selector, visibleClass = 'd-flex') {
     }
 }
 
-function getCurrentDate(complete = true) {
+function getCurrentDate({ complete = true } = {}) {
     return complete ? new Date().toLocaleString() : new Date().toLocaleDateString();
 }
 
@@ -1389,7 +1389,7 @@ function initBlogPage(langPage) {
                     setTimeout(() => location.reload(), 150);
                 });
                 $('.heading').text(recentArticle.title[langPage]);
-                $('.meta').html('<i class="icon-calendar"></i> ' + convertDate(recentArticle.date, 'readable', langPage));
+                $('.meta').html('<i class="icon-calendar"></i> ' + convertDate(recentArticle.date, langPage, 'readable'));
             }
 
             const $tagCloud = $('.tagcloud');
