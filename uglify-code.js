@@ -5,7 +5,7 @@ const { minify } = require('terser');
 const ENCODING = 'utf-8';
 
 async function main() {
-    const jsDir = path.join(__dirname, 'js');
+    const jsDir = path.join(__dirname, process.argv[2] || 'js');
     const files = fs.readdirSync(jsDir).filter(file => file.endsWith('.js'));
 
     for (const file of files) {

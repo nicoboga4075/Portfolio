@@ -3,8 +3,8 @@
   "version": "2.0.4",
   "description": "This project is deployed on **Netlify** : https://nicoboga.netlify.app",
   "scripts": {
-    "dev": "bash -c \"ELEVENTY_PREVIEW=1 npm run eleventy && netlify dev\"",
-    "dev:live": "bash -c \"ELEVENTY_PREVIEW=1 npm run eleventy && netlify dev --live=dev\"",
+    "dev": "bash -c \"ELEVENTY_PREVIEW=1 npm run eleventy && npm run uglify:preview && netlify dev\"",
+    "dev:live": "bash -c \"ELEVENTY_PREVIEW=1 npm run eleventy && npm run uglify:preview && netlify dev --live=dev\"",
     "build": "npm run eleventy && npm run uglify:js",
     "kill": "taskkill /IM node.exe /F",
     "tag-version": "bash -c \"version=$(node -p \\\"require('./package.json').version\\\"); if git status --porcelain | grep -vE '^.M (package.json|CHANGELOG.md)' | grep -q .; then echo 'Uncommitted or unstaged changes detected. Please commit or stash your changes before tagging.'; else git tag v$version; echo 'v'$version; fi\" --",
@@ -21,6 +21,7 @@
     "cypress": "npx cypress run",
     "simu:ci": "powershell.exe -Command \"Start-Process powershell.exe -ArgumentList '-NoExit','-Command','Set-Location -LiteralPath \\\"%CD%\\\"; ./simulator_ci.ps1' -Verb RunAs\"",
     "uglify:js": "node uglify-code.js",
+    "uglify:preview": "node uglify-code.js .eleventy/js",
     "eleventy": "npx eleventy",
     "capacitor:add": "npx cap add android",
     "capacitor:sync": "npx cap sync",
