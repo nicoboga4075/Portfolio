@@ -1,0 +1,694 @@
+---
+permalink: "articles/bien-pasbien_en.html"
+---
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Portfolio - Good / Not Good</title>
+        {% include "metas.html" %}
+        <meta name="description" content="Good / Not Good: good and bad coding practices">
+        <meta http-equiv="Content-Language" content="en_US">
+        {% include "poppins.html" %}
+        <base href="../../">
+        {% include "manifest.html" %}
+        {% include "default.html" %}
+    </head>
+    <body onload="initArticle()">
+        <div class="article-container">
+            <div class="title-center">🧐 Good / Not Good</div>
+            <div class="card pas-bien">
+                <h2>❌ Not Good</h2>
+                <p>Naming variables in abbreviated form or with no concrete meaning</p>
+                <i>❌ Magic Number</i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+let ThirtyOne = 31;
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+ThirtyOne = 31
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+using System;
+class Program
+{
+    static void Main()
+    {
+        int ThirtyOne = 31;
+    }
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card pas-bien">
+                <h2>❌ Not Good</h2>
+                <p>Not allowing a rollback in case of a crash before the commit in the database</p>
+                <i>✅ <b>A</b>CID: Atomicity</i>
+                <p>If the first query succeeds and the server crashes before the second one:</p>
+                <ul>
+                    <li>Account [id = 1] is debited</li>
+                    <li>Account [id = 2] is not credited</li>
+                </ul>
+                <p>➡️ Money lost</p>
+                <div class="bloc-code">
+                    <span class="lang-label">SQL</span>
+                    <span class="lang-code">
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+-- Server outage here, or app crash
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+                    </span>
+                </div>
+            </div>
+            <div class="card pas-bien">
+                <h2>❌ Not Good</h2>
+                <p>Duplicating code instead of factoring it out</p>
+                <i>✅ DRY: <b>D</b>on't <b>R</b>epeat <b>Y</b>ourself</i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+console.log("Hello world");
+console.log("Hello Jack");
+console.log("Hello John");
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+print("Hello world")
+print("Hello Jack")
+print("Hello John")
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+Console.WriteLine("Hello world");
+Console.WriteLine("Hello Jack");
+Console.WriteLine("Hello John");
+                    </span>
+                </div>
+            </div>
+            <div class="card bien">
+                <h2>✅ Good</h2>
+                <p>Documenting your code and keeping it intuitive</p>
+                <i>✅ KISS: <b>K</b>eep <b>I</b>t <b>S</b>imple <b>S</b>tupid</i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+function calculateVAT(preTaxPrice) {
+    // Calculates VAT for a pre-tax price
+    return preTaxPrice * 0.2;
+}
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+def calculate_vat(pre_tax_price):
+    """Calculates VAT for a pre-tax price"""
+    return pre_tax_price * 0.2
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+public double CalculateVAT(double preTaxPrice)
+{
+    // Calculates VAT for a pre-tax price
+    return preTaxPrice * 0.2;
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card pas-bien">
+                <h2>❌ Not Good</h2>
+                <p>Too much logic in a single function/class</p>
+                <i>✅ SRP: Single Responsibility Principle (<b>S</b>OLID)</i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+function processUserData() {
+    // Read the data
+    // Validate the data
+    // Compute stuff
+    // Generate a report
+    // Send an email
+    ...
+}
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+def process_user_data():
+    # Read the data
+    # Validate the data
+    # Compute stuff
+    # Generate a report
+    # Send an email
+    ...
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+public void ProcessUserData() {
+    // Read the data
+    // Validate the data
+    // Compute stuff
+    // Generate a report
+    // Send an email
+    ...
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card bien">
+                <h2>✅ Good</h2>
+                <p>Applying clean code principles</p>
+                <i>✅ GRASP: General Responsibility Assignment Software Patterns</i>
+                <ol>
+                    <li>Information Expert — assign responsibility to the class that has the necessary information</li>
+                    <li>Creator — the class that creates an object</li>
+                    <li>Controller — handle the system's events</li>
+                    <li>Low Coupling — minimize dependencies between classes (encapsulation)</li>
+                    <li>High Cohesion — a class should have a well-focused responsibility</li>
+                    <li>Polymorphism — use polymorphism to handle variations</li>
+                    <li>Pure Fabrication — create artificial classes to avoid strong coupling or responsibilities that don't belong to domain classes</li>
+                    <li>Indirection — use an intermediate class to reduce dependencies</li>
+                    <li>Protected Variations — protect unstable elements behind interfaces or abstractions</li>
+                </ol>
+            </div>
+            <div class="card pas-bien">
+                <h2>❌ Not Good</h2>
+                <p>Not respecting database constraints before and after a transaction</p>
+                <i>✅ A<b>C</b>ID: Consistency</i>
+                <div class="bloc-code">
+                    <span class="lang-label">SQL</span>
+                    <span class="lang-code">
+CREATE TABLE accounts (
+    id INTEGER PRIMARY KEY,
+    balance INTEGER
+);
+-- A negative balance should not be allowed in a banking context
+BEGIN;
+UPDATE accounts SET balance = balance - 200 WHERE id = 1;
+COMMIT;
+                    </span>
+                </div>
+            </div>
+            <div class="card bien">
+                <h2>✅ Good</h2>
+                <p>Catching errors</p>
+                <i>✅ Fail Fast </i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+function divideNumbers(dividend, divisor) {
+    try {
+            if (divisor === 0) {
+                throw new Error("Division by zero is not allowed");
+            }
+            const result = dividend / divisor;
+            return result;
+    } catch (error) {
+        return null;
+    } finally {
+        console.log("Request succeeded");
+    }
+}
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+def divide_numbers(dividend, divisor):
+    try:
+        if divisor == 0:
+           raise ValueError("Division by zero is not allowed")
+        result = dividend / divisor
+        return result
+    except ValueError as error:
+        return None
+    finally:
+        print("Request succeeded")
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+static double DivideNumbers(double dividend, double divisor)
+{
+    try
+    {
+        if (divisor == 0)
+        {
+        throw new ArgumentException("Division by zero is not allowed");
+        }
+        double result = dividend / divisor;
+        return result;
+    }
+    catch (ArgumentException error)
+    {
+        return double.NaN;
+    }
+    finally
+    {
+        Console.WriteLine("Request succeeded");
+    }
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card pas-bien">
+                <h2>❌ Not Good</h2>
+                <p>Modifying existing code instead of extending it</p>
+                <i>✅ OCP: Open/Closed Principle (S<b>O</b>LID)</i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+function calculatePrice(cart, customerType) {
+    if (customerType === "pro") {
+        return cart * 0.9;
+    } else if (customerType === "vip") {
+        return cart * 0.8;
+    } else {
+        return cart;
+    }
+}
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+def calculate_price(cart, customer_type):
+    if customer_type == "pro":
+        return cart * 0.9
+    elif customer_type == "vip":
+        return cart * 0.8
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+public static double CalculatePrice(double cart, string customerType)
+{
+    if (customerType == "pro")
+    {
+        return cart * 0.9;
+    }
+    else if (customerType == "vip")
+    {
+        return cart * 0.8;
+    }
+    else
+    {
+        return cart;
+    }
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card bien">
+                <h2>✅ Good</h2>
+                <p>Not inheriting from a class that doesn't respect the contract or expected behavior of the parent class</p>
+                <i>✅ LSP: Liskov Substitution Principle (SO<b>L</b>ID)</i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+class Customer {
+    calculatePrice(cart) { return cart; }
+}
+class ProCustomer extends Customer {
+    calculatePrice(cart) { return cart * 0.9; }
+}
+class VipCustomer extends Customer {
+    calculatePrice(cart) { return cart * 0.8; }
+}
+[ new Customer(), new ProCustomer(), new VipCustomer() ]
+.forEach(c =&gt; console.log(c.calculatePrice(100)));
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+class Customer:
+    def calculate_price(self, cart):
+        return cart
+class ProCustomer(Customer):
+    def calculate_price(self, cart):
+        return cart * 0.9
+class VipCustomer(Customer):
+    def calculate_price(self, cart):
+        return cart * 0.8
+for customer in [Customer(), ProCustomer(), VipCustomer()]:
+    print(customer.calculate_price(100))
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+using System;
+class Customer {
+    public virtual double CalculatePrice(double cart) =&gt; cart;
+}
+class ProCustomer : Customer {
+    public override double CalculatePrice(double cart) =&gt; cart * 0.9;
+}
+class VipCustomer : Customer {
+    public override double CalculatePrice(double cart) =&gt; cart * 0.8;
+}
+class Program {
+    static void Main() {
+        Customer[] customers = { new Customer(), new ProCustomer(), new VipCustomer() };
+        foreach (var c in customers)
+        Console.WriteLine(c.CalculatePrice(100));
+    }
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card pas-bien">
+                <h2>❌ Not Good</h2>
+                <p>An interface/class too large, imposed on everyone</p>
+                <i>✅ ISP: Interface Segregation Principle (SOL<b>I</b>D)</i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+class Animal {
+    eat() { }
+    fly() { }
+}
+class Cat extends Animal {
+    fly() {
+    // Useless for a cat
+    }
+}
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+class Animal:
+    def eat(self):
+        pass
+    def fly(self):
+        pass
+class Cat(Animal):
+    def fly(self):
+    # Useless for a cat
+        pass
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+public abstract class Animal
+{
+    public abstract void Eat();
+    public abstract void Fly();
+}
+/*
+public interface IAnimal
+{
+    void Eat();
+    void Fly();
+}
+*/
+public class Cat : Animal
+{
+    public override void Eat()
+    {
+        // Eats normally
+        Console.WriteLine("Cat is eating");
+    }
+    public void Fly()
+    {
+        // Useless for a cat but must be implemented
+    }
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card bien">
+                <h2>✅ Good</h2>
+                <p>The model stores the data, the view displays it, and the controller creates it</p>
+                <i>✅ MVC: Model View Controller</i>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+using System;
+using System.Collections.Generic;
+// Model
+class TaskModel {
+    public List&lt;string&gt; Tasks = new List&lt;string&gt;();
+    public void AddTask(string task) {
+        Tasks.Add(task);
+    }
+    public List&lt;string&gt; GetAll() {
+        return Tasks;
+    }
+}
+// View
+class TaskView {
+    public static void Display(List&lt;string&gt; tasks) {
+        for (int i = 0; i &lt; tasks.Count; i++) {
+            Console.WriteLine($"{i+1}. {tasks[i]}");
+        }
+    }
+}
+// Controller
+class TaskController {
+    private TaskModel model;
+    private TaskView view;
+    public TaskController(TaskModel m, TaskView v) {
+        model = m;
+        view = v;
+    }
+    public void AddNewTask(string task) {
+        model.AddTask(task);
+        TaskView.Display(model.GetAll());
+    }
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card pas-bien">
+                <h2>❌ Not Good</h2>
+                <p> Allowing "dirty reads" (reading uncommitted data),
+                    "non-repeatable reads" (re-reading data modified by another transaction),
+                    "phantom reads" (new rows appearing in a repeated query)
+                </p>
+                <i>✅ AC<b>I</b>D: Isolation</i>
+                <div class="bloc-code">
+                    <span class="lang-label">SQL</span>
+                    <span class="lang-code">
+-- Transaction 1
+BEGIN;
+SELECT balance FROM accounts WHERE id=1; -- reads 100
+UPDATE accounts SET balance = balance - 80 WHERE id=1;
+-- Not committed yet
+-- Transaction 2 (concurrent)
+BEGIN;
+SELECT balance FROM accounts WHERE id=1; -- also reads 100
+UPDATE accounts SET balance = balance - 80 WHERE id=1;
+COMMIT;
+-- Transaction 1 commits after, overwrites T2's change
+COMMIT;
+                    </span>
+                </div>
+            </div>
+            <div class="card bien">
+                <h2>✅ Good</h2>
+                <p>A function should only talk to its close friends (itself, its direct attributes,
+                    the objects passed to it, the objects it creates)...
+                </p>
+                <i>✅ LoD: Law of Demeter</i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+function getCustomerCity(order) {
+    return order.getCustomerCity();
+}
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+def get_customer_city(order):
+    return order.get_customer_city()
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+string GetCustomerCity(Order order)
+{
+    return order.GetCustomerCity();
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card pas-bien">
+                <h2>❌ Not Good</h2>
+                <p>...not to friends of friends (too many calls)</p>
+                <i>✅ LoD: Law of Demeter</i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+function getCustomerCity(order) {
+    return order.customer.address.city;
+}
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+def get_customer_city(order):
+    return order.customer.address.city
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+string GetCustomerCity(Order order) {
+    return order.Customer.Address.City;
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card pas-bien">
+                <h2>❌ Not Good</h2>
+                <p></p>
+                <i>✅ ACI<b>D</b>: Durability</i>
+                <div class="bloc-code">
+                    <span class="lang-label">SQL</span>
+                    <span class="lang-code">
+BEGIN TRANSACTION
+    UPDATE accounts SET balance = balance - 100 WHERE id = 1
+    UPDATE accounts SET balance = balance + 100 WHERE id = 2
+COMMIT
+-- Data committed but server crash before disk write
+-- A mechanism like the Write-Ahead Log (WAL) is needed
+-- Even if the machine crashes right after, the changes can be recovered on restart by replaying this log
+                    </span>
+                </div>
+            </div>
+            <div class="card bien">
+                <h2>✅ Good</h2>
+                <p>Classes should not depend on other classes but on interfaces or abstract classes</p>
+                <i>✅ DIP: Dependency Inversion Principle (SOLI<b>D</b>)</i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+class MessageService {
+    send(msg) {}
+}
+class EmailService extends MessageService {
+    send(msg) { console.log(msg); }
+}
+class OrderManager {
+    constructor(service) {
+        this.service = service;
+    }
+    notify(message) {
+        this.service.send(message);
+    }
+}
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+class MessageService:
+    def send(self, message):
+        pass
+class EmailService(MessageService):
+    def send(self, message):
+        print(f"Email sent: {message}")
+class OrderManager:
+    def __init__(self, service):
+        self.service = service
+    def notify(self):
+        self.service.send("Order confirmed")
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+public interface IMessageService
+{
+    void Send(string message);
+}
+public class EmailService : IMessageService
+{
+    public void Send(string message)
+    {
+        Console.WriteLine($"Email sent: {message}");
+    }
+}
+public class OrderManager
+{
+    private readonly IMessageService _service;
+    public OrderManager(IMessageService service)
+    {
+        _service = service;
+    }
+    public void Notify()
+    {
+        _service.Send("Order confirmed");
+    }
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card pas-bien">
+                <h2>❌ Not Good</h2>
+                <p>Coding a feature now because you think it will be useful later</p>
+                <i>YAGNI: You Aren't Gonna Need It</i>
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+function calculateTotal(price, tax, discount = 0, birthdayBonus = 0) {
+    const total = price + (price * tax);
+    // The other parameters serve no purpose for now
+    return total;
+}
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+def calculate_total(price, tax, discount=0, birthday_bonus=0):
+    total = price + (price * tax)
+    # The other parameters aren't used yet
+    return total
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+public decimal CalculateTotal(decimal price, decimal tax, decimal discount = 0, decimal birthdayBonus = 0)
+{
+    decimal total = price + (price * tax);
+    // The other parameters are unused for now
+    return total;
+}
+                    </span>
+                </div>
+            </div>
+            <div class="card modere">
+                <h2>⚠️ Good in moderation</h2>
+                <p>Using <a href="https://refactoring.guru/design-patterns">design patterns</a></p>
+                <i>Useful when appropriate, to avoid in excess or just for looks</i>
+                <img id="pattern" class="article-image" alt="Patterns">
+            </div>
+        </div>
+    </body>
+</html>
