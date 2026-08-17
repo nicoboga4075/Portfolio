@@ -46,8 +46,9 @@ export default defineConfig([
       },
     },
 	rules : {
-	  // Called from inline HTML or external callbacks, so ESLint can't see the usage
-	  "no-unused-vars": ["warn", { varsIgnorePattern: "^(initPage|initCaptcha|initArticle|gapiLoaded|gisLoaded|toggleDarkMode)$" }],
+	  // Called from inline HTML or external callbacks (ESLint can't see the usage),
+	  // or intentionally kept for future use (getCurrentOnlyDate)
+	  "no-unused-vars": ["warn", { varsIgnorePattern: "^(initPage|initCaptcha|initArticle|gapiLoaded|gisLoaded|toggleDarkMode|getCurrentOnlyDate)$" }],
 	  "no-undef": "error",
 	  "no-var": "warn",
 	  // warn/error are trusted as real diagnostics; only console.log is flagged

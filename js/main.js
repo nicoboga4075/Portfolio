@@ -607,8 +607,12 @@ function toggleVisibility(selector, visibleClass = 'd-flex') {
     }
 }
 
-function getCurrentDate({ complete = true } = {}) {
-    return complete ? new Date().toLocaleString() : new Date().toLocaleDateString();
+function getCurrentOnlyDate(lang, date = Date.now()) {
+    return new Date(date).toLocaleDateString(lang);
+}
+
+function getCurrentFullDate(lang, date = Date.now()) {
+    return new Date(date).toLocaleString(lang);
 }
 
 function lastCvUpdate(lang) {
@@ -619,11 +623,11 @@ function lastCvUpdate(lang) {
             return res.json();
         })
         .then(data => {
-            lastUpdateDate.text(data.date ? new Date(data.date).toLocaleString() : getCurrentDate());
+            lastUpdateDate.text(data.date ? getCurrentFullDate(lang, data.date) : getCurrentFullDate(lang));
         })
         .catch(error => {
             console.error(error);
-            lastUpdateDate.text(getCurrentDate());
+            lastUpdateDate.text(getCurrentFullDate(lang));
             return false;
         });
 }
