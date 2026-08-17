@@ -595,10 +595,13 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 
 .owl-menu {
     cursor: pointer;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
 }
 
 .owl-menu.active {
-    color: var(--main);
+    color: color-mix(in srgb, var(--main) 75%, var(--white));
+    border-bottom-color: color-mix(in srgb, var(--main) 75%, var(--white));
 }
 
 .owl-carousel {
