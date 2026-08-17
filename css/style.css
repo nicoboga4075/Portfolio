@@ -35,6 +35,7 @@ html.dark-mode .hero-wrap .overlay {
 body {
     font-family: Poppins, sans-serif !important;
     background-color: var(--background);
+    color: var(--text-color);
 }
 
 a {
