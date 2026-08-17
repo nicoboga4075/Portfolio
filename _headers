@@ -4,3 +4,5 @@
   Cache-Control: public, max-age=31536000, immutable
 /service-worker.js
   Cache-Control: no-cache
+/.netlify/functions/*
+  Cache-Control: no-cache
