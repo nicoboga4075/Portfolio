@@ -75,6 +75,18 @@ const appMessages = {
     "error-generic": {
         "fr": "Oops ! Une erreur est survenue. Réessayez plus tard.",
         "en": "Oops ! An error has occurred. Try again later."
+    },
+    "carousel-prev": {
+        "fr": "Précédent",
+        "en": "Previous"
+    },
+    "carousel-next": {
+        "fr": "Suivant",
+        "en": "Next"
+    },
+    "carousel-dot": {
+        "fr": "Aller à la diapositive",
+        "en": "Go to slide"
     }
 };
 
@@ -892,13 +904,6 @@ function createCircularChart({
     onePageClick();
 
     const carousel = function () {
-        $('.owl-carousel').on('initialized.owl.carousel', function () {
-            $('.owl-prev').attr('aria-label', 'Previous slide');
-            $('.owl-next').attr('aria-label', 'Next slide');
-            $('.owl-dot').each(function (index) {
-                $(this).attr('aria-label', 'Go to slide ' + (index + 1));
-            });
-        });
         initCarousel(`#${appSkills[0]}`);
     };
     carousel();
@@ -1105,6 +1110,14 @@ function initArticle() {
     initCareerAnimation();
 }
 
+function labelCarouselControls(target) {
+    $(target).find('.owl-prev').attr('aria-label', getMessage('carousel-prev'));
+    $(target).find('.owl-next').attr('aria-label', getMessage('carousel-next'));
+    $(target).find('.owl-dot').each(function (index) {
+        $(this).attr('aria-label', `${getMessage('carousel-dot')} ${index + 1}`);
+    });
+}
+
 function initCarousel(target) {
     const itemCount = $(target).children().length;
     $(target).owlCarousel({
@@ -1133,6 +1146,7 @@ function initCarousel(target) {
             }
         }
     });
+    labelCarouselControls(target);
     $(`.owl-menu[data-target="${target}"]`).addClass("active").siblings('.owl-menu').removeClass('active');
     $(target).addClass('active');
 }
@@ -1541,6 +1555,7 @@ function initPage() {
         }
         // To avoid glitch switching to other carousel
         $(target).removeClass('d-none').trigger('refresh.owl.carousel');
+        labelCarouselControls(target);
     });
 
     if (idPage === 'index') {
