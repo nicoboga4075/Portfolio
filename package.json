@@ -17,7 +17,7 @@
     "lint:css": "npx stylelint \"**/*.css\"",
     "lint:js": "npx eslint .",
     "jest": "npx jest --coverage --passWithNoTests",
-    "playwright": "npx playwright test",
+    "playwright": "playwright test",
     "cypress": "npx cypress run",
     "simu:ci": "powershell.exe -Command \"Start-Process powershell.exe -ArgumentList '-NoExit','-Command','Set-Location -LiteralPath \\\"%CD%\\\"; ./simulator_ci.ps1' -Verb RunAs\"",
     "uglify:js": "node uglify-code.js",
