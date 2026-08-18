@@ -1104,7 +1104,15 @@ function initCareerAnimation() {
     updateCarPosition();
 }
 
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+            .catch(error => console.error(error));
+    }
+}
+
 function initArticle() {
+    registerServiceWorker();
     loadImages('.article-image', 'png');
     loadImages('.icon.svg', 'svg');
     initCareerAnimation();
@@ -1512,10 +1520,7 @@ function initBlogPage(langPage) {
 }
 
 function initPage() {
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
-            .catch(error => console.error(error));
-    }
+    registerServiceWorker();
 
     applyDarkModePreference();
 

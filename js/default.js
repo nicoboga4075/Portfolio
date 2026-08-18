@@ -112,7 +112,15 @@ function fillCareerCounts() {
     }
 }
 
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+            .catch(error => console.error(error));
+    }
+}
+
 function initArticle() {
+    registerServiceWorker();
     applyDarkModePreference();
     loadImages('.article-image', 'png');
     loadImages('.icon.svg', 'svg');
@@ -124,10 +132,7 @@ function initArticle() {
 }
 
 function initPage() {
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
-            .catch(error => console.error(error));
-    }
+    registerServiceWorker();
     applyDarkModePreference();
     loadImages('.icon.svg', 'svg');
     initTranslator();
