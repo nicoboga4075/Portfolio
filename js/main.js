@@ -786,6 +786,7 @@ function createCircularChart({
                 title: {
                     display: true,
                     text: titles[currentLanguage] || titles.fr || titles.en,
+                    color: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim(),
                     font: {
                         family: 'Poppins',
                         size: 18,
