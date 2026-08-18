@@ -475,7 +475,6 @@ let appCheckpointSubSection;
 let originalArticleContent = '';
 let indexSearchOccurence = -1;
 let chart;
-let legendLabelColor = '#000000';
 
 function debounce(func, delay) {
     let timeout;
@@ -833,7 +832,7 @@ function createCircularChart({
                                     fillStyle: chart.data.datasets[0].backgroundColor[i],
                                     strokeStyle: '#ffffff',
                                     lineWidth: 2,
-                                    fontColor: legendLabelColor
+                                    fontColor: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim()
                                 };
                             });
                         }
@@ -1752,7 +1751,7 @@ function toggleDarkMode(event) {
     $icon.attr('class', isDark ? 'icon-moon-o' : 'icon-sun-o');
     localStorage.setItem('darkMode', isDark);
     if (chart) {
-        legendLabelColor = legendLabelColor === '#000000' ? '#ffffff' : '#000000';
+        chart.options.plugins.title.color = getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim();
         chart.update();
     }
 }
