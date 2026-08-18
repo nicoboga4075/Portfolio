@@ -3,7 +3,12 @@ self.addEventListener('install', () => {
 });
 
 self.addEventListener('activate', event => {
-    event.waitUntil(self.clients.claim());
+    // clients.claim() runs alongside the cache purge, not after it,
+    // so taking control of pages isn't delayed by cleanup work.
+    event.waitUntil(Promise.all([
+        self.clients.claim(),
+        caches.keys().then(keys => Promise.all(keys.map(key => caches.delete(key))))
+    ]));
 });
 
 self.addEventListener('fetch', event => {
