@@ -4,7 +4,7 @@ default:
 
 variables:
   GIT_CLEAN_FLAGS: -ffdx --exclude=node_modules/
-  GIT_DEPTH: 0
+  GIT_DEPTH: 1
 
 stages:
   - setup
@@ -27,7 +27,7 @@ build-job:
     - |
       if ($env:CI -eq "true") {
         echo "> npm ci"
-        npm ci
+        npm ci --cache .npm-cache
       } else {
         echo "> npm install"
         npm install
@@ -41,8 +41,8 @@ build-job:
       files:
         - package-lock.json
     paths:
-      - node_modules/
-    policy: pull-push 
+      - .npm-cache/
+    policy: pull-push
 
 test-job:
   stage: test
@@ -55,13 +55,6 @@ test-job:
     - echo "Running Playwright tests..."
     - npx playwright test *> $null -ErrorAction SilentlyContinue; if ($LASTEXITCODE -ne 0) { echo "No tests found, exiting with code 0" }
     - echo "Run done!"
-  cache:
-    key:
-      files:
-        - package-lock.json
-    paths:
-      - node_modules/
-    policy: pull 
   coverage: '/All files\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+([\d\.]+)/'
   artifacts:
     when: always
@@ -81,13 +74,8 @@ test-job:
 sonar-job:
   allow_failure: true
   stage: sonar
-  cache:
-    key:
-      files:
-        - package-lock.json
-    paths:
-      - node_modules/
-    policy: pull
+  variables:
+    GIT_DEPTH: 0
   dependencies:
     - test-job
   script:

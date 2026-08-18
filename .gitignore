@@ -45,6 +45,7 @@ google-services.json
 
 # Node modules and dependency files
 /node_modules/
+/.npm-cache/
 /package-lock.json
 /yarn.lock
 
