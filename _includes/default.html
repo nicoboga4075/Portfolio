@@ -1,2 +1,7 @@
 <link rel="stylesheet" href="css/default.css">
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js', { scope: '/' }).catch(function (error) { console.error(error); });
+    }
+</script>
 <script src="js/default.js" defer></script>
