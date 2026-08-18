@@ -108,43 +108,43 @@
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
-	path = "articles/du-voc-de-dev_en.html"
+	path = ".netlify/functions/article?filename=du-voc-de-dev_en.html"
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
-	path = "articles/du-voc-de-dev_fr.html"
+	path = ".netlify/functions/article?filename=du-voc-de-dev_fr.html"
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
-	path = "articles/mcs_en.html"
+	path = ".netlify/functions/article?filename=mcs_en.html"
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
-	path = "articles/mcs_fr.html"
+	path = ".netlify/functions/article?filename=mcs_fr.html"
 	
   [[context.production.plugins.inputs.audits]]
   url = "https://nicoboga.netlify.app"
-	path = "articles/presentation_en.html"
+	path = ".netlify/functions/article?filename=presentation_en.html"
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
-	path = "articles/presentation_fr.html"
+	path = ".netlify/functions/article?filename=presentation_fr.html"
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
-	path = "articles/sur-quels-criteres-choisir-une-agence-web_en.html"
+	path = ".netlify/functions/article?filename=sur-quels-criteres-choisir-une-agence-web_en.html"
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
-	path = "articles/sur-quels-criteres-choisir-une-agence-web_fr.html"
+	path = ".netlify/functions/article?filename=sur-quels-criteres-choisir-une-agence-web_fr.html"
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
-	path = "articles/5-conseils-pour-un-nom-de-marque-parfait_en.html"
+	path = ".netlify/functions/article?filename=5-conseils-pour-un-nom-de-marque-parfait_en.html"
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
-	path = "articles/5-conseils-pour-un-nom-de-marque-parfait_fr.html"
+	path = ".netlify/functions/article?filename=5-conseils-pour-un-nom-de-marque-parfait_fr.html"
 	
   [[context.production.plugins.inputs.audits]]
 	url = "https://nicoboga.netlify.app"
