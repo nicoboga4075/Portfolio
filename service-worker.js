@@ -1,3 +1,5 @@
+const CACHE_NAME = 'runtime-cache';
+
 self.addEventListener('install', () => {
     self.skipWaiting();
 });
@@ -7,17 +9,66 @@ self.addEventListener('activate', event => {
     // so taking control of pages isn't delayed by cleanup work.
     event.waitUntil(Promise.all([
         self.clients.claim(),
-        caches.keys().then(keys => Promise.all(keys.map(key => caches.delete(key))))
+        caches.keys().then(keys =>
+            Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))
+        )
     ]));
 });
 
 self.addEventListener('fetch', event => {
+    const { request } = event;
+    if (request.method !== 'GET') {
+        return;
+    }
+
+    const url = new URL(request.url);
+
     // Only intercept same-origin requests: proxying cross-origin ones
     // (Google Fonts, reCAPTCHA, etc.) through fetch() here reclassifies
     // them under the CSP connect-src directive instead of their real
     // one (style-src/script-src/img-src), blocking otherwise allowed assets.
-    if (new URL(event.request.url).origin !== self.location.origin) {
+    if (url.origin !== self.location.origin) {
         return;
     }
-    event.respondWith(fetch(event.request));
+
+    // Netlify functions serve dynamic data (visit counter, env secrets,
+    // article content) that must never be served stale from cache.
+    if (url.pathname.startsWith('/.netlify/functions/')) {
+        return;
+    }
+
+    event.respondWith(
+        request.mode === 'navigate' ? networkFirst(request) : staleWhileRevalidate(request)
+    );
 });
+
+// Pages: try the network first so visitors online always get the latest
+// content; fall back to a previously cached copy only when offline.
+async function networkFirst(request) {
+    try {
+        const response = await fetch(request);
+        if (response.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            cache.put(request, response.clone());
+        }
+        return response;
+    } catch {
+        return (await caches.match(request)) ?? Response.error();
+    }
+}
+
+// Static assets: serve the cached copy instantly for speed, then refresh
+// it in the background so the next visit picks up any change.
+async function staleWhileRevalidate(request) {
+    const cache = await caches.open(CACHE_NAME);
+    const cached = await cache.match(request);
+    const update = fetch(request)
+        .then(response => {
+            if (response.ok) {
+                cache.put(request, response.clone());
+            }
+            return response;
+        })
+        .catch(() => cached ?? Response.error());
+    return cached ?? update;
+}
