@@ -1261,8 +1261,8 @@ function initIndexPage(langPage) {
                 en: 'Time distribution across my skills'
             },
             subtitles: {
-                fr: 'Données basées sur + 4 années en activité',
-                en: 'Data based on + 4 years in activity'
+                fr: `Données basées sur ${xp} années en activité`,
+                en: `Data based on ${xp} years in activity`
             }
         });
 
