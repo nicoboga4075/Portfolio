@@ -1,4 +1,4 @@
-if (window.innerWidth >= 1024) {
+function loadBotpress() {
 	const script = document.createElement('script');
 	script.src = 'https://cdn.botpress.cloud/webchat/v3.3/inject.js';
 	script.integrity = 'sha384-q27XaYztfyGV9K34UJCFnCbnIa7DRgZo/WX8wKxn6Qr38BjQV+JbJ2snHJLCqbwc';
@@ -35,4 +35,17 @@ if (window.innerWidth >= 1024) {
 		});
 	};
 	document.head.appendChild(script);
+}
+
+if (window.innerWidth >= 1024) {
+	const interactionEvents = ['scroll', 'click', 'mousemove'];
+	const onFirstInteraction = function () {
+		interactionEvents.forEach(function (event) {
+			window.removeEventListener(event, onFirstInteraction);
+		});
+		loadBotpress();
+	};
+	interactionEvents.forEach(function (event) {
+		window.addEventListener(event, onFirstInteraction, { once: true, passive: true });
+	});
 }
