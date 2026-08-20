@@ -750,6 +750,22 @@ function initProfile() {
     $('#countriesCount').attr('data-number', countriesCount);
 }
 
+function loadChartJs() {
+    if (window.Chart) {
+        return Promise.resolve();
+    }
+    if (!loadChartJs.promise) {
+        loadChartJs.promise = new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'js/chart.js';
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+    return loadChartJs.promise;
+}
+
 function createCircularChart({
     canvasId,
     data,
@@ -1248,23 +1264,33 @@ function initIndexPage(langPage) {
 
         lastCvUpdate(langPage);
 
-        createCircularChart({
-            canvasId: 'skillsChart',
-            data: [45, 25, 15, 10, 5],
-            backgroundColor: ['#3e64ff', '#ffa60e', '#8bc34a', '#dc143c', '#9b4f97'],
-            labels: ['Back-end', 'Front-end', {
-                fr: 'Gestion de projet',
-                en: 'Project management'
-            }, 'Support', 'CI/CD'],
-            titles: {
-                fr: 'Répartition du temps passé sur mes compétences',
-                en: 'Time distribution across my skills'
-            },
-            subtitles: {
-                fr: `Données basées sur ${xp} années en activité`,
-                en: `Data based on ${xp} years in activity`
-            }
-        });
+        const skillsChartCanvas = document.getElementById('skillsChart');
+        if (skillsChartCanvas) {
+            const skillsChartObserver = new IntersectionObserver((entries) => {
+                if (!entries[0].isIntersecting) {
+                    return;
+                }
+                skillsChartObserver.disconnect();
+                loadChartJs().then(() => createCircularChart({
+                    canvasId: 'skillsChart',
+                    data: [45, 25, 15, 10, 5],
+                    backgroundColor: ['#3e64ff', '#ffa60e', '#8bc34a', '#dc143c', '#9b4f97'],
+                    labels: ['Back-end', 'Front-end', {
+                        fr: 'Gestion de projet',
+                        en: 'Project management'
+                    }, 'Support', 'CI/CD'],
+                    titles: {
+                        fr: 'Répartition du temps passé sur mes compétences',
+                        en: 'Time distribution across my skills'
+                    },
+                    subtitles: {
+                        fr: `Données basées sur ${xp} années en activité`,
+                        en: `Data based on ${xp} years in activity`
+                    }
+                }));
+            });
+            skillsChartObserver.observe(skillsChartCanvas);
+        }
 
         $('form[name="contactForm"]').on('submit', async (event) => {
             event.preventDefault(); // Avoid Netlify default submission
