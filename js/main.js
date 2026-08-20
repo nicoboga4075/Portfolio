@@ -1271,10 +1271,12 @@ function initIndexPage(langPage) {
                     return;
                 }
                 skillsChartObserver.disconnect();
+                const rootStyle = getComputedStyle(document.documentElement);
+                const cssVar = (name) => rootStyle.getPropertyValue(name).trim();
                 loadChartJs().then(() => createCircularChart({
                     canvasId: 'skillsChart',
                     data: [45, 25, 15, 10, 5],
-                    backgroundColor: ['#3e64ff', '#ffa60e', '#8bc34a', '#dc143c', '#9b4f97'],
+                    backgroundColor: [cssVar('--blue'), cssVar('--orange'), cssVar('--green'), cssVar('--red'), cssVar('--purple')],
                     labels: ['Back-end', 'Front-end', {
                         fr: 'Gestion de projet',
                         en: 'Project management'
