@@ -1,0 +1,38 @@
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+using System;
+using System.Collections.Generic;
+// Model
+class TaskModel {
+    public List&lt;string&gt; Tasks = new List&lt;string&gt;();
+    public void AddTask(string task) {
+        Tasks.Add(task);
+    }
+    public List&lt;string&gt; GetAll() {
+        return Tasks;
+    }
+}
+// View
+class TaskView {
+    public static void Display(List&lt;string&gt; tasks) {
+        for (int i = 0; i &lt; tasks.Count; i++) {
+            Console.WriteLine($"{i+1}. {tasks[i]}");
+        }
+    }
+}
+// Controller
+class TaskController {
+    private TaskModel model;
+    private TaskView view;
+    public TaskController(TaskModel m, TaskView v) {
+        model = m;
+        view = v;
+    }
+    public void AddNewTask(string task) {
+        model.AddTask(task);
+        TaskView.Display(model.GetAll());
+    }
+}
+                    </span>
+                </div>

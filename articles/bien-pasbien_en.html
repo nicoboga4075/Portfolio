@@ -20,31 +20,7 @@ permalink: "articles/bien-pasbien_en.html"
                 <h2>❌ Not Good</h2>
                 <p>Naming variables in abbreviated form or with no concrete meaning</p>
                 <i>❌ Magic Number</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
-let ThirtyOne = 31;
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
-ThirtyOne = 31
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
-using System;
-class Program
-{
-    static void Main()
-    {
-        int ThirtyOne = 31;
-    }
-}
-                    </span>
-                </div>
+                {% include "bien-pasbien-magic-number.html" %}
             </div>
             <div class="card pas-bien">
                 <h2>❌ Not Good</h2>
@@ -69,30 +45,7 @@ UPDATE accounts SET balance = balance + 100 WHERE id = 2;
                 <h2>❌ Not Good</h2>
                 <p>Duplicating code instead of factoring it out</p>
                 <i>✅ DRY: <b>D</b>on't <b>R</b>epeat <b>Y</b>ourself</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
-console.log("Hello world");
-console.log("Hello Jack");
-console.log("Hello John");
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
-print("Hello world")
-print("Hello Jack")
-print("Hello John")
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
-Console.WriteLine("Hello world");
-Console.WriteLine("Hello Jack");
-Console.WriteLine("Hello John");
-                    </span>
-                </div>
+                {% include "bien-pasbien-dry.html" %}
             </div>
             <div class="card bien">
                 <h2>✅ Good</h2>
@@ -207,64 +160,7 @@ COMMIT;
                 <h2>✅ Good</h2>
                 <p>Catching errors</p>
                 <i>✅ Fail Fast </i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
-function divideNumbers(dividend, divisor) {
-    try {
-            if (divisor === 0) {
-                throw new Error("Division by zero is not allowed");
-            }
-            const result = dividend / divisor;
-            return result;
-    } catch (error) {
-        return null;
-    } finally {
-        console.log("Request succeeded");
-    }
-}
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
-def divide_numbers(dividend, divisor):
-    try:
-        if divisor == 0:
-           raise ValueError("Division by zero is not allowed")
-        result = dividend / divisor
-        return result
-    except ValueError as error:
-        return None
-    finally:
-        print("Request succeeded")
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
-static double DivideNumbers(double dividend, double divisor)
-{
-    try
-    {
-        if (divisor == 0)
-        {
-        throw new ArgumentException("Division by zero is not allowed");
-        }
-        double result = dividend / divisor;
-        return result;
-    }
-    catch (ArgumentException error)
-    {
-        return double.NaN;
-    }
-    finally
-    {
-        Console.WriteLine("Request succeeded");
-    }
-}
-                    </span>
-                </div>
+                {% include "bien-pasbien-fail-fast.html" %}
             </div>
             <div class="card pas-bien">
                 <h2>❌ Not Good</h2>
@@ -440,44 +336,7 @@ public class Cat : Animal
                 <h2>✅ Good</h2>
                 <p>The model stores the data, the view displays it, and the controller creates it</p>
                 <i>✅ MVC: Model View Controller</i>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
-using System;
-using System.Collections.Generic;
-// Model
-class TaskModel {
-    public List&lt;string&gt; Tasks = new List&lt;string&gt;();
-    public void AddTask(string task) {
-        Tasks.Add(task);
-    }
-    public List&lt;string&gt; GetAll() {
-        return Tasks;
-    }
-}
-// View
-class TaskView {
-    public static void Display(List&lt;string&gt; tasks) {
-        for (int i = 0; i &lt; tasks.Count; i++) {
-            Console.WriteLine($"{i+1}. {tasks[i]}");
-        }
-    }
-}
-// Controller
-class TaskController {
-    private TaskModel model;
-    private TaskView view;
-    public TaskController(TaskModel m, TaskView v) {
-        model = m;
-        view = v;
-    }
-    public void AddNewTask(string task) {
-        model.AddTask(task);
-        TaskView.Display(model.GetAll());
-    }
-}
-                    </span>
-                </div>
+                {% include "bien-pasbien-mvc.html" %}
             </div>
             <div class="card pas-bien">
                 <h2>❌ Not Good</h2>
@@ -510,58 +369,13 @@ COMMIT;
                     the objects passed to it, the objects it creates)...
                 </p>
                 <i>✅ LoD: Law of Demeter</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
-function getCustomerCity(order) {
-    return order.getCustomerCity();
-}
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
-def get_customer_city(order):
-    return order.get_customer_city()
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
-string GetCustomerCity(Order order)
-{
-    return order.GetCustomerCity();
-}
-                    </span>
-                </div>
+                {% include "bien-pasbien-lod-close.html" %}
             </div>
             <div class="card pas-bien">
                 <h2>❌ Not Good</h2>
                 <p>...not to friends of friends (too many calls)</p>
                 <i>✅ LoD: Law of Demeter</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
-function getCustomerCity(order) {
-    return order.customer.address.city;
-}
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
-def get_customer_city(order):
-    return order.customer.address.city
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
-string GetCustomerCity(Order order) {
-    return order.Customer.Address.City;
-}
-                    </span>
-                </div>
+                {% include "bien-pasbien-lod-friends.html" %}
             </div>
             <div class="card pas-bien">
                 <h2>❌ Not Good</h2>
@@ -584,25 +398,7 @@ COMMIT
                 <h2>✅ Good</h2>
                 <p>Classes should not depend on other classes but on interfaces or abstract classes</p>
                 <i>✅ DIP: Dependency Inversion Principle (SOLI<b>D</b>)</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
-class MessageService {
-    send(msg) {}
-}
-class EmailService extends MessageService {
-    send(msg) { console.log(msg); }
-}
-class OrderManager {
-    constructor(service) {
-        this.service = service;
-    }
-    notify(message) {
-        this.service.send(message);
-    }
-}
-                    </span>
-                </div>
+                {% include "bien-pasbien-dip-js.html" -%}
                 <div class="bloc-code">
                     <span class="lang-label">Python</span>
                     <span class="lang-code">

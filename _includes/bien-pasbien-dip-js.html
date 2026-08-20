@@ -1,0 +1,19 @@
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+class MessageService {
+    send(msg) {}
+}
+class EmailService extends MessageService {
+    send(msg) { console.log(msg); }
+}
+class OrderManager {
+    constructor(service) {
+        this.service = service;
+    }
+    notify(message) {
+        this.service.send(message);
+    }
+}
+                    </span>
+                </div>
