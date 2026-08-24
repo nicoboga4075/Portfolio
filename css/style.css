@@ -256,6 +256,12 @@ progress::-webkit-progress-value {
     background-color: var(--main);
 }
 
+/* Navbar */
+
+.navbar-nav > .nav-item .nav-link.active span {
+    color: color-mix(in srgb, var(--main) 90%, var(--black));
+}
+
 /* Language Switcher */
 
 .language-switch {
