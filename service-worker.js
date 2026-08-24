@@ -1,4 +1,4 @@
-const CACHE_NAME = 'runtime-cache';
+const CACHE_NAME = 'site-runtime-cache';
 
 self.addEventListener('install', () => {
     self.skipWaiting();
@@ -42,11 +42,19 @@ self.addEventListener('fetch', event => {
     );
 });
 
+// _headers sends Cache-Control: immutable on everything, so a plain
+// fetch() here would be satisfied straight from the browser's HTTP
+// cache and never actually reach the network — defeating both
+// strategies below. 'reload' forces each one past that layer.
+function fetchFresh(request) {
+    return fetch(request, { cache: 'reload' });
+}
+
 // Pages: try the network first so visitors online always get the latest
 // content; fall back to a previously cached copy only when offline.
 async function networkFirst(request) {
     try {
-        const response = await fetch(request);
+        const response = await fetchFresh(request);
         if (response.ok) {
             const cache = await caches.open(CACHE_NAME);
             cache.put(request, response.clone());
@@ -62,7 +70,7 @@ async function networkFirst(request) {
 async function staleWhileRevalidate(request) {
     const cache = await caches.open(CACHE_NAME);
     const cached = await cache.match(request);
-    const update = fetch(request)
+    const update = fetchFresh(request)
         .then(response => {
             if (response.ok) {
                 cache.put(request, response.clone());
