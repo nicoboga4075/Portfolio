@@ -750,6 +750,27 @@ function initProfile() {
     $('#countriesCount').attr('data-number', countriesCount);
 }
 
+function loadContactScripts() {
+    if (loadContactScripts.loaded) {
+        return;
+    }
+    loadContactScripts.loaded = true;
+    const gapi = document.createElement('script');
+    gapi.src = 'https://apis.google.com/js/api.js';
+    gapi.crossOrigin = 'anonymous';
+    gapi.onload = gapiLoaded;
+    document.body.appendChild(gapi);
+
+    const gsi = document.createElement('script');
+    gsi.src = 'https://accounts.google.com/gsi/client';
+    gsi.onload = gisLoaded;
+    document.body.appendChild(gsi);
+
+    const recaptcha = document.createElement('script');
+    recaptcha.src = `https://www.google.com/recaptcha/api.js?hl=${getCurrentLanguage()}&onload=initCaptcha&render=explicit`;
+    document.body.appendChild(recaptcha);
+}
+
 function loadChartJs() {
     if (window.Chart) {
         return Promise.resolve();
@@ -1294,6 +1315,18 @@ function initIndexPage(langPage) {
                 }));
             });
             skillsChartObserver.observe(skillsChartCanvas);
+        }
+
+        const contactFormEl = document.querySelector('form[name="contactForm"]');
+        if (contactFormEl) {
+            const contactFormObserver = new IntersectionObserver((entries) => {
+                if (!entries[0].isIntersecting) {
+                    return;
+                }
+                contactFormObserver.disconnect();
+                loadContactScripts();
+            });
+            contactFormObserver.observe(contactFormEl);
         }
 
         $('form[name="contactForm"]').on('submit', async (event) => {
