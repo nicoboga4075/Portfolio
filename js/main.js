@@ -1135,8 +1135,10 @@ function initArticle() {
 }
 
 function labelCarouselControls(target) {
-    $(target).find('.owl-prev').attr('aria-label', getMessage('carousel-prev'));
-    $(target).find('.owl-next').attr('aria-label', getMessage('carousel-next'));
+    // Owl Carousel marks these role="presentation" by default, which conflicts
+    // with the aria-label they need since they're real, focusable controls.
+    $(target).find('.owl-prev').removeAttr('role').attr('aria-label', getMessage('carousel-prev'));
+    $(target).find('.owl-next').removeAttr('role').attr('aria-label', getMessage('carousel-next'));
     $(target).find('.owl-dot').each(function (index) {
         $(this).attr('aria-label', `${getMessage('carousel-dot')} ${index + 1}`);
     });
