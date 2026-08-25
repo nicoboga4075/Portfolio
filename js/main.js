@@ -1598,6 +1598,11 @@ function initPage() {
 
     initTranslator();
 
+    $('#cv-download').click(function () {
+        const $btn = $(this).addClass('loading');
+        setTimeout(() => $btn.removeClass('loading'), 2000);
+    });
+
     $('.open-mfp').click(function () {
         const target = $(this).data('target');
         toggleVisibility(target);

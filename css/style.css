@@ -30,6 +30,26 @@ html.dark-mode {
     }
 }
 
+#cv-download .spinner {
+    display: none;
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    border: 2px solid rgb(255 255 255 / 40%);
+    border-top-color: #fff;
+    border-radius: 50%;
+    vertical-align: middle;
+    animation: spinner-rotate 0.6s linear infinite;
+}
+
+#cv-download.loading .spinner {
+    display: inline-block;
+}
+
+#cv-download .btn-label {
+    color: inherit;
+}
+
 html.dark-mode .ftco-navbar-light:not(.awake,.scrolled) .navbar-nav > .nav-item > .nav-link span, 
 html.dark-mode .resume-wrap .position,
 html.dark-mode .ftco-about ul.about-info li span:first-child,
