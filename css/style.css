@@ -12,6 +12,24 @@ html.dark-mode {
     --text-color: var(--white);
 }
 
+#ftco-loader .spinner {
+    position: absolute;
+    left: calc(50% - 24px);
+    top: calc(50% - 24px);
+    width: 48px;
+    height: 48px;
+    border: 4px solid #ebefff;
+    border-top-color: var(--main);
+    border-radius: 50%;
+    animation: spinner-rotate 1s linear infinite;
+}
+
+@keyframes spinner-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 html.dark-mode .ftco-navbar-light:not(.awake,.scrolled) .navbar-nav > .nav-item > .nav-link span, 
 html.dark-mode .resume-wrap .position,
 html.dark-mode .ftco-about ul.about-info li span:first-child,
