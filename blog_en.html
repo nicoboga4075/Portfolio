@@ -20,56 +20,58 @@ permalink: "blog_en.html"
                 {% include "switcher_en.html" %}
             </div>
         </nav>
-        <section class="ftco-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 ftco-animate" id="article-shape">
-                        <iframe id="iframe-article" title="Article Content"></iframe>
-                        <div class="about-author p-4 bg-light d-none">
-                            <div class="bio mr-5">
-                                <img src="images/profile.webp" class="img-fluid mb-4" alt="Profile" loading="lazy" width="1000" height="1074">
-                            </div>
-                            <div class="desc text-center">
-                                <h3 class="author">{{ author }}</h3>
-                                <p>Software Engineer</p>
-                                <p>Scan me</p>
-                                <img src="images/qrcode.png" id="qrcode" alt="Linkerz QR Code" loading="lazy" width="200" height="200">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 sidebar">
-                        <div class="sidebar-box">
-                            <form class="search-form">
-                                <div class="form-group">
-                                    <input name="search-input" class="form-control" type="text" placeholder="Search..." autocomplete="off" aria-label="Search in the article">
-                                    <span class="icon icon-times mr-4"></span>
-                                    <span class="icon icon-search"></span>
-                                    <ul id="search-suggestions" aria-label="Search suggestions"></ul>
+        <main>
+            <section class="ftco-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 ftco-animate" id="article-shape">
+                            <iframe id="iframe-article" title="Article Content"></iframe>
+                            <div class="about-author p-4 bg-light d-none">
+                                <div class="bio mr-5">
+                                    <img src="images/profile.webp" class="img-fluid mb-4" alt="Profile" loading="lazy" width="1000" height="1074">
                                 </div>
-                            </form>
-                            <div id="search-info"></div>
-                        </div>
-                        <div class="sidebar-box">
-                            <h3 class="heading-sidebar">Recent Publications</h3>
-                            <div class="block-21 mb-4 d-flex justify-content-center">
-                                <a id="crm" class="blog-img mr-4" aria-labelledby="recent-article-heading" aria-label="Recent publication"></a>
-                                <div class="text">
-                                    <h3 id="recent-article-heading" class="heading">Recent publication</h3>
-                                    <div class="meta"></div>
+                                <div class="desc text-center">
+                                    <h3 class="author">{{ author }}</h3>
+                                    <p>Software Engineer</p>
+                                    <p>Scan me</p>
+                                    <img src="images/qrcode.png" id="qrcode" alt="Linkerz QR Code" loading="lazy" width="200" height="200">
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar-box">
-                            <h3 class="heading-sidebar">Tags</h3>
-                            <div class="tagcloud"></div>
-                        </div>
-                        <div class="sidebar-box">
-                            <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="nicolas-bogalheiro-126a7616b" data-version="v1"></div>
+                        <div class="col-lg-4 sidebar">
+                            <div class="sidebar-box">
+                                <form class="search-form">
+                                    <div class="form-group">
+                                        <input name="search-input" class="form-control" type="text" placeholder="Search..." autocomplete="off" aria-label="Search in the article">
+                                        <span class="icon icon-times mr-4"></span>
+                                        <span class="icon icon-search"></span>
+                                        <ul id="search-suggestions" aria-label="Search suggestions"></ul>
+                                    </div>
+                                </form>
+                                <div id="search-info"></div>
+                            </div>
+                            <div class="sidebar-box">
+                                <h3 class="heading-sidebar">Recent Publications</h3>
+                                <div class="block-21 mb-4 d-flex justify-content-center">
+                                    <a id="crm" class="blog-img mr-4" aria-labelledby="recent-article-heading" aria-label="Recent publication"></a>
+                                    <div class="text">
+                                        <h3 id="recent-article-heading" class="heading">Recent publication</h3>
+                                        <div class="meta"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sidebar-box">
+                                <h3 class="heading-sidebar">Tags</h3>
+                                <div class="tagcloud"></div>
+                            </div>
+                            <div class="sidebar-box">
+                                <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="nicolas-bogalheiro-126a7616b" data-version="v1"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
         <footer class="ftco-footer ftco-section">
             <div class="container">
                 <div class="row mb-5">

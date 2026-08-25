@@ -14,84 +14,85 @@ permalink: "articles/bien-pasbien_fr.html"
         {% include "default.html" %}
     </head>
     <body onload="initArticle()" class="read-zone">
-        <div class="article-container">
-            <div class="title-center">🧐 Bien / Pas Bien</div>
-            <div class="video-wrapper">
-                <video controls>
-                    <track kind="subtitles" src="docs/public/Bien_PasBien_FR.vtt" srclang="fr" label="Français">
-                    <source src="docs/public/Bien_PasBien.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Pas Bien</h2>
-                <p>Nommer ses variables en abrégé ou sans signification concrète</p>
-                <i>❌ Magic Number</i>
-                {% include "bien-pasbien-magic-number.html" %}
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Pas Bien</h2>
-                <p>Ne pas permettre de rollback en cas de crash avant le commit dans la base de données</p>
-                <i>✅ <b>A</b>CID : Atomicity</i>
-                <p>Si la première requête passe et que le serveur plante avant la deuxième :</p>
-                <ul>
-                    <li>Le compte [id = 1] est débité</li>
-                    <li>Le compte [id = 2] n'est pas crédité</li>
-                </ul>
-                <p>➡️ Argent perdu</p>
-                <div class="bloc-code">
-                    <span class="lang-label">SQL</span>
-                    <span class="lang-code">
+        <main>
+            <div class="article-container">
+                <div class="title-center">🧐 Bien / Pas Bien</div>
+                <div class="video-wrapper">
+                    <video controls>
+                        <track kind="subtitles" src="docs/public/Bien_PasBien_FR.vtt" srclang="fr" label="Français">
+                        <source src="docs/public/Bien_PasBien.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Pas Bien</h2>
+                    <p>Nommer ses variables en abrégé ou sans signification concrète</p>
+                    <i>❌ Magic Number</i>
+                    {% include "bien-pasbien-magic-number.html" %}
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Pas Bien</h2>
+                    <p>Ne pas permettre de rollback en cas de crash avant le commit dans la base de données</p>
+                    <i>✅ <b>A</b>CID : Atomicity</i>
+                    <p>Si la première requête passe et que le serveur plante avant la deuxième :</p>
+                    <ul>
+                        <li>Le compte [id = 1] est débité</li>
+                        <li>Le compte [id = 2] n'est pas crédité</li>
+                    </ul>
+                    <p>➡️ Argent perdu</p>
+                    <div class="bloc-code">
+                        <span class="lang-label">SQL</span>
+                        <span class="lang-code">
 UPDATE comptes SET solde = solde - 100 WHERE id = 1;
 -- Panne serveur ici, ou crash de l’appli
 UPDATE comptes SET solde = solde + 100 WHERE id = 2;
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Pas Bien</h2>
-                <p>Dupliquer du code au lieu de factoriser</p>
-                <i>✅ DRY : <b>D</b>on't <b>R</b>epeat <b>Y</b>ourself</i>
-                {% include "bien-pasbien-dry.html" %}
-            </div>
-            <div class="card bien">
-                <h2>✅ Bien</h2>
-                <p>Documenter son code et le rendre intuitif</p>
-                <i>✅ KISS : <b>K</b>eep <b>I</b>t <b>S</b>imple <b>S</b>tupid</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card pas-bien">
+                    <h2>❌ Pas Bien</h2>
+                    <p>Dupliquer du code au lieu de factoriser</p>
+                    <i>✅ DRY : <b>D</b>on't <b>R</b>epeat <b>Y</b>ourself</i>
+                    {% include "bien-pasbien-dry.html" %}
+                </div>
+                <div class="card bien">
+                    <h2>✅ Bien</h2>
+                    <p>Documenter son code et le rendre intuitif</p>
+                    <i>✅ KISS : <b>K</b>eep <b>I</b>t <b>S</b>imple <b>S</b>tupid</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 function calculerTVA(prixHT) {
     // Calcule la TVA pour un prix HT
     return prixHT * 0.2;
 }
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 def calculer_tva(prix_ht):
     """Calcule la TVA pour un prix HT"""
     return prix_ht * 0.2
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public double CalculerTVA(double prixHT)
 {
     // Calcule la TVA pour un prix HT
     return prixHT * 0.2;
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Pas Bien</h2>
-                <p>Trop de logique dans une seule fonction/classe</p>
-                <i>✅ SRP : Single Responsibility Principle (<b>S</b>OLID)</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card pas-bien">
+                    <h2>❌ Pas Bien</h2>
+                    <p>Trop de logique dans une seule fonction/classe</p>
+                    <i>✅ SRP : Single Responsibility Principle (<b>S</b>OLID)</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 function processUserData() {
     // Lire les données
     // Valider les données
@@ -100,11 +101,11 @@ function processUserData() {
     // Envoyer un mail
     ...
 }
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 def process_user_data():
     # Lire les données
     # Valider les données
@@ -112,11 +113,11 @@ def process_user_data():
     # Générer un rapport
     # Envoyer un mail
     ...
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public void ProcessUserData() {
     // Lire les données
     // Valider les données
@@ -125,32 +126,32 @@ public void ProcessUserData() {
     // Envoyer un mail
     ...
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Bien</h2>
-                <p>Appliquer des principes de clean code</p>
-                <i>✅ GRASP : General Responsibility Assignment Software Patterns</i>
-                <ol>
-                    <li>Information Expert — attribuer la responsabilité à la classe qui a l'information nécessaire</li>
-                    <li>Creator — la classe qui crée un objet</li>
-                    <li>Controller — gérer les événements du système</li>
-                    <li>Low Coupling — minimiser les dépendances entre classes (encapsulation)</li>
-                    <li>High Cohesion — une classe doit avoir une responsabilité bien ciblée</li>
-                    <li>Polymorphism — utiliser le polymorphisme pour gérer les variations</li>
-                    <li>Pure Fabrication — créer des classes artificielles pour éviter le couplage fort ou les responsabilités qui n'appartiennent pas aux classes de domaine</li>
-                    <li>Indirection — utiliser une classe intermédiaire pour réduire les dépendances</li>
-                    <li>Protected Variations — protéger les éléments instables derrière des interfaces ou abstractions</li>
-                </ol>
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Pas Bien</h2>
-                <p>Ne pas respecter les contraintes de la base de  données avant et après transaction</p>
-                <i>✅ A<b>C</b>ID : Consistency</i>
-                <div class="bloc-code">
-                    <span class="lang-label">SQL</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Bien</h2>
+                    <p>Appliquer des principes de clean code</p>
+                    <i>✅ GRASP : General Responsibility Assignment Software Patterns</i>
+                    <ol>
+                        <li>Information Expert — attribuer la responsabilité à la classe qui a l'information nécessaire</li>
+                        <li>Creator — la classe qui crée un objet</li>
+                        <li>Controller — gérer les événements du système</li>
+                        <li>Low Coupling — minimiser les dépendances entre classes (encapsulation)</li>
+                        <li>High Cohesion — une classe doit avoir une responsabilité bien ciblée</li>
+                        <li>Polymorphism — utiliser le polymorphisme pour gérer les variations</li>
+                        <li>Pure Fabrication — créer des classes artificielles pour éviter le couplage fort ou les responsabilités qui n'appartiennent pas aux classes de domaine</li>
+                        <li>Indirection — utiliser une classe intermédiaire pour réduire les dépendances</li>
+                        <li>Protected Variations — protéger les éléments instables derrière des interfaces ou abstractions</li>
+                    </ol>
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Pas Bien</h2>
+                    <p>Ne pas respecter les contraintes de la base de  données avant et après transaction</p>
+                    <i>✅ A<b>C</b>ID : Consistency</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">SQL</span>
+                        <span class="lang-code">
 CREATE TABLE comptes (
     id INTEGER PRIMARY KEY,
     solde INTEGER
@@ -159,22 +160,22 @@ CREATE TABLE comptes (
 BEGIN;
 UPDATE comptes SET solde = solde - 200 WHERE id = 1;
 COMMIT;
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Bien</h2>
-                <p>Capturer les erreurs</p>
-                <i>✅ Fail Fast </i>
-                {% include "bien-pasbien-fail-fast.html" %}
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Pas Bien</h2>
-                <p>Modification du code existant au lieu de l'étendre</p>
-                <i>✅ OCP : Open/Closed Principle (S<b>O</b>LID)</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Bien</h2>
+                    <p>Capturer les erreurs</p>
+                    <i>✅ Fail Fast </i>
+                    {% include "bien-pasbien-fail-fast.html" %}
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Pas Bien</h2>
+                    <p>Modification du code existant au lieu de l'étendre</p>
+                    <i>✅ OCP : Open/Closed Principle (S<b>O</b>LID)</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 function calculerPrix(panier, typeClient) {
     if (typeClient === "pro") {
         return panier * 0.9;
@@ -184,21 +185,21 @@ function calculerPrix(panier, typeClient) {
         return panier;
     }
 }
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 def calculer_prix(panier, type_client):
     if type_client == "pro":
         return panier * 0.9
     elif type_client == "vip":
         return panier * 0.8
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public static double CalculerPrix(double panier, string typeClient)
 {
     if (typeClient == "pro")
@@ -214,16 +215,16 @@ public static double CalculerPrix(double panier, string typeClient)
         return panier;
     }
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Bien</h2>
-                <p>Ne pas hériter une classe qui ne respecte pas le contrat ou comportement attendu de la classe mère</p>
-                <i>✅ LSP : Liskov Substitution Principle (SO<b>L</b>ID)</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Bien</h2>
+                    <p>Ne pas hériter une classe qui ne respecte pas le contrat ou comportement attendu de la classe mère</p>
+                    <i>✅ LSP : Liskov Substitution Principle (SO<b>L</b>ID)</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 class Client {
     calculerPrix(panier) { return panier; }
 }
@@ -235,11 +236,11 @@ class ClientVip extends Client {
 }
 [ new Client(), new ClientPro(), new ClientVip() ]
 .forEach(c =&gt; console.log(c.calculerPrix(100)));
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 class Client:
     def calculer_prix(self, panier):
         return panier
@@ -251,11 +252,11 @@ class ClientVip(Client):
         return panier * 0.8
 for client in [Client(), ClientPro(), ClientVip()]:
     print(client.calculer_prix(100))
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 using System;
 class Client {
     public virtual double CalculerPrix(double panier) =&gt; panier;
@@ -273,16 +274,16 @@ class Program {
         Console.WriteLine(c.CalculerPrix(100));
     }
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Pas Bien</h2>
-                <p>Interface/Classe trop conséquente imposée à tout le monde</p>
-                <i>✅ ISP : Interface Segregation Principle (SOL<b>I</b>D)</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card pas-bien">
+                    <h2>❌ Pas Bien</h2>
+                    <p>Interface/Classe trop conséquente imposée à tout le monde</p>
+                    <i>✅ ISP : Interface Segregation Principle (SOL<b>I</b>D)</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 class Animal {
     eat() { }
     fly() { }
@@ -292,11 +293,11 @@ class Cat extends Animal {
     // Inutile pour un chat
     }
 }
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 class Animal:
     def eat(self):
         pass
@@ -306,11 +307,11 @@ class Cat(Animal):
     def fly(self):
     # Inutile pour un chat
         pass
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public abstract class Animal
 {
     public abstract void Eat();
@@ -335,25 +336,25 @@ public class Cat : Animal
         // Inutile pour un chat mais doit être implémentée
     }
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Bien</h2>
-                <p>Le modèle stocke les données, la vue les affiche et le contrôleur les crée</p>
-                <i>✅ MVC : Model View Controller</i>
-                {% include "bien-pasbien-mvc.html" %}
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Pas Bien</h2>
-                <p> Permettre des "dirty reads" (lecture de données non validées),
-                    "non-repeatable reads" (relecture de données modifiées par une autre transaction),
-                    "phantom reads" (nouvelles lignes apparaissant dans une requête répétée)
-                </p>
-                <i>✅ AC<b>I</b>D : Isolation</i>
-                <div class="bloc-code">
-                    <span class="lang-label">SQL</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Bien</h2>
+                    <p>Le modèle stocke les données, la vue les affiche et le contrôleur les crée</p>
+                    <i>✅ MVC : Model View Controller</i>
+                    {% include "bien-pasbien-mvc.html" %}
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Pas Bien</h2>
+                    <p> Permettre des "dirty reads" (lecture de données non validées),
+                        "non-repeatable reads" (relecture de données modifiées par une autre transaction),
+                        "phantom reads" (nouvelles lignes apparaissant dans une requête répétée)
+                    </p>
+                    <i>✅ AC<b>I</b>D : Isolation</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">SQL</span>
+                        <span class="lang-code">
 -- Transaction 1
 BEGIN;
 SELECT solde FROM comptes WHERE id=1; -- lit 100
@@ -366,30 +367,30 @@ UPDATE comptes SET solde = solde - 80 WHERE id=1;
 COMMIT;
 -- Transaction 1 commit après, écrase modification de T2
 COMMIT;
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Bien</h2>
-                <p>Une fonction ne doit parler qu'à ses proches (elle-même, ses attributs directs,
-                    les objets qu’on lui passe, les objets qu’elle crée)...
-                </p>
-                <i>✅ LoD : Law of Demeter</i>
-                {% include "bien-pasbien-lod-close.html" %}
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Pas Bien</h2>
-                <p>... pas aux amis des amis (trop d'appels)</p>
-                <i>✅ LoD : Law of Demeter</i>
-                {% include "bien-pasbien-lod-friends.html" %}
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Pas Bien</h2>
-                <p></p>
-                <i>✅ ACI<b>D</b> : Durability</i>
-                <div class="bloc-code">
-                    <span class="lang-label">SQL</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Bien</h2>
+                    <p>Une fonction ne doit parler qu'à ses proches (elle-même, ses attributs directs,
+                        les objets qu’on lui passe, les objets qu’elle crée)...
+                    </p>
+                    <i>✅ LoD : Law of Demeter</i>
+                    {% include "bien-pasbien-lod-close.html" %}
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Pas Bien</h2>
+                    <p>... pas aux amis des amis (trop d'appels)</p>
+                    <i>✅ LoD : Law of Demeter</i>
+                    {% include "bien-pasbien-lod-friends.html" %}
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Pas Bien</h2>
+                    <p></p>
+                    <i>✅ ACI<b>D</b> : Durability</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">SQL</span>
+                        <span class="lang-code">
 BEGIN TRANSACTION
     UPDATE comptes SET solde = solde - 100 WHERE id = 1
     UPDATE comptes SET solde = solde + 100 WHERE id = 2
@@ -397,17 +398,17 @@ COMMIT
 -- Données validées mais crash serveur avant écriture disque 
 -- Il faut mettre en place un mécanisme comme le Write-Ahead Log (WAL)
 -- Même si la machine plante juste après, les modifications peuvent être récupérées au redémarrage en relisant ce journal
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Bien</h2>
-                <p>Les classes ne doivent pas dépendre d’autres classes mais d’interfaces ou de classes abstraites</p>
-                <i>✅ DIP : Dependency Inversion Principle (SOLI<b>D</b>)</i>
-                {% include "bien-pasbien-dip-js.html" -%}
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Bien</h2>
+                    <p>Les classes ne doivent pas dépendre d’autres classes mais d’interfaces ou de classes abstraites</p>
+                    <i>✅ DIP : Dependency Inversion Principle (SOLI<b>D</b>)</i>
+                    {% include "bien-pasbien-dip-js.html" -%}
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 class MessageService:
     def send(self, message):
         pass
@@ -419,11 +420,11 @@ class OrderManager:
         self.service = service
     def notify(self):
         self.service.send("Commande confirmée")
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public interface IMessageService
 {
     void Send(string message);
@@ -447,50 +448,51 @@ public class OrderManager
         _service.Send("Commande confirmée");
     }
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Pas Bien</h2>
-                <p>Coder maintenant une fonctionnalité qu'on estime utile pour plus tard</p>
-                <i>YAGNI : You Aren’t Gonna Need It</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card pas-bien">
+                    <h2>❌ Pas Bien</h2>
+                    <p>Coder maintenant une fonctionnalité qu'on estime utile pour plus tard</p>
+                    <i>YAGNI : You Aren’t Gonna Need It</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 function calculerTotal(prix, tva, remise = 0, primeAnniversaire = 0) {
     const total = prix + (prix * tva);
     // Les autres paramètres ne servent à rien pour le moment
     return total;
 }
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 def calculer_total(prix, tva, remise=0, prime_anniversaire=0):
     total = prix + (prix * tva)
     # Les autres paramètres ne servent pas encore
     return total
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public decimal CalculerTotal(decimal prix, decimal tva, decimal remise = 0, decimal primeAnniversaire = 0)
 {
     decimal total = prix + (prix * tva);
     // Les autres paramètres sont inutiles pour le moment
     return total;
 }
-                    </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="card modere">
+                    <h2>⚠️ Bien avec modération</h2>
+                    <p>Utiliser des <a href="https://refactoring.guru/design-patterns">design patterns</a></p>
+                    <i>Utile si adapté, à éviter en excès ou pour faire joli</i>
+                    <img id="pattern" class="article-image" alt="Patterns" width="800" height="400">
                 </div>
             </div>
-            <div class="card modere">
-                <h2>⚠️ Bien avec modération</h2>
-                <p>Utiliser des <a href="https://refactoring.guru/design-patterns">design patterns</a></p>
-                <i>Utile si adapté, à éviter en excès ou pour faire joli</i>
-                <img id="pattern" class="article-image" alt="Patterns" width="800" height="400">
-            </div>
-        </div>
+        </main>
     </body>
 </html>

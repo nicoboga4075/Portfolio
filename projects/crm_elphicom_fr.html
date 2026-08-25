@@ -14,49 +14,51 @@ permalink: "projects/crm_elphicom_fr.html"
         {% include "default.html" %}
     </head>
     <body onload="initArticle()" class="read-zone">
-        <div class="read-title">
-            <h1>🖥️ CRM Elphicom</h1>
-            {% include "switcher_fr.html" %}
-        </div>
-        <div class="video-wrapper">
-            <video controls>
-                <track label="Français" kind="subtitles" srclang="fr" src="docs/public/CRM_Elphicom_FR.vtt">
-                <track label="English" kind="subtitles" srclang="en" src="docs/public/CRM_Elphicom_EN.vtt">
-                <source src="docs/public/CRM_Elphicom.mp4" type="video/mp4">
-            </video>
-        </div>
-        <p><strong>Plateforme CRM développée pendant 3 mois</strong>, lors de mon stage de fin d’études chez <a target="_blank" rel="noopener" href="https://www.soft-concept.com">Soft Concept</a>, éditeur de logiciels lyonnais spécialisé dans les solutions d’enquêtes (satisfaction, baromètres sociaux, enquêtes RH)</p>
-        <h2>📝 Présentation</h2>
-        <p><a target="_blank" rel="noopener" href="https://elphicom.com">Elphicom</a> est une société spécialisée dans la téléphonie et les services d’opérateur, basée à Avignon et à Vienne. Ce CRM permet de gérer efficacement : les clients et prospects, les contrats et documents associés, le suivi des appels et des interventions.</p>
-        <h2>🛠️ Technologies utilisées</h2>
-        <ul>
-            <li><strong>HTML, CSS, JavaScript</strong></li>
-            <li>
-                Outils internes :
-                <ul>
-                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-enquete-en-ligne-web-on-line-net-survey.html">Net-Survey</a> : création de questionnaires</li>
-                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-traitement-enquetes-ethnos.html">Ethnos</a> : analyse de données collectées</li>
-                    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-reporting-resultats-enquete-en-ligne-web-reports.html">Web Reports</a> : développement et déploiement applicatif</li>
-                </ul>
-            </li>
-        </ul>
-        <h2>🗂️ Structure de l’application</h2>
-        <ul>
-            <li>📇 <strong>Clients et prospects</strong> : consultation, modification, suppression (uniquement pour les prospects)</li>
-            <li>📃 <strong>Contrats</strong> : gestion avec code couleur (expiré, à surveiller, actif), renouvellement et suppression</li>
-            <li>📞 <strong>Appels</strong> : gestion des historiques avec date, interlocuteur, motif, suite à donner</li>
-            <li>📑 <strong>Bibliothèque de documents</strong> : fichiers Word, Excel, PDF...</li>
-        </ul>
-        <h2>⚙️ Fonctionnalités complémentaires</h2>
-        <ul>
-            <li>📑 Fiches clients détaillées issues d'Ethnos : interlocuteur, SIRET, applications liées (Zendesk, Forest)</li>
-            <li>📋 Rapports d’intervention terrain via <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.soft_concept.mobisurvey2&amp;hl=fr">Mobi-Survey</a> (mode off-line)</li>
-            <li>👥 Gestion des utilisateurs (Administrateur, Responsable, Commercial)</li>
-        </ul>
-        <h2>📈 Utilisation</h2>
-        <p>L’application est utilisée quotidiennement par une vingtaine de collaborateurs pour le suivi client et la gestion commerciale et technique.</p>
-        <hr>
-        <p>©Soft Concept 2021</p>
-        <a id="index">Retour à l'accueil</a>
+        <main>
+            <div class="read-title">
+                <h1>🖥️ CRM Elphicom</h1>
+                {% include "switcher_fr.html" %}
+            </div>
+            <div class="video-wrapper">
+                <video controls>
+                    <track label="Français" kind="subtitles" srclang="fr" src="docs/public/CRM_Elphicom_FR.vtt">
+                    <track label="English" kind="subtitles" srclang="en" src="docs/public/CRM_Elphicom_EN.vtt">
+                    <source src="docs/public/CRM_Elphicom.mp4" type="video/mp4">
+                </video>
+            </div>
+            <p><strong>Plateforme CRM développée pendant 3 mois</strong>, lors de mon stage de fin d’études chez <a target="_blank" rel="noopener" href="https://www.soft-concept.com">Soft Concept</a>, éditeur de logiciels lyonnais spécialisé dans les solutions d’enquêtes (satisfaction, baromètres sociaux, enquêtes RH)</p>
+            <h2>📝 Présentation</h2>
+            <p><a target="_blank" rel="noopener" href="https://elphicom.com">Elphicom</a> est une société spécialisée dans la téléphonie et les services d’opérateur, basée à Avignon et à Vienne. Ce CRM permet de gérer efficacement : les clients et prospects, les contrats et documents associés, le suivi des appels et des interventions.</p>
+            <h2>🛠️ Technologies utilisées</h2>
+            <ul>
+                <li><strong>HTML, CSS, JavaScript</strong></li>
+                <li>
+                    Outils internes :
+                    <ul>
+                        <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-enquete-en-ligne-web-on-line-net-survey.html">Net-Survey</a> : création de questionnaires</li>
+                        <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-traitement-enquetes-ethnos.html">Ethnos</a> : analyse de données collectées</li>
+                        <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/logiciel-reporting-resultats-enquete-en-ligne-web-reports.html">Web Reports</a> : développement et déploiement applicatif</li>
+                    </ul>
+                </li>
+            </ul>
+            <h2>🗂️ Structure de l’application</h2>
+            <ul>
+                <li>📇 <strong>Clients et prospects</strong> : consultation, modification, suppression (uniquement pour les prospects)</li>
+                <li>📃 <strong>Contrats</strong> : gestion avec code couleur (expiré, à surveiller, actif), renouvellement et suppression</li>
+                <li>📞 <strong>Appels</strong> : gestion des historiques avec date, interlocuteur, motif, suite à donner</li>
+                <li>📑 <strong>Bibliothèque de documents</strong> : fichiers Word, Excel, PDF...</li>
+            </ul>
+            <h2>⚙️ Fonctionnalités complémentaires</h2>
+            <ul>
+                <li>📑 Fiches clients détaillées issues d'Ethnos : interlocuteur, SIRET, applications liées (Zendesk, Forest)</li>
+                <li>📋 Rapports d’intervention terrain via <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.soft_concept.mobisurvey2&amp;hl=fr">Mobi-Survey</a> (mode off-line)</li>
+                <li>👥 Gestion des utilisateurs (Administrateur, Responsable, Commercial)</li>
+            </ul>
+            <h2>📈 Utilisation</h2>
+            <p>L’application est utilisée quotidiennement par une vingtaine de collaborateurs pour le suivi client et la gestion commerciale et technique.</p>
+            <hr>
+            <p>©Soft Concept 2021</p>
+            <a id="index">Retour à l'accueil</a>
+        </main>
     </body>
 </html>

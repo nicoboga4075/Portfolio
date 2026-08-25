@@ -14,78 +14,79 @@ permalink: "articles/bien-pasbien_en.html"
         {% include "default.html" %}
     </head>
     <body onload="initArticle()" class="read-zone">
-        <div class="article-container">
-            <div class="title-center">🧐 Good / Not Good</div>
-            <div class="card pas-bien">
-                <h2>❌ Not Good</h2>
-                <p>Naming variables in abbreviated form or with no concrete meaning</p>
-                <i>❌ Magic Number</i>
-                {% include "bien-pasbien-magic-number.html" %}
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Not Good</h2>
-                <p>Not allowing a rollback in case of a crash before the commit in the database</p>
-                <i>✅ <b>A</b>CID: Atomicity</i>
-                <p>If the first query succeeds and the server crashes before the second one:</p>
-                <ul>
-                    <li>Account [id = 1] is debited</li>
-                    <li>Account [id = 2] is not credited</li>
-                </ul>
-                <p>➡️ Money lost</p>
-                <div class="bloc-code">
-                    <span class="lang-label">SQL</span>
-                    <span class="lang-code">
+        <main>
+            <div class="article-container">
+                <div class="title-center">🧐 Good / Not Good</div>
+                <div class="card pas-bien">
+                    <h2>❌ Not Good</h2>
+                    <p>Naming variables in abbreviated form or with no concrete meaning</p>
+                    <i>❌ Magic Number</i>
+                    {% include "bien-pasbien-magic-number.html" %}
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Not Good</h2>
+                    <p>Not allowing a rollback in case of a crash before the commit in the database</p>
+                    <i>✅ <b>A</b>CID: Atomicity</i>
+                    <p>If the first query succeeds and the server crashes before the second one:</p>
+                    <ul>
+                        <li>Account [id = 1] is debited</li>
+                        <li>Account [id = 2] is not credited</li>
+                    </ul>
+                    <p>➡️ Money lost</p>
+                    <div class="bloc-code">
+                        <span class="lang-label">SQL</span>
+                        <span class="lang-code">
 UPDATE accounts SET balance = balance - 100 WHERE id = 1;
 -- Server outage here, or app crash
 UPDATE accounts SET balance = balance + 100 WHERE id = 2;
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Not Good</h2>
-                <p>Duplicating code instead of factoring it out</p>
-                <i>✅ DRY: <b>D</b>on't <b>R</b>epeat <b>Y</b>ourself</i>
-                {% include "bien-pasbien-dry.html" %}
-            </div>
-            <div class="card bien">
-                <h2>✅ Good</h2>
-                <p>Documenting your code and keeping it intuitive</p>
-                <i>✅ KISS: <b>K</b>eep <b>I</b>t <b>S</b>imple <b>S</b>tupid</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card pas-bien">
+                    <h2>❌ Not Good</h2>
+                    <p>Duplicating code instead of factoring it out</p>
+                    <i>✅ DRY: <b>D</b>on't <b>R</b>epeat <b>Y</b>ourself</i>
+                    {% include "bien-pasbien-dry.html" %}
+                </div>
+                <div class="card bien">
+                    <h2>✅ Good</h2>
+                    <p>Documenting your code and keeping it intuitive</p>
+                    <i>✅ KISS: <b>K</b>eep <b>I</b>t <b>S</b>imple <b>S</b>tupid</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 function calculateVAT(preTaxPrice) {
     // Calculates VAT for a pre-tax price
     return preTaxPrice * 0.2;
 }
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 def calculate_vat(pre_tax_price):
     """Calculates VAT for a pre-tax price"""
     return pre_tax_price * 0.2
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public double CalculateVAT(double preTaxPrice)
 {
     // Calculates VAT for a pre-tax price
     return preTaxPrice * 0.2;
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Not Good</h2>
-                <p>Too much logic in a single function/class</p>
-                <i>✅ SRP: Single Responsibility Principle (<b>S</b>OLID)</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card pas-bien">
+                    <h2>❌ Not Good</h2>
+                    <p>Too much logic in a single function/class</p>
+                    <i>✅ SRP: Single Responsibility Principle (<b>S</b>OLID)</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 function processUserData() {
     // Read the data
     // Validate the data
@@ -94,11 +95,11 @@ function processUserData() {
     // Send an email
     ...
 }
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 def process_user_data():
     # Read the data
     # Validate the data
@@ -106,11 +107,11 @@ def process_user_data():
     # Generate a report
     # Send an email
     ...
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public void ProcessUserData() {
     // Read the data
     // Validate the data
@@ -119,32 +120,32 @@ public void ProcessUserData() {
     // Send an email
     ...
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Good</h2>
-                <p>Applying clean code principles</p>
-                <i>✅ GRASP: General Responsibility Assignment Software Patterns</i>
-                <ol>
-                    <li>Information Expert — assign responsibility to the class that has the necessary information</li>
-                    <li>Creator — the class that creates an object</li>
-                    <li>Controller — handle the system's events</li>
-                    <li>Low Coupling — minimize dependencies between classes (encapsulation)</li>
-                    <li>High Cohesion — a class should have a well-focused responsibility</li>
-                    <li>Polymorphism — use polymorphism to handle variations</li>
-                    <li>Pure Fabrication — create artificial classes to avoid strong coupling or responsibilities that don't belong to domain classes</li>
-                    <li>Indirection — use an intermediate class to reduce dependencies</li>
-                    <li>Protected Variations — protect unstable elements behind interfaces or abstractions</li>
-                </ol>
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Not Good</h2>
-                <p>Not respecting database constraints before and after a transaction</p>
-                <i>✅ A<b>C</b>ID: Consistency</i>
-                <div class="bloc-code">
-                    <span class="lang-label">SQL</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Good</h2>
+                    <p>Applying clean code principles</p>
+                    <i>✅ GRASP: General Responsibility Assignment Software Patterns</i>
+                    <ol>
+                        <li>Information Expert — assign responsibility to the class that has the necessary information</li>
+                        <li>Creator — the class that creates an object</li>
+                        <li>Controller — handle the system's events</li>
+                        <li>Low Coupling — minimize dependencies between classes (encapsulation)</li>
+                        <li>High Cohesion — a class should have a well-focused responsibility</li>
+                        <li>Polymorphism — use polymorphism to handle variations</li>
+                        <li>Pure Fabrication — create artificial classes to avoid strong coupling or responsibilities that don't belong to domain classes</li>
+                        <li>Indirection — use an intermediate class to reduce dependencies</li>
+                        <li>Protected Variations — protect unstable elements behind interfaces or abstractions</li>
+                    </ol>
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Not Good</h2>
+                    <p>Not respecting database constraints before and after a transaction</p>
+                    <i>✅ A<b>C</b>ID: Consistency</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">SQL</span>
+                        <span class="lang-code">
 CREATE TABLE accounts (
     id INTEGER PRIMARY KEY,
     balance INTEGER
@@ -153,22 +154,22 @@ CREATE TABLE accounts (
 BEGIN;
 UPDATE accounts SET balance = balance - 200 WHERE id = 1;
 COMMIT;
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Good</h2>
-                <p>Catching errors</p>
-                <i>✅ Fail Fast </i>
-                {% include "bien-pasbien-fail-fast.html" %}
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Not Good</h2>
-                <p>Modifying existing code instead of extending it</p>
-                <i>✅ OCP: Open/Closed Principle (S<b>O</b>LID)</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Good</h2>
+                    <p>Catching errors</p>
+                    <i>✅ Fail Fast </i>
+                    {% include "bien-pasbien-fail-fast.html" %}
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Not Good</h2>
+                    <p>Modifying existing code instead of extending it</p>
+                    <i>✅ OCP: Open/Closed Principle (S<b>O</b>LID)</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 function calculatePrice(cart, customerType) {
     if (customerType === "pro") {
         return cart * 0.9;
@@ -178,21 +179,21 @@ function calculatePrice(cart, customerType) {
         return cart;
     }
 }
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 def calculate_price(cart, customer_type):
     if customer_type == "pro":
         return cart * 0.9
     elif customer_type == "vip":
         return cart * 0.8
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public static double CalculatePrice(double cart, string customerType)
 {
     if (customerType == "pro")
@@ -208,16 +209,16 @@ public static double CalculatePrice(double cart, string customerType)
         return cart;
     }
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Good</h2>
-                <p>Not inheriting from a class that doesn't respect the contract or expected behavior of the parent class</p>
-                <i>✅ LSP: Liskov Substitution Principle (SO<b>L</b>ID)</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Good</h2>
+                    <p>Not inheriting from a class that doesn't respect the contract or expected behavior of the parent class</p>
+                    <i>✅ LSP: Liskov Substitution Principle (SO<b>L</b>ID)</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 class Customer {
     calculatePrice(cart) { return cart; }
 }
@@ -229,11 +230,11 @@ class VipCustomer extends Customer {
 }
 [ new Customer(), new ProCustomer(), new VipCustomer() ]
 .forEach(c =&gt; console.log(c.calculatePrice(100)));
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 class Customer:
     def calculate_price(self, cart):
         return cart
@@ -245,11 +246,11 @@ class VipCustomer(Customer):
         return cart * 0.8
 for customer in [Customer(), ProCustomer(), VipCustomer()]:
     print(customer.calculate_price(100))
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 using System;
 class Customer {
     public virtual double CalculatePrice(double cart) =&gt; cart;
@@ -267,16 +268,16 @@ class Program {
         Console.WriteLine(c.CalculatePrice(100));
     }
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Not Good</h2>
-                <p>An interface/class too large, imposed on everyone</p>
-                <i>✅ ISP: Interface Segregation Principle (SOL<b>I</b>D)</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card pas-bien">
+                    <h2>❌ Not Good</h2>
+                    <p>An interface/class too large, imposed on everyone</p>
+                    <i>✅ ISP: Interface Segregation Principle (SOL<b>I</b>D)</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 class Animal {
     eat() { }
     fly() { }
@@ -286,11 +287,11 @@ class Cat extends Animal {
     // Useless for a cat
     }
 }
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 class Animal:
     def eat(self):
         pass
@@ -300,11 +301,11 @@ class Cat(Animal):
     def fly(self):
     # Useless for a cat
         pass
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public abstract class Animal
 {
     public abstract void Eat();
@@ -329,25 +330,25 @@ public class Cat : Animal
         // Useless for a cat but must be implemented
     }
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Good</h2>
-                <p>The model stores the data, the view displays it, and the controller creates it</p>
-                <i>✅ MVC: Model View Controller</i>
-                {% include "bien-pasbien-mvc.html" %}
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Not Good</h2>
-                <p> Allowing "dirty reads" (reading uncommitted data),
-                    "non-repeatable reads" (re-reading data modified by another transaction),
-                    "phantom reads" (new rows appearing in a repeated query)
-                </p>
-                <i>✅ AC<b>I</b>D: Isolation</i>
-                <div class="bloc-code">
-                    <span class="lang-label">SQL</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Good</h2>
+                    <p>The model stores the data, the view displays it, and the controller creates it</p>
+                    <i>✅ MVC: Model View Controller</i>
+                    {% include "bien-pasbien-mvc.html" %}
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Not Good</h2>
+                    <p> Allowing "dirty reads" (reading uncommitted data),
+                        "non-repeatable reads" (re-reading data modified by another transaction),
+                        "phantom reads" (new rows appearing in a repeated query)
+                    </p>
+                    <i>✅ AC<b>I</b>D: Isolation</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">SQL</span>
+                        <span class="lang-code">
 -- Transaction 1
 BEGIN;
 SELECT balance FROM accounts WHERE id=1; -- reads 100
@@ -360,30 +361,30 @@ UPDATE accounts SET balance = balance - 80 WHERE id=1;
 COMMIT;
 -- Transaction 1 commits after, overwrites T2's change
 COMMIT;
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Good</h2>
-                <p>A function should only talk to its close friends (itself, its direct attributes,
-                    the objects passed to it, the objects it creates)...
-                </p>
-                <i>✅ LoD: Law of Demeter</i>
-                {% include "bien-pasbien-lod-close.html" %}
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Not Good</h2>
-                <p>...not to friends of friends (too many calls)</p>
-                <i>✅ LoD: Law of Demeter</i>
-                {% include "bien-pasbien-lod-friends.html" %}
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Not Good</h2>
-                <p></p>
-                <i>✅ ACI<b>D</b>: Durability</i>
-                <div class="bloc-code">
-                    <span class="lang-label">SQL</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Good</h2>
+                    <p>A function should only talk to its close friends (itself, its direct attributes,
+                        the objects passed to it, the objects it creates)...
+                    </p>
+                    <i>✅ LoD: Law of Demeter</i>
+                    {% include "bien-pasbien-lod-close.html" %}
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Not Good</h2>
+                    <p>...not to friends of friends (too many calls)</p>
+                    <i>✅ LoD: Law of Demeter</i>
+                    {% include "bien-pasbien-lod-friends.html" %}
+                </div>
+                <div class="card pas-bien">
+                    <h2>❌ Not Good</h2>
+                    <p></p>
+                    <i>✅ ACI<b>D</b>: Durability</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">SQL</span>
+                        <span class="lang-code">
 BEGIN TRANSACTION
     UPDATE accounts SET balance = balance - 100 WHERE id = 1
     UPDATE accounts SET balance = balance + 100 WHERE id = 2
@@ -391,17 +392,17 @@ COMMIT
 -- Data committed but server crash before disk write
 -- A mechanism like the Write-Ahead Log (WAL) is needed
 -- Even if the machine crashes right after, the changes can be recovered on restart by replaying this log
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card bien">
-                <h2>✅ Good</h2>
-                <p>Classes should not depend on other classes but on interfaces or abstract classes</p>
-                <i>✅ DIP: Dependency Inversion Principle (SOLI<b>D</b>)</i>
-                {% include "bien-pasbien-dip-js.html" -%}
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                <div class="card bien">
+                    <h2>✅ Good</h2>
+                    <p>Classes should not depend on other classes but on interfaces or abstract classes</p>
+                    <i>✅ DIP: Dependency Inversion Principle (SOLI<b>D</b>)</i>
+                    {% include "bien-pasbien-dip-js.html" -%}
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 class MessageService:
     def send(self, message):
         pass
@@ -413,11 +414,11 @@ class OrderManager:
         self.service = service
     def notify(self):
         self.service.send("Order confirmed")
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public interface IMessageService
 {
     void Send(string message);
@@ -441,50 +442,51 @@ public class OrderManager
         _service.Send("Order confirmed");
     }
 }
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="card pas-bien">
-                <h2>❌ Not Good</h2>
-                <p>Coding a feature now because you think it will be useful later</p>
-                <i>YAGNI: You Aren't Gonna Need It</i>
-                <div class="bloc-code">
-                    <span class="lang-label">JavaScript</span>
-                    <span class="lang-code">
+                <div class="card pas-bien">
+                    <h2>❌ Not Good</h2>
+                    <p>Coding a feature now because you think it will be useful later</p>
+                    <i>YAGNI: You Aren't Gonna Need It</i>
+                    <div class="bloc-code">
+                        <span class="lang-label">JavaScript</span>
+                        <span class="lang-code">
 function calculateTotal(price, tax, discount = 0, birthdayBonus = 0) {
     const total = price + (price * tax);
     // The other parameters serve no purpose for now
     return total;
 }
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">Python</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">Python</span>
+                        <span class="lang-code">
 def calculate_total(price, tax, discount=0, birthday_bonus=0):
     total = price + (price * tax)
     # The other parameters aren't used yet
     return total
-                    </span>
-                </div>
-                <div class="bloc-code">
-                    <span class="lang-label">C#</span>
-                    <span class="lang-code">
+                        </span>
+                    </div>
+                    <div class="bloc-code">
+                        <span class="lang-label">C#</span>
+                        <span class="lang-code">
 public decimal CalculateTotal(decimal price, decimal tax, decimal discount = 0, decimal birthdayBonus = 0)
 {
     decimal total = price + (price * tax);
     // The other parameters are unused for now
     return total;
 }
-                    </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="card modere">
+                    <h2>⚠️ Good in moderation</h2>
+                    <p>Using <a href="https://refactoring.guru/design-patterns">design patterns</a></p>
+                    <i>Useful when appropriate, to avoid in excess or just for looks</i>
+                    <img id="pattern" class="article-image" alt="Patterns" width="800" height="400">
                 </div>
             </div>
-            <div class="card modere">
-                <h2>⚠️ Good in moderation</h2>
-                <p>Using <a href="https://refactoring.guru/design-patterns">design patterns</a></p>
-                <i>Useful when appropriate, to avoid in excess or just for looks</i>
-                <img id="pattern" class="article-image" alt="Patterns" width="800" height="400">
-            </div>
-        </div>
+        </main>
     </body>
 </html>
