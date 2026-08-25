@@ -25,8 +25,44 @@ html.dark-mode #article-shape .author {
     color: initial !important;
 }
 
+@font-face {
+    font-family: 'Poppins Windows';
+    src: local('Arial');
+    size-adjust: 110.7%;
+    ascent-override: 105%;
+    descent-override: 35%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: 'Poppins Mac/iOS';
+    src: local('Helvetica Neue'), local('Helvetica');
+    size-adjust: 110.7%;
+    ascent-override: 105%;
+    descent-override: 35%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: 'Poppins Linux';
+    src: local('Liberation Sans');
+    size-adjust: 110.7%;
+    ascent-override: 105%;
+    descent-override: 35%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: 'Poppins Android';
+    src: local('Roboto');
+    size-adjust: 111.1%;
+    ascent-override: 105%;
+    descent-override: 35%;
+    line-gap-override: 0%;
+}
+
 body {
-    font-family: Poppins, sans-serif !important;
+    font-family: Poppins, 'Poppins Windows', 'Poppins Mac/iOS', 'Poppins Linux', 'Poppins Android', sans-serif !important;
     background-color: var(--background);
     color: var(--text-color);
 }
