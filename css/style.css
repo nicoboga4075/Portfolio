@@ -153,7 +153,6 @@ input[name="search-input"].highlight-flash {
 @keyframes pulse-blue {
     0%,
     100% {
-        color: var(--main);
         filter: drop-shadow(0 0 5px var(--main));
     }
 }
@@ -395,8 +394,8 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     top: 0;
     font-size: 28px;
     line-height: 1;
-    transform: translate(-50%, -50%);
-    transition: top 0.1s linear;
+    transform: translate(-50%, -50%) translateY(var(--car-offset, 0px));
+    transition: transform 0.1s linear;
     z-index: 2;
 }
 
