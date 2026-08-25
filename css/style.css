@@ -430,7 +430,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     top: 0;
     font-size: 28px;
     line-height: 1;
-    transform: translate(-50%, -50%) translateY(var(--car-offset, 0px));
+    transform: translate(-50%, -50%) translateY(var(--car-offset, 0));
     transition: transform 0.1s linear;
     z-index: 2;
 }

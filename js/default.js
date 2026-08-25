@@ -118,7 +118,6 @@ function initArticle() {
     loadImages('.icon.svg', 'svg');
     initTranslator();
     addHomeRedirect();
-    document.body.classList.add('read-zone');
     initCareerAnimation();
     fillCareerCounts();
 }

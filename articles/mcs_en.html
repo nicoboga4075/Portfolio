@@ -13,7 +13,7 @@ permalink: "articles/mcs_en.html"
         {% include "manifest.html" %}
         {% include "default.html" %}
     </head>
-    <body onload="initArticle()">
+    <body onload="initArticle()" class="read-zone">
         <div class="article-container">
             <div class="title-center">What is a MSC application ?</div>
             <div class="second-title">With the ubiquity of digital technology in our lives, protecting computer systems has become a necessity. But ensuring their safety is not just about putting protections in place initially : they need to be monitored and updated regularly to avoid incidents. <b>That’s where Maintenance in Security Condition (MSC, originally MCS in French) comes in, a process of reducing flaws that can be exploited by cyber attacks, commonly known as vulnerabilities</b>. Meanwhile, Maintenance in Operational Condition (MOC, originally MCO in French) aims to ensure that computer equipments such as servers or networks run properly and sustainably. In summary, MOC focuses on good technical running while MSC focuses on protection against external threats. Both are essential : an unresolved failure can leave a door open to attack and an unpatched vulnerability can take an entire system out of service. In this article, we’ll explore what a MSC application is, why it’s essential for any organization and how it can help make digital infrastructures more secure in the long run.</div>
@@ -25,7 +25,7 @@ permalink: "articles/mcs_en.html"
                 <li>the « DB » part, storing API data (database)</li>
             </ul>
             <p>It uses a <b>REST API</b> that sends responses in <b>JSON</b> and uses a secure protocol to authenticate users (for instance, OAuth2 with Python) and the <b>HTTP</b> (HyperText Transfer Protocol) to communicate. The application is based on a <b>client-server architecture</b> and linking to at least one database (for example, PostgreSQL or Elasticsearch). The server designates the entire API while the client represents the software that sends requests to the API. Primary objectives are <b>confidentiality</b>, <b>maintainability</b> but also a fine-grained management of the actions that users are entitled to perform (<b>CRUD</b> - creation, reading, update or removal of resources) and a setting up of the app from the database.</p>
-            <img id="mcs-design" class="article-image" alt="MCS Design">
+            <img id="mcs-design" class="article-image" alt="MCS Design" width="1733" height="768">
             <p>As a reminder, there are six architectural constraints which define a REST system :</p>
             <ol>
                 <li>
@@ -134,7 +134,7 @@ permalink: "articles/mcs_en.html"
                     <p>The CVSS (Common Vulnerability Scoring System) can be used to assess the <b>criticality</b> of vulnerabilities based on objective, measurable criteria such as access complexity or presence or absence of privileges. It establishes three scores per version (V2 and V3) : <b>the impact score, the exploitability score and the base score</b> that results from the other two. The above-mentioned scores are calculated from ratios defined for particular parameters such as access complexity and authentication. For more information, click on <a target="_blank" rel="noopener" href="https://nvd.nist.gov/vuln-metrics/cvss" aria-label="NVD vulnerability metrics">NVD vulnerability metrics</a>.</p>
                 </li>
             </ul>
-            <img id="mcs-example" class="article-image" alt="MCS Example">
+            <img id="mcs-example" class="article-image" alt="MCS Example" width="1739" height="307">
             <p>To conclude, a MSC application embodies a structured and proactive approach so as to anticipate and mitigate IT vulnerabilities. By combining continuous monitoring, decision automation and fine-grained rights management, it enables organizations to better control their digital environments. It is becoming more than just a tool, it is becoming a strategic lever, indispensable faced with the constant evolution of cyber attacks. In addition to reading, I recommend <a target="_blank" rel="noopener" href="https://www.bassetti-group.com/le-maintien-en-condition-de-securite-mcs-un-outil-pour-couvrir-les-risques-de-securite-du-systeme-dinformation-si-dans-la-duree" aria-label="Read this article for more on MCS">this article</a>.</p>
         </div>
     </body>

@@ -226,7 +226,7 @@ sup:hover {
     top: 0;
     font-size: 28px;
     line-height: 1;
-    transform: translate(-50%, -50%) translateY(var(--car-offset, 0px));
+    transform: translate(-50%, -50%) translateY(var(--car-offset, 0));
     transition: transform 0.1s linear;
     z-index: 2;
 }
@@ -277,6 +277,52 @@ sup:hover {
     transform: translateY(-50%);
 }
 
+/* Rotating box  */
+
+#mountain {
+    width: 100%;
+}
+
+#future {
+    margin: 30px;
+    place-items: center;
+}
+
+.box-rotate {
+    position: relative;
+    width: 300px;
+    aspect-ratio: 1;
+    animation: rotate 8s infinite alternate;
+    transform-style: preserve-3d;
+}
+
+.img-rotate {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.span-inside {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--white);
+    font-size: 20px;
+    text-shadow: 0 2px 5px var(--dark);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateX(20deg) rotateY(20deg);
+    }
+
+    to {
+        transform: rotateX(-15deg) rotateY(-40deg);
+    }
+}
+
 #qrcode {
     max-width: 15vw;
 }
@@ -293,9 +339,15 @@ sup:hover {
 }
 
 #mcs-design,
-#mcs-example {
+#mcs-example,
+#programming {
     max-width: 70vw;
     margin-bottom: 15px;
+}
+
+#pattern {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Project or Article */
