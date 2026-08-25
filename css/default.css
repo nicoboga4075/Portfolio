@@ -190,8 +190,8 @@ sup:hover {
     top: 0;
     font-size: 28px;
     line-height: 1;
-    transform: translate(-50%, -50%);
-    transition: top 0.1s linear;
+    transform: translate(-50%, -50%) translateY(var(--car-offset, 0px));
+    transition: transform 0.1s linear;
     z-index: 2;
 }
 

@@ -89,7 +89,7 @@ function initCareerAnimation() {
     const updateCarPosition = () => {
         const rect = container.getBoundingClientRect();
         const progress = Math.min(Math.max((window.innerHeight / 2 - rect.top) / rect.height, 0), 1);
-        car.style.top = `${progress * 100}%`;
+        car.style.setProperty('--car-offset', `${progress * rect.height}px`);
     };
     window.addEventListener('scroll', updateCarPosition, { passive: true });
     window.addEventListener('resize', updateCarPosition);
