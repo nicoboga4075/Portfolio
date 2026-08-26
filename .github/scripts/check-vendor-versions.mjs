@@ -1,6 +1,6 @@
-// Checks the third-party libraries vendored in js/ against their upstream registry,
-// since Dependabot only tracks npm package.json dependencies and these files are
-// manually downloaded (see .github/vendor-versions.json for the source of truth).
+// Checks the third-party libraries vendored in js/ and css/ against their upstream
+// registry, since Dependabot only tracks npm package.json dependencies and these
+// files are manually downloaded (see .github/vendor-versions.json for the source of truth).
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -55,7 +55,7 @@ for (const lib of manifest) {
   }
 }
 
-let body = "Automated weekly check of the third-party libraries vendored in `js/` " +
+let body = "Automated weekly check of the third-party libraries vendored in `js/` and `css/` " +
   "(not managed by Dependabot since they are not npm dependencies of this project).\n\n";
 
 if (outdated.length) {
