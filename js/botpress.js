@@ -1,3 +1,28 @@
+// The FAB's position (bottom:24px;right:24px) is hardcoded in Botpress's own
+// shadow-scoped stylesheet, not exposed as a CSS custom property, so
+// page-level CSS can never reach it - the shadow root itself is open, so we
+// inject our own override style directly into it instead, to move it away
+// from our own #contact-icon button in the same corner. Botpress rebuilds
+// the shadow root's contents at least once after its own init settles,
+// wiping out a one-shot injection, so a persistent observer keeps
+// re-applying the override style whenever it goes missing.
+const BP_FAB_OVERRIDE_ID = 'bp-fab-position-override';
+const BP_FAB_OVERRIDE_CSS = '.bpFabWrapper { bottom: auto !important; top: 10px !important; right: 20px !important; }';
+
+function watchBotpressFab(shadowRoot) {
+	function applyOverride() {
+		if (shadowRoot.getElementById(BP_FAB_OVERRIDE_ID)) {
+			return;
+		}
+		const style = document.createElement('style');
+		style.id = BP_FAB_OVERRIDE_ID;
+		style.textContent = BP_FAB_OVERRIDE_CSS;
+		shadowRoot.appendChild(style);
+	}
+	applyOverride();
+	new MutationObserver(applyOverride).observe(shadowRoot, { childList: true, subtree: true });
+}
+
 function loadBotpress() {
 	const script = document.createElement('script');
 	script.src = 'https://cdn.botpress.cloud/webchat/v3.7/inject.js';
@@ -12,6 +37,22 @@ function loadBotpress() {
 		const config = document.createElement('script');
 		config.src = 'https://files.bpcontent.cloud/2025/10/06/10/20251006102232-ANM8U0DA.js';
 		document.head.appendChild(config);
+
+		// #fab-root doesn't exist until the config script's own async init
+		// finishes, so watch for it instead of guessing a fixed delay.
+		const fabRoot = document.getElementById('fab-root');
+		if (fabRoot && fabRoot.shadowRoot) {
+			watchBotpressFab(fabRoot.shadowRoot);
+			return;
+		}
+		const observer = new MutationObserver(function () {
+			const root = document.getElementById('fab-root');
+			if (root && root.shadowRoot) {
+				observer.disconnect();
+				watchBotpressFab(root.shadowRoot);
+			}
+		});
+		observer.observe(document.body, { childList: true, subtree: true });
 	};
 	document.head.appendChild(script);
 }
