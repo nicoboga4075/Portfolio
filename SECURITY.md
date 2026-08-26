@@ -34,14 +34,14 @@ Versions are tracked in [`.github/vendor-versions.json`](.github/vendor-versions
 | 3.6.0   | jQuery Migrate        |
 | 0.0.14  | jQuery AnimateNumber  |
 | 1.4.1   | jQuery Easing         |
-| 1.1.0   | jQuery Magnific Popup |
+| 1.2.0   | jQuery Magnific Popup |
 | 0.6.2   | jQuery Stellar        |
-| 4.0.0   | jQuery Waypoints      |
-| 2.3.0   | Owl Carousel          |
+| 4.0.1   | jQuery Waypoints      |
+| 2.3.4   | Owl Carousel          |
 | > 2.0.0 | Aos                   |
-| 1.13.0  | Popper                |
+| 1.16.1  | Popper                |
 | 1.0.0   | Scrollax              |
-| 4.4.9   | Chart.js              |
+| 4.5.1   | Chart.js              |
 | 3.4.0   | Animate.css           | 
 
 ## Vulnerability Disclosure Log

@@ -13,12 +13,12 @@ The third-party libraries in `js/` and `css/` are downloaded manually (not npm d
 | jQuery Easing | 1.4.1 | [npm](https://www.npmjs.com/package/jquery.easing) |
 | jQuery AnimateNumber | 0.0.14 | [GitHub](https://github.com/aishek/jquery-animateNumber) |
 | Bootstrap | 4.3.1 | [npm](https://www.npmjs.com/package/bootstrap) |
-| Popper.js | 1.13.0 | [npm](https://www.npmjs.com/package/popper.js) |
-| Chart.js | 4.4.9 | [npm](https://www.npmjs.com/package/chart.js) |
-| Magnific Popup | 1.1.0 | [npm](https://www.npmjs.com/package/magnific-popup) |
+| Popper.js | 1.16.1 | [npm](https://www.npmjs.com/package/popper.js) |
+| Chart.js | 4.5.1 | [npm](https://www.npmjs.com/package/chart.js) |
+| Magnific Popup | 1.2.0 | [npm](https://www.npmjs.com/package/magnific-popup) |
 | Stellar.js | 0.6.2 | [npm](https://www.npmjs.com/package/jquery.stellar) |
-| Waypoints | 4.0.0 | [npm](https://www.npmjs.com/package/waypoints) |
-| Owl Carousel | 2.3.0 | [npm](https://www.npmjs.com/package/owl.carousel) |
+| Waypoints | 4.0.1 | [npm](https://www.npmjs.com/package/waypoints) |
+| Owl Carousel | 2.3.4 | [npm](https://www.npmjs.com/package/owl.carousel) |
 | AOS | 2.x | [npm](https://www.npmjs.com/package/aos) |
 | Scrollax | 1.0.0 | [npm](https://www.npmjs.com/package/scrollax) |
 | Animate.css | 3.4.0 | [npm](https://www.npmjs.com/package/animate.css) |
