@@ -559,8 +559,8 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 }
 
 #inpi-process {
-    width: 100%;
-    min-width: 20%;
+    max-width: 100%;
+    height: auto;
     display: block;
     margin: auto;
     margin-top: 40px;
