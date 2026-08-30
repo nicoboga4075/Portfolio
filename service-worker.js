@@ -37,8 +37,13 @@ self.addEventListener('fetch', event => {
         return;
     }
 
+    // JS/CSS can carry security patches (vendored library updates), so a
+    // stale cached copy shouldn't linger past one deploy the way it can
+    // with stale-while-revalidate - treat them like pages instead.
+    const isScriptOrStyle = /\.(js|css)$/.test(url.pathname);
+
     event.respondWith(
-        request.mode === 'navigate' ? networkFirst(request) : staleWhileRevalidate(request)
+        request.mode === 'navigate' || isScriptOrStyle ? networkFirst(request) : staleWhileRevalidate(request)
     );
 });
 
@@ -65,8 +70,8 @@ async function networkFirst(request) {
     }
 }
 
-// Static assets: serve the cached copy instantly for speed, then refresh
-// it in the background so the next visit picks up any change.
+// Images, fonts, etc.: serve the cached copy instantly for speed, then
+// refresh it in the background so the next visit picks up any change.
 async function staleWhileRevalidate(request) {
     const cache = await caches.open(CACHE_NAME);
     const cached = await cache.match(request);
