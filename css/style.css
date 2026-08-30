@@ -12,6 +12,40 @@ html.dark-mode {
     --text-color: var(--white);
 }
 
+#ftco-loader {
+    position: fixed;
+    width: 96px;
+    height: 96px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255 255 255 / 90%);
+    box-shadow: 0 24px 64px rgb(0 0 0 / 24%);
+    border-radius: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-out, visibility 0s linear 0.2s;
+    z-index: 1000;
+}
+
+#ftco-loader.fullscreen {
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    background-color: #fff;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#ftco-loader.show {
+    transition: opacity 0.4s ease-out, visibility 0s linear 0s;
+    visibility: visible;
+    opacity: 1;
+}
+
 #ftco-loader .spinner {
     position: absolute;
     left: calc(50% - 24px);
