@@ -1227,7 +1227,10 @@ function initIndexPage(langPage) {
 
         $('.nav-link').each(function (index, navLink) {
             navLink.href = `#${appAllSections[index]}`;
-            appScrollSections.push($($(navLink).attr('href')));
+            const scrollTarget = $($(navLink).attr('href'));
+            if (scrollTarget.length) {
+                appScrollSections.push(scrollTarget);
+            }
             navLink.addEventListener('click', function (event) {
                 event.preventDefault();
                 // Check if the link is in subsections
