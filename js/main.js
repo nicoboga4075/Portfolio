@@ -10,7 +10,7 @@ const city = 'Paris';
 const certifsCount = 5;
 const projectsCount = 20;
 const experiencesCount = 6;
-const countriesCount = 14;
+const countriesCount = 15;
 const dateBirth = '1997-11-19';
 
 const appDefaultRoutes = {
