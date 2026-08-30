@@ -743,7 +743,8 @@ function initProfile() {
     });
     $('#cdiCount').text(cdiCount);
     $('#internshipsCount').text(internshipsCount);
-    $('#experiences .resume-wrap a:first').addClass('victory');
+    $('#experiences .resume-wrap .date:contains("Today"), #experiences .resume-wrap .date:contains("Aujourd\'hui")')
+        .closest('.resume-wrap').find('a:first').addClass('victory');
     $('#certifsCount').attr('data-number', certifsCount);
     $('#projectsCount').attr('data-number', projectsCount);
     $('#experiencesCount').attr('data-number', experiencesCount);

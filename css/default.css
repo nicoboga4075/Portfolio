@@ -325,6 +325,7 @@ sup:hover {
 
 #qrcode {
     max-width: 15vw;
+    height: auto;
 }
 
 #inpi-process {
@@ -342,6 +343,7 @@ sup:hover {
 #mcs-example,
 #programming {
     max-width: 70vw;
+    height: auto;
     margin-bottom: 15px;
 }
 

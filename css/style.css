@@ -555,6 +555,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 
 #qrcode {
     max-width: 15vw;
+    height: auto;
 }
 
 #inpi-process {
@@ -572,6 +573,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 #mcs-example,
 #programming {
     max-width: 70vw;
+    height: auto;
     margin-bottom: 15px;
 }
 
