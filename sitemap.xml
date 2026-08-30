@@ -282,6 +282,79 @@
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
+    <!-- Article pages -->
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=presentation_en.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=presentation_fr.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=mcs_en.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=mcs_fr.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=bien-pasbien_en.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=bien-pasbien_fr.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=du-voc-de-dev_en.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=du-voc-de-dev_fr.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=sur-quels-criteres-choisir-une-agence-web_en.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=sur-quels-criteres-choisir-une-agence-web_fr.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=5-conseils-pour-un-nom-de-marque-parfait_en.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://nicoboga.netlify.app/.netlify/functions/article?filename=5-conseils-pour-un-nom-de-marque-parfait_fr.html</loc>
+        <lastmod>2026-08-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
     <!-- 404 page -->
     <url>
         <loc>https://nicoboga.netlify.app/404</loc>

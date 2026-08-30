@@ -7,10 +7,10 @@ import { defineConfig } from "eslint/config";
 const vendorJs = [
   "js/aos.js",
   "js/bootstrap.min.js",
-  "js/chart.js",
-  "js/jquery-migrate-3.0.1.min.js",
+  "js/chart.umd.min.js",
+  "js/jquery-migrate.min.js",
   "js/jquery.animateNumber.min.js",
-  "js/jquery.easing.1.3.js",
+  "js/jquery.easing.min.js",
   "js/jquery.magnific-popup.min.js",
   "js/jquery.min.js",
   "js/jquery.stellar.min.js",

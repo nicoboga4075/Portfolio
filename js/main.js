@@ -778,7 +778,7 @@ function loadChartJs() {
     if (!loadChartJs.promise) {
         loadChartJs.promise = new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = 'js/chart.js';
+            script.src = 'js/chart.umd.min.js';
             script.onload = resolve;
             script.onerror = reject;
             document.head.appendChild(script);

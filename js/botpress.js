@@ -41,13 +41,13 @@ function loadBotpress() {
 		// #fab-root doesn't exist until the config script's own async init
 		// finishes, so watch for it instead of guessing a fixed delay.
 		const fabRoot = document.getElementById('fab-root');
-		if (fabRoot && fabRoot.shadowRoot) {
+		if (fabRoot?.shadowRoot) {
 			watchBotpressFab(fabRoot.shadowRoot);
 			return;
 		}
 		const observer = new MutationObserver(function () {
 			const root = document.getElementById('fab-root');
-			if (root && root.shadowRoot) {
+			if (root?.shadowRoot) {
 				observer.disconnect();
 				watchBotpressFab(root.shadowRoot);
 			}

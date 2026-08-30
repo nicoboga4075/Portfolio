@@ -1,0 +1,32 @@
+name: Vendor library version check
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # Every Monday at 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+      - name: Check vendor library versions
+        id: check
+        run: node .github/scripts/check-vendor-versions.mjs
+      - name: Open or update tracking issue
+        if: steps.check.outputs.has_updates == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          existing=$(gh issue list --search "Vendor library updates available in:title" --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --body-file vendor-report.md
+          else
+            gh issue create --title "Vendor library updates available" --body-file vendor-report.md --label "dependencies"
+          fi
