@@ -44,6 +44,15 @@ Versions are tracked in [`.github/vendor-versions.json`](.github/vendor-versions
 | 4.5.1   | Chart.js              |
 | 3.4.0   | Animate.css           | 
 
+### Major versions held back on purpose
+
+jQuery, jQuery Migrate, Bootstrap and Animate.css are intentionally pinned below their latest major release. None of this is a security risk on its own (unlike the CVEs below, which are fixed) - it's a stability/compatibility trade-off that needs dedicated testing before it can be lifted:
+
+- **jQuery 3.7.1 → 4.0.0**: jQuery 4 drops legacy event API methods (`.bind()`/`.unbind()`/`.delegate()`/`.undelegate()`) and other old helpers (`$.isFunction`, `$.trim`, ...) that some vendored plugins here (Stellar.js, Magnific Popup, Owl Carousel, jQuery Easing, jQuery AnimateNumber - all written 2013-2017) may still call internally. jQuery Migrate exists to bridge exactly this gap, but Migrate 3.6.0 (pinned to jQuery 3.x) covers more of these than Migrate 4.x does, so jumping both to 4.x doesn't fully remove the risk.
+- **jQuery Migrate 3.6.0 → 4.0.2**: follows jQuery's version, not an independent choice - it only makes sense to bump once jQuery itself moves to 4.x.
+- **Bootstrap 4.3.1 → 5.3.8**: Bootstrap 5 drops jQuery entirely and replaces Popper.js v1 (`js/popper.min.js`, used here) with the incompatible `@popperjs/core` v2 API, breaking every dropdown/tooltip/popover. It also renames utility classes (`.ml-*`/`.mr-*` → `.ms-*`/`.me-*`, `.text-left`/`.text-right` → `.text-start`/`.text-end`) and namespaces data attributes (`data-toggle` → `data-bs-toggle`) used throughout the site's HTML, not just in the vendored JS - this would require rewriting markup across every page, not just swapping a file.
+- **Animate.css 3.4.0 → 4.1.1**: v4 prefixes every class with `animate__` (`.fadeInUp` → `.animate__fadeInUp`), while `main.js` adds unprefixed classes like `fadeInUp`/`ftco-animated` dynamically on scroll. The break would be silent - no JS error, animations just stop firing.
+
 ## Vulnerability Disclosure Log
 
 | Date             | Description                   | Criticity | Status                             | Acknowledgement    |

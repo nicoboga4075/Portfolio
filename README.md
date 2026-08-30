@@ -23,5 +23,7 @@ The third-party libraries in `js/` and `css/` are downloaded manually (not npm d
 | Scrollax | 1.0.0 | [npm](https://www.npmjs.com/package/scrollax) |
 | Animate.css | 3.4.0 | [npm](https://www.npmjs.com/package/animate.css) |
 
+jQuery, jQuery Migrate, Bootstrap and Animate.css are intentionally kept below their latest major release - see [SECURITY.md](SECURITY.md#major-versions-held-back-on-purpose) for why each one is pinned.
+
 ### 📄 License
 This project is licensed under [MIT License](LICENSE).
