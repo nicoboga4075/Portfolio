@@ -501,6 +501,59 @@ sup:hover {
     font-size: 13px;
 }
 
+/* FAQ */
+
+.accordion > .card {
+    position: relative;
+}
+
+.accordion > .card:first-of-type {
+    border-radius: 0;
+}
+
+.accordion > .card .card-header {
+    padding: 0;
+}
+
+.accordion .card-header input {
+    display: none;
+}
+
+.accordion .card-header label {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.accordion .card-header label::after {
+    content: '+';
+    font-size: 20px;
+    transition: transform 0.3s;
+}
+
+.accordion .card:has(.card-header input:checked) .card-header label::after {
+    transform: rotate(45deg);
+}
+
+.accordion .card-body {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    font-size: 0.95rem;
+    color: var(--dark);
+}
+
+.accordion .card:has(.card-header input:checked) .card-body {
+    max-height: 200px;
+    padding: 15px 20px;
+    overflow: auto;
+}
+
 /* Badges */
 
 .badge {
