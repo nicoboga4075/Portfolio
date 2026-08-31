@@ -74,7 +74,7 @@
   "dependencies": {
     "auto-changelog": "^2.6.0",
     "prettier": "^3.9.6",
-    "terser": "^5.50.0",
+    "terser": "^5.51.2",
     "toml": "^5.0.0"
   },
   "devDependencies": {
