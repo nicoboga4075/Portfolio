@@ -361,6 +361,18 @@ sup:hover {
     margin: 2rem auto;
 }
 
+@media (max-width: 1199.98px) {
+    .read-zone {
+        max-width: 75%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .read-zone {
+        max-width: 90%;
+    }
+}
+
 .read-title {
     display: flex;
     align-items: center;
