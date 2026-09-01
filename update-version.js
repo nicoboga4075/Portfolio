@@ -15,7 +15,11 @@ if (!version) {
 const changelogPath = path.join(__dirname, 'CHANGELOG.md');
 let changelog = fs.readFileSync(changelogPath, 'utf8');
 const escapedVersion = version.replaceAll('.', String.raw`\.`);
-const regex = new RegExp(String.raw`(#### v${escapedVersion}\r\n\r\n> )[^\r\n]*`);
-changelog = changelog.replace(regex,`$1${releaseDate}`);
+const regex = new RegExp(String.raw`(#### v${escapedVersion}\r?\n\r?\n> )[^\r\n]*`);
+if (!regex.test(changelog)) {
+  console.error(`No "#### v${version}" release heading found in CHANGELOG.md`);
+  process.exit(1);
+}
+changelog = changelog.replace(regex, `$1${releaseDate}`);
 fs.writeFileSync(changelogPath, changelog);
 console.warn(`CHANGELOG.md updated -> v${version} / ${releaseDate}`);

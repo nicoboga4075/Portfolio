@@ -3,15 +3,15 @@
                     <span class="lang-code">
 function divideNumbers(dividend, divisor) {
     try {
-            if (divisor === 0) {
-                throw new Error("Division by zero is not allowed");
-            }
-            const result = dividend / divisor;
-            return result;
+        if (divisor === 0) {
+            throw new Error("Division by zero is not allowed");
+        }
+        return dividend / divisor;
     } catch (error) {
-        return null;
+        console.error(error.message);
+        throw error;
     } finally {
-        console.log("Request succeeded");
+        console.log("Cleanup complete");
     }
 }
                     </span>
@@ -22,13 +22,13 @@ function divideNumbers(dividend, divisor) {
 def divide_numbers(dividend, divisor):
     try:
         if divisor == 0:
-           raise ValueError("Division by zero is not allowed")
-        result = dividend / divisor
-        return result
+            raise ValueError("Division by zero is not allowed")
+        return dividend / divisor
     except ValueError as error:
-        return None
+        print(error)
+        raise
     finally:
-        print("Request succeeded")
+        print("Cleanup complete")
                     </span>
                 </div>
                 <div class="bloc-code">
@@ -40,18 +40,18 @@ static double DivideNumbers(double dividend, double divisor)
     {
         if (divisor == 0)
         {
-        throw new ArgumentException("Division by zero is not allowed");
+            throw new ArgumentException("Division by zero is not allowed");
         }
-        double result = dividend / divisor;
-        return result;
+        return dividend / divisor;
     }
     catch (ArgumentException error)
     {
-        return double.NaN;
+        Console.Error.WriteLine(error.Message);
+        throw;
     }
     finally
     {
-        Console.WriteLine("Request succeeded");
+        Console.WriteLine("Cleanup complete");
     }
 }
                     </span>
