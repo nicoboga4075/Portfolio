@@ -39,7 +39,8 @@ export default async function handlerArticle(req: Request, context: Context): Pr
             const fileContent = await fs.readFile(previewFilePath, "utf-8");
             return new Response(fileContent, {
                 headers: {
-                    "Content-Type": "text/html"
+                    "Content-Type": "text/html",
+                    "X-Content-Type-Options": "nosniff"
                 },
             });
         } catch {
@@ -50,7 +51,8 @@ export default async function handlerArticle(req: Request, context: Context): Pr
             const fileContent = await fs.readFile(filePath, "utf-8");
             return new Response(fileContent, {
                 headers: {
-                    "Content-Type": "text/html"
+                    "Content-Type": "text/html",
+                    "X-Content-Type-Options": "nosniff"
                 },
             });
         } catch {
@@ -60,7 +62,8 @@ export default async function handlerArticle(req: Request, context: Context): Pr
         console.error(`[${context.requestId}]`, error);
         return new Response(
             JSON.stringify({
-                error: (error as Error).message
+                error: "Internal error",
+                requestId: context.requestId
             }), {
                 status: 500,
                 headers: {

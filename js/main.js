@@ -1551,9 +1551,22 @@ function initBlogPage(langPage) {
                         const footer = doc.querySelector('.footer');
                         if (footer) footer.remove();
 
-                        // Remove potential XSS vectors
-                        const dangerousTags = doc.querySelectorAll('script, iframe, object, embed, link, style, meta');
-                        dangerousTags.forEach(el => el.remove());
+                        // Strip elements and attributes that could execute script.
+                        // Article HTML is first-party - the function validates the
+                        // filename against a strict allowlist - so this is defense in depth.
+                        doc.querySelectorAll('script, iframe, object, embed, link, style, meta').forEach(el => el.remove());
+
+                        doc.querySelectorAll('*').forEach(el => {
+                            [...el.attributes].forEach(attr => {
+                                const name = attr.name.toLowerCase();
+                                const value = attr.value.replace(/\s+/g, '').toLowerCase();
+                                const isUrlAttr = ['src', 'xlink:href', 'action', 'formaction'].includes(name);
+                                const isDangerousUrl = /^(javascript|data|vbscript):/.test(value);
+                                if (name.startsWith('on') || name === 'srcdoc' || (isUrlAttr && isDangerousUrl)) {
+                                    el.removeAttribute(attr.name);
+                                }
+                            });
+                        });
 
                         // Sanitize anchor hrefs to prevent open redirects
                         const links = doc.querySelectorAll('a[href]');
@@ -1714,14 +1727,17 @@ function gisLoaded() {
 }
 
 async function sendEmail(senderName, subject, message) {
+    // Strip CR/LF from header fields to prevent email header injection
+    const safeSubject = String(subject).replace(/[\r\n]+/g, ' ');
+    const safeSenderName = String(senderName).replace(/[\r\n]+/g, ' ');
     const emailString = [
         'From: me',
         'To: nicolas.bogalheiro@gmail.com',
-        `Subject: ${subject}`,
+        `Subject: ${safeSubject}`,
         '',
         `${message}`,
         '----------------------------------------',
-        `Message sent by ${senderName} (${appName})`,
+        `Message sent by ${safeSenderName} (${appName})`,
     ].join('\n');
     const successMessage = getMessage('success-generic');
     const errorMessage = getMessage('error-generic');
@@ -1754,7 +1770,7 @@ async function sendEmail(senderName, subject, message) {
             }
         } else {
             callbackForm.text(errorMessage);
-            localStorage.clear();
+            localStorage.removeItem('tokenAPI');
         }
     }
 
@@ -1784,7 +1800,7 @@ async function sendEmail(senderName, subject, message) {
         } catch (error) {
             console.error(error);
             callbackForm.text(errorMessage);
-            localStorage.clear();
+            localStorage.removeItem('tokenAPI');
         }
     } else {
         callbackForm.text('');
@@ -1797,7 +1813,7 @@ async function sendEmail(senderName, subject, message) {
         } catch (error) {
             console.error(error);
             callbackForm.text(errorMessage);
-            localStorage.clear();
+            localStorage.removeItem('tokenAPI');
         }
     }
 }
