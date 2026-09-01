@@ -296,12 +296,16 @@ input[name="search-input"].highlight-flash {
     font-size: 16px;
     font-weight: 400;
     max-width: 34rem;
-    margin: 0 auto;
+    margin-inline: auto;
     color: var(--text-color);
     opacity: 0.7;
 }
 
 /* About Section */
+
+.ftco-about ul.about-info li span:first-child {
+    margin-right: 0.5rem;
+}
 
 .profile-photo {
     background-image: url("/images/profile.webp");
