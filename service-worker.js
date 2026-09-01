@@ -43,7 +43,7 @@ self.addEventListener('fetch', event => {
     const isScriptOrStyle = /\.(js|css)$/.test(url.pathname);
 
     event.respondWith(
-        request.mode === 'navigate' || isScriptOrStyle ? networkFirst(request) : staleWhileRevalidate(request)
+        request.mode === 'navigate' || isScriptOrStyle ? networkFirst(event) : staleWhileRevalidate(event)
     );
 });
 
@@ -55,14 +55,30 @@ function fetchFresh(request) {
     return fetch(request, { cache: 'reload' });
 }
 
+// Write to the cache under the event's extended lifetime so the SW isn't
+// killed mid-write, and swallow put() rejections (206 Partial Content from
+// <video> Range requests, QuotaExceededError) so they can't surface as
+// unhandled rejections.
+function cachePut(event, request, response) {
+    const done = caches.open(CACHE_NAME)
+        .then(cache => cache.put(request, response))
+        .catch(() => {});
+    event.waitUntil(done);
+}
+
 // Pages: try the network first so visitors online always get the latest
-// content; fall back to a previously cached copy only when offline.
-async function networkFirst(request) {
+// content; fall back to a previously cached copy when offline or when the
+// origin is reachable but failing (5xx / 503 during a deploy).
+async function networkFirst(event) {
+    const { request } = event;
     try {
         const response = await fetchFresh(request);
         if (response.ok) {
-            const cache = await caches.open(CACHE_NAME);
-            cache.put(request, response.clone());
+            cachePut(event, request, response.clone());
+            return response;
+        }
+        if (response.status >= 500) {
+            return (await caches.match(request)) ?? response;
         }
         return response;
     } catch {
@@ -72,16 +88,21 @@ async function networkFirst(request) {
 
 // Images, fonts, etc.: serve the cached copy instantly for speed, then
 // refresh it in the background so the next visit picks up any change.
-async function staleWhileRevalidate(request) {
-    const cache = await caches.open(CACHE_NAME);
-    const cached = await cache.match(request);
+async function staleWhileRevalidate(event) {
+    const { request } = event;
+    const cached = await caches.match(request);
     const update = fetchFresh(request)
         .then(response => {
             if (response.ok) {
-                cache.put(request, response.clone());
+                cachePut(event, request, response.clone());
             }
             return response;
         })
         .catch(() => cached ?? Response.error());
-    return cached ?? update;
+    if (cached) {
+        // Keep the SW alive until the background refresh finishes.
+        event.waitUntil(update.catch(() => {}));
+        return cached;
+    }
+    return update;
 }
