@@ -297,6 +297,7 @@ input[name="search-input"].highlight-flash {
     font-weight: 400;
     max-width: 34rem;
     margin-inline: auto;
+    margin-bottom: 0;
     color: var(--text-color);
     opacity: 0.7;
 }
