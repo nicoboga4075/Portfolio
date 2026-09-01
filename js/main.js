@@ -975,7 +975,7 @@ function createCircularChart({
         const numbers = document.querySelectorAll('.number');
         if (!numbers.length) return;
         const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const formatter = new Intl.NumberFormat(getCurrentLanguage());
+        const formatter = new Intl.NumberFormat(getCurrentLanguage() || 'en');
         const animate = function (el) {
             const target = Number(el.dataset.number) || 0;
             if (reduce) {

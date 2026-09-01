@@ -516,7 +516,10 @@ sup:hover {
 }
 
 .accordion .card-header input {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
 }
 
 .accordion .card-header label {
@@ -526,7 +529,13 @@ sup:hover {
     margin-bottom: 0;
     cursor: pointer;
     font-weight: 500;
+    color: var(--dark);
     transition: background 0.2s;
+}
+
+.accordion .card-header input:focus-visible + label {
+    outline: 2px solid var(--dark);
+    outline-offset: -2px;
 }
 
 .accordion .card-header label::after {
