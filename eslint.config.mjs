@@ -9,7 +9,6 @@ const vendorJs = [
   "js/bootstrap.min.js",
   "js/chart.umd.min.js",
   "js/jquery-migrate.min.js",
-  "js/jquery.animateNumber.min.js",
   "js/jquery.easing.min.js",
   "js/jquery.magnific-popup.min.js",
   "js/jquery.min.js",

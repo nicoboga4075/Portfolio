@@ -969,18 +969,39 @@ function createCircularChart({
     });
 
     const counter = function () {
-        $('.ftco-about, .ftco-counter').waypoint(function (direction) {
-            if (direction === 'down' && !$(this.element).hasClass('ftco-animated')) {
-                const comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',');
-                $('.number').each(function () {
-                    $(this).animateNumber({
-                        number: $(this).data('number'),
-                        numberStep: comma_separator_number_step
-                    }, 7000);
-                });
+        const numbers = document.querySelectorAll('.number');
+        if (!numbers.length) return;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const formatter = new Intl.NumberFormat(getCurrentLanguage());
+        const animate = function (el) {
+            const target = Number(el.dataset.number) || 0;
+            if (reduce) {
+                el.textContent = formatter.format(target);
+                return;
             }
-        }, {
-            offset: '95%'
+            const duration = 2000;
+            const start = performance.now();
+            const step = function (now) {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+                el.textContent = formatter.format(Math.round(target * eased));
+                if (progress < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        };
+        // rootMargin trims 5% off the viewport bottom so the count starts as the
+        // element reaches 95% of the viewport height, matching the old Waypoints
+        // `offset: '95%'`.
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    animate(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '0px 0px -5% 0px' });
+        numbers.forEach(function (el) {
+            observer.observe(el);
         });
     };
     counter();

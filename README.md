@@ -11,7 +11,6 @@ The third-party libraries in `js/` and `css/` are downloaded manually (not npm d
 | jQuery | 3.7.1 | [npm](https://www.npmjs.com/package/jquery) |
 | jQuery Migrate | 3.6.0 | [npm](https://www.npmjs.com/package/jquery-migrate) |
 | jQuery Easing | 1.4.1 | [npm](https://www.npmjs.com/package/jquery.easing) |
-| jQuery AnimateNumber | 0.0.14 | [GitHub](https://github.com/aishek/jquery-animateNumber) |
 | Bootstrap | 4.3.1 | [npm](https://www.npmjs.com/package/bootstrap) |
 | Popper.js | 1.16.1 | [npm](https://www.npmjs.com/package/popper.js) |
 | Chart.js | 4.5.1 | [npm](https://www.npmjs.com/package/chart.js) |
