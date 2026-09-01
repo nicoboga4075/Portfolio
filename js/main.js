@@ -108,7 +108,10 @@ const appServices = [
     'https://github.com/nicoboga4075',
     'https://www.lumapps.com/fr/digital-workplace/outils-transformation-digitale',
     appProjectSection,
-    'https://www.linkedin.com/pulse/fundamentals-support-structures-david-apollon'
+    'https://www.linkedin.com/pulse/fundamentals-support-structures-david-apollon',
+    'https://www.ibm.com/fr-fr/topics/ai-automation',
+    'https://cyber.gouv.fr/',
+    appBlogSection
 ];
 
 const appArticles = [{
