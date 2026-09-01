@@ -5,7 +5,6 @@ import { defineConfig } from "eslint/config";
 
 // Third-party bundles in js/, never linted (minified/vendored, not ours to fix)
 const vendorJs = [
-  "js/aos.js",
   "js/bootstrap.min.js",
   "js/chart.umd.min.js",
   "js/jquery-migrate.min.js",
@@ -40,8 +39,7 @@ export default defineConfig([
 		bootstrap: "readonly",
 		google: "readonly",
 		gapi: "readonly",
-		Chart: "readonly",
-		AOS: "readonly"
+		Chart: "readonly"
       },
     },
 	rules : {

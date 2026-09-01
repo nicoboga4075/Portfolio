@@ -18,7 +18,6 @@ The third-party libraries in `js/` and `css/` are downloaded manually (not npm d
 | Stellar.js | 0.6.2 | [npm](https://www.npmjs.com/package/jquery.stellar) |
 | Waypoints | 4.0.1 | [npm](https://www.npmjs.com/package/waypoints) |
 | Owl Carousel | 2.3.4 | [npm](https://www.npmjs.com/package/owl.carousel) |
-| AOS | 2.3.4 | [npm](https://www.npmjs.com/package/aos) |
 | Scrollax | 1.0.0 | [npm](https://www.npmjs.com/package/scrollax) |
 | Animate.css | 3.4.0 | [npm](https://www.npmjs.com/package/animate.css) |
 

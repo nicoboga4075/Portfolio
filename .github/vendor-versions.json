@@ -9,7 +9,6 @@
   { "name": "Stellar.js", "file": "js/jquery.stellar.min.js", "source": "npm", "npm": "jquery.stellar", "version": "0.6.2" },
   { "name": "Waypoints", "file": "js/jquery.waypoints.min.js", "source": "npm", "npm": "waypoints", "version": "4.0.1" },
   { "name": "Owl Carousel", "file": "js/owl.carousel.min.js", "source": "npm", "npm": "owl.carousel", "version": "2.3.4" },
-  { "name": "AOS", "file": "js/aos.js", "source": "npm", "npm": "aos", "version": "2.3.4" },
   { "name": "Scrollax", "file": "js/scrollax.min.js", "source": "npm", "npm": "scrollax", "version": "1.0.0" },
   { "name": "Animate.css", "file": "css/animate.min.css", "source": "npm", "npm": "animate.css", "version": "3.4.0" }
 ]

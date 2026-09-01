@@ -1141,11 +1141,6 @@ function createCircularChart({
         this.tooltip = new bootstrap.Tooltip(this);
     });
 
-    AOS.init({
-        duration: 800,
-        easing: 'linear'
-    });
-
     initProfile();
 
 })(jQuery);

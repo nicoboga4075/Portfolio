@@ -6,7 +6,6 @@
     ".eleventy/**",
     "reports/**",
     "css/animate.min.css",
-    "css/aos.css",
     "css/bootstrap.min.css",
     "css/flaticon.css",
     "css/icomoon.css",

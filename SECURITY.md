@@ -37,7 +37,6 @@ Versions are tracked in [`.github/vendor-versions.json`](.github/vendor-versions
 | 0.6.2   | jQuery Stellar        |
 | 4.0.1   | jQuery Waypoints      |
 | 2.3.4   | Owl Carousel          |
-| 2.3.4   | Aos                   |
 | 1.16.1  | Popper                |
 | 1.0.0   | Scrollax              |
 | 4.5.1   | Chart.js              |
