@@ -77,7 +77,11 @@ if (!isMainThread) {
         }
         const files = fs.readdirSync(jsDir).filter(file => file.endsWith('.js'));
         const filePaths = files.map(file => path.join(jsDir, file));
-        const concurrency = Math.min(os.cpus().length, filePaths.length);
+        // os.cpus() returning [] is a documented occurrence in some
+        // container/VM environments; fall back to 1 so a non-empty
+        // filePaths still gets a worker instead of silently minifying
+        // nothing.
+        const concurrency = Math.min(os.cpus().length || 1, filePaths.length);
         await minifyInParallel(filePaths, concurrency);
     }
 

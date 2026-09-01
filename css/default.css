@@ -505,10 +505,16 @@ sup:hover {
 
 .accordion > .card {
     position: relative;
+    margin: 0.5rem 0;
+    border-radius: 0;
+    transition: none;
 }
 
-.accordion > .card:first-of-type {
-    border-radius: 0;
+/* Neutralize .card's hover-lift: it reads as a stray jump on a row
+   you're about to click, not a floating card. */
+.accordion > .card:hover {
+    transform: none;
+    box-shadow: 0 0 4px rgb(0 0 0 / 10%);
 }
 
 .accordion > .card .card-header {
@@ -548,19 +554,20 @@ sup:hover {
     transform: rotate(45deg);
 }
 
+/* Definitions run well past 1000 characters in du-voc-de-dev, so a fixed
+   max-height either clips them into a nested scrollbar or (sized large
+   enough to avoid that) makes the open/close transition snap instead of
+   animate. Toggle display instead of animating height. */
 .accordion .card-body {
-    max-height: 0;
-    overflow: hidden;
+    display: none;
     padding: 0 20px;
-    transition: max-height 0.3s ease, padding 0.3s ease;
     font-size: 0.95rem;
     color: var(--dark);
 }
 
 .accordion .card:has(.card-header input:checked) .card-body {
-    max-height: 200px;
+    display: block;
     padding: 15px 20px;
-    overflow: auto;
 }
 
 /* Badges */
