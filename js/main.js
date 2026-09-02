@@ -3,8 +3,6 @@ const appRoot = '/en';
 const appLanguages = new Set(['en', 'fr']);
 
 const xp = 5;
-const cdiCount = 4;
-const internshipsCount = 3;
 const email = 'nicolas.bogalheiro@gmail.com';
 const city = 'Paris';
 const certifsCount = 5;
@@ -12,18 +10,6 @@ const projectsCount = 20;
 const experiencesCount = 6;
 const countriesCount = 15;
 const dateBirth = '1997-11-19';
-
-const appDefaultRoutes = {
-    "policy": "/{lng}/policy",
-    "terms": "/{lng}/terms",
-    "error404": "/404"
-};
-
-const appRoutes = {
-    "index": "/{lng}",
-    "blog": "/{lng}/blog",
-    ...appDefaultRoutes
-};
 
 const appHomeSection = "home-section";
 const appProjectSection = "projects-section";
@@ -564,10 +550,6 @@ function convertDate(dateString, lang, target = 'iso') {
     }), lang);
 }
 
-function getHashFromSession() {
-    return sessionStorage.getItem('currentHash');
-}
-
 function saveHashToSession(hash) {
     sessionStorage.setItem('currentHash', hash);
 }
@@ -598,18 +580,6 @@ function computeAge(englishDate) {
     const d = new Date(englishDate);
     const today = new Date();
     return today.getFullYear() - d.getFullYear() - (today < new Date(today.getFullYear(), d.getMonth(), d.getDate()) ? 1 : 0);
-}
-
-function getCurrentRoute() {
-    const path = window.location.pathname;
-    return Object.keys(appRoutes).find(key => {
-        const pattern = '^' + appRoutes[key].replace('{lng}', '[a-z]{2}') + '/?$';
-        return new RegExp(pattern).test(path);
-    }) || 'error404';
-}
-
-function getCurrentLanguage() {
-    return document.documentElement.lang;
 }
 
 function toggleVisibility(selector, visibleClass = 'd-flex') {
@@ -655,20 +625,6 @@ function addRedirectById(elementId) {
             sessionStorage.clear(); // Reset hash for all other links
         });
     }
-}
-
-function loadImages(selector, extension, one = false) {
-    const imgs = document.querySelectorAll(`${selector}`);
-    Array.from(imgs).some((el, index) => {
-        const locationImg = `images/${el.id}.${extension}`;
-        if (el.tagName.toLowerCase() === 'img') {
-            el.src = locationImg;
-        } else {
-            el.style.backgroundImage = `url(${locationImg})`;
-        }
-        // If first iteration, return true to stop further iteration
-        return index === 0 && one;
-    });
 }
 
 function loadBingo() {
@@ -1144,22 +1100,6 @@ function createCircularChart({
     initProfile();
 
 })(jQuery);
-
-function initCareerAnimation() {
-    const container = document.querySelector('.animation-container');
-    const car = document.getElementById('car');
-    if (!container || !car) {
-        return;
-    }
-    const updateCarPosition = () => {
-        const rect = container.getBoundingClientRect();
-        const progress = Math.min(Math.max((window.innerHeight / 2 - rect.top) / rect.height, 0), 1);
-        car.style.setProperty('--car-offset', `${progress * rect.height}px`);
-    };
-    window.addEventListener('scroll', updateCarPosition, { passive: true });
-    window.addEventListener('resize', updateCarPosition);
-    updateCarPosition();
-}
 
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
