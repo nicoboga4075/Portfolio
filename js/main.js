@@ -1501,7 +1501,8 @@ function initBlogPage(langPage) {
                     setTimeout(() => location.reload(), 150);
                 });
                 $('.heading').text(recentArticle.title[langPage]);
-                $('.meta').html('<i class="icon-calendar"></i> ' + convertDate(recentArticle.date, langPage, 'readable'));
+                $('.meta').html('<i class="icon-calendar"></i> ')
+                    .append(document.createTextNode(convertDate(recentArticle.date, langPage, 'readable')));
             }
 
             const $tagCloud = $('.tagcloud');
@@ -1577,7 +1578,14 @@ function initBlogPage(langPage) {
                             }
                         });
 
-                        articleShape.html(doc.body.innerHTML + articleShape.html());
+                        // Insert the already-parsed and sanitized nodes directly, keeping
+                        // whatever markup #article-shape already held after them. Avoids
+                        // re-serializing to an HTML string and re-parsing it at a .html() sink.
+                        const sanitizedNodes = Array.from(doc.body.childNodes);
+                        const existingShapeContent = articleShape.contents().detach();
+                        articleShape.empty();
+                        sanitizedNodes.forEach(node => articleShape[0].appendChild(node));
+                        articleShape.append(existingShapeContent);
 
                         initArticle();
                         initProfile();

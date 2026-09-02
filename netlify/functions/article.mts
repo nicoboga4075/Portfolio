@@ -10,8 +10,6 @@ export default async function handlerArticle(req: Request, context: Context): Pr
         const referer = req.headers.get("referer") || "";
         const userAgent = req.headers.get("user-agent") || "";
 
-        const error404 = new URL("/404", req.url).toString();
-
         const allowedOrigins = [
             "http://localhost:8888",
             "https://nicoboga.netlify.app"
@@ -33,12 +31,12 @@ export default async function handlerArticle(req: Request, context: Context): Pr
         const isFromLighthouse = /Lighthouse|Chrome-Lighthouse/i.test(userAgent);
 
         if (!filename || (!isFromSite && !isFromLighthouse)) {
-            return Response.redirect(error404, 302);
+            return new Response(null, { status: 302, headers: { Location: "/404" } });
         }
 
         const isValidFilename = /^[a-zA-Z0-9_-]+_(fr|en)\.html$/.test(filename);
         if (!isValidFilename) {
-            return Response.redirect(error404, 302);
+            return new Response(null, { status: 302, headers: { Location: "/404" } });
         }
 
         // Local preview (npm run dev) compiles to .eleventy/ instead of in-place,
@@ -68,7 +66,7 @@ export default async function handlerArticle(req: Request, context: Context): Pr
                 },
             });
         } catch {
-            return Response.redirect(error404, 302);
+            return new Response(null, { status: 302, headers: { Location: "/404" } });
         }
     } catch (error) {
         console.error(`[${context.requestId}]`, error);

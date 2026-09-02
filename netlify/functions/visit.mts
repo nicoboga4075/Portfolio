@@ -5,8 +5,6 @@ export default async function handlerVisit(req: Request, context: Context): Prom
         const referer = req.headers.get("referer") || "";
         const userAgent = req.headers.get("user-agent") || "";
 
-        const error404 = new URL("/404", req.url).toString();
-
         const allowedOrigins = [
             "http://localhost:8888",
             "https://nicoboga.netlify.app"
@@ -28,7 +26,7 @@ export default async function handlerVisit(req: Request, context: Context): Prom
         const isFromLighthouse = /Lighthouse|Chrome-Lighthouse/i.test(userAgent);
 
         if (!isFromSite && !isFromLighthouse) {
-            return Response.redirect(error404, 302);
+            return new Response(null, { status: 302, headers: { Location: "/404" } });
         }
 
         const supabaseUrl = process.env.SUPABASE_URL;
@@ -58,7 +56,7 @@ export default async function handlerVisit(req: Request, context: Context): Prom
             }
         );
     } catch (error) {
-        console.error(`[${context.requestId}] Referer: ${req.headers.get("referer") || "unknown"}`, error);
+        console.error("[%s] Referer: %s", context.requestId, req.headers.get("referer") || "unknown", error);
         return new Response(
             JSON.stringify({
                 error: "Internal error",

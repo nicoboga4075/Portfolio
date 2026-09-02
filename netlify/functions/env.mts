@@ -49,8 +49,6 @@ export default async function handlerEnv(req: Request, context: Context): Promis
         const referer = req.headers.get("referer") || "";
         const userAgent = req.headers.get("user-agent") || "";
 
-        const error404 = new URL("/404", req.url).toString();
-
         const allowedOrigins = [
             "http://localhost:8888",
             "https://nicoboga.netlify.app"
@@ -72,13 +70,13 @@ export default async function handlerEnv(req: Request, context: Context): Promis
         const isFromLighthouse = /Lighthouse|Chrome-Lighthouse/i.test(userAgent);
 
         if (!isFromSite && !isFromLighthouse) {
-            return Response.redirect(error404, 302);
+            return new Response(null, { status: 302, headers: { Location: "/404" } });
         }
 
         if (lang) {
             const isValidLang = /^(fr|en)$/.test(lang);
             if (!isValidLang) {
-                return Response.redirect(error404, 302);
+                return new Response(null, { status: 302, headers: { Location: "/404" } });
             }
             return await getLastCvUpdate(lang);
         }
