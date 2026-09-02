@@ -676,10 +676,10 @@ function switchLanguage(url, langA = 'en', langB = 'fr') {
 
 function initTranslator() {
     const toggle = $('#language-toggle');
-    if (toggle) {
+    if (toggle.length) {
         toggle.prop('checked', getCurrentLanguage() == 'fr');
         toggle.on('change', function () {
-            toggle.checked = getCurrentLanguage() == 'fr';
+            toggle.prop('checked', getCurrentLanguage() == 'fr');
             const newUrl = switchLanguage(window.location.href);
             if (/^\/(?!\/)/.test(newUrl)) {
                 window.location.href = newUrl;
