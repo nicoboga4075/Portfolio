@@ -1,19 +1,10 @@
 ---
+layout: "base.njk"
 permalink: "404.html"
+title: "Portfolio - Page Not Found"
+description: "Error 404"
+base: "/"
 ---
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Portfolio - Page Not Found</title>
-        {% include "metas.html" %}
-        <meta name="description" content="Error 404">
-        <meta http-equiv="Content-Language" content="en_US">
-        {% include "poppins.html" %}
-        <base href="/">
-        {% include "manifest.html" %}
-        {% include "default.html" %}
-    </head>
-    <body onload="initPage()">
         <main>
             <h1>Oops ! Page not found</h1>
             <p>It seems you've hit a broken link or the page has moved.</p>
@@ -23,5 +14,3 @@ permalink: "404.html"
             <img id="astronaut" class="icon svg" alt="Astronaut icon" width="178" height="228">
             <a id="index">Go back to the homepage</a>
         </main>
-    </body>
-</html>

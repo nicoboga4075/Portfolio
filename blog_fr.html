@@ -1,19 +1,11 @@
 ---
+layout: "base.njk"
 permalink: "blog_fr.html"
+title: "Portfolio - Blog"
+description: "Articles de blog et vision d’un ingénieur logiciel sur la tech et le codage"
+assets: ["links.html"]
+scrollspy: true
 ---
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <title>Portfolio - Blog</title>
-        {% include "metas.html" %}
-        <meta name="description" content="Articles de blog et vision d’un ingénieur logiciel sur la tech et le codage">
-        <meta http-equiv="Content-Language" content="fr_FR">
-        {% include "poppins.html" %}
-        <base href="../../">
-        {% include "manifest.html" %}
-        {% include "links.html" %}
-    </head>
-    <body data-spy="scroll" data-target="#ftco-navbar" data-offset="300" onload="initPage()">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar" aria-label="Main navigation">
             <div class="container">
                 {% include "nav_fr.html" %}
@@ -99,5 +91,3 @@ permalink: "blog_fr.html"
         {% include "loading.html" %}
         {% include "scripts.html" %}
         <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
-    </body>
-</html>

@@ -1,19 +1,12 @@
 ---
+layout: "base.njk"
 permalink: "index_en.html"
+title: "Portfolio"
+description: "Portfolio of an AI-augmented software engineer: projects, skills and experience in tech and development"
+assets: ["links.html"]
+base: "../"
+scrollspy: true
 ---
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Portfolio</title>
-        {% include "metas.html" %}
-        <meta name="description" content="Portfolio of an AI-augmented software engineer: projects, skills and experience in tech and development">
-        <meta http-equiv="Content-Language" content="en_US">
-        {% include "poppins.html" %}
-        <base href="../">
-        {% include "manifest.html" %}
-        {% include "links.html" %}
-    </head>
-    <body data-spy="scroll" data-target="#ftco-navbar" data-offset="300" onload="initPage()">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar" aria-label="Main navigation">
             <div class="container">
                 {% include "nav_en.html" %}
@@ -1022,5 +1015,3 @@ permalink: "index_en.html"
         {% if viewport == "desktop" %}
         <script defer src="js/botpress.js"></script>
         {% endif %}
-    </body>
-</html>

@@ -1,0 +1,22 @@
+---
+base: "../../"
+onload: "initPage()"
+---
+<!DOCTYPE html>
+<html lang="{{ "fr" if "_fr" in page.fileSlug else "en" }}">
+    <head>
+        <title>{{ title | safe }}</title>
+        {% include "metas.html" %}
+        <meta name="description" content="{{ description | safe }}">
+        <meta http-equiv="Content-Language" content="{{ "fr_FR" if "_fr" in page.fileSlug else "en_US" }}">
+        {% include "poppins.html" %}
+        <base href="{{ base }}">
+        {% include "manifest.html" %}
+        {%- for partial in assets or ["default.html"] %}
+        {% include partial %}
+        {%- endfor %}
+    </head>
+    <body{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}"{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+        {{ content | safe }}
+    </body>
+</html>
