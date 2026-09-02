@@ -1748,7 +1748,7 @@ async function sendEmail(senderName, subject, message) {
     const base64EncodedEmail = removeTrailingEquals(btoa(emailString).replaceAll('+', '-').replaceAll('/', '_'));
 
     // Check if token exists, otherwise request it
-    const token = JSON.parse(localStorage.getItem('tokenAPI'));
+    const token = JSON.parse(sessionStorage.getItem('tokenAPI'));
 
     async function sendHelper(token) {
         const response = await fetch('https://www.googleapis.com/gmail/v1/users/me/messages/send', {
@@ -1763,14 +1763,14 @@ async function sendEmail(senderName, subject, message) {
         });
 
         if (response.ok) {
-            localStorage.setItem('tokenAPI', JSON.stringify(token));
+            sessionStorage.setItem('tokenAPI', JSON.stringify(token));
             callbackForm.text(successMessage);
             if (window.location.protocol === 'https:') {
                 sessionStorage.clear();
             }
         } else {
             callbackForm.text(errorMessage);
-            localStorage.removeItem('tokenAPI');
+            sessionStorage.removeItem('tokenAPI');
         }
     }
 
@@ -1800,7 +1800,7 @@ async function sendEmail(senderName, subject, message) {
         } catch (error) {
             console.error(error);
             callbackForm.text(errorMessage);
-            localStorage.removeItem('tokenAPI');
+            sessionStorage.removeItem('tokenAPI');
         }
     } else {
         callbackForm.text('');
@@ -1813,7 +1813,7 @@ async function sendEmail(senderName, subject, message) {
         } catch (error) {
             console.error(error);
             callbackForm.text(errorMessage);
-            localStorage.removeItem('tokenAPI');
+            sessionStorage.removeItem('tokenAPI');
         }
     }
 }
