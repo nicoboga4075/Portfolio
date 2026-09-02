@@ -1501,8 +1501,9 @@ function initBlogPage(langPage) {
                     setTimeout(() => location.reload(), 150);
                 });
                 $('.heading').text(recentArticle.title[langPage]);
-                $('.meta').html('<i class="icon-calendar"></i> ')
-                    .append(document.createTextNode(convertDate(recentArticle.date, langPage, 'readable')));
+                $('.meta')
+                    .text(convertDate(recentArticle.date, langPage, 'readable'))
+                    .prepend($('<i>', { 'class': 'icon-calendar' }), ' ');
             }
 
             const $tagCloud = $('.tagcloud');
