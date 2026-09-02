@@ -12,12 +12,24 @@ export default async function handlerArticle(req: Request, context: Context): Pr
 
         const error404 = new URL("/404", req.url).toString();
 
-        const allowedReferers = [
+        const allowedOrigins = [
             "http://localhost:8888",
             "https://nicoboga.netlify.app"
         ];
 
-        const isFromSite = allowedReferers.some(origin => referer.startsWith(origin));
+        let refererOrigin = "";
+        try {
+            refererOrigin = new URL(referer).origin;
+        } catch {
+            // Missing or malformed Referer: treat as not originating from the site.
+        }
+
+        // Netlify sets CONTEXT to "dev" only under `netlify dev` (npm run dev / dev:live);
+        // in that mode the Live Share tunnel serves the site from a *.netlify.live origin.
+        const isDevTunnel = process.env.CONTEXT === "dev" &&
+            /^https:\/\/[^/]+\.netlify\.live$/.test(refererOrigin);
+
+        const isFromSite = allowedOrigins.includes(refererOrigin) || isDevTunnel;
         const isFromLighthouse = /Lighthouse|Chrome-Lighthouse/i.test(userAgent);
 
         if (!filename || (!isFromSite && !isFromLighthouse)) {
