@@ -1,32 +1,10 @@
 import { Context } from "@netlify/functions";
+import { internalError, isTrustedRequest, jsonResponse, redirectTo404 } from "./shared/http.mjs";
 
 export default async function handlerVisit(req: Request, context: Context): Promise<Response> {
     try {
-        const referer = req.headers.get("referer") || "";
-        const userAgent = req.headers.get("user-agent") || "";
-
-        const allowedOrigins = [
-            "http://localhost:8888",
-            "https://nicoboga.netlify.app"
-        ];
-
-        let refererOrigin = "";
-        try {
-            refererOrigin = new URL(referer).origin;
-        } catch {
-            // Missing or malformed Referer: treat as not originating from the site.
-        }
-
-        // Netlify sets CONTEXT to "dev" only under `netlify dev` (npm run dev / dev:live);
-        // in that mode the Live Share tunnel serves the site from a *.netlify.live origin.
-        const isDevTunnel = process.env.CONTEXT === "dev" &&
-            /^https:\/\/[^/]+\.netlify\.live$/.test(refererOrigin);
-
-        const isFromSite = allowedOrigins.includes(refererOrigin) || isDevTunnel;
-        const isFromLighthouse = /Lighthouse|Chrome-Lighthouse/i.test(userAgent);
-
-        if (!isFromSite && !isFromLighthouse) {
-            return new Response(null, { status: 302, headers: { Location: "/404" } });
+        if (!isTrustedRequest(req)) {
+            return redirectTo404();
         }
 
         const supabaseUrl = process.env.SUPABASE_URL;
@@ -46,27 +24,8 @@ export default async function handlerVisit(req: Request, context: Context): Prom
         }
 
         const newCount = await response.json();
-        return new Response(
-            JSON.stringify({
-                visits: newCount
-            }), {
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            }
-        );
+        return jsonResponse({ visits: newCount });
     } catch (error) {
-        console.error("[%s] Referer: %s", context.requestId, req.headers.get("referer") || "unknown", error);
-        return new Response(
-            JSON.stringify({
-                error: "Internal error",
-                requestId: context.requestId
-            }), {
-                status: 500,
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            }
-        );
+        return internalError(context, error, req);
     }
 };

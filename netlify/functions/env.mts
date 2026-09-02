@@ -1,4 +1,5 @@
 import { Context } from "@netlify/functions";
+import { internalError, isTrustedRequest, jsonResponse, redirectTo404 } from "./shared/http.mjs";
 
 const PUBLIC_ENV_VARS = [
     "ENV_CLIENT_ID",
@@ -17,11 +18,7 @@ async function webhook<T>(url: string, transform: (data: T) => unknown): Promise
         throw new Error(`Webhook fetch failed: ${response.statusText}`);
     }
 
-    return new Response(JSON.stringify(transform(await response.json())), {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
+    return jsonResponse(transform(await response.json()));
 }
 
 type GithubCommit = {
@@ -46,37 +43,14 @@ export default async function handlerEnv(req: Request, context: Context): Promis
         const url = new URL(req.url);
         const lang = url.searchParams.get("lang");
 
-        const referer = req.headers.get("referer") || "";
-        const userAgent = req.headers.get("user-agent") || "";
-
-        const allowedOrigins = [
-            "http://localhost:8888",
-            "https://nicoboga.netlify.app"
-        ];
-
-        let refererOrigin = "";
-        try {
-            refererOrigin = new URL(referer).origin;
-        } catch {
-            // Missing or malformed Referer: treat as not originating from the site.
-        }
-
-        // Netlify sets CONTEXT to "dev" only under `netlify dev` (npm run dev / dev:live);
-        // in that mode the Live Share tunnel serves the site from a *.netlify.live origin.
-        const isDevTunnel = process.env.CONTEXT === "dev" &&
-            /^https:\/\/[^/]+\.netlify\.live$/.test(refererOrigin);
-
-        const isFromSite = allowedOrigins.includes(refererOrigin) || isDevTunnel;
-        const isFromLighthouse = /Lighthouse|Chrome-Lighthouse/i.test(userAgent);
-
-        if (!isFromSite && !isFromLighthouse) {
-            return new Response(null, { status: 302, headers: { Location: "/404" } });
+        if (!isTrustedRequest(req)) {
+            return redirectTo404();
         }
 
         if (lang) {
             const isValidLang = /^(fr|en)$/.test(lang);
             if (!isValidLang) {
-                return new Response(null, { status: 302, headers: { Location: "/404" } });
+                return redirectTo404();
             }
             return await getLastCvUpdate(lang);
         }
@@ -87,18 +61,8 @@ export default async function handlerEnv(req: Request, context: Context): Promis
                 .map(key => [key, process.env[key]])
         );
 
-        return new Response(JSON.stringify(filteredEnvVars), {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+        return jsonResponse(filteredEnvVars);
     } catch (error) {
-        console.error(`[${context.requestId}]`, error);
-        return new Response(JSON.stringify({ error: "Internal error", requestId: context.requestId }), {
-            status: 500,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+        return internalError(context, error);
     }
 };

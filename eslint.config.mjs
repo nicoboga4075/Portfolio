@@ -58,7 +58,7 @@ export default defineConfig([
   },
   // MTS config
   {
-    files: ["netlify/functions/*.mts"],
+    files: ["netlify/functions/**/*.mts"],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
