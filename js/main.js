@@ -1,15 +1,5 @@
 const appName = 'Portfolio';
 const appRoot = '/en';
-const appLanguages = new Set(['en', 'fr']);
-
-const xp = 5;
-const email = 'nicolas.bogalheiro@gmail.com';
-const city = 'Paris';
-const certifsCount = 5;
-const projectsCount = 20;
-const experiencesCount = 6;
-const countriesCount = 15;
-const dateBirth = '1997-11-19';
 
 const appHomeSection = "home-section";
 const appProjectSection = "projects-section";
@@ -654,38 +644,6 @@ function loadBingo() {
 
 function getMessage(key) {
     return appMessages[key]?.[`${getCurrentLanguage()}`] || '';
-}
-
-function switchLanguage(url, langA = 'en', langB = 'fr') {
-    try {
-        const urlObj = new URL(url, window.location.origin);
-        const pathParts = urlObj.pathname.split('/').filter(Boolean);
-        if (pathParts.length > 0 && appLanguages.has(pathParts[0])) {
-            pathParts[0] = pathParts[0] === langA ? langB : langA;
-            urlObj.pathname = `/${pathParts.join('/')}`;
-            const hash = getHashFromSession();
-            urlObj.hash = (hash && /^[\w-]+$/.test(hash)) ? `#${hash}` : '';
-            return `${urlObj.pathname}${urlObj.search}${urlObj.hash}`;
-        }
-        throw new Error("Language not recognized in URL");
-    } catch (error) {
-        console.error(error);
-        return appDefaultRoutes['error404'];
-    }
-}
-
-function initTranslator() {
-    const toggle = $('#language-toggle');
-    if (toggle.length) {
-        toggle.prop('checked', getCurrentLanguage() == 'fr');
-        toggle.on('change', function () {
-            toggle.prop('checked', getCurrentLanguage() == 'fr');
-            const newUrl = switchLanguage(window.location.href);
-            if (/^\/(?!\/)/.test(newUrl)) {
-                window.location.href = newUrl;
-            }
-        });
-    }
 }
 
 function initProfile() {

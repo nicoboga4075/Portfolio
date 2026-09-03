@@ -16,8 +16,23 @@ const appRoutes = {
     ...appDefaultRoutes
 };
 
+// "en" is the language the site is deployed under (the Netlify default);
+// "fr" is the author's own language.
+const langNetlify = "en";
+const langAuthor = "fr";
+const appLanguages = new Set([langNetlify, langAuthor]);
+
+// Profile / CV facts, rendered into the page by initProfile (main.js) and fillCareerCounts (default.js).
+const xp = 5;
+const email = 'nicolas.bogalheiro@gmail.com';
+const city = 'Paris';
+const dateBirth = '1997-11-19';
 const cdiCount = 4;
 const internshipsCount = 3;
+const certifsCount = 5;
+const projectsCount = 20;
+const experiencesCount = 6;
+const countriesCount = 15;
 
 function getCurrentRoute() {
     const path = window.location.pathname;
@@ -33,6 +48,38 @@ function getHashFromSession() {
 
 function getCurrentLanguage() {
     return document.documentElement.lang;
+}
+
+function switchLanguage(url, langOrigin = langNetlify, langTarget = langAuthor) {
+    try {
+        const urlObj = new URL(url, window.location.origin);
+        const pathParts = urlObj.pathname.split('/').filter(Boolean);
+        if (pathParts.length > 0 && appLanguages.has(pathParts[0])) {
+            pathParts[0] = pathParts[0] === langOrigin ? langTarget : langOrigin;
+            urlObj.pathname = `/${pathParts.join('/')}`;
+            const hash = getHashFromSession();
+            urlObj.hash = (hash && /^[\w-]+$/.test(hash)) ? `#${hash}` : '';
+            return `${urlObj.pathname}${urlObj.search}${urlObj.hash}`;
+        }
+        throw new Error("Language not recognized in URL");
+    } catch (error) {
+        console.error(error);
+        return appDefaultRoutes['error404'];
+    }
+}
+
+function initTranslator() {
+    const toggle = document.getElementById('language-toggle');
+    if (toggle) {
+        toggle.checked = getCurrentLanguage() == langAuthor;
+        toggle.addEventListener('change', function () {
+            toggle.checked = getCurrentLanguage() == langAuthor;
+            const newUrl = switchLanguage(window.location.href);
+            if (/^\/(?!\/)/.test(newUrl)) {
+                window.location.href = newUrl;
+            }
+        });
+    }
 }
 
 function loadImages(selector, extension, one = false) {

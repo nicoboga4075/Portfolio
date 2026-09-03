@@ -8,39 +8,6 @@ function addHomeRedirect() {
     }
 }
 
-function switchLanguage(url) {
-    try {
-        const urlObj = new URL(url, window.location.origin);
-        urlObj.pathname = urlObj.pathname.replace(/^\/(fr|en)/, (match) => {
-            return match === '/fr' ? '/en' : '/fr';
-        });
-        const currentHash = getHashFromSession();
-        if (currentHash && /^[a-zA-Z0-9-_]+$/.test(currentHash)) {
-            urlObj.hash = `#${currentHash}`;
-        } else {
-            urlObj.hash = '';
-        }
-        return urlObj.pathname + urlObj.search + urlObj.hash;
-    } catch (error) {
-        console.error(error);
-        return '/';
-    }
-}
-
-function initTranslator() {
-    const toggle = document.getElementById('language-toggle');
-    if (toggle) {
-        toggle.checked = getCurrentLanguage() == 'fr';
-        toggle.addEventListener('change', function () {
-            toggle.checked = getCurrentLanguage() == 'fr';
-            const newUrl = switchLanguage(window.location.href);
-            if (/^\/(?!\/)/.test(newUrl)) {
-                window.location.href = newUrl;
-            }
-        });
-    }
-}
-
 function applyDarkModePreference() {
     const isDark = localStorage.getItem('darkMode') === 'true';
     document.documentElement.classList.toggle('dark-mode', isDark);

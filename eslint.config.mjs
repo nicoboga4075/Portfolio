@@ -57,22 +57,40 @@ export default defineConfig([
 	}
   },
   // js/common.js defines shared helpers that default.js and main.js consume at
-  // runtime (both load after common.js). ESLint analyses each file in isolation:
-  // declare the shared names as globals for the consumers, and skip no-unused-vars
-  // for common.js itself (its top-level declarations are the whole point).
+  // runtime (both load after common.js). ESLint analyses each file in isolation,
+  // so declare the shared names as globals for the consumers. Names both files
+  // use go here; names only main.js uses are in the block below; and
+  // no-unused-vars is skipped for common.js itself (its top-level declarations
+  // are the whole point).
   {
     files: ["js/default.js", "js/main.js"],
     languageOptions: {
       globals: {
         appDefaultRoutes: "readonly",
-        appRoutes: "readonly",
         cdiCount: "readonly",
         internshipsCount: "readonly",
         getCurrentRoute: "readonly",
-        getHashFromSession: "readonly",
         getCurrentLanguage: "readonly",
+        initTranslator: "readonly",
         loadImages: "readonly",
         initCareerAnimation: "readonly"
+      }
+    }
+  },
+  {
+    files: ["js/main.js"],
+    languageOptions: {
+      globals: {
+        appRoutes: "readonly",
+        getHashFromSession: "readonly",
+        xp: "readonly",
+        email: "readonly",
+        city: "readonly",
+        dateBirth: "readonly",
+        certifsCount: "readonly",
+        projectsCount: "readonly",
+        experiencesCount: "readonly",
+        countriesCount: "readonly"
       }
     }
   },
