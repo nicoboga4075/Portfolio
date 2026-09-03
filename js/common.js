@@ -147,3 +147,13 @@ function addRedirectById(elementId) {
         sessionStorage.clear(); // Reset hash for all other links
     });
 }
+
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+            .catch(error => console.error(error));
+    }
+}
+
+// Runs on every page as soon as this (deferred) script loads.
+registerServiceWorker();
