@@ -1503,8 +1503,6 @@ function initBlogPage(langPage) {
 }
 
 function initPage() {
-    applyDarkModePreference();
-
     const idPage = getCurrentRoute();
     const langPage = getCurrentLanguage();
 
@@ -1723,18 +1721,11 @@ function initCaptcha() {
 
 /* Dark Mode */
 
-function toggleDarkMode(event) {
-    if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
-    $('html').toggleClass('dark-mode');
-    const $icon = $('#dark-icon');
-    const isDark = $('html').hasClass('dark-mode');
-    $icon.attr('class', isDark ? 'icon-moon-o' : 'icon-sun-o');
-    localStorage.setItem('darkMode', isDark);
+// common.js owns the toggle (class + icon + storage) and fires darkmodechange;
+// the skills chart just needs its title recoloured to the new --text-color.
+document.addEventListener('darkmodechange', function () {
     if (chart) {
         chart.options.plugins.title.color = getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim();
         chart.update();
     }
-}
+});

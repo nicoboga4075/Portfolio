@@ -126,7 +126,15 @@ function initCareerAnimation() {
     updateCarPosition();
 }
 
-function applyDarkModePreference() {
+// No argument: apply the stored preference (on page load). With an event (the
+// #dark-icon button's onclick): flip the stored preference first, then apply.
+// Fires `darkmodechange` so main.js can recolour the skills chart.
+function toggleDarkMode(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        localStorage.setItem('darkMode', localStorage.getItem('darkMode') !== 'true');
+    }
     const isDark = localStorage.getItem('darkMode') === 'true';
     document.documentElement.classList.toggle('dark-mode', isDark);
     // #dark-icon only exists on index/blog (in the navbar); no-op elsewhere.
@@ -134,6 +142,7 @@ function applyDarkModePreference() {
     if (icon) {
         icon.className = isDark ? 'icon-moon-o' : 'icon-sun-o';
     }
+    document.dispatchEvent(new CustomEvent('darkmodechange'));
 }
 
 function addRedirectById(elementId) {
@@ -155,5 +164,6 @@ function registerServiceWorker() {
     }
 }
 
-// Runs on every page as soon as this (deferred) script loads.
+// Run on every page as soon as this (deferred) script loads.
 registerServiceWorker();
+toggleDarkMode();

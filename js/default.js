@@ -1,5 +1,4 @@
 function initArticle() {
-    applyDarkModePreference();
     loadImages('.article-image', 'png');
     loadImages('.icon.svg', 'svg');
     initTranslator();
@@ -9,7 +8,6 @@ function initArticle() {
 }
 
 function initPage() {
-    applyDarkModePreference();
     loadImages('.icon.svg', 'svg');
     initTranslator();
     addRedirectById('index');
