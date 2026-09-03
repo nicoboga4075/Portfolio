@@ -1,6 +1,3 @@
-const appName = 'Portfolio';
-const appRoot = '/en';
-
 const appHomeSection = "home-section";
 const appProjectSection = "projects-section";
 const appBlogSection = "blog-section";
@@ -606,17 +603,6 @@ function lastCvUpdate(lang) {
         });
 }
 
-function addRedirectById(elementId) {
-    const balise = $(`#${elementId}`);
-    if (balise) {
-        const path = appRoutes[elementId];
-        balise.attr('href', path ? path.replace('{lng}', getCurrentLanguage()) : appRoot);
-        balise.on('click', function () {
-            sessionStorage.clear(); // Reset hash for all other links
-        });
-    }
-}
-
 function loadBingo() {
     let timer = null;
     let number = 0;
@@ -658,8 +644,7 @@ function initProfile() {
             $(this).text(xp);
         }
     });
-    $('#cdiCount').text(cdiCount);
-    $('#internshipsCount').text(internshipsCount);
+    fillCareerCounts();
     $('#experiences .resume-wrap .date:contains("Today"), #experiences .resume-wrap .date:contains("Aujourd\'hui")')
         .closest('.resume-wrap').find('a:first').addClass('victory');
     $('#certifsCount').attr('data-number', certifsCount);
@@ -1747,12 +1732,6 @@ function initCaptcha() {
 }
 
 /* Dark Mode */
-
-function applyDarkModePreference() {
-    const isDark = localStorage.getItem('darkMode') === 'true';
-    $('html').toggleClass('dark-mode', isDark);
-    $('#dark-icon').attr('class', isDark ? 'icon-moon-o' : 'icon-sun-o');
-}
 
 function toggleDarkMode(event) {
     if (event) {

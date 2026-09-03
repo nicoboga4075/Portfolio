@@ -1,6 +1,8 @@
 /* Shared helpers loaded before both default.js (light pages) and main.js
    (index/blog). Code that was identical (or trivially reconcilable) in both. */
 
+const appName = 'Portfolio';
+
 const appDefaultRoutes = {
     "policy": "/{lng}/policy",
     "terms": "/{lng}/terms",
@@ -21,8 +23,9 @@ const appRoutes = {
 const langNetlify = "en";
 const langAuthor = "fr";
 const appLanguages = new Set([langNetlify, langAuthor]);
+const appRoot = `/${langNetlify}`;
 
-// Profile / CV facts, rendered into the page by initProfile (main.js) and fillCareerCounts (default.js).
+// Profile / CV facts, rendered into the page by fillCareerCounts and initProfile (main.js).
 const xp = 5;
 const email = 'nicolas.bogalheiro@gmail.com';
 const city = 'Paris';
@@ -96,6 +99,17 @@ function loadImages(selector, extension, one = false) {
     });
 }
 
+function fillCareerCounts() {
+    const cdiCountEl = document.getElementById('cdiCount');
+    if (cdiCountEl) {
+        cdiCountEl.textContent = cdiCount;
+    }
+    const internshipsCountEl = document.getElementById('internshipsCount');
+    if (internshipsCountEl) {
+        internshipsCountEl.textContent = internshipsCount;
+    }
+}
+
 function initCareerAnimation() {
     const container = document.querySelector('.animation-container');
     const car = document.getElementById('car');
@@ -110,4 +124,26 @@ function initCareerAnimation() {
     window.addEventListener('scroll', updateCarPosition, { passive: true });
     window.addEventListener('resize', updateCarPosition);
     updateCarPosition();
+}
+
+function applyDarkModePreference() {
+    const isDark = localStorage.getItem('darkMode') === 'true';
+    document.documentElement.classList.toggle('dark-mode', isDark);
+    // #dark-icon only exists on index/blog (in the navbar); no-op elsewhere.
+    const icon = document.getElementById('dark-icon');
+    if (icon) {
+        icon.className = isDark ? 'icon-moon-o' : 'icon-sun-o';
+    }
+}
+
+function addRedirectById(elementId) {
+    const el = document.getElementById(elementId);
+    if (!el) {
+        return;
+    }
+    const path = appRoutes[elementId];
+    el.setAttribute('href', path ? path.replace('{lng}', getCurrentLanguage()) : appRoot);
+    el.addEventListener('click', function () {
+        sessionStorage.clear(); // Reset hash for all other links
+    });
 }

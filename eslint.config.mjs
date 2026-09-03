@@ -67,13 +67,14 @@ export default defineConfig([
     languageOptions: {
       globals: {
         appDefaultRoutes: "readonly",
-        cdiCount: "readonly",
-        internshipsCount: "readonly",
         getCurrentRoute: "readonly",
         getCurrentLanguage: "readonly",
         initTranslator: "readonly",
         loadImages: "readonly",
-        initCareerAnimation: "readonly"
+        initCareerAnimation: "readonly",
+        fillCareerCounts: "readonly",
+        applyDarkModePreference: "readonly",
+        addRedirectById: "readonly"
       }
     }
   },
@@ -81,6 +82,7 @@ export default defineConfig([
     files: ["js/main.js"],
     languageOptions: {
       globals: {
+        appName: "readonly",
         appRoutes: "readonly",
         getHashFromSession: "readonly",
         xp: "readonly",
