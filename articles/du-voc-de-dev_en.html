@@ -2690,6 +2690,22 @@ description: "From the dev vocab"
                         </div>
                         <div class="card-body">Hijacking is the takeover of a legitimate resource while it is in use, redirecting it to an attacker's benefit without the victim noticing. Depending on the target: <i>session hijacking</i> steals the session cookie to impersonate a logged-in user, <i>clickjacking</i> overlays the target page in an invisible <i>iframe</i> to divert clicks toward an unintended action, <i>base-tag hijacking</i> injects a &lt;base&gt; tag that redirects all of the page's relative URLs (scripts, images, links) to an attacker-controlled server and <i>DNS hijacking</i> corrupts a domain name's resolution to reroute traffic. Common defences include <i>SameSite</i> and <i>HttpOnly</i> cookies, the <i>Content-Security-Policy</i> header (<i>frame-ancestors</i> and <i>base-uri</i> directives) and HTTPS.</div>
                     </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <input type="checkbox" id="q309">
+                            <label for="q309">Transformers</label>
+                            <span class="badge badge-definition">AI</span>
+                        </div>
+                        <div class="card-body">The Transformer is a neural network architecture introduced in 2017 ("Attention Is All You Need", Google). It processes an entire sequence in parallel through a <i>self-attention</i> mechanism that weighs, for every token, its relevance to every other token, capturing long-range dependencies without recurrence — unlike RNNs and LSTMs, which are sequential, or CNNs, whose receptive field is local. It stacks encoder and/or decoder blocks (multi-head attention plus feed-forward layers, with residual connections and layer normalisation) and underpins nearly every modern large language model: encoder-only (BERT) for understanding, decoder-only (GPT, Claude) for generation, encoder-decoder (T5) for translation. Because the computation is fully parallel it maps well onto GPUs: training and inference at scale rely almost entirely on NVIDIA hardware — from a single T4 in a notebook to clusters of H100s — through <i>CUDA</i>, NVIDIA’s parallel-computing platform. On top of such models, agent patterns like the <i>ReAct</i> loop (Reason + Act) interleave a reasoning step with a tool call, feed the resulting observation back into the model and repeat until it produces a final answer. To standardise how such agents reach external tools and data, Anthropic released the <i>Model Context Protocol</i> (MCP) in 2024 — an open client–server protocol, quickly adopted across the ecosystem, that exposes tools, resources and prompts to any compatible model. A related pattern, <i>Retrieval-Augmented Generation</i> (RAG), grounds answers by pulling relevant passages from a knowledge base into the prompt rather than by calling a tool.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <input type="checkbox" id="q310">
+                            <label for="q310">Chunk</label>
+                            <span class="badge badge-definition">AI</span>
+                        </div>
+                        <div class="card-body">In Retrieval-Augmented Generation, a chunk is one of the small passages a document is split into before being embedded and indexed. Chunking well — choosing the size and the overlap between consecutive chunks — is decisive: chunks too large dilute relevance and waste context, too small lose the surrounding meaning. Retrieval then returns the few chunks closest to the query, which are prepended to the prompt.</div>
+                    </div>
                 </div>
             </div>
         </main>

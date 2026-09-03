@@ -2698,6 +2698,22 @@ description: "Du voc' de dev'"
                         </div>
                         <div class="card-body">Le hijacking (détournement en français) désigne la prise de contrôle d'une ressource légitime en cours d'utilisation pour la rediriger au profit d'un attaquant, sans que la victime s'en aperçoive. Selon la cible : le <i>session hijacking</i> vole le cookie de session pour usurper l'identité d'un utilisateur connecté, le <i>clickjacking</i> superpose la page visée dans une <i>iframe</i> invisible pour détourner les clics vers une action non voulue, le <i>base-tag hijacking</i> injecte une balise &lt;base&gt; qui redirige toutes les URL relatives de la page (scripts, images, liens) vers un serveur contrôlé par l'attaquant et le <i>DNS hijacking</i> corrompt la résolution d'un nom de domaine pour rerouter le trafic. On s'en protège notamment par des cookies <i>SameSite</i> et <i>HttpOnly</i>, l'en-tête <i>Content-Security-Policy</i> (directives <i>frame-ancestors</i> et <i>base-uri</i>) et le protocole HTTPS.</div>
                     </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <input type="checkbox" id="q309">
+                            <label for="q309">Transformers</label>
+                            <span class="badge badge-definition">AI</span>
+                        </div>
+                        <div class="card-body">Le Transformer est une architecture de réseau de neurones introduite en 2017 (« Attention Is All You Need », Google). Il traite toute une séquence en parallèle grâce à un mécanisme d'<i>auto-attention</i> (<i>self-attention</i>) qui pondère, pour chaque token, sa pertinence vis-à-vis de tous les autres, capturant les dépendances à longue portée sans récurrence — contrairement aux RNN et LSTM, séquentiels, ou aux CNN, dont le champ récepteur est local. Il empile des blocs encodeur et/ou décodeur (attention multi-têtes et couches <i>feed-forward</i>, avec connexions résiduelles et normalisation de couche) et se trouve au cœur de la quasi-totalité des grands modèles de langage actuels : encodeur seul (BERT) pour la compréhension, décodeur seul (GPT, Claude) pour la génération, encodeur-décodeur (T5) pour la traduction. Comme le calcul est entièrement parallèle, il s'adapte bien aux GPU : l'entraînement et l'inférence à grande échelle reposent presque exclusivement sur le matériel NVIDIA — d'un simple T4 dans un notebook à des grappes de H100 — via <i>CUDA</i>, la plateforme de calcul parallèle de NVIDIA. Sur ces modèles se greffent des schémas d'agent comme la boucle <i>ReAct</i> (Reason + Act), qui alterne une étape de raisonnement et un appel d'outil, réinjecte l'observation obtenue dans le modèle et recommence jusqu'à produire une réponse finale. Pour standardiser la façon dont ces agents accèdent aux outils et aux données externes, Anthropic a publié en 2024 le <i>Model Context Protocol</i> (MCP) — un protocole client-serveur ouvert, rapidement adopté dans l'écosystème, qui expose outils, ressources et prompts à tout modèle compatible. Un schéma proche, la <i>génération augmentée de récupération</i> (RAG), ancre les réponses en injectant dans le prompt des passages pertinents tirés d'une base de connaissances plutôt qu'en appelant un outil.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <input type="checkbox" id="q310">
+                            <label for="q310">Chunk</label>
+                            <span class="badge badge-definition">AI</span>
+                        </div>
+                        <div class="card-body">En génération augmentée de récupération, un chunk est l'un des petits passages en lesquels un document est découpé avant d'être vectorisé (embedding) et indexé. Bien découper — choisir la taille et le recouvrement entre chunks consécutifs — est déterminant : des chunks trop gros diluent la pertinence et gaspillent du contexte, trop petits perdent le sens alentour. La récupération renvoie ensuite les quelques chunks les plus proches de la requête, ajoutés en tête du prompt.</div>
+                    </div>
                 </div>
             </div>
         </main>
