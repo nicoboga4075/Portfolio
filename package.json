@@ -80,7 +80,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
     "@capacitor/android": "^8.5.0",
-    "@capacitor/cli": "^8.5.1",
+    "@capacitor/cli": "^8.4.3",
     "@capacitor/core": "^8.5.0",
     "@eslint/js": "^9.39.2",
     "@netlify/functions": "^6.0.0",
@@ -111,6 +111,6 @@
   "allowScripts": {
     "sonar-scanner@3.1.0": true,
     "unrs-resolver@1.11.1": true,
-    "cypress@15.20.1": true
+    "cypress@16.0.0": true
   }
 }
