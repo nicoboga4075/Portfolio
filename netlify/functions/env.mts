@@ -6,6 +6,9 @@ const PUBLIC_ENV_VARS = [
     "SITE_RECAPTCHA_KEY"
 ];
 
+// Google's public reCAPTCHA v2 test key (always passes, no domain allowlist): https://developers.google.com/recaptcha/docs/faq
+const RECAPTCHA_TEST_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+
 async function webhook<T>(url: string, transform: (data: T) => unknown): Promise<Response> {
     const response = await fetch(url, {
         headers: {
@@ -55,11 +58,16 @@ export default async function handlerEnv(req: Request, context: Context): Promis
             return await getLastCvUpdate(lang);
         }
 
-        const filteredEnvVars = Object.fromEntries(
+        const filteredEnvVars: Record<string, string | undefined> = Object.fromEntries(
             PUBLIC_ENV_VARS
                 .filter(key => key in process.env)
                 .map(key => [key, process.env[key]])
         );
+
+        // Under `netlify dev` the real key's domain allowlist excludes localhost, so the widget can't render; hand back Google's test key instead so the contact form's captcha is usable locally.
+        if (process.env.CONTEXT === "dev") {
+            filteredEnvVars.SITE_RECAPTCHA_KEY = RECAPTCHA_TEST_KEY;
+        }
 
         return jsonResponse(filteredEnvVars);
     } catch (error) {
