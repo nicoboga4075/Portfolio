@@ -1416,7 +1416,6 @@ function initBlogPage(langPage) {
         }
 
         const articleShape = $('#article-shape');
-        const iframeArticle = $('#iframe-article');
         const hashLink = window.location.hash ? getSlugFromUrl() : '';
         const errorArticle = getMessage('error-generic');
         const host = window.location.origin;
@@ -1427,77 +1426,75 @@ function initBlogPage(langPage) {
             clearUrlPath();
             const urlArticle = `${host}/.netlify/functions/article?filename=${currentHash}_${langPage}.html`;
 
-            iframeArticle.prop('src', urlArticle);
+            // Fetched directly (no hidden trigger <iframe>): article responses
+            // carry frame-ancestors 'none', so framing them only logged a CSP
+            // violation and a second request for the URL fetch() already loads.
+            fetch(urlArticle)
+                .then(response => response.text())
+                .then(html => {
+                    if (html.includes("It seems you've hit a broken link or the page has moved") || html.toLowerCase().includes('"error"')) {
+                        throw new Error("Resource not found"); // Catch directly to show error message when fetch redirects to 404 page
+                    }
 
-            iframeArticle.on('load', function () {
-                fetch(urlArticle)
-                    .then(response => response.text())
-                    .then(html => {
-                        if (html.includes("It seems you've hit a broken link or the page has moved") || html.toLowerCase().includes('"error"')) {
-                            throw new Error("Resource not found"); // Catch directly to show error message when fetch redirects to 404 page
-                        }
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
 
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, 'text/html');
+                    const header = doc.querySelector('.header');
+                    if (header) header.remove();
 
-                        const header = doc.querySelector('.header');
-                        if (header) header.remove();
+                    const footer = doc.querySelector('.footer');
+                    if (footer) footer.remove();
 
-                        const footer = doc.querySelector('.footer');
-                        if (footer) footer.remove();
+                    // Strip elements and attributes that could execute script.
+                    // Article HTML is first-party - the function validates the
+                    // filename against a strict allowlist - so this is defense in depth.
+                    doc.querySelectorAll('script, iframe, object, embed, link, style, meta').forEach(el => el.remove());
 
-                        // Strip elements and attributes that could execute script.
-                        // Article HTML is first-party - the function validates the
-                        // filename against a strict allowlist - so this is defense in depth.
-                        doc.querySelectorAll('script, iframe, object, embed, link, style, meta').forEach(el => el.remove());
-
-                        doc.querySelectorAll('*').forEach(el => {
-                            [...el.attributes].forEach(attr => {
-                                const name = attr.name.toLowerCase();
-                                const value = attr.value.replace(/\s+/g, '').toLowerCase();
-                                const isUrlAttr = ['src', 'xlink:href', 'action', 'formaction'].includes(name);
-                                const isDangerousUrl = /^(javascript|data|vbscript):/.test(value);
-                                if (name.startsWith('on') || name === 'srcdoc' || (isUrlAttr && isDangerousUrl)) {
-                                    el.removeAttribute(attr.name);
-                                }
-                            });
-                        });
-
-                        // Sanitize anchor hrefs to prevent open redirects
-                        const links = doc.querySelectorAll('a[href]');
-                        links.forEach(link => {
-                            const href = link.getAttribute('href');
-                            if (!href.startsWith('https')) {
-                                link.setAttribute('href', appDefaultRoutes['error404']);
+                    doc.querySelectorAll('*').forEach(el => {
+                        [...el.attributes].forEach(attr => {
+                            const name = attr.name.toLowerCase();
+                            const value = attr.value.replace(/\s+/g, '').toLowerCase();
+                            const isUrlAttr = ['src', 'xlink:href', 'action', 'formaction'].includes(name);
+                            const isDangerousUrl = /^(javascript|data|vbscript):/.test(value);
+                            if (name.startsWith('on') || name === 'srcdoc' || (isUrlAttr && isDangerousUrl)) {
+                                el.removeAttribute(attr.name);
                             }
                         });
-
-                        // Insert the already-parsed and sanitized nodes directly, keeping
-                        // whatever markup #article-shape already held after them. Avoids
-                        // re-serializing to an HTML string and re-parsing it at a .html() sink.
-                        const sanitizedNodes = Array.from(doc.body.childNodes);
-                        const existingShapeContent = articleShape.contents().detach();
-                        articleShape.empty();
-                        sanitizedNodes.forEach(node => articleShape[0].appendChild(node));
-                        articleShape.append(existingShapeContent);
-
-                        initArticle();
-                        initProfile();
-                        $('a[article-link]').each(function () {
-                            const articleId = $(this).attr('article-link');
-                            $(this).attr('href', `/${langPage}/blog#${articleId}`);
-                        });
-                        originalArticleContent = $('.article-container').html();
-                    })
-                    .catch(error => {
-                        console.error(error);
-                        articleShape.text(errorArticle);
-                    })
-                    .finally(() => {
-                        $('#iframe-article').remove();
-                        $('.about-author').removeClass('d-none').addClass('d-flex');
                     });
-            });
+
+                    // Sanitize anchor hrefs to prevent open redirects
+                    const links = doc.querySelectorAll('a[href]');
+                    links.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (!href.startsWith('https')) {
+                            link.setAttribute('href', appDefaultRoutes['error404']);
+                        }
+                    });
+
+                    // Insert the already-parsed and sanitized nodes directly, keeping
+                    // whatever markup #article-shape already held after them. Avoids
+                    // re-serializing to an HTML string and re-parsing it at a .html() sink.
+                    const sanitizedNodes = Array.from(doc.body.childNodes);
+                    const existingShapeContent = articleShape.contents().detach();
+                    articleShape.empty();
+                    sanitizedNodes.forEach(node => articleShape[0].appendChild(node));
+                    articleShape.append(existingShapeContent);
+
+                    initArticle();
+                    initProfile();
+                    $('a[article-link]').each(function () {
+                        const articleId = $(this).attr('article-link');
+                        $(this).attr('href', `/${langPage}/blog#${articleId}`);
+                    });
+                    originalArticleContent = $('.article-container').html();
+                })
+                .catch(error => {
+                    console.error(error);
+                    articleShape.text(errorArticle);
+                })
+                .finally(() => {
+                    $('.about-author').removeClass('d-none').addClass('d-flex');
+                });
         } else {
             articleShape.text(errorArticle);
         }
