@@ -683,7 +683,14 @@ function loadChartJs() {
             const script = document.createElement('script');
             script.src = 'js/chart.umd.min.js';
             script.onload = resolve;
-            script.onerror = reject;
+            script.onerror = () => {
+                // Don't cache a failed load (offline, dropped connection while
+                // the machine slept): drop the script and the memoised promise
+                // so a later trigger can retry from scratch.
+                script.remove();
+                loadChartJs.promise = null;
+                reject(new Error('Failed to load js/chart.umd.min.js'));
+            };
             document.head.appendChild(script);
         });
     }
@@ -1187,30 +1194,41 @@ function initIndexPage(langPage) {
 
         const skillsChartCanvas = document.getElementById('skillsChart');
         if (skillsChartCanvas) {
+            let skillsChartRendered = false;
             const skillsChartObserver = new IntersectionObserver((entries) => {
-                if (!entries[0].isIntersecting) {
+                if (skillsChartRendered || !entries[0].isIntersecting) {
                     return;
                 }
-                skillsChartObserver.disconnect();
                 const rootStyle = getComputedStyle(document.documentElement);
                 const cssVar = (name) => rootStyle.getPropertyValue(name).trim();
-                loadChartJs().then(() => createCircularChart({
-                    canvasId: 'skillsChart',
-                    data: [45, 25, 15, 10, 5],
-                    backgroundColor: [cssVar('--blue'), cssVar('--orange'), cssVar('--green'), cssVar('--red'), cssVar('--purple')],
-                    labels: ['Back-end', 'Front-end', {
-                        fr: 'Gestion de projet',
-                        en: 'Project management'
-                    }, 'Support', 'CI/CD'],
-                    titles: {
-                        fr: 'Répartition du temps passé sur mes compétences',
-                        en: 'Time distribution across my skills'
-                    },
-                    subtitles: {
-                        fr: `Données basées sur ${xp} années en activité`,
-                        en: `Data based on ${xp} years in activity`
+                loadChartJs().then(() => {
+                    if (skillsChartRendered) {
+                        return;
                     }
-                }));
+                    skillsChartRendered = true;
+                    skillsChartObserver.disconnect();
+                    createCircularChart({
+                        canvasId: 'skillsChart',
+                        data: [45, 25, 15, 10, 5],
+                        backgroundColor: [cssVar('--blue'), cssVar('--orange'), cssVar('--green'), cssVar('--red'), cssVar('--purple')],
+                        labels: ['Back-end', 'Front-end', {
+                            fr: 'Gestion de projet',
+                            en: 'Project management'
+                        }, 'Support', 'CI/CD'],
+                        titles: {
+                            fr: 'Répartition du temps passé sur mes compétences',
+                            en: 'Time distribution across my skills'
+                        },
+                        subtitles: {
+                            fr: `Données basées sur ${xp} années en activité`,
+                            en: `Data based on ${xp} years in activity`
+                        }
+                    });
+                }).catch(() => {
+                    // Chart.js couldn't be fetched (offline / transient network).
+                    // Leave the observer connected so the chart is retried the
+                    // next time the canvas scrolls into view.
+                });
             });
             skillsChartObserver.observe(skillsChartCanvas);
         }
