@@ -2702,7 +2702,7 @@ description: "Du voc' de dev'"
                         <div class="card-header">
                             <input type="checkbox" id="q309">
                             <label for="q309">Transformers</label>
-                            <span class="badge badge-definition">AI</span>
+                            <span class="badge badge-definition">IA</span>
                         </div>
                         <div class="card-body">Le Transformer est une architecture de réseau de neurones introduite en 2017 (« Attention Is All You Need », Google). Il traite toute une séquence en parallèle grâce à un mécanisme d'<i>auto-attention</i> (<i>self-attention</i>) qui pondère, pour chaque token, sa pertinence vis-à-vis de tous les autres, capturant les dépendances à longue portée sans récurrence — contrairement aux RNN et LSTM, séquentiels, ou aux CNN, dont le champ récepteur est local. Il empile des blocs encodeur et/ou décodeur (attention multi-têtes et couches <i>feed-forward</i>, avec connexions résiduelles et normalisation de couche) et se trouve au cœur de la quasi-totalité des grands modèles de langage actuels : encodeur seul (BERT) pour la compréhension, décodeur seul (GPT, Claude) pour la génération, encodeur-décodeur (T5) pour la traduction. Comme le calcul est entièrement parallèle, il s'adapte bien aux GPU : l'entraînement et l'inférence à grande échelle reposent presque exclusivement sur le matériel NVIDIA — d'un simple T4 dans un notebook à des grappes de H100 — via <i>CUDA</i>, la plateforme de calcul parallèle de NVIDIA. Sur ces modèles se greffent des schémas d'agent comme la boucle <i>ReAct</i> (Reason + Act), qui alterne une étape de raisonnement et un appel d'outil, réinjecte l'observation obtenue dans le modèle et recommence jusqu'à produire une réponse finale. Pour standardiser la façon dont ces agents accèdent aux outils et aux données externes, Anthropic a publié en 2024 le <i>Model Context Protocol</i> (MCP) — un protocole client-serveur ouvert, rapidement adopté dans l'écosystème, qui expose outils, ressources et prompts à tout modèle compatible. Un schéma proche, la <i>génération augmentée de récupération</i> (RAG), ancre les réponses en injectant dans le prompt des passages pertinents tirés d'une base de connaissances plutôt qu'en appelant un outil.</div>
                     </div>
@@ -2710,9 +2710,65 @@ description: "Du voc' de dev'"
                         <div class="card-header">
                             <input type="checkbox" id="q310">
                             <label for="q310">Chunk</label>
-                            <span class="badge badge-definition">AI</span>
+                            <span class="badge badge-definition">IA</span>
                         </div>
                         <div class="card-body">En génération augmentée de récupération, un chunk est l'un des petits passages en lesquels un document est découpé avant d'être vectorisé (embedding) et indexé. Bien découper — choisir la taille et le recouvrement entre chunks consécutifs — est déterminant : des chunks trop gros diluent la pertinence et gaspillent du contexte, trop petits perdent le sens alentour. La récupération renvoie ensuite les quelques chunks les plus proches de la requête, ajoutés en tête du prompt.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <input type="checkbox" id="q311">
+                            <label for="q311">Nucleus sampling</label>
+                            <span class="badge badge-definition">IA</span>
+                        </div>
+                        <div class="card-body">Le nucleus sampling (ou échantillonnage par noyau / top-p en français) est une stratégie de décodage des modèles de langage. Plutôt que de toujours prendre le token le plus probable (<i>greedy</i>) ou d'échantillonner dans tout le vocabulaire, il conserve le plus petit ensemble de tokens de tête dont la probabilité cumulée atteint un seuil p (par exemple 0,9) — le <i>noyau</i> —, le renormalise et y échantillonne. Le vivier de candidats se resserre quand le modèle est sûr de lui et s'élargit quand il hésite, ce qui préserve la variété sans laisser passer de tokens improbables. Contrairement au <i>top-k</i>, qui fixe le nombre de candidats, le top-p l'adapte ; les deux se combinent généralement avec la température.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <input type="checkbox" id="q312">
+                            <label for="q312">OTP</label>
+                            <span class="badge badge-definition">Cyber</span>
+                        </div>
+                        <div class="card-body">Un OTP (mot de passe à usage unique) est un code numérique ou alphanumérique court, valable une seule fois et pour une fenêtre courte (souvent 30 à 60 secondes pour le TOTP, RFC 6238), envoyé par SMS ou e-mail, ou généré par une application d'authentification à partir d'un secret partagé et de l'heure courante. Contrairement à un mot de passe fixe, un OTP intercepté est inutilisable une fois expiré ou consommé, ce qui en fait un second facteur (2FA/MFA) standard pour les connexions, paiements et réinitialisations de mot de passe.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <input type="checkbox" id="q313">
+                            <label for="q313">Sentence Transformer</label>
+                            <span class="badge badge-definition">IA</span>
+                        </div>
+                        <div class="card-body">Un Sentence Transformer est un modèle Transformer, souvent une variante de BERT (modèle de TLAN développé par Google en 2018), affiné — généralement via un réseau siamois ou triplet — pour produire un seul vecteur dense par phrase ou paragraphe plutôt qu'un par token. Les textes sémantiquement proches se retrouvant proches dans cet espace vectoriel, c'est le moteur derrière la recherche sémantique, le clustering et l'étape de récupération du RAG, où une requête et un ensemble de chunks sont vectorisés une fois puis comparés par similarité cosinus plutôt que par correspondance exacte de mots-clés.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <input type="checkbox" id="q314">
+                            <label for="q314">Top-k sampling</label>
+                            <span class="badge badge-definition">IA</span>
+                        </div>
+                        <div class="card-body">Le top-k sampling (ou échantillonnage top-k en français) est une stratégie de décodage qui restreint le token suivant aux k candidats les plus probables (par exemple k = 40), renormalise leurs probabilités et échantillonne dans cet ensemble. Plus simple que le nucleus sampling, mais sa coupure est fixe : le même k s'applique que le modèle soit quasi certain (les candidats supplémentaires n'ajoutent que du bruit) ou réellement indécis (k peut alors être trop petit). Il se combine fréquemment avec le top-p et la température.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <input type="checkbox" id="q315">
+                            <label for="q315">CTE</label>
+                            <span class="badge badge-definition">SQL</span>
+                        </div>
+                        <div class="card-body">Une CTE (Common Table Expression ou expression de table commune en français) est un résultat temporaire nommé, déclaré avec le mot-clé <i>with</i> et disponible uniquement le temps de la requête qui suit. Elle aplatit une requête complexe en étapes nommées et lisibles, chacune réutilisable plusieurs fois, sans créer de vue ni de table temporaire. Une CTE récursive (<i>with recursive</i>) se référence elle-même pour parcourir des données hiérarchiques ou en graphe — organigrammes, nomenclatures, chemins d'arbre.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <input type="checkbox" id="q316">
+                            <label for="q316">NLP</label>
+                            <span class="badge badge-definition">IA</span>
+                        </div>
+                        <div class="card-body">Le NLP (Natural Language Processing, ou traitement automatique du langage naturel en français — TALN) est le domaine à la croisée de la linguistique et de l'apprentissage automatique qui vise à faire lire, interpréter et produire du langage humain par des machines. Les tâches classiques comprennent la tokenisation, l'étiquetage morpho-syntaxique, la reconnaissance d'entités nommées, l'analyse de sentiment, la traduction, le résumé et le question-réponse. Les premiers systèmes reposaient sur des règles écrites à la main et des modèles statistiques sur des sacs de mots ; le domaine a été transformé d'abord par les plongements lexicaux (word2vec, GloVe), puis par le Transformer, dont les modèles de langage pré-entraînés (BERT, GPT) constituent aujourd'hui le socle de la plupart des applications.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <input type="checkbox" id="q317">
+                            <label for="q317">k-NN</label>
+                            <span class="badge badge-definition">IA</span>
+                        </div>
+                        <div class="card-body">Le k-NN (k plus proches voisins) est un algorithme paresseux et non paramétrique : il mémorise le jeu d'entraînement puis, pour classer un nouveau point, regarde ses k points les plus proches selon une métrique de distance (euclidienne, cosinus, Manhattan) et prend le vote majoritaire — ou la moyenne, en régression. Il n'y a pas de phase d'apprentissage, donc chaque prédiction coûte un parcours complet des données, sauf si elles sont indexées (k-d tree, ball tree, HNSW). Un k petit suit le bruit et surapprend ; un k grand lisse trop et brouille les frontières entre classes. En classification binaire, un k impair est préférable : il exclut une égalité de vote (avec k = 4 les voisins peuvent se répartir 2–2, avec k = 5 c'est impossible). Les variables doivent d'abord être mises à l'échelle, sinon celle de plus grande amplitude domine la distance.</div>
                     </div>
                 </div>
             </div>
