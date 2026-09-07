@@ -843,8 +843,14 @@ function createCircularChart({
     const onePageClick = function () {
         $(document).on('click', '#ftco-nav a[href^="#"]', function (event) {
             event.preventDefault();
+            // The navbar is on every page but its section targets are not, so
+            // bail when the href points to an id absent from the current page.
+            const target = $($.attr(this, 'href'));
+            if (!target.length) {
+                return;
+            }
             $('html, body').animate({
-                scrollTop: $($.attr(this, 'href')).offset().top - 70
+                scrollTop: target.offset().top - 70
             }, 500);
         });
     };
@@ -970,8 +976,12 @@ function createCircularChart({
     const goHere = function () {
         $('.mouse-icon').on('click', function (event) {
             event.preventDefault();
+            const target = $(`#${goHereSection}`);
+            if (!target.length) {
+                return;
+            }
             $('html,body').animate({
-                scrollTop: $(`#${goHereSection}`).offset().top
+                scrollTop: target.offset().top
             }, 500, 'easeInOutExpo');
         });
     };
@@ -1135,9 +1145,10 @@ function initIndexPage(langPage) {
             navLink.addEventListener('click', function (event) {
                 event.preventDefault();
                 // Check if the link is in subsections
-                if ($(this).closest('#navi').length) {
+                const subSectionTarget = $($(this).attr('href'));
+                if ($(this).closest('#navi').length && subSectionTarget.length) {
                     $('html, body').animate({
-                        scrollTop: $($(this).attr('href')).offset().top - 180
+                        scrollTop: subSectionTarget.offset().top - 180
                     }, 500);
                 }
                 saveHashToSession(appAllSections[index]);
