@@ -1,0 +1,576 @@
+/* Shared rules, loaded before default.css and style.css. */
+
+:root {
+    --main: #3e64ff;
+    --link: var(--main);
+    --black: #000;
+    --white: #fff;
+    --gray: #6c757d;
+    --green: #28a745;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --dark: #343a40;
+    --light: #f8f9fa;
+    --lavender: #e6e6fa;
+    --cyan: #17a2b8;
+    --positive: #1e7e34;
+    --negative: #c82333;
+    --background: var(--white);
+    --text-color: var(--black);
+    --shadow-xs: #0000000d;
+    --shadow-sm: #0000001a;
+    --shadow-md: #0003;
+    --shadow-lg: #0000004d;
+}
+
+html.dark-mode {
+    --background: var(--black);
+    --text-color: var(--white);
+    --gray: #adb5bd;
+    --link: #5b7bff;
+    --positive: #28a745;
+    --negative: #dc3545;
+    --shadow-xs: #ffffff0d;
+    --shadow-sm: #ffffff14;
+    --shadow-md: #ffffff1f;
+    --shadow-lg: #fff3;
+}
+
+html.dark-mode h1,
+html.dark-mode h2,
+html.dark-mode h3 {
+    color: var(--text-color) !important;
+}
+
+html.dark-mode .card h2,
+html.dark-mode #article-shape .author {
+    color: initial !important;
+}
+
+/* .card keeps its white background in dark mode, so its inherited body
+   text must stay dark rather than the light --gray. */
+html.dark-mode .card {
+    color: var(--dark);
+}
+
+@font-face {
+    font-family: 'Poppins Windows';
+    src: local('Arial');
+    size-adjust: 110.7%;
+    ascent-override: 105%;
+    descent-override: 35%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: 'Poppins Mac/iOS';
+    src: local('Helvetica Neue'), local('Helvetica');
+    size-adjust: 110.7%;
+    ascent-override: 105%;
+    descent-override: 35%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: 'Poppins Linux';
+    src: local('Liberation Sans');
+    size-adjust: 110.7%;
+    ascent-override: 105%;
+    descent-override: 35%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: 'Poppins Android';
+    src: local('Roboto');
+    size-adjust: 111.1%;
+    ascent-override: 105%;
+    descent-override: 35%;
+    line-gap-override: 0%;
+}
+
+/* clip on <html> too: absolutely-positioned decoration (404 astronaut,
+   #contact bubble) is laid out against the viewport, so body's clip alone
+   doesn't contain it. clip (not hidden) keeps sticky/scroll behaviour. */
+html,
+body {
+    overflow-x: clip;
+}
+
+body {
+    font-family: Poppins, 'Poppins Windows', 'Poppins Mac/iOS', 'Poppins Linux', 'Poppins Android', sans-serif;
+    background-color: var(--background);
+    color: var(--gray);
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--link);
+    font-weight: bold;
+}
+
+a[href="#"] {
+    cursor: default;
+}
+
+[disabled] {
+    pointer-events: none;
+    cursor: default;
+}
+
+table {
+    border-collapse: collapse;
+    border-width: 1px;
+}
+
+th,
+td {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 14px;
+    border: 1px solid var(--text-color);
+}
+
+td strong {
+    color: var(--link);
+}
+
+sup {
+    background-color: var(--dark);
+    color: var(--white);
+    font-size: 10px;
+    padding: 4px;
+    margin: 2px;
+    top: -16px;
+}
+
+sup:hover {
+    background-color: var(--main);
+}
+
+#dark-icon {
+    color: var(--link);
+    font-size: 24px;
+    margin: 10px;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+#dark-icon:focus {
+    outline: unset;
+}
+
+.language-switch {
+    padding: 10px;
+}
+
+.lang-text {
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.lang-text.on {
+    color: var(--link);
+}
+
+.lang-text.off {
+    color: var(--text-color);
+}
+
+.toggle-container {
+    position: relative;
+    display: inline-block;
+    height: 25px;
+    width: 50px;
+    background-color: var(--lavender);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-slider {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: var(--main);
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 4px var(--shadow-md);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#language-toggle {
+    visibility: hidden;
+}
+
+#language-toggle:checked+.toggle-slider {
+    transform: translateX(25px);
+    background-color: var(--main);
+}
+
+/* Blog Article */
+
+.article-container h2 {
+    color: var(--link);
+}
+
+.title-center {
+    font-size: 40px;
+    color: var(--link);
+    font-weight: bold;
+    line-height: 50px;
+    margin-bottom: 25px;
+}
+
+.second-title {
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+/* Career Timeline */
+
+.animation-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin: 40px 0;
+    padding-left: 50px;
+}
+
+.road {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 4px;
+    background: repeating-linear-gradient(to bottom, var(--main) 0, var(--main) 10px, transparent 10px, transparent 20px);
+    border-radius: 2px;
+}
+
+.car {
+    position: absolute;
+    left: 22px;
+    top: 0;
+    font-size: 28px;
+    line-height: 1;
+    transform: translate(-50%, -50%) translateY(var(--car-offset, 0));
+    transition: transform 0.1s linear;
+    z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .car {
+        transition: none;
+    }
+}
+
+.city {
+    position: relative;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--link);
+}
+
+.city::before {
+    content: '';
+    position: absolute;
+    left: -35px;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    background: var(--main);
+    border: 3px solid var(--background);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--main);
+    transform: translateY(-50%);
+}
+
+.step {
+    position: relative;
+    font-size: 15px;
+    padding-left: 4px;
+}
+
+.step::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background: var(--background);
+    border: 2px solid var(--main);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+/* Rotating box  */
+
+#mountain {
+    width: 100%;
+}
+
+#future {
+    margin: clamp(12px, 4vw, 30px);
+    place-items: center;
+}
+
+.box-rotate {
+    position: relative;
+    width: min(300px, 80vw);
+    aspect-ratio: 1;
+    animation: rotate 8s infinite alternate;
+    transform-style: preserve-3d;
+}
+
+.img-rotate {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.span-inside {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--white);
+    font-size: 20px;
+    text-shadow: 0 2px 5px var(--dark);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateX(20deg) rotateY(20deg);
+    }
+
+    to {
+        transform: rotateX(-15deg) rotateY(-40deg);
+    }
+}
+
+#qrcode {
+    max-width: clamp(160px, 15vw, 288px);
+    height: auto;
+}
+
+#inpi-process {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    position: relative;
+    box-shadow: 0 4px 8px 0 var(--shadow-xs);
+}
+
+#mcs-design,
+#mcs-example,
+#programming {
+    max-width: 70vw;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+#pattern {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Project or Article */
+
+.read-zone {
+    max-width: 50%;
+    margin: 2rem auto;
+}
+
+@media (max-width: 1199.98px) {
+    .read-zone {
+        max-width: 75%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .read-zone {
+        max-width: 90%;
+    }
+}
+
+.read-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Video */
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Cards */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 1rem;
+    box-shadow: 0 0 4px var(--shadow-sm);
+    padding: 1.5rem;
+    margin: 20px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 12px var(--shadow-lg);
+}
+
+.bien {
+    border-left: 5px solid var(--green);
+}
+
+.pas-bien {
+    border-left: 5px solid var(--red);
+}
+
+.modere {
+    border-left: 5px solid var(--yellow);
+}
+
+.bloc-code {
+    position: relative;
+    background: var(--dark);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.bloc-code .lang-label {
+    position: absolute;
+    top: 1px;
+    left: 10px;
+    color: var(--yellow);
+    font-size: 10px;
+}
+
+.bloc-code .lang-code {
+    white-space: pre;
+    color: var(--white);
+    font-size: 13px;
+}
+
+/* Badges */
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: var(--white);
+    font-size: 0.75em;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: var(--main);
+}
+
+.badge-definition {
+    top: 35px;
+    right: 70px;
+    left: inherit;
+}
+
+/* FAQ accordion */
+
+.accordion > .card {
+    position: relative;
+    margin: 0.5rem 0;
+    border-radius: 0;
+    transition: none;
+}
+
+.accordion > .card:hover {
+    transform: none;
+    box-shadow: 0 0 4px var(--shadow-sm);
+}
+
+.accordion > .card .card-header {
+    padding: 0;
+}
+
+/* input sits directly in .card (before .card-header) so the plain sibling
+   combinator drives the panel, with no relational selector (Firefox 121+). */
+.accordion .card > input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.accordion .card-header label {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--dark);
+    transition: background 0.2s;
+}
+
+.accordion .card > input:focus-visible ~ .card-header label {
+    outline: 2px solid var(--dark);
+    outline-offset: -2px;
+}
+
+.accordion .card-header label::after {
+    content: '+';
+    font-size: 20px;
+    transition: transform 0.3s;
+}
+
+.accordion .card > input:checked ~ .card-header label::after {
+    transform: rotate(45deg);
+}
+
+/* Toggle display rather than animate height: definitions are too long for a fixed max-height. */
+
+.accordion .card-body {
+    display: none;
+    padding: 0 20px;
+    font-size: 0.95rem;
+    color: var(--dark);
+}
+
+.accordion .card > input:checked ~ .card-body {
+    display: block;
+    padding: 15px 20px;
+}

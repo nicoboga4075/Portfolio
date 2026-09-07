@@ -1,17 +1,5 @@
 /* General */
 
-:root {
-    --main: #3e64ff;
-    --black: #000;
-    --background: var(--white);
-    --text-color: var(--black);
-}
-
-html.dark-mode {
-    --background: var(--black);
-    --text-color: var(--white);
-}
-
 #ftco-loader {
     position: fixed;
     width: 96px;
@@ -19,8 +7,8 @@ html.dark-mode {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(255 255 255 / 90%);
-    box-shadow: 0 24px 64px rgb(0 0 0 / 24%);
+    background-color: #ffffffe6;
+    box-shadow: 0 24px 64px var(--shadow-md);
     border-radius: 16px;
     opacity: 0;
     visibility: hidden;
@@ -35,7 +23,7 @@ html.dark-mode {
     width: 100%;
     height: 100%;
     transform: none;
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 0;
     box-shadow: none;
 }
@@ -52,7 +40,7 @@ html.dark-mode {
     top: calc(50% - 24px);
     width: 48px;
     height: 48px;
-    border: 4px solid #ebefff;
+    border: 4px solid var(--lavender);
     border-top-color: var(--main);
     border-radius: 50%;
     animation: spinner-rotate 1s linear infinite;
@@ -69,8 +57,8 @@ html.dark-mode {
     width: 14px;
     height: 14px;
     margin-right: 8px;
-    border: 2px solid rgb(255 255 255 / 40%);
-    border-top-color: #fff;
+    border: 2px solid #fff6;
+    border-top-color: var(--white);
     border-radius: 50%;
     vertical-align: middle;
     animation: spinner-rotate 0.6s linear infinite;
@@ -84,29 +72,21 @@ html.dark-mode {
     color: inherit;
 }
 
-html.dark-mode .ftco-navbar-light:not(.awake,.scrolled) .navbar-nav > .nav-item > .nav-link span, 
+html.dark-mode .ftco-navbar-light:not(.awake,.scrolled) .navbar-nav > .nav-item > .nav-link span,
 html.dark-mode .resume-wrap .position,
 html.dark-mode .ftco-about ul.about-info li span:first-child,
 html.dark-mode .ftco-about .counter-wrap .text p span,
-html.dark-mode h1,
-html.dark-mode h2,
-html.dark-mode h3,
 html.dark-mode #navi li a:not(.current) {
     color: var(--text-color) !important;
 }
 
-html.dark-mode .card h2,
-html.dark-mode #article-shape .author {
-    color: initial !important;
-}
-
 html.dark-mode .ftco-navbar-light:not(.awake,.scrolled) .navbar-nav > .nav-item > .nav-link.active span {
-    color: var(--main) !important;
+    color: var(--link) !important;
 }
 
 html.dark-mode .heading-section h2,
 html.dark-mode h2.heading {
-    color: var(--main) !important;
+    color: var(--link) !important;
 }
 
 html.dark-mode #about-section .heading-section h2 {
@@ -114,7 +94,7 @@ html.dark-mode #about-section .heading-section h2 {
 }
 
 html.dark-mode .counter-wrap .text .number.xp {
-    color: var(--main) !important;
+    color: var(--link) !important;
 }
 
 html.dark-mode #last-update-date {
@@ -135,107 +115,8 @@ html.dark-mode .ftco-partner .partner img {
     border-radius: 4px;
 }
 
-@font-face {
-    font-family: 'Poppins Windows';
-    src: local('Arial');
-    size-adjust: 110.7%;
-    ascent-override: 105%;
-    descent-override: 35%;
-    line-gap-override: 0%;
-}
-
-@font-face {
-    font-family: 'Poppins Mac/iOS';
-    src: local('Helvetica Neue'), local('Helvetica');
-    size-adjust: 110.7%;
-    ascent-override: 105%;
-    descent-override: 35%;
-    line-gap-override: 0%;
-}
-
-@font-face {
-    font-family: 'Poppins Linux';
-    src: local('Liberation Sans');
-    size-adjust: 110.7%;
-    ascent-override: 105%;
-    descent-override: 35%;
-    line-gap-override: 0%;
-}
-
-@font-face {
-    font-family: 'Poppins Android';
-    src: local('Roboto');
-    size-adjust: 111.1%;
-    ascent-override: 105%;
-    descent-override: 35%;
-    line-gap-override: 0%;
-}
-
-body {
-    font-family: Poppins, 'Poppins Windows', 'Poppins Mac/iOS', 'Poppins Linux', 'Poppins Android', sans-serif !important;
-    background-color: var(--background);
-    color: var(--gray);
-}
-
-a {
-    cursor: pointer;
-}
-
-a[href="#"] {
-    cursor: default;
-}
-
 #navi li a.current {
-	color: var(--main) !important;
-}
-
-[disabled] {
-    pointer-events: none;
-    cursor: default;
-}
-
-table {
-    border-collapse: collapse;
-    border-width: 1px;
-}
-
-th,
-td {
-    text-align: center;
-    color: var(--text-color);
-    font-size: 14px;
-    border: 1px solid var(--text-color);
-}
-
-td strong {
-    color: var(--main);
-}
-
-sup {
-    background-color: var(--dark);
-    color: var(--white);
-    font-size: 10px;
-    padding: 4px;
-    margin: 2px;
-    top: -16px !important;
-}
-
-sup:hover {
-    background-color: var(--main);
-}
-
-#dark-icon {
-    color: var(--main);
-    font-size: 24px;
-    margin: 10px;
-    border: none;
-    background: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-#dark-icon:focus {
-    outline: unset;
+	color: var(--link) !important;
 }
 
 .open-mfp:hover,
@@ -245,7 +126,7 @@ sup:hover {
 }
 
 mark.highlight {
-    background-color: lavender;
+    background-color: var(--lavender);
     border: 1px solid var(--main);
 }
 
@@ -254,7 +135,7 @@ mark.highlight.current-match {
 }
 
 input[name="search-input"].highlight-flash {
-    box-shadow: 0 0 3px 3px var(--secondary) !important;
+    box-shadow: 0 0 3px 3px var(--gray) !important;
     transition: box-shadow 0.3s ease;
 }
 
@@ -268,17 +149,25 @@ input[name="search-input"].highlight-flash {
 .icon-search.search-help {
     animation: pulse-blue 2s ease-in-out;
     cursor: pointer;
-    color: var(--main);
+    color: var(--link);
 }
 
 #search-info {
-    color: var(--green);
+    color: var(--positive);
     font-style: italic;
 }
 
+#search-info:not(:empty)::before {
+    content: "\2713\00a0";
+}
+
 #search-info.no-result {
-    color: var(--red) !important;
+    color: var(--negative) !important;
     font-style: italic;
+}
+
+#search-info.no-result:not(:empty)::before {
+    content: "\26a0\00a0";
 }
 
 .search-form .icon-search,
@@ -298,8 +187,7 @@ input[name="search-input"].highlight-flash {
     max-width: 34rem;
     margin-inline: auto;
     margin-bottom: 0;
-    color: var(--text-color);
-    opacity: 0.7;
+    color: var(--gray);
 }
 
 /* About Section */
@@ -341,6 +229,31 @@ input[name="search-input"].highlight-flash {
     padding: 0;
 }
 
+/* Growing blue underline on hover, mirroring the top navbar's
+   .nav-link span::before (scoped to .ftco-navbar-light, so it never
+   reaches the resume sub-nav). The current item keeps its own ::after dash. */
+#navi li a span {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+}
+
+#navi li a span::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--main);
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+#navi li a:not(.current):hover span::before {
+    transform: scaleX(1);
+}
+
 #js {
     background-position: center;
     border: 1px solid var(--cyan);
@@ -365,7 +278,7 @@ progress {
 }
 
 progress::-webkit-progress-bar {
-    background-color: #edf5ff;
+    background-color: var(--lavender);
     border-radius: 0.5rem;
 }
 
@@ -381,7 +294,7 @@ progress::-webkit-progress-value {
 /* Navbar */
 
 .navbar-nav > .nav-item .nav-link.active span {
-    color: color-mix(in srgb, var(--main) 90%, var(--black));
+    color: #385ae6;
 }
 
 /* Language Switcher */
@@ -389,21 +302,6 @@ progress::-webkit-progress-value {
 .language-switch {
     gap: 15px;
     position: relative;
-    padding: 10px;
-}
-
-.lang-text {
-    font-size: 16px;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.lang-text.on {
-    color: var(--main);
-}
-
-.ftco-navbar-light:not(.awake) .lang-text.off {
-    color: var(--text-color);
 }
 
 html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
@@ -413,6 +311,12 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 
 @media(max-width: 991.98px) {
     .lang-text.off.top-scroll {
+        color: var(--white) !important;
+    }
+
+    /* Active language over the dark mobile hero: --link only hits 4.47:1.
+       The toggle pill still shows which language is selected. */
+    .ftco-navbar-light:not(.scrolled) .lang-text.on {
         color: var(--white) !important;
     }
 
@@ -431,37 +335,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     }
 }
 
-.toggle-container {
-    position: relative;
-    height: 25px;
-    width: 50px;
-    background-color: lavender;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.toggle-slider {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    background-color: var(--main);
-    border-radius: 50%;
-    top: 0;
-    left: 0;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-#language-toggle {
-    visibility: hidden;
-}
-
-#language-toggle:checked+.toggle-slider {
-    transform: translateX(25px);
-    background-color: var(--main);
-}
-
 .about-author {
     margin-top: 20px;
 }
@@ -470,132 +343,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 
 .blog-entry .article-image:hover {
     opacity: 0.7 !important;
-}
-
-.article-container h2 {
-    color: var(--main);
-}
-
-.title-center {
-    font-size: 40px;
-    color: var(--main);
-    font-weight: bold;
-    line-height: 50px;
-    margin-bottom: 25px;
-}
-
-.second-title {
-    font-style: italic;
-    margin-bottom: 20px;
-}
-
-/* Career Timeline */
-
-.animation-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    margin: 40px 0;
-    padding-left: 50px;
-}
-
-.road {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 20px;
-    width: 4px;
-    background: repeating-linear-gradient(to bottom, var(--main) 0, var(--main) 10px, transparent 10px, transparent 20px);
-    border-radius: 2px;
-}
-
-.car {
-    position: absolute;
-    left: 22px;
-    top: 0;
-    font-size: 28px;
-    line-height: 1;
-    transform: translate(-50%, -50%) translateY(var(--car-offset, 0));
-    transition: transform 0.1s linear;
-    z-index: 2;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .car {
-        transition: none;
-    }
-}
-
-.city {
-    position: relative;
-    font-size: 22px;
-    font-weight: bold;
-    color: var(--main);
-}
-
-.city::before {
-    content: '';
-    position: absolute;
-    left: -35px;
-    top: 50%;
-    width: 14px;
-    height: 14px;
-    background: var(--main);
-    border: 3px solid var(--background);
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px var(--main);
-    transform: translateY(-50%);
-}
-
-.step {
-    position: relative;
-    font-size: 15px;
-    padding-left: 4px;
-}
-
-.step::before {
-    content: '';
-    position: absolute;
-    left: -32px;
-    top: 50%;
-    width: 8px;
-    height: 8px;
-    background: var(--background);
-    border: 2px solid var(--main);
-    border-radius: 50%;
-    transform: translateY(-50%);
-}
-
-#qrcode {
-    max-width: 15vw;
-    height: auto;
-}
-
-#inpi-process {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: auto;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    position: relative;
-    box-shadow: 0 4px 8px 0 rgb(15 41 48 / 5%);
-}
-
-#mcs-design,
-#mcs-example,
-#programming {
-    max-width: 70vw;
-    height: auto;
-    margin-bottom: 15px;
-}
-
-#pattern {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
 }
 
 /* Contact Popup */
@@ -608,7 +355,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     background-color: var(--main);
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgb(0 0 0 / 50%);
+    box-shadow: 0 4px 6px var(--shadow-lg);
     z-index: 1000;
 }
 
@@ -624,7 +371,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     width: 300px;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgb(0 0 0 / 50%);
+    box-shadow: 0 4px 6px var(--shadow-lg);
     overflow: hidden;
     z-index: 1000;
 }
@@ -659,6 +406,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     background-repeat: no-repeat;
 }
 
+/* stays --main, not --link: #contact-window is bg-white in both themes */
 #contact-link a {
     color: var(--main);
     text-decoration: none;
@@ -758,7 +506,8 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 /* Carousel Section */
 
 .owl-menus {
-    gap: 60px;
+    flex-wrap: wrap;
+    gap: clamp(16px, 6vw, 60px);
 }
 
 .owl-menu {
@@ -767,9 +516,11 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     border-bottom: 2px solid transparent;
 }
 
+/* Lightened blue: the carousel sits on a fixed #191919 panel in both
+   themes, where --main (#3e64ff) only reaches 3.7:1. */
 .owl-menu.active {
-    color: color-mix(in srgb, var(--main) 75%, var(--white));
-    border-bottom-color: color-mix(in srgb, var(--main) 75%, var(--white));
+    color: #6e8bff;
+    border-bottom-color: #6e8bff;
 }
 
 .owl-carousel {
@@ -793,16 +544,16 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 .owl-prev,
 .owl-next {
     top: 50%;
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
 }
 
 .owl-prev {
-    left: -25px;
+    left: -28px;
 }
 
 .owl-next {
-    right: -25px;
+    right: -28px;
 }
 
 .owl-theme .owl-nav [class*="owl-"]:hover {
@@ -868,14 +619,16 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     opacity: 0.8;
 }
 
+/* --green / --red, not --positive / --negative: #bingo-timer sits on the
+   always-black footer, where the light-theme (darkened) variants fail. */
 .victory {
-    color: var(--success);
+    color: var(--green);
     border-radius: 10px;
     animation: blink 0.5s alternate 5;
 }
 
 .defeat {
-    color: var(--danger);
+    color: var(--red);
     border-radius: 10px;
     animation: shake 0.5s;
 }
@@ -925,7 +678,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     border-radius: 10px;
     padding: 10px;
     max-width: 200px;
-    box-shadow: 2px 2px 5px rgb(0 0 0 / 30%);
+    box-shadow: 2px 2px 5px var(--shadow-lg);
 }
 
 .bulle-bd::after {
@@ -947,31 +700,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 .chart-container {
     min-height: 250px;
     max-height: 500px;
-}
-
-/* Project or Article */
-
-.read-zone {
-    max-width: 50%;
-    margin: 2rem auto;
-}
-
-@media (max-width: 1199.98px) {
-    .read-zone {
-        max-width: 75%;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .read-zone {
-        max-width: 90%;
-    }
-}
-
-.read-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 #search-suggestions {
@@ -1002,147 +730,4 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 
 input[name="search-input"] {
     border-color: var(--main) !important;
-}
-
-/* Video */
-
-.video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%;
-
-    /* 16:9 ratio */
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-}
-
-.video-wrapper video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-/* Cards */
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.card {
-    background: var(--white);
-    border-radius: 1rem;
-    box-shadow: 0 0 4px rgb(0 0 0 / 10%);
-    padding: 1.5rem;
-    margin: 20px 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 0 12px rgb(0 0 0 / 30%);
-}
-
-.bien {
-    border-left: 5px solid var(--green);
-}
-
-.pas-bien {
-    border-left: 5px solid var(--red);
-}
-
-.modere {
-    border-left: 5px solid var(--yellow);
-}
-
-.bloc-code {
-    position: relative;
-    background: var(--dark);
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    margin: 1rem 0;
-    overflow-x: auto;
-}
-
-.bloc-code .lang-label {
-    position: absolute;
-    top: 1px;
-    left: 10px;
-    color: var(--yellow);
-    font-size: 10px;
-}
-
-.bloc-code .lang-code {
-    white-space: pre;
-    color: var(--white);
-    font-size: 13px;
-}
-
-/* Badges */
-
-.badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    color: var(--white);
-    font-size: 0.75em;
-    padding: 5px 10px !important;
-    border-radius: 20px;
-    background-color: var(--main);
-}
-
-.badge-definition {
-    top: 35px !important;
-    right: 70px !important;
-    left: inherit !important;
-}
-
-/* Rotating box  */
-
-#mountain {
-    width: 100%;
-}
-
-#future {
-    margin: 30px;
-    place-items: center;
-}
-
-.box-rotate {
-    position: relative;
-    width: 300px;
-    aspect-ratio: 1;
-    animation: rotate 8s infinite alternate;
-    transform-style: preserve-3d;
-}
-
-.img-rotate {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 25px;
-}
-
-.span-inside {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    color: var(--white);
-    font-size: 20px;
-    text-shadow: 0 2px 5px var(--dark);
-}
-
-@keyframes rotate {
-    from {
-        transform: rotateX(20deg) rotateY(20deg);
-    }
-
-    to {
-        transform: rotateX(-15deg) rotateY(-40deg);
-    }
 }
