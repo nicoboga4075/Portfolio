@@ -835,23 +835,9 @@ scrollspy: true
                         <span class="owl-menu" data-target="#soft-skills">Soft skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Personal attributes or interpersonal abilities that enhance how you work and interact with others"></i></span>
                         <span class="owl-menu" data-target="#mad-skills">Mad skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="Atypical abilities or unique talents, often developed through personal passions"></i></span>
                     </div>
-                    {% include "hardskills.html" %}
-                    <div class="owl-carousel owl-theme d-none" id="soft-skills">
-                        <div class="d-flex flex-column align-items-center"><img src="images/team.png" class="img-fluid" alt="Team spirit" loading="lazy" height="75" width="75"><span>Team spirit</span></div>
-                        <div class="d-flex flex-column align-items-center"><img src="images/leadership.png" class="img-fluid" alt="Leadership" loading="lazy" height="75" width="75"><span>Leadership</span></div>
-                        <div class="d-flex flex-column align-items-center"><img src="images/communication.png" class="img-fluid" alt="Communication" loading="lazy" height="75" width="75"><span>Communication</span></div>
-                        <div class="d-flex flex-column align-items-center"><img src="images/adaptability.png" class="img-fluid" alt="Adaptability" loading="lazy" height="75" width="75"><span>Adaptability</span></div>
-                        <div class="d-flex flex-column align-items-center"><img src="images/proactivity.png" class="img-fluid" alt="Proactivity" loading="lazy" height="75" width="75"><span>Proactivity</span></div>
-                        <div class="d-flex flex-column align-items-center"><img src="images/independence.png" class="img-fluid" alt="Independence" loading="lazy" height="75" width="75"><span>Independence</span></div>
-                        <div class="d-flex flex-column align-items-center"><img src="images/empathy.png" class="img-fluid" alt="Empathy" loading="lazy" height="75" width="75"><span>Empathy</span></div>
-                        <div class="d-flex flex-column align-items-center"><img src="images/creativity.png" class="img-fluid" alt="Creativity" loading="lazy" height="75" width="75"><span>Creativity</span></div>
-                    </div>
-                    <div class="owl-carousel owl-theme d-none" id="mad-skills">
-                        <div class="d-flex flex-column align-items-center"><img src="images/tennis.png" class="img-fluid" alt="Tennis" loading="lazy" height="75" width="75"><span>Tennis</span></div>
-                        <div class="d-flex flex-column align-items-center"><img src="images/chess.png" class="img-fluid" alt="Chess" height="75" loading="lazy" width="75"><span>Chess</span></div>
-                        <div class="d-flex flex-column align-items-center"><img src="images/travel.png" class="img-fluid" alt="Travel" loading="lazy" height="75" width="75"><span>Travel</span></div>
-                        <div class="d-flex flex-column align-items-center"><img src="images/writing.png" class="img-fluid" alt="Writing" loading="lazy" height="75" width="75"><span>Writing</span></div>
-                    </div>
+                    {% include "hard-skills.html" %}
+                    {% include "soft-skills.html" %}
+                    {% include "mad-skills.html" %}
                 </div>
             </section>
             {% endif %}
