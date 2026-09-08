@@ -44,8 +44,8 @@ export default defineConfig([
     },
 	rules : {
 	  // Called from inline HTML or external callbacks (ESLint can't see the usage),
-	  // or intentionally kept for future use (getCurrentOnlyDate)
-	  "no-unused-vars": ["warn", { varsIgnorePattern: "^(initPage|initCaptcha|initArticle|gapiLoaded|gisLoaded|getCurrentOnlyDate)$" }],
+	  // or kept for future use (parseDate).
+	  "no-unused-vars": ["warn", { varsIgnorePattern: "^(initPage|initCaptcha|initArticle|gapiLoaded|gisLoaded|parseDate)$" }],
 	  "no-undef": "error",
 	  "no-var": "warn",
 	  // warn/error are trusted as real diagnostics; only console.log is flagged
@@ -84,6 +84,8 @@ export default defineConfig([
         appName: "readonly",
         appRoutes: "readonly",
         getHashFromSession: "readonly",
+        convertDate: "readonly",
+        getCurrentFullDate: "readonly",
         xp: "readonly",
         email: "readonly",
         city: "readonly",

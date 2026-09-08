@@ -460,18 +460,6 @@ function debounce(func, delay) {
     };
 }
 
-function capitalize(string, locale, allWords = true) {
-    if (!allWords) {
-        return string.charAt(0).toLocaleUpperCase(locale) + string.slice(1);
-    }
-    return string.split(' ').map(word => {
-        if (word.length === 0) return word;
-        const first = word[0].toLocaleUpperCase(locale);
-        const remaining = word.slice(1).toLocaleLowerCase(locale);
-        return first + remaining;
-    }).join(' ');
-}
-
 function removeTrailingEquals(string) {
     let end = string.length;
     while (end > 0 && string[end - 1] === '=') {
@@ -519,24 +507,6 @@ function scrollToNextHighlight() {
     });
 }
 
-function convertDate(dateString, lang, target = 'iso') {
-    if (target === 'iso') {
-        const [day, month, year] = dateString.split('/');
-        return `${year}-${month}-${day}`;
-    }
-    if (target === 'fr') {
-        const [year, month, day] = dateString.split('-');
-        return `${day}/${month}/${year}`;
-    }
-    // target === 'readable': Transform 2000-01-01 into 1 Janvier 2000 or January 1, 2020
-    const date = new Date(dateString);
-    return capitalize(date.toLocaleDateString(lang, {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-    }), lang);
-}
-
 function saveHashToSession(hash) {
     sessionStorage.setItem('currentHash', hash);
 }
@@ -578,14 +548,6 @@ function toggleVisibility(selector, visibleClass = 'd-flex') {
     }
 }
 
-function getCurrentOnlyDate(lang, date = Date.now()) {
-    return new Date(date).toLocaleDateString(lang);
-}
-
-function getCurrentFullDate(lang, date = Date.now()) {
-    return new Date(date).toLocaleString(lang);
-}
-
 function lastCvUpdate(lang) {
     const lastUpdateDate = $('#last-update-date');
     fetch(`/.netlify/functions/env?lang=${lang}`)
@@ -594,7 +556,7 @@ function lastCvUpdate(lang) {
             return res.json();
         })
         .then(data => {
-            lastUpdateDate.text(data.date ? getCurrentFullDate(lang, data.date) : getCurrentFullDate(lang));
+            lastUpdateDate.text(convertDate(data.date, lang, { dateStyle: 'short', timeStyle: 'medium' }, false));
         })
         .catch(error => {
             console.error(error);
@@ -1406,7 +1368,7 @@ function initBlogPage(langPage) {
                 });
                 $('.heading').text(recentArticle.title[langPage]);
                 $('.meta')
-                    .text(convertDate(recentArticle.date, langPage, 'readable'))
+                    .text(convertDate(recentArticle.date, langPage))
                     .prepend($('<i>', { 'class': 'icon-calendar' }), ' ');
             }
 

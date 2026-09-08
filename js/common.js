@@ -54,6 +54,76 @@ function getCurrentLanguage() {
     return document.documentElement.lang;
 }
 
+function capitalize(string, locale, allWords = true) {
+    if (!allWords) {
+        return string.charAt(0).toLocaleUpperCase(locale) + string.slice(1);
+    }
+    return string.split(' ').map(word => {
+        if (word.length === 0) return word;
+        const first = word[0].toLocaleUpperCase(locale);
+        const remaining = word.slice(1).toLocaleLowerCase(locale);
+        return first + remaining;
+    }).join(' ');
+}
+
+// `date` is anything `new Date()` accepts: an ISO string ("2025-07-26",
+// "2026-05-24T13:48:02Z") or a timestamp (Date.now()); omitted -> now.
+// `options` is forwarded to toLocaleString. For 2000-01-01 13:05:09, en / fr:
+//   dateStyle: 'full'    "Saturday, January 1, 2000"     "samedi 1 janvier 2000"
+//              'long'     "January 1, 2000"              "1 janvier 2000"
+//              'medium'   "Jan 1, 2000"                  "1 janv. 2000"
+//              'short'    "1/1/00"                       "01/01/2000"
+//   timeStyle: 'full'    "1:05:09 PM <timezone name>"    "13:05:09 <nom du fuseau>"
+//              'long'     "1:05:09 PM UTC"               "13:05:09 UTC"
+//              'medium'   "1:05:09 PM"                   "13:05:09"
+//              'short'    "1:05 PM"                       "13:05"
+// Combined, the date/time connector follows dateStyle: 'full'/'long' -> " at " / " à ", 'medium'/'short' -> ", " (en) / ", " or " " (fr).
+function convertDate(date, lang, options = { dateStyle: 'long' }, capitalized = true) {
+    const text = new Date(date ?? Date.now()).toLocaleString(lang, options);
+    return capitalized ? capitalize(text, lang) : text;
+}
+
+function getCurrentFullDate(lang, withTime = true) {
+    return convertDate(Date.now(), lang, {
+        dateStyle: 'short',
+        ...(withTime && { timeStyle: 'medium' })
+    }, false);
+}
+
+// Inverse of convertDate. `text` is a written date in `lang` (as produced by
+// convertDate with dateStyle 'long'), optionally with a time; matching is
+// case-insensitive. For 2000-01-01 13:05, en / fr:
+//   "January 1, 2000"             "1 janvier 2000"          -> "01/01/2000"
+//   "January 1, 2000 at 1:05 PM"  "1 janvier 2000 à 13:05"  -> "01/01/2000 13:05"
+// With `iso: true`: "2000-01-01" / "2000-01-01T13:05". The time part is kept
+// only if present, converted to 24h unless `hour12` is true (ignored when iso).
+function parseDate(text, lang, iso = false, hour12 = false) {
+    const months = Array.from({ length: 12 }, (_, i) =>
+        new Date(2000, i, 15).toLocaleDateString(lang, { month: 'long' }).toLocaleLowerCase(lang)
+    );
+    const parts = text.toLocaleLowerCase(lang).replace(',', '').split(' ');
+    const month = String(months.indexOf(parts.find(part => isNaN(part))) + 1).padStart(2, '0');
+    const day = parts.find(part => Number(part) <= 31).padStart(2, '0');
+    const year = parts.find(part => Number(part) > 31);
+
+    let time = '';
+    const clock = parts.find(part => /^\d{1,2}:\d{2}/.test(part));
+    if (clock) {
+        const meridiem = parts.find(part => part === 'am' || part === 'pm');
+        if (hour12 && meridiem && !iso) {
+            time = `${clock} ${meridiem.toUpperCase()}`;
+        } else {
+            const [hour, minute, second] = clock.split(':');
+            const hour24 = meridiem ? Number(hour) % 12 + (meridiem === 'pm' ? 12 : 0) : Number(hour);
+            time = `${String(hour24).padStart(2, '0')}:${minute}` + (second ? `:${second}` : '');
+        }
+    }
+
+    return iso
+        ? `${year}-${month}-${day}` + (time ? `T${time}` : '')
+        : `${day}/${month}/${year}` + (time ? ` ${time}` : '');
+}
+
 function switchLanguage(url, langOrigin = langNetlify, langTarget = langAuthor) {
     try {
         const urlObj = new URL(url, window.location.origin);
