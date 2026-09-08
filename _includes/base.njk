@@ -2,13 +2,17 @@
 base: "../../"
 onload: "initPage()"
 ---
+{%- set parts = page.fileSlug.split("_") -%}
+{%- set suffix = parts[parts.length - 1] -%}
+{%- set lang = suffix if suffix.length == 2 else "en" -%}
+{%- set locale = { "en": "en_US", "fr": "fr_FR" }[lang] -%}
 <!DOCTYPE html>
-<html lang="{{ "fr" if "_fr" in page.fileSlug else "en" }}">
+<html lang="{{ lang }}">
     <head>
         <title>{{ title | safe }}</title>
         {% include "metas.html" %}
         <meta name="description" content="{{ description | safe }}">
-        <meta http-equiv="Content-Language" content="{{ "fr_FR" if "_fr" in page.fileSlug else "en_US" }}">
+        <meta http-equiv="Content-Language" content="{{ locale }}">
         {% include "poppins.html" %}
         <base href="{{ base }}">
         {% include "manifest.html" %}
