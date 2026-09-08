@@ -1,11 +1,8 @@
-<li>
-    Outils internes :
-    <ul>
-        <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/net-survey">Net-Survey</a> : création de questionnaires</li>
-        <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/ethnos">Ethnos</a> : analyse de données collectées</li>
-        <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/web-reports">Web Reports</a> : développement et déploiement applicatif</li>
-        {%- if extraTool %}
-        <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/{{ extraTool.slug }}">{{ extraTool.name }}</a> : {{ extraTool.desc }}</li>
-        {%- endif %}
-    </ul>
-</li>
+<ul>
+    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/net-survey">Net-Survey</a> : création de questionnaires</li>
+    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/ethnos">Ethnos</a> : analyse de données collectées</li>
+    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/web-reports">Web Reports</a> : développement et déploiement applicatif</li>
+    {%- if extraTool %}
+    <li><a target="_blank" rel="noopener" href="https://www.soft-concept.com/{{ extraTool.slug }}">{{ extraTool.name }}</a> : {{ extraTool.desc }}</li>
+    {%- endif %}
+</ul>

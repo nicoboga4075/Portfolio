@@ -22,7 +22,10 @@ description: "Panel MNT"
             <ul>
                 <li><strong>HTML, CSS, JavaScript</strong></li>
                 {% set extraTool = { slug: "panel-manager", name: "Panel Manager", desc: "survey management and panel monitoring" } %}
-                {% include "soft-concept-tools_en.html" %}
+                <li>
+                    Internal tools:
+                    {% include "soft-concept-tools_en.html" %}
+                </li>
             </ul>
             <h2>🗂️ Application structure</h2>
             <h3>👨‍💼 Back Office (Administrators)</h3>
