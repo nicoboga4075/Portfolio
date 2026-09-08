@@ -78,8 +78,8 @@ function capitalize(string, locale, allWords = true) {
 //              'medium'   "1:05:09 PM"                   "13:05:09"
 //              'short'    "1:05 PM"                       "13:05"
 // Combined, the date/time connector follows dateStyle: 'full'/'long' -> " at " / " à ", 'medium'/'short' -> ", " (en) / ", " or " " (fr).
-function convertDate(date, lang, options = { dateStyle: 'long' }, capitalized = true) {
-    const text = new Date(date ?? Date.now()).toLocaleString(lang, options);
+function convertDate(date, lang, options, capitalized = true) {
+    const text = new Date(date ?? Date.now()).toLocaleString(lang, options ?? { dateStyle: 'long' });
     return capitalized ? capitalize(text, lang) : text;
 }
 
@@ -102,26 +102,28 @@ function parseDate(text, lang, iso = false, hour12 = false) {
         new Date(2000, i, 15).toLocaleDateString(lang, { month: 'long' }).toLocaleLowerCase(lang)
     );
     const parts = text.toLocaleLowerCase(lang).replace(',', '').split(' ');
-    const month = String(months.indexOf(parts.find(part => isNaN(part))) + 1).padStart(2, '0');
+    const month = String(months.indexOf(parts.find(part => Number.isNaN(Number(part)))) + 1).padStart(2, '0');
     const day = parts.find(part => Number(part) <= 31).padStart(2, '0');
     const year = parts.find(part => Number(part) > 31);
+    const date = iso ? `${year}-${month}-${day}` : `${day}/${month}/${year}`;
 
-    let time = '';
     const clock = parts.find(part => /^\d{1,2}:\d{2}/.test(part));
-    if (clock) {
-        const meridiem = parts.find(part => part === 'am' || part === 'pm');
-        if (hour12 && meridiem && !iso) {
-            time = `${clock} ${meridiem.toUpperCase()}`;
-        } else {
-            const [hour, minute, second] = clock.split(':');
-            const hour24 = meridiem ? Number(hour) % 12 + (meridiem === 'pm' ? 12 : 0) : Number(hour);
-            time = `${String(hour24).padStart(2, '0')}:${minute}` + (second ? `:${second}` : '');
-        }
+    if (!clock) {
+        return date;
     }
 
-    return iso
-        ? `${year}-${month}-${day}` + (time ? `T${time}` : '')
-        : `${day}/${month}/${year}` + (time ? ` ${time}` : '');
+    const meridiem = parts.find(part => part === 'am' || part === 'pm');
+    if (hour12 && meridiem && !iso) {
+        return `${date} ${clock} ${meridiem.toUpperCase()}`;
+    }
+
+    const [hour, minute, second] = clock.split(':');
+    let hour24 = Number(hour);
+    if (meridiem) {
+        hour24 = hour24 % 12 + (meridiem === 'pm' ? 12 : 0);
+    }
+    const time = `${String(hour24).padStart(2, '0')}:${minute}` + (second ? `:${second}` : '');
+    return iso ? `${date}T${time}` : `${date} ${time}`;
 }
 
 function switchLanguage(url, langOrigin = langNetlify, langTarget = langAuthor) {
