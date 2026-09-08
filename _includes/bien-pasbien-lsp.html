@@ -1,0 +1,54 @@
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+class Customer {
+    calculatePrice(cart) { return cart; }
+}
+class ProCustomer extends Customer {
+    calculatePrice(cart) { return cart * 0.9; }
+}
+class VipCustomer extends Customer {
+    calculatePrice(cart) { return cart * 0.8; }
+}
+[ new Customer(), new ProCustomer(), new VipCustomer() ]
+.forEach(c =&gt; console.log(c.calculatePrice(100)));
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+class Customer:
+    def calculate_price(self, cart):
+        return cart
+class ProCustomer(Customer):
+    def calculate_price(self, cart):
+        return cart * 0.9
+class VipCustomer(Customer):
+    def calculate_price(self, cart):
+        return cart * 0.8
+for customer in [Customer(), ProCustomer(), VipCustomer()]:
+    print(customer.calculate_price(100))
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+using System;
+class Customer {
+    public virtual double CalculatePrice(double cart) =&gt; cart;
+}
+class ProCustomer : Customer {
+    public override double CalculatePrice(double cart) =&gt; cart * 0.9;
+}
+class VipCustomer : Customer {
+    public override double CalculatePrice(double cart) =&gt; cart * 0.8;
+}
+class Program {
+    static void Main() {
+        Customer[] customers = { new Customer(), new ProCustomer(), new VipCustomer() };
+        foreach (var c in customers)
+        Console.WriteLine(c.CalculatePrice(100));
+    }
+}
+                    </span>
+                </div>

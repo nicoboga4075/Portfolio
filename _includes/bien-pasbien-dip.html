@@ -1,0 +1,63 @@
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+class MessageService {
+    send(msg) {}
+}
+class EmailService extends MessageService {
+    send(msg) { console.log(msg); }
+}
+class OrderManager {
+    constructor(service) {
+        this.service = service;
+    }
+    notify(message) {
+        this.service.send(message);
+    }
+}
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+class MessageService:
+    def send(self, message):
+        pass
+class EmailService(MessageService):
+    def send(self, message):
+        print(f"Email sent: {message}")
+class OrderManager:
+    def __init__(self, service):
+        self.service = service
+    def notify(self):
+        self.service.send("Order confirmed")
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+public interface IMessageService
+{
+    void Send(string message);
+}
+public class EmailService : IMessageService
+{
+    public void Send(string message)
+    {
+        Console.WriteLine($"Email sent: {message}");
+    }
+}
+public class OrderManager
+{
+    private readonly IMessageService _service;
+    public OrderManager(IMessageService service)
+    {
+        _service = service;
+    }
+    public void Notify()
+    {
+        _service.Send("Order confirmed");
+    }
+}
+                    </span>
+                </div>

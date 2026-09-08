@@ -1,0 +1,13 @@
+                <div class="bloc-code">
+                    <span class="lang-label">SQL</span>
+                    <span class="lang-code">
+CREATE TABLE accounts (
+    id INTEGER PRIMARY KEY,
+    balance INTEGER
+);
+-- A negative balance should not be allowed in a banking context
+BEGIN;
+UPDATE accounts SET balance = balance - 200 WHERE id = 1;
+COMMIT;
+                    </span>
+                </div>

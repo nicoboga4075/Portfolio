@@ -1,0 +1,57 @@
+                <div class="bloc-code">
+                    <span class="lang-label">JavaScript</span>
+                    <span class="lang-code">
+class Animal {
+    eat() { }
+    fly() { }
+}
+class Cat extends Animal {
+    fly() {
+    // Useless for a cat
+    }
+}
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">Python</span>
+                    <span class="lang-code">
+class Animal:
+    def eat(self):
+        pass
+    def fly(self):
+        pass
+class Cat(Animal):
+    def fly(self):
+    # Useless for a cat
+        pass
+                    </span>
+                </div>
+                <div class="bloc-code">
+                    <span class="lang-label">C#</span>
+                    <span class="lang-code">
+public abstract class Animal
+{
+    public abstract void Eat();
+    public abstract void Fly();
+}
+/*
+public interface IAnimal
+{
+    void Eat();
+    void Fly();
+}
+*/
+public class Cat : Animal
+{
+    public override void Eat()
+    {
+        // Eats normally
+        Console.WriteLine("Cat is eating");
+    }
+    public void Fly()
+    {
+        // Useless for a cat but must be implemented
+    }
+}
+                    </span>
+                </div>
