@@ -4,15 +4,14 @@ onload: "initPage()"
 ---
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else "en" -%}
-{%- set locale = { "en": "en_US", "fr": "fr_FR" }[lang] -%}
+{%- set lang = suffix if suffix.length == 2 else languages.default -%}
 <!DOCTYPE html>
-<html lang="{{ lang }}">
+<html lang="{{ lang }}" data-default-lang="{{ languages.default }}" data-author-lang="{{ languages.author }}" data-languages="{% for code, locale in languages.locales %}{{ code }}{% if not loop.last %} {% endif %}{% endfor %}">
     <head>
         <title>{{ title | safe }}</title>
         {% include "metas.html" %}
         <meta name="description" content="{{ description | safe }}">
-        <meta http-equiv="Content-Language" content="{{ locale }}">
+        <meta http-equiv="Content-Language" content="{{ languages.locales[lang] }}">
         {% include "poppins.html" %}
         <base href="{{ base }}">
         {% include "manifest.html" %}

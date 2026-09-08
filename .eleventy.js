@@ -38,6 +38,11 @@ module.exports = function configureEleventy(eleventyConfig) {
     const preset = lighthousePlugin?.inputs?.settings?.preset ?? "mobile";
     eleventyConfig.addGlobalData("viewport", preset);
     eleventyConfig.addGlobalData("author", "Nicolas BOGALHEIRO");
+    eleventyConfig.addGlobalData("languages", {
+        default: "en",
+        author: "fr",
+        locales: { en: "en_US", fr: "fr_FR" }
+    });
     for (const dir of passthroughDirs) {
         if (fs.existsSync(dir)) {
             eleventyConfig.addPassthroughCopy(dir);

@@ -18,11 +18,12 @@ const appRoutes = {
     ...appDefaultRoutes
 };
 
-// "en" is the language the site is deployed under (the Netlify default);
-// "fr" is the author's own language.
-const langNetlify = "en";
-const langAuthor = "fr";
-const appLanguages = new Set([langNetlify, langAuthor]);
+// The site is deployed under the "default" language (the Netlify default);
+// "author" is the author's own language. Both are set in .eleventy.js and
+// rendered onto <html> by _includes/base.njk.
+const langNetlify = document.documentElement.dataset.defaultLang;
+const langAuthor = document.documentElement.dataset.authorLang;
+const appLanguages = new Set(document.documentElement.dataset.languages.split(' '));
 const appRoot = `/${langNetlify}`;
 
 // Profile / CV facts, rendered into the page by fillCareerCounts and initProfile (main.js).
