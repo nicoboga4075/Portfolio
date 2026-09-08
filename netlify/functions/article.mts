@@ -12,7 +12,7 @@ export default async function handlerArticle(req: Request, context: Context): Pr
             return redirectTo404();
         }
 
-        const isValidFilename = /^[a-zA-Z0-9_-]+_(fr|en)\.html$/.test(filename);
+        const isValidFilename = /^[a-zA-Z0-9_-]+_[a-z]{2}\.html$/.test(filename);
         if (!isValidFilename) {
             return redirectTo404();
         }

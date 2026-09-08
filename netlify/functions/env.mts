@@ -32,9 +32,13 @@ type GithubCommit = {
     }
 };
 
+// CVs are only published for these languages; any other request falls back to the first.
+const CV_LANGS = new Set(["en", "fr"]);
+
 function getLastCvUpdate(lang: string): Promise<Response> {
+    const cvLang = CV_LANGS.has(lang) ? lang : [...CV_LANGS][0];
     return webhook<GithubCommit[]>(
-        `https://api.github.com/repos/nicoboga4075/Portfolio/commits?path=docs/public/CV_${lang}.pdf&per_page=1`,
+        `https://api.github.com/repos/nicoboga4075/Portfolio/commits?path=docs/public/CV_${cvLang}.pdf&per_page=1`,
         data => ({
             date: data[0]?.commit.committer.date
         })
@@ -51,7 +55,7 @@ export default async function handlerEnv(req: Request, context: Context): Promis
         }
 
         if (lang) {
-            const isValidLang = /^(fr|en)$/.test(lang);
+            const isValidLang = /^[a-z]{2}$/.test(lang);
             if (!isValidLang) {
                 return redirectTo404();
             }
