@@ -164,7 +164,7 @@ sup:hover {
     outline: unset;
 }
 
-.language-switch {
+#language-switch {
     padding: 10px;
 }
 

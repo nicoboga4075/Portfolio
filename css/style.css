@@ -299,7 +299,7 @@ progress::-webkit-progress-value {
 
 /* Language Switcher */
 
-.language-switch {
+#language-switch {
     gap: 15px;
     position: relative;
 }
