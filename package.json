@@ -72,7 +72,7 @@
     "Cypress"
   ],
   "dependencies": {
-    "auto-changelog": "^2.6.0",
+    "auto-changelog": "^2.6.1",
     "prettier": "^3.9.6",
     "terser": "^5.50.0",
     "toml": "^5.0.0"
