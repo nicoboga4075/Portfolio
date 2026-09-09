@@ -1,5 +1,6 @@
 import { Context } from "@netlify/functions";
 import { internalError, isTrustedRequest, jsonResponse, redirectTo404 } from "./shared/http.mjs";
+import pkg from "../../package.json" with { type: "json" };
 
 const PUBLIC_ENV_VARS = [
     "ENV_CLIENT_ID",
@@ -32,11 +33,12 @@ type GithubCommit = {
     }
 };
 
-// CVs are only published for these languages; any other request falls back to the first.
-const CV_LANGS = new Set(["en", "fr"]);
+// The languages a docs/public/CV_<lang>.pdf is published for; anything else
+// serves routes.cvDefaultLang.
+const { cvLangs, cvDefaultLang } = pkg.routes;
 
 function getLastCvUpdate(lang: string): Promise<Response> {
-    const cvLang = CV_LANGS.has(lang) ? lang : [...CV_LANGS][0];
+    const cvLang = cvLangs.includes(lang) ? lang : cvDefaultLang;
     return webhook<GithubCommit[]>(
         `https://api.github.com/repos/nicoboga4075/Portfolio/commits?path=docs/public/CV_${cvLang}.pdf&per_page=1`,
         data => ({

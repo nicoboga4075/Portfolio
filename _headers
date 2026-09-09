@@ -19,9 +19,7 @@
 /googled72e0253bbe65a2f.html
   X-Robots-Tag: noindex
 
-# Non-content, tooling and private paths - kept out of search results without
-# naming them in robots.txt. They are already 404'd in _redirects; these headers
-# are defense-in-depth if a redirect rule is ever dropped.
+# Non-content, tooling and private paths - kept out of search results without naming them in robots.txt. They are already 404'd in _redirects; these headers are defense-in-depth if a redirect rule is ever dropped.
 /netlify/*
   X-Robots-Tag: noindex, nofollow
 /_includes/*
@@ -41,7 +39,6 @@
 /projects/*
   X-Robots-Tag: noindex, nofollow
 
-# Public assets under the otherwise-blocked /docs tree stay indexable (longer
-# path wins for a conflicting header).
+# Public assets under the otherwise-blocked /docs tree stay indexable (longer path wins for a conflicting header).
 /docs/public/*
   X-Robots-Tag: all
