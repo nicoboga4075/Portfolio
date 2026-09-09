@@ -173,7 +173,7 @@ const appArticles = [{
     },
     {
         slug: "sur-quels-criteres-choisir-une-agence-web",
-        titlle: {
+        title: {
             "fr": "Sur quels critères choisir une agence web ?",
             "en": "How to choose a web agency ?"
         },
