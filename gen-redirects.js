@@ -101,5 +101,5 @@ const out = [
     STATIC
 ];
 
-fs.writeFileSync(path.join(__dirname, "_redirects"), out.join("\n").replace(/\n*$/, "\n"), "utf-8");
+fs.writeFileSync(path.join(__dirname, "_redirects"), out.join("\n").trimEnd() + "\n", "utf-8");
 console.warn(`_redirects regenerated: ${rewrites.length} rewrites + static block`);
