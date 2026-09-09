@@ -1,50 +1,31 @@
+{%- set perRow = 7 -%}
+{%- set partners = [
+    { key: "microsoft", alt: "Microsoft",       href: "https://www.microsoft.com" },
+    { key: "android",   alt: "Android",         href: "https://www.android.com" },
+    { key: "java",      alt: "Java",            href: "https://www.java.com" },
+    { key: "google",    alt: "Google",          href: "https://www.google.com" },
+    { key: "adobe",     alt: "Adobe",           href: "https://www.adobe.com" },
+    { key: "openai",    alt: "OpenAI",          href: "https://www.openai.com" },
+    { key: "anthropic", alt: "Anthropic",       href: "https://www.anthropic.com" },
+    { key: "meta",      alt: "Meta",            href: "https://www.meta.com" },
+    { key: "apple",     alt: "Apple",           href: "https://www.apple.com" },
+    { key: "nvidia",    alt: "Nvidia",          href: "https://www.nvidia.com" },
+    { key: "amazon",    alt: "Amazon",          href: "https://www.amazon.com" },
+    { key: "ovhcloud",  alt: "OVHcloud",        href: "https://www.ovhcloud.com" },
+    { key: "scaleway",  alt: "Scaleway",        href: "https://www.scaleway.com" },
+    { key: "oracle",    alt: "Oracle Database", href: "https://www.oracle.com/database" }
+] -%}
 <section class="ftco-section ftco-partner d-none d-sm-flex">
     <div class="container">
-        <div class="row mb-4">
+        {%- for row in partners | batch(perRow) %}
+        {%- set rowClass = "row" if loop.last else "row mb-4" %}
+        <div class="{{ rowClass }}">
+            {%- for p in row %}
             <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.microsoft.com"><img src="images/partner-1.webp" width="400" height="160" class="img-fluid" alt="Microsoft" loading="lazy"></a>
+                <a class="partner" target="_blank" rel="noopener" href="{{ p.href }}"><img src="images/{{ p.key }}.webp" width="400" height="160" class="img-fluid" alt="{{ p.alt }}" loading="lazy"></a>
             </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.android.com"><img src="images/partner-2.webp" width="400" height="160" class="img-fluid" alt="Android" loading="lazy"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.java.com"><img src="images/partner-3.webp" width="400" height="160" class="img-fluid" alt="Java" loading="lazy"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.google.com"><img src="images/partner-4.webp" width="400" height="160" class="img-fluid" alt="Google" loading="lazy"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.adobe.com"><img src="images/partner-5.webp" width="400" height="160" class="img-fluid" alt="Adobe" loading="lazy"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.openai.com"><img src="images/partner-6.webp" width="400" height="160" class="img-fluid" alt="OpenAI" loading="lazy"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.anthropic.com"><img src="images/partner-7.webp" width="400" height="160" class="img-fluid" alt="Anthropic" loading="lazy"></a>
-            </div>
+            {%- endfor %}
         </div>
-        <div class="row">
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.meta.com"><img src="images/partner-8.webp" width="400" height="160" class="img-fluid" alt="Meta" loading="lazy"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.apple.com"><img src="images/partner-9.webp" width="400" height="160" class="img-fluid" alt="Apple" loading="lazy"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.nvidia.com"><img src="images/partner-10.webp" width="400" height="160" class="img-fluid" alt="Nvidia" loading="lazy"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.amazon.com"><img src="images/partner-11.webp" width="400" height="160" class="img-fluid" alt="Amazon" loading="lazy"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.ovhcloud.com"><img src="images/partner-12.webp" width="400" height="160" class="img-fluid" alt="OVHcloud" loading="lazy"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.scaleway.com"><img src="images/partner-13.webp" width="400" height="160" class="img-fluid" alt="Scaleway" loading="lazy"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="https://www.oracle.com/database"><img src="images/partner-14.webp" width="400" height="160" class="img-fluid" alt="Oracle Database" loading="lazy"></a>
-            </div>
-        </div>
+        {%- endfor %}
     </div>
 </section>
