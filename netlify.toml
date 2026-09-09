@@ -61,234 +61,142 @@
 	best-practices = 0.5
 	seo = 0.5
 	pwa = 0.5
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = ""
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "404"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "404/"
 
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/blog"
+    url = "https://nicoboga.netlify.app"
+    path = ""
 
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/blog/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/blog"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/blog/" 
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = ".netlify/functions/article?filename=du-voc-de-dev_en.html"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = ".netlify/functions/article?filename=du-voc-de-dev_fr.html"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = ".netlify/functions/article?filename=mcs_en.html"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = ".netlify/functions/article?filename=mcs_fr.html"
-	
-  [[context.production.plugins.inputs.audits]]
-  url = "https://nicoboga.netlify.app"
-	path = ".netlify/functions/article?filename=presentation_en.html"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = ".netlify/functions/article?filename=presentation_fr.html"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = ".netlify/functions/article?filename=sur-quels-criteres-choisir-une-agence-web_en.html"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = ".netlify/functions/article?filename=sur-quels-criteres-choisir-une-agence-web_fr.html"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = ".netlify/functions/article?filename=5-conseils-pour-un-nom-de-marque-parfait_en.html"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = ".netlify/functions/article?filename=5-conseils-pour-un-nom-de-marque-parfait_fr.html"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/policy"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/policy/"
+    url = "https://nicoboga.netlify.app"
+    path = "en"
 
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/policy"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/policy/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/terms"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/terms/"
+    url = "https://nicoboga.netlify.app"
+    path = "fr"
 
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/terms"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/terms/" 
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/crm_elphicom"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/crm_elphicom/"
+    url = "https://nicoboga.netlify.app"
+    path = "404"
 
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/crm_elphicom"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/crm_elphicom/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/ebatisoft"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/ebatisoft/"
+    url = "https://nicoboga.netlify.app"
+    path = "en/blog"
 
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/ebatisoft"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/ebatisoft/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/panel_mnt"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/panel_mnt/"
+    url = "https://nicoboga.netlify.app"
+    path = "fr/blog"
 
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/panel_mnt"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/panel_mnt/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/jca_sushirobots"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/jca_sushirobots/"
+    url = "https://nicoboga.netlify.app"
+    path = ".netlify/functions/article?filename=du-voc-de-dev_en.html"
 
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/jca_sushirobots"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/jca_sushirobots/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/ref230_afnor"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/ref230_afnor/"
+    url = "https://nicoboga.netlify.app"
+    path = ".netlify/functions/article?filename=du-voc-de-dev_fr.html"
 
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/ref230_afnor"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/ref230_afnor/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/opale_snitem"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/opale_snitem/"
+    url = "https://nicoboga.netlify.app"
+    path = ".netlify/functions/article?filename=mcs_en.html"
 
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/opale_snitem"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/opale_snitem/"
-	
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/pragma_surveys"
-  
-  [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "fr/pragma_surveys/"
+    url = "https://nicoboga.netlify.app"
+    path = ".netlify/functions/article?filename=mcs_fr.html"
 
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/pragma_surveys"
-	
+    url = "https://nicoboga.netlify.app"
+    path = ".netlify/functions/article?filename=presentation_en.html"
+
   [[context.production.plugins.inputs.audits]]
-	url = "https://nicoboga.netlify.app"
-	path = "en/pragma_surveys/"
+    url = "https://nicoboga.netlify.app"
+    path = ".netlify/functions/article?filename=presentation_fr.html"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = ".netlify/functions/article?filename=sur-quels-criteres-choisir-une-agence-web_en.html"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = ".netlify/functions/article?filename=sur-quels-criteres-choisir-une-agence-web_fr.html"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = ".netlify/functions/article?filename=5-conseils-pour-un-nom-de-marque-parfait_en.html"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = ".netlify/functions/article?filename=5-conseils-pour-un-nom-de-marque-parfait_fr.html"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "fr/policy"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "en/policy"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "fr/terms"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "en/terms"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "fr/crm_elphicom"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "en/crm_elphicom"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "fr/ebatisoft"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "en/ebatisoft"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "fr/panel_mnt"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "en/panel_mnt"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "fr/jca_sushirobots"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "en/jca_sushirobots"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "fr/ref230_afnor"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "en/ref230_afnor"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "fr/opale_snitem"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "en/opale_snitem"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "fr/pragma_surveys"
+
+  [[context.production.plugins.inputs.audits]]
+    url = "https://nicoboga.netlify.app"
+    path = "en/pragma_surveys"
 
 [[redirects]]
   from = "/en"
