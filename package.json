@@ -3,9 +3,10 @@
   "version": "2.0.5",
   "description": "This project is deployed on **Netlify** : https://nicoboga.netlify.app",
   "scripts": {
-    "dev": "bash -c \"ELEVENTY_PREVIEW=1 npm run eleventy && npm run uglify:preview && netlify dev\"",
-    "dev:live": "bash -c \"ELEVENTY_PREVIEW=1 npm run eleventy && npm run uglify:preview && netlify dev --live=dev\"",
-    "build": "npm run eleventy && npm run uglify:js",
+    "dev": "bash -c \"npm run gen:redirects && ELEVENTY_PREVIEW=1 npm run eleventy && npm run uglify:preview && netlify dev\"",
+    "dev:live": "bash -c \"npm run gen:redirects && ELEVENTY_PREVIEW=1 npm run eleventy && npm run uglify:preview && netlify dev --live=dev\"",
+    "build": "npm run gen:redirects && npm run eleventy && npm run uglify:js",
+    "gen:redirects": "node gen-redirects.js",
     "kill": "taskkill /IM node.exe /F",
     "tag-version": "bash -c \"version=$(node -p \\\"require('./package.json').version\\\"); if git status --porcelain | grep -vE '^.M (package.json|CHANGELOG.md)' | grep -q .; then echo 'Uncommitted or unstaged changes detected. Please commit or stash your changes before tagging.'; else git tag v$version; echo 'v'$version; fi\" --",
     "changelog": "auto-changelog",
@@ -113,5 +114,16 @@
     "cypress@16.0.0": true,
     "@parcel/watcher@2.6.0": true,
     "unrs-resolver@1.12.2": true
+  },
+  "routes": {
+    "site": "https://nicoboga.netlify.app",
+    "locales": { "en": "en_US", "fr": "fr_FR" },
+    "defaultLang": "en",
+    "authorLang": "fr",
+    "cvLangs": ["en", "fr"],
+    "cvDefaultLang": "en",
+    "sections": ["blog", "terms", "policy"],
+    "projects": ["crm_elphicom", "ebatisoft", "panel_mnt", "jca_sushirobots", "ref230_afnor", "opale_snitem", "pragma_surveys"],
+    "articles": ["presentation", "mcs", "bien-pasbien", "du-voc-de-dev", "sur-quels-criteres-choisir-une-agence-web", "5-conseils-pour-un-nom-de-marque-parfait"]
   }
 }

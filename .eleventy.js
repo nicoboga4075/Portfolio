@@ -1,15 +1,13 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const { execSync } = require("node:child_process");
 const toml = require("toml");
 const prettier = require("prettier");
-const { version } = require("./package.json");
+const pkg = require("./package.json");
 const outputFolder = ".eleventy";
 const includesFolder = "_includes";
 const allowedDirs = new Set([".", includesFolder, "articles", "projects"]);
-// Local preview (npm run dev) serves straight from the output folder instead of
-// compiling html back over the tracked source files. Production (npm run build)
-// keeps the historical in-place compile, since netlify/functions/article.mts
-// reads the compiled articles/*.html straight off disk at request time.
+// npm run dev serves the output folder; npm run build compiles html in place (article.mts reads it off disk).
 const isPreview = !!process.env.ELEVENTY_PREVIEW;
 const passthroughDirs = ["images", "css", "js", "fonts", "videos", "docs/public"];
 const passthroughFiles = [
@@ -18,7 +16,8 @@ const passthroughFiles = [
     "service-worker.js",
     "site.webmanifest",
     "robots.txt",
-    "sitemap.xml",
+    // Search Console token - keep this exact path (else it compiles to /googled.../index.html).
+    "googled72e0253bbe65a2f.html",
     "favicon.ico",
     "favicon-16x16.png",
     "favicon-32x32.png",
@@ -28,7 +27,109 @@ const passthroughFiles = [
     "package.json"
 ];
 
+// /sitemap.xml is built here from package.json "routes" (shared with
+// gen-redirects.js; a plain require, not an Eleventy _data file - that would need
+// "njk" back and the cascade only reaches templates).
+//   locales    - language -> BCP-47 tag; its keys are the language list
+//   defaultLang - "/" redirect + hreflang x-default
+//   authorLang  - the (binary) language-toggle target
+// Add a language: add its routes.locales entry + create the *_<lang>.html files.
+const { site, locales, defaultLang, authorLang, sections, projects, articles } = pkg.routes;
+const langs = Object.keys(locales);
+for (const lang of [defaultLang, authorLang]) {
+    if (!locales[lang]) {
+        throw new Error(`package.json routes: "${lang}" is not a key of routes.locales`);
+    }
+}
+
+// <lastmod> per url = last commit date of the page's own source file (git log;
+// today when unavailable). Netlify's clone is full history, so this resolves there.
+const dateCache = new Map();
+function gitDate(file) {
+    if (dateCache.has(file)) {
+        return dateCache.get(file);
+    }
+    let date = new Date().toISOString().slice(0, 10);
+    try {
+        const out = execSync(`git log -1 --format=%cs -- "${file}"`, {
+            encoding: "utf8",
+            stdio: ["ignore", "pipe", "ignore"]
+        }).trim();
+        if (out) {
+            date = out;
+        }
+    } catch {
+        // keep the today fallback
+    }
+    dateCache.set(file, date);
+    return date;
+}
+
+// The same page in every language. `neutralPath` (home only, "/") also becomes the
+// x-default target and gets its own <url>. All entries share the full alternates set.
+function localised(toPath, toFile, neutralPath) {
+    const alternates = [
+        ...langs.map(lang => ({ hreflang: lang, href: site + toPath(lang) })),
+        { hreflang: "x-default", href: site + (neutralPath || toPath(defaultLang)) }
+    ];
+    const urls = langs.map(lang => ({
+        loc: site + toPath(lang),
+        lastmod: gitDate(toFile(lang)),
+        alternates
+    }));
+    if (neutralPath) {
+        urls.unshift({ loc: site + neutralPath, lastmod: urls[0].lastmod, alternates });
+    }
+    return urls;
+}
+
+function buildSitemap() {
+    return [
+        ...localised(lang => `/${lang}`, lang => `index_${lang}.html`, "/"),
+        ...sections.flatMap(slug =>
+            localised(lang => `/${lang}/${slug}`, lang => `${slug}_${lang}.html`)),
+        ...projects.flatMap(slug =>
+            localised(lang => `/${lang}/${slug}`, lang => `projects/${slug}_${lang}.html`)),
+        ...articles.flatMap(slug =>
+            localised(
+                lang => `/.netlify/functions/article?filename=${slug}_${lang}.html`,
+                lang => `articles/${slug}_${lang}.html`
+            ))
+        // /404 omitted: noindex, soft 200 fallback only.
+    ];
+}
+
+const xmlEscape = s => String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
+function sitemapXml(urls) {
+    const body = urls.map(u => {
+        const lines = [
+            "    <url>",
+            `        <loc>${xmlEscape(u.loc)}</loc>`,
+            `        <lastmod>${u.lastmod}</lastmod>`
+        ];
+        for (const a of u.alternates) {
+            lines.push(`        <xhtml:link rel="alternate" hreflang="${a.hreflang}" href="${xmlEscape(a.href)}"/>`);
+        }
+        lines.push("    </url>");
+        return lines.join("\n");
+    }).join("\n");
+    return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${body}
+</urlset>
+`;
+}
+
 module.exports = function configureEleventy(eleventyConfig) {
+    // -> repo root (the publish dir); passthrough-copied for the preview server.
+    fs.writeFileSync(path.join(__dirname, "sitemap.xml"), sitemapXml(buildSitemap()));
+    eleventyConfig.addPassthroughCopy("sitemap.xml");
+
     for (const name of fs.readdirSync(".")) {
         const fullPath = path.join(".", name);
         if (fs.statSync(fullPath).isDirectory() && !allowedDirs.has(name)) {
@@ -39,11 +140,11 @@ module.exports = function configureEleventy(eleventyConfig) {
     const preset = lighthousePlugin?.inputs?.settings?.preset ?? "mobile";
     eleventyConfig.addGlobalData("viewport", preset);
     eleventyConfig.addGlobalData("author", "Nicolas BOGALHEIRO");
-    eleventyConfig.addGlobalData("version", version);
+    eleventyConfig.addGlobalData("version", pkg.version);
     eleventyConfig.addGlobalData("languages", {
-        default: "en",
-        author: "fr",
-        locales: { en: "en_US", fr: "fr_FR" }
+        default: defaultLang,
+        author: authorLang,
+        locales
     });
     for (const dir of passthroughDirs) {
         if (fs.existsSync(dir)) {
@@ -101,7 +202,9 @@ module.exports = function configureEleventy(eleventyConfig) {
     });
     return {
         dir: { input: ".", includes: includesFolder, output: outputFolder },
+        // .html only; input is "." so this skips the repo-root markdown docs.
         templateFormats: ["html"],
+        // Render .html with Nunjucks (Eleventy defaults to Liquid, which lacks `| safe` and the {%- -%} / {% include %} syntax base.njk uses).
         htmlTemplateEngine: "njk"
     };
 };
