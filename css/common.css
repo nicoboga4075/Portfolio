@@ -164,54 +164,37 @@ sup:hover {
     outline: unset;
 }
 
+/* Segmented pill: a lavender track with the current language filled in --main.
+   The switcher carries its own background, so its colours no longer depend on
+   the navbar state (hero / scrolled, light / dark). Scales to N languages. */
 #language-switch {
-    padding: 10px;
-}
-
-.lang-text {
-    font-size: 16px;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.lang-text.on {
-    color: var(--link);
-}
-
-.lang-text.off {
-    color: var(--text-color);
-}
-
-.toggle-container {
-    position: relative;
-    display: inline-block;
-    height: 25px;
-    width: 50px;
+    gap: 4px;
+    padding: 4px;
     background-color: var(--lavender);
     border-radius: 50px;
+}
+
+/* Scoped to #language-switch so these win over Bootstrap's
+   a:not([href]):not([tabindex]) reboot rule on the current-language link
+   (which has its href removed and would otherwise inherit the navbar grey). */
+#language-switch .lang-text {
+    padding: 3px 13px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--dark);
+    border-radius: 50px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.toggle-slider {
-    position: absolute;
-    width: 25px;
-    height: 25px;
+#language-switch .lang-text.on {
+    color: var(--white);
     background-color: var(--main);
-    border-radius: 50%;
-    top: 0;
-    left: 0;
-    box-shadow: 0 2px 4px var(--shadow-md);
-    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-#language-toggle {
-    visibility: hidden;
-}
-
-#language-toggle:checked+.toggle-slider {
-    transform: translateX(25px);
-    background-color: var(--main);
+#language-switch .lang-text[aria-current] {
+    cursor: default;
 }
 
 /* Blog Article */

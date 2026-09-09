@@ -32,7 +32,7 @@ const passthroughFiles = [
 // "njk" back and the cascade only reaches templates).
 //   locales    - language -> BCP-47 tag; its keys are the language list
 //   defaultLang - "/" redirect + hreflang x-default
-//   authorLang  - the (binary) language-toggle target
+//   authorLang  - the author's own language (vs. the deployed default)
 // Add a language: add its routes.locales entry + create the *_<lang>.html files.
 const { site, locales, defaultLang, authorLang, sections, projects, articles } = pkg.routes;
 const langs = Object.keys(locales);

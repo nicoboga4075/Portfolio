@@ -297,12 +297,7 @@ progress::-webkit-progress-value {
     color: #385ae6;
 }
 
-/* Language Switcher */
-
-#language-switch {
-    gap: 15px;
-    position: relative;
-}
+/* Navbar brand */
 
 html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 .ftco-navbar-light:not(.awake) .navbar-brand:hover {
@@ -310,16 +305,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 }
 
 @media(max-width: 991.98px) {
-    .lang-text.off.top-scroll {
-        color: var(--white) !important;
-    }
-
-    /* Active language over the dark mobile hero: --link only hits 4.47:1.
-       The toggle pill still shows which language is selected. */
-    .ftco-navbar-light:not(.scrolled) .lang-text.on {
-        color: var(--white) !important;
-    }
-
     .ftco-navbar-light .navbar-brand,
     .ftco-navbar-light:not(.awake) .navbar-brand:hover {
         color: var(--white) !important;

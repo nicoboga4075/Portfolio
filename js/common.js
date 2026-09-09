@@ -18,13 +18,10 @@ const appRoutes = {
     ...appDefaultRoutes
 };
 
-// The site is deployed under the "default" language (the Netlify default);
-// "author" is the author's own language. Both are set in .eleventy.js and
-// rendered onto <html> by _includes/base.njk.
-const langNetlify = document.documentElement.dataset.defaultLang;
-const langAuthor = document.documentElement.dataset.authorLang;
-const appLanguages = new Set(document.documentElement.dataset.languages.split(' '));
-const appRoot = `/${langNetlify}`;
+// The languages the switcher offers (rendered by Eleventy from package.json routes).
+const appLanguages = new Set(
+    Array.from(document.querySelectorAll('#language-switch [data-lang]'), a => a.dataset.lang)
+);
 
 // Profile / CV facts, rendered into the page by fillCareerCounts and initProfile (main.js).
 const xp = 5;
@@ -126,12 +123,13 @@ function parseDate(text, lang, iso = false, hour12 = false) {
     return iso ? `${date}T${time}` : `${date} ${time}`;
 }
 
-function switchLanguage(url, langOrigin = langNetlify, langTarget = langAuthor) {
+// Same path, first segment swapped to langTarget. Keeps the remembered #hash.
+function switchLanguage(url, langTarget) {
     try {
         const urlObj = new URL(url, window.location.origin);
         const pathParts = urlObj.pathname.split('/').filter(Boolean);
         if (pathParts.length > 0 && appLanguages.has(pathParts[0])) {
-            pathParts[0] = pathParts[0] === langOrigin ? langTarget : langOrigin;
+            pathParts[0] = langTarget;
             urlObj.pathname = `/${pathParts.join('/')}`;
             const hash = getHashFromSession();
             urlObj.hash = (hash && /^[\w-]+$/.test(hash)) ? `#${hash}` : '';
@@ -144,18 +142,20 @@ function switchLanguage(url, langOrigin = langNetlify, langTarget = langAuthor) 
     }
 }
 
+// #language-switch (switcher.html) lists every language; mark the current one and
+// point the others at the same page in their language.
 function initTranslator() {
-    const toggle = document.getElementById('language-toggle');
-    if (toggle) {
-        toggle.checked = getCurrentLanguage() == langAuthor;
-        toggle.addEventListener('change', function () {
-            toggle.checked = getCurrentLanguage() == langAuthor;
-            const newUrl = switchLanguage(window.location.href);
-            if (/^\/(?!\/)/.test(newUrl)) {
-                window.location.href = newUrl;
-            }
-        });
-    }
+    const currentLang = getCurrentLanguage();
+    document.querySelectorAll('#language-switch [data-lang]').forEach(link => {
+        const isCurrent = link.dataset.lang === currentLang;
+        link.classList.toggle('on', isCurrent);
+        if (isCurrent) {
+            link.removeAttribute('href');
+            link.setAttribute('aria-current', 'true');
+        } else {
+            link.href = switchLanguage(window.location.href, link.dataset.lang);
+        }
+    });
 }
 
 function loadImages(selector, extension, one = false) {
@@ -223,8 +223,9 @@ function addRedirectById(elementId) {
     if (!el) {
         return;
     }
+    const currentLang = getCurrentLanguage();
     const path = appRoutes[elementId];
-    el.setAttribute('href', path ? path.replace('{lng}', getCurrentLanguage()) : appRoot);
+    el.setAttribute('href', path ? path.replace('{lng}', currentLang) : `/${currentLang}`);
     el.addEventListener('click', function () {
         sessionStorage.clear(); // Reset hash for all other links
     });

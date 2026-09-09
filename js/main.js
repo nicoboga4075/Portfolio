@@ -42,24 +42,24 @@ const appSkills = [
 
 const appMessages = {
     "success-generic": {
-        "fr": "L'opération a été un franc succès.",
-        "en": "The operation was successfully completed."
+        fr: "L'opération a été un franc succès.",
+        en: "The operation was successfully completed."
     },
     "error-generic": {
-        "fr": "Oops ! Une erreur est survenue. Réessayez plus tard.",
-        "en": "Oops ! An error has occurred. Try again later."
+        fr: "Oops ! Une erreur est survenue. Réessayez plus tard.",
+        en: "Oops ! An error has occurred. Try again later."
     },
     "carousel-prev": {
-        "fr": "Précédent",
-        "en": "Previous"
+        fr: "Précédent",
+        en: "Previous"
     },
     "carousel-next": {
-        "fr": "Suivant",
-        "en": "Next"
+        fr: "Suivant",
+        en: "Next"
     },
     "carousel-dot": {
-        "fr": "Aller à la diapositive",
-        "en": "Go to slide"
+        fr: "Aller à la diapositive",
+        en: "Go to slide"
     }
 };
 
@@ -90,8 +90,8 @@ const appServices = [
 const appArticles = [{
         slug: "bien-pasbien",
         title: {
-            "fr": "Bien / Pas Bien : bonnes et mauvaises pratiques de code",
-            "en": "Good / Not Good: good and bad coding practices"
+            fr: "Bien / Pas Bien : bonnes et mauvaises pratiques de code",
+            en: "Good / Not Good: good and bad coding practices"
         },
         date: "2025-07-26",
         tags: [{
@@ -115,8 +115,8 @@ const appArticles = [{
     {
         slug: "du-voc-de-dev",
         title: {
-            "fr": "Du voc' de dev",
-            "en": "From the dev vocab"
+            fr: "Du voc' de dev",
+            en: "From the dev vocab"
         },
         date: "2025-05-05",
         tags: [{
@@ -132,8 +132,8 @@ const appArticles = [{
     {
         slug: "mcs",
         title: {
-            "fr": "Une application MCS : Kézako ?",
-            "en": "What is a MSC application ?"
+            fr: "Une application MCS : Kézako ?",
+            en: "What is a MSC application ?"
         },
         date: "2024-12-23",
         tags: [{
@@ -153,8 +153,8 @@ const appArticles = [{
     {
         slug: "presentation",
         title: {
-            "fr": "Mon parcours pro en quelques lignes",
-            "en": "My career in few lines"
+            fr: "Mon parcours pro en quelques lignes",
+            en: "My career in few lines"
         },
         date: "2024-01-01",
         tags: [{
@@ -174,8 +174,8 @@ const appArticles = [{
     {
         slug: "sur-quels-criteres-choisir-une-agence-web",
         title: {
-            "fr": "Sur quels critères choisir une agence web ?",
-            "en": "How to choose a web agency ?"
+            fr: "Sur quels critères choisir une agence web ?",
+            en: "How to choose a web agency ?"
         },
         date: "2019-07-31",
         tags: [{
@@ -191,8 +191,8 @@ const appArticles = [{
     {
         slug: "5-conseils-pour-un-nom-de-marque-parfait",
         title: {
-            "fr": "5 conseils pour un nom de marque parfait",
-            "en": "5 tips for the perfect brand name",
+            fr: "5 conseils pour un nom de marque parfait",
+            en: "5 tips for the perfect brand name",
         },
         date: "2019-07-03",
         tags: [{
@@ -836,20 +836,18 @@ function createCircularChart({
             wasAwake = navbar.hasClass('awake');
         // Fixed, opaque navbar past 150px
         navbar.toggleClass('scrolled', scrollTop >= 150);
-        // Brand/lang text switches from light to theme color past 350px
+        // Brand switches from light to theme color past 350px
         navbar.toggleClass('awake', scrollTop >= 350);
         // Smooths the awake -> scrolled transition only when scrolling back
         // up out of the awake zone (not when first scrolling down into it)
         navbar.toggleClass('sleep', scrollTop >= 150 && scrollTop < 350 && wasAwake);
-        // For small screens, the header becomes dark
-        $('.off').first().toggleClass('top-scroll', window.scrollY < 150);
     });
 
     const counter = function () {
         const numbers = document.querySelectorAll('.number');
         if (!numbers.length) return;
         const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const formatter = new Intl.NumberFormat(getCurrentLanguage() || 'en');
+        const formatter = new Intl.NumberFormat(getCurrentLanguage());
         const animate = function (el) {
             const target = Number(el.dataset.number) || 0;
             if (reduce) {
@@ -1138,7 +1136,7 @@ function initIndexPage(langPage) {
             // Retains the value of the scroll top with the reference at the middle of the page
             const scrollMiddle = $(this).scrollTop() + ($(window).height() / 2);
             if ($(this).scrollTop() < 150) {
-                $(`a[href*="${appHomeSection}"]`).addClass('active');
+                $(`.nav-link[href*="${appHomeSection}"]`).addClass('active');
                 saveHashToSession(appHomeSection);
             }
             let scrolled_id;
@@ -1243,7 +1241,7 @@ function initBlogPage(langPage) {
             });
         });
 
-        $(`a[href*="${appBlogSection}"]`).addClass('active');
+        $(`.nav-link[href*="${appBlogSection}"]`).addClass('active');
 
         const currentArticle = getCurrentArticle();
         const recentArticle = getRecentArticle();
