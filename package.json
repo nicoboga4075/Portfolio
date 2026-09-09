@@ -81,7 +81,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
     "@capacitor/android": "^8.5.0",
-    "@capacitor/cli": "^8.5.1",
+    "@capacitor/cli": "^8.4.3",
     "@capacitor/core": "^8.5.0",
     "@eslint/js": "^9.39.2",
     "@netlify/functions": "^6.0.0",
@@ -117,13 +117,38 @@
   },
   "routes": {
     "site": "https://nicoboga.netlify.app",
-    "locales": { "en": "en_US", "fr": "fr_FR" },
+    "locales": {
+      "en": "en_US",
+      "fr": "fr_FR"
+    },
     "defaultLang": "en",
     "authorLang": "fr",
-    "cvLangs": ["en", "fr"],
+    "cvLangs": [
+      "en",
+      "fr"
+    ],
     "cvDefaultLang": "en",
-    "sections": ["blog", "terms", "policy"],
-    "projects": ["crm_elphicom", "ebatisoft", "panel_mnt", "jca_sushirobots", "ref230_afnor", "opale_snitem", "pragma_surveys"],
-    "articles": ["presentation", "mcs", "bien-pasbien", "du-voc-de-dev", "sur-quels-criteres-choisir-une-agence-web", "5-conseils-pour-un-nom-de-marque-parfait"]
+    "sections": [
+      "blog",
+      "terms",
+      "policy"
+    ],
+    "projects": [
+      "crm_elphicom",
+      "ebatisoft",
+      "panel_mnt",
+      "jca_sushirobots",
+      "ref230_afnor",
+      "opale_snitem",
+      "pragma_surveys"
+    ],
+    "articles": [
+      "presentation",
+      "mcs",
+      "bien-pasbien",
+      "du-voc-de-dev",
+      "sur-quels-criteres-choisir-une-agence-web",
+      "5-conseils-pour-un-nom-de-marque-parfait"
+    ]
   }
 }
