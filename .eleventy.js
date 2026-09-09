@@ -2,6 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const toml = require("toml");
 const prettier = require("prettier");
+const { version } = require("./package.json");
 const outputFolder = ".eleventy";
 const includesFolder = "_includes";
 const allowedDirs = new Set([".", includesFolder, "articles", "projects"]);
@@ -38,6 +39,7 @@ module.exports = function configureEleventy(eleventyConfig) {
     const preset = lighthousePlugin?.inputs?.settings?.preset ?? "mobile";
     eleventyConfig.addGlobalData("viewport", preset);
     eleventyConfig.addGlobalData("author", "Nicolas BOGALHEIRO");
+    eleventyConfig.addGlobalData("version", version);
     eleventyConfig.addGlobalData("languages", {
         default: "en",
         author: "fr",

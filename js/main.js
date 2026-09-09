@@ -1555,19 +1555,6 @@ function initPage() {
             }, 1000);
         }
     });
-
-    const versionElement = $('#version-badge');
-    fetch('/package.json')
-        .then(response => response.json())
-        .then(data => {
-            if (versionElement && data.version) {
-                versionElement.text(data.version);
-            }
-        })
-        .catch(error => {
-            console.error(error);
-            versionElement.text(1.0);
-        });
 }
 
 /* Contact Form */
