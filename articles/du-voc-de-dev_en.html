@@ -2762,6 +2762,14 @@ description: "From the dev vocab"
                         </div>
                         <div class="card-body">k-NN (k-Nearest Neighbours) is a lazy, non-parametric algorithm: it stores the training set and, to classify a new point, looks at its k closest points under a distance metric (Euclidean, cosine, Manhattan) and takes the majority vote — or the average, for regression. There is no training phase, so every prediction costs a full scan of the data unless it is indexed (k-d tree, ball tree, HNSW). A small k follows the noise and overfits; a large k oversmooths and blurs class boundaries. For binary classification an odd k is preferable: it rules out a tied vote (with k = 4 the neighbours can split 2–2, with k = 5 they cannot). Features must be scaled first, or the largest-range feature dominates the distance.</div>
                     </div>
+                    <div class="card">
+                        <input type="checkbox" id="q318">
+                        <div class="card-header">
+                            <label for="q318">Blue/Green Deployment</label>
+                            <span class="badge badge-definition">DevOps</span>
+                        </div>
+                        <div class="card-body">Blue/Green deployment keeps two identical production environments: "Blue" serves live traffic while "Green" receives the new version. Once Green is deployed and validated with smoke tests, the router (or load balancer) switches all traffic from Blue to Green in a single operation. Blue is left untouched: if an incident occurs, switching back to it gives a near-instant rollback with no rebuild. Unlike Canary deployment, which exposes the new version to a growing percentage of users, Blue/Green flips 100% of the traffic at once.</div>
+                    </div>
                 </div>
             </div>
         </main>

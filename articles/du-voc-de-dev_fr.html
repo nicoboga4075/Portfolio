@@ -2770,6 +2770,14 @@ description: "Du voc' de dev'"
                         </div>
                         <div class="card-body">Le k-NN (k plus proches voisins) est un algorithme paresseux et non paramétrique : il mémorise le jeu d'entraînement puis, pour classer un nouveau point, regarde ses k points les plus proches selon une métrique de distance (euclidienne, cosinus, Manhattan) et prend le vote majoritaire — ou la moyenne, en régression. Il n'y a pas de phase d'apprentissage, donc chaque prédiction coûte un parcours complet des données, sauf si elles sont indexées (k-d tree, ball tree, HNSW). Un k petit suit le bruit et surapprend ; un k grand lisse trop et brouille les frontières entre classes. En classification binaire, un k impair est préférable : il exclut une égalité de vote (avec k = 4 les voisins peuvent se répartir 2–2, avec k = 5 c'est impossible). Les variables doivent d'abord être mises à l'échelle, sinon celle de plus grande amplitude domine la distance.</div>
                     </div>
+                    <div class="card">
+                        <input type="checkbox" id="q318">
+                        <div class="card-header">
+                            <label for="q318">Déploiement Blue/Green</label>
+                            <span class="badge badge-definition">DevOps</span>
+                        </div>
+                        <div class="card-body">Le déploiement Blue/Green consiste à maintenir deux environnements de production identiques : « Blue » sert le trafic réel pendant que « Green » reçoit la nouvelle version. Une fois Green déployé et validé par des tests de fumée, le routeur (ou load balancer) bascule tout le trafic de Blue vers Green en une seule opération. Blue est alors conservé tel quel : en cas d'incident, il suffit de rebasculer vers lui pour un rollback quasi instantané, sans reconstruction. À la différence du déploiement Canary, qui expose la nouvelle version à un pourcentage croissant d'utilisateurs, le Blue/Green fait basculer 100 % du trafic d'un coup.</div>
+                    </div>
                 </div>
             </div>
         </main>
