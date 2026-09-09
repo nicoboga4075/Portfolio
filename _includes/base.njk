@@ -11,6 +11,9 @@ onload: "initPage()"
         <title>{{ title | safe }}</title>
         {% include "metas.html" %}
         <meta name="description" content="{{ description | safe }}">
+        {%- if noindex %}
+        <meta name="robots" content="noindex">
+        {%- endif %}
         <meta http-equiv="Content-Language" content="{{ languages.locales[lang] }}">
         {% include "poppins.html" %}
         <base href="{{ base }}">
