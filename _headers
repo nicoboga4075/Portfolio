@@ -9,3 +9,7 @@
   Cache-Control: no-cache
 /.netlify/functions/*
   Cache-Control: no-cache
+/robots.txt
+  Cache-Control: public, max-age=3600
+/sitemap.xml
+  Cache-Control: public, max-age=3600
