@@ -1,56 +1,25 @@
+{%- set languages = [
+    { key: "csharp",     title: "C#",         href: "https://learn.microsoft.com/en-us/dotnet/csharp",        stack: [".NET", "IIS"] },
+    { key: "python",     title: "Python",     href: "https://www.python.org",                                 stack: ["Flask", "FastAPI"] },
+    { key: "javascript", title: "JavaScript", href: "https://developer.mozilla.org/en-us/docs/Web/JavaScript", stack: ["Angular", "React"] }
+] -%}
 <div class="row progress-circle mb-5">
+    {%- for l in languages %}
     <div class="col-lg-4 mb-4">
         <div class="bg-white rounded-lg shadow p-4">
-            <h2 class="h5 font-weight-bold text-center mb-4">C#</h2>
+            <h2 class="h5 font-weight-bold text-center mb-4">{{ l.title }}</h2>
             <div class="block-21 mb-4 d-flex justify-content-center">
-                <a id="csharp" class="blog-img main-language" target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/dotnet/csharp" aria-label="C#"></a>
+                <a id="{{ l.key }}" class="blog-img main-language" target="_blank" rel="noopener" href="{{ l.href }}" aria-label="{{ l.title }}"></a>
             </div>
             <div class="row text-center mt-4">
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">.NET</div>
+                {%- for name in l.stack %}
+                <div class="col-6{{ ' border-right' if loop.index is odd }}">
+                    <div class="h5 font-weight-bold mb-0">{{ name }}</div>
                     <span class="small text-gray"></span>
                 </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">IIS</div>
-                    <span class="small text-gray"></span>
-                </div>
+                {%- endfor %}
             </div>
         </div>
     </div>
-    <div class="col-lg-4 mb-4">
-        <div class="bg-white rounded-lg shadow p-4">
-            <h2 class="h5 font-weight-bold text-center mb-4">Python</h2>
-            <div class="block-21 mb-4 d-flex justify-content-center">
-                <a id="python" class="blog-img main-language" target="_blank" rel="noopener" href="https://www.python.org" aria-label="Python"></a>
-            </div>
-            <div class="row text-center mt-4">
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">Flask</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">FastAPI</div>
-                    <span class="small text-gray"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 mb-4">
-        <div class="bg-white rounded-lg shadow p-4">
-            <h2 class="h5 font-weight-bold text-center mb-4">JavaScript</h2>
-            <div class="block-21 mb-4 d-flex justify-content-center">
-                <a id="javascript" class="blog-img main-language" target="_blank" rel="noopener" href="https://developer.mozilla.org/en-us/docs/Web/JavaScript" aria-label="JavaScript"></a>
-            </div>
-            <div class="row text-center mt-4">
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">Angular</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">React</div>
-                    <span class="small text-gray"></span>
-                </div>
-            </div>
-        </div>
-    </div>
+    {%- endfor %}
 </div>
