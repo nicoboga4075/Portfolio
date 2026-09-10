@@ -1,3 +1,9 @@
+{%- set tools = [
+    "Ethnos", "Teexma", "Net-Survey", "Web-Reports", "Office", "Postman",
+    "Visual Studio", "Pyzo", "SQLAlchemy", "PowerShell", "KeePass", "CTF",
+    "i18n", "KMS", "GitHub Desktop", "Ollama", "SonarCloud", "Copilot",
+    "RAG", "Machine Learning"
+] -%}
 <div class="row progress-circle mb-5">
     <div class="col-lg-12 mb-4">
         <div class="bg-white rounded-lg shadow p-4">
@@ -6,84 +12,12 @@
                 <a id="survey" class="blog-img" target="_blank" rel="noopener" href="https://www.linkedin.com/in/nicolas-bogalheiro-126a7616b" aria-label="+"></a>
             </div>
             <div class="row text-center mt-4">
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">Ethnos</div>
+                {%- for name in tools %}
+                <div class="col-6{{ ' border-right' if loop.index is odd }}">
+                    <div class="h5 font-weight-bold mb-0">{{ name }}</div>
                     <span class="small text-gray"></span>
                 </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">Teexma</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">Net-Survey</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">Web-Reports</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">Office</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">Postman</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">Visual Studio</div>
-                </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">Pyzo</div>
-                </div>
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">SQLAlchemy</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">PowerShell</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">KeePass</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">CTF</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">i18n</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">KMS</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">GitHub Desktop</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">Ollama</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">SonarCloud</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">Copilot</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6 border-right">
-                    <div class="h5 font-weight-bold mb-0">RAG</div>
-                    <span class="small text-gray"></span>
-                </div>
-                <div class="col-6">
-                    <div class="h5 font-weight-bold mb-0">Machine Learning</div>
-                    <span class="small text-gray"></span>
-                </div>
+                {%- endfor %}
             </div>
         </div>
     </div>
