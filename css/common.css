@@ -204,9 +204,8 @@ main > #language-switch,
     }
 }
 
-/* Scoped to #language-switch so these win over Bootstrap's
-   a:not([href]):not([tabindex]) reboot rule on the current-language link
-   (which has its href removed and would otherwise inherit the navbar grey). */
+/* Scoped to #language-switch for the id specificity that beats Bootstrap's
+   link reboot rules on index/blog, so the pill colours hold in the navbar. */
 #language-switch .lang-text {
     padding: 3px 13px;
     font-size: 16px;
@@ -223,8 +222,11 @@ main > #language-switch,
     background-color: var(--main);
 }
 
+/* Current language: keep it a real (crawlable) link but inert to clicks so it
+   doesn't pointlessly reload the page. */
 #language-switch .lang-text[aria-current] {
     cursor: default;
+    pointer-events: none;
 }
 
 /* Blog Article */

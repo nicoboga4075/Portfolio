@@ -146,6 +146,16 @@ module.exports = function configureEleventy(eleventyConfig) {
         author: authorLang,
         locales
     });
+    // Crawlable path to the same page in `lang`, matching buildSitemap()'s scheme:
+    // "/<lang>" for home, "/<lang>/<slug>" for every section and project (the page
+    // types the language switcher renders on). initTranslator() adds the
+    // remembered #hash on top of this client-side.
+    eleventyConfig.addFilter("localisedHref", (page, lang) => {
+        const parts = page.fileSlug.split("_");
+        parts.pop();
+        const slug = parts.join("_");
+        return slug === "index" ? `/${lang}` : `/${lang}/${slug}`;
+    });
     for (const dir of passthroughDirs) {
         if (fs.existsSync(dir)) {
             eleventyConfig.addPassthroughCopy(dir);

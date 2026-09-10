@@ -142,18 +142,24 @@ function switchLanguage(url, langTarget) {
     }
 }
 
-// #language-switch (switcher.html) lists every language; mark the current one and
-// point the others at the same page in their language.
+// #language-switch (switcher.html) lists every language, each already carrying a
+// crawlable href to this page in that language. Mark the current one and refresh
+// the others' href with the remembered #hash.
 function initTranslator() {
     const currentLang = getCurrentLanguage();
     document.querySelectorAll('#language-switch [data-lang]').forEach(link => {
         const isCurrent = link.dataset.lang === currentLang;
         link.classList.toggle('on', isCurrent);
         if (isCurrent) {
-            link.removeAttribute('href');
-            link.setAttribute('aria-current', 'true');
+            link.setAttribute('aria-current', 'page');
         } else {
-            link.href = switchLanguage(window.location.href, link.dataset.lang);
+            link.removeAttribute('aria-current');
+            // Refresh the server-rendered href with the remembered #hash; keep it
+            // untouched if the URL can't be parsed (switchLanguage returns /404).
+            const target = switchLanguage(window.location.href, link.dataset.lang);
+            if (target !== appDefaultRoutes['error404']) {
+                link.href = target;
+            }
         }
     });
 }
