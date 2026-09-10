@@ -1,20 +1,21 @@
-{%- set perRow = 7 -%}
+{%- set rows = 2 -%}
 {%- set partners = [
-    { key: "microsoft", alt: "Microsoft",       href: "https://www.microsoft.com" },
-    { key: "android",   alt: "Android",         href: "https://www.android.com" },
-    { key: "java",      alt: "Java",            href: "https://www.java.com" },
-    { key: "google",    alt: "Google",          href: "https://www.google.com" },
-    { key: "adobe",     alt: "Adobe",           href: "https://www.adobe.com" },
-    { key: "openai",    alt: "OpenAI",          href: "https://www.openai.com" },
-    { key: "anthropic", alt: "Anthropic",       href: "https://www.anthropic.com" },
-    { key: "meta",      alt: "Meta",            href: "https://www.meta.com" },
-    { key: "apple",     alt: "Apple",           href: "https://www.apple.com" },
-    { key: "nvidia",    alt: "Nvidia",          href: "https://www.nvidia.com" },
-    { key: "amazon",    alt: "Amazon",          href: "https://www.amazon.com" },
-    { key: "ovhcloud",  alt: "OVHcloud",        href: "https://www.ovhcloud.com" },
-    { key: "scaleway",  alt: "Scaleway",        href: "https://www.scaleway.com" },
-    { key: "oracle",    alt: "Oracle Database", href: "https://www.oracle.com/database" }
+    { key: "microsoft", href: "https://www.microsoft.com" },
+    { key: "android",   href: "https://www.android.com" },
+    { key: "java",      href: "https://www.java.com" },
+    { key: "google",    href: "https://www.google.com" },
+    { key: "adobe",     href: "https://www.adobe.com" },
+    { key: "openai",    href: "https://www.openai.com" },
+    { key: "anthropic", href: "https://www.anthropic.com" },
+    { key: "meta",      href: "https://www.meta.com" },
+    { key: "apple",     href: "https://www.apple.com" },
+    { key: "nvidia",    href: "https://www.nvidia.com" },
+    { key: "amazon",    href: "https://www.amazon.com" },
+    { key: "ovhcloud",  href: "https://www.ovhcloud.com" },
+    { key: "scaleway",  href: "https://www.scaleway.com" },
+    { key: "oracle",    href: "https://www.oracle.com/database" }
 ] -%}
+{%- set perRow = (partners.length / rows) | round(0, "ceil") -%}
 <section class="ftco-section ftco-partner d-none d-sm-flex">
     <div class="container">
         {%- for row in partners | batch(perRow) %}
@@ -22,7 +23,7 @@
         <div class="{{ rowClass }}">
             {%- for p in row %}
             <div class="col-sm ftco-animate">
-                <a class="partner" target="_blank" rel="noopener" href="{{ p.href }}"><img src="images/{{ p.key }}.webp" width="400" height="160" class="img-fluid" alt="{{ p.alt }}" loading="lazy"></a>
+                <a class="partner" target="_blank" rel="noopener" href="{{ p.href }}"><img src="images/{{ p.key }}.webp" width="400" height="160" class="img-fluid" alt="{{ p.key | capitalize }}" loading="lazy"></a>
             </div>
             {%- endfor %}
         </div>
