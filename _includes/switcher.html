@@ -1,4 +1,4 @@
-<nav class="d-flex align-items-center justify-content-center" id="language-switch" aria-label="Language">
+<nav id="language-switch" aria-label="Language">
     {%- for code, locale in languages.locales %}
     <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}">{{ code | upper }}</a>
     {%- endfor %}

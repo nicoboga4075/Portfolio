@@ -168,10 +168,40 @@ sup:hover {
    The switcher carries its own background, so its colours no longer depend on
    the navbar state (hero / scrolled, light / dark). Scales to N languages. */
 #language-switch {
+    /* Lay the pill out here, not via a d-flex utility on the markup: this include
+       also renders on policy / terms / project / article pages, which use the
+       light asset bundle (default.html) that omits bootstrap.min.css. Without
+       these the switcher is a plain block with inline EN/FR that wrap when space
+       is tight. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 4px;
     padding: 4px;
     background-color: var(--lavender);
     border-radius: 50px;
+    /* Track hugs its buttons instead of stretching full width; flex: none keeps
+       .read-title's space-between row from squeezing it. */
+    width: fit-content;
+    flex: none;
+}
+
+/* Centre the pill only where it stands alone: policy / terms (a lone block in
+   <main>'s centered flow) and the navbar's wrapped mobile row. In .read-title
+   it's one half of a space-between row and must stay flush right, so auto side
+   margins (which would eat the free space and float it mid-row) are left off. */
+main > #language-switch,
+.navbar #language-switch {
+    margin-inline: auto;
+}
+
+/* Below the navbar's expand breakpoint the switcher wraps onto its own row
+   inside .container; without this it butts against the toggler row above and
+   the page content below. */
+@media (max-width: 991.98px) {
+    .navbar #language-switch {
+        margin-block: 10px;
+    }
 }
 
 /* Scoped to #language-switch so these win over Bootstrap's
