@@ -3,7 +3,7 @@ layout: "base.njk"
 permalink: "index_en.html"
 title: "Portfolio"
 description: "Portfolio of an AI-augmented software engineer: projects, skills and experience in tech and development"
-assets: ["head-links.html"]
+assets: ["head-links.html", "head-scripts.html"]
 base: "../"
 scrollspy: true
 nav: true
@@ -1049,7 +1049,6 @@ nav: true
             </div>
         </footer>
         <div id="ftco-visitor" hidden></div>
-        {% include "scripts.html" %}
         {% if viewport == "desktop" %}
         <script defer src="js/botpress.js"></script>
         {% endif %}
