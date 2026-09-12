@@ -41,6 +41,9 @@ onload: "initPage()"
         {%- endif %}
     </head>
     <body{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}"{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+        <div id="ftco-loader" class="show fullscreen">
+            <div class="spinner"></div>
+        </div>
         {{ content | safe }}
     </body>
 </html>

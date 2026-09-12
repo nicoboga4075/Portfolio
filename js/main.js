@@ -781,13 +781,6 @@ function createCircularChart({
     };
     fullHeight();
 
-    const loader = function () {
-        if ($('#ftco-loader').length > 0) {
-            $('#ftco-loader').removeClass('show');
-        }
-    };
-    loader();
-
     $.Scrollax();
 
     const burgerMenu = function () {

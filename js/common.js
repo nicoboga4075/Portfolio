@@ -244,6 +244,11 @@ function registerServiceWorker() {
     }
 }
 
+function hideLoader() {
+    document.getElementById('ftco-loader')?.classList.remove('show');
+}
+
 // Run on every page as soon as this (deferred) script loads.
 registerServiceWorker();
 toggleDarkMode();
+hideLoader();
