@@ -39,6 +39,9 @@ onload: "initPage()"
         <script src="js/common.js" defer></script>
         <script src="js/default.js" defer></script>
         {%- endif %}
+        {%- if botpress and viewport == "desktop" %}
+        <script defer src="js/botpress.js"></script>
+        {%- endif %}
     </head>
     <body{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}"{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
         <div id="ftco-loader" class="show fullscreen">
