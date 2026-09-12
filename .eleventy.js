@@ -141,6 +141,13 @@ module.exports = function configureEleventy(eleventyConfig) {
     eleventyConfig.addGlobalData("viewport", preset);
     eleventyConfig.addGlobalData("author", "Nicolas BOGALHEIRO");
     eleventyConfig.addGlobalData("version", pkg.version);
+    const linkedinDomain = "https://www.linkedin.com";
+    const linkedinVanity = "nicolas-bogalheiro-126a7616b";
+    eleventyConfig.addGlobalData("linkedin", {
+        vanity: linkedinVanity,
+        url: `${linkedinDomain}/in/${linkedinVanity}`,
+        messaging: `${linkedinDomain}/messaging/thread/new`
+    });
     eleventyConfig.addGlobalData("languages", {
         default: defaultLang,
         author: authorLang,
