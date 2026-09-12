@@ -1015,7 +1015,7 @@ scrollspy: true
                 <h6>Contact me</h6>
                 <span class="mfp-close">×</span>
             </div>
-            {% include "social_modal.html" %}
+            {% set socialVariant = "contact" %}{% include "social-links.html" %}
         </div>
         <div id="webchat"></div>
         <footer class="ftco-footer ftco-section">
@@ -1035,7 +1035,7 @@ scrollspy: true
                                     <li><span class="icon-envelope"></span>&nbsp;&nbsp;<span class="text email"></span></li>
                                 </ul>
                             </div>
-                            {% include "social.html" %}
+                            {% set socialVariant = "icons" %}{% include "social-links.html" %}
                         </div>
                     </div>
                 </div>
