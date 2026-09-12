@@ -54,7 +54,13 @@ onload: "initPage()"
         {% include "nav.html" %}
         {%- endif %}
         {{ content | safe }}
-        {% include "copyright.html" %}
+        {%- if footer %}
+        {% include "footer.html" %}
+        {%- else %}
+        <footer>
+            {% include "copyright.html" %}
+        </footer>
+        {%- endif %}
         <div id="ftco-visitor" hidden></div>
     </body>
 </html>

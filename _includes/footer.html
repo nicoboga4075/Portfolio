@@ -1,0 +1,43 @@
+{%- set footerText = {
+    en: { synopsis: "Far far away, beyond the mountains of code, far from the lands of outdated designs and clunky interfaces, there lives the web developer. Crafting seamless user experiences, building responsive websites and breathing life into lines of code, the engineer turns ideas into digital reality.", question: "Have a question ?", bingoTitle: "A bingo ?", bingoText: "If you come across number 2713, you've won !", bingoButton: "Play" },
+    fr: { synopsis: "Loin, très loin, au-delà des montagnes de code, loin des terres de designs dépassés et d’interfaces obsolètes, ici gît le développeur web. Visant des expériences utilisateurs fluides, construisant des sites web adaptatifs et insufflant la vie à des lignes de code, l'ingénieur transforme les idées en réalité numérique.", question: "Une question ?", bingoTitle: "Un bingo ?", bingoText: "Si tu tombes sur le numéro 2713, tu as gagné !", bingoButton: "Jouer" }
+} -%}
+{%- set ft = footerText[lang] -%}
+<footer class="ftco-footer ftco-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-8">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Synopsis</h2>
+                    <p>{{ ft.synopsis }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">{{ ft.question }}</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><span class="icon-envelope"></span>&nbsp;&nbsp;<span class="text email"></span></li>
+                        </ul>
+                    </div>
+                    {% set socialVariant = "icons" %}{% include "social-links.html" %}
+                </div>
+            </div>
+        </div>
+        {%- if bingo %}
+        <div class="row mb-5">
+            <div class="col-md-12 text-center">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">{{ ft.bingoTitle }}</h2>
+                    <div class="block-23 mb-3 d-flex flex-column align-items-center">
+                        <p>{{ ft.bingoText }}</p>
+                        <div id="bingo-timer">0</div>
+                        <div id="bingo-btn" class="text-white">{{ ft.bingoButton }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%- endif %}
+        {% include "copyright.html" %}
+    </div>
+</footer>
