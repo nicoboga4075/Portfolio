@@ -42,6 +42,9 @@ onload: "initPage()"
         {%- if botpress and viewport == "desktop" %}
         <script defer src="js/botpress.js"></script>
         {%- endif %}
+        {%- if profile %}
+        <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+        {%- endif %}
     </head>
     <body{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}"{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
         <div id="ftco-loader" class="show fullscreen">
