@@ -226,7 +226,8 @@ function toggleDarkMode(event) {
 
 function addRedirectById(elementId) {
     const el = document.getElementById(elementId);
-    if (!el) {
+    // Skip self-links for policy/terms: no point redirecting to the page you're already on.
+    if (!el || (elementId in appDefaultRoutes && elementId === getCurrentRoute())) {
         return;
     }
     const currentLang = getCurrentLanguage();
@@ -248,7 +249,16 @@ function hideLoader() {
     document.getElementById('ftco-loader')?.classList.remove('show');
 }
 
+function setCopyrightYear() {
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+    }
+}
+
 // Run on every page as soon as this (deferred) script loads.
 registerServiceWorker();
 toggleDarkMode();
 hideLoader();
+setCopyrightYear();
+Object.keys(appRoutes).forEach(addRedirectById);

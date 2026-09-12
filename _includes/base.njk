@@ -44,6 +44,10 @@ onload: "initPage()"
         <div id="ftco-loader" class="show fullscreen">
             <div class="spinner"></div>
         </div>
+        {%- if nav %}
+        {% include "nav.html" %}
+        {%- endif %}
         {{ content | safe }}
+        {% include "copyright.html" %}
     </body>
 </html>

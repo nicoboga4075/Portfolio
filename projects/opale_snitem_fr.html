@@ -6,7 +6,11 @@ description: "OPALE SNITEM"
         <main>
             <div class="read-title">
                 <h1>🖥️ OPALE SNITEM</h1>
-                {% include "switcher.html" %}
+                <nav id="language-switch" aria-label="Language">
+                    {%- for code, locale in languages.locales %}
+                    <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
+                    {%- endfor %}
+                </nav>
             </div>
             <div class="video-wrapper">
                 <video controls>

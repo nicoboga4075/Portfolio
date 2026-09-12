@@ -940,14 +940,6 @@ function createCircularChart({
     };
     goHere();
 
-    const copyright = function () {
-        const yearCopyright = $('#year');
-        if (yearCopyright) {
-            yearCopyright.text(new Date().getFullYear());
-        }
-    };
-    copyright();
-
     $('.progress').each(function () {
         const value = $(this).attr('data-value');
         const left = $(this).find('.progress-left .progress-bar');
@@ -1486,10 +1478,6 @@ function initPage() {
     const langPage = getCurrentLanguage();
 
     loadImages('.icon.svg', 'svg');
-
-    $.each(appRoutes, function (appRoute) {
-        addRedirectById(appRoute);
-    });
 
     initTranslator();
 

@@ -7,7 +7,11 @@ description: "Politique de confidentialité"
         <main>
             <h1>Politique de confidentialité</h1>
             <i>Mis à jour le 7 décembre 2024</i>
-            {% include "switcher.html" %}
+            <nav id="language-switch" aria-label="Language">
+                {%- for code, locale in languages.locales %}
+                <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
+                {%- endfor %}
+            </nav>
             <div>
                 <h2>Quelles données sont collectées ?</h2>
                 <p>Les données personnelles utilisées sont celles que l'utilisateur fournit explicitement dans le formulaire de contact : nom de l'expéditeur, objet du mail et contenu du message. Ces informations sont intégrées dans un email envoyé via l'API Gmail et ne sont pas conservées sur le serveur de l'application. Lors de la connexion via OAuth (authentification manuelle), votre adresse email est récupérée depuis votre compte Google. Aucune autre donnée personnelle ou sensible n'est collectée ou utilisée.</p>

@@ -1,13 +1,12 @@
-{%- set lang = page.fileSlug.slice(-2) -%}
-{%- set snykUrl = { en: "https://snyk.io", fr: "https://snyk.io/fr" } -%}
-{%- set text = {
+{%- set snykUrl = "https://snyk.io" + ("/" + lang if lang != "en") -%}
+{%- set copyrightText = {
     en: { rights: "All rights reserved", made: "This site is made with", and: "and", with: "with", policy: "Privacy policy", terms: "Terms of use" },
     fr: { rights: "Tous droits réservés", made: "Ce site est fait avec", and: "et", with: "avec", policy: "Politique de confidentialité", terms: "Conditions d'utilisation" }
 } -%}
-{%- set t = text[lang] -%}
+{%- set t = copyrightText[lang] -%}
 <div class="row">
     <div class="col-md-12 text-center">
-        <p>Copyright &copy;<i id="year"></i> {{ t.rights }} | {{ t.made }} <i class="icon-heart" aria-hidden="true"></i> {{ t.and }} <i class="icon-shield" aria-hidden="true"></i> {{ t.with }} <a target="_blank" rel="noopener" href="{{ snykUrl[lang] }}">Snyk</a></p>
+        <p>Copyright &copy;<i id="year"></i> {{ t.rights }} | {{ t.made }} <i class="icon-heart" aria-hidden="true"></i> {{ t.and }} <i class="icon-shield" aria-hidden="true"></i> {{ t.with }} <a target="_blank" rel="noopener" href="{{ snykUrl }}">Snyk</a></p>
         <p><a id="policy"><i>{{ t.policy }}</i></a> | <a id="terms"><i>{{ t.terms }}</i></a></p>
     </div>
 </div>

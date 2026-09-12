@@ -2,7 +2,6 @@ function initArticle() {
     loadImages('.article-image', 'png');
     loadImages('.icon.svg', 'svg');
     initTranslator();
-    addRedirectById('index');
     initCareerAnimation();
     fillCareerCounts();
 }
@@ -10,7 +9,6 @@ function initArticle() {
 function initPage() {
     loadImages('.icon.svg', 'svg');
     initTranslator();
-    addRedirectById('index');
     const idPage = getCurrentRoute();
     if (idPage in appDefaultRoutes) {
         document.body.classList.add('text-center');
