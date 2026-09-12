@@ -9,18 +9,36 @@ onload: "initPage()"
 <html lang="{{ lang }}">
     <head>
         <title>{{ title | safe }}</title>
-        {% include "metas.html" %}
+        <meta charset="utf-8">
+        <meta name="google" content="notranslate">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="{{ author }}">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="title" property="og:title" content="Portfolio">
+        <meta name="image" property="og:image" content="https://nicoboga.netlify.app/images/view.png">
         <meta name="description" content="{{ description | safe }}">
         {%- if noindex %}
         <meta name="robots" content="noindex">
         {%- endif %}
         <meta http-equiv="Content-Language" content="{{ languages.locales[lang] }}">
-        {% include "poppins.html" %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
         <base href="{{ base }}">
-        {% include "manifest.html" %}
-        {%- for partial in assets or ["default.html"] %}
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+        {%- if assets %}
+        {%- for partial in assets %}
         {% include partial %}
         {%- endfor %}
+        {%- else %}
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/default.css">
+        <script src="js/common.js" defer></script>
+        <script src="js/default.js" defer></script>
+        {%- endif %}
     </head>
     <body{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}"{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
         {{ content | safe }}
