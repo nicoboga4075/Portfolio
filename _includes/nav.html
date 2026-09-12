@@ -1,14 +1,20 @@
+{%- set lang = page.fileSlug.slice(-2) -%}
+{%- set items = [
+    { en: "Home",     fr: "Accueil" },
+    { en: "About",    fr: "À propos" },
+    { en: "Resume",   fr: "Résumé" },
+    { en: "Services", fr: "Services" },
+    { en: "Projects", fr: "Projets" },
+    { en: "Blog",     fr: "Blog" },
+    { en: "Contact",  fr: "Contact" }
+] -%}
 <a id="index" class="navbar-brand"><span>P</span>ortfolio<sup id="version-badge" class="d-none d-lg-inline">{{ version }}</sup></a>
 <button id="dark-icon" type="button" class="icon-sun-o" onclick="toggleDarkMode(event)" aria-label="Toggle dark mode"></button>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation"><span class="icon-menu"></span> Menu</button>
 <div class="collapse navbar-collapse" id="ftco-nav">
     <ul class="navbar-nav nav ml-auto">
-        <li class="nav-item"><a class="nav-link"><span>Home</span></a></li>
-        <li class="nav-item"><a class="nav-link"><span>About</span></a></li>
-        <li class="nav-item"><a class="nav-link"><span>Resume</span></a></li>
-        <li class="nav-item"><a class="nav-link"><span>Services</span></a></li>
-        <li class="nav-item"><a class="nav-link"><span>Projects</span></a></li>
-        <li class="nav-item"><a class="nav-link"><span>Blog</span></a></li>
-        <li class="nav-item"><a class="nav-link"><span>Contact</span></a></li>
+        {%- for item in items %}
+        <li class="nav-item"><a class="nav-link"><span>{{ item[lang] }}</span></a></li>
+        {%- endfor %}
     </ul>
 </div>
