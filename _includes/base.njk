@@ -2,6 +2,7 @@
 base: "../../"
 onload: "initPage()"
 image: "https://nicoboga.netlify.app/images/view.png"
+bodyClass: ""
 ---
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
@@ -46,7 +47,7 @@ image: "https://nicoboga.netlify.app/images/view.png"
         <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
         {%- endif %}
     </head>
-    <body{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}"{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+    <body class="{{ bodyClass }}"{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}">
         {%- set loadingText = { en: "Loading…", fr: "Chargement…" } -%}
         {%- set landmarkLabels = {
             en: { visitor: "Visitor count", nav: "Main navigation", main: "Main content", footer: "Site footer" },
