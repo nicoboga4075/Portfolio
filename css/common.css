@@ -656,3 +656,38 @@ main > #language-switch,
         transform: rotate(360deg);
     }
 }
+
+/* Footer: bootstrap.min.css's own rules target .ftco-footer, but the element
+   uses id="ftco-footer" instead, so they never applied. Re-keyed to the id and
+   moved here (not style.css) so the always-black footer renders the same on
+   every page, not just the ones that load Bootstrap. */
+#ftco-footer {
+    font-size: 16px;
+    background: var(--black);
+    padding: 7em 0;
+}
+
+#ftco-footer .ftco-footer-widget h2 {
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 40px;
+}
+
+#ftco-footer .ftco-footer-widget ul li {
+    margin-bottom: 10px;
+}
+
+#ftco-footer .ftco-footer-widget ul li a,
+#ftco-footer .ftco-footer-widget ul li a span {
+    color: rgb(255 255 255 / 60%);
+}
+
+#ftco-footer p,
+#ftco-footer a {
+    color: rgb(255 255 255 / 70%);
+}
+
+#ftco-footer a:hover {
+    color: var(--white);
+}
