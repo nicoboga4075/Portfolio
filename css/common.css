@@ -269,7 +269,7 @@ main > #language-switch,
     border-radius: 2px;
 }
 
-.car {
+#car {
     position: absolute;
     left: 22px;
     top: 0;
@@ -281,7 +281,7 @@ main > #language-switch,
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .car {
+    #car {
         transition: none;
     }
 }
