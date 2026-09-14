@@ -56,6 +56,9 @@ onload: "initPage()"
         <main>
         {{ content | safe }}
         </main>
+        {%- if contact %}
+        {% include "contact.html" %}
+        {%- endif %}
         {%- if footer %}
         {% include "footer.html" %}
         {%- else %}

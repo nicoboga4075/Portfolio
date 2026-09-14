@@ -10,6 +10,7 @@ nav: true
 botpress: true
 footer: true
 bingo: true
+contact: true
 ---
             <section class="hero-wrap js-fullheight">
                 <div class="overlay"></div>
@@ -1003,14 +1004,3 @@ bingo: true
                 </div>
             </section>
             {% endif %}
-        <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" data-target="#contact-window">
-            <span class="icon-user"></span>
-        </div>
-        <div id="contact-window" class="mfp flex-column bg-white" hidden>
-            <div id="contact-header" class="d-flex align-items-center justify-content-between text-white">
-                <h6>Me contacter</h6>
-                <span class="mfp-close">×</span>
-            </div>
-            {% set socialVariant = "contact" %}{% include "social-links.html" %}
-        </div>
-        <div id="webchat"></div>
