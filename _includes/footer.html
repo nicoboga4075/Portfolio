@@ -3,6 +3,12 @@
     fr: { synopsis: "Loin, très loin, au-delà des montagnes de code, loin des terres de designs dépassés et d’interfaces obsolètes, ici gît le développeur web. Visant des expériences utilisateurs fluides, construisant des sites web adaptatifs et insufflant la vie à des lignes de code, l'ingénieur transforme les idées en réalité numérique.", question: "Une question ?", bingoTitle: "Un bingo ?", bingoText: "Si tu tombes sur le numéro 2713, tu as gagné !", bingoButton: "Jouer" }
 } -%}
 {%- set ft = footerText[lang] -%}
+{%- set snykUrl = "https://snyk.io" + ("/" + lang if lang != "en") -%}
+{%- set copyrightText = {
+    en: { rights: "All rights reserved", made: "This site is made with", and: "and", with: "with", policy: "Privacy policy", terms: "Terms of use" },
+    fr: { rights: "Tous droits réservés", made: "Ce site est fait avec", and: "et", with: "avec", policy: "Politique de confidentialité", terms: "Conditions d'utilisation" }
+} -%}
+{%- set ct = copyrightText[lang] -%}
 <div class="container">
     {%- if synopsis %}
     <div class="row mb-5">
@@ -45,5 +51,10 @@
         </div>
     </div>
     {%- endif %}
-    {% include "copyright.html" %}
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <p>Copyright &copy;<i id="year"></i> {{ ct.rights }} | {{ ct.made }} <i class="icon-heart" aria-hidden="true"></i> {{ ct.and }} <i class="icon-shield" aria-hidden="true"></i> {{ ct.with }} <a target="_blank" rel="noopener" href="{{ snykUrl }}">Snyk</a></p>
+            <p><a id="policy"><i>{{ ct.policy }}</i></a> | <a id="terms"><i>{{ ct.terms }}</i></a></p>
+        </div>
+    </div>
 </div>
