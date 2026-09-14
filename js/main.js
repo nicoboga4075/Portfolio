@@ -825,7 +825,7 @@ function createCircularChart({
 
     $(window).scroll(function () {
         const scrollTop = $(this).scrollTop(),
-            navbar = $('.ftco_navbar'),
+            navbar = $('#ftco-navbar'),
             wasAwake = navbar.hasClass('awake');
         // Fixed, opaque navbar past 150px
         navbar.toggleClass('scrolled', scrollTop >= 150);
