@@ -107,7 +107,12 @@
     "micromatch": "4.0.8",
     "yargs-parser": "21.1.1",
     "yauzl": "^3.2.1",
-    "js-yaml": "^4.1.1"
+    "js-yaml": "^4.1.1",
+    "@capacitor/cli": {
+      "xcode": {
+        "uuid": "^11.1.1"
+      }
+    }
   },
   "allowScripts": {
     "sonar-scanner@3.1.0": true,
