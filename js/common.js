@@ -26,7 +26,7 @@ const appLanguages = new Set(
 // Profile / CV facts, rendered into the page by fillCareerCounts and initProfile (main.js).
 const xp = 5;
 const email = 'nicolas.bogalheiro@gmail.com';
-const city = 'Paris';
+const address = 'Paris';
 const dateBirth = '1997-11-19';
 const cdiCount = 4;
 const internshipsCount = 3;

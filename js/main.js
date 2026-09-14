@@ -596,7 +596,7 @@ function getMessage(key) {
 
 function initProfile() {
     $('.author').text($('meta[name="author"]').attr('content'));
-    $('#city').text(city);
+    $('#address').text(address);
     $('.email').text(email);
     $('.age').text(computeAge(dateBirth));
     $('.xp').each(function () {

@@ -88,7 +88,7 @@ export default defineConfig([
         getCurrentFullDate: "readonly",
         xp: "readonly",
         email: "readonly",
-        city: "readonly",
+        address: "readonly",
         dateBirth: "readonly",
         certifsCount: "readonly",
         projectsCount: "readonly",
