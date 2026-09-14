@@ -53,7 +53,9 @@ onload: "initPage()"
         {%- if nav %}
         {% include "nav.html" %}
         {%- endif %}
+        <main>
         {{ content | safe }}
+        </main>
         {%- if footer %}
         {% include "footer.html" %}
         {%- else %}
