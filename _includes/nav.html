@@ -8,22 +8,20 @@
     { en: "Blog",     fr: "Blog" },
     { en: "Contact",  fr: "Contact" }
 ] -%}
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar" aria-label="Main navigation">
-    <div class="container">
-        <a id="index" class="navbar-brand"><span>P</span>ortfolio<sup id="version-badge" class="d-none d-lg-inline">{{ version }}</sup></a>
-        <button id="dark-icon" type="button" class="icon-sun-o" onclick="toggleDarkMode(event)" aria-label="Toggle dark mode"></button>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation"><span class="icon-menu"></span> Menu</button>
-        <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav nav ml-auto">
-                {%- for item in items %}
-                <li class="nav-item"><a class="nav-link"><span>{{ item[lang] }}</span></a></li>
-                {%- endfor %}
-            </ul>
-        </div>
-        <nav id="language-switch" aria-label="Language">
-            {%- for code, locale in languages.locales %}
-            <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
+<div class="container">
+    <a id="index" class="navbar-brand"><span>P</span>ortfolio<sup id="version-badge" class="d-none d-lg-inline">{{ version }}</sup></a>
+    <button id="dark-icon" type="button" class="icon-sun-o" onclick="toggleDarkMode(event)" aria-label="Toggle dark mode"></button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation"><span class="icon-menu"></span> Menu</button>
+    <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav nav ml-auto">
+            {%- for item in items %}
+            <li class="nav-item"><a class="nav-link"><span>{{ item[lang] }}</span></a></li>
             {%- endfor %}
-        </nav>
+        </ul>
     </div>
-</nav>
+    <nav id="language-switch" aria-label="Language">
+        {%- for code, locale in languages.locales %}
+        <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
+        {%- endfor %}
+    </nav>
+</div>
