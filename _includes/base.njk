@@ -1,6 +1,7 @@
 ---
 base: "../../"
 onload: "initPage()"
+image: "https://nicoboga.netlify.app/images/view.png"
 ---
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
@@ -8,19 +9,18 @@ onload: "initPage()"
 <!DOCTYPE html>
 <html lang="{{ lang }}">
     <head>
-        <title>{{ title | safe }}</title>
         <meta charset="utf-8">
+        <title>{{ title | safe }}</title>
         <meta name="google" content="notranslate">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="{{ author }}">
         <meta name="theme-color" content="#ffffff">
-        <meta name="title" property="og:title" content="Portfolio">
-        <meta name="image" property="og:image" content="https://nicoboga.netlify.app/images/view.png">
+        <meta name="title" property="og:title" content="{{ title | safe }}">
+        <meta name="image" property="og:image" content="{{ image }}">
         <meta name="description" content="{{ description | safe }}">
         {%- if noindex %}
         <meta name="robots" content="noindex">
         {%- endif %}
-        <meta http-equiv="Content-Language" content="{{ languages.locales[lang] }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -48,23 +48,28 @@ onload: "initPage()"
     </head>
     <body{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}"{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
         {%- set loadingText = { en: "Loading…", fr: "Chargement…" } -%}
-        <div id="ftco-loader" class="show fullscreen" role="status" aria-live="polite" aria-atomic="true">
-            <div class="spinner"></div>
+        {%- set landmarkLabels = {
+            en: { visitor: "Visitor count", nav: "Main navigation", main: "Main content", footer: "Site footer" },
+            fr: { visitor: "Nombre de visiteurs", nav: "Navigation principale", main: "Contenu principal", footer: "Pied de page" }
+        } -%}
+        {%- set ll = landmarkLabels[lang] -%}
+        <div id="ftco-loader" class="show fullscreen" role="status" aria-live="polite" aria-atomic="true" aria-label="{{ loadingText[lang] }}">
+            <div class="spinner" aria-hidden="true"></div>
             <span class="sr-only">{{ loadingText[lang] }}</span>
         </div>
-        <div id="ftco-visitor" hidden></div>
+        <div id="ftco-visitor" hidden aria-label="{{ ll.visitor }}"></div>
         {%- if nav %}
-        <nav id="ftco-navbar" class="navbar navbar-expand-lg navbar-dark ftco-navbar-light" aria-label="Main navigation">
+        <nav id="ftco-navbar" class="navbar navbar-expand-lg navbar-dark ftco-navbar-light" aria-label="{{ ll.nav }}">
             {% include "nav.html" %}
         </nav>
         {%- endif %}
-        <main id="ftco-main">
+        <main id="ftco-main" aria-label="{{ ll.main }}">
         {{ content | safe }}
         </main>
         {%- if contact %}
         {% include "contact.html" %}
         {%- endif %}
-        <footer id="ftco-footer" class="ftco-section">
+        <footer id="ftco-footer" class="ftco-section" aria-label="{{ ll.footer }}">
             {% include "footer.html" %}
         </footer>
     </body>
