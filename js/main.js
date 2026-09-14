@@ -1489,11 +1489,13 @@ function initPage() {
     $('.open-mfp').click(function () {
         const target = $(this).data('target');
         toggleVisibility(target);
+        $(this).attr('aria-expanded', !$(target).is('[hidden]'));
     });
 
     $('.mfp-close').click(function () {
         const modalId = $(this).closest('.mfp')[0].id;
         toggleVisibility(`#${modalId}`);
+        $(`[aria-controls="${modalId}"]`).attr('aria-expanded', false);
     });
 
     $('.owl-menu').click(function () {

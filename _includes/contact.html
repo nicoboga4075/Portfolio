@@ -1,6 +1,6 @@
 {%- set lang = page.fileSlug.slice(-2) -%}
 {%- set contactTitle = { en: "Contact me", fr: "Me contacter" } -%}
-<div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" data-target="#contact-window">
+<div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" data-target="#contact-window" aria-expanded="false" aria-controls="contact-window">
     <span class="icon-user"></span>
 </div>
 <div id="contact-window" class="mfp flex-column bg-white" hidden>
