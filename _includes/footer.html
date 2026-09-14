@@ -4,6 +4,7 @@
 } -%}
 {%- set ft = footerText[lang] -%}
 <div class="container">
+    {%- if synopsis %}
     <div class="row mb-5">
         <div class="col-md-8">
             <div class="ftco-footer-widget mb-4">
@@ -29,6 +30,7 @@
             </div>
         </div>
     </div>
+    {%- endif %}
     {%- if bingo %}
     <div class="row mb-5">
         <div class="col-md-12 text-center">
