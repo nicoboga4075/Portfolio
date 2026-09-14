@@ -19,7 +19,13 @@
                         <li><span class="icon-envelope"></span>&nbsp;&nbsp;<span class="text email"></span></li>
                     </ul>
                 </div>
-                {% include "social-links.html" %}
+                <ul class="ftco-footer-links list-unstyled float-md-left float-lft">
+                    {%- for s in socials %}
+                    <li class="ftco-animate">
+                        <a target="_blank" rel="noopener" href="{{ s.href }}" aria-label="{{ s.label }}"><span class="icon-{{ s.icon }}"></span></a>
+                    </li>
+                    {%- endfor %}
+                </ul>
             </div>
         </div>
     </div>
