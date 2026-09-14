@@ -59,13 +59,13 @@ onload: "initPage()"
         {%- if contact %}
         {% include "contact.html" %}
         {%- endif %}
-        {%- if footer %}
-        {% include "footer.html" %}
-        {%- else %}
-        <footer>
+        <footer{% if footer %} class="ftco-footer ftco-section"{% endif %}>
+            {%- if footer %}
+            {% include "footer.html" %}
+            {%- else %}
             {% include "copyright.html" %}
+            {%- endif %}
         </footer>
-        {%- endif %}
         <div id="ftco-visitor" hidden></div>
     </body>
 </html>
