@@ -62,7 +62,7 @@ onload: "initPage()"
         {%- if contact %}
         {% include "contact.html" %}
         {%- endif %}
-        <footer{% if footer %} class="ftco-footer ftco-section"{% endif %}>
+        <footer id="ftco-footer"{% if footer %} class="ftco-section"{% endif %}>
             {%- if footer %}
             {% include "footer.html" %}
             {%- else %}
