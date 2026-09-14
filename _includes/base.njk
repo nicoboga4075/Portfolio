@@ -50,6 +50,7 @@ onload: "initPage()"
         <div id="ftco-loader" class="show fullscreen">
             <div class="spinner"></div>
         </div>
+        <div id="ftco-visitor" hidden></div>
         {%- if nav %}
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar" aria-label="Main navigation">
             {% include "nav.html" %}
@@ -68,6 +69,5 @@ onload: "initPage()"
             {% include "copyright.html" %}
             {%- endif %}
         </footer>
-        <div id="ftco-visitor" hidden></div>
     </body>
 </html>
