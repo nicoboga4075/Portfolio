@@ -159,7 +159,7 @@ sup:hover {
     padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
     white-space: nowrap;
     border: 0;
 }
@@ -194,6 +194,7 @@ sup:hover {
     padding: 4px;
     background-color: var(--lavender);
     border-radius: 50px;
+
     /* Track hugs its buttons instead of stretching full width; flex: none keeps
        .read-title's space-between row from squeezing it. */
     width: fit-content;
