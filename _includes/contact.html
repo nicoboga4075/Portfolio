@@ -8,5 +8,16 @@
         <h6>{{ contactTitle[lang] }}</h6>
         <span class="mfp-close">×</span>
     </div>
-    {% set socialVariant = "contact" %}{% include "social-links.html" %}
+    <div id="contact-link" class="text-dark">
+        <p class="d-flex align-items-center">
+            <i class="icon-envelope"></i>
+            <span class="email"></span>
+        </p>
+        {%- for s in socials %}
+        <p class="d-flex align-items-center">
+            <i class="icon-{{ s.icon }}"></i>
+            <a target="_blank" rel="noopener" href="{{ s.href }}" aria-label="{{ s.label }}">{{ s.label }}</a>
+        </p>
+        {%- endfor %}
+    </div>
 </div>
