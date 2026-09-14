@@ -12,7 +12,7 @@
     <a id="index" class="navbar-brand"><span>P</span>ortfolio<sup id="version-badge" class="d-none d-lg-inline">{{ version }}</sup></a>
     <button id="dark-icon" type="button" class="icon-sun-o" onclick="toggleDarkMode(event)" aria-label="Toggle dark mode"></button>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation"><span class="icon-menu"></span> Menu</button>
-    <div class="collapse navbar-collapse" id="ftco-nav">
+    <div id="ftco-nav" class="collapse navbar-collapse">
         <ul class="navbar-nav nav ml-auto">
             {%- for item in items %}
             <li class="nav-item"><a class="nav-link"><span>{{ item[lang] }}</span></a></li>
