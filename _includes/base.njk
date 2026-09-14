@@ -47,8 +47,10 @@ onload: "initPage()"
         {%- endif %}
     </head>
     <body{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}"{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
-        <div id="ftco-loader" class="show fullscreen">
+        {%- set loadingText = { en: "Loading…", fr: "Chargement…" } -%}
+        <div id="ftco-loader" class="show fullscreen" role="status" aria-live="polite" aria-atomic="true">
             <div class="spinner"></div>
+            <span class="sr-only">{{ loadingText[lang] }}</span>
         </div>
         <div id="ftco-visitor" hidden></div>
         {%- if nav %}

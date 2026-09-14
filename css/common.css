@@ -150,6 +150,20 @@ sup:hover {
     background-color: var(--main);
 }
 
+/* Visually hidden but readable by screen readers - loads on every page
+   (default.css pages don't have Bootstrap's own .sr-only). */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 #dark-icon {
     color: var(--link);
     font-size: 24px;
