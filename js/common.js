@@ -131,7 +131,14 @@ function switchLanguage(url, langTarget) {
         if (pathParts.length > 0 && appLanguages.has(pathParts[0])) {
             pathParts[0] = langTarget;
             urlObj.pathname = `/${pathParts.join('/')}`;
-            const hash = getHashFromSession();
+            // initTranslator() runs (and bakes this href) before the page's own
+            // init saves the *current* hash to session - e.g. on the blog page,
+            // before initBlogPage() has saved the article slug - so the session
+            // value can still be stale (a leftover nav-link section hash). The
+            // hash already on `url` (read before clearUrlPath() strips it) is
+            // always the current page's real hash; prefer it.
+            const urlHash = urlObj.hash ? urlObj.hash.slice(1) : '';
+            const hash = urlHash || getHashFromSession();
             urlObj.hash = (hash && /^[\w-]+$/.test(hash)) ? `#${hash}` : '';
             return `${urlObj.pathname}${urlObj.search}${urlObj.hash}`;
         }

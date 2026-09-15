@@ -1375,7 +1375,12 @@ function initBlogPage(langPage) {
         const hashLink = window.location.hash ? getSlugFromUrl() : '';
         const errorArticle = getMessage('error-generic');
         const host = window.location.origin;
-        const currentHash = hashLink || getHashFromSession();
+        // getHashFromSession() is shared with the nav links' section hash
+        // (e.g. "blog-section"), so a stale value from browsing the main nav
+        // must not be mistaken for a remembered article slug.
+        const sessionHash = getHashFromSession();
+        const isSessionArticle = appArticles.some(article => article.slug === sessionHash);
+        const currentHash = hashLink || (isSessionArticle ? sessionHash : '');
 
         if (currentHash) {
             saveHashToSession(currentHash);
@@ -1395,11 +1400,27 @@ function initBlogPage(langPage) {
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
 
-                    const header = doc.querySelector('.header');
+                    // Stable ids, not the guessed .header/.footer classes those
+                    // elements never actually carry (#ftco-navbar / #ftco-footer)
+                    // - the old selectors silently matched nothing, so the fetched
+                    // article's own nav and footer (with its copyright) stayed in.
+                    const header = doc.querySelector('#ftco-navbar');
                     if (header) header.remove();
 
-                    const footer = doc.querySelector('.footer');
+                    const footer = doc.querySelector('#ftco-footer');
                     if (footer) footer.remove();
+
+                    // The fetched article is a full standalone page: its own
+                    // #ftco-loader ships "shown" (only ever dismissed once, by
+                    // the *current* page's copy, right after initial load) and
+                    // its #ftco-visitor is a duplicate counter. Left in, the
+                    // injected loader sits fixed/fullscreen over the article
+                    // forever, hiding the content behind a blank overlay.
+                    const injectedLoader = doc.querySelector('#ftco-loader');
+                    if (injectedLoader) injectedLoader.remove();
+
+                    const injectedVisitor = doc.querySelector('#ftco-visitor');
+                    if (injectedVisitor) injectedVisitor.remove();
 
                     // Strip elements and attributes that could execute script.
                     // Article HTML is first-party - the function validates the
