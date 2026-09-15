@@ -3,63 +3,63 @@ permalink: "projects/pragma_surveys_en.html"
 title: "Portfolio - Pragma Internal Surveys"
 description: "Pragma Internal Surveys"
 ---
-            <article>
-            <div class="read-title">
-                <h1>🖥️ Pragma Internal Surveys</h1>
-                <nav id="language-switch" aria-label="Language">
-                    {%- for code, locale in languages.locales %}
-                    <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
-                    {%- endfor %}
-                </nav>
-            </div>
-            <div class="video-wrapper">
-                <video controls>
-                    <track label="Français" kind="subtitles" srclang="fr" src="docs/public/Pragma_Surveys_FR.vtt">
-                    <track label="English" kind="subtitles" srclang="en" src="docs/public/Pragma_Surveys_EN.vtt" default>
-                    <source src="docs/public/Pragma_Surveys.mp4" type="video/mp4">
-                </video>
-            </div>
-            <p><strong>Survey webapp developed over 1 year and a half</strong>, on a permanent contract at <a target="_blank" rel="noopener" href="https://www.soft-concept.com/en">Soft Concept</a>, in collaboration with <a target="_blank" rel="noopener" href="https://www.pragma-management.fr/prestations/les-plateformes-d-enquetes-internes-7">Pragma</a></p>
-            <h2>📝 Presentation</h2>
-            <p>It’s a platform for internal surveys designed to collect and analyze employees’ perceptions on topics that matter to the organization or the business which uses it (such as workplace safety, quality of relationships, team dynamics...). It allows users to launch a survey in just a few minutes and access the results as soon as it closes. Users can also benefit from Pragma’s expertise both upstream — to help identify their needs — and downstream, to support the analysis and presentation of the results.</p>
-            <h2>🛠️ Technologies used</h2>
-            <ul>
-                <li><strong>C#, HTML, CSS, JavaScript</strong></li>
-                <li>
-                    Internal tools:
-                    {% include "softconcept-tools.html" %}
-                </li>
-            </ul>
-            <h2>🗂️ Application structure</h2>
-            <h3>👨‍💼 Back Office (Pragma)</h3>
-            <ul>
-                <li>🏢 Client company management and global monitoring (consolidated report)</li>
-                <li>📝 Survey questionnaire administration</li>
-            </ul>
-            <h3>👥 Head of Survey Area (Users)</h3>
-            <ul>
-                <li>🎨 Survey creation: templates, logos, dates, key labels</li>
-                <li>🎯 Participation tracking</li>
-                <li>📊 Access to results : general report, breakdown by category, comparison, consolidation</li>
-            </ul>
-            <h2>⚙️ Additional features</h2>
-            <ul>
-                <li>📣 Notifications sending (email import, invitations, reminders)</li>
-                <li>📇 Mailing management with access codes (PDF with QR Code)</li>
-                <li>❓ User manual and FAQ to assist users</li>
-            </ul>
-            <h2>📈 Usage</h2>
-            <ol>
-                <li>A company wishing to use the platform contacts Pragma.</li>
-                <li>Pragma registers the company in the database.</li>
-                <li>The company receives a link with a login and a password.</li>
-                <li>The head of survey can then initiate the survey: set dates, adjust messages, enter emails or generate code and customize demographic questions (department, division...).</li>
-                <li>The survey is then launched and subsequently closed.</li>
-                <li>The company can export the results of the current wave (N) or compare them with the previous wave (N-1).</li>
-                <li>Pragma can produce an annual consolidated global report.</li>
-                <li>Pragma can also monitor survey usage (view the list of conducted surveys).</li>
-            </ol>
-            <hr>
-            <p>©Soft Concept 2023</p>
-            </article>
-            <a id="index">Go back to the homepage</a>
+<article>
+    <div class="read-title">
+        <h1>🖥️ Pragma Internal Surveys</h1>
+        <nav id="language-switch" aria-label="Language">
+            {%- for code, locale in languages.locales %}
+            <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
+            {%- endfor %}
+        </nav>
+    </div>
+    <div class="video-wrapper">
+        <video controls>
+            <track label="Français" kind="subtitles" srclang="fr" src="docs/public/Pragma_Surveys_FR.vtt">
+            <track label="English" kind="subtitles" srclang="en" src="docs/public/Pragma_Surveys_EN.vtt" default>
+            <source src="docs/public/Pragma_Surveys.mp4" type="video/mp4">
+        </video>
+    </div>
+    <p><strong>Survey webapp developed over 1 year and a half</strong>, on a permanent contract at <a target="_blank" rel="noopener" href="https://www.soft-concept.com/en">Soft Concept</a>, in collaboration with <a target="_blank" rel="noopener" href="https://www.pragma-management.fr/prestations/les-plateformes-d-enquetes-internes-7">Pragma</a></p>
+    <h2>📝 Presentation</h2>
+    <p>It’s a platform for internal surveys designed to collect and analyze employees’ perceptions on topics that matter to the organization or the business which uses it (such as workplace safety, quality of relationships, team dynamics...). It allows users to launch a survey in just a few minutes and access the results as soon as it closes. Users can also benefit from Pragma’s expertise both upstream — to help identify their needs — and downstream, to support the analysis and presentation of the results.</p>
+    <h2>🛠️ Technologies used</h2>
+    <ul>
+        <li><strong>C#, HTML, CSS, JavaScript</strong></li>
+        <li>
+            Internal tools:
+            {% include "softconcept-tools.html" %}
+        </li>
+    </ul>
+    <h2>🗂️ Application structure</h2>
+    <h3>👨‍💼 Back Office (Pragma)</h3>
+    <ul>
+        <li>🏢 Client company management and global monitoring (consolidated report)</li>
+        <li>📝 Survey questionnaire administration</li>
+    </ul>
+    <h3>👥 Head of Survey Area (Users)</h3>
+    <ul>
+        <li>🎨 Survey creation: templates, logos, dates, key labels</li>
+        <li>🎯 Participation tracking</li>
+        <li>📊 Access to results : general report, breakdown by category, comparison, consolidation</li>
+    </ul>
+    <h2>⚙️ Additional features</h2>
+    <ul>
+        <li>📣 Notifications sending (email import, invitations, reminders)</li>
+        <li>📇 Mailing management with access codes (PDF with QR Code)</li>
+        <li>❓ User manual and FAQ to assist users</li>
+    </ul>
+    <h2>📈 Usage</h2>
+    <ol>
+        <li>A company wishing to use the platform contacts Pragma.</li>
+        <li>Pragma registers the company in the database.</li>
+        <li>The company receives a link with a login and a password.</li>
+        <li>The head of survey can then initiate the survey: set dates, adjust messages, enter emails or generate code and customize demographic questions (department, division...).</li>
+        <li>The survey is then launched and subsequently closed.</li>
+        <li>The company can export the results of the current wave (N) or compare them with the previous wave (N-1).</li>
+        <li>Pragma can produce an annual consolidated global report.</li>
+        <li>Pragma can also monitor survey usage (view the list of conducted surveys).</li>
+    </ol>
+    <hr>
+    <p>©Soft Concept 2023</p>
+</article>
+<a id="index">Go back to the homepage</a>

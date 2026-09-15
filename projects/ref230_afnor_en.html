@@ -3,70 +3,70 @@ permalink: "projects/ref230_afnor_en.html"
 title: "Portfolio - REF230 AFNOR"
 description: "REF230 AFNOR"
 ---
-            <article>
-            <div class="read-title">
-                <h1>🖥️ REF230 AFNOR</h1>
-                <nav id="language-switch" aria-label="Language">
-                    {%- for code, locale in languages.locales %}
-                    <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
-                    {%- endfor %}
-                </nav>
-            </div>
-            <div class="video-wrapper">
-                <video controls>
-                    <track label="Français" kind="subtitles" srclang="fr" src="docs/public/REF230_AFNOR_FR.vtt">
-                    <track label="English" kind="subtitles" srclang="en" src="docs/public/REF230_AFNOR_EN.vtt" default>
-                    <source src="docs/public/REF230_AFNOR.mp4" type="video/mp4">
-                </video>
-            </div>
-            <p><strong>Audit platform developed over 2 years</strong> for <a target="_blank" rel="noopener" href="https://www.afnor.org/en">AFNOR</a>, on a permanent contract at <a target="_blank" rel="noopener" href="https://www.soft-concept.com/en">Soft Concept</a>, in collaboration with <a target="_blank" rel="noopener" href="https://www.vitalisgroup.com">Vitalis</a></p>
-            <h2>📝 Presentation</h2>
-            <p>This software is a management and monitoring tool for the <a target="_blank" rel="noopener" href="https://certification.afnor.org/en/services/service-commitment">REF230</a> certification, delivered by AFNOR, ensuring the quality of the services in the optical sector (ISO 9001).</p>
-            <h2>🛠️ Technologies used</h2>
-            <ul>
-                <li><strong>C#, HTML, CSS, JavaScript</strong></li>
-                {% set extraTool = { slug: "survey-manager", name: "Survey-Manager", desc: "survey management and mail launcher" } %}
-                <li>
-                    Internal tools:
-                    {% include "softconcept-tools.html" %}
-                </li>
-            </ul>
-            <h2>🗂️ Application Structure</h2>
-            <h3>👨‍💼 Administrator / Customer Manager Profile (AFNOR)</h3>
-            <ul>
-                <li>🏬 Store management (certified and new)</li>
-                <li>📅 Request and scheduling of audits</li>
-                <li>📑 Reading and editing of data sheets</li>
-                <li>🔍 Viewing of reports</li>
-                <li>📍 Certification decision</li>
-            </ul>
-            <h3>📑 Service Provider Profile (Vitalis / Présence)</h3>
-            <ul>
-                <li>📅 Handling of scheduled audits</li>
-                <li>📎 Entry of audit reports and summaries</li>
-                <li>✅ Follow-up of completed audits</li>
-            </ul>
-            <h3>🏪 Brand Profile (e.g. Lissac)</h3>
-            <ul>
-                <li>🔍 Consultation of certification files</li>
-                <li>📂 Download of data sheets and related documents</li>
-                <li>📊 Externalized DataViz</li>
-            </ul>
-            <h2>⚙️ Additional Features</h2>
-            <ul>
-                <li>📥 Notifications and application status tracking by email</li>
-                <li>📄 File import: K-bis, ADELI certificate...</li>
-                <li>🎯 Custom statistics and interactive map</li>
-                <li>🔍 Advanced filters: brand, postal code, workforce, legal status...</li>
-            </ul>
-            <h2>📈 Usage</h2>
-            <ul>
-                <li>👉 <strong>AFNOR</strong>: global administration and user management</li>
-                <li>👉 <strong>Customer Managers (TC)</strong>: store management and audit monitoring</li>
-                <li>👉 <strong>Service Providers</strong>: audit and report execution (non-compliance and proposition sheets)</li>
-                <li>👉 <strong>Retail Brands</strong>: read-only store monitoring</li>
-            </ul>
-            <hr>
-            <p>©Soft Concept 2023</p>
-            </article>
-            <a id="index">Go back to the homepage</a>
+<article>
+    <div class="read-title">
+        <h1>🖥️ REF230 AFNOR</h1>
+        <nav id="language-switch" aria-label="Language">
+            {%- for code, locale in languages.locales %}
+            <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
+            {%- endfor %}
+        </nav>
+    </div>
+    <div class="video-wrapper">
+        <video controls>
+            <track label="Français" kind="subtitles" srclang="fr" src="docs/public/REF230_AFNOR_FR.vtt">
+            <track label="English" kind="subtitles" srclang="en" src="docs/public/REF230_AFNOR_EN.vtt" default>
+            <source src="docs/public/REF230_AFNOR.mp4" type="video/mp4">
+        </video>
+    </div>
+    <p><strong>Audit platform developed over 2 years</strong> for <a target="_blank" rel="noopener" href="https://www.afnor.org/en">AFNOR</a>, on a permanent contract at <a target="_blank" rel="noopener" href="https://www.soft-concept.com/en">Soft Concept</a>, in collaboration with <a target="_blank" rel="noopener" href="https://www.vitalisgroup.com">Vitalis</a></p>
+    <h2>📝 Presentation</h2>
+    <p>This software is a management and monitoring tool for the <a target="_blank" rel="noopener" href="https://certification.afnor.org/en/services/service-commitment">REF230</a> certification, delivered by AFNOR, ensuring the quality of the services in the optical sector (ISO 9001).</p>
+    <h2>🛠️ Technologies used</h2>
+    <ul>
+        <li><strong>C#, HTML, CSS, JavaScript</strong></li>
+        {% set extraTool = { slug: "survey-manager", name: "Survey-Manager", desc: "survey management and mail launcher" } %}
+        <li>
+            Internal tools:
+            {% include "softconcept-tools.html" %}
+        </li>
+    </ul>
+    <h2>🗂️ Application Structure</h2>
+    <h3>👨‍💼 Administrator / Customer Manager Profile (AFNOR)</h3>
+    <ul>
+        <li>🏬 Store management (certified and new)</li>
+        <li>📅 Request and scheduling of audits</li>
+        <li>📑 Reading and editing of data sheets</li>
+        <li>🔍 Viewing of reports</li>
+        <li>📍 Certification decision</li>
+    </ul>
+    <h3>📑 Service Provider Profile (Vitalis / Présence)</h3>
+    <ul>
+        <li>📅 Handling of scheduled audits</li>
+        <li>📎 Entry of audit reports and summaries</li>
+        <li>✅ Follow-up of completed audits</li>
+    </ul>
+    <h3>🏪 Brand Profile (e.g. Lissac)</h3>
+    <ul>
+        <li>🔍 Consultation of certification files</li>
+        <li>📂 Download of data sheets and related documents</li>
+        <li>📊 Externalized DataViz</li>
+    </ul>
+    <h2>⚙️ Additional Features</h2>
+    <ul>
+        <li>📥 Notifications and application status tracking by email</li>
+        <li>📄 File import: K-bis, ADELI certificate...</li>
+        <li>🎯 Custom statistics and interactive map</li>
+        <li>🔍 Advanced filters: brand, postal code, workforce, legal status...</li>
+    </ul>
+    <h2>📈 Usage</h2>
+    <ul>
+        <li>👉 <strong>AFNOR</strong>: global administration and user management</li>
+        <li>👉 <strong>Customer Managers (TC)</strong>: store management and audit monitoring</li>
+        <li>👉 <strong>Service Providers</strong>: audit and report execution (non-compliance and proposition sheets)</li>
+        <li>👉 <strong>Retail Brands</strong>: read-only store monitoring</li>
+    </ul>
+    <hr>
+    <p>©Soft Concept 2023</p>
+</article>
+<a id="index">Go back to the homepage</a>

@@ -3,70 +3,70 @@ permalink: "projects/ref230_afnor_fr.html"
 title: "Portfolio - REF230 AFNOR"
 description: "REF230 AFNOR"
 ---
-            <article>
-            <div class="read-title">
-                <h1>🖥️ REF230 AFNOR</h1>
-                <nav id="language-switch" aria-label="Language">
-                    {%- for code, locale in languages.locales %}
-                    <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
-                    {%- endfor %}
-                </nav>
-            </div>
-            <div class="video-wrapper">
-                <video controls>
-                    <track label="Français" kind="subtitles" srclang="fr" src="docs/public/REF230_AFNOR_FR.vtt">
-                    <track label="English" kind="subtitles" srclang="en" src="docs/public/REF230_AFNOR_EN.vtt">
-                    <source src="docs/public/REF230_AFNOR.mp4" type="video/mp4">
-                </video>
-            </div>
-            <p><strong>Plateforme d'audit développée pendant 2 ans</strong> pour l'<a target="_blank" rel="noopener" href="https://www.afnor.org">AFNOR</a>, en CDI chez <a target="_blank" rel="noopener" href="https://www.soft-concept.com">Soft Concept</a>, en collaboration avec <a target="_blank" rel="noopener" href="https://www.vitalisgroup.com">Vitalis</a></p>
-            <h2>📝 Présentation</h2>
-            <p>C'est un outil de gestion et de suivi pour la certification <a target="_blank" rel="noopener" href="https://certification.afnor.org/services/engagement-de-service-qualite-en-optique">REF230</a>, délivrée par l'AFNOR et assurant la qualité des services en optique (ISO 9001).</p>
-            <h2>🛠️ Technologies utilisées</h2>
-            <ul>
-                <li><strong>C#, HTML, CSS, JavaScript</strong></li>
-                {% set extraTool = { slug: "survey-manager", name: "Survey-Manager", desc: "pilotage des enquêtes et utilitaire mail" } %}
-                <li>
-                    Outils internes :
-                    {% include "softconcept-tools.html" %}
-                </li>
-            </ul>
-            <h2>🗂️ Structure de l’application</h2>
-            <h3>👨‍💼 Profil Administrateur / Chargé de clientèle (AFNOR)</h3>
-            <ul>
-                <li>🏬 Gestion des magasins (certifiés et nouveaux)</li>
-                <li>📅 Demande et planification d’audits</li>
-                <li>📑 Lecture et modification des fiches signalétiques</li>
-                <li>🔍 Consultation des rapports</li>
-                <li>📍 Décision de certification</li>
-            </ul>
-            <h3>📑 Profil Prestataire (Vitalis / Présence)</h3>
-            <ul>
-                <li>📅 Prise en charge des audits planifiés</li>
-                <li>📎 Saisie des comptes rendus et rapports d’audit</li>
-                <li>✅ Suivi des audits réalisés</li>
-            </ul>
-            <h3>🏪 Profil Enseigne (ex : Lissac)</h3>
-            <ul>
-                <li>🔍 Consultation des dossiers de certification</li>
-                <li>📂 Téléchargement des fiches signalétiques et documents associés</li>
-                <li>📊 DataViz externalisée</li>
-            </ul>
-            <h2>⚙️ Fonctionnalités complémentaires</h2>
-            <ul>
-                <li>📥 Notifications et suivi d'étapes de candidature par mail</li>
-                <li>📄 Import de fichiers : K-bis, attestation ADELI…</li>
-                <li>🎯 Statistiques personnalisés et carte interactive</li>
-                <li>🔍 Filtres avancés : enseigne, code postal, effectif, statut juridique…</li>
-            </ul>
-            <h2>📈 Utilisation</h2>
-            <ul>
-                <li>👉 <strong>AFNOR </strong>: administration globale et gestion des utilisateurs</li>
-                <li>👉 <strong>Chargés de clientèle (TC) </strong>: pilotage des magasins et gestion des audits</li>
-                <li>👉 <strong>Prestataires </strong>: réalisation d’audits et rapports (fiches de non-conformité et de proposition)</li>
-                <li>👉 <strong>Enseignes </strong>: suivi des magasins en lecture seule</li>
-            </ul>
-            <hr>
-            <p>©Soft Concept 2023</p>
-            </article>
-            <a id="index">Retour à l'accueil</a>
+<article>
+    <div class="read-title">
+        <h1>🖥️ REF230 AFNOR</h1>
+        <nav id="language-switch" aria-label="Language">
+            {%- for code, locale in languages.locales %}
+            <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
+            {%- endfor %}
+        </nav>
+    </div>
+    <div class="video-wrapper">
+        <video controls>
+            <track label="Français" kind="subtitles" srclang="fr" src="docs/public/REF230_AFNOR_FR.vtt">
+            <track label="English" kind="subtitles" srclang="en" src="docs/public/REF230_AFNOR_EN.vtt">
+            <source src="docs/public/REF230_AFNOR.mp4" type="video/mp4">
+        </video>
+    </div>
+    <p><strong>Plateforme d'audit développée pendant 2 ans</strong> pour l'<a target="_blank" rel="noopener" href="https://www.afnor.org">AFNOR</a>, en CDI chez <a target="_blank" rel="noopener" href="https://www.soft-concept.com">Soft Concept</a>, en collaboration avec <a target="_blank" rel="noopener" href="https://www.vitalisgroup.com">Vitalis</a></p>
+    <h2>📝 Présentation</h2>
+    <p>C'est un outil de gestion et de suivi pour la certification <a target="_blank" rel="noopener" href="https://certification.afnor.org/services/engagement-de-service-qualite-en-optique">REF230</a>, délivrée par l'AFNOR et assurant la qualité des services en optique (ISO 9001).</p>
+    <h2>🛠️ Technologies utilisées</h2>
+    <ul>
+        <li><strong>C#, HTML, CSS, JavaScript</strong></li>
+        {% set extraTool = { slug: "survey-manager", name: "Survey-Manager", desc: "pilotage des enquêtes et utilitaire mail" } %}
+        <li>
+            Outils internes :
+            {% include "softconcept-tools.html" %}
+        </li>
+    </ul>
+    <h2>🗂️ Structure de l’application</h2>
+    <h3>👨‍💼 Profil Administrateur / Chargé de clientèle (AFNOR)</h3>
+    <ul>
+        <li>🏬 Gestion des magasins (certifiés et nouveaux)</li>
+        <li>📅 Demande et planification d’audits</li>
+        <li>📑 Lecture et modification des fiches signalétiques</li>
+        <li>🔍 Consultation des rapports</li>
+        <li>📍 Décision de certification</li>
+    </ul>
+    <h3>📑 Profil Prestataire (Vitalis / Présence)</h3>
+    <ul>
+        <li>📅 Prise en charge des audits planifiés</li>
+        <li>📎 Saisie des comptes rendus et rapports d’audit</li>
+        <li>✅ Suivi des audits réalisés</li>
+    </ul>
+    <h3>🏪 Profil Enseigne (ex : Lissac)</h3>
+    <ul>
+        <li>🔍 Consultation des dossiers de certification</li>
+        <li>📂 Téléchargement des fiches signalétiques et documents associés</li>
+        <li>📊 DataViz externalisée</li>
+    </ul>
+    <h2>⚙️ Fonctionnalités complémentaires</h2>
+    <ul>
+        <li>📥 Notifications et suivi d'étapes de candidature par mail</li>
+        <li>📄 Import de fichiers : K-bis, attestation ADELI…</li>
+        <li>🎯 Statistiques personnalisés et carte interactive</li>
+        <li>🔍 Filtres avancés : enseigne, code postal, effectif, statut juridique…</li>
+    </ul>
+    <h2>📈 Utilisation</h2>
+    <ul>
+        <li>👉 <strong>AFNOR </strong>: administration globale et gestion des utilisateurs</li>
+        <li>👉 <strong>Chargés de clientèle (TC) </strong>: pilotage des magasins et gestion des audits</li>
+        <li>👉 <strong>Prestataires </strong>: réalisation d’audits et rapports (fiches de non-conformité et de proposition)</li>
+        <li>👉 <strong>Enseignes </strong>: suivi des magasins en lecture seule</li>
+    </ul>
+    <hr>
+    <p>©Soft Concept 2023</p>
+</article>
+<a id="index">Retour à l'accueil</a>

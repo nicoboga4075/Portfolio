@@ -3,62 +3,62 @@ permalink: "projects/panel_mnt_en.html"
 title: "Portfolio - Panel MNT"
 description: "Panel MNT"
 ---
-            <article>
-            <div class="read-title">
-                <h1>🖥️ Panel MNT</h1>
-                <nav id="language-switch" aria-label="Language">
-                    {%- for code, locale in languages.locales %}
-                    <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
-                    {%- endfor %}
-                </nav>
-            </div>
-            <div class="video-wrapper">
-                <video controls>
-                    <track label="Français" kind="subtitles" srclang="fr" src="docs/public/Panel_MNT_FR.vtt">
-                    <track label="English" kind="subtitles" srclang="en" src="docs/public/Panel_MNT_EN.vtt" default>
-                    <source src="docs/public/Panel_MNT.mp4" type="video/mp4">
-                </video>
-            </div>
-            <p><strong>Panelist portal developed over 3 months</strong> for the French "Mutuelle Nationale Territoriale" (<a target="_blank" rel="noopener" href="https://www.mnt.fr">MNT</a>), on a permanent contract at <a target="_blank" rel="noopener" href="https://www.soft-concept.com/en">Soft Concept</a></p>
-            <h2>📝 Presentation</h2>
-            <p>This application allows the members of the mutual to participate in thematic surveys and to earn rewards in the form of gift vouchers in exchange.</p>
-            <h2>🛠️ Technologies used</h2>
-            <ul>
-                <li><strong>HTML, CSS, JavaScript</strong></li>
-                {% set extraTool = { slug: "panel-manager", name: "Panel Manager", desc: "survey management and panel monitoring" } %}
-                <li>
-                    Internal tools:
-                    {% include "softconcept-tools.html" %}
-                </li>
-            </ul>
-            <h2>🗂️ Application structure</h2>
-            <h3>👨‍💼 Back Office (Administrators)</h3>
-            <ul>
-                <li>👥 Panelist management</li>
-                <li>📅 Survey creation and scheduling</li>
-                <li>📂 Data archiving and download</li>
-                <li>📥 Import of results in PDF format</li>
-            </ul>
-            <h3>👤 Panelist Area (Users)</h3>
-            <ul>
-                <li>🔑 Login to personal account</li>
-                <li>📝 View and edit profile</li>
-                <li>📊 Participate in surveys</li>
-                <li>📜 Participation history</li>
-                <li>📞 Support contact and account deletion</li>
-            </ul>
-            <h2>⚙️ Additional features</h2>
-            <ul>
-                <li>📣 Notification sending</li>
-                <li>🎁 Viewing points and rewards</li>
-                <li>❓ FAQ to assist panelists</li>
-            </ul>
-            <h2>📈 Usage</h2>
-            <p>The application is used by MNT members to contribute to surveys on health, prevention and mutual services.
-                On the MNT side, Panel Manager is a management and analysis tool designed to gather feedback and optimize its services.
-                Members are rewarded for participating in monthly surveys through digital gift vouchers provided by <a target="_blank" rel="noopener" href="https://www.glady.com">Glady</a>.
-            </p>
-            <hr>
-            <p>©Soft Concept 2023</p>
-            </article>
-            <a id="index">Go back to the homepage</a>
+<article>
+    <div class="read-title">
+        <h1>🖥️ Panel MNT</h1>
+        <nav id="language-switch" aria-label="Language">
+            {%- for code, locale in languages.locales %}
+            <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
+            {%- endfor %}
+        </nav>
+    </div>
+    <div class="video-wrapper">
+        <video controls>
+            <track label="Français" kind="subtitles" srclang="fr" src="docs/public/Panel_MNT_FR.vtt">
+            <track label="English" kind="subtitles" srclang="en" src="docs/public/Panel_MNT_EN.vtt" default>
+            <source src="docs/public/Panel_MNT.mp4" type="video/mp4">
+        </video>
+    </div>
+    <p><strong>Panelist portal developed over 3 months</strong> for the French "Mutuelle Nationale Territoriale" (<a target="_blank" rel="noopener" href="https://www.mnt.fr">MNT</a>), on a permanent contract at <a target="_blank" rel="noopener" href="https://www.soft-concept.com/en">Soft Concept</a></p>
+    <h2>📝 Presentation</h2>
+    <p>This application allows the members of the mutual to participate in thematic surveys and to earn rewards in the form of gift vouchers in exchange.</p>
+    <h2>🛠️ Technologies used</h2>
+    <ul>
+        <li><strong>HTML, CSS, JavaScript</strong></li>
+        {% set extraTool = { slug: "panel-manager", name: "Panel Manager", desc: "survey management and panel monitoring" } %}
+        <li>
+            Internal tools:
+            {% include "softconcept-tools.html" %}
+        </li>
+    </ul>
+    <h2>🗂️ Application structure</h2>
+    <h3>👨‍💼 Back Office (Administrators)</h3>
+    <ul>
+        <li>👥 Panelist management</li>
+        <li>📅 Survey creation and scheduling</li>
+        <li>📂 Data archiving and download</li>
+        <li>📥 Import of results in PDF format</li>
+    </ul>
+    <h3>👤 Panelist Area (Users)</h3>
+    <ul>
+        <li>🔑 Login to personal account</li>
+        <li>📝 View and edit profile</li>
+        <li>📊 Participate in surveys</li>
+        <li>📜 Participation history</li>
+        <li>📞 Support contact and account deletion</li>
+    </ul>
+    <h2>⚙️ Additional features</h2>
+    <ul>
+        <li>📣 Notification sending</li>
+        <li>🎁 Viewing points and rewards</li>
+        <li>❓ FAQ to assist panelists</li>
+    </ul>
+    <h2>📈 Usage</h2>
+    <p>The application is used by MNT members to contribute to surveys on health, prevention and mutual services.
+        On the MNT side, Panel Manager is a management and analysis tool designed to gather feedback and optimize its services.
+        Members are rewarded for participating in monthly surveys through digital gift vouchers provided by <a target="_blank" rel="noopener" href="https://www.glady.com">Glady</a>.
+    </p>
+    <hr>
+    <p>©Soft Concept 2023</p>
+</article>
+<a id="index">Go back to the homepage</a>
