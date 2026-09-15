@@ -387,9 +387,51 @@ main > #language-switch,
     }
 }
 
-#qrcode {
-    max-width: clamp(160px, 15vw, 288px);
+.about-author .desc {
+    display: flex;
+    flex-direction: column;
+}
+
+.qrcode-group {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.qrcode-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+}
+
+.qrcode-logo {
+    max-width: 110px;
     height: auto;
+    margin-bottom: 6px;
+}
+
+.qrcode-img {
+    max-width: clamp(90px, 9vw, 140px);
+    height: auto;
+}
+
+/* Stacked cards have the whole column to themselves, so they can be bigger;
+   side by side on mobile, two cards must still fit in that same width. */
+@media (max-width: 767.98px) {
+    .qrcode-group {
+        flex-direction: row;
+    }
+
+    .qrcode-logo {
+        max-width: 60px;
+    }
+
+    .qrcode-img {
+        max-width: clamp(55px, 5vw, 65px);
+    }
 }
 
 #inpi-process {
