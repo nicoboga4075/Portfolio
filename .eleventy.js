@@ -152,7 +152,7 @@ module.exports = function configureEleventy(eleventyConfig) {
         { href: `${linkedinDomain}/in/${linkedinVanity}`, label: "LinkedIn", icon: "linkedin" },
         { href: "https://github.com/nicoboga4075", label: "GitHub", icon: "github" },
         { href: "https://www.codingame.com/profile/8755914e3c5aeab435bb5ec921b9237e8911643", label: "CodinGame", icon: "gamepad" },
-        { href: "https://www.chess.com/member/nicoboga4075knight", label: "Chess", icon: "king-outlined" }
+        { href: "https://www.chess.com/member/nicoboga4075knight", label: "Chess", icon: "king-outlined", modalIcon: "chessboard" }
     ]);
     eleventyConfig.addGlobalData("languages", {
         default: defaultLang,

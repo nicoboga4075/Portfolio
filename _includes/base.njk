@@ -77,7 +77,7 @@ bodyClass: ""
                 </p>
                 {%- for s in socials %}
                 <p class="d-flex align-items-center">
-                    <i class="icon-{{ s.icon }}"></i>
+                    <i class="icon-{{ s.modalIcon or s.icon }}"></i>
                     <a target="_blank" rel="noopener" href="{{ s.href }}" aria-label="{{ s.label }}">{{ s.label }}</a>
                 </p>
                 {%- endfor %}
