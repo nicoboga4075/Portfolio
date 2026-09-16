@@ -245,7 +245,7 @@ const appKeywords = [
     "Hibernate",
     // Database
     "MySQL",
-    "SQLAlchemy",
+    "Entity Framework",
     "PostgreSQL",
     "MongoDB",
     "SQLite",
