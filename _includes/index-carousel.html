@@ -2,10 +2,6 @@
 {%- set suffix = parts[parts.length - 1] -%}
 {%- set lang = suffix if suffix.length == 2 else languages.default -%}
 
-{%- set carouselText = {
-    en: { heading: "Discover my skills", hardTip: "Practical or technical abilities learned through training or experience", softTip: "Personal attributes or interpersonal abilities that enhance how you work and interact with others", madTip: "Atypical abilities or unique talents, often developed through personal passions" },
-    fr: { heading: "Découvrez mes compétences", hardTip: "Compétences techniques ou pratiques, acquises par la formation ou l'expérience", softTip: "Compétences personnelles ou interpersonnelles, améliorant la manière de travailler et d’interagir avec les autres", madTip: "Compétences atypiques ou talents uniques, souvent développées à travers des passions personnelles" }
-} -%}
 {%- set carousel = carouselText[lang] -%}
 {% if viewport == "desktop" %}
 <section id="carousel-section" class="ftco-section ftco-counter img d-none d-sm-flex">

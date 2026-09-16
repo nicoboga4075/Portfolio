@@ -1,0 +1,8 @@
+{
+    "success-generic": { "en": "The operation was successfully completed.", "fr": "L'opération a été un franc succès." },
+    "error-generic": { "en": "Oops ! An error has occurred. Try again later.", "fr": "Oops ! Une erreur est survenue. Réessayez plus tard." },
+    "carousel-prev": { "en": "Previous", "fr": "Précédent" },
+    "carousel-next": { "en": "Next", "fr": "Suivant" },
+    "carousel-dot": { "en": "Go to slide", "fr": "Aller à la diapositive" },
+    "search-no-result": { "en": "Houston, we have a problem", "fr": "Houston, nous avons un problème" }
+}

@@ -1,0 +1,9 @@
+[
+    { "icon": "icon-language", "date": { "en": "November 2025", "fr": "Novembre 2025" }, "title": { "en": "Voltaire Certificate", "fr": "Certificat Voltaire" }, "score": "841", "detail": { "en": "Business Level", "fr": "Niveau Affaires" } },
+    { "icon": "icon-language", "date": { "en": "January 2020", "fr": "Janvier 2020" }, "title": "TOEIC", "score": "810", "detail": "B2" },
+    { "icon": "icon-language", "date": { "en": "January 2019", "fr": "Janvier 2019" }, "title": "TOEFL", "score": "550", "detail": "B2" },
+    { "icon": "icon-web", "date": { "en": "June 2019", "fr": "Juin 2019" }, "title": { "en": "CGI Student Contest", "fr": "Challenge étudiant CGI" }, "score": { "en": "Finalist", "fr": "Finaliste" }, "detail": { "en": "Solidarity : Easy Student Housing", "fr": "Solidarité : Easy Student Housing" } },
+    { "icon": "icon-drivers-license", "date": { "en": "July 2016", "fr": "Juillet 2016" }, "title": { "en": "Driving License", "fr": "Permis de conduire" }, "score": "24", "detail": "B" },
+    { "icon": "icon-certificate", "date": { "en": "July 2015", "fr": "Juillet 2015" }, "title": { "en": "Baccalaureate", "fr": "Bac" }, "score": { "en": "Very Good", "fr": "TB" }, "detail": { "en": "Scientific : St Jacques de Compostelle (Dax)", "fr": "Scientifique : St Jacques de Compostelle (Dax)" } },
+    { "svgId": "fft", "date": { "en": "August 2012", "fr": "Août 2012" }, "title": "TNJA", "score": { "en": "Finalist", "fr": "Finaliste" }, "detail": { "en": "Tennis Referee : CBBL", "fr": "Arbitre de Tennis : CBBL" } }
+]

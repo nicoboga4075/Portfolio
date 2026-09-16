@@ -1,11 +1,6 @@
 {%- set lang = page.fileSlug.slice(-2) -%}
 {%- set urlPrefix = "https://www.soft-concept.com/" + (lang + "/" if lang != "fr") -%}
 {%- set separator = " : " if lang == "fr" else ": " -%}
-{%- set tools = [
-    { slug: "net-survey", name: "Net-Survey", en: "questionnaire creation", fr: "création de questionnaires" },
-    { slug: "ethnos", name: "Ethnos", en: "survey data analysis", fr: "analyse de données collectées" },
-    { slug: "web-reports", name: "Web Reports", en: "application development and deployment", fr: "développement et déploiement applicatif" }
-] -%}
 <ul>
     {%- for tool in tools %}
     <li><a target="_blank" rel="noopener" href="{{ urlPrefix }}{{ tool.slug }}">{{ tool.name }}</a>{{ separator }}{{ tool[lang] }}</li>

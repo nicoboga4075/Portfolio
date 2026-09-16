@@ -1,0 +1,9 @@
+[
+    { "en": "Home",     "fr": "Accueil" },
+    { "en": "About",    "fr": "À propos" },
+    { "en": "Resume",   "fr": "Résumé" },
+    { "en": "Services", "fr": "Services" },
+    { "en": "Projects", "fr": "Projets" },
+    { "en": "Blog",     "fr": "Blog" },
+    { "en": "Contact",  "fr": "Contact" }
+]

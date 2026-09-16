@@ -1,0 +1,5 @@
+[
+    { "flag": "flag-fr.png", "countryAlt": { "en": "France", "fr": "France" }, "name": { "en": "French", "fr": "Français" }, "value": 100 },
+    { "flag": "flag-gb.png", "countryAlt": { "en": "United Kingdom", "fr": "Royaume-Uni" }, "name": { "en": "English", "fr": "Anglais" }, "value": 70 },
+    { "flag": "flag-es.png", "countryAlt": { "en": "Spain", "fr": "Espagne" }, "name": { "en": "Spanish", "fr": "Espagnol" }, "value": 40 }
+]

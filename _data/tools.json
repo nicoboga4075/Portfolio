@@ -1,0 +1,5 @@
+[
+    { "slug": "net-survey", "name": "Net-Survey", "en": "questionnaire creation", "fr": "création de questionnaires" },
+    { "slug": "ethnos", "name": "Ethnos", "en": "survey data analysis", "fr": "analyse de données collectées" },
+    { "slug": "web-reports", "name": "Web Reports", "en": "application development and deployment", "fr": "développement et déploiement applicatif" }
+]

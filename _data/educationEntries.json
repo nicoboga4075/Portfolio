@@ -1,0 +1,5 @@
+[
+    { "id": "UQAC", "date": "2020 - 2021", "title": { "en": "University Master in Computer Science", "fr": "Master universitaire en Informatique" }, "href": "https://www.uqac.ca", "school": "UQAC", "place": "(Chicoutimi, CAN)" },
+    { "id": "ESILV", "date": "2018 - 2021", "title": { "en": "Engineering Diploma in Informatics", "fr": "Diplôme d'ingénieurs en Informatique" }, "href": { "en": "https://www.esilv.fr/en", "fr": "https://www.esilv.fr" }, "school": "ESILV", "place": "(Paris La Défense, FRA)" },
+    { "id": "js", "date": "2015 - 2018", "title": { "en": "Prepa MPSI/MP", "fr": "Prépa MPSI/MP" }, "href": "https://www.janson-de-sailly.fr", "school": "Janson de Sailly", "place": "(Paris 16e, FRA)" }
+]

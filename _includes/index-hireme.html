@@ -2,10 +2,6 @@
 {%- set suffix = parts[parts.length - 1] -%}
 {%- set lang = suffix if suffix.length == 2 else languages.default -%}
 
-{%- set hiremeText = {
-    en: { heading: "Attentive to opportunities", location: "In Paris area", cta: "Contact me" },
-    fr: { heading: "À l'écoute d'opportunités", location: "En région parisienne", cta: "Me contacter" }
-} -%}
 {%- set hireme = hiremeText[lang] -%}
 <section class="ftco-section ftco-hireme img d-none d-sm-flex">
     <div class="overlay"></div>

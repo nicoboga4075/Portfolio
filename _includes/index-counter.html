@@ -2,10 +2,6 @@
 {%- set suffix = parts[parts.length - 1] -%}
 {%- set lang = suffix if suffix.length == 2 else languages.default -%}
 
-{%- set counterText = {
-    en: { certifs: "Certifications", projects: "Delivered projects", experiences: "Work experiences", countries: "Visited countries" },
-    fr: { certifs: "Certifications", projects: "Projets livrés", experiences: "Expériences pros", countries: "Pays visités" }
-} -%}
 {%- set counter = counterText[lang] -%}
 {% if viewport == "desktop" %}
 <section id="counter-section" class="ftco-section ftco-counter">

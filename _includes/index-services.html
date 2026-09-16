@@ -2,22 +2,7 @@
 {%- set suffix = parts[parts.length - 1] -%}
 {%- set lang = suffix if suffix.length == 2 else languages.default -%}
 
-{%- set servicesText = {
-    en: { heading: "Services", devAlt: "Developer Avatar", tagline: "Programming, Customer Support &amp; Training" },
-    fr: { heading: "Services", devAlt: "Avatar Développeur", tagline: "Programmation, Assistance Technique &amp; Formation" }
-} -%}
 {%- set services = servicesText[lang] -%}
-{%- set serviceCards = [
-    { icon: "flaticon-analysis", ariaLabel: { en: "Data Visualization", fr: "Data Viz" }, title: { en: "Data Visualization", fr: "Data Viz" } },
-    { icon: "flaticon-flasks", ariaLabel: { en: "Customer Care", fr: "Relation Client" }, title: { en: "Customer Care", fr: "Relation Client" } },
-    { icon: "flaticon-ideas", ariaLabel: { en: "Web Development", fr: "Développement Web" }, title: { en: "Web Development", fr: "Développement Web" } },
-    { icon: "flaticon-innovation", ariaLabel: { en: "Digital Transformation", fr: "Transformation Digitale" }, title: { en: "Digital Transformation", fr: "Transformation Digitale" } },
-    { icon: "flaticon-ux-design", ariaLabel: { en: "Project Management", fr: "Gestion de Projet" }, title: { en: "Project Management", fr: "Gestion De Projet" } },
-    { icon: "flaticon-idea", ariaLabel: { en: "Technical Support", fr: "Support technique" }, title: { en: "Technical Support", fr: "Support Technique" } },
-    { icon: "icon-microchip", ariaLabel: { en: "AI and Automation", fr: "IA et Automatisation" }, title: { en: "AI &amp; Automation", fr: "IA &amp; Automatisation" } },
-    { icon: "icon-shield", ariaLabel: { en: "Cybersecurity", fr: "Cybersécurité" }, title: { en: "Cybersecurity", fr: "Cybersécurité" } },
-    { icon: "icon-graduation-cap", ariaLabel: { en: "Training and CV review", fr: "Formation et révision de CV" }, title: { en: "Training &amp; CV Review", fr: "Formation &amp; Révision de CV" } }
-] -%}
 <section id="services-section" class="ftco-section">
     <div class="container-fluid px-md-5">
         <div class="row justify-content-center py-5 mt-5">

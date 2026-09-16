@@ -2,25 +2,7 @@
 {%- set suffix = parts[parts.length - 1] -%}
 {%- set lang = suffix if suffix.length == 2 else languages.default -%}
 
-{%- set blogSectionText = {
-    en: { heading: "Blog", tagline: "Far far away, beyond the mountains of code" },
-    fr: { heading: "Blog", tagline: "Loin, très loin, au-delà des montagnes de code" }
-} -%}
 {%- set blogSection = blogSectionText[lang] -%}
-{%- set blogEntries = [
-    { id: "bien-pasbien", title: { en: "Good / Not Good", fr: "Bien / Pas Bien" }, date: { en: "July 26, 2025", fr: "26 Juillet 2025" }, readTime: "8 min",
-      excerpt: { en: "Magic numbers, ACID, SOLID, DRY, KISS, GRASP, MVC, Law of Demeter, YAGNI, design patterns... A playful tour of good and bad development practices, illustrated in JavaScript, Python and C#.", fr: "Magic numbers, ACID, SOLID, DRY, KISS, GRASP, MVC, Loi de Déméter, YAGNI, design patterns... Un tour d'horizon ludique des bonnes et des mauvaises pratiques de développement, illustré en JavaScript, Python et C#." } },
-    { id: "software", title: { en: "From the dev vocab", fr: "Du voc' de dev" }, date: { en: "May 5, 2025", fr: "5 Mai 2025" }, readTime: "3 min",
-      excerpt: { en: "Software development relies on a variety of tools, each with a well-defined role to facilitate the developers work. The words <b>framework, library, package and module</b> are often used, sometimes interchangeably, but what do they mean ?", fr: "Le développement logiciel repose sur des outils variés, chacun ayant un rôle bien défini pour faciliter le travail des développeurs. Les termes <b>framework, librairie, bibliothèque, package et module</b> sont souvent utilisés, parfois de manière interchangeable mais que signifient-ils ?" } },
-    { id: "mcs", title: { en: "What is a MSC application ?", fr: "Une application MCS : Kézako ?" }, date: { en: "December 23, 2024", fr: "23 Décembre 2024" }, readTime: "6 min",
-      excerpt: { en: "With the ubiquity of digital technology in our lives, protecting computer systems has become a necessity. But ensuring their safety isn't just about putting protections in place initially : they need to be monitored and updated regularly to avoid incidents. That’s where <b>Maintenance in Security Condition (MSC)</b> comes in, a process which consists of reducing vulnerabilities...", fr: "Avec l’omniprésence du numérique dans nos vies, protéger les systèmes informatiques est devenu indispensable. Mais assurer leur sécurité ne se limite pas à une mise en place initiale de protections : il faut les surveiller et les mettre à jour régulièrement pour éviter les incidents. C’est là qu’intervient le Maintien en Condition de Sécurité (MCS), un processus qui consiste à réduire les vulnérabilités..." } },
-    { id: "work", title: { en: "My career in few lines", fr: "Mon parcours pro en quelques lignes" }, date: { en: "December 1, 2024", fr: "1er Décembre 2024" }, readTime: "4 min",
-      excerpt: { en: "I'm developer but what else ? Internships, contracts, projects, languages... A one-page overview to learn a bit more about my experiences.", fr: "Je suis développeur but what else ? Stages, contrats, projets, langages... Une page recto pour en savoir un peu plus sur mes expériences." } },
-    { id: "agence-web", title: { en: "How to choose a web agency ?", fr: "Sur quels critères choisir une agence web ?" }, date: { en: "July 31, 2019", fr: "31 Juillet 2019" }, readTime: "4 min",
-      excerpt: { en: "For several decades now, computer science has been omnipresent in the business world. That's why many entrepreneurs decide to delegate their communication and marketing to specialized digital agencies.", fr: "Depuis plusieurs décennies, l'informatique est devenue omniprésente dans le monde de l'entreprise. C'est pourquoi de nombreux entrepreneurs décident de déléguer la communication et le marketing à des agences spécialisées dans le numérique." } },
-    { id: "brand", title: { en: "5 tips for the perfect brand name", fr: "5 conseils pour un nom de marque parfait" }, date: { en: "July 3, 2019", fr: "3 Juillet 2019" }, readTime: "6 min",
-      excerpt: { en: "Woken up with a revolutionary idea ? Want to become an entrepreneur ? There's no time to lose ! But first of all, you'll need a brand name.", fr: "Vous vous êtes réveillé avec une idée révolutionnaire ? Vous voulez devenir entrepreneur ? Pas de temps à perdre ! Mais avant toute chose, il va falloir vous trouver un nom de marque." } }
-] -%}
 <section id="blog-section" class="ftco-section">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
