@@ -95,101 +95,75 @@ const appArticles = [{
         slug: "bien-pasbien",
         title: appArticleTitles["bien-pasbien"],
         date: "2025-07-26",
-        tags: [{
-            "Clean Code": "#"
-        }, {
-            "SOLID": "#"
-        }, {
-            "Design Patterns": "https://refactoring.guru/design-patterns"
-        }, {
-            "DRY": "#"
-        }, {
-            "KISS": "#"
-        }, {
-            "C#": "#"
-        }, {
-            "Python": "#"
-        }, {
-            "JavaScript": "#"
-        }]
+        tags: [
+            { "Clean Code": "#" },
+            { "SOLID": "#" },
+            { "Design Patterns": "https://refactoring.guru/design-patterns" },
+            { "DRY": "#" },
+            { "KISS": "#" },
+            { "C#": "#" },
+            { "Python": "#" },
+            { "JavaScript": "#" }
+        ]
     },
     {
         slug: "du-voc-de-dev",
         title: appArticleTitles["du-voc-de-dev"],
         date: "2025-05-05",
-        tags: [{
-            "Framework": "#"
-        }, {
-            "Library": "#"
-        }, {
-            "Package": "#"
-        }, {
-            "Module": "#"
-        }]
+        tags: [
+            { "Framework": "#" },
+            { "Library": "#" },
+            { "Package": "#" },
+            { "Module": "#" }
+        ]
     },
     {
         slug: "mcs",
         title: appArticleTitles["mcs"],
         date: "2024-12-23",
-        tags: [{
-            "MCS": "https://gimelec.fr/wp-content/uploads/2025/03/GIMELEC-Cyber-OT-Livre-blanc-MCS-2025-web.pdf"
-        }, {
-            "CyberSecurity": "https://cyber.gouv.fr/le-cyberdico"
-        }, {
-            "Vulnerability": "https://www.cvedetails.com/vulnerability-list"
-        }, {
-            "REST": "#"
-        }, {
-            "API": "https://aws.amazon.com/fr/what-is/api"
-        }, {
-            "OAuth2": "https://loan-truong.medium.com/le-protocole-oauth2-0-a845773bec21"
-        }]
+        tags: [
+            { "MCS": "https://gimelec.fr/wp-content/uploads/2025/03/GIMELEC-Cyber-OT-Livre-blanc-MCS-2025-web.pdf" },
+            { "CyberSecurity": "https://cyber.gouv.fr/le-cyberdico" },
+            { "Vulnerability": "https://www.cvedetails.com/vulnerability-list" },
+            { "REST": "#" },
+            { "API": "https://aws.amazon.com/fr/what-is/api" },
+            { "OAuth2": "https://loan-truong.medium.com/le-protocole-oauth2-0-a845773bec21" }
+        ]
     },
     {
         slug: "presentation",
         title: appArticleTitles["presentation"],
         date: "2024-01-01",
-        tags: [{
-            "Software Engineer": "https://blog.lewagon.com/fr/career/metier-software-engineer"
-        }, {
-            "Full Stack Developer": "https://blog.lewagon.com/fr/career/metiers-tech-developpement-web-developpeur-full-stack"
-        }, {
-            "Paris": "#"
-        }, {
-            "Lyon": "#"
-        }, {
-            "ESILV": "https://www.esilv.fr/ingenieur/classement"
-        }, {
-            "UQAC": "https://www.uqac.ca/programme/3037-maitrise-en-informatique-professionnel"
-        }]
+        tags: [
+            { "Software Engineer": "https://blog.lewagon.com/fr/career/metier-software-engineer" },
+            { "Full Stack Developer": "https://blog.lewagon.com/fr/career/metiers-tech-developpement-web-developpeur-full-stack" },
+            { "Paris": "#" },
+            { "Lyon": "#" },
+            { "ESILV": "https://www.esilv.fr/ingenieur/classement" },
+            { "UQAC": "https://www.uqac.ca/programme/3037-maitrise-en-informatique-professionnel" }
+        ]
     },
     {
         slug: "sur-quels-criteres-choisir-une-agence-web",
         title: appArticleTitles["sur-quels-criteres-choisir-une-agence-web"],
         date: "2019-07-31",
-        tags: [{
-            "Web Agency": "#"
-        }, {
-            "Digital Transformation": "#"
-        }, {
-            "Project Management": "#"
-        }, {
-            "Business Growth": "#"
-        }]
+        tags: [
+            { "Web Agency": "#" },
+            { "Digital Transformation": "#" },
+            { "Project Management": "#" },
+            { "Business Growth": "#" }
+        ]
     },
     {
         slug: "5-conseils-pour-un-nom-de-marque-parfait",
         title: appArticleTitles["5-conseils-pour-un-nom-de-marque-parfait"],
         date: "2019-07-03",
-        tags: [{
-            "Brand Naming": "#"
-        }, {
-            "Business Growth": "#"
-        }, {
-            "Trademark": "#"
-        }, {
-            "Entrepreneurship": "#"
-        }]
+        tags: [
+            { "Brand Naming": "#" },
+            { "Business Growth": "#" },
+            { "Trademark": "#" },
+            { "Entrepreneurship": "#" }
+        ]
     }
 ];
 
