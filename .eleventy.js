@@ -169,9 +169,24 @@ module.exports = function configureEleventy(eleventyConfig) {
         const slug = parts.join("_");
         return slug === "index" ? `/${lang}` : `/${lang}/${slug}`;
     });
-    // Resolves each article's bilingual title to `lang`, keeping slug/date/tags as authored.
-    eleventyConfig.addFilter("resolveArticles", (articles, lang) => {
-        return articles.map(article => ({ slug: article.slug, title: article.title[lang], date: article.date, tags: article.tags }));
+    // Resolves each article's bilingual title/tags to `lang` (falling back to `defaultLang`), leaving already single-language tags untouched.
+    eleventyConfig.addFilter("resolveArticles", (articles, lang, defaultLang, locales) => {
+        const langCodes = Object.keys(locales);
+        const isBilingualText = value => typeof value === "object" && langCodes.every(code => code in value);
+        const resolveTag = tag => {
+            if (typeof tag === "string") return tag;
+            if ("name" in tag && "url" in tag) {
+                const name = isBilingualText(tag.name) ? (tag.name[lang] ?? tag.name[defaultLang]) : tag.name;
+                return { [name]: tag.url };
+            }
+            return isBilingualText(tag) ? (tag[lang] ?? tag[defaultLang]) : tag;
+        };
+        return articles.map(article => ({
+            slug: article.slug,
+            title: article.title[lang] ?? article.title[defaultLang],
+            date: article.date,
+            tags: article.tags.map(resolveTag)
+        }));
     });
     for (const dir of passthroughDirs) {
         if (fs.existsSync(dir)) {

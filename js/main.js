@@ -64,7 +64,7 @@ const appServices = [
     appBlogSection
 ];
 
-const appArticles = JSON.parse($('meta[name="app-articles"]').attr('content'));
+const appArticles = JSON.parse($('meta[name="articles"]').attr('content'));
 
 const appKeywords = [
     // Frontend
@@ -531,8 +531,8 @@ function createCircularChart({
         data: {
             labels,
             datasets: [{
-                data: data,
-                backgroundColor: backgroundColor,
+                data,
+                backgroundColor,
                 borderWidth: 0,
             }]
         },
