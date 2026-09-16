@@ -2,11 +2,11 @@
 {%- set suffix = parts[parts.length - 1] -%}
 {%- set lang = suffix if suffix.length == 2 else languages.default -%}
 
-{%- set projectsText = {
+{%- set projectsSectionText = {
     en: { heading: "Projects", p1: "Welcome to my portfolio ! Here you will find a selection of completed projects and articles written as software engineer.", p2: "They cover a wide variety of technologies, sectors and work environments. Each of them highlights my hard skills and my ability to adapt to different contexts.", context: "Context", explore: "Explore" },
     fr: { heading: "Projets", p1: "Bienvenue sur mon portfolio ! Vous y trouverez une sélection de projets réalisés et d'articles rédigés en tant qu'ingénieur logiciel.", p2: "Ils couvrent une grande variété de technologies, de secteurs et d'environnements de travail. Chacun d'entre eux met en avant mes compétences techniques et ma capacité à m'adapter à des contextes divers.", context: "Contexte", explore: "Explorer" }
 } -%}
-{%- set pt = projectsText[lang] -%}
+{%- set projectsSection = projectsSectionText[lang] -%}
 {%- set projects = [
     { id: "esh", title: "Easy Student Housing", badge: "Microsoft Office",
       context: { en: "<i>CGI</i> Student Contest | Monitored, in quartet (ESILV) | 6 months", fr: "Concours étudiant <i>CGI</i> | Supervisé, en quatuor (ESILV) | 6 mois" },
@@ -51,9 +51,9 @@
     <div class="container-fluid px-md-0">
         <div class="row no-gutters justify-content-center pb-5">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <h2 class="mb-4">{{ pt.heading }}</h2>
-                <p>{{ pt.p1 }}</p>
-                <p>{{ pt.p2 }}</p>
+                <h2 class="mb-4">{{ projectsSection.heading }}</h2>
+                <p>{{ projectsSection.p1 }}</p>
+                <p>{{ projectsSection.p2 }}</p>
             </div>
         </div>
         <div class="row no-gutters">
@@ -66,14 +66,14 @@
                     <div class="text text-center p-4">
                         <h3>{{ (p.heading[lang] if p.heading else p.title) | safe }}</h3>
                         <span>
-                            <p><u>{{ pt.context }}</u> : {{ p.context[lang] | safe }}</p>
+                            <p><u>{{ projectsSection.context }}</u> : {{ p.context[lang] | safe }}</p>
                             <p><u>Description</u> : {{ p.description[lang] | safe }}
                                 <br><u>Technologies</u> : {{ p.technologies | safe }}
                             </p>
                             {%- if p.note %}
                             <p>{{ p.note[lang] }}</p>
                             {%- endif %}
-                            <a class="explore btn btn-light py-3 px-3">{{ pt.explore }}</a>
+                            <a class="explore btn btn-light py-3 px-3">{{ projectsSection.explore }}</a>
                         </span>
                     </div>
                 </div>

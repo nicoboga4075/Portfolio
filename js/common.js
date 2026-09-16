@@ -55,6 +55,10 @@ const appMessages = {
     "carousel-dot": {
         fr: "Aller à la diapositive",
         en: "Go to slide"
+    },
+    "search-no-result": {
+        fr: "Houston, nous avons un problème",
+        en: "Houston, we have a problem"
     }
 };
 

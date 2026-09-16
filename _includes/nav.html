@@ -8,10 +8,15 @@
     { en: "Blog",     fr: "Blog" },
     { en: "Contact",  fr: "Contact" }
 ] -%}
+{%- set navAriaText = {
+    en: { darkMode: "Toggle dark mode", navigation: "Toggle navigation", language: "Language" },
+    fr: { darkMode: "Basculer le mode sombre", navigation: "Basculer la navigation", language: "Langue" }
+} -%}
+{%- set navAria = navAriaText[lang] -%}
 <div class="container">
     <a id="index" class="navbar-brand"><span>P</span>ortfolio<sup id="version-badge" class="d-none d-lg-inline">{{ version }}</sup></a>
-    <button id="dark-icon" type="button" class="icon-sun-o" onclick="toggleDarkMode(event)" aria-label="Toggle dark mode"></button>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation"><span class="icon-menu"></span> Menu</button>
+    <button id="dark-icon" type="button" class="icon-sun-o" onclick="toggleDarkMode(event)" aria-label="{{ navAria.darkMode }}"></button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="{{ navAria.navigation }}"><span class="icon-menu"></span> Menu</button>
     <div id="ftco-nav" class="collapse navbar-collapse">
         <ul class="navbar-nav nav ml-auto">
             {%- for item in items %}
@@ -19,7 +24,7 @@
             {%- endfor %}
         </ul>
     </div>
-    <nav id="language-switch" aria-label="Language">
+    <nav id="language-switch" aria-label="{{ navAria.language }}">
         {%- for code, locale in languages.locales %}
         <a class="lang-text" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
         {%- endfor %}

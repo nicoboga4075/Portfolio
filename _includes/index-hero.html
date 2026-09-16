@@ -3,8 +3,8 @@
 {%- set lang = suffix if suffix.length == 2 else languages.default -%}
 
 {%- set heroText = {
-    en: { subheading: "Hello ! My name is", intro: "I'm a", roles: "[ &quot;Software Engineer.&quot;, &quot;AI-Augmented Developer.&quot;, &quot;Full Stack Developer.&quot;,&quot;Support Engineer.&quot;, &quot;IT Consultant.&quot;, &quot;Back End Developer.&quot; ]", tagline: "The AI copilots, I hold the harness; it judges the line, I umpire the match — as in tennis." },
-    fr: { subheading: "Bonjour ! Je m'appelle", intro: "Je suis un", roles: "[ &quot;Ingénieur Logiciel.&quot;, &quot;Développeur IA Augmenté.&quot;, &quot;Développeur Full Stack.&quot;,&quot;Ingénieur Support.&quot;, &quot;Consultant IT.&quot;, &quot;Développeur Back-End.&quot; ]", tagline: "L'IA copilote, je tiens les rênes ; elle juge la ligne, j'arbitre le match — comme au tennis." }
+    en: { subheading: "Hello ! My name is", intro: "I'm a", roles: "[ &quot;Software Engineer.&quot;, &quot;AI-Augmented Developer.&quot;, &quot;Full Stack Developer.&quot;,&quot;Support Engineer.&quot;, &quot;IT Consultant.&quot;, &quot;Back End Developer.&quot; ]", tagline: "The AI copilots, I hold the harness; it judges the line, I umpire the match — as in tennis.", resumeAria: "Go to Resume Section" },
+    fr: { subheading: "Bonjour ! Je m'appelle", intro: "Je suis un", roles: "[ &quot;Ingénieur Logiciel.&quot;, &quot;Développeur IA Augmenté.&quot;, &quot;Développeur Full Stack.&quot;,&quot;Ingénieur Support.&quot;, &quot;Consultant IT.&quot;, &quot;Développeur Back-End.&quot; ]", tagline: "L'IA copilote, je tiens les rênes ; elle juge la ligne, j'arbitre le match — comme au tennis.", resumeAria: "Aller à la section Résumé" }
 } -%}
 {%- set hero = heroText[lang] -%}
 <section class="hero-wrap js-fullheight">
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="mouse">
-        <a class="mouse-icon nav-link" aria-label="Go to Resume Section">
+        <a class="mouse-icon nav-link" aria-label="{{ hero.resumeAria }}">
             <div class="mouse-wheel"><span class="icon-long-arrow-down"></span></div>
         </a>
     </div>

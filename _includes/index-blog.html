@@ -6,7 +6,7 @@
     en: { heading: "Blog", tagline: "Far far away, beyond the mountains of code" },
     fr: { heading: "Blog", tagline: "Loin, très loin, au-delà des montagnes de code" }
 } -%}
-{%- set bs = blogSectionText[lang] -%}
+{%- set blogSection = blogSectionText[lang] -%}
 {%- set blogEntries = [
     { id: "bien-pasbien", title: { en: "Good / Not Good", fr: "Bien / Pas Bien" }, date: { en: "July 26, 2025", fr: "26 Juillet 2025" }, readTime: "8 min",
       excerpt: { en: "Magic numbers, ACID, SOLID, DRY, KISS, GRASP, MVC, Law of Demeter, YAGNI, design patterns... A playful tour of good and bad development practices, illustrated in JavaScript, Python and C#.", fr: "Magic numbers, ACID, SOLID, DRY, KISS, GRASP, MVC, Loi de Déméter, YAGNI, design patterns... Un tour d'horizon ludique des bonnes et des mauvaises pratiques de développement, illustré en JavaScript, Python et C#." } },
@@ -25,8 +25,8 @@
     <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 heading-section text-center ftco-animate">
-                <h2 class="mb-4">{{ bs.heading }}</h2>
-                <p>{{ bs.tagline }}</p>
+                <h2 class="mb-4">{{ blogSection.heading }}</h2>
+                <p>{{ blogSection.tagline }}</p>
             </div>
         </div>
         <div class="row d-flex">

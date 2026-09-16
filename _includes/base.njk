@@ -13,7 +13,7 @@ bodyClass: ""
     en: { visitor: "Visitor count", nav: "Main navigation", main: "Main content", footer: "Site footer" },
     fr: { visitor: "Nombre de visiteurs", nav: "Navigation principale", main: "Contenu principal", footer: "Pied de page" }
 } -%}
-{%- set ll = landmarkLabels[lang] -%}
+{%- set landmark = landmarkLabels[lang] -%}
 {%- set contactTitle = { en: "Contact me", fr: "Me contacter" } -%}
 {%- set closeLabel = { en: "Close", fr: "Fermer" } -%}
 {%- set articles = [
@@ -99,7 +99,7 @@ bodyClass: ""
             <div class="spinner" aria-hidden="true"></div>
             <span class="sr-only">{{ loadingText[lang] }}</span>
         </div>
-        <div id="ftco-visitor" hidden aria-label="{{ ll.visitor }}"></div>
+        <div id="ftco-visitor" hidden aria-label="{{ landmark.visitor }}"></div>
         {%- if contact %}
         <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" data-target="#contact-window" aria-expanded="false" aria-controls="contact-window" aria-label="{{ contactTitle[lang] }}">
             <span class="icon-user" aria-hidden="true"></span>
@@ -124,14 +124,14 @@ bodyClass: ""
         </div>
         {%- endif %}
         {%- if nav %}
-        <nav id="ftco-navbar" class="navbar navbar-expand-lg navbar-dark ftco-navbar-light" aria-label="{{ ll.nav }}">
+        <nav id="ftco-navbar" class="navbar navbar-expand-lg navbar-dark ftco-navbar-light" aria-label="{{ landmark.nav }}">
             {% include "nav.html" %}
         </nav>
         {%- endif %}
-        <main id="ftco-main" aria-label="{{ ll.main }}">
+        <main id="ftco-main" aria-label="{{ landmark.main }}">
             {{ content | safe }}
         </main>
-        <footer id="ftco-footer"{% if minimal %} class="minimal"{% endif %} aria-label="{{ ll.footer }}">
+        <footer id="ftco-footer"{% if minimal %} class="minimal"{% endif %} aria-label="{{ landmark.footer }}">
             {% include "footer.html" %}
         </footer>
     </body>

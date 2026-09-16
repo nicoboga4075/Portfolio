@@ -1,10 +1,10 @@
-{%- set languages = [
+{%- set programmingLanguages = [
     { key: "csharp",     title: "C#",         href: "https://learn.microsoft.com/en-us/dotnet/csharp",        stack: [".NET", "IIS"] },
     { key: "python",     title: "Python",     href: "https://www.python.org",                                 stack: ["Flask", "FastAPI"] },
     { key: "javascript", title: "JavaScript", href: "https://developer.mozilla.org/en-us/docs/Web/JavaScript", stack: ["Angular", "React"] }
 ] -%}
 <div class="row progress-circle mb-5">
-    {%- for l in languages %}
+    {%- for l in programmingLanguages %}
     <div class="col-lg-4 mb-4">
         <div class="bg-white rounded-lg shadow p-4">
             <h2 class="h5 font-weight-bold text-center mb-4">{{ l.title }}</h2>

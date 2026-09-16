@@ -4,9 +4,9 @@
 
 {%- set resumeText = {
     en: { navAria: "Resume navigation", education: "Education", experiences: "Experiences", skills: "Skills", languagesNav: "Languages", awards: "Awards" },
-    fr: { navAria: "Resume navigation", education: "Éducation", experiences: "Expériences", skills: "Compétences", languagesNav: "Langues", awards: "Récompenses" }
+    fr: { navAria: "Navigation du résumé", education: "Éducation", experiences: "Expériences", skills: "Compétences", languagesNav: "Langues", awards: "Récompenses" }
 } -%}
-{%- set r = resumeText[lang] -%}
+{%- set resume = resumeText[lang] -%}
 {%- set educationEntries = [
     { id: "UQAC", date: "2020 - 2021", title: { en: "University Master in Computer Science", fr: "Master universitaire en Informatique" }, href: "https://www.uqac.ca", school: "UQAC", place: "(Chicoutimi, CAN)" },
     { id: "ESILV", date: "2018 - 2021", title: { en: "Engineering Diploma in Informatics", fr: "Diplôme d'ingénieurs en Informatique" }, href: { en: "https://www.esilv.fr/en", fr: "https://www.esilv.fr" }, school: "ESILV", place: "(Paris La Défense, FRA)" },
@@ -62,19 +62,19 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <nav id="navi" aria-label="{{ r.navAria }}">
+                <nav id="navi" aria-label="{{ resume.navAria }}">
                     <ul>
-                        <li><a class="nav-link"><span>{{ r.education }}</span></a></li>
-                        <li><a class="nav-link"><span>{{ r.experiences }}</span></a></li>
-                        <li><a class="nav-link"><span>{{ r.skills }}</span></a></li>
-                        <li><a class="nav-link"><span>{{ r.languagesNav }}</span></a></li>
-                        <li><a class="nav-link"><span>{{ r.awards }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ resume.education }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ resume.experiences }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ resume.skills }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ resume.languagesNav }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ resume.awards }}</span></a></li>
                     </ul>
                 </nav>
             </div>
             <div class="col-md-9">
                 <div id="education" class="page">
-                    <h2 class="heading">{{ r.education }}</h2>
+                    <h2 class="heading">{{ resume.education }}</h2>
                     {%- for e in educationEntries %}
                     <div class="resume-wrap d-flex ftco-animate">
                         <div id="{{ e.id }}" class="icon logo-school d-flex align-items-center justify-content-center"></div>
@@ -88,7 +88,7 @@
                     {%- endfor %}
                 </div>
                 <div id="experiences" class="page">
-                    <h2 class="heading">{{ r.experiences }}</h2>
+                    <h2 class="heading">{{ resume.experiences }}</h2>
                     {%- for e in experienceEntries %}
                     <div class="resume-wrap d-flex ftco-animate">
                         <div class="icon d-flex align-items-center justify-content-center">
@@ -104,7 +104,7 @@
                     {%- endfor %}
                 </div>
                 <div id="skills" class="page">
-                    <h2 class="heading">{{ r.skills }}</h2>
+                    <h2 class="heading">{{ resume.skills }}</h2>
                     <div class="chart-container d-flex justify-content-center mb-5">
                         <canvas id="skillsChart" data-labels="{{ skillsChartLabels[lang] | dump }}" data-title="{{ skillsChartTitle[lang] }}" data-subtitle-template="{{ skillsChartSubtitleTemplate[lang] }}"></canvas>
                     </div>
@@ -136,7 +136,7 @@
                     {% include "more-tools.html" %}
                 </div>
                 <div id="languages" class="page">
-                    <h2 class="heading">{{ r.languagesNav }}</h2>
+                    <h2 class="heading">{{ resume.languagesNav }}</h2>
                     <div class="row">
                         {%- for l in spokenLanguages %}
                         <div class="col-md-12 animate-box">
@@ -149,7 +149,7 @@
                     </div>
                 </div>
                 <div id="awards" class="page">
-                    <h2 class="heading">{{ r.awards }}</h2>
+                    <h2 class="heading">{{ resume.awards }}</h2>
                     {%- for a in awardEntries %}
                     <div class="resume-wrap d-flex ftco-animate">
                         {%- if a.svgId %}

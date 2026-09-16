@@ -432,7 +432,7 @@ function loadBingo() {
     $('#bingo-btn').click(function () {
         if (number === 0) {
             $('#bingo-timer').removeClass();
-            $('#bingo-btn').text('Stop');
+            $('#bingo-btn').text($('#bingo-btn').data('stop'));
             timer = setInterval(() => {
                 number++;
                 $('#bingo-timer').text(number);
@@ -1161,7 +1161,7 @@ function initBlogPage(langPage) {
                         block: 'center'
                     });
                 } else {
-                    $searchInfo.text('Houston, we have a problem').addClass('no-result');
+                    $searchInfo.text(getMessage('search-no-result')).addClass('no-result');
                 }
             });
 
