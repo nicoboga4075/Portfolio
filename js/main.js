@@ -40,29 +40,6 @@ const appSkills = [
     "mad-skills"
 ];
 
-const appMessages = {
-    "success-generic": {
-        fr: "L'opération a été un franc succès.",
-        en: "The operation was successfully completed."
-    },
-    "error-generic": {
-        fr: "Oops ! Une erreur est survenue. Réessayez plus tard.",
-        en: "Oops ! An error has occurred. Try again later."
-    },
-    "carousel-prev": {
-        fr: "Précédent",
-        en: "Previous"
-    },
-    "carousel-next": {
-        fr: "Suivant",
-        en: "Next"
-    },
-    "carousel-dot": {
-        fr: "Aller à la diapositive",
-        en: "Go to slide"
-    }
-};
-
 const appProjects = [
     'https://www.esilv.fr/challenges-citoyens-cgi-2019-deux-premiers-prix-esilv-categories-environnement-et-handicap',
     'blog#mcs',
@@ -87,12 +64,36 @@ const appServices = [
     appBlogSection
 ];
 
+const appArticleTitles = {
+    "bien-pasbien": {
+        en: "Good / Not Good: good and bad coding practices",
+        fr: "Bien / Pas Bien : bonnes et mauvaises pratiques de code"
+    },
+    "du-voc-de-dev": {
+        en: "From the dev vocab",
+        fr: "Du voc' de dev"
+    },
+    "mcs": {
+        en: "What is a MSC application ?",
+        fr: "Une application MCS : Kézako ?"
+    },
+    "presentation": {
+        en: "My career in few lines",
+        fr: "Mon parcours pro en quelques lignes"
+    },
+    "sur-quels-criteres-choisir-une-agence-web": {
+        en: "How to choose a web agency ?",
+        fr: "Sur quels critères choisir une agence web ?"
+    },
+    "5-conseils-pour-un-nom-de-marque-parfait": {
+        en: "5 tips for the perfect brand name",
+        fr: "5 conseils pour un nom de marque parfait"
+    }
+};
+
 const appArticles = [{
         slug: "bien-pasbien",
-        title: {
-            fr: "Bien / Pas Bien : bonnes et mauvaises pratiques de code",
-            en: "Good / Not Good: good and bad coding practices"
-        },
+        title: appArticleTitles["bien-pasbien"],
         date: "2025-07-26",
         tags: [{
             "Clean Code": "#"
@@ -114,10 +115,7 @@ const appArticles = [{
     },
     {
         slug: "du-voc-de-dev",
-        title: {
-            fr: "Du voc' de dev",
-            en: "From the dev vocab"
-        },
+        title: appArticleTitles["du-voc-de-dev"],
         date: "2025-05-05",
         tags: [{
             "Framework": "#"
@@ -131,10 +129,7 @@ const appArticles = [{
     },
     {
         slug: "mcs",
-        title: {
-            fr: "Une application MCS : Kézako ?",
-            en: "What is a MSC application ?"
-        },
+        title: appArticleTitles["mcs"],
         date: "2024-12-23",
         tags: [{
             "MCS": "https://gimelec.fr/wp-content/uploads/2025/03/GIMELEC-Cyber-OT-Livre-blanc-MCS-2025-web.pdf"
@@ -152,10 +147,7 @@ const appArticles = [{
     },
     {
         slug: "presentation",
-        title: {
-            fr: "Mon parcours pro en quelques lignes",
-            en: "My career in few lines"
-        },
+        title: appArticleTitles["presentation"],
         date: "2024-01-01",
         tags: [{
             "Software Engineer": "https://blog.lewagon.com/fr/career/metier-software-engineer"
@@ -173,10 +165,7 @@ const appArticles = [{
     },
     {
         slug: "sur-quels-criteres-choisir-une-agence-web",
-        title: {
-            fr: "Sur quels critères choisir une agence web ?",
-            en: "How to choose a web agency ?"
-        },
+        title: appArticleTitles["sur-quels-criteres-choisir-une-agence-web"],
         date: "2019-07-31",
         tags: [{
             "Web Agency": "#"
@@ -190,10 +179,7 @@ const appArticles = [{
     },
     {
         slug: "5-conseils-pour-un-nom-de-marque-parfait",
-        title: {
-            fr: "5 conseils pour un nom de marque parfait",
-            en: "5 tips for the perfect brand name",
-        },
+        title: appArticleTitles["5-conseils-pour-un-nom-de-marque-parfait"],
         date: "2019-07-03",
         tags: [{
             "Brand Naming": "#"
@@ -206,6 +192,21 @@ const appArticles = [{
         }]
     }
 ];
+
+const appSkillsChartLabels = ['Back-end', 'Front-end', {
+    en: 'Project management',
+    fr: 'Gestion de projet'
+}, 'Support', 'CI/CD'];
+
+const appSkillsChartTitle = {
+    en: 'Time distribution across my skills',
+    fr: 'Répartition du temps passé sur mes compétences'
+};
+
+const appSkillsChartSubtitle = {
+    en: `Data based on ${xp} years in activity`,
+    fr: `Données basées sur ${xp} années en activité`
+};
 
 const appKeywords = [
     // Frontend
@@ -441,8 +442,7 @@ const appKeywords = [
     "Microsoft Edge",
     "Internet Explorer",
     "IE",
-    "Internet",
-
+    "Internet"
 ];
 
 let appGoogleToken;
@@ -588,10 +588,6 @@ function loadBingo() {
             number = 0;
         }
     });
-}
-
-function getMessage(key) {
-    return appMessages[key]?.[`${getCurrentLanguage()}`] || '';
 }
 
 function initProfile() {
@@ -1167,18 +1163,9 @@ function initIndexPage(langPage) {
                         canvasId: 'skillsChart',
                         data: [45, 25, 15, 10, 5],
                         backgroundColor: [cssVar('--blue'), cssVar('--orange'), cssVar('--green'), cssVar('--red'), cssVar('--purple')],
-                        labels: ['Back-end', 'Front-end', {
-                            fr: 'Gestion de projet',
-                            en: 'Project management'
-                        }, 'Support', 'CI/CD'],
-                        titles: {
-                            fr: 'Répartition du temps passé sur mes compétences',
-                            en: 'Time distribution across my skills'
-                        },
-                        subtitles: {
-                            fr: `Données basées sur ${xp} années en activité`,
-                            en: `Data based on ${xp} years in activity`
-                        }
+                        labels: appSkillsChartLabels,
+                        titles: appSkillsChartTitle,
+                        subtitles: appSkillsChartSubtitle
                     });
                 }).catch(() => {
                     // Chart.js couldn't be fetched (offline / transient network).

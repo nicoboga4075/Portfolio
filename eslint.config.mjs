@@ -84,6 +84,7 @@ export default defineConfig([
         appName: "readonly",
         appRoutes: "readonly",
         getHashFromSession: "readonly",
+        getMessage: "readonly",
         convertDate: "readonly",
         getCurrentFullDate: "readonly",
         xp: "readonly",
