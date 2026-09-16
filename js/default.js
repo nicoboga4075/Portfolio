@@ -9,10 +9,6 @@ function initArticle() {
 function initPage() {
     loadImages('.icon.svg', 'svg');
     initTranslator();
-    const idPage = getCurrentRoute();
-    if (idPage in appDefaultRoutes) {
-        document.body.classList.add('text-center');
-    }
     document.querySelectorAll('a[href="#"]').forEach(link => {
         link.addEventListener('click', function (event) {
             event.preventDefault();

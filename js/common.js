@@ -233,8 +233,13 @@ function toggleDarkMode(event) {
 
 function addRedirectById(elementId) {
     const el = document.getElementById(elementId);
+    if (!el) {
+        return;
+    }
     // Skip self-links for policy/terms: no point redirecting to the page you're already on.
-    if (!el || (elementId in appDefaultRoutes && elementId === getCurrentRoute())) {
+    // Mark it as the current page instead of leaving a dead-but-clickable-looking link.
+    if (elementId in appDefaultRoutes && elementId === getCurrentRoute()) {
+        el.setAttribute('aria-current', 'page');
         return;
     }
     const currentLang = getCurrentLanguage();

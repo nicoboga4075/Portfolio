@@ -2,25 +2,49 @@
 // shadow-scoped stylesheet, not exposed as a CSS custom property, so
 // page-level CSS can never reach it - the shadow root itself is open, so we
 // inject our own override style directly into it instead, to move it away
-// from our own #contact-icon button in the same corner. Botpress rebuilds
-// the shadow root's contents at least once after its own init settles,
-// wiping out a one-shot injection, so a persistent observer keeps
-// re-applying the override style whenever it goes missing.
+// from our own #contact-icon button in the same corner, vertically centered
+// on the navbar. Botpress rebuilds the shadow root's contents at least once
+// after its own init settles, wiping out a one-shot injection, so a
+// persistent observer keeps re-applying the override style whenever it goes
+// missing. The navbar's own height shifts (.scrolled shrinks its padding),
+// so the offset is recomputed - fixed pixels drift out of center between
+// the two states - on every re-apply and on navbar resize.
 const BP_FAB_OVERRIDE_ID = 'bp-fab-position-override';
-const BP_FAB_OVERRIDE_CSS = '.bpFabWrapper { bottom: auto !important; top: 10px !important; right: 20px !important; }';
+const BP_FAB_OVERRIDE_CSS = top => `.bpFabWrapper { bottom: auto !important; top: ${top}px !important; right: 20px !important; }`;
 
 function watchBotpressFab(shadowRoot) {
 	function applyOverride() {
-		if (shadowRoot.getElementById(BP_FAB_OVERRIDE_ID)) {
+		const fab = shadowRoot.querySelector('.bpFabWrapper');
+		const navbar = document.getElementById('ftco-navbar');
+		const fabHeight = fab ? fab.getBoundingClientRect().height : 64;
+		const navHeight = navbar ? navbar.getBoundingClientRect().height : 85;
+		const top = Math.round((navHeight - fabHeight) / 2);
+		const css = BP_FAB_OVERRIDE_CSS(top);
+		const existing = shadowRoot.getElementById(BP_FAB_OVERRIDE_ID);
+		// Writing textContent (even to the same value) is itself a childList
+		// mutation the observer below is watching for - skipping no-op writes
+		// keeps a stable navbar height from re-triggering itself forever.
+		if (existing) {
+			if (existing.textContent !== css) {
+				existing.textContent = css;
+			}
 			return;
 		}
 		const style = document.createElement('style');
 		style.id = BP_FAB_OVERRIDE_ID;
-		style.textContent = BP_FAB_OVERRIDE_CSS;
+		style.textContent = css;
 		shadowRoot.appendChild(style);
 	}
 	applyOverride();
-	new MutationObserver(applyOverride).observe(shadowRoot, { childList: true, subtree: true });
+	// subtree:false - only shadowRoot's own direct children (Botpress rebuilding
+	// its top-level UI). subtree:true would also fire on every unrelated internal
+	// mutation Botpress makes while running, each forcing a synchronous layout
+	// via getBoundingClientRect above - enough volume to freeze the tab.
+	new MutationObserver(applyOverride).observe(shadowRoot, { childList: true });
+	const navbar = document.getElementById('ftco-navbar');
+	if (navbar) {
+		new ResizeObserver(applyOverride).observe(navbar);
+	}
 }
 
 function loadBotpress() {
