@@ -138,6 +138,18 @@ input[name="search-input"].highlight-flash {
     color: var(--gray);
 }
 
+/* .hero-wrap is set to the exact window height in JS (fullHeight() in
+   main.js), and .mouse sits at a fixed 120px from its bottom - on a short
+   (but still >= 992px wide, so .mouse isn't already hidden) browser window,
+   that leaves too little room above it and the scroll-down cue overlaps the
+   vertically-centered hero text. Pull it closer to the true bottom edge to
+   free up that space. */
+@media (max-height: 700px) {
+    .mouse {
+        bottom: 40px;
+    }
+}
+
 /* About Section */
 
 .ftco-about ul.about-info li span:first-child {
@@ -598,7 +610,8 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     }
 }
 
-.icon-heart {
+.icon-heart,
+.icon-shield {
     color: var(--red);
 }
 

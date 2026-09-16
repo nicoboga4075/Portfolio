@@ -1,4 +1,4 @@
-/* Shared rules, loaded before default.css and style.css. */
+/* Shared rules, loaded before default.css and main.css. */
 
 :root {
     --main: #3e64ff;
@@ -99,9 +99,21 @@ body {
 }
 
 body {
+    margin: 0;
     font-family: Poppins, 'Poppins Windows', 'Poppins Mac/iOS', 'Poppins Linux', 'Poppins Android', sans-serif;
     background-color: var(--background);
     color: var(--gray);
+}
+
+main {
+    margin: 10px;
+}
+
+/* Page title only: policy/terms (bodyClass: "legal") and projects
+   (bodyClass: "read-zone"; articles share it but have no h1). */
+body.legal h1,
+body.read-zone h1 {
+    color: var(--main);
 }
 
 a {
@@ -462,21 +474,28 @@ main > #language-switch,
 
 /* Project or Article */
 
-.read-zone {
+/* Constrain the article/project content column only (not .read-zone itself,
+   the <body>) so the footer, a sibling of <main>, still spans the full page. */
+.read-zone > main {
     max-width: 50%;
-    margin: 2rem auto;
+    margin: 1rem auto;
 }
 
 @media (max-width: 1199.98px) {
-    .read-zone {
+    .read-zone > main {
         max-width: 75%;
     }
 }
 
 @media (max-width: 767.98px) {
-    .read-zone {
+    .read-zone > main {
         max-width: 90%;
     }
+}
+
+.read-zone main > a#index {
+    display: block;
+    text-align: center;
 }
 
 .read-title {
@@ -709,6 +728,13 @@ main > #language-switch,
     padding: 7em 0;
 }
 
+/* Pages without the Synopsis/bingo widgets (policy, terms) only ever show
+   the copyright line here; the same 7em padding as the full footer leaves a
+   disproportionate slab of empty black space above it. */
+#ftco-footer.minimal {
+    padding: 3em 0;
+}
+
 #ftco-footer .ftco-footer-widget h2 {
     font-weight: 600;
     font-size: 22px;
@@ -722,14 +748,41 @@ main > #language-switch,
 
 #ftco-footer .ftco-footer-widget ul li a,
 #ftco-footer .ftco-footer-widget ul li a span {
-    color: rgb(255 255 255 / 60%);
+    color: var(--white);
 }
 
-#ftco-footer p,
+#ftco-footer .ftco-footer-links a:hover {
+    opacity: 0.7;
+}
+
+
+#ftco-footer p {
+    color: var(--white);
+    opacity: 0.7;
+}
+
+#ftco-footer p.legal {
+    opacity: 1;
+}
+
+#ftco-footer .shield-emoji {
+    filter: hue-rotate(14deg) saturate(1.2);
+}
+
 #ftco-footer a {
-    color: rgb(255 255 255 / 70%);
+    color: var(--white);
 }
 
 #ftco-footer a:hover {
-    color: var(--white);
+    color: var(--main);
+}
+
+/* addRedirectById() skips href for the page you're already on (#policy/#terms). */
+#ftco-footer a:not([href]) {
+    cursor: default;
+    color: var(--main);
+}
+
+#ftco-footer a:not([href]):hover {
+    color: var(--main);
 }

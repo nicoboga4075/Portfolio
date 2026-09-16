@@ -10,6 +10,34 @@
 
 /* 404 */
 
+.space-decor {
+    position: relative;
+    min-height: 100vh;
+}
+
+/* On the 404 page only: fit everything (message, decor, footer) in one
+   viewport height so the copyright is visible without scrolling. */
+body.error-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.error-page h1 {
+    color: var(--red);
+}
+
+body.error-page #ftco-main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+body.error-page .space-decor {
+    flex: 1;
+    min-height: 0;
+}
+
 #astronaut {
     position: absolute;
     top: 50%;
@@ -80,12 +108,5 @@
         100% {
             transform: translate(120px, -60px);
         }
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    #astronaut,
-    #rocket {
-        animation: none;
     }
 }
