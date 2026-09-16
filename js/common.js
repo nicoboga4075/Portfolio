@@ -20,7 +20,7 @@ const appRoutes = {
 
 // The languages the switcher offers (rendered by Eleventy from package.json routes).
 const appLanguages = new Set(
-    Array.from(document.querySelectorAll('#language-switch [data-lang]'), a => a.dataset.lang)
+    Array.from(document.querySelectorAll('#language-switch [hreflang]'), a => a.hreflang)
 );
 
 // Profile / CV facts, rendered into the page by fillCareerCounts and initProfile (main.js).
@@ -178,22 +178,22 @@ function switchLanguage(url, langTarget) {
 
 // #language-switch (switcher.html) lists every language, each already carrying a
 // crawlable href to this page in that language. Mark the current one and refresh
-// the others' href with the remembered #hash.
+// every link's href (including the current one) with the remembered #hash.
 function initTranslator() {
     const currentLang = getCurrentLanguage();
-    document.querySelectorAll('#language-switch [data-lang]').forEach(link => {
-        const isCurrent = link.dataset.lang === currentLang;
+    document.querySelectorAll('#language-switch [hreflang]').forEach(link => {
+        const isCurrent = link.hreflang === currentLang;
         link.classList.toggle('on', isCurrent);
         if (isCurrent) {
             link.setAttribute('aria-current', 'page');
         } else {
             link.removeAttribute('aria-current');
-            // Refresh the server-rendered href with the remembered #hash; keep it
-            // untouched if the URL can't be parsed (switchLanguage returns /404).
-            const target = switchLanguage(window.location.href, link.dataset.lang);
-            if (target !== appDefaultRoutes['error404']) {
-                link.href = target;
-            }
+        }
+        // Refresh the server-rendered href with the remembered #hash; keep it
+        // untouched if the URL can't be parsed (switchLanguage returns /404).
+        const target = switchLanguage(window.location.href, link.hreflang);
+        if (target !== appDefaultRoutes['error404']) {
+            link.href = target;
         }
     });
 }

@@ -8,7 +8,7 @@ description: "REF230 AFNOR"
         <h1>🖥️ REF230 AFNOR</h1>
         <nav id="language-switch" aria-label="Language">
             {%- for code, locale in languages.locales %}
-            <a class="lang-text" data-lang="{{ code }}" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
+            <a class="lang-text" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
             {%- endfor %}
         </nav>
     </div>
