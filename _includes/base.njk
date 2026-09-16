@@ -16,6 +16,36 @@ bodyClass: ""
 {%- set ll = landmarkLabels[lang] -%}
 {%- set contactTitle = { en: "Contact me", fr: "Me contacter" } -%}
 {%- set closeLabel = { en: "Close", fr: "Fermer" } -%}
+{%- set articles = [
+    { slug: "bien-pasbien", title: { en: "Good / Not Good: good and bad coding practices", fr: "Bien / Pas Bien : bonnes et mauvaises pratiques de code" }, date: "2025-07-26", tags: [
+        "Clean Code", "SOLID", { "Design Patterns": "https://refactoring.guru/design-patterns" }, "DRY", "KISS", "C#", "Python", "JavaScript"
+    ] },
+    { slug: "du-voc-de-dev", title: { en: "From the dev vocab", fr: "Du voc' de dev" }, date: "2025-05-05", tags: [
+        "Framework", "Library", "Package", "Module"
+    ] },
+    { slug: "mcs", title: { en: "What is a MSC application ?", fr: "Une application MCS : Kézako ?" }, date: "2024-12-23", tags: [
+        { "MCS": "https://gimelec.fr/wp-content/uploads/2025/03/GIMELEC-Cyber-OT-Livre-blanc-MCS-2025-web.pdf" },
+        { "CyberSecurity": "https://cyber.gouv.fr/le-cyberdico" },
+        { "Vulnerability": "https://www.cvedetails.com/vulnerability-list" },
+        "REST",
+        { "API": "https://aws.amazon.com/fr/what-is/api" },
+        { "OAuth2": "https://loan-truong.medium.com/le-protocole-oauth2-0-a845773bec21" }
+    ] },
+    { slug: "presentation", title: { en: "My career in few lines", fr: "Mon parcours pro en quelques lignes" }, date: "2024-01-01", tags: [
+        { "Software Engineer": "https://blog.lewagon.com/fr/career/metier-software-engineer" },
+        { "Full Stack Developer": "https://blog.lewagon.com/fr/career/metiers-tech-developpement-web-developpeur-full-stack" },
+        "Paris", "Lyon",
+        { "ESILV": "https://www.esilv.fr/ingenieur/classement" },
+        { "UQAC": "https://www.uqac.ca/programme/3037-maitrise-en-informatique-professionnel" }
+    ] },
+    { slug: "sur-quels-criteres-choisir-une-agence-web", title: { en: "How to choose a web agency ?", fr: "Sur quels critères choisir une agence web ?" }, date: "2019-07-31", tags: [
+        "Web Agency", "Digital Transformation", "Project Management", "Business Growth"
+    ] },
+    { slug: "5-conseils-pour-un-nom-de-marque-parfait", title: { en: "5 tips for the perfect brand name", fr: "5 conseils pour un nom de marque parfait" }, date: "2019-07-03", tags: [
+        "Brand Naming", "Business Growth", "Trademark", "Entrepreneurship"
+    ] }
+] -%}
+{%- set appArticlesData = articles | resolveArticles(lang) -%}
 <!DOCTYPE html>
 <html lang="{{ lang }}">
     <head>
@@ -30,6 +60,9 @@ bodyClass: ""
         <meta name="description" content="{{ description | safe }}">
         {%- if noindex %}
         <meta name="robots" content="noindex">
+        {%- endif %}
+        {%- if assets and "head-scripts.html" in assets %}
+        <meta name="app-articles" content="{{ appArticlesData | dump }}">
         {%- endif %}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">

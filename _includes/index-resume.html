@@ -37,6 +37,18 @@
     { flag: "flag-gb.png", countryAlt: { en: "United Kingdom", fr: "Royaume-Uni" }, name: { en: "English", fr: "Anglais" }, value: 70 },
     { flag: "flag-es.png", countryAlt: { en: "Spain", fr: "Espagne" }, name: { en: "Spanish", fr: "Espagnol" }, value: 40 }
 ] -%}
+{%- set skillsChartLabels = {
+    en: ['Back-end', 'Front-end', 'Project management', 'Support', 'CI/CD'],
+    fr: ['Back-end', 'Front-end', 'Gestion de projet', 'Support', 'CI/CD']
+} -%}
+{%- set skillsChartTitle = {
+    en: 'Time distribution across my skills',
+    fr: 'Répartition du temps passé sur mes compétences'
+} -%}
+{%- set skillsChartSubtitleTemplate = {
+    en: 'Data based on {xp} years in activity',
+    fr: 'Données basées sur {xp} années en activité'
+} -%}
 {%- set awardEntries = [
     { icon: "icon-language", date: { en: "November 2025", fr: "Novembre 2025" }, title: { en: "Voltaire Certificate", fr: "Certificat Voltaire" }, score: "841", detail: { en: "Business Level", fr: "Niveau Affaires" } },
     { icon: "icon-language", date: { en: "January 2020", fr: "Janvier 2020" }, title: "TOEIC", score: "810", detail: "B2" },
@@ -94,7 +106,7 @@
                 <div id="skills" class="page">
                     <h2 class="heading">{{ r.skills }}</h2>
                     <div class="chart-container d-flex justify-content-center mb-5">
-                        <canvas id="skillsChart"></canvas>
+                        <canvas id="skillsChart" data-labels="{{ skillsChartLabels[lang] | dump }}" data-title="{{ skillsChartTitle[lang] }}" data-subtitle-template="{{ skillsChartSubtitleTemplate[lang] }}"></canvas>
                     </div>
                     {% include "languages.html" %}
                     {%- for row in skillCards | batch(3) %}

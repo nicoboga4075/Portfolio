@@ -169,6 +169,10 @@ module.exports = function configureEleventy(eleventyConfig) {
         const slug = parts.join("_");
         return slug === "index" ? `/${lang}` : `/${lang}/${slug}`;
     });
+    // Resolves each article's bilingual title to `lang`, keeping slug/date/tags as authored.
+    eleventyConfig.addFilter("resolveArticles", (articles, lang) => {
+        return articles.map(article => ({ slug: article.slug, title: article.title[lang], date: article.date, tags: article.tags }));
+    });
     for (const dir of passthroughDirs) {
         if (fs.existsSync(dir)) {
             eleventyConfig.addPassthroughCopy(dir);

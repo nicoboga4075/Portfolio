@@ -64,123 +64,7 @@ const appServices = [
     appBlogSection
 ];
 
-const appArticleTitles = {
-    "bien-pasbien": {
-        en: "Good / Not Good: good and bad coding practices",
-        fr: "Bien / Pas Bien : bonnes et mauvaises pratiques de code"
-    },
-    "du-voc-de-dev": {
-        en: "From the dev vocab",
-        fr: "Du voc' de dev"
-    },
-    "mcs": {
-        en: "What is a MSC application ?",
-        fr: "Une application MCS : Kézako ?"
-    },
-    "presentation": {
-        en: "My career in few lines",
-        fr: "Mon parcours pro en quelques lignes"
-    },
-    "sur-quels-criteres-choisir-une-agence-web": {
-        en: "How to choose a web agency ?",
-        fr: "Sur quels critères choisir une agence web ?"
-    },
-    "5-conseils-pour-un-nom-de-marque-parfait": {
-        en: "5 tips for the perfect brand name",
-        fr: "5 conseils pour un nom de marque parfait"
-    }
-};
-
-const appArticles = [{
-        slug: "bien-pasbien",
-        title: appArticleTitles["bien-pasbien"],
-        date: "2025-07-26",
-        tags: [
-            { "Clean Code": "#" },
-            { "SOLID": "#" },
-            { "Design Patterns": "https://refactoring.guru/design-patterns" },
-            { "DRY": "#" },
-            { "KISS": "#" },
-            { "C#": "#" },
-            { "Python": "#" },
-            { "JavaScript": "#" }
-        ]
-    },
-    {
-        slug: "du-voc-de-dev",
-        title: appArticleTitles["du-voc-de-dev"],
-        date: "2025-05-05",
-        tags: [
-            { "Framework": "#" },
-            { "Library": "#" },
-            { "Package": "#" },
-            { "Module": "#" }
-        ]
-    },
-    {
-        slug: "mcs",
-        title: appArticleTitles["mcs"],
-        date: "2024-12-23",
-        tags: [
-            { "MCS": "https://gimelec.fr/wp-content/uploads/2025/03/GIMELEC-Cyber-OT-Livre-blanc-MCS-2025-web.pdf" },
-            { "CyberSecurity": "https://cyber.gouv.fr/le-cyberdico" },
-            { "Vulnerability": "https://www.cvedetails.com/vulnerability-list" },
-            { "REST": "#" },
-            { "API": "https://aws.amazon.com/fr/what-is/api" },
-            { "OAuth2": "https://loan-truong.medium.com/le-protocole-oauth2-0-a845773bec21" }
-        ]
-    },
-    {
-        slug: "presentation",
-        title: appArticleTitles["presentation"],
-        date: "2024-01-01",
-        tags: [
-            { "Software Engineer": "https://blog.lewagon.com/fr/career/metier-software-engineer" },
-            { "Full Stack Developer": "https://blog.lewagon.com/fr/career/metiers-tech-developpement-web-developpeur-full-stack" },
-            { "Paris": "#" },
-            { "Lyon": "#" },
-            { "ESILV": "https://www.esilv.fr/ingenieur/classement" },
-            { "UQAC": "https://www.uqac.ca/programme/3037-maitrise-en-informatique-professionnel" }
-        ]
-    },
-    {
-        slug: "sur-quels-criteres-choisir-une-agence-web",
-        title: appArticleTitles["sur-quels-criteres-choisir-une-agence-web"],
-        date: "2019-07-31",
-        tags: [
-            { "Web Agency": "#" },
-            { "Digital Transformation": "#" },
-            { "Project Management": "#" },
-            { "Business Growth": "#" }
-        ]
-    },
-    {
-        slug: "5-conseils-pour-un-nom-de-marque-parfait",
-        title: appArticleTitles["5-conseils-pour-un-nom-de-marque-parfait"],
-        date: "2019-07-03",
-        tags: [
-            { "Brand Naming": "#" },
-            { "Business Growth": "#" },
-            { "Trademark": "#" },
-            { "Entrepreneurship": "#" }
-        ]
-    }
-];
-
-const appSkillsChartLabels = ['Back-end', 'Front-end', {
-    en: 'Project management',
-    fr: 'Gestion de projet'
-}, 'Support', 'CI/CD'];
-
-const appSkillsChartTitle = {
-    en: 'Time distribution across my skills',
-    fr: 'Répartition du temps passé sur mes compétences'
-};
-
-const appSkillsChartSubtitle = {
-    en: `Data based on ${xp} years in activity`,
-    fr: `Données basées sur ${xp} années en activité`
-};
+const appArticles = JSON.parse($('meta[name="app-articles"]').attr('content'));
 
 const appKeywords = [
     // Frontend
@@ -641,15 +525,11 @@ function createCircularChart({
     const canvas = $(`#${canvasId}`)[0];
     const context = canvas.getContext('2d');
     const total = data.reduce((a, b) => a + b, 0);
-    const currentLanguage = getCurrentLanguage();
-    
+
     chart = new Chart(context, {
         type: 'doughnut',
         data: {
-            labels: labels.map(label => {
-                if (typeof label === 'string') return label;
-                return label[currentLanguage] || label.fr || label.en;
-            }),
+            labels,
             datasets: [{
                 data: data,
                 backgroundColor: backgroundColor,
@@ -663,7 +543,7 @@ function createCircularChart({
                 },
                 title: {
                     display: true,
-                    text: titles[currentLanguage] || titles.fr || titles.en,
+                    text: titles,
                     color: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim(),
                     font: {
                         family: 'Poppins',
@@ -678,7 +558,7 @@ function createCircularChart({
                 },
                 subtitle: {
                     display: true,
-                    text: subtitles[currentLanguage] || subtitles.fr || subtitles.en,
+                    text: subtitles,
                     font: {
                         family: 'Poppins',
                         size: 14,
@@ -1137,9 +1017,9 @@ function initIndexPage(langPage) {
                         canvasId: 'skillsChart',
                         data: [45, 25, 15, 10, 5],
                         backgroundColor: [cssVar('--blue'), cssVar('--orange'), cssVar('--green'), cssVar('--red'), cssVar('--purple')],
-                        labels: appSkillsChartLabels,
-                        titles: appSkillsChartTitle,
-                        subtitles: appSkillsChartSubtitle
+                        labels: JSON.parse(skillsChartCanvas.dataset.labels),
+                        titles: skillsChartCanvas.dataset.title,
+                        subtitles: skillsChartCanvas.dataset.subtitleTemplate.replace('{xp}', xp)
                     });
                 }).catch(() => {
                     // Chart.js couldn't be fetched (offline / transient network).
@@ -1310,7 +1190,7 @@ function initBlogPage(langPage) {
                     window.location.href = `/${langPage}/blog#${recentArticle.slug}`;
                     setTimeout(() => location.reload(), 150);
                 });
-                $('.heading').text(recentArticle.title[langPage]);
+                $('.heading').text(recentArticle.title);
                 $('.meta')
                     .text(convertDate(recentArticle.date, langPage))
                     .prepend($('<i>', { 'class': 'icon-calendar' }), ' ');
@@ -1320,8 +1200,8 @@ function initBlogPage(langPage) {
             $tagCloud.empty();
             const tags = currentArticle.tags;
             $.each(tags, function (index, tag) {
-                const tagName = tag && Object.keys(tag)[0];
-                const tagLink = tag[tagName];
+                const tagName = typeof tag === 'string' ? tag : Object.keys(tag)[0];
+                const tagLink = typeof tag === 'string' ? '#' : tag[tagName];
                 const $a = $('<a></a>')
                     .attr('href', tagLink)
                     .addClass('tag-cloud-link')
