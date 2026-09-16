@@ -7,6 +7,7 @@ import { defineConfig } from "eslint/config";
 const vendorJs = [
   "js/bootstrap.min.js",
   "js/chart.umd.min.js",
+  "js/i18next.min.js",
   "js/jquery-migrate.min.js",
   "js/jquery.easing.min.js",
   "js/jquery.magnific-popup.min.js",
@@ -84,7 +85,7 @@ export default defineConfig([
         appName: "readonly",
         appRoutes: "readonly",
         getHashFromSession: "readonly",
-        getMessage: "readonly",
+        i18next: "readonly",
         convertDate: "readonly",
         getCurrentFullDate: "readonly",
         xp: "readonly",

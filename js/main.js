@@ -303,6 +303,39 @@ const appKeywords = [
     "Internet"
 ];
 
+// Visitor-facing strings needed at runtime (main.js only - default.js pages don't load i18next). Page language is fixed server-side (separate _en/_fr builds), so init runs synchronously (initImmediate: false) and getMessage() can call t() right away without awaiting the init promise.
+i18next.init({
+    lng: getCurrentLanguage(),
+    fallbackLng: false,
+    initImmediate: false,
+    resources: {
+        en: {
+            translation: {
+                "success-generic": "The operation was successfully completed.",
+                "error-generic": "Oops ! An error has occurred. Try again later.",
+                "carousel-prev": "Previous",
+                "carousel-next": "Next",
+                "carousel-dot": "Go to slide",
+                "search-no-result": "Houston, we have a problem"
+            }
+        },
+        fr: {
+            translation: {
+                "success-generic": "L'opération a été un franc succès.",
+                "error-generic": "Oops ! Une erreur est survenue. Réessayez plus tard.",
+                "carousel-prev": "Précédent",
+                "carousel-next": "Suivant",
+                "carousel-dot": "Aller à la diapositive",
+                "search-no-result": "Houston, nous avons un problème"
+            }
+        }
+    }
+});
+
+function getMessage(key) {
+    return i18next.t(key);
+}
+
 let appGoogleToken;
 const appScrollSections = [];
 let appCheckpointSubSection;

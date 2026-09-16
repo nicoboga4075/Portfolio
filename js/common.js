@@ -35,33 +35,6 @@ const projectsCount = 20;
 const experiencesCount = 6;
 const countriesCount = 15;
 
-const appMessages = {
-    "success-generic": {
-        fr: "L'opération a été un franc succès.",
-        en: "The operation was successfully completed."
-    },
-    "error-generic": {
-        fr: "Oops ! Une erreur est survenue. Réessayez plus tard.",
-        en: "Oops ! An error has occurred. Try again later."
-    },
-    "carousel-prev": {
-        fr: "Précédent",
-        en: "Previous"
-    },
-    "carousel-next": {
-        fr: "Suivant",
-        en: "Next"
-    },
-    "carousel-dot": {
-        fr: "Aller à la diapositive",
-        en: "Go to slide"
-    },
-    "search-no-result": {
-        fr: "Houston, nous avons un problème",
-        en: "Houston, we have a problem"
-    }
-};
-
 function getCurrentRoute() {
     const path = window.location.pathname;
     return Object.keys(appRoutes).find(key => {
@@ -76,10 +49,6 @@ function getHashFromSession() {
 
 function getCurrentLanguage() {
     return document.documentElement.lang;
-}
-
-function getMessage(key) {
-    return appMessages[key]?.[`${getCurrentLanguage()}`] || '';
 }
 
 function capitalize(string, locale, allWords = true) {
