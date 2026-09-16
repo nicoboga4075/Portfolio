@@ -1,0 +1,66 @@
+{%- set parts = page.fileSlug.split("_") -%}
+{%- set suffix = parts[parts.length - 1] -%}
+{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+{%- set text = {
+    en: { profileAlt: "Profile", role: "Software Engineer", scanMe: "Scan me", sidebar: "Sidebar", searchPlaceholder: "Search...", searchAria: "Search in the article", searchSuggestions: "Search suggestions", recent: "Recent Publications", recentAria: "Recent publication", tags: "Tags", locale: "en_US" },
+    fr: { profileAlt: "Profil", role: "Ingénieur Logiciel", scanMe: "Scanne-moi", sidebar: "Barre latérale", searchPlaceholder: "Rechercher...", searchAria: "Rechercher dans l'article", searchSuggestions: "Suggestions de recherche", recent: "Récents", recentAria: "Publication récente", tags: "Mots-clés", locale: "fr_FR" }
+} -%}
+{%- set labels = text[lang] -%}
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div id="article-shape" class="col-lg-8 ftco-animate">
+                <div class="about-author p-4 bg-light d-none">
+                    <div class="bio mr-5">
+                        <img src="images/profile.webp" class="img-fluid mb-4" alt="{{ labels.profileAlt }}" loading="lazy" width="1000" height="1074">
+                    </div>
+                    <div class="desc text-center">
+                        <h3 class="author">{{ author }}</h3>
+                        <p>{{ labels.role }}</p>
+                        <p><i>{{ labels.scanMe }}</i></p>
+                        <div class="qrcode-group">
+                            <div class="qrcode-card">
+                                <img src="images/logo-beacons.png" class="qrcode-logo" alt="Beacons" loading="lazy" width="720" height="200">
+                                <img src="images/qrcode-beacons.png" class="qrcode-img" alt="Beacons QR Code" loading="lazy" width="200" height="200">
+                            </div>
+                            <div class="qrcode-card">
+                                <img src="images/logo-linkerz.png" class="qrcode-logo" alt="Linkerz" loading="lazy" width="720" height="200">
+                                <img src="images/qrcode-linkerz.png" class="qrcode-img" alt="Linkerz QR Code" loading="lazy" width="200" height="200">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <aside class="col-lg-4 sidebar" aria-label="{{ labels.sidebar }}">
+                <div class="sidebar-box">
+                    <form class="search-form">
+                        <div class="form-group">
+                            <input name="search-input" class="form-control" type="text" placeholder="{{ labels.searchPlaceholder }}" autocomplete="off" aria-label="{{ labels.searchAria }}">
+                            <span class="icon icon-times mr-4"></span>
+                            <span class="icon icon-search"></span>
+                            <ul id="search-suggestions" aria-label="{{ labels.searchSuggestions }}"></ul>
+                        </div>
+                    </form>
+                    <div id="search-info"></div>
+                </div>
+                <div class="sidebar-box">
+                    <h3 class="heading-sidebar">{{ labels.recent }}</h3>
+                    <div class="block-21 mb-4 d-flex justify-content-center">
+                        <a id="crm" class="blog-img mr-4" aria-labelledby="recent-article-heading" aria-label="{{ labels.recentAria }}"></a>
+                        <div class="text">
+                            <h3 id="recent-article-heading" class="heading">{{ labels.recentAria }}</h3>
+                            <div class="meta"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-box">
+                    <h3 class="heading-sidebar">{{ labels.tags }}</h3>
+                    <div class="tagcloud"></div>
+                </div>
+                <div class="sidebar-box">
+                    <div class="badge-base LI-profile-badge" data-locale="{{ labels.locale }}" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="{{ linkedin.vanity }}" data-version="v1"></div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
