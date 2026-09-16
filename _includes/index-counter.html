@@ -1,0 +1,49 @@
+{%- set parts = page.fileSlug.split("_") -%}
+{%- set suffix = parts[parts.length - 1] -%}
+{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+
+{%- set counterText = {
+    en: { certifs: "Certifications", projects: "Delivered projects", experiences: "Work experiences", countries: "Visited countries" },
+    fr: { certifs: "Certifications", projects: "Projets livrés", experiences: "Expériences pros", countries: "Pays visités" }
+} -%}
+{%- set counter = counterText[lang] -%}
+{% if viewport == "desktop" %}
+<section id="counter-section" class="ftco-section ftco-counter">
+    <div class="container-fluid px-md-5">
+        <div class="row d-md-flex align-items-center">
+            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 shadow">
+                    <div class="text">
+                        <strong id="certifsCount" class="number">0</strong>
+                        <span>{{ counter.certifs }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 shadow">
+                    <div class="text">
+                        <strong id="projectsCount" class="number">0</strong>
+                        <span>{{ counter.projects }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 shadow">
+                    <div class="text">
+                        <strong id="experiencesCount" class="number">0</strong>
+                        <span>{{ counter.experiences }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 shadow">
+                    <div class="text">
+                        <strong id="countriesCount" class="number">0</strong>
+                        <span>{{ counter.countries }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

@@ -1,0 +1,78 @@
+{%- set parts = page.fileSlug.split("_") -%}
+{%- set suffix = parts[parts.length - 1] -%}
+{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+
+{%- set contactPageText = {
+    en: { heading: "Contact", p1: "Career opportunities, projects to suggest, ideas to share...", p2: "Don't hesitate !", p3: "Book a 30-minute slot to discuss.", address: "Address", email: "Email", honeypot: "Do not fill this out if you are human : ", namePlaceholder: "Name", subjectPlaceholder: "Subject", messagePlaceholder: "Message", send: "Send", motto: "Faster, Higher, Stronger - Together !" },
+    fr: { heading: "Contact", p1: "Opportunités de carrière, propositions de projets, idées à partager...", p2: "N'hésitez pas !", p3: "Réservez un créneau de 30 minutes pour échanger.", address: "Adresse", email: "Email", honeypot: "Ne remplis pas ce champ si tu es humain : ", namePlaceholder: "Nom", subjectPlaceholder: "Objet", messagePlaceholder: "Message", send: "Envoyer", motto: "Toujours plus loin, toujours plus haut, toujours plus fort !" }
+} -%}
+{%- set contactPage = contactPageText[lang] -%}
+{% if viewport == "desktop" %}
+<section id="contact-section" class="contact-section ftco-section ftco-no-pb">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <h2 class="mb-4">{{ contactPage.heading }}</h2>
+                <p>{{ contactPage.p1 }}</p>
+                <p>{{ contactPage.p2 }}</p>
+                <p>{{ contactPage.p3 }}</p>
+                <a href="https://calendly.com/nicolas-bogalheiro/30min">https://calendly.com/nicolas-bogalheiro/30min</a>
+            </div>
+        </div>
+        <div class="row contact-info mb-5 d-none d-sm-flex">
+            <div class="col-md-12 col-lg-6 d-flex ftco-animate">
+                <div class="align-self-stretch box text-center p-4 shadow">
+                    <div class="icon d-flex align-items-center justify-content-center">
+                        <span class="icon-map-signs"></span>
+                    </div>
+                    <div>
+                        <h3 class="mb-4">{{ contactPage.address }}</h3>
+                        <p id="address"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6 d-flex ftco-animate">
+                <div class="align-self-stretch box text-center p-4 shadow">
+                    <div class="icon d-flex align-items-center justify-content-center">
+                        <span class="icon-paper-plane"></span>
+                    </div>
+                    <div>
+                        <h3 class="mb-4">{{ contactPage.email }}</h3>
+                        <p class="email"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row no-gutters block-9 justify-content-center mb-5 pb-3">
+            <div class="col-md-6 order-md-last d-flex">
+                <form class="bg-light p-4 p-md-5 contact-form" name="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+                    <p hidden>
+                        <label>{{ contactPage.honeypot }}<input name="bot-field"></label>
+                    </p>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="{{ contactPage.namePlaceholder }}" name="name" required autocomplete="name" aria-label="{{ contactPage.namePlaceholder }}">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="{{ contactPage.subjectPlaceholder }}" name="subject" required aria-label="{{ contactPage.subjectPlaceholder }}">
+                    </div>
+                    <div class="form-group">
+                        <textarea cols="30" rows="10" class="form-control" placeholder="{{ contactPage.messagePlaceholder }}" name="message" required aria-label="{{ contactPage.messagePlaceholder }}"></textarea>
+                    </div>
+                    <div id="captchaCheck"></div>
+                    <div id="callback-form" class="text-center"></div>
+                    <div class="form-group text-right">
+                        <input type="submit" value="{{ contactPage.send }}" class="btn btn-primary py-3 px-5" disabled>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 d-flex d-lg-none">
+                <div id="profile-mobile" class="img profile-photo">
+                    <div class="bulle-bd text-center bg-white">
+                        {{ contactPage.motto }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

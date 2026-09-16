@@ -1,0 +1,34 @@
+{%- set parts = page.fileSlug.split("_") -%}
+{%- set suffix = parts[parts.length - 1] -%}
+{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+
+{%- set heroText = {
+    en: { subheading: "Hello ! My name is", intro: "I'm a", roles: "[ &quot;Software Engineer.&quot;, &quot;AI-Augmented Developer.&quot;, &quot;Full Stack Developer.&quot;,&quot;Support Engineer.&quot;, &quot;IT Consultant.&quot;, &quot;Back End Developer.&quot; ]", tagline: "The AI copilots, I hold the harness; it judges the line, I umpire the match — as in tennis." },
+    fr: { subheading: "Bonjour ! Je m'appelle", intro: "Je suis un", roles: "[ &quot;Ingénieur Logiciel.&quot;, &quot;Développeur IA Augmenté.&quot;, &quot;Développeur Full Stack.&quot;,&quot;Ingénieur Support.&quot;, &quot;Consultant IT.&quot;, &quot;Développeur Back-End.&quot; ]", tagline: "L'IA copilote, je tiens les rênes ; elle juge la ligne, j'arbitre le match — comme au tennis." }
+} -%}
+{%- set hero = heroText[lang] -%}
+<section class="hero-wrap js-fullheight">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight justify-content-center align-items-center">
+            <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-center">
+                <div class="text text-center">
+                    <span class="subheading">{{ hero.subheading }}</span>
+                    <h1 class="author">{{ author }}</h1>
+                    <h2>{{ hero.intro }}&nbsp;
+                        <span
+                            class="txt-rotate"
+                            data-period="2000"
+                            data-rotate="{{ hero.roles | safe }}"></span>
+                    </h2>
+                    <p class="hero-tagline mt-3">{{ hero.tagline }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mouse">
+        <a class="mouse-icon nav-link" aria-label="Go to Resume Section">
+            <div class="mouse-wheel"><span class="icon-long-arrow-down"></span></div>
+        </a>
+    </div>
+</section>

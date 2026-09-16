@@ -1,0 +1,162 @@
+{%- set parts = page.fileSlug.split("_") -%}
+{%- set suffix = parts[parts.length - 1] -%}
+{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+
+{%- set resumeText = {
+    en: { navAria: "Resume navigation", education: "Education", experiences: "Experiences", skills: "Skills", languagesNav: "Languages", awards: "Awards" },
+    fr: { navAria: "Resume navigation", education: "Éducation", experiences: "Expériences", skills: "Compétences", languagesNav: "Langues", awards: "Récompenses" }
+} -%}
+{%- set r = resumeText[lang] -%}
+{%- set educationEntries = [
+    { id: "UQAC", date: "2020 - 2021", title: { en: "University Master in Computer Science", fr: "Master universitaire en Informatique" }, href: "https://www.uqac.ca", school: "UQAC", place: "(Chicoutimi, CAN)" },
+    { id: "ESILV", date: "2018 - 2021", title: { en: "Engineering Diploma in Informatics", fr: "Diplôme d'ingénieurs en Informatique" }, href: { en: "https://www.esilv.fr/en", fr: "https://www.esilv.fr" }, school: "ESILV", place: "(Paris La Défense, FRA)" },
+    { id: "js", date: "2015 - 2018", title: { en: "Prepa MPSI/MP", fr: "Prépa MPSI/MP" }, href: "https://www.janson-de-sailly.fr", school: "Janson de Sailly", place: "(Paris 16e, FRA)" }
+] -%}
+{%- set experienceEntries = [
+    { icon: "icon-users", date: { en: "December 2025 - August 2026", fr: "Décembre 2025 - Août 2026" }, title: { en: "Software Engineer", fr: "Ingénieur Logiciel" }, href: { en: "https://www.chapsvision.com", fr: "https://www.chapsvision.com/fr" }, company: "ChapsVision", city: "Paris" },
+    { icon: "icon-briefcase", date: { en: "December 2024 - August 2025", fr: "Décembre 2024 - Août 2025" }, title: { en: "Consultant Engineer", fr: "Ingénieur Consultant" }, href: { en: "https://astekgroup.fr/?lang=en", fr: "https://astekgroup.fr" }, company: "Astek", city: "Lyon" },
+    { icon: "icon-security", date: { en: "June 2024 - September 2024", fr: "Juin 2024 - Septembre 2024" }, title: { en: "Security Engineer", fr: "Ingénieur Sécurité" }, href: { en: "https://www.bassetti-group.com/en", fr: "https://www.bassetti-group.com" }, company: "Bassetti Group", city: "Lyon" },
+    { icon: "icon-gears", date: { en: "July 2021 - May 2024", fr: "Juillet 2021 - Mai 2024" }, title: { en: "Software Engineer", fr: "Ingénieur Logiciel" }, href: { en: "https://www.soft-concept.com/en", fr: "https://www.soft-concept.com" }, company: "Soft Concept", city: "Lyon" },
+    { icon: "icon-clipboard", date: { en: "March 2020 - August 2020", fr: "Mars 2020 - Août 2020" }, title: { en: "Full Stack Developer", fr: "Développeur Full Stack" }, href: "https://cyberprotect.one", company: "Cyberprotect", city: "Bron" },
+    { icon: "icon-build", date: { en: "June 2019 - August 2019", fr: "Juin 2019 - Août 2019" }, title: { en: "Web Assistant", fr: "Assistant Web" }, href: { en: "https://en.galadrim.fr", fr: "https://galadrim.fr" }, company: "Galadrim", city: "Paris" },
+    { icon: "icon-user-secret", date: { en: "October 2018 - April 2019", fr: "Octobre 2018 - Avril 2019" }, title: { en: "Student Project Manager", fr: "Chef de projet étudiant" }, href: "https://www.cgi.com/fr", company: "CGI", city: "Paris La Défense" }
+] -%}
+{%- set skillCards = [
+    { id: "db", title: "SQL", href: "https://sql.sh", item1: "Postgre", item2: "SQLite" },
+    { id: "methodology", title: { en: "Project", fr: "Projet" }, href: { en: "https://www.geeksforgeeks.org/difference-between-agile-model-and-v-model", fr: "https://blog.hubspot.fr/marketing/difference-cycle-en-v-et-methode-agile" }, item1: "Agile", item2: { en: "V Model", fr: "Cycle V" } },
+    { id: "devops", title: "DevOps", href: { en: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-devops", fr: "https://azure.microsoft.com/fr-fr/resources/cloud-computing-dictionary/what-is-devops" }, item1: "Git", item2: "Docker" },
+    { id: "design", title: "Design", href: { en: "https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure", fr: "https://developer.mozilla.org/fr/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure" }, item1: "HTML", item2: "CSS" },
+    { id: "dark", title: { en: "Add-ons", fr: "Extensions" }, href: "https://www.geeksforgeeks.org/differences-between-bootstrap-and-jquery-ui", item1: "jQuery", item2: "Bootstrap" },
+    { id: "cyber", title: { en: "Cybersecurity", fr: "Cybersécurité" }, href: "https://owasp.org/www-community/OWASP_Risk_Rating_Methodology", item1: "OWASP", item2: "CVSS" },
+    { id: "llm", title: "LLM", href: { en: "https://en.wikipedia.org/wiki/Large_language_model", fr: "https://fr.wikipedia.org/wiki/Grand_mod%C3%A8le_de_langage" }, item1: "Claude", item2: "ChatGPT" },
+    { id: "automation", title: { en: "Automation", fr: "Automatisation" }, href: "https://n8n.io", item1: "n8n", item2: "Botpress" },
+    { id: "protocols", title: { en: "Protocols", fr: "Protocoles" }, href: "https://modelcontextprotocol.io", item1: "HTTP", item2: "MCP" }
+] -%}
+{%- set spokenLanguages = [
+    { flag: "flag-fr.png", countryAlt: { en: "France", fr: "France" }, name: { en: "French", fr: "Français" }, value: 100 },
+    { flag: "flag-gb.png", countryAlt: { en: "United Kingdom", fr: "Royaume-Uni" }, name: { en: "English", fr: "Anglais" }, value: 70 },
+    { flag: "flag-es.png", countryAlt: { en: "Spain", fr: "Espagne" }, name: { en: "Spanish", fr: "Espagnol" }, value: 40 }
+] -%}
+{%- set awardEntries = [
+    { icon: "icon-language", date: { en: "November 2025", fr: "Novembre 2025" }, title: { en: "Voltaire Certificate", fr: "Certificat Voltaire" }, score: "841", detail: { en: "Business Level", fr: "Niveau Affaires" } },
+    { icon: "icon-language", date: { en: "January 2020", fr: "Janvier 2020" }, title: "TOEIC", score: "810", detail: "B2" },
+    { icon: "icon-language", date: { en: "January 2019", fr: "Janvier 2019" }, title: "TOEFL", score: "550", detail: "B2" },
+    { icon: "icon-web", date: { en: "June 2019", fr: "Juin 2019" }, title: { en: "CGI Student Contest", fr: "Challenge étudiant CGI" }, score: { en: "Finalist", fr: "Finaliste" }, detail: { en: "Solidarity : Easy Student Housing", fr: "Solidarité : Easy Student Housing" } },
+    { icon: "icon-drivers-license", date: { en: "July 2016", fr: "Juillet 2016" }, title: { en: "Driving License", fr: "Permis de conduire" }, score: "24", detail: "B" },
+    { icon: "icon-certificate", date: { en: "July 2015", fr: "Juillet 2015" }, title: { en: "Baccalaureate", fr: "Bac" }, score: { en: "Very Good", fr: "TB" }, detail: { en: "Scientific : St Jacques de Compostelle (Dax)", fr: "Scientifique : St Jacques de Compostelle (Dax)" } },
+    { svgId: "fft", date: { en: "August 2012", fr: "Août 2012" }, title: "TNJA", score: { en: "Finalist", fr: "Finaliste" }, detail: { en: "Tennis Referee : CBBL", fr: "Arbitre de Tennis : CBBL" } }
+] -%}
+<section id="resume-section" class="ftco-section ftco-no-pb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <nav id="navi" aria-label="{{ r.navAria }}">
+                    <ul>
+                        <li><a class="nav-link"><span>{{ r.education }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ r.experiences }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ r.skills }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ r.languagesNav }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ r.awards }}</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-9">
+                <div id="education" class="page">
+                    <h2 class="heading">{{ r.education }}</h2>
+                    {%- for e in educationEntries %}
+                    <div class="resume-wrap d-flex ftco-animate">
+                        <div id="{{ e.id }}" class="icon logo-school d-flex align-items-center justify-content-center"></div>
+                        <div class="text pl-3">
+                            <span class="date">{{ e.date }}</span>
+                            <h2>{{ e.title[lang] }}</h2>
+                            <span class="position"><a target="_blank" rel="noopener" href="{{ e.href[lang] if e.href[lang] else e.href }}">{{ e.school }}</a> {{ e.place }}</span>
+                            <p></p>
+                        </div>
+                    </div>
+                    {%- endfor %}
+                </div>
+                <div id="experiences" class="page">
+                    <h2 class="heading">{{ r.experiences }}</h2>
+                    {%- for e in experienceEntries %}
+                    <div class="resume-wrap d-flex ftco-animate">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <span class="{{ e.icon }}"></span>
+                        </div>
+                        <div class="text pl-3">
+                            <span class="date">{{ e.date[lang] }}</span>
+                            <h2>{{ e.title[lang] }}</h2>
+                            <span class="position"><a target="_blank" rel="noopener" href="{{ e.href[lang] if e.href[lang] else e.href }}">{{ e.company }}</a></span>
+                            <p>{{ e.city }}</p>
+                        </div>
+                    </div>
+                    {%- endfor %}
+                </div>
+                <div id="skills" class="page">
+                    <h2 class="heading">{{ r.skills }}</h2>
+                    <div class="chart-container d-flex justify-content-center mb-5">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                    {% include "languages.html" %}
+                    {%- for row in skillCards | batch(3) %}
+                    <div class="row progress-circle mb-5">
+                        {%- for card in row %}
+                        <div class="col-lg-4 mb-4">
+                            <div class="bg-white rounded-lg shadow p-4">
+                                <h2 class="h5 font-weight-bold text-center mb-4">{{ card.title[lang] if card.title[lang] else card.title }}</h2>
+                                <div class="block-21 mb-4 d-flex justify-content-center">
+                                    <a id="{{ card.id }}" class="blog-img" target="_blank" rel="noopener" href="{{ card.href[lang] if card.href[lang] else card.href }}" aria-label="{{ card.title[lang] if card.title[lang] else card.title }}"></a>
+                                </div>
+                                <div class="row text-center mt-4">
+                                    <div class="col-6 border-right">
+                                        <div class="h5 font-weight-bold mb-0">{{ card.item1 }}</div>
+                                        <span class="small text-gray"></span>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="h5 font-weight-bold mb-0">{{ card.item2[lang] if card.item2[lang] else card.item2 }}</div>
+                                        <span class="small text-gray"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%- endfor %}
+                    </div>
+                    {%- endfor %}
+                    {% include "more-tools.html" %}
+                </div>
+                <div id="languages" class="page">
+                    <h2 class="heading">{{ r.languagesNav }}</h2>
+                    <div class="row">
+                        {%- for l in spokenLanguages %}
+                        <div class="col-md-12 animate-box">
+                            <div class="progress-wrap ftco-animate">
+                                <h3><img src="images/{{ l.flag }}" alt="{{ l.countryAlt[lang] }}" width="27" height="18" class="mr-2 align-middle">{{ l.name[lang] }}</h3>
+                                <progress value="{{ l.value }}" max="100" aria-valuetext="{{ l.value }}%"></progress>
+                            </div>
+                        </div>
+                        {%- endfor %}
+                    </div>
+                </div>
+                <div id="awards" class="page">
+                    <h2 class="heading">{{ r.awards }}</h2>
+                    {%- for a in awardEntries %}
+                    <div class="resume-wrap d-flex ftco-animate">
+                        {%- if a.svgId %}
+                        <div id="{{ a.svgId }}" class="icon svg d-flex align-items-center justify-content-center"></div>
+                        {%- else %}
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <span class="{{ a.icon }}"></span>
+                        </div>
+                        {%- endif %}
+                        <div class="text pl-3">
+                            <span class="date">{{ a.date[lang] if a.date[lang] else a.date }}</span>
+                            <h2>{{ a.title[lang] if a.title[lang] else a.title }}</h2>
+                            <span class="position">{{ a.score[lang] if a.score[lang] else a.score }}</span>
+                            <p>{{ a.detail[lang] if a.detail[lang] else a.detail }}</p>
+                        </div>
+                    </div>
+                    {%- endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

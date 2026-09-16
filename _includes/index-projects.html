@@ -1,0 +1,84 @@
+{%- set parts = page.fileSlug.split("_") -%}
+{%- set suffix = parts[parts.length - 1] -%}
+{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+
+{%- set projectsText = {
+    en: { heading: "Projects", p1: "Welcome to my portfolio ! Here you will find a selection of completed projects and articles written as software engineer.", p2: "They cover a wide variety of technologies, sectors and work environments. Each of them highlights my hard skills and my ability to adapt to different contexts.", context: "Context", explore: "Explore" },
+    fr: { heading: "Projets", p1: "Bienvenue sur mon portfolio ! Vous y trouverez une sélection de projets réalisés et d'articles rédigés en tant qu'ingénieur logiciel.", p2: "Ils couvrent une grande variété de technologies, de secteurs et d'environnements de travail. Chacun d'entre eux met en avant mes compétences techniques et ma capacité à m'adapter à des contextes divers.", context: "Contexte", explore: "Explorer" }
+} -%}
+{%- set pt = projectsText[lang] -%}
+{%- set projects = [
+    { id: "esh", title: "Easy Student Housing", badge: "Microsoft Office",
+      context: { en: "<i>CGI</i> Student Contest | Monitored, in quartet (ESILV) | 6 months", fr: "Concours étudiant <i>CGI</i> | Supervisé, en quatuor (ESILV) | 6 mois" },
+      description: { en: "Student housing app (prototype)", fr: "Application de logement étudiant (Prototype)" },
+      technologies: "PowerPoint, Word, Excel" },
+    { id: "cpmcs", title: "CPMCS", badge: "Python/Angular",
+      context: { en: "Internship at <i>Cyberprotect</i> | Monitored, lonely | 6 months", fr: "Stage chez <i>Cyberprotect</i> | Supervisé, en autonomie | 6 mois" },
+      description: { en: "Application of maintenance in security condition (MSC)", fr: "Application de maintien en condition de sécurité (MCS)" },
+      technologies: "<b>Python</b> (Flask), Angular, PostgreSQL, Elasticsearch",
+      note: { en: "For the sake of privacy, I just do a presentation of the concept.", fr: "Par soucis de confidentialité, je me limite à une présentation du concept." } },
+    { id: "crm", title: "CRM <i>Elphicom</i>", badge: "HTML/CSS/JS",
+      context: { en: "Internship at <i>Soft Concept</i> | Monitored, lonely | 3 months", fr: "Stage chez <i>Soft Concept</i> | Supervisé, en autonomie | 3 mois" },
+      description: { en: "Customer management software (CRM)", fr: "Logiciel de gestion de la clientèle (CRM)" },
+      technologies: "<b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, Net-Survey, Ethnos, Web-Reports" },
+    { id: "building", title: "EBati <i>Carto Amiante</i>", badge: "C#",
+      context: { en: "Permanent contract at <i>Soft Concept</i> | In pairs | 1 year", fr: "CDI chez <i>Soft Concept</i> | En binôme | 1 an" },
+      description: { en: "Real estate management software", fr: "Logiciel de gestion de biens immobiliers" },
+      technologies: "<b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports" },
+    { id: "sushi", title: "JCA <i>Sushi Robots</i>", badge: "C#",
+      context: { en: "Permanent contract at <i>Soft Concept</i> | Lonely | 6 months", fr: "CDI chez <i>Soft Concept</i> | En autonomie | 6 mois" },
+      description: { en: "E-learning platform for cooking", fr: "Plateforme d'e-learning culinaire" },
+      technologies: "<b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports" },
+    { id: "pragma", title: "Enquêtes Internes <i>Pragma</i>", badge: "C#",
+      heading: { en: "<i>Pragma</i> Internal Surveys", fr: "Enquêtes Internes <i>Pragma</i>" },
+      context: { en: "Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 1 year and a half", fr: "CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 1 an et demi" },
+      description: { en: "Software for internal surveys", fr: "Plateforme d'enquêtes internes" },
+      technologies: "<b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports" },
+    { id: "smiley", title: "REF230 <i>AFNOR</i>", badge: "C#",
+      context: { en: "Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 2 years", fr: "CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 2 ans" },
+      description: { en: "Audit management application for optician certification with <i>Vitalis</i>", fr: "Application de gestion d'audits pour la certification des opticiens avec <i>Vitalis</i>" },
+      technologies: "<b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports" },
+    { id: "satisfaction", title: "Panel <i>MNT</i>", badge: "HTML/CSS/JS",
+      context: { en: "Permanent contract at <i>Soft Concept</i> | Lonely | 3 months", fr: "CDI chez <i>Soft Concept</i> | En autonomie | 3 mois" },
+      description: { en: "Panelist site for the mutual", fr: "Site panéliste pour la mutuelle" },
+      technologies: "<b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, Net-Survey, Ethnos, Web-Reports" },
+    { id: "health", title: "OPALE <i>SNITEM</i>", badge: "C#",
+      context: { en: "Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 1 year", fr: "CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 1 an et demi" },
+      description: { en: "Medical piloting tool with <i>Nexialist</i>", fr: "Outil de pilotage médical avec <i>Nexialist</i>" },
+      technologies: "<b>C#</b> (.NET Core), HTML, CSS, JavaScript, Net-Survey, Ethnos, Web-Reports" }
+] -%}
+<section id="projects-section" class="ftco-section ftco-project">
+    <div class="container-fluid px-md-0">
+        <div class="row no-gutters justify-content-center pb-5">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4">{{ pt.heading }}</h2>
+                <p>{{ pt.p1 }}</p>
+                <p>{{ pt.p2 }}</p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            {%- for p in projects %}
+            <div class="col-md-4">
+                <div id="{{ p.id }}" class="project img ftco-animate d-flex justify-content-center align-items-center">
+                    <div class="overlay"></div>
+                    <div class="project-title text-center"><h5>{{ p.title | safe }}</h5></div>
+                    <span class="badge">{{ p.badge }}</span>
+                    <div class="text text-center p-4">
+                        <h3>{{ (p.heading[lang] if p.heading else p.title) | safe }}</h3>
+                        <span>
+                            <p><u>{{ pt.context }}</u> : {{ p.context[lang] | safe }}</p>
+                            <p><u>Description</u> : {{ p.description[lang] | safe }}
+                                <br><u>Technologies</u> : {{ p.technologies | safe }}
+                            </p>
+                            {%- if p.note %}
+                            <p>{{ p.note[lang] }}</p>
+                            {%- endif %}
+                            <a class="explore btn btn-light py-3 px-3">{{ pt.explore }}</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {%- endfor %}
+        </div>
+    </div>
+</section>
