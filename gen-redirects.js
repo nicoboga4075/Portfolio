@@ -24,7 +24,10 @@ const rewrites = [
 // Real deploy-root files to block directly (/index_en.html, /blog_fr.html, ...).
 const hiddenPrefixes = ["index", ...sections];
 
-const STATIC = `# Public assets nested under an otherwise-blocked directory (first match wins)
+const STATIC = `# The 404 page itself must not be reachable directly with a 200
+/404.html /404 404!
+
+# Public assets nested under an otherwise-blocked directory (first match wins)
 /docs/public/* /docs/public/:splat 200
 
 # --- Un-rendered source directories --------------------------------------
