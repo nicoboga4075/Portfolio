@@ -1601,6 +1601,14 @@ async function sendEmail(senderName, subject, message) {
     const callbackForm = $('#callback-form');
     callbackForm.text('');
 
+    function handleSendFailure(error) {
+        if (error) {
+            console.error(error);
+        }
+        callbackForm.text(errorMessage);
+        sessionStorage.removeItem('tokenAPI');
+    }
+
     // Base64 encode the email in URL-safe format
     const base64EncodedEmail = removeTrailingEquals(btoa(emailString).replaceAll('+', '-').replaceAll('/', '_'));
 
@@ -1626,8 +1634,7 @@ async function sendEmail(senderName, subject, message) {
                 sessionStorage.clear();
             }
         } else {
-            callbackForm.text(errorMessage);
-            sessionStorage.removeItem('tokenAPI');
+            handleSendFailure();
         }
     }
 
@@ -1655,9 +1662,7 @@ async function sendEmail(senderName, subject, message) {
         try {
             await sendHelper(token);
         } catch (error) {
-            console.error(error);
-            callbackForm.text(errorMessage);
-            sessionStorage.removeItem('tokenAPI');
+            handleSendFailure(error);
         }
     } else {
         callbackForm.text('');
@@ -1668,9 +1673,7 @@ async function sendEmail(senderName, subject, message) {
             });
             await checkTokenConsent();
         } catch (error) {
-            console.error(error);
-            callbackForm.text(errorMessage);
-            sessionStorage.removeItem('tokenAPI');
+            handleSendFailure(error);
         }
     }
 }
