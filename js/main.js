@@ -29,7 +29,6 @@ const appSecondarySections = [
 const appAllSections = [
     appHomeSection,
     ...appMainSections,
-    goHereSection,
     ...appSubSections,
     ...appSecondarySections
 ];
@@ -987,7 +986,10 @@ function initIndexPage(langPage) {
                 });
         }
 
-        $('.nav-link').each(function (index, navLink) {
+        // :not(.mouse-icon) excludes the hero's scroll-down arrow, which also
+        // carries .nav-link for its Bootstrap base styling but isn't part of
+        // the appAllSections sequence (it has its own click handler via goHere()).
+        $('.nav-link:not(.mouse-icon)').each(function (index, navLink) {
             navLink.href = `#${appAllSections[index]}`;
             const scrollTarget = $($(navLink).attr('href'));
             if (scrollTarget.length) {
@@ -1117,7 +1119,7 @@ function initIndexPage(langPage) {
 }
 
 function initBlogPage(langPage) {
-        $('.nav-link').each(function (index, navLink) {
+        $('.nav-link:not(.mouse-icon)').each(function (index, navLink) {
             navLink.href = `/${langPage}#${appAllSections[index]}`;
             navLink.addEventListener('click', function () {
                 saveHashToSession(appAllSections[index]);
