@@ -38,6 +38,19 @@ body.error-page .space-decor {
     min-height: 0;
 }
 
+/* On short legal pages (policy, terms), same sticky-footer pattern as
+   body.error-page above: without it, short content leaves the footer
+   floating short of the bottom of the screen with blank space below it. */
+body.legal {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.legal #ftco-main {
+    flex: 1;
+}
+
 #astronaut {
     position: absolute;
     top: 50%;

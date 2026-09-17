@@ -795,12 +795,16 @@ main > #language-switch,
     color: var(--main);
 }
 
-/* addRedirectById() skips href for the page you're already on (#policy/#terms). */
-#ftco-footer a:not([href]) {
+/* addRedirectById() marks the page you're already on (#policy/#terms) with
+   aria-current="page" (it keeps a real, crawlable href otherwise).
+   var(--main) on the always-black footer is ~4.47:1, just under the WCAG AA
+   4.5:1 minimum, so this lightens it toward white (plain opacity would blend
+   toward the black background instead and only darken it further). */
+#ftco-footer a[aria-current="page"] {
     cursor: default;
-    color: var(--main);
+    color: color-mix(in srgb, var(--main) 85%, white 15%);
 }
 
-#ftco-footer a:not([href]):hover {
-    color: var(--main);
+#ftco-footer a[aria-current="page"]:hover {
+    color: color-mix(in srgb, var(--main) 85%, white 15%);
 }
