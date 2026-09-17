@@ -1002,6 +1002,9 @@ function initIndexPage(langPage) {
             }
             navLink.addEventListener('click', function (event) {
                 event.preventDefault();
+                if (appAllSections[index] === appHomeSection) {
+                    $('html, body').animate({ scrollTop: 0 }, 500);
+                }
                 // Check if the link is in subsections
                 const subSectionTarget = $($(this).attr('href'));
                 if ($(this).closest('#navi').length && subSectionTarget.length) {
