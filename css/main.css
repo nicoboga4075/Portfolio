@@ -17,6 +17,20 @@ body.blog-page #ftco-main {
     flex: 1;
 }
 
+/* Toggled on <body> alongside .error-message (js/main.js) so the message
+   sits centered in whatever space #ftco-main has, instead of pinned to the
+   top-left of the (now sidebar-less) article column. */
+body.article-error #ftco-main {
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message {
+    color: var(--red);
+    text-align: center;
+    white-space: nowrap;
+}
+
 #cv-download .spinner {
     display: none;
     width: 14px;

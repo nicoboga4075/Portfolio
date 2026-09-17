@@ -1282,6 +1282,12 @@ function initBlogPage(langPage) {
         const articleShape = $('#article-shape');
         const hashLink = window.location.hash ? getSlugFromUrl() : '';
         const errorArticle = getMessage('error-generic');
+        // Centered (body.article-error, css/main.css) and red (.error-message) instead of the normal top-left, sidebar-flanked article layout. The fetched article's real height is gone, so the page collapses to a couple lines - without the scroll reset the visitor stays scrolled where they were, with the (now much higher up) footer and blank space below it.
+        const showArticleError = () => {
+            articleShape.addClass('error-message').text(errorArticle);
+            document.body.classList.add('article-error');
+            window.scrollTo(0, 0);
+        };
         const host = window.location.origin;
         // getHashFromSession() is shared with the nav links' section hash
         // (e.g. "blog-section"), so a stale value from browsing the main nav
@@ -1375,16 +1381,13 @@ function initBlogPage(langPage) {
                 })
                 .catch(error => {
                     console.error(error);
-                    articleShape.text(errorArticle);
-                    // The fetched article's real height is gone, so the page collapses to a couple lines - without this the visitor stays scrolled where they were, with the (now much higher up) footer and blank space below it.
-                    window.scrollTo(0, 0);
+                    showArticleError();
                 })
                 .finally(() => {
                     $('.about-author').removeClass('d-none').addClass('d-flex');
                 });
         } else {
-            articleShape.text(errorArticle);
-            window.scrollTo(0, 0);
+            showArticleError();
         }
 
         if (currentHash === "presentation") {
