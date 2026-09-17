@@ -57,7 +57,7 @@ bodyClass: ""
         </div>
         <div id="ftco-visitor" hidden aria-label="{{ landmarkLang.visitor }}"></div>
         {%- if showContact %}
-        <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" data-target="#contact-window" aria-expanded="false" aria-controls="contact-window" aria-label="{{ contact.title[lang] }}">
+        <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" role="button" tabindex="0" data-target="#contact-window" aria-expanded="false" aria-controls="contact-window" aria-label="{{ contact.title[lang] }}">
             <span class="icon-user" aria-hidden="true"></span>
         </div>
         <div id="contact-window" class="mfp flex-column bg-white" hidden>

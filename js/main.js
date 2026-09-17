@@ -1432,6 +1432,11 @@ function initPage() {
         const target = $(this).data('target');
         toggleVisibility(target);
         $(this).attr('aria-expanded', !$(target).is('[hidden]'));
+    }).keydown(function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            $(this).trigger('click');
+        }
     });
 
     $('.mfp-close').click(function () {
