@@ -384,8 +384,13 @@ function scrollToNextHighlight() {
     });
 }
 
+// initTranslator() only bakes the language-switch hrefs once, at page load (see its own comment in common.js) - without re-running it here, the switcher keeps pointing at whatever section was current at load time, however far the visitor scrolls afterward. Skip when the hash didn't actually change so scrolling within the same section doesn't re-run it every tick.
 function saveHashToSession(hash) {
+    if (sessionStorage.getItem('currentHash') === hash) {
+        return;
+    }
     sessionStorage.setItem('currentHash', hash);
+    initTranslator();
 }
 
 function clearUrlPath() {
