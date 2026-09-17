@@ -51,7 +51,7 @@
                 <div id="skills" class="page">
                     <h2 class="heading">{{ resume.skills }}</h2>
                     <div class="chart-container d-flex justify-content-center mb-5">
-                        <canvas id="skillsChart" data-labels="{{ skillsChartLabels[lang] | dump }}" data-title="{{ skillsChartTitle[lang] }}" data-subtitle-template="{{ skillsChartSubtitleTemplate[lang] }}"></canvas>
+                        <canvas id="skillsChart" data-labels="{{ skillsChart[lang].labels | dump }}" data-title="{{ skillsChart[lang].title }}" data-subtitle-template="{{ skillsChart[lang].subtitleTemplate }}" data-center="{{ skillsChart[lang].centerText }}"></canvas>
                     </div>
                     {% include "languages.html" %}
                     {%- for row in skillCards | batch(3) %}
@@ -86,7 +86,7 @@
                         {%- for l in spokenLanguages %}
                         <div class="col-md-12 animate-box">
                             <div class="progress-wrap ftco-animate">
-                                <h3><img src="images/{{ l.flag }}" alt="{{ l.countryAlt[lang] }}" width="27" height="18" class="mr-2 align-middle">{{ l.name[lang] }}</h3>
+                                <h3><img src="images/{{ l.flag }}" alt="{{ l.countryAlt[lang] }}" width="27" height="18" class="mr-2 align-middle">{{ l.name[lang] }} ({{ l.level[lang] }})</h3>
                                 <progress value="{{ l.value }}" max="100" aria-valuetext="{{ l.value }}%"></progress>
                             </div>
                         </div>

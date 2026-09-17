@@ -7,6 +7,7 @@ import { defineConfig } from "eslint/config";
 const vendorJs = [
   "js/bootstrap.min.js",
   "js/chart.umd.min.js",
+  "js/chartjs-plugin-doughnutlabel.min.js",
   "js/i18next.min.js",
   "js/jquery-migrate.min.js",
   "js/jquery.easing.min.js",

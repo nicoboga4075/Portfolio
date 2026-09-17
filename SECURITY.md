@@ -40,7 +40,9 @@ Versions are tracked in [`.github/vendor-versions.json`](.github/vendor-versions
 | 1.16.1  | Popper                |
 | 1.0.0   | Scrollax              |
 | 4.5.1   | Chart.js              |
-| 3.4.0   | Animate.css           | 
+| 3.4.0   | Animate.css           |
+| 26.4.2  | i18next               |
+| 1.2.0   | chartjs-plugin-doughnutlabel-v3 |
 
 ### Major versions held back on purpose
 

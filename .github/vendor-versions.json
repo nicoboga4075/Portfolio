@@ -10,5 +10,7 @@
   { "name": "Waypoints", "file": "js/jquery.waypoints.min.js", "source": "npm", "npm": "waypoints", "version": "4.0.1" },
   { "name": "Owl Carousel", "file": "js/owl.carousel.min.js", "source": "npm", "npm": "owl.carousel", "version": "2.3.4" },
   { "name": "Scrollax", "file": "js/scrollax.min.js", "source": "npm", "npm": "scrollax", "version": "1.0.0" },
-  { "name": "Animate.css", "file": "css/animate.min.css", "source": "npm", "npm": "animate.css", "version": "3.4.0" }
+  { "name": "Animate.css", "file": "css/animate.min.css", "source": "npm", "npm": "animate.css", "version": "3.4.0" },
+  { "name": "i18next", "file": "js/i18next.min.js", "source": "npm", "npm": "i18next", "version": "26.4.2" },
+  { "name": "chartjs-plugin-doughnutlabel-v3", "file": "js/chartjs-plugin-doughnutlabel.min.js", "source": "npm", "npm": "chartjs-plugin-doughnutlabel-v3", "version": "1.2.0" }
 ]

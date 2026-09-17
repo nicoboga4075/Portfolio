@@ -20,6 +20,8 @@ The third-party libraries in `js/` and `css/` are downloaded manually (not npm d
 | Owl Carousel | 2.3.4 | [npm](https://www.npmjs.com/package/owl.carousel) |
 | Scrollax | 1.0.0 | [npm](https://www.npmjs.com/package/scrollax) |
 | Animate.css | 3.4.0 | [npm](https://www.npmjs.com/package/animate.css) |
+| i18next | 26.4.2 | [npm](https://www.npmjs.com/package/i18next) |
+| chartjs-plugin-doughnutlabel-v3 | 1.2.0 | [npm](https://www.npmjs.com/package/chartjs-plugin-doughnutlabel-v3) |
 
 jQuery, jQuery Migrate, Bootstrap and Animate.css are intentionally kept below their latest major release - see [SECURITY.md](SECURITY.md#major-versions-held-back-on-purpose) for why each one is pinned.
 

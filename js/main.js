@@ -510,44 +510,71 @@ function loadContactScripts() {
     document.body.appendChild(recaptcha);
 }
 
-function loadChartJs() {
-    if (window.Chart) {
-        return Promise.resolve();
-    }
-    if (!loadChartJs.promise) {
-        loadChartJs.promise = new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.src = 'js/chart.umd.min.js';
-            script.onload = resolve;
-            script.onerror = () => {
-                // Don't cache a failed load (offline, dropped connection while
-                // the machine slept): drop the script and the memoised promise
-                // so a later trigger can retry from scratch.
-                script.remove();
-                loadChartJs.promise = null;
-                reject(new Error('Failed to load js/chart.umd.min.js'));
-            };
-            document.head.appendChild(script);
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = () => {
+            script.remove();
+            reject(new Error(`Failed to load ${src}`));
+        };
+        document.head.appendChild(script);
+    });
+}
+
+// `type` decides whether the doughnutLabel plugin (only useful for
+// doughnut/pie's cutout) is worth fetching alongside Chart.js core.
+function loadChartJs(type = 'doughnut') {
+    if (!loadChartJs.corePromise) {
+        loadChartJs.corePromise = window.Chart ? Promise.resolve() : loadScript('js/chart.umd.min.js').catch(error => {
+            // Don't cache a failed load (offline, dropped connection while
+            // the machine slept): drop the memoised promise so a later
+            // trigger can retry from scratch.
+            loadChartJs.corePromise = null;
+            throw error;
         });
     }
-    return loadChartJs.promise;
+    if (type !== 'doughnut' && type !== 'pie') {
+        return loadChartJs.corePromise;
+    }
+    return loadChartJs.corePromise.then(() => {
+        if (window.Chart.registry.plugins.get('doughnutLabel')) {
+            return;
+        }
+        if (!loadChartJs.pluginPromise) {
+            loadChartJs.pluginPromise = loadScript('js/chartjs-plugin-doughnutlabel.min.js').catch(error => {
+                loadChartJs.pluginPromise = null;
+                throw error;
+            });
+        }
+        return loadChartJs.pluginPromise;
+    });
 }
 
 function createCircularChart({
     canvasId,
+    type = 'doughnut',
     data,
     backgroundColor,
     labels,
     titles,
     subtitles,
+    centerText,
     cutout = '50%'
 }) {
     const canvas = $(`#${canvasId}`)[0];
+    const existingChart = Chart.getChart(canvas);
+    if (existingChart) {
+        return existingChart;
+    }
     const context = canvas.getContext('2d');
     const total = data.reduce((a, b) => a + b, 0);
+    // doughnutLabel needs a cutout hole to draw into - only doughnut/pie have one.
+    const supportsCenterText = centerText && (type === 'doughnut' || type === 'pie');
 
     chart = new Chart(context, {
-        type: 'doughnut',
+        type,
         data: {
             labels,
             datasets: [{
@@ -561,6 +588,15 @@ function createCircularChart({
                 tooltip: {
                     enabled: false
                 },
+                ...(supportsCenterText && {
+                    doughnutLabel: {
+                        labels: [{
+                            text: centerText,
+                            font: { family: 'Poppins', size: 16, weight: 'bold' },
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim()
+                        }]
+                    }
+                }),
                 title: {
                     display: true,
                     text: titles,
@@ -1027,7 +1063,7 @@ function initIndexPage(langPage) {
                 }
                 const rootStyle = getComputedStyle(document.documentElement);
                 const cssVar = (name) => rootStyle.getPropertyValue(name).trim();
-                loadChartJs().then(() => {
+                loadChartJs('doughnut').then(() => {
                     if (skillsChartRendered) {
                         return;
                     }
@@ -1039,7 +1075,8 @@ function initIndexPage(langPage) {
                         backgroundColor: [cssVar('--blue'), cssVar('--orange'), cssVar('--green'), cssVar('--red'), cssVar('--purple')],
                         labels: JSON.parse(skillsChartCanvas.dataset.labels),
                         titles: skillsChartCanvas.dataset.title,
-                        subtitles: skillsChartCanvas.dataset.subtitleTemplate.replace('{xp}', xp)
+                        subtitles: skillsChartCanvas.dataset.subtitleTemplate.replace('{xp}', xp),
+                        centerText: skillsChartCanvas.dataset.center
                     });
                 }).catch(() => {
                     // Chart.js couldn't be fetched (offline / transient network).
@@ -1563,10 +1600,16 @@ function initCaptcha() {
 /* Dark Mode */
 
 // common.js owns the toggle (class + icon + storage) and fires darkmodechange;
-// the skills chart just needs its title recoloured to the new --text-color.
+// the skills chart just needs its title and center label recoloured to the
+// new --text-color (doughnutLabel bakes its color into the options, unlike
+// our previous custom plugin which read --text-color fresh on every draw).
 document.addEventListener('darkmodechange', function () {
     if (chart) {
-        chart.options.plugins.title.color = getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim();
+        const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim();
+        chart.options.plugins.title.color = textColor;
+        if (chart.options.plugins.doughnutLabel) {
+            chart.options.plugins.doughnutLabel.labels[0].color = textColor;
+        }
         chart.update();
     }
 });
