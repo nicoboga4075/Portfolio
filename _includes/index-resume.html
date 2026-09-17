@@ -55,6 +55,9 @@
                                 {%- endif -%}
                             </span>
                             <p>{{ e.city }}</p>
+                            {%- for tag in e.sector %}
+                            <span class="sector-tag">{{ tag[lang] }}</span>
+                            {%- endfor %}
                         </div>
                     </div>
                     {%- endfor %}

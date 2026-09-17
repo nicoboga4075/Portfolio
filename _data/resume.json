@@ -185,7 +185,17 @@
             },
             "company": "ChapsVision",
             "city": "Paris",
-            "type": "permanent"
+            "type": "permanent",
+            "sector": [
+                {
+                    "en": "AI",
+                    "fr": "IA"
+                },
+                {
+                    "en": "Data Intelligence",
+                    "fr": "Data Intelligence"
+                }
+            ]
         },
         {
             "icon": "icon-briefcase",
@@ -203,7 +213,17 @@
             },
             "company": "Astek",
             "city": "Lyon",
-            "type": "permanent"
+            "type": "permanent",
+            "sector": [
+                {
+                    "en": "Industry",
+                    "fr": "Industrie"
+                },
+                {
+                    "en": "IT Consulting",
+                    "fr": "Conseil IT"
+                }
+            ]
         },
         {
             "icon": "icon-security",
@@ -221,7 +241,17 @@
             },
             "company": "Bassetti Group",
             "city": "Lyon",
-            "type": "permanent"
+            "type": "permanent",
+            "sector": [
+                {
+                    "en": "Industry",
+                    "fr": "Industrie"
+                },
+                {
+                    "en": "Quality",
+                    "fr": "Qualité"
+                }
+            ]
         },
         {
             "icon": "icon-gears",
@@ -239,7 +269,17 @@
             },
             "company": "Soft Concept",
             "city": "Lyon",
-            "type": "permanent"
+            "type": "permanent",
+            "sector": [
+                {
+                    "en": "Surveys",
+                    "fr": "Enquêtes"
+                },
+                {
+                    "en": "Data Visualization",
+                    "fr": "DataViz"
+                }
+            ]
         },
         {
             "icon": "icon-clipboard",
@@ -254,7 +294,13 @@
             "href": "https://cyberprotect.one",
             "company": "Cyberprotect",
             "city": "Bron",
-            "type": "internship"
+            "type": "internship",
+            "sector": [
+                {
+                    "en": "Cybersecurity",
+                    "fr": "Cybersécurité"
+                }
+            ]
         },
         {
             "icon": "icon-build",
@@ -272,7 +318,13 @@
             },
             "company": "Galadrim",
             "city": "Paris",
-            "type": "internship"
+            "type": "internship",
+            "sector": [
+                {
+                    "en": "Software Engineering",
+                    "fr": "Génie Logiciel"
+                }
+            ]
         },
         {
             "icon": "icon-book",
@@ -286,7 +338,17 @@
             },
             "company": "Kelprof & Yoopies",
             "city": "Paris",
-            "type": "other"
+            "type": "other",
+            "sector": [
+                {
+                    "en": "Education",
+                    "fr": "Éducation"
+                },
+                {
+                    "en": "Mathematics",
+                    "fr": "Mathématiques"
+                }
+            ]
         },
         {
             "icon": "icon-user-secret",
@@ -301,7 +363,17 @@
             "href": "https://www.cgi.com/fr",
             "company": "CGI",
             "city": "Paris La Défense",
-            "type": "other"
+            "type": "other",
+            "sector": [
+                {
+                    "en": "Digital Transformation",
+                    "fr": "Transformation Digitale"
+                },
+                {
+                    "en": "IT Consulting",
+                    "fr": "Conseil IT"
+                }
+            ]
         },
         {
             "svgId": "fft",
@@ -315,7 +387,21 @@
             },
             "company": "US Dax Tennis",
             "city": "Dax",
-            "type": "other"
+            "type": "other",
+            "sector": [
+                {
+                    "en": "Sport",
+                    "fr": "Sport"
+                },
+                {
+                    "en": "Refereeing",
+                    "fr": "Arbitrage"
+                },
+                {
+                    "en": "Education",
+                    "fr": "Éducation"
+                }
+            ]
         }
     ]
 }
