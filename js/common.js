@@ -236,15 +236,14 @@ function addRedirectById(elementId) {
     if (!el) {
         return;
     }
-    // Skip self-links for policy/terms: no point redirecting to the page you're already on.
-    // Mark it as the current page instead of leaving a dead-but-clickable-looking link.
+    const currentLang = getCurrentLanguage();
+    const path = appRoutes[elementId];
+    el.setAttribute('href', path ? path.replace('{lng}', currentLang) : `/${currentLang}`);
+    // Self-links for policy/terms keep a real (crawlable) href but are marked current instead of getting the click handler below.
     if (elementId in appDefaultRoutes && elementId === getCurrentRoute()) {
         el.setAttribute('aria-current', 'page');
         return;
     }
-    const currentLang = getCurrentLanguage();
-    const path = appRoutes[elementId];
-    el.setAttribute('href', path ? path.replace('{lng}', currentLang) : `/${currentLang}`);
     el.addEventListener('click', function () {
         sessionStorage.clear(); // Reset hash for all other links
     });
