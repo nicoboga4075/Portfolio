@@ -1034,6 +1034,12 @@ function initIndexPage(langPage) {
             navLink.href = buildSafeRedirection(appServices[index], langPage);
         });
 
+        $('#calendly-cta').on('click', function (event) {
+            event.preventDefault();
+            const mainColor = getComputedStyle(document.documentElement).getPropertyValue('--main').trim().replace('#', '');
+            Calendly.initPopupWidget({ url: this.dataset.calendlyUrl, color: mainColor });
+        });
+
         $(window).scroll(function () {
             // Retains the value of the scroll top with the reference at the middle of the page
             const scrollMiddle = $(this).scrollTop() + ($(window).height() / 2);

@@ -394,6 +394,10 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     text-decoration: underline;
 }
 
+#calendly-cta {
+    cursor: pointer;
+}
+
 @media(max-width:910px) {
     #contact-window {
         bottom: 90px;

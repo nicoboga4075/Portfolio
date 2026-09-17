@@ -132,6 +132,24 @@ a[href="#"] {
     cursor: default;
 }
 
+.btn-primary,
+.btn-outline-primary {
+    background-color: var(--main);
+    border-color: var(--main);
+}
+
+.btn-outline-primary {
+    background-color: transparent;
+    color: var(--main);
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+    background-color: var(--main);
+    border-color: var(--main);
+    color: var(--white);
+}
+
 table {
     border-collapse: collapse;
     border-width: 1px;

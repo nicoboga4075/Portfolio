@@ -148,6 +148,8 @@ module.exports = function configureEleventy(eleventyConfig) {
         url: `${linkedinDomain}/in/${linkedinVanity}`,
         messaging: `${linkedinDomain}/messaging/thread/new`
     });
+    const calendlyUrl = "https://calendly.com/nicolas-bogalheiro/30min";
+    eleventyConfig.addGlobalData("calendly", { en: calendlyUrl, fr: calendlyUrl });
     eleventyConfig.addGlobalData("socials", [
         { href: `${linkedinDomain}/in/${linkedinVanity}`, label: "LinkedIn", icon: "linkedin" },
         { href: "https://github.com/nicoboga4075", label: "GitHub", icon: "github" },

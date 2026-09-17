@@ -87,6 +87,7 @@ export default defineConfig([
         appRoutes: "readonly",
         getHashFromSession: "readonly",
         i18next: "readonly",
+        Calendly: "readonly",
         convertDate: "readonly",
         getCurrentFullDate: "readonly",
         xp: "readonly",
