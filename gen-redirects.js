@@ -26,6 +26,7 @@ const hiddenPrefixes = ["index", ...sections];
 
 const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /404.html /404 404!
+/404 /404.html 404!
 
 # Public assets nested under an otherwise-blocked directory (first match wins)
 /docs/public/* /docs/public/:splat 200

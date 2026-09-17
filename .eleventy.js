@@ -95,7 +95,7 @@ function buildSitemap() {
                 lang => `/.netlify/functions/article?filename=${slug}_${lang}.html`,
                 lang => `articles/${slug}_${lang}.html`
             ))
-        // /404 omitted: noindex, soft 200 fallback only.
+        // /404 omitted: it's an error page, not content.
     ];
 }
 

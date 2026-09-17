@@ -21,9 +21,6 @@ bodyClass: ""
         <meta name="title" property="og:title" content="{{ title | safe }}">
         <meta name="image" property="og:image" content="{{ image }}">
         <meta name="description" content="{{ description | safe }}">
-        {%- if noindex %}
-        <meta name="robots" content="noindex">
-        {%- endif %}
         {%- if assets and "head-scripts.html" in assets %}
         <meta name="articles" content="{{ articles | resolveArticles(lang, siteLanguages.default, siteLanguages.locales) | dump }}">
         <meta name="i18n-messages" content="{{ messages | dump }}">
