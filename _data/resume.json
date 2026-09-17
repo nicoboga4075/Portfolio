@@ -5,7 +5,12 @@
         "experiences": "Experiences",
         "skills": "Skills",
         "languagesNav": "Languages",
-        "awards": "Awards"
+        "awards": "Awards",
+        "types": {
+            "permanent": "Permanent",
+            "internship": "Internship",
+            "other": "Other"
+        }
     },
     "fr": {
         "navAria": "Navigation du résumé",
@@ -13,7 +18,12 @@
         "experiences": "Expériences",
         "skills": "Compétences",
         "languagesNav": "Langues",
-        "awards": "Récompenses"
+        "awards": "Récompenses",
+        "types": {
+            "permanent": "CDI",
+            "internship": "Stage",
+            "other": "Autre"
+        }
     },
     "awards": [
         {
@@ -174,7 +184,8 @@
                 "fr": "https://www.chapsvision.com/fr"
             },
             "company": "ChapsVision",
-            "city": "Paris"
+            "city": "Paris",
+            "type": "permanent"
         },
         {
             "icon": "icon-briefcase",
@@ -191,7 +202,8 @@
                 "fr": "https://astekgroup.fr"
             },
             "company": "Astek",
-            "city": "Lyon"
+            "city": "Lyon",
+            "type": "permanent"
         },
         {
             "icon": "icon-security",
@@ -208,7 +220,8 @@
                 "fr": "https://www.bassetti-group.com"
             },
             "company": "Bassetti Group",
-            "city": "Lyon"
+            "city": "Lyon",
+            "type": "permanent"
         },
         {
             "icon": "icon-gears",
@@ -225,7 +238,8 @@
                 "fr": "https://www.soft-concept.com"
             },
             "company": "Soft Concept",
-            "city": "Lyon"
+            "city": "Lyon",
+            "type": "permanent"
         },
         {
             "icon": "icon-clipboard",
@@ -239,7 +253,8 @@
             },
             "href": "https://cyberprotect.one",
             "company": "Cyberprotect",
-            "city": "Bron"
+            "city": "Bron",
+            "type": "internship"
         },
         {
             "icon": "icon-build",
@@ -256,7 +271,22 @@
                 "fr": "https://galadrim.fr"
             },
             "company": "Galadrim",
-            "city": "Paris"
+            "city": "Paris",
+            "type": "internship"
+        },
+        {
+            "icon": "icon-book",
+            "date": {
+                "en": "November 2018 - April 2020",
+                "fr": "Novembre 2018 - Avril 2020"
+            },
+            "title": {
+                "en": "Private Math Tutor",
+                "fr": "Professeur particulier de mathématiques"
+            },
+            "company": "Kelprof & Yoopies",
+            "city": "Paris",
+            "type": "other"
         },
         {
             "icon": "icon-user-secret",
@@ -270,7 +300,22 @@
             },
             "href": "https://www.cgi.com/fr",
             "company": "CGI",
-            "city": "Paris La Défense"
+            "city": "Paris La Défense",
+            "type": "other"
+        },
+        {
+            "svgId": "fft",
+            "date": {
+                "en": "2012 - 2015",
+                "fr": "2012 - 2015"
+            },
+            "title": {
+                "en": "Tennis Assistant Coach & Referee",
+                "fr": "Assistant professeur & arbitre de tennis"
+            },
+            "company": "US Dax Tennis",
+            "city": "Dax",
+            "type": "other"
         }
     ]
 }

@@ -36,13 +36,24 @@
                     <h2 class="heading">{{ resumeLang.experiences }}</h2>
                     {%- for e in resume.experiences %}
                     <div class="resume-wrap d-flex ftco-animate">
+                        {%- if e.svgId %}
+                        <div id="{{ e.svgId }}" class="icon svg d-flex align-items-center justify-content-center"></div>
+                        {%- else %}
                         <div class="icon d-flex align-items-center justify-content-center">
                             <span class="{{ e.icon }}"></span>
                         </div>
+                        {%- endif %}
                         <div class="text pl-3">
                             <span class="date">{{ e.date[lang] }}</span>
+                            <span class="badge">{{ resumeLang.types[e.type] }}</span>
                             <h2>{{ e.title[lang] }}</h2>
-                            <span class="position"><a target="_blank" rel="noopener" href="{{ e.href[lang] if e.href[lang] else e.href }}">{{ e.company }}</a></span>
+                            <span class="position">
+                                {%- if e.href -%}
+                                <a target="_blank" rel="noopener" href="{{ e.href[lang] if e.href[lang] else e.href }}">{{ e.company }}</a>
+                                {%- else -%}
+                                {{ e.company }}
+                                {%- endif -%}
+                            </span>
                             <p>{{ e.city }}</p>
                         </div>
                     </div>

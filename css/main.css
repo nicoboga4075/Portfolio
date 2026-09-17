@@ -479,6 +479,15 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     transition: background-color 0.3s ease;
 }
 
+/* .badge is positioned absolute for the project-card overlay; reset it to
+   flow inline next to the experience date instead. */
+.resume-wrap .badge {
+    position: static;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
 .ftco-counter .block-18 {
 	background-color: var(--white);
 }
