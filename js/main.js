@@ -1376,12 +1376,15 @@ function initBlogPage(langPage) {
                 .catch(error => {
                     console.error(error);
                     articleShape.text(errorArticle);
+                    // The fetched article's real height is gone, so the page collapses to a couple lines - without this the visitor stays scrolled where they were, with the (now much higher up) footer and blank space below it.
+                    window.scrollTo(0, 0);
                 })
                 .finally(() => {
                     $('.about-author').removeClass('d-none').addClass('d-flex');
                 });
         } else {
             articleShape.text(errorArticle);
+            window.scrollTo(0, 0);
         }
 
         if (currentHash === "presentation") {
