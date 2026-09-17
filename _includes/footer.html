@@ -1,18 +1,18 @@
-{%- set footer = footerText[lang] -%}
+{%- set footerLang = footer[lang] -%}
 {%- set snykUrl = "https://snyk.io" + ("/" + lang if lang != "en") -%}
-{%- set copyright = copyrightText[lang] -%}
+{%- set copyrightLang = footer.copyright[lang] -%}
 <div class="container">
     {%- if synopsis %}
     <div class="row mb-5">
         <div class="col-md-8">
             <div class="ftco-footer-widget mb-4">
                 <h2 class="ftco-heading-2">Synopsis</h2>
-                <p>{{ footer.synopsis }}</p>
+                <p>{{ footerLang.synopsis }}</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="ftco-footer-widget mb-4">
-                <h2 class="ftco-heading-2">{{ footer.question }}</h2>
+                <h2 class="ftco-heading-2">{{ footerLang.question }}</h2>
                 <div class="block-23 mb-3">
                     <ul>
                         <li><span class="icon-envelope"></span>&nbsp;&nbsp;<span class="text email"></span></li>
@@ -33,11 +33,11 @@
     <div class="row mb-5">
         <div class="col-md-12 text-center">
             <div class="ftco-footer-widget mb-4">
-                <h2 class="ftco-heading-2">{{ footer.bingoTitle }}</h2>
+                <h2 class="ftco-heading-2">{{ footerLang.bingoTitle }}</h2>
                 <div class="block-23 mb-3 d-flex flex-column align-items-center">
-                    <p>{{ footer.bingoText }}</p>
+                    <p>{{ footerLang.bingoText }}</p>
                     <div id="bingo-timer">0</div>
-                    <div id="bingo-btn" class="text-white" data-stop="{{ footer.bingoStop }}">{{ footer.bingoButton }}</div>
+                    <div id="bingo-btn" class="text-white" data-stop="{{ footerLang.bingoStop }}">{{ footerLang.bingoButton }}</div>
                 </div>
             </div>
         </div>
@@ -45,8 +45,8 @@
     {%- endif %}
     <div class="row">
         <div class="col-md-12 text-center">
-            <p class="legal">Copyright &copy;<i id="year"></i> {{ copyright.rights }} | {{ copyright.made }} {% if assets %}<i class="icon-heart" aria-hidden="true"></i>{% else %}<span aria-hidden="true">&#10084;&#65039;</span>{% endif %} {{ copyright.by }} <a target="_blank" rel="noopener" href="https://colorlib.com">Colorlib</a> {{ copyright.and }} {% if assets %}<i class="icon-shield" aria-hidden="true"></i>{% else %}<span class="shield-emoji" aria-hidden="true">&#128737;&#65039;</span>{% endif %} {{ copyright.with }} <a target="_blank" rel="noopener" href="{{ snykUrl }}">Snyk</a></p>
-            <p class="legal"><a id="policy"><i>{{ copyright.policy }}</i></a> | <a id="terms"><i>{{ copyright.terms }}</i></a></p>
+            <p class="legal">Copyright &copy;<i id="year"></i> {{ copyrightLang.rights }} | {{ copyrightLang.made }} {% if assets %}<i class="icon-heart" aria-hidden="true"></i>{% else %}<span aria-hidden="true">&#10084;&#65039;</span>{% endif %} {{ copyrightLang.by }} <a target="_blank" rel="noopener" href="https://colorlib.com">Colorlib</a> {{ copyrightLang.and }} {% if assets %}<i class="icon-shield" aria-hidden="true"></i>{% else %}<span class="shield-emoji" aria-hidden="true">&#128737;&#65039;</span>{% endif %} {{ copyrightLang.with }} <a target="_blank" rel="noopener" href="{{ snykUrl }}">Snyk</a></p>
+            <p class="legal"><a id="policy"><i>{{ copyrightLang.policy }}</i></a> | <a id="terms"><i>{{ copyrightLang.terms }}</i></a></p>
         </div>
     </div>
 </div>

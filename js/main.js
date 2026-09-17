@@ -302,11 +302,12 @@ const appKeywords = [
     "Internet"
 ];
 
-// Visitor-facing strings needed at runtime (main.js only - default.js pages don't load i18next), authored once in _data/i18nMessages.json and embedded by base.njk into the <meta name="i18n-messages"> tag (same pattern as appArticles below). Page language is fixed server-side (separate _en/_fr builds), so init runs synchronously (initImmediate: false) and getMessage() can call t() right away without awaiting the init promise.
+// Visitor-facing strings needed at runtime (main.js only - default.js pages don't load i18next), authored once in _data/messages.json and embedded by base.njk into the <meta name="i18n-messages"> tag (same pattern as appArticles below). Page language is fixed server-side (separate _en/_fr builds), so init runs synchronously (initImmediate: false) and getMessage() can call t() right away without awaiting the init promise.
 const appI18nMessages = JSON.parse($('meta[name="i18n-messages"]').attr('content'));
 const appI18nResources = Object.keys(appI18nMessages).reduce((resources, key) => {
     Object.entries(appI18nMessages[key]).forEach(([lng, value]) => {
-        (resources[lng] ??= { translation: {} }).translation[key] = value;
+        resources[lng] ??= { translation: {} };
+        resources[lng].translation[key] = value;
     });
     return resources;
 }, {});

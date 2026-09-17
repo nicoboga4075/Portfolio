@@ -1,8 +1,8 @@
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
-{%- set counter = counterText[lang] -%}
+{%- set counterLang = counter[lang] -%}
 {% if viewport == "desktop" %}
 <section id="counter-section" class="ftco-section ftco-counter">
     <div class="container-fluid px-md-5">
@@ -11,7 +11,7 @@
                 <div class="block-18 shadow">
                     <div class="text">
                         <strong id="certifsCount" class="number">0</strong>
-                        <span>{{ counter.certifs }}</span>
+                        <span>{{ counterLang.certifs }}</span>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 <div class="block-18 shadow">
                     <div class="text">
                         <strong id="projectsCount" class="number">0</strong>
-                        <span>{{ counter.projects }}</span>
+                        <span>{{ counterLang.projects }}</span>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <div class="block-18 shadow">
                     <div class="text">
                         <strong id="experiencesCount" class="number">0</strong>
-                        <span>{{ counter.experiences }}</span>
+                        <span>{{ counterLang.experiences }}</span>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <div class="block-18 shadow">
                     <div class="text">
                         <strong id="countriesCount" class="number">0</strong>
-                        <span>{{ counter.countries }}</span>
+                        <span>{{ counterLang.countries }}</span>
                     </div>
                 </div>
             </div>

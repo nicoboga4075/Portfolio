@@ -1,0 +1,201 @@
+{
+    "cards": [
+        {
+            "id": "db",
+            "title": "SQL",
+            "href": "https://sql.sh",
+            "item1": "Postgre",
+            "item2": "SQLite"
+        },
+        {
+            "id": "methodology",
+            "title": {
+                "en": "Project",
+                "fr": "Projet"
+            },
+            "href": {
+                "en": "https://www.geeksforgeeks.org/difference-between-agile-model-and-v-model",
+                "fr": "https://blog.hubspot.fr/marketing/difference-cycle-en-v-et-methode-agile"
+            },
+            "item1": "Agile",
+            "item2": {
+                "en": "V Model",
+                "fr": "Cycle V"
+            }
+        },
+        {
+            "id": "devops",
+            "title": "DevOps",
+            "href": {
+                "en": "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-devops",
+                "fr": "https://azure.microsoft.com/fr-fr/resources/cloud-computing-dictionary/what-is-devops"
+            },
+            "item1": "Git",
+            "item2": "Docker"
+        },
+        {
+            "id": "design",
+            "title": "Design",
+            "href": {
+                "en": "https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure",
+                "fr": "https://developer.mozilla.org/fr/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure"
+            },
+            "item1": "HTML",
+            "item2": "CSS"
+        },
+        {
+            "id": "dark",
+            "title": {
+                "en": "Add-ons",
+                "fr": "Extensions"
+            },
+            "href": "https://www.geeksforgeeks.org/differences-between-bootstrap-and-jquery-ui",
+            "item1": "jQuery",
+            "item2": "Bootstrap"
+        },
+        {
+            "id": "cyber",
+            "title": {
+                "en": "Cybersecurity",
+                "fr": "Cybersécurité"
+            },
+            "href": "https://owasp.org/www-community/OWASP_Risk_Rating_Methodology",
+            "item1": "OWASP",
+            "item2": "CVSS"
+        },
+        {
+            "id": "llm",
+            "title": "LLM",
+            "href": {
+                "en": "https://en.wikipedia.org/wiki/Large_language_model",
+                "fr": "https://fr.wikipedia.org/wiki/Grand_mod%C3%A8le_de_langage"
+            },
+            "item1": "Claude",
+            "item2": "ChatGPT"
+        },
+        {
+            "id": "automation",
+            "title": {
+                "en": "Automation",
+                "fr": "Automatisation"
+            },
+            "href": "https://n8n.io",
+            "item1": "n8n",
+            "item2": "Botpress"
+        },
+        {
+            "id": "protocols",
+            "title": {
+                "en": "Protocols",
+                "fr": "Protocoles"
+            },
+            "href": "https://modelcontextprotocol.io",
+            "item1": "HTTP",
+            "item2": "MCP"
+        }
+    ],
+    "carousel": {
+        "en": {
+            "heading": "Discover my skills",
+            "hardTip": "Practical or technical abilities learned through training or experience",
+            "softTip": "Personal attributes or interpersonal abilities that enhance how you work and interact with others",
+            "madTip": "Atypical abilities or unique talents, often developed through personal passions"
+        },
+        "fr": {
+            "heading": "Découvrez mes compétences",
+            "hardTip": "Compétences techniques ou pratiques, acquises par la formation ou l'expérience",
+            "softTip": "Compétences personnelles ou interpersonnelles, améliorant la manière de travailler et d’interagir avec les autres",
+            "madTip": "Compétences atypiques ou talents uniques, souvent développées à travers des passions personnelles"
+        }
+    },
+    "mad": [
+        {
+            "key": "tennis",
+            "en": "Tennis",
+            "fr": "Tennis"
+        },
+        {
+            "key": "chess",
+            "en": "Chess",
+            "fr": "Échecs"
+        },
+        {
+            "key": "travel",
+            "en": "Travel",
+            "fr": "Voyage"
+        },
+        {
+            "key": "writing",
+            "en": "Writing",
+            "fr": "Écriture"
+        }
+    ],
+    "soft": [
+        {
+            "key": "team",
+            "en": "Team spirit",
+            "fr": "Esprit d'équipe"
+        },
+        {
+            "key": "leadership",
+            "en": "Leadership",
+            "fr": "Leadership"
+        },
+        {
+            "key": "communication",
+            "en": "Communication",
+            "fr": "Communication"
+        },
+        {
+            "key": "adaptability",
+            "en": "Adaptability",
+            "fr": "Adaptabilité"
+        },
+        {
+            "key": "proactivity",
+            "en": "Proactivity",
+            "fr": "Proactivité"
+        },
+        {
+            "key": "independence",
+            "en": "Independence",
+            "fr": "Autonomie"
+        },
+        {
+            "key": "empathy",
+            "en": "Empathy",
+            "fr": "Empathie"
+        },
+        {
+            "key": "creativity",
+            "en": "Creativity",
+            "fr": "Créativité"
+        }
+    ],
+    "chart": {
+        "en": {
+            "labels": [
+                "Back-end",
+                "Front-end",
+                "Project management",
+                "Support",
+                "CI/CD"
+            ],
+            "title": "Time distribution across my skills",
+            "subtitleTemplate": "Data based on {xp} years in activity",
+            "centerText": "AI-Augmented"
+        },
+        "fr": {
+            "labels": [
+                "Back-end",
+                "Front-end",
+                "Gestion de projet",
+                "Support",
+                "CI/CD"
+            ],
+            "title": "Répartition du temps passé sur mes compétences",
+            "subtitleTemplate": "Données basées sur {xp} années en activité",
+            "centerText": "Augmenté par IA"
+        }
+    }
+}

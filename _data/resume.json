@@ -1,0 +1,276 @@
+{
+    "en": {
+        "navAria": "Resume navigation",
+        "education": "Education",
+        "experiences": "Experiences",
+        "skills": "Skills",
+        "languagesNav": "Languages",
+        "awards": "Awards"
+    },
+    "fr": {
+        "navAria": "Navigation du résumé",
+        "education": "Éducation",
+        "experiences": "Expériences",
+        "skills": "Compétences",
+        "languagesNav": "Langues",
+        "awards": "Récompenses"
+    },
+    "awards": [
+        {
+            "icon": "icon-language",
+            "date": {
+                "en": "November 2025",
+                "fr": "Novembre 2025"
+            },
+            "title": {
+                "en": "Voltaire Certificate",
+                "fr": "Certificat Voltaire"
+            },
+            "score": "841",
+            "detail": {
+                "en": "Business Level",
+                "fr": "Niveau Affaires"
+            }
+        },
+        {
+            "icon": "icon-language",
+            "date": {
+                "en": "January 2020",
+                "fr": "Janvier 2020"
+            },
+            "title": "TOEIC",
+            "score": "810",
+            "detail": "B2"
+        },
+        {
+            "icon": "icon-language",
+            "date": {
+                "en": "January 2019",
+                "fr": "Janvier 2019"
+            },
+            "title": "TOEFL",
+            "score": "550",
+            "detail": "B2"
+        },
+        {
+            "icon": "icon-web",
+            "date": {
+                "en": "June 2019",
+                "fr": "Juin 2019"
+            },
+            "title": {
+                "en": "CGI Student Contest",
+                "fr": "Challenge étudiant CGI"
+            },
+            "score": {
+                "en": "Finalist",
+                "fr": "Finaliste"
+            },
+            "detail": {
+                "en": "Solidarity : Easy Student Housing",
+                "fr": "Solidarité : Easy Student Housing"
+            }
+        },
+        {
+            "icon": "icon-drivers-license",
+            "date": {
+                "en": "July 2016",
+                "fr": "Juillet 2016"
+            },
+            "title": {
+                "en": "Driving License",
+                "fr": "Permis de conduire"
+            },
+            "score": "24",
+            "detail": "B"
+        },
+        {
+            "icon": "icon-certificate",
+            "date": {
+                "en": "July 2015",
+                "fr": "Juillet 2015"
+            },
+            "title": {
+                "en": "Baccalaureate",
+                "fr": "Bac"
+            },
+            "score": {
+                "en": "Very Good",
+                "fr": "TB"
+            },
+            "detail": {
+                "en": "Scientific : St Jacques de Compostelle (Dax)",
+                "fr": "Scientifique : St Jacques de Compostelle (Dax)"
+            }
+        },
+        {
+            "svgId": "fft",
+            "date": {
+                "en": "August 2012",
+                "fr": "Août 2012"
+            },
+            "title": "TNJA",
+            "score": {
+                "en": "Finalist",
+                "fr": "Finaliste"
+            },
+            "detail": {
+                "en": "Tennis Referee : CBBL",
+                "fr": "Arbitre de Tennis : CBBL"
+            }
+        }
+    ],
+    "education": [
+        {
+            "id": "UQAC",
+            "date": "2020 - 2021",
+            "title": {
+                "en": "University Master in Computer Science",
+                "fr": "Master universitaire en Informatique"
+            },
+            "href": "https://www.uqac.ca",
+            "school": "UQAC",
+            "place": "(Chicoutimi, CAN)"
+        },
+        {
+            "id": "ESILV",
+            "date": "2018 - 2021",
+            "title": {
+                "en": "Engineering Diploma in Informatics",
+                "fr": "Diplôme d'ingénieurs en Informatique"
+            },
+            "href": {
+                "en": "https://www.esilv.fr/en",
+                "fr": "https://www.esilv.fr"
+            },
+            "school": "ESILV",
+            "place": "(Paris La Défense, FRA)"
+        },
+        {
+            "id": "js",
+            "date": "2015 - 2018",
+            "title": {
+                "en": "Prepa MPSI/MP",
+                "fr": "Prépa MPSI/MP"
+            },
+            "href": "https://www.janson-de-sailly.fr",
+            "school": "Janson de Sailly",
+            "place": "(Paris 16e, FRA)"
+        }
+    ],
+    "experiences": [
+        {
+            "icon": "icon-users",
+            "date": {
+                "en": "December 2025 - August 2026",
+                "fr": "Décembre 2025 - Août 2026"
+            },
+            "title": {
+                "en": "Software Engineer",
+                "fr": "Ingénieur Logiciel"
+            },
+            "href": {
+                "en": "https://www.chapsvision.com",
+                "fr": "https://www.chapsvision.com/fr"
+            },
+            "company": "ChapsVision",
+            "city": "Paris"
+        },
+        {
+            "icon": "icon-briefcase",
+            "date": {
+                "en": "December 2024 - August 2025",
+                "fr": "Décembre 2024 - Août 2025"
+            },
+            "title": {
+                "en": "Consultant Engineer",
+                "fr": "Ingénieur Consultant"
+            },
+            "href": {
+                "en": "https://astekgroup.fr/?lang=en",
+                "fr": "https://astekgroup.fr"
+            },
+            "company": "Astek",
+            "city": "Lyon"
+        },
+        {
+            "icon": "icon-security",
+            "date": {
+                "en": "June 2024 - September 2024",
+                "fr": "Juin 2024 - Septembre 2024"
+            },
+            "title": {
+                "en": "Security Engineer",
+                "fr": "Ingénieur Sécurité"
+            },
+            "href": {
+                "en": "https://www.bassetti-group.com/en",
+                "fr": "https://www.bassetti-group.com"
+            },
+            "company": "Bassetti Group",
+            "city": "Lyon"
+        },
+        {
+            "icon": "icon-gears",
+            "date": {
+                "en": "July 2021 - May 2024",
+                "fr": "Juillet 2021 - Mai 2024"
+            },
+            "title": {
+                "en": "Software Engineer",
+                "fr": "Ingénieur Logiciel"
+            },
+            "href": {
+                "en": "https://www.soft-concept.com/en",
+                "fr": "https://www.soft-concept.com"
+            },
+            "company": "Soft Concept",
+            "city": "Lyon"
+        },
+        {
+            "icon": "icon-clipboard",
+            "date": {
+                "en": "March 2020 - August 2020",
+                "fr": "Mars 2020 - Août 2020"
+            },
+            "title": {
+                "en": "Full Stack Developer",
+                "fr": "Développeur Full Stack"
+            },
+            "href": "https://cyberprotect.one",
+            "company": "Cyberprotect",
+            "city": "Bron"
+        },
+        {
+            "icon": "icon-build",
+            "date": {
+                "en": "June 2019 - August 2019",
+                "fr": "Juin 2019 - Août 2019"
+            },
+            "title": {
+                "en": "Web Assistant",
+                "fr": "Assistant Web"
+            },
+            "href": {
+                "en": "https://en.galadrim.fr",
+                "fr": "https://galadrim.fr"
+            },
+            "company": "Galadrim",
+            "city": "Paris"
+        },
+        {
+            "icon": "icon-user-secret",
+            "date": {
+                "en": "October 2018 - April 2019",
+                "fr": "Octobre 2018 - Avril 2019"
+            },
+            "title": {
+                "en": "Student Project Manager",
+                "fr": "Chef de projet étudiant"
+            },
+            "href": "https://www.cgi.com/fr",
+            "company": "CGI",
+            "city": "Paris La Défense"
+        }
+    ]
+}

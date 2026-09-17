@@ -1,16 +1,16 @@
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
-{%- set hireme = hiremeText[lang] -%}
+{%- set hiremeLang = hireme[lang] -%}
 <section class="ftco-section ftco-hireme img d-none d-sm-flex">
     <div class="overlay"></div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-7 ftco-animate text-center">
-                <h2>{{ hireme.heading }}</h2>
-                <p>{{ hireme.location }}</p>
-                <p class="mb-0"><a target="_blank" rel="noopener" href="{{ linkedin.messaging }}" class="btn btn-primary py-3 px-5">{{ hireme.cta }}</a></p>
+                <h2>{{ hiremeLang.heading }}</h2>
+                <p>{{ hiremeLang.location }}</p>
+                <p class="mb-0"><a target="_blank" rel="noopener" href="{{ linkedin.messaging }}" class="btn btn-primary py-3 px-5">{{ hiremeLang.cta }}</a></p>
             </div>
         </div>
     </div>

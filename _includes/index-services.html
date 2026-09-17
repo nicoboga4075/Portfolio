@@ -1,19 +1,19 @@
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
-{%- set services = servicesText[lang] -%}
+{%- set servicesLang = services[lang] -%}
 <section id="services-section" class="ftco-section">
     <div class="container-fluid px-md-5">
         <div class="row justify-content-center py-5 mt-5">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <h2 class="mb-4">{{ services.heading }}</h2>
-                <img class="img-fluid" src="images/developer.png" id="developer" alt="{{ services.devAlt }}" loading="lazy" height="250" width="150">
-                <p class="mt-4">{{ services.tagline | safe }}</p>
+                <h2 class="mb-4">{{ servicesLang.heading }}</h2>
+                <img class="img-fluid" src="images/developer.png" id="developer" alt="{{ servicesLang.devAlt }}" loading="lazy" height="250" width="150">
+                <p class="mt-4">{{ servicesLang.tagline | safe }}</p>
             </div>
         </div>
         <div class="row justify-content-center">
-            {%- for card in serviceCards %}
+            {%- for card in services.cards %}
             <div class="col-md-4 text-center d-flex ftco-animate">
                 <a class="services-1 shadow" aria-label="{{ card.ariaLabel[lang] }}">
                     <span class="icon">

@@ -8,7 +8,7 @@ bodyClass: "legal text-center"
 <h1>Politique de confidentialité</h1>
 <i>Mis à jour le 7 décembre 2024</i>
 <nav id="language-switch" aria-label="Langue">
-    {%- for code, locale in languages.locales %}
+    {%- for code, locale in siteLanguages.locales %}
     <a class="lang-text" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
     {%- endfor %}
 </nav>

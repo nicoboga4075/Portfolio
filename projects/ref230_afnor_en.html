@@ -7,7 +7,7 @@ description: "REF230 AFNOR"
     <div class="read-title">
         <h1>🖥️ REF230 AFNOR</h1>
         <nav id="language-switch" aria-label="Language">
-            {%- for code, locale in languages.locales %}
+            {%- for code, locale in siteLanguages.locales %}
             <a class="lang-text" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
             {%- endfor %}
         </nav>
@@ -28,7 +28,7 @@ description: "REF230 AFNOR"
         {% set extraTool = { slug: "survey-manager", name: "Survey-Manager", desc: "survey management and mail launcher" } %}
         <li>
             Internal tools:
-            {% include "softconcept-tools.html" %}
+            {% include "tools-softconcept.html" %}
         </li>
     </ul>
     <h2>🗂️ Application Structure</h2>

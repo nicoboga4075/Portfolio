@@ -1,26 +1,26 @@
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
-{%- set resume = resumeText[lang] -%}
+{%- set resumeLang = resume[lang] -%}
 <section id="resume-section" class="ftco-section ftco-no-pb">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <nav id="navi" aria-label="{{ resume.navAria }}">
+                <nav id="navi" aria-label="{{ resumeLang.navAria }}">
                     <ul>
-                        <li><a class="nav-link"><span>{{ resume.education }}</span></a></li>
-                        <li><a class="nav-link"><span>{{ resume.experiences }}</span></a></li>
-                        <li><a class="nav-link"><span>{{ resume.skills }}</span></a></li>
-                        <li><a class="nav-link"><span>{{ resume.languagesNav }}</span></a></li>
-                        <li><a class="nav-link"><span>{{ resume.awards }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ resumeLang.education }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ resumeLang.experiences }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ resumeLang.skills }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ resumeLang.languagesNav }}</span></a></li>
+                        <li><a class="nav-link"><span>{{ resumeLang.awards }}</span></a></li>
                     </ul>
                 </nav>
             </div>
             <div class="col-md-9">
                 <div id="education" class="page">
-                    <h2 class="heading">{{ resume.education }}</h2>
-                    {%- for e in educationEntries %}
+                    <h2 class="heading">{{ resumeLang.education }}</h2>
+                    {%- for e in resume.education %}
                     <div class="resume-wrap d-flex ftco-animate">
                         <div id="{{ e.id }}" class="icon logo-school d-flex align-items-center justify-content-center"></div>
                         <div class="text pl-3">
@@ -33,8 +33,8 @@
                     {%- endfor %}
                 </div>
                 <div id="experiences" class="page">
-                    <h2 class="heading">{{ resume.experiences }}</h2>
-                    {%- for e in experienceEntries %}
+                    <h2 class="heading">{{ resumeLang.experiences }}</h2>
+                    {%- for e in resume.experiences %}
                     <div class="resume-wrap d-flex ftco-animate">
                         <div class="icon d-flex align-items-center justify-content-center">
                             <span class="{{ e.icon }}"></span>
@@ -49,12 +49,12 @@
                     {%- endfor %}
                 </div>
                 <div id="skills" class="page">
-                    <h2 class="heading">{{ resume.skills }}</h2>
+                    <h2 class="heading">{{ resumeLang.skills }}</h2>
                     <div class="chart-container d-flex justify-content-center mb-5">
-                        <canvas id="skillsChart" data-labels="{{ skillsChart[lang].labels | dump }}" data-title="{{ skillsChart[lang].title }}" data-subtitle-template="{{ skillsChart[lang].subtitleTemplate }}" data-center="{{ skillsChart[lang].centerText }}"></canvas>
+                        <canvas id="skillsChart" data-labels="{{ skills.chart[lang].labels | dump }}" data-title="{{ skills.chart[lang].title }}" data-subtitle-template="{{ skills.chart[lang].subtitleTemplate }}" data-center="{{ skills.chart[lang].centerText }}"></canvas>
                     </div>
                     {% include "languages.html" %}
-                    {%- for row in skillCards | batch(3) %}
+                    {%- for row in skills.cards | batch(3) %}
                     <div class="row progress-circle mb-5">
                         {%- for card in row %}
                         <div class="col-lg-4 mb-4">
@@ -78,12 +78,12 @@
                         {%- endfor %}
                     </div>
                     {%- endfor %}
-                    {% include "more-tools.html" %}
+                    {% include "tools-more.html" %}
                 </div>
                 <div id="languages" class="page">
-                    <h2 class="heading">{{ resume.languagesNav }}</h2>
+                    <h2 class="heading">{{ resumeLang.languagesNav }}</h2>
                     <div class="row">
-                        {%- for l in spokenLanguages %}
+                        {%- for l in languages %}
                         <div class="col-md-12 animate-box">
                             <div class="progress-wrap ftco-animate">
                                 <h3><img src="images/{{ l.flag }}" alt="{{ l.countryAlt[lang] }}" width="27" height="18" class="mr-2 align-middle">{{ l.name[lang] }} ({{ l.level[lang] }})</h3>
@@ -94,8 +94,8 @@
                     </div>
                 </div>
                 <div id="awards" class="page">
-                    <h2 class="heading">{{ resume.awards }}</h2>
-                    {%- for a in awardEntries %}
+                    <h2 class="heading">{{ resumeLang.awards }}</h2>
+                    {%- for a in resume.awards %}
                     <div class="resume-wrap d-flex ftco-animate">
                         {%- if a.svgId %}
                         <div id="{{ a.svgId }}" class="icon svg d-flex align-items-center justify-content-center"></div>

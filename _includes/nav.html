@@ -1,18 +1,18 @@
 {%- set lang = page.fileSlug.slice(-2) -%}
-{%- set navAria = navAriaText[lang] -%}
+{%- set navLang = nav[lang] -%}
 <div class="container">
     <a id="index" class="navbar-brand"><span>P</span>ortfolio<sup id="version-badge" class="d-none d-lg-inline">{{ version }}</sup></a>
-    <button id="dark-icon" type="button" class="icon-sun-o" onclick="toggleDarkMode(event)" aria-label="{{ navAria.darkMode }}"></button>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="{{ navAria.navigation }}"><span class="icon-menu"></span> Menu</button>
+    <button id="dark-icon" type="button" class="icon-sun-o" onclick="toggleDarkMode(event)" aria-label="{{ navLang.darkMode }}"></button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="{{ navLang.navigation }}"><span class="icon-menu"></span> Menu</button>
     <div id="ftco-nav" class="collapse navbar-collapse">
         <ul class="navbar-nav nav ml-auto">
-            {%- for item in items %}
+            {%- for item in nav.menus %}
             <li class="nav-item"><a class="nav-link"><span>{{ item[lang] }}</span></a></li>
             {%- endfor %}
         </ul>
     </div>
-    <nav id="language-switch" aria-label="{{ navAria.language }}">
-        {%- for code, locale in languages.locales %}
+    <nav id="language-switch" aria-label="{{ navLang.language }}">
+        {%- for code, locale in siteLanguages.locales %}
         <a class="lang-text" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
         {%- endfor %}
     </nav>

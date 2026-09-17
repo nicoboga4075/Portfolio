@@ -1,0 +1,26 @@
+{
+    "en": {
+        "motto": "Faster, Higher, Stronger - Together !",
+        "whoAmI": "Who am I ?",
+        "name": "Name :",
+        "age": "Age :",
+        "schoolYear": "School Year :",
+        "esilvHref": "https://www.esilv.fr/en",
+        "experience": "Years of experience",
+        "cvHref": "docs/public/CV_en.pdf",
+        "downloadCv": "Download CV",
+        "madeWith": "Made with CVDesignr"
+    },
+    "fr": {
+        "motto": "Toujours plus loin, toujours plus haut, toujours plus fort !",
+        "whoAmI": "Qui suis-je ?",
+        "name": "Nom :",
+        "age": "Âge :",
+        "schoolYear": "Promotion :",
+        "esilvHref": "https://www.esilv.fr",
+        "experience": "Années d'expérience",
+        "cvHref": "docs/public/CV_fr.pdf",
+        "downloadCv": "Télécharger le CV",
+        "madeWith": "Réalisé avec CVDesignr"
+    }
+}

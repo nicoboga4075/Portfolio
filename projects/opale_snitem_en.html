@@ -7,7 +7,7 @@ description: "OPALE SNITEM"
     <div class="read-title">
         <h1>🖥️ OPALE SNITEM</h1>
         <nav id="language-switch" aria-label="Language">
-            {%- for code, locale in languages.locales %}
+            {%- for code, locale in siteLanguages.locales %}
             <a class="lang-text" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
             {%- endfor %}
         </nav>
@@ -27,7 +27,7 @@ description: "OPALE SNITEM"
         <li><strong>C#, HTML, CSS, JavaScript</strong></li>
         <li>
             Internal tools:
-            {% include "softconcept-tools.html" %}
+            {% include "tools-softconcept.html" %}
         </li>
     </ul>
     <h2>🗂️ Application Structure</h2>

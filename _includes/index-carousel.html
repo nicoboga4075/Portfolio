@@ -1,20 +1,20 @@
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
-{%- set carousel = carouselText[lang] -%}
+{%- set carouselLang = skills.carousel[lang] -%}
 {% if viewport == "desktop" %}
 <section id="carousel-section" class="ftco-section ftco-counter img d-none d-sm-flex">
     <div class="container-fluid px-md-5 pb-3 pt-3 bg-dark text-white text-center">
-        <h2 class="text-white">{{ carousel.heading }}</h2>
+        <h2 class="text-white">{{ carouselLang.heading }}</h2>
         <div class="owl-menus d-flex justify-content-center">
-            <span class="owl-menu" data-target="#hard-skills">Hard skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carousel.hardTip }}"></i></span>
-            <span class="owl-menu" data-target="#soft-skills">Soft skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carousel.softTip }}"></i></span>
-            <span class="owl-menu" data-target="#mad-skills">Mad skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carousel.madTip }}"></i></span>
+            <span class="owl-menu" data-target="#hard-skills">Hard skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carouselLang.hardTip }}"></i></span>
+            <span class="owl-menu" data-target="#soft-skills">Soft skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carouselLang.softTip }}"></i></span>
+            <span class="owl-menu" data-target="#mad-skills">Mad skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carouselLang.madTip }}"></i></span>
         </div>
-        {% include "hard-skills.html" %}
-        {% include "soft-skills.html" %}
-        {% include "mad-skills.html" %}
+        {% include "skills-hard.html" %}
+        {% include "skills-soft.html" %}
+        {% include "skills-mad.html" %}
     </div>
 </section>
 {% endif %}

@@ -1,29 +1,29 @@
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
-{%- set hero = heroText[lang] -%}
+{%- set heroLang = hero[lang] -%}
 <section class="hero-wrap js-fullheight">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight justify-content-center align-items-center">
             <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-center">
                 <div class="text text-center">
-                    <span class="subheading">{{ hero.subheading }}</span>
+                    <span class="subheading">{{ heroLang.subheading }}</span>
                     <h1 class="author">{{ author }}</h1>
-                    <h2>{{ hero.intro }}&nbsp;
+                    <h2>{{ heroLang.intro }}&nbsp;
                         <span
                             class="txt-rotate"
                             data-period="2000"
-                            data-rotate="{{ hero.roles | safe }}"></span>
+                            data-rotate="{{ heroLang.roles | safe }}"></span>
                     </h2>
-                    <p class="hero-tagline mt-3">{{ hero.tagline }}</p>
+                    <p class="hero-tagline mt-3">{{ heroLang.tagline }}</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="mouse">
-        <a class="mouse-icon nav-link" aria-label="{{ hero.resumeAria }}">
+        <a class="mouse-icon nav-link" aria-label="{{ heroLang.resumeAria }}">
             <div class="mouse-wheel"><span class="icon-long-arrow-down"></span></div>
         </a>
     </div>

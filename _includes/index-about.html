@@ -1,8 +1,8 @@
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
-{%- set about = aboutText[lang] -%}
+{%- set aboutLang = about[lang] -%}
 <section id="about-section" class="ftco-section ftco-about ftco-no-pt ftco-no-pb img">
     <div class="container">
         <div class="row d-flex no-gutters">
@@ -11,7 +11,7 @@
                     <div class="overlay"></div>
                     <div id="profile" class="img profile-photo d-flex align-self-stretch align-items-center">
                         <div class="bulle-bd text-center bg-white">
-                            {{ about.motto }}
+                            {{ aboutLang.motto }}
                         </div>
                     </div>
                 </div>
@@ -19,11 +19,11 @@
             <div class="col-md-6 col-lg-6 pl-md-5 py-5">
                 <div class="row justify-content-start pb-3">
                     <div class="col-md-12 heading-section ftco-animate">
-                        <h2 class="mb-4">{{ about.whoAmI }}</h2>
+                        <h2 class="mb-4">{{ aboutLang.whoAmI }}</h2>
                         <ul class="about-info mt-4 px-md-0 px-2">
-                            <li class="d-flex"><span>{{ about.name }}</span> <span class="author"></span></li>
-                            <li class="d-flex"><span>{{ about.age }}</span> <span class="age"></span></li>
-                            <li class="d-flex"><span>{{ about.schoolYear }}</span> <span><a target="_blank" rel="noopener" href="{{ about.esilvHref }}">ESILV</a> 2021</span></li>
+                            <li class="d-flex"><span>{{ aboutLang.name }}</span> <span class="author"></span></li>
+                            <li class="d-flex"><span>{{ aboutLang.age }}</span> <span class="age"></span></li>
+                            <li class="d-flex"><span>{{ aboutLang.schoolYear }}</span> <span><a target="_blank" rel="noopener" href="{{ aboutLang.esilvHref }}">ESILV</a> 2021</span></li>
                             <li class="d-flex"><span>Email :</span> <span class="email"></span></li>
                         </ul>
                     </div>
@@ -32,16 +32,16 @@
                     <div class="text">
                         <p class="mb-4">
                             <span class="number xp">0</span>
-                            <span>{{ about.experience }}</span>
+                            <span>{{ aboutLang.experience }}</span>
                         </p>
                         <p class="mb-4">
-                            <a target="_blank" rel="noopener" href="{{ about.cvHref }}" id="cv-download" class="btn btn-primary py-3 px-3"><span class="spinner"></span><span class="btn-label">{{ about.downloadCv }}</span></a>
+                            <a target="_blank" rel="noopener" href="{{ aboutLang.cvHref }}" id="cv-download" class="btn btn-primary py-3 px-3"><span class="spinner"></span><span class="btn-label">{{ aboutLang.downloadCv }}</span></a>
                         </p>
                         <p>
                             <i class="icon-upload"></i>&nbsp;&nbsp;<span id="last-update-date"></span>
                         </p>
                         <p class="mb-0">
-                            <img src="images/cvdesignr.png" alt="CVDesignr" width="20" height="20" class="align-middle">&nbsp;&nbsp;<small>{{ about.madeWith }}</small>
+                            <img src="images/cvdesignr.png" alt="CVDesignr" width="20" height="20" class="align-middle">&nbsp;&nbsp;<small>{{ aboutLang.madeWith }}</small>
                         </p>
                     </div>
                 </div>

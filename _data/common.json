@@ -1,0 +1,24 @@
+{
+    "landmark": {
+        "en": {
+            "visitor": "Visitor count",
+            "nav": "Main navigation",
+            "main": "Main content",
+            "footer": "Site footer"
+        },
+        "fr": {
+            "visitor": "Nombre de visiteurs",
+            "nav": "Navigation principale",
+            "main": "Contenu principal",
+            "footer": "Pied de page"
+        }
+    },
+    "closeLabel": {
+        "en": "Close",
+        "fr": "Fermer"
+    },
+    "loading": {
+        "en": "Loading…",
+        "fr": "Chargement…"
+    }
+}

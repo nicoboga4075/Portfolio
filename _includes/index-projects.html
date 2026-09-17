@@ -1,19 +1,19 @@
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
-{%- set projectsSection = projectsSectionText[lang] -%}
+{%- set projectsLang = projects[lang] -%}
 <section id="projects-section" class="ftco-section ftco-project">
     <div class="container-fluid px-md-0">
         <div class="row no-gutters justify-content-center pb-5">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <h2 class="mb-4">{{ projectsSection.heading }}</h2>
-                <p>{{ projectsSection.p1 }}</p>
-                <p>{{ projectsSection.p2 }}</p>
+                <h2 class="mb-4">{{ projectsLang.heading }}</h2>
+                <p>{{ projectsLang.p1 }}</p>
+                <p>{{ projectsLang.p2 }}</p>
             </div>
         </div>
         <div class="row no-gutters">
-            {%- for p in projects %}
+            {%- for p in projects.cards %}
             <div class="col-md-4">
                 <div id="{{ p.id }}" class="project img ftco-animate d-flex justify-content-center align-items-center">
                     <div class="overlay"></div>
@@ -22,14 +22,14 @@
                     <div class="text text-center p-4">
                         <h3>{{ (p.heading[lang] if p.heading else p.title) | safe }}</h3>
                         <span>
-                            <p><u>{{ projectsSection.context }}</u> : {{ p.context[lang] | safe }}</p>
+                            <p><u>{{ projectsLang.context }}</u> : {{ p.context[lang] | safe }}</p>
                             <p><u>Description</u> : {{ p.description[lang] | safe }}
                                 <br><u>Technologies</u> : {{ p.technologies | safe }}
                             </p>
                             {%- if p.note %}
                             <p>{{ p.note[lang] }}</p>
                             {%- endif %}
-                            <a class="explore btn btn-light py-3 px-3">{{ projectsSection.explore }}</a>
+                            <a class="explore btn btn-light py-3 px-3">{{ projectsLang.explore }}</a>
                         </span>
                     </div>
                 </div>

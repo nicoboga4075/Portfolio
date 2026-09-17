@@ -1,7 +1,7 @@
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else languages.default -%}
-{%- set labels = blogContentText[lang] -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
+{%- set labels = blog.contentText[lang] -%}
 <section class="ftco-section">
     <div class="container">
         <div class="row">

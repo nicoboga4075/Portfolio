@@ -7,8 +7,8 @@ bodyClass: ""
 {%- set minimal = not synopsis and not bingo -%}
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else languages.default -%}
-{%- set landmark = landmarkLabels[lang] -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
+{%- set landmarkLang = common.landmark[lang] -%}
 <!DOCTYPE html>
 <html lang="{{ lang }}">
     <head>
@@ -25,8 +25,8 @@ bodyClass: ""
         <meta name="robots" content="noindex">
         {%- endif %}
         {%- if assets and "head-scripts.html" in assets %}
-        <meta name="articles" content="{{ articles | resolveArticles(lang, languages.default, languages.locales) | dump }}">
-        <meta name="i18n-messages" content="{{ i18nMessages | dump }}">
+        <meta name="articles" content="{{ articles | resolveArticles(lang, siteLanguages.default, siteLanguages.locales) | dump }}">
+        <meta name="i18n-messages" content="{{ messages | dump }}">
         {%- endif %}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -54,19 +54,19 @@ bodyClass: ""
         {%- endif %}
     </head>
     <body class="{{ bodyClass }}"{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}">
-        <div id="ftco-loader" class="show fullscreen" role="status" aria-live="polite" aria-atomic="true" aria-label="{{ loadingText[lang] }}">
+        <div id="ftco-loader" class="show fullscreen" role="status" aria-live="polite" aria-atomic="true" aria-label="{{ common.loading[lang] }}">
             <div class="spinner" aria-hidden="true"></div>
-            <span class="sr-only">{{ loadingText[lang] }}</span>
+            <span class="sr-only">{{ common.loading[lang] }}</span>
         </div>
-        <div id="ftco-visitor" hidden aria-label="{{ landmark.visitor }}"></div>
-        {%- if contact %}
-        <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" data-target="#contact-window" aria-expanded="false" aria-controls="contact-window" aria-label="{{ contactTitle[lang] }}">
+        <div id="ftco-visitor" hidden aria-label="{{ landmarkLang.visitor }}"></div>
+        {%- if showContact %}
+        <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" data-target="#contact-window" aria-expanded="false" aria-controls="contact-window" aria-label="{{ contact.title[lang] }}">
             <span class="icon-user" aria-hidden="true"></span>
         </div>
         <div id="contact-window" class="mfp flex-column bg-white" hidden>
             <div id="contact-header" class="d-flex align-items-center justify-content-between text-white">
-                <h6>{{ contactTitle[lang] }}</h6>
-                <span class="mfp-close" aria-label="{{ closeLabel[lang] }}">×</span>
+                <h6>{{ contact.title[lang] }}</h6>
+                <span class="mfp-close" aria-label="{{ common.closeLabel[lang] }}">×</span>
             </div>
             <div id="contact-link" class="text-dark">
                 <p class="d-flex align-items-center">
@@ -82,15 +82,15 @@ bodyClass: ""
             </div>
         </div>
         {%- endif %}
-        {%- if nav %}
-        <nav id="ftco-navbar" class="navbar navbar-expand-lg navbar-dark ftco-navbar-light" aria-label="{{ landmark.nav }}">
+        {%- if showNav %}
+        <nav id="ftco-navbar" class="navbar navbar-expand-lg navbar-dark ftco-navbar-light" aria-label="{{ landmarkLang.nav }}">
             {% include "nav.html" %}
         </nav>
         {%- endif %}
-        <main id="ftco-main" aria-label="{{ landmark.main }}">
+        <main id="ftco-main" aria-label="{{ landmarkLang.main }}">
             {{ content | safe }}
         </main>
-        <footer id="ftco-footer"{% if minimal %} class="minimal"{% endif %} aria-label="{{ landmark.footer }}">
+        <footer id="ftco-footer"{% if minimal %} class="minimal"{% endif %} aria-label="{{ landmarkLang.footer }}">
             {% include "footer.html" %}
         </footer>
     </body>

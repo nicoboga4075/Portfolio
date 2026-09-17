@@ -1,4 +1,0 @@
-{
-    "en": { "profileAlt": "Profile", "role": "Software Engineer", "scanMe": "Scan me", "sidebar": "Sidebar", "searchPlaceholder": "Search...", "searchAria": "Search in the article", "searchSuggestions": "Search suggestions", "recent": "Recent Publications", "recentAria": "Recent publication", "tags": "Tags", "locale": "en_US" },
-    "fr": { "profileAlt": "Profil", "role": "Ingénieur Logiciel", "scanMe": "Scanne-moi", "sidebar": "Barre latérale", "searchPlaceholder": "Rechercher...", "searchAria": "Rechercher dans l'article", "searchSuggestions": "Suggestions de recherche", "recent": "Récents", "recentAria": "Publication récente", "tags": "Mots-clés", "locale": "fr_FR" }
-}

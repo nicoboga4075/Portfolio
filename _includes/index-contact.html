@@ -1,8 +1,8 @@
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
-{%- set lang = suffix if suffix.length == 2 else languages.default -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
-{%- set contactPage = contactPageText[lang] -%}
+{%- set contactPage = contact.pageText[lang] -%}
 {% if viewport == "desktop" %}
 <section id="contact-section" class="contact-section ftco-section ftco-no-pb">
     <div class="container">
