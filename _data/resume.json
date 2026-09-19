@@ -237,6 +237,10 @@
             "mission": {
                 "en": "On assignment at Alstom",
                 "fr": "En mission chez Alstom"
+            },
+            "missionHref": {
+                "en": "https://www.alstom.com",
+                "fr": "https://www.alstom.com/fr"
             }
         },
         {

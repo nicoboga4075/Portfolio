@@ -61,7 +61,13 @@
                                 {%- endif -%}
                             </span>
                             {%- if e.mission %}
-                            <span class="mission">{{ e.mission[lang] if e.mission[lang] else e.mission }}</span>
+                            <span class="mission">
+                                {%- if e.missionHref -%}
+                                <a target="_blank" rel="noopener" href="{{ e.missionHref[lang] if e.missionHref[lang] else e.missionHref }}">{{ e.mission[lang] if e.mission[lang] else e.mission }}</a>
+                                {%- else -%}
+                                {{ e.mission[lang] if e.mission[lang] else e.mission }}
+                                {%- endif -%}
+                            </span>
                             {%- endif %}
                             <p>{{ e.city }}</p>
                             {%- for tag in e.sector %}
