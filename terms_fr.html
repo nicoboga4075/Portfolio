@@ -7,11 +7,8 @@ bodyClass: "legal text-center"
 ---
 <h1>Conditions d'utilisation</h1>
 <i>Mis à jour le 4 décembre 2024</i>
-<nav id="language-switch" aria-label="Langue">
-    {%- for code, locale in siteLanguages.locales %}
-    <a class="lang-text" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
-    {%- endfor %}
-</nav>
+{% include "dark-mode.html" %}
+{% include "language-switcher.html" %}
 <div>
     <h2>Accès à l'application</h2>
     <p>L'utilisation de l'application est autorisée sous réserve de votre respect des conditions suivantes. Vous vous engagez à ne pas l'utiliser à des fins illégales.</p>

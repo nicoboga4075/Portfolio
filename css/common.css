@@ -225,7 +225,7 @@ sup:hover {
 /* Segmented pill: a lavender track with the current language filled in --main.
    The switcher carries its own background, so its colours no longer depend on
    the navbar state (hero / scrolled, light / dark). Scales to N languages. */
-#language-switch {
+#language-switcher {
     /* Lay the pill out here, not via a d-flex utility on the markup: this include
        also renders on policy / terms / project / article pages, which use the
        light asset bundle (default.html) that omits bootstrap.min.css. Without
@@ -249,8 +249,8 @@ sup:hover {
    <main>'s centered flow) and the navbar's wrapped mobile row. In .read-title
    it's one half of a space-between row and must stay flush right, so auto side
    margins (which would eat the free space and float it mid-row) are left off. */
-main > #language-switch,
-.navbar #language-switch {
+main > #language-switcher,
+.navbar #language-switcher {
     margin-inline: auto;
 }
 
@@ -258,14 +258,14 @@ main > #language-switch,
    inside .container; without this it butts against the toggler row above and
    the page content below. */
 @media (max-width: 991.98px) {
-    .navbar #language-switch {
+    .navbar #language-switcher {
         margin-block: 10px;
     }
 }
 
-/* Scoped to #language-switch for the id specificity that beats Bootstrap's
+/* Scoped to #language-switcher for the id specificity that beats Bootstrap's
    link reboot rules on index/blog, so the pill colours hold in the navbar. */
-#language-switch .lang-text {
+#language-switcher .lang-text {
     padding: 3px 13px;
     font-size: 16px;
     font-weight: bold;
@@ -276,14 +276,14 @@ main > #language-switch,
     transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-#language-switch .lang-text.on {
+#language-switcher .lang-text.on {
     color: var(--white);
     background-color: var(--main);
 }
 
 /* Current language: keep it a real (crawlable) link but inert to clicks so it
    doesn't pointlessly reload the page. */
-#language-switch .lang-text[aria-current] {
+#language-switcher .lang-text[aria-current] {
     cursor: default;
     pointer-events: none;
 }

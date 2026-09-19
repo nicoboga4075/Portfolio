@@ -1,0 +1,8 @@
+{%- set parts = page.fileSlug.split("_") -%}
+{%- set suffix = parts[parts.length - 1] -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
+<nav id="language-switcher" aria-label="{{ nav[lang].language }}">
+    {%- for code, locale in siteLanguages.locales %}
+    <a class="lang-text" hreflang="{{ code }}" href="{{ page | localisedHref(code) }}">{{ code | upper }}</a>
+    {%- endfor %}
+</nav>

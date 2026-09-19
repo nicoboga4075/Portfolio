@@ -20,7 +20,7 @@ const appRoutes = {
 
 // The languages the switcher offers (rendered by Eleventy from package.json routes).
 const appLanguages = new Set(
-    Array.from(document.querySelectorAll('#language-switch [hreflang]'), a => a.hreflang)
+    Array.from(document.querySelectorAll('#language-switcher [hreflang]'), a => a.hreflang)
 );
 
 // Profile / CV facts, rendered into the page by fillCareerCounts and initProfile (main.js).
@@ -149,12 +149,12 @@ function switchLanguage(url, langTarget) {
     }
 }
 
-// #language-switch (switcher.html) lists every language, each already carrying a
-// crawlable href to this page in that language. Mark the current one and refresh
-// every link's href (including the current one) with the remembered #hash.
+// #language-switcher (language-switcher.html) lists every language, each already
+// carrying a crawlable href to this page in that language. Mark the current one
+// and refresh every link's href (including the current one) with the remembered #hash.
 function initTranslator() {
     const currentLang = getCurrentLanguage();
-    document.querySelectorAll('#language-switch [hreflang]').forEach(link => {
+    document.querySelectorAll('#language-switcher [hreflang]').forEach(link => {
         const isCurrent = link.hreflang === currentLang;
         link.classList.toggle('on', isCurrent);
         if (isCurrent) {

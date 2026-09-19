@@ -1,0 +1,4 @@
+{%- set parts = page.fileSlug.split("_") -%}
+{%- set suffix = parts[parts.length - 1] -%}
+{%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
+<button id="dark-icon" type="button" class="icon-sun-o" onclick="toggleDarkMode(event)" aria-label="{{ nav[lang].darkMode }}"></button>
