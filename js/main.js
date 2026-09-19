@@ -1011,9 +1011,9 @@ function initExperienceFilters() {
     function applyFilters() {
         let visibleCount = 0;
         wraps.forEach(wrap => {
-            const texts = [...wrap.querySelectorAll('.badge, .company-type-badge, .company-size-badge, .sector-tag')]
-                .map(el => el.textContent.trim());
-            const visible = active.size === 0 || [...active].every(f => texts.includes(f));
+            const texts = new Set([...wrap.querySelectorAll('.badge, .company-type-badge, .company-size-badge, .sector-tag')]
+                .map(el => el.textContent.trim()));
+            const visible = active.size === 0 || [...active].every(f => texts.has(f));
             wrap.classList.toggle('filtered-out', !visible);
             if (visible) {
                 visibleCount++;
