@@ -980,6 +980,104 @@ function buildSafeRedirection(redirect, langPage) {
     return safeRedirection;
 }
 
+// Badge/tag text is already localized server-side (separate _en/_fr builds),
+// so filters are built straight from the rendered DOM instead of duplicating
+// the experience data in JS.
+function initExperienceFilters() {
+    const container = document.getElementById('experiences');
+    const wraps = container ? [...container.querySelectorAll('.resume-wrap')] : [];
+    if (!wraps.length) {
+        return;
+    }
+
+    const groups = [
+        { key: 'type', selector: '.badge', label: getMessage('filter-contract') },
+        { key: 'companyType', selector: '.company-type-badge', label: getMessage('filter-company-type') },
+        { key: 'companySize', selector: '.company-size-badge', label: getMessage('filter-company-size') },
+        { key: 'sector', selector: '.sector-tag', label: getMessage('filter-sector') }
+    ];
+    groups.forEach(g => g.values = new Set());
+
+    wraps.forEach(wrap => {
+        groups.forEach(g => {
+            wrap.querySelectorAll(g.selector).forEach(el => g.values.add(el.textContent.trim()));
+        });
+    });
+
+    const active = new Set();
+    const toolbar = document.createElement('div');
+    toolbar.id = 'experience-filters';
+
+    function applyFilters() {
+        let visibleCount = 0;
+        wraps.forEach(wrap => {
+            const texts = [...wrap.querySelectorAll('.badge, .company-type-badge, .company-size-badge, .sector-tag')]
+                .map(el => el.textContent.trim());
+            const visible = active.size === 0 || [...active].every(f => texts.includes(f));
+            wrap.classList.toggle('filtered-out', !visible);
+            if (visible) {
+                visibleCount++;
+                // Filtering can bring a card into view below the fold without
+                // ever crossing the waypoint.js scroll trigger that normally
+                // reveals it, leaving it stuck at opacity: 0.
+                if (!wrap.classList.contains('ftco-animated')) {
+                    wrap.classList.add('fadeInUp', 'ftco-animated');
+                }
+            }
+        });
+        $('#experiences-empty').toggleClass('d-none', visibleCount !== 0);
+    }
+
+    groups.forEach(g => {
+        if (!g.values.size) {
+            return;
+        }
+        const group = document.createElement('div');
+        group.className = 'filter-group';
+        const label = document.createElement('span');
+        label.className = 'filter-group-label';
+        label.textContent = g.label;
+        group.appendChild(label);
+        g.values.forEach(value => {
+            const chip = document.createElement('button');
+            chip.type = 'button';
+            chip.className = 'filter-chip';
+            chip.textContent = value;
+            chip.setAttribute('aria-pressed', 'false');
+            chip.addEventListener('click', () => {
+                const isActive = active.has(value);
+                isActive ? active.delete(value) : active.add(value);
+                chip.classList.toggle('active', !isActive);
+                chip.setAttribute('aria-pressed', String(!isActive));
+                applyFilters();
+            });
+            group.appendChild(chip);
+        });
+        toolbar.appendChild(group);
+    });
+
+    const resetBtn = document.createElement('button');
+    resetBtn.type = 'button';
+    resetBtn.id = 'experience-filters-reset';
+    resetBtn.textContent = getMessage('filter-reset');
+    resetBtn.addEventListener('click', () => {
+        active.clear();
+        toolbar.querySelectorAll('.filter-chip.active').forEach(chip => {
+            chip.classList.remove('active');
+            chip.setAttribute('aria-pressed', 'false');
+        });
+        applyFilters();
+    });
+    toolbar.appendChild(resetBtn);
+
+    const empty = document.createElement('p');
+    empty.id = 'experiences-empty';
+    empty.className = 'd-none';
+    empty.textContent = getMessage('filter-no-results');
+
+    container.querySelector('h2.heading').after(toolbar, empty);
+}
+
 function initIndexPage(langPage) {
         if (window.location.protocol === 'https:') {
             fetch('/.netlify/functions/visit')
@@ -1070,6 +1168,8 @@ function initIndexPage(langPage) {
         loadImages('.article-image', 'avif');
 
         lastCvUpdate(langPage);
+
+        initExperienceFilters();
 
         const skillsChartCanvas = document.getElementById('skillsChart');
         if (skillsChartCanvas) {

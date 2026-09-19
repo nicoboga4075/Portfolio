@@ -46,6 +46,12 @@
                         <div class="text pl-3">
                             <span class="date">{{ e.date[lang] }}</span>
                             <span class="badge">{{ resumeLang.types[e.type] }}</span>
+                            {%- if e.companyType %}
+                            <span class="company-type-badge">{{ e.companyType[lang] if e.companyType[lang] else e.companyType }}</span>
+                            {%- endif %}
+                            {%- if e.companySize %}
+                            <span class="company-size-badge">{{ e.companySize[lang] if e.companySize[lang] else e.companySize }}</span>
+                            {%- endif %}
                             <h2>{{ e.title[lang] }}</h2>
                             <span class="position">
                                 {%- if e.href -%}
@@ -54,9 +60,12 @@
                                 {{ e.company }}
                                 {%- endif -%}
                             </span>
+                            {%- if e.mission %}
+                            <span class="mission">{{ e.mission[lang] if e.mission[lang] else e.mission }}</span>
+                            {%- endif %}
                             <p>{{ e.city }}</p>
                             {%- for tag in e.sector %}
-                            <span class="sector-tag">{{ tag[lang] }}</span>
+                            <span class="sector-tag">{{ tag[lang] if tag[lang] else tag }}</span>
                             {%- endfor %}
                         </div>
                     </div>

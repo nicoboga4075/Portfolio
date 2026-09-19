@@ -4,5 +4,11 @@
     "carousel-prev": { "en": "Previous", "fr": "Précédent" },
     "carousel-next": { "en": "Next", "fr": "Suivant" },
     "carousel-dot": { "en": "Go to slide", "fr": "Aller à la diapositive" },
-    "search-no-result": { "en": "Houston, we have a problem", "fr": "Houston, nous avons un problème" }
+    "search-no-result": { "en": "Houston, we have a problem", "fr": "Houston, nous avons un problème" },
+    "filter-contract": { "en": "Contract", "fr": "Contrat" },
+    "filter-company-type": { "en": "Company type", "fr": "Type d'entreprise" },
+    "filter-company-size": { "en": "Company size", "fr": "Taille d'entreprise" },
+    "filter-sector": { "en": "Sector", "fr": "Secteur" },
+    "filter-reset": { "en": "Reset filters", "fr": "Réinitialiser" },
+    "filter-no-results": { "en": "No experience matches these filters.", "fr": "Aucune expérience ne correspond à ces filtres." }
 }

@@ -170,7 +170,7 @@
     ],
     "experiences": [
         {
-            "icon": "icon-users",
+            "icon": "icon-gears",
             "date": {
                 "en": "December 2025 - August 2026",
                 "fr": "Décembre 2025 - Août 2026"
@@ -191,11 +191,13 @@
                     "en": "AI",
                     "fr": "IA"
                 },
-                {
-                    "en": "Data Intelligence",
-                    "fr": "Data Intelligence"
-                }
-            ]
+                "Data Intelligence"
+            ],
+            "companyType": {
+                "en": "Software Publisher",
+                "fr": "Éditeur"
+            },
+            "companySize": "Scale-up"
         },
         {
             "icon": "icon-briefcase",
@@ -220,10 +222,22 @@
                     "fr": "Industrie"
                 },
                 {
-                    "en": "IT Consulting",
-                    "fr": "Conseil IT"
+                    "en": "Cryptography",
+                    "fr": "Cryptographie"
                 }
-            ]
+            ],
+            "companyType": {
+                "en": "IT Consulting Firm",
+                "fr": "ESN"
+            },
+            "companySize": {
+                "en": "Large group",
+                "fr": "Grand Groupe"
+            },
+            "mission": {
+                "en": "On assignment at Alstom",
+                "fr": "En mission chez Alstom"
+            }
         },
         {
             "icon": "icon-security",
@@ -251,10 +265,18 @@
                     "en": "Quality",
                     "fr": "Qualité"
                 }
-            ]
+            ],
+            "companyType": {
+                "en": "Software Publisher",
+                "fr": "Éditeur"
+            },
+            "companySize": {
+                "en": "ISE",
+                "fr": "ETI"
+            }
         },
         {
-            "icon": "icon-gears",
+            "icon": "icon-poll",
             "date": {
                 "en": "July 2021 - May 2024",
                 "fr": "Juillet 2021 - Mai 2024"
@@ -275,11 +297,16 @@
                     "en": "Surveys",
                     "fr": "Enquêtes"
                 },
-                {
-                    "en": "Data Visualization",
-                    "fr": "DataViz"
-                }
-            ]
+                "Data Viz"
+            ],
+            "companyType": {
+                "en": "Software Publisher",
+                "fr": "Éditeur"
+            },
+            "companySize": {
+                "en": "SME",
+                "fr": "PME"
+            }
         },
         {
             "icon": "icon-clipboard",
@@ -300,7 +327,15 @@
                     "en": "Cybersecurity",
                     "fr": "Cybersécurité"
                 }
-            ]
+            ],
+            "companyType": {
+                "en": "Software Publisher",
+                "fr": "Éditeur"
+            },
+            "companySize": {
+                "en": "SME",
+                "fr": "PME"
+            }
         },
         {
             "icon": "icon-build",
@@ -324,7 +359,12 @@
                     "en": "Software Engineering",
                     "fr": "Génie Logiciel"
                 }
-            ]
+            ],
+            "companyType": {
+                "en": "Digital Agency",
+                "fr": "Agence digitale"
+            },
+            "companySize": "Start-up"
         },
         {
             "icon": "icon-book",
@@ -336,7 +376,7 @@
                 "en": "Private Math Tutor",
                 "fr": "Professeur particulier de mathématiques"
             },
-            "company": "Kelprof & Yoopies",
+            "company": "Kelprof, Yoopies",
             "city": "Paris",
             "type": "other",
             "sector": [
@@ -351,7 +391,7 @@
             ]
         },
         {
-            "icon": "icon-user-secret",
+            "icon": "icon-users",
             "date": {
                 "en": "October 2018 - April 2019",
                 "fr": "Octobre 2018 - Avril 2019"
@@ -368,12 +408,16 @@
                 {
                     "en": "Digital Transformation",
                     "fr": "Transformation Digitale"
-                },
-                {
-                    "en": "IT Consulting",
-                    "fr": "Conseil IT"
                 }
-            ]
+            ],
+            "companyType": {
+                "en": "IT Consulting Firm",
+                "fr": "ESN"
+            },
+            "companySize": {
+                "en": "Large group",
+                "fr": "Grand Groupe"
+            }
         },
         {
             "svgId": "fft",
@@ -389,10 +433,8 @@
             "city": "Dax",
             "type": "other",
             "sector": [
-                {
-                    "en": "Sport",
-                    "fr": "Sport"
-                },
+                "Sport",
+                "Tennis",
                 {
                     "en": "Refereeing",
                     "fr": "Arbitrage"
