@@ -37,12 +37,6 @@ html.dark-mode {
     --shadow-lg: #fff3;
 }
 
-html.dark-mode h1,
-html.dark-mode h2,
-html.dark-mode h3 {
-    color: var(--text-color) !important;
-}
-
 html.dark-mode .card h2,
 html.dark-mode #article-shape .author {
     color: initial !important;
@@ -116,11 +110,31 @@ body.read-zone h1 {
     color: var(--main);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+    line-height: 1.5;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.text-primary {
+    color: var(--main) !important;
+}
+
 a {
     cursor: pointer;
     text-decoration: none;
     color: var(--link);
     font-weight: bold;
+    transition: .3s all ease;
 }
 
 a[href="#"] {
