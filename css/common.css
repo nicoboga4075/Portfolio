@@ -245,13 +245,20 @@ sup:hover {
     flex: none;
 }
 
-/* Centre the pill only where it stands alone: policy / terms (a lone block in
-   <main>'s centered flow) and the navbar's wrapped mobile row. In .read-title
-   it's one half of a space-between row and must stay flush right, so auto side
-   margins (which would eat the free space and float it mid-row) are left off. */
-main > #language-switcher,
+/* Centre the pill on the navbar's wrapped mobile row (a flex item there, so still block-level and needs auto margins to centre within that row). In .page-controls (policy / terms) and .read-title (projects) it's one part of a flex row that's already centred (or space-between, for .read-title) as a whole, so no auto margins there. */
 .navbar #language-switcher {
     margin-inline: auto;
+}
+
+/* Wraps #dark-icon and #language-switcher on their own centred row below the
+   "Updated on ..." date, on policy / terms (a lone block in <main>'s centered
+   flow, unlike .read-title's projects where the pair sits flush right of the
+   h1 instead). */
+.page-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
 }
 
 /* Below the navbar's expand breakpoint the switcher wraps onto its own row
