@@ -1,5 +1,17 @@
 /* General */
 
+/* Scroll-reveal: index/blog sections and the footer's synopsis widget start hidden, then app.js adds ftco-animated (plus a fadeInUp class) once the element scrolls into view. Kept together and in this order so cascade order still resolves visibility to visible even after app.css loads. */
+.ftco-animate {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.ftco-animated {
+    visibility: visible;
+    animation-duration: .5s;
+    animation-fill-mode: both;
+}
+
 /* On the blog page only: when a fetched article fails (unknown slug, network
    error) #article-shape collapses to a one-line error message, leaving the
    page shorter than the viewport - without this the footer floats short of
