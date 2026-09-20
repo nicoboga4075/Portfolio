@@ -181,6 +181,18 @@ input[name="search-input"].highlight-flash {
     color: var(--gray);
 }
 
+/* Bootstrap's own .slider-text h1 gets a 40px mobile override, but h2 (the
+   "I'm a <rotating role>" line) has none: at the default 32px, the longest
+   role ("AI-Augmented Developer.", nbsp-glued to "a" so it can't wrap before
+   AI-Augmented) doesn't fit one line on a phone-width screen, and the extra
+   wrapped line overflows .hero-wrap's JS-fixed viewport height (fullHeight()
+   in app.js). */
+@media (max-width: 767.98px) {
+    .slider-text h2 {
+        font-size: 20px;
+    }
+}
+
 /* .hero-wrap is set to the exact window height in JS (fullHeight() in
    main.js), and .mouse sits at a fixed 120px from its bottom - on a short
    (but still >= 992px wide, so .mouse isn't already hidden) browser window,
