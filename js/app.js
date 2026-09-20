@@ -557,6 +557,23 @@ function loadChartJs(type = 'doughnut') {
     });
 }
 
+// doughnutlabel's auto-shrink is broken (reads the wrong innerRadius), so refit the text ourselves.
+const CENTER_TEXT_BASE_FONT_SIZE = 16;
+function fitCenterTextToHole(chartInstance) {
+    const labelOption = chartInstance.options.plugins.doughnutLabel?.labels?.[0];
+    const innerRadius = chartInstance.getDatasetMeta(0).controller?.innerRadius;
+    if (!labelOption || !innerRadius) {
+        return;
+    }
+    const ctx = chartInstance.ctx;
+    ctx.font = `${labelOption.font.weight} ${CENTER_TEXT_BASE_FONT_SIZE}px ${labelOption.font.family}`;
+    const textWidth = ctx.measureText(labelOption.text).width;
+    const textHeight = CENTER_TEXT_BASE_FONT_SIZE * 1.2;
+    const diagonal = Math.sqrt(textWidth ** 2 + textHeight ** 2);
+    const scale = Math.min(1, (2 * innerRadius) / diagonal);
+    labelOption.font.size = Math.max(8, Math.floor(CENTER_TEXT_BASE_FONT_SIZE * scale));
+}
+
 function createCircularChart({
     canvasId,
     type = 'doughnut',
@@ -580,6 +597,11 @@ function createCircularChart({
 
     chart = new Chart(context, {
         type,
+        // Runs before the global doughnutLabel plugin's own beforeDraw, so it reads the corrected size the same frame.
+        plugins: supportsCenterText ? [{
+            id: 'centerTextFit',
+            beforeDraw: (chartInstance) => fitCenterTextToHole(chartInstance)
+        }] : [],
         data: {
             labels,
             datasets: [{
@@ -668,7 +690,11 @@ function createCircularChart({
             }
         }
     });
-    
+
+    if (supportsCenterText) {
+        fitCenterTextToHole(chart);
+    }
+
     return chart;
 }
 
