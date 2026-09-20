@@ -4,7 +4,7 @@ onload: "initPage()"
 image: "https://nicoboga.netlify.app/images/view.png"
 bodyClass: ""
 ---
-{%- set minimal = not synopsis and not bingo -%}
+{%- set standalone = not synopsis and not bingo -%}
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
 {%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
@@ -87,7 +87,7 @@ bodyClass: ""
         <main id="ftco-main" aria-label="{{ landmarkLang.main }}">
             {{ content | safe }}
         </main>
-        <footer id="ftco-footer"{% if minimal %} class="minimal"{% endif %} aria-label="{{ landmarkLang.footer }}">
+        <footer id="ftco-footer"{% if standalone %} class="standalone"{% endif %} aria-label="{{ landmarkLang.footer }}">
             {% include "footer.html" %}
         </footer>
     </body>

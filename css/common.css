@@ -763,7 +763,7 @@ main > #language-switcher,
 /* Pages without the Synopsis/bingo widgets (policy, terms) only ever show
    the copyright line here; the same 7em padding as the full footer leaves a
    disproportionate slab of empty black space above it. */
-#ftco-footer.minimal {
+#ftco-footer.standalone {
     padding: 3em 0;
 }
 
