@@ -1,4 +1,4 @@
-/* Shared helpers loaded before both default.js (light pages) and main.js
+/* Shared helpers loaded before both standalone.js (light pages) and app.js
    (index/blog). Code that was identical (or trivially reconcilable) in both. */
 
 const appName = 'Portfolio';
@@ -23,7 +23,7 @@ const appLanguages = new Set(
     Array.from(document.querySelectorAll('#language-switcher [hreflang]'), a => a.hreflang)
 );
 
-// Profile / CV facts, rendered into the page by fillCareerCounts and initProfile (main.js).
+// Profile / CV facts, rendered into the page by fillCareerCounts and initProfile (app.js).
 const xp = 5;
 const email = 'nicolas.bogalheiro@gmail.com';
 const address = 'Paris';
@@ -214,7 +214,7 @@ function initCareerAnimation() {
 
 // No argument: apply the stored preference (on page load). With an event (the
 // #dark-icon button's onclick): flip the stored preference first, then apply.
-// Fires `darkmodechange` so main.js can recolour the skills chart.
+// Fires `darkmodechange` so app.js can recolour the skills chart.
 function toggleDarkMode(event) {
     if (event) {
         event.preventDefault();

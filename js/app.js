@@ -302,7 +302,7 @@ const appKeywords = [
     "Internet"
 ];
 
-// Visitor-facing strings needed at runtime (main.js only - default.js pages don't load i18next), authored once in _data/messages.json and embedded by base.njk into the <meta name="i18n-messages"> tag (same pattern as appArticles below). Page language is fixed server-side (separate _en/_fr builds), so init runs synchronously (initImmediate: false) and getMessage() can call t() right away without awaiting the init promise.
+// Visitor-facing strings needed at runtime (app.js only - standalone.js pages don't load i18next), authored once in _data/messages.json and embedded by base.njk into the <meta name="i18n-messages"> tag (same pattern as appArticles below). Page language is fixed server-side (separate _en/_fr builds), so init runs synchronously (initImmediate: false) and getMessage() can call t() right away without awaiting the init promise.
 const appI18nMessages = JSON.parse($('meta[name="i18n-messages"]').attr('content'));
 const appI18nResources = Object.keys(appI18nMessages).reduce((resources, key) => {
     Object.entries(appI18nMessages[key]).forEach(([lng, value]) => {
@@ -1389,7 +1389,7 @@ function initBlogPage(langPage) {
         const articleShape = $('#article-shape');
         const hashLink = window.location.hash ? getSlugFromUrl() : '';
         const errorArticle = getMessage('error-generic');
-        // Centered (body.article-error, css/main.css) and red (.error-message) instead of the normal top-left, sidebar-flanked article layout. The fetched article's real height is gone, so the page collapses to a couple lines - without the scroll reset the visitor stays scrolled where they were, with the (now much higher up) footer and blank space below it.
+        // Centered (body.article-error, css/app.css) and red (.error-message) instead of the normal top-left, sidebar-flanked article layout. The fetched article's real height is gone, so the page collapses to a couple lines - without the scroll reset the visitor stays scrolled where they were, with the (now much higher up) footer and blank space below it.
         const showArticleError = () => {
             articleShape.addClass('error-message').text(errorArticle);
             document.body.classList.add('article-error');

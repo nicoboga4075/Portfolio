@@ -1,4 +1,4 @@
-/* Shared rules, loaded before default.css and main.css. */
+/* Shared rules, loaded before standalone.css and app.css. */
 
 :root {
     --main: #3e64ff;
@@ -195,7 +195,7 @@ sup:hover {
 }
 
 /* Visually hidden but readable by screen readers - loads on every page
-   (default.css pages don't have Bootstrap's own .sr-only). */
+   (standalone.css pages don't have Bootstrap's own .sr-only). */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -228,7 +228,7 @@ sup:hover {
 #language-switcher {
     /* Lay the pill out here, not via a d-flex utility on the markup: this include
        also renders on policy / terms / project / article pages, which use the
-       light asset bundle (default.html) that omits bootstrap.min.css. Without
+       light asset bundle (standalone.html) that omits bootstrap.min.css. Without
        these the switcher is a plain block with inline EN/FR that wrap when space
        is tight. */
     display: flex;

@@ -1,8 +1,8 @@
 module.exports = {
   roots: ["<rootDir>/js", "<rootDir>/netlify"],
   collectCoverageFrom: [
-    "js/default.js",
-    "js/main.js"
+    "js/standalone.js",
+    "js/app.js"
   ],
   testPathIgnorePatterns: ["/node_modules/", "/docs/"],
   modulePathIgnorePatterns: ["/node_modules/", "/docs/"],

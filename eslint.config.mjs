@@ -58,14 +58,14 @@ export default defineConfig([
 	  "no-redeclare": "error"
 	}
   },
-  // js/common.js defines shared helpers that default.js and main.js consume at
+  // js/common.js defines shared helpers that standalone.js and app.js consume at
   // runtime (both load after common.js). ESLint analyses each file in isolation,
   // so declare the shared names as globals for the consumers. Names both files
-  // use go here; names only main.js uses are in the block below; and
+  // use go here; names only app.js uses are in the block below; and
   // no-unused-vars is skipped for common.js itself (its top-level declarations
   // are the whole point).
   {
-    files: ["js/default.js", "js/main.js"],
+    files: ["js/standalone.js", "js/app.js"],
     languageOptions: {
       globals: {
         appDefaultRoutes: "readonly",
@@ -80,7 +80,7 @@ export default defineConfig([
     }
   },
   {
-    files: ["js/main.js"],
+    files: ["js/app.js"],
     languageOptions: {
       globals: {
         appName: "readonly",
