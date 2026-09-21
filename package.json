@@ -90,7 +90,7 @@
     "jest": "^30.5.1",
     "jest-html-reporter": "^4.4.2",
     "jest-junit": "^17.0.0",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.8",
     "sonar-scanner": "^3.1.0",
     "stylelint": "^17.15.0",
     "stylelint-config-standard": "^40.0.0",
