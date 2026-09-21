@@ -115,9 +115,9 @@
   },
   "allowScripts": {
     "sonar-scanner@3.1.0": true,
-    "cypress@16.0.0": true,
     "@parcel/watcher@2.6.0": true,
-    "unrs-resolver@1.12.2": true
+    "unrs-resolver@1.12.2": true,
+    "cypress@16.1.0": true
   },
   "routes": {
     "site": "https://nicoboga.netlify.app",

@@ -10,6 +10,11 @@
             "permanent": "Permanent",
             "internship": "Internship",
             "other": "Other"
+        },
+        "companyTypes": {
+            "software-publisher": "Software Publisher",
+            "it-consulting-firm": "IT Consulting Firm",
+            "digital-agency": "Digital Agency"
         }
     },
     "fr": {
@@ -23,6 +28,11 @@
             "permanent": "CDI",
             "internship": "Stage",
             "other": "Autre"
+        },
+        "companyTypes": {
+            "software-publisher": "Éditeur",
+            "it-consulting-firm": "ESN",
+            "digital-agency": "Agence digitale"
         }
     },
     "awards": [
@@ -193,10 +203,7 @@
                 },
                 "Data Intelligence"
             ],
-            "companyType": {
-                "en": "Software Publisher",
-                "fr": "Éditeur"
-            },
+            "companyType": "software-publisher",
             "companySize": "Scale-up"
         },
         {
@@ -226,18 +233,16 @@
                     "fr": "Cryptographie"
                 }
             ],
-            "companyType": {
-                "en": "IT Consulting Firm",
-                "fr": "ESN"
-            },
+            "companyType": "it-consulting-firm",
             "companySize": {
                 "en": "Large group",
                 "fr": "Grand Groupe"
             },
             "mission": {
-                "en": "On assignment at Alstom",
-                "fr": "En mission chez Alstom"
+                "en": "On assignment at",
+                "fr": "En mission chez"
             },
+            "missionCompany": "Alstom",
             "missionHref": {
                 "en": "https://www.alstom.com",
                 "fr": "https://www.alstom.com/fr"
@@ -270,10 +275,7 @@
                     "fr": "Qualité"
                 }
             ],
-            "companyType": {
-                "en": "Software Publisher",
-                "fr": "Éditeur"
-            },
+            "companyType": "software-publisher",
             "companySize": {
                 "en": "ISE",
                 "fr": "ETI"
@@ -303,10 +305,7 @@
                 },
                 "Data Viz"
             ],
-            "companyType": {
-                "en": "Software Publisher",
-                "fr": "Éditeur"
-            },
+            "companyType": "software-publisher",
             "companySize": {
                 "en": "SME",
                 "fr": "PME"
@@ -332,10 +331,7 @@
                     "fr": "Cybersécurité"
                 }
             ],
-            "companyType": {
-                "en": "Software Publisher",
-                "fr": "Éditeur"
-            },
+            "companyType": "software-publisher",
             "companySize": {
                 "en": "SME",
                 "fr": "PME"
@@ -364,10 +360,7 @@
                     "fr": "Génie Logiciel"
                 }
             ],
-            "companyType": {
-                "en": "Digital Agency",
-                "fr": "Agence digitale"
-            },
+            "companyType": "digital-agency",
             "companySize": "Start-up"
         },
         {
@@ -414,10 +407,7 @@
                     "fr": "Transformation Digitale"
                 }
             ],
-            "companyType": {
-                "en": "IT Consulting Firm",
-                "fr": "ESN"
-            },
+            "companyType": "it-consulting-firm",
             "companySize": {
                 "en": "Large group",
                 "fr": "Grand Groupe"

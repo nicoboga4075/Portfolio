@@ -47,7 +47,7 @@
                             <span class="date">{{ e.date[lang] }}</span>
                             <span class="badge">{{ resumeLang.types[e.type] }}</span>
                             {%- if e.companyType %}
-                            <span class="company-type-badge">{{ e.companyType[lang] if e.companyType[lang] else e.companyType }}</span>
+                            <span class="company-type-badge">{{ resumeLang.companyTypes[e.companyType] }}</span>
                             {%- endif %}
                             {%- if e.companySize %}
                             <span class="company-size-badge">{{ e.companySize[lang] if e.companySize[lang] else e.companySize }}</span>
@@ -61,13 +61,11 @@
                                 {%- endif -%}
                             </span>
                             {%- if e.mission %}
-                            <span class="mission">
-                                {%- if e.missionHref -%}
-                                <a target="_blank" rel="noopener" href="{{ e.missionHref[lang] if e.missionHref[lang] else e.missionHref }}">{{ e.mission[lang] if e.mission[lang] else e.mission }}</a>
+                            <span class="mission">{{ e.mission[lang] if e.mission[lang] else e.mission }} {% if e.missionHref -%}
+                                <a target="_blank" rel="noopener" href="{{ e.missionHref[lang] if e.missionHref[lang] else e.missionHref }}">{{ e.missionCompany }}</a>
                                 {%- else -%}
-                                {{ e.mission[lang] if e.mission[lang] else e.mission }}
-                                {%- endif -%}
-                            </span>
+                                {{ e.missionCompany }}
+                                {%- endif %}</span>
                             {%- endif %}
                             <p>{{ e.city }}</p>
                             {%- for tag in e.sector %}

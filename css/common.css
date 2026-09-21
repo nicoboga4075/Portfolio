@@ -4,7 +4,6 @@
 
 :root {
     --main: #3e64ff;
-    --link: var(--main);
     --black: #000;
     --white: #fff;
     --gray: #6c757d;
@@ -117,7 +116,7 @@ h6,
 a {
     cursor: pointer;
     text-decoration: none;
-    color: var(--link);
+    color: var(--main);
     font-weight: bold;
     transition: .3s all ease;
 }
@@ -147,12 +146,12 @@ th,
 td {
     text-align: center;
     color: var(--text-color);
-    font-size: 14px;
+    font-size: 13px;
     border: 1px solid var(--text-color);
 }
 
 td strong {
-    color: var(--link);
+    color: var(--main);
 }
 
 sup {
@@ -187,8 +186,7 @@ sup:hover {
 /* ==== Dark Mode Toggle ==== */
 
 #dark-icon {
-    color: var(--link);
-    font-size: 24px;
+    color: var(--main);
     margin: 10px;
     border: none;
     background: none;
@@ -216,7 +214,6 @@ sup:hover {
 
 #language-switcher .lang-text {
     padding: 3px 13px;
-    font-weight: bold;
     text-decoration: none;
     color: var(--dark);
     border-radius: 50px;
@@ -241,7 +238,6 @@ sup:hover {
     top: 10px;
     left: 10px;
     color: var(--white);
-    font-size: 0.75em;
     padding: 5px 10px;
     border-radius: 20px;
     background-color: var(--main);
