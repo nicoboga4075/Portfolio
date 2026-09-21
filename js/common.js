@@ -196,22 +196,6 @@ function fillCareerCounts() {
     }
 }
 
-function initCareerAnimation() {
-    const container = document.querySelector('.animation-container');
-    const car = document.getElementById('car');
-    if (!container || !car) {
-        return;
-    }
-    const updateCarPosition = () => {
-        const rect = container.getBoundingClientRect();
-        const progress = Math.min(Math.max((window.innerHeight / 2 - rect.top) / rect.height, 0), 1);
-        car.style.setProperty('--car-offset', `${progress * rect.height}px`);
-    };
-    window.addEventListener('scroll', updateCarPosition, { passive: true });
-    window.addEventListener('resize', updateCarPosition);
-    updateCarPosition();
-}
-
 // No argument: apply the stored preference (on page load). With an event (the
 // #dark-icon button's onclick): flip the stored preference first, then apply.
 // Fires `darkmodechange` so app.js can recolour the skills chart.

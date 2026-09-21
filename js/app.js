@@ -928,7 +928,6 @@ function createCircularChart({
 function initArticle() {
     loadImages('.article-image', 'png');
     loadImages('.icon.svg', 'svg');
-    initCareerAnimation();
 }
 
 function labelCarouselControls(target) {

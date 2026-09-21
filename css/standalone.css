@@ -199,6 +199,7 @@ body.read-zone h1 {
     gap: 22px;
     margin: 40px 0;
     padding-left: 50px;
+    view-timeline-name: --career-track;
 }
 
 .road {
@@ -211,20 +212,34 @@ body.read-zone h1 {
     border-radius: 2px;
 }
 
+/* Drives itself from the .animation-container's own scroll position via the
+   native scroll-driven animations spec - no JS/inline style needed. Starts
+   pinned to Dax (top: 0%) the instant the article renders, unlike the old
+   getBoundingClientRect()-based JS offset, which depended on where the
+   container happened to land relative to the viewport on load. */
 #car {
     position: absolute;
     left: 22px;
     top: 0;
     font-size: 28px;
     line-height: 1;
-    transform: translate(-50%, -50%) translateY(var(--car-offset, 0));
-    transition: transform 0.1s linear;
+    transform: translate(-50%, -50%);
     z-index: 2;
+    animation-name: drive-car;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: --career-track;
+    animation-range: contain 0% contain 100%;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    #car {
-        transition: none;
+@keyframes drive-car {
+    from {
+        top: 0%;
+    }
+
+    to {
+        top: 100%;
     }
 }
 

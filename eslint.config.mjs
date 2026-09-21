@@ -73,7 +73,6 @@ export default defineConfig([
         getCurrentLanguage: "readonly",
         initTranslator: "readonly",
         loadImages: "readonly",
-        initCareerAnimation: "readonly",
         fillCareerCounts: "readonly",
         addRedirectById: "readonly"
       }
