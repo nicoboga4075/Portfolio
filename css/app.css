@@ -51,8 +51,8 @@ body.article-error #ftco-main {
 
 html.dark-mode .ftco-navbar-light:not(.awake,.scrolled) .navbar-nav > .nav-item > .nav-link span,
 html.dark-mode .resume-wrap .position,
-html.dark-mode .ftco-about ul.about-info li span:first-child,
-html.dark-mode .ftco-about .counter-wrap .text p span,
+html.dark-mode #about-section ul.about-info li span:first-child,
+html.dark-mode #about-section .counter-wrap .text p span,
 html.dark-mode #navi li a:not(.current) {
     color: var(--text-color) !important;
 }
@@ -96,7 +96,7 @@ html.dark-mode #article-shape .author {
     color: initial !important;
 }
 
-html.dark-mode .ftco-partner .partner img {
+html.dark-mode #partners-section .partner img {
     background-color: var(--white);
     padding: 4px;
     border-radius: 4px;
@@ -329,52 +329,52 @@ input[name="search-input"].highlight-flash {
 
 /* ==== About Section ==== */
 
-.ftco-about .img-about {
+#about-section .img-about {
     width: 100%;
     z-index: 0;
     position: relative;
 }
 
-.ftco-about .img-about .img {
+#about-section .img-about .img {
     display: block;
     width: 100%;
     position: relative;
     z-index: 1;
 }
 
-.ftco-about ul.about-info {
+#about-section ul.about-info {
     display: inline-block;
     padding: 0;
     margin: 0;
     width: 100%;
 }
 
-.ftco-about ul.about-info li {
+#about-section ul.about-info li {
     list-style: none;
     margin-bottom: 10px;
 }
 
-.ftco-about ul.about-info li span {
+#about-section ul.about-info li span {
     width: calc(100% - 130px);
 }
 
-.ftco-about ul.about-info li span:first-child {
+#about-section ul.about-info li span:first-child {
     font-weight: 600;
     color: #000;
     width: 130px;
     margin-right: 8px;
 }
 
-.ftco-about .counter-wrap .text p {
+#about-section .counter-wrap .text p {
     font-size: 20px;
 }
 
-.ftco-about .counter-wrap .text p span {
+#about-section .counter-wrap .text p span {
     font-weight: 400;
     color: #000;
 }
 
-.ftco-about .counter-wrap .text p span.number {
+#about-section .counter-wrap .text p span.number {
     font-weight: 600;
     color: var(--main);
 }
@@ -428,12 +428,12 @@ input[name="search-input"].highlight-flash {
 }
 
 @media (max-width: 1199.98px) {
-    .ftco-counter {
+    #counter-section {
         background-position: center center !important;
     }
 }
 
-.ftco-counter .block-18 {
+#counter-section .block-18 {
     display: block;
     width: 100%;
     text-align: center;
@@ -441,47 +441,34 @@ input[name="search-input"].highlight-flash {
     background-color: var(--white);
 }
 
-.ftco-counter .text strong.number {
+#counter-section .text strong.number {
     font-weight: 700;
     font-size: 30px;
     color: var(--main);
     display: block;
 }
 
-.ftco-counter .text span {
+#counter-section .text span {
     display: block;
     color: rgb(0 0 0 / 80%);
 }
 
 @media (max-width: 767.98px) {
-    .ftco-counter .counter-wrap {
+    #counter-section .counter-wrap {
         margin-bottom: 20px;
     }
 }
 
-.ftco-counter .ftco-number {
-    display: block;
-    font-size: 72px;
-    font-weight: bold;
-    color: var(--main);
-}
-
-.ftco-counter .ftco-label {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-}
-
 /* ==== Hire Me ==== */
 
-.ftco-hireme {
+#hireme-section {
     background: var(--main);
     z-index: 0;
     position: relative;
     background-image: url("/images/background.webp");
 }
 
-.ftco-hireme .overlay {
+#hireme-section .overlay {
     position: absolute;
     inset: 0;
     content: '';
@@ -489,17 +476,17 @@ input[name="search-input"].highlight-flash {
     opacity: 0.5 !important;
 }
 
-.ftco-hireme h2 {
+#hireme-section h2 {
     color: #fff;
     font-size: 40px;
     font-weight: 900;
 }
 
-.ftco-hireme h2 span {
+#hireme-section h2 span {
     color: #a0f669;
 }
 
-.ftco-hireme p {
+#hireme-section p {
     color: rgb(255 255 255 / 90%);
 }
 
@@ -816,10 +803,6 @@ progress::-webkit-progress-value {
     padding-bottom: 0 !important;
 }
 
-.ftco-bg-dark {
-    background: #3c312e;
-}
-
 #map {
     width: 100%;
 }
@@ -906,17 +889,17 @@ progress::-webkit-progress-value {
 
 /* ==== Partners ==== */
 
-.ftco-partner {
+#partners-section {
     padding: 4em 0 !important;
 }
 
-.ftco-partner .partner {
+#partners-section .partner {
     display: block;
     padding: 0 20px;
 }
 
 @media (max-width: 991.98px) {
-    .ftco-partner .partner {
+    #partners-section .partner {
         display: none;
     }
 }
@@ -2139,14 +2122,6 @@ textarea.form-control {
 
 .footer-small-nav>li a:hover,
 .footer-small-nav>li a:focus {
-    color: var(--main);
-}
-
-.media .ftco-icon {
-    width: 100px;
-}
-
-.media .ftco-icon span {
     color: var(--main);
 }
 

@@ -16,7 +16,7 @@
     { key: "oracle",    href: "https://www.oracle.com/database" }
 ] -%}
 {%- set perRow = (partners.length / rows) | round(0, "ceil") -%}
-<section class="ftco-section ftco-partner d-none d-sm-flex">
+<section id="partners-section" class="ftco-section d-none d-sm-flex">
     <div class="container">
         {%- for row in partners | batch(perRow) %}
         {%- set rowClass = "row" if loop.last else "row mb-4" %}
