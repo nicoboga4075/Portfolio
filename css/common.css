@@ -37,8 +37,7 @@ html.dark-mode {
     --shadow-lg: #fff3;
 }
 
-html.dark-mode .card h2,
-html.dark-mode #article-shape .author {
+html.dark-mode .card h2 {
     color: initial !important;
 }
 
@@ -102,13 +101,6 @@ body {
     color: var(--gray);
 }
 
-/* Page title only: policy/terms (bodyClass: "legal") and projects
-   (bodyClass: "read-zone"; articles share it but have no h1). */
-body.legal h1,
-body.read-zone h1 {
-    color: var(--main);
-}
-
 main {
     margin: 10px;
 }
@@ -151,24 +143,6 @@ a:focus {
 [disabled] {
     pointer-events: none;
     cursor: default;
-}
-
-.btn-primary,
-.btn-outline-primary {
-    background-color: var(--main);
-    border-color: var(--main);
-}
-
-.btn-outline-primary {
-    background-color: transparent;
-    color: var(--main);
-}
-
-.btn-primary:hover,
-.btn-outline-primary:hover {
-    background-color: var(--main);
-    border-color: var(--main);
-    color: var(--white);
 }
 
 table {
@@ -250,31 +224,6 @@ sup:hover {
        .read-title's space-between row from squeezing it. */
     width: fit-content;
     flex: none;
-}
-
-/* Centre the pill on the navbar's wrapped mobile row (a flex item there, so still block-level and needs auto margins to centre within that row). In .page-controls (policy / terms) and .read-title (projects) it's one part of a flex row that's already centred (or space-between, for .read-title) as a whole, so no auto margins there. */
-.navbar #language-switcher {
-    margin-inline: auto;
-}
-
-/* Wraps #dark-icon and #language-switcher on their own centred row below the
-   "Updated on ..." date, on policy / terms (a lone block in <main>'s centered
-   flow, unlike .read-title's projects where the pair sits flush right of the
-   h1 instead). */
-.page-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-}
-
-/* Below the navbar's expand breakpoint the switcher wraps onto its own row
-   inside .container; without this it butts against the toggler row above and
-   the page content below. */
-@media (max-width: 991.98px) {
-    .navbar #language-switcher {
-        margin-block: 10px;
-    }
 }
 
 /* Scoped to #language-switcher for the id specificity that beats Bootstrap's
@@ -445,53 +394,6 @@ sup:hover {
     }
 }
 
-.about-author .desc {
-    display: flex;
-    flex-direction: column;
-}
-
-.qrcode-group {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-}
-
-.qrcode-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 0;
-}
-
-.qrcode-logo {
-    max-width: 110px;
-    height: auto;
-    margin-bottom: 6px;
-}
-
-.qrcode-img {
-    max-width: clamp(90px, 9vw, 140px);
-    height: auto;
-}
-
-/* Stacked cards have the whole column to themselves, so they can be bigger;
-   side by side on mobile, two cards must still fit in that same width. */
-@media (max-width: 767.98px) {
-    .qrcode-group {
-        flex-direction: row;
-    }
-
-    .qrcode-logo {
-        max-width: 60px;
-    }
-
-    .qrcode-img {
-        max-width: clamp(55px, 5vw, 65px);
-    }
-}
-
 #inpi-process {
     max-width: 100%;
     height: auto;
@@ -516,38 +418,6 @@ sup:hover {
     height: auto;
     display: block;
     margin: 0 auto;
-}
-
-/* Project or Article */
-
-/* Constrain the article/project content column only (not .read-zone itself,
-   the <body>) so the footer, a sibling of <main>, still spans the full page. */
-.read-zone > main {
-    max-width: 50%;
-    margin: 1rem auto;
-}
-
-@media (max-width: 1199.98px) {
-    .read-zone > main {
-        max-width: 75%;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .read-zone > main {
-        max-width: 90%;
-    }
-}
-
-.read-zone main > a#index {
-    display: block;
-    text-align: center;
-}
-
-.read-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 /* Video */
