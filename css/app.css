@@ -164,7 +164,7 @@ input[name="search-input"].highlight-flash {
     cursor: pointer;
 }
 
-/* Home Section */
+/* ==== Home Section ==== */
 
 .hero-wrap {
     width: 100%;
@@ -189,7 +189,6 @@ input[name="search-input"].highlight-flash {
 
 .slider-text .subheading {
     text-transform: uppercase;
-    font-size: 16px;
     font-weight: 800;
     color: var(--main);
     letter-spacing: 4px;
@@ -228,36 +227,6 @@ input[name="search-input"].highlight-flash {
 
 .slider-text p strong a {
     color: #000;
-}
-
-.slider-text .breadcrumbs {
-    font-size: 16px;
-    margin-bottom: 20px;
-    z-index: 99;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.slider-text .breadcrumbs span {
-    color: rgb(0 0 0 / 80%);
-}
-
-.slider-text .breadcrumbs span i {
-    color: rgb(0 0 0 / 80%);
-}
-
-.slider-text .breadcrumbs span a {
-    color: var(--main);
-}
-
-.slider-text .breadcrumbs span a:hover,
-.slider-text .breadcrumbs span a:focus {
-    color: var(--main);
-}
-
-.slider-text .breadcrumbs span a:hover i,
-.slider-text .breadcrumbs span a:focus i {
-    color: var(--main);
 }
 
 .slider-text .bread {
@@ -359,7 +328,7 @@ input[name="search-input"].highlight-flash {
     }
 }
 
-/* About Section */
+/* ==== About Section ==== */
 
 .ftco-about .img-about {
     width: 100%;
@@ -452,7 +421,7 @@ input[name="search-input"].highlight-flash {
     opacity: 0.9;
 }
 
-/* Counter Section */
+/* ==== Counter Section ==== */
 
 #counter-section {
     position: relative;
@@ -482,7 +451,6 @@ input[name="search-input"].highlight-flash {
 
 .ftco-counter .text span {
     display: block;
-    font-size: 16px;
     color: rgb(0 0 0 / 80%);
 }
 
@@ -505,7 +473,7 @@ input[name="search-input"].highlight-flash {
     letter-spacing: .1em;
 }
 
-/* Hire Me */
+/* ==== Hire Me ==== */
 
 .ftco-hireme {
     background: var(--main);
@@ -536,7 +504,7 @@ input[name="search-input"].highlight-flash {
     color: rgb(255 255 255 / 90%);
 }
 
-/* Resume Section */
+/* ==== Resume Section ==== */
 
 .page {
     width: 100%;
@@ -579,7 +547,6 @@ input[name="search-input"].highlight-flash {
 
 .resume-wrap .date {
     font-weight: 700;
-    font-size: 16px;
     color: rgb(0 0 0 / 60%);
     color: var(--main);
 }
@@ -697,7 +664,7 @@ input[name="search-input"].highlight-flash {
     background-position: center;
 }
 
-/* Progress Bars */
+/* ==== Progress Bars ==== */
 
 .progress-wrap {
     width: 100%;
@@ -708,113 +675,6 @@ input[name="search-input"].highlight-flash {
     font-size: 16px;
     margin-bottom: 10px;
     font-weight: 500;
-}
-
-.progress {
-    height: 10px;
-    box-shadow: none;
-    background: #e6e6e6;
-    overflow: visible;
-}
-
-.progress-bar {
-    background: var(--main);
-    box-shadow: none;
-    font-size: 12px;
-    line-height: 1.2;
-    color: #000;
-    font-weight: 600;
-    position: relative;
-    overflow: visible;
-    border-radius: 2px;
-}
-
-.progress-bar::after {
-    position: absolute;
-    top: -2px;
-    right: 0;
-    width: 34px;
-    height: 34px;
-    content: '';
-    background: var(--main);
-    border-radius: 2px;
-    opacity: 0;
-}
-
-.progress-bar span {
-    position: absolute;
-    top: -38px;
-    right: 0;
-    font-size: 16px;
-    font-weight: 500;
-    color: #000;
-}
-
-.progress-circle .progress {
-    width: 150px;
-    height: 150px;
-    background: 0;
-    position: relative;
-}
-
-.progress-circle .progress::after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 6px solid #eee;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.progress-circle .progress>span {
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    z-index: 1;
-}
-
-.progress-circle .progress .progress-left {
-    left: 0;
-}
-
-.progress-circle .progress .progress-bar {
-    width: 100%;
-    height: 100%;
-    background: 0;
-    border-width: 6px;
-    border-style: solid;
-    position: absolute;
-    top: 0;
-}
-
-.progress-circle .progress .progress-left .progress-bar {
-    left: 100%;
-    border-top-right-radius: 80px;
-    border-bottom-right-radius: 80px;
-    border-left: 0;
-    transform-origin: center left;
-}
-
-.progress-circle .progress .progress-right {
-    right: 0;
-}
-
-.progress-circle .progress .progress-right .progress-bar {
-    left: -100%;
-    border-top-left-radius: 80px;
-    border-bottom-left-radius: 80px;
-    border-right: 0;
-    transform-origin: center right;
-}
-
-.progress-circle .progress .progress-value {
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 progress {
@@ -840,7 +700,7 @@ progress::-webkit-progress-value {
     background-color: var(--main);
 }
 
-/* Buttons */
+/* ==== Buttons ==== */
 
 .bg-light {
     background: #f8f9fa !important;
@@ -960,7 +820,7 @@ progress::-webkit-progress-value {
     background: var(--main) !important;
 }
 
-/* Utilities */
+/* ==== Utilities ==== */
 
 .ftco-vh-100 {
     height: 100vh;
@@ -1093,7 +953,7 @@ progress::-webkit-progress-value {
     height: 300px;
 }
 
-/* Partners */
+/* ==== Partners ==== */
 
 .ftco-partner {
     padding: 4em 0 !important;
@@ -1110,7 +970,7 @@ progress::-webkit-progress-value {
     }
 }
 
-/* Navbar */
+/* ==== Navbar ==== */
 
 .ftco-navbar-light {
     background: transparent !important;
@@ -1159,7 +1019,6 @@ progress::-webkit-progress-value {
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
-    font-size: 16px;
     padding: .7rem 20px;
     color: #000;
     font-weight: 400;
@@ -1336,7 +1195,6 @@ progress::-webkit-progress-value {
     border-color: rgb(0 0 0 / 50%) !important;
     cursor: pointer;
     text-transform: uppercase;
-    font-size: 16px;
     letter-spacing: .1em;
 }
 
@@ -1392,7 +1250,7 @@ progress::-webkit-progress-value {
     color: #385ae6;
 }
 
-/* Navbar brand */
+/* ==== Navbar Brand ==== */
 
 html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 .ftco-navbar-light:not(.awake) .navbar-brand:hover {
@@ -1415,7 +1273,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     }
 }
 
-/* Blog Section */
+/* ==== Blog Section ==== */
 
 .blog-entry {
     position: relative;
@@ -1458,7 +1316,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     display: inline-block;
     margin-right: 5px;
     margin-bottom: 0;
-    font-size: 16px;
     font-weight: 600;
 }
 
@@ -1500,14 +1357,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     font-size: 18px;
     padding-top: 2px;
     color: white;
-}
-
-.block-6 {
-    margin-bottom: 40px;
-}
-
-.block-6 .media-body p {
-    font-size: 16px;
 }
 
 .block-27 ul {
@@ -1771,7 +1620,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     opacity: 0.7 !important;
 }
 
-/* Contact Popup */
+/* ==== Contact Popup ==== */
 
 #contact-icon {
     position: fixed;
@@ -1886,7 +1735,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     cursor: pointer;
 }
 
-/* Contact Section */
+/* ==== Contact Section ==== */
 
 .form-control {
     height: 52px !important;
@@ -1969,7 +1818,7 @@ textarea.form-control {
     font-size: 15px;
 }
 
-/* Lightbox */
+/* ==== Lightbox ==== */
 
 .image-popup {
     cursor: zoom-in;
@@ -1995,7 +1844,7 @@ textarea.form-control {
     opacity: 0;
 }
 
-/* Projects Section */
+/* ==== Projects Section ==== */
 
 .project {
     width: 100%;
@@ -2283,7 +2132,7 @@ textarea.form-control {
     font-style: italic;
 }
 
-/* Carousel Section */
+/* ==== Carousel Section ==== */
 
 .owl-menus {
     flex-wrap: wrap;
@@ -2350,7 +2199,7 @@ textarea.form-control {
     background: var(--main) !important;
 }
 
-/* Services Section */
+/* ==== Services Section ==== */
 
 .services-1 {
     margin-bottom: 40px;
@@ -2431,7 +2280,7 @@ textarea.form-control {
     background: #000;
 }
 
-/* Blog */
+/* ==== Article Iframe ==== */
 
 #iframe-article {
     visibility: hidden;
@@ -2439,66 +2288,7 @@ textarea.form-control {
     width: 0;
 }
 
-/* Footer */
-
-.ftco-footer {
-    font-size: 16px;
-    background: #000;
-    padding: 7em 0;
-    z-index: 0;
-}
-
-.ftco-footer .ftco-footer-logo {
-    text-transform: uppercase;
-    letter-spacing: .1em;
-}
-
-.ftco-footer .ftco-footer-widget h2 {
-    color: #fff;
-    margin-bottom: 40px;
-    font-size: 22px;
-    font-weight: 600;
-}
-
-.ftco-footer .ftco-footer-widget ul li {
-    margin-bottom: 10px;
-}
-
-.ftco-footer .ftco-footer-widget ul li a {
-    color: rgb(255 255 255 / 60%);
-}
-
-.ftco-footer .ftco-footer-widget ul li a span {
-    color: rgb(255 255 255 / 60%);
-}
-
-.ftco-footer .ftco-footer-widget .btn-primary {
-    background: #fff !important;
-    border: 2px solid #fff !important;
-}
-
-.ftco-footer .ftco-footer-widget .btn-primary:hover {
-    background: #fff;
-    border: 2px solid #fff !important;
-}
-
-.ftco-footer p {
-    color: rgb(255 255 255 / 70%);
-}
-
-.ftco-footer a {
-    color: rgb(255 255 255 / 70%);
-}
-
-.ftco-footer a:hover {
-    color: #fff;
-}
-
-.ftco-footer .ftco-heading-2 {
-    font-size: 17px;
-    font-weight: 400;
-    color: #000;
-}
+/* ==== Footer ==== */
 
 .ftco-footer-links li {
     list-style: none;
@@ -2646,7 +2436,7 @@ textarea.form-control {
     display: block;
 }
 
-/* Chart */
+/* ==== Chart ==== */
 
 .chart-container {
     min-height: 250px;
