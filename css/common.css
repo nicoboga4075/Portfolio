@@ -1,5 +1,7 @@
 /* Shared rules, loaded before standalone.css and app.css. */
 
+/* ==== Variables ==== */
+
 :root {
     --main: #3e64ff;
     --link: var(--main);
@@ -37,15 +39,7 @@ html.dark-mode {
     --shadow-lg: #fff3;
 }
 
-html.dark-mode .card h2 {
-    color: initial !important;
-}
-
-/* .card keeps its white background in dark mode, so its inherited body
-   text must stay dark rather than the light --gray. */
-html.dark-mode .card {
-    color: var(--dark);
-}
+/* ==== Fonts ==== */
 
 @font-face {
     font-family: 'Poppins Windows';
@@ -83,9 +77,8 @@ html.dark-mode .card {
     line-gap-override: 0%;
 }
 
-/* clip on <html> too: absolutely-positioned decoration (404 astronaut,
-   #contact bubble) is laid out against the viewport, so body's clip alone
-   doesn't contain it. clip (not hidden) keeps sticky/scroll behaviour. */
+/* ==== Base ==== */
+
 html,
 body {
     overflow-x: clip;
@@ -175,6 +168,8 @@ sup:hover {
     background-color: var(--main);
 }
 
+/* ==== Accessibility ==== */
+
 /* Visually hidden but readable by screen readers - loads on every page
    (standalone.css pages don't have Bootstrap's own .sr-only). */
 .sr-only {
@@ -188,6 +183,8 @@ sup:hover {
     white-space: nowrap;
     border: 0;
 }
+
+/* ==== Dark Mode Toggle ==== */
 
 #dark-icon {
     color: var(--link);
@@ -203,15 +200,9 @@ sup:hover {
     outline: unset;
 }
 
-/* Segmented pill: a lavender track with the current language filled in --main.
-   The switcher carries its own background, so its colours no longer depend on
-   the navbar state (hero / scrolled, light / dark). Scales to N languages. */
+/* ==== Language Switcher ==== */
+
 #language-switcher {
-    /* Lay the pill out here, not via a d-flex utility on the markup: this include
-       also renders on policy / terms / project / article pages, which use the
-       light asset bundle (standalone.html) that omits bootstrap.min.css. Without
-       these the switcher is a plain block with inline EN/FR that wrap when space
-       is tight. */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -219,18 +210,12 @@ sup:hover {
     padding: 4px;
     background-color: var(--lavender);
     border-radius: 50px;
-
-    /* Track hugs its buttons instead of stretching full width; flex: none keeps
-       .read-title's space-between row from squeezing it. */
     width: fit-content;
     flex: none;
 }
 
-/* Scoped to #language-switcher for the id specificity that beats Bootstrap's
-   link reboot rules on index/blog, so the pill colours hold in the navbar. */
 #language-switcher .lang-text {
     padding: 3px 13px;
-    font-size: 16px;
     font-weight: bold;
     text-decoration: none;
     color: var(--dark);
@@ -244,250 +229,12 @@ sup:hover {
     background-color: var(--main);
 }
 
-/* Current language: keep it a real (crawlable) link but inert to clicks so it
-   doesn't pointlessly reload the page. */
 #language-switcher .lang-text[aria-current] {
     cursor: default;
     pointer-events: none;
 }
 
-/* Blog Article */
-
-.article-container h2 {
-    color: var(--link);
-}
-
-.title-center {
-    font-size: 40px;
-    color: var(--link);
-    font-weight: bold;
-    line-height: 50px;
-    margin-bottom: 25px;
-}
-
-.second-title {
-    font-style: italic;
-    margin-bottom: 20px;
-}
-
-/* Career Timeline */
-
-.animation-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    margin: 40px 0;
-    padding-left: 50px;
-}
-
-.road {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 20px;
-    width: 4px;
-    background: repeating-linear-gradient(to bottom, var(--main) 0, var(--main) 10px, transparent 10px, transparent 20px);
-    border-radius: 2px;
-}
-
-#car {
-    position: absolute;
-    left: 22px;
-    top: 0;
-    font-size: 28px;
-    line-height: 1;
-    transform: translate(-50%, -50%) translateY(var(--car-offset, 0));
-    transition: transform 0.1s linear;
-    z-index: 2;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    #car {
-        transition: none;
-    }
-}
-
-.city {
-    position: relative;
-    font-size: 22px;
-    font-weight: bold;
-    color: var(--link);
-}
-
-.city::before {
-    content: '';
-    position: absolute;
-    left: -35px;
-    top: 50%;
-    width: 14px;
-    height: 14px;
-    background: var(--main);
-    border: 3px solid var(--background);
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px var(--main);
-    transform: translateY(-50%);
-}
-
-.step {
-    position: relative;
-    font-size: 15px;
-    padding-left: 4px;
-}
-
-.step::before {
-    content: '';
-    position: absolute;
-    left: -32px;
-    top: 50%;
-    width: 8px;
-    height: 8px;
-    background: var(--background);
-    border: 2px solid var(--main);
-    border-radius: 50%;
-    transform: translateY(-50%);
-}
-
-/* Rotating box  */
-
-#mountain {
-    width: 100%;
-}
-
-#future {
-    margin: clamp(12px, 4vw, 30px);
-    place-items: center;
-}
-
-.box-rotate {
-    position: relative;
-    width: min(300px, 80vw);
-    aspect-ratio: 1;
-    animation: rotate 8s infinite alternate;
-    transform-style: preserve-3d;
-}
-
-.img-rotate {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 25px;
-}
-
-.span-inside {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    color: var(--white);
-    font-size: 20px;
-    text-shadow: 0 2px 5px var(--dark);
-}
-
-@keyframes rotate {
-    from {
-        transform: rotateX(20deg) rotateY(20deg);
-    }
-
-    to {
-        transform: rotateX(-15deg) rotateY(-40deg);
-    }
-}
-
-#inpi-process {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: auto;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    position: relative;
-    box-shadow: 0 4px 8px 0 var(--shadow-xs);
-}
-
-#mcs-design,
-#mcs-example,
-#programming {
-    max-width: 70vw;
-    height: auto;
-    margin-bottom: 15px;
-}
-
-#pattern {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-/* Video */
-
-.video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 ratio */
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-}
-
-.video-wrapper video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.card {
-    background: var(--white);
-    border-radius: 1rem;
-    box-shadow: 0 0 4px var(--shadow-sm);
-    padding: 1.5rem;
-    margin: 20px 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 0 12px var(--shadow-lg);
-}
-
-.bien {
-    border-left: 5px solid var(--green);
-}
-
-.pas-bien {
-    border-left: 5px solid var(--red);
-}
-
-.modere {
-    border-left: 5px solid var(--yellow);
-}
-
-.bloc-code {
-    position: relative;
-    background: var(--dark);
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    margin: 1rem 0;
-    overflow-x: auto;
-}
-
-.bloc-code .lang-label {
-    position: absolute;
-    top: 1px;
-    left: 10px;
-    color: var(--yellow);
-    font-size: 10px;
-}
-
-.bloc-code .lang-code {
-    white-space: pre;
-    color: var(--white);
-    font-size: 13px;
-}
-
-/* Badges */
+/* ==== Badges ==== */
 
 .badge {
     position: absolute;
@@ -500,78 +247,7 @@ sup:hover {
     background-color: var(--main);
 }
 
-.badge-definition {
-    top: 35px;
-    right: 70px;
-    left: inherit;
-}
-
-/* FAQ accordion */
-
-.accordion > .card {
-    position: relative;
-    margin: 0.5rem 0;
-    border-radius: 0;
-    transition: none;
-}
-
-.accordion > .card:hover {
-    transform: none;
-    box-shadow: 0 0 4px var(--shadow-sm);
-}
-
-.accordion > .card .card-header {
-    padding: 0;
-}
-
-/* input sits directly in .card (before .card-header) so the plain sibling
-   combinator drives the panel, with no relational selector (Firefox 121+). */
-.accordion .card > input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-}
-
-.accordion .card-header label {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 20px;
-    margin-bottom: 0;
-    cursor: pointer;
-    font-weight: 500;
-    color: var(--dark);
-    transition: background 0.2s;
-}
-
-.accordion .card > input:focus-visible ~ .card-header label {
-    outline: 2px solid var(--dark);
-    outline-offset: -2px;
-}
-
-.accordion .card-header label::after {
-    content: '+';
-    font-size: 20px;
-    transition: transform 0.3s;
-}
-
-.accordion .card > input:checked ~ .card-header label::after {
-    transform: rotate(45deg);
-}
-
-/* Toggle display rather than animate height: definitions are too long for a fixed max-height. */
-
-.accordion .card-body {
-    display: none;
-    padding: 0 20px;
-    font-size: 0.95rem;
-    color: var(--dark);
-}
-
-.accordion .card > input:checked ~ .card-body {
-    display: block;
-    padding: 15px 20px;
-}
+/* ==== Loader ==== */
 
 #ftco-loader {
     position: fixed;
@@ -625,19 +301,13 @@ sup:hover {
     }
 }
 
-/* Footer: bootstrap.min.css's own rules target .ftco-footer, but the element
-   uses id="ftco-footer" instead, so they never applied. Re-keyed to the id and
-   moved here (not style.css) so the always-black footer renders the same on
-   every page, not just the ones that load Bootstrap. */
+/* ==== Footer ==== */
+
 #ftco-footer {
-    font-size: 16px;
     background: var(--black);
     padding: 7em 0;
 }
 
-/* Pages without the Synopsis/bingo widgets (policy, terms) only ever show
-   the copyright line here; the same 7em padding as the full footer leaves a
-   disproportionate slab of empty black space above it. */
 #ftco-footer.standalone {
     padding: 3em 0;
 }
@@ -662,7 +332,6 @@ sup:hover {
     opacity: 0.7;
 }
 
-
 #ftco-footer p {
     color: var(--white);
     opacity: 0.7;
@@ -684,11 +353,6 @@ sup:hover {
     color: var(--main);
 }
 
-/* addRedirectById() marks the page you're already on (#policy/#terms) with
-   aria-current="page" (it keeps a real, crawlable href otherwise).
-   var(--main) on the always-black footer is ~4.47:1, just under the WCAG AA
-   4.5:1 minimum, so this lightens it toward white (plain opacity would blend
-   toward the black background instead and only darken it further). */
 #ftco-footer a[aria-current="page"] {
     cursor: default;
     color: color-mix(in srgb, var(--main) 85%, white 15%);

@@ -7,14 +7,14 @@
     {%- for l in programmingLanguages %}
     <div class="col-lg-4 mb-4">
         <div class="bg-white rounded-lg shadow p-4">
-            <h2 class="h5 font-weight-bold text-center mb-4">{{ l.title }}</h2>
+            <h5 class="font-weight-bold text-center mb-4">{{ l.title }}</h5>
             <div class="block-21 mb-4 d-flex justify-content-center">
                 <a id="{{ l.key }}" class="blog-img main-language" target="_blank" rel="noopener" href="{{ l.href }}" aria-label="{{ l.title }}"></a>
             </div>
             <div class="row text-center mt-4">
                 {%- for name in l.stack %}
                 <div class="col-6{{ ' border-right' if loop.index is odd }}">
-                    <div class="h5 font-weight-bold mb-0">{{ name }}</div>
+                    <div class="h6 font-weight-bold mb-0">{{ name }}</div>
                     <span class="small text-gray"></span>
                 </div>
                 {%- endfor %}

@@ -115,7 +115,7 @@ body.error-page .space-decor {
     }
 }
 
-/* ==== Copyrights, Terms / Projects ==== */
+/* ==== Copyrights, Terms & Projects ==== */
 
 /* On short legal pages (policy, terms), same sticky-footer pattern as body.error-page above: without it, short content leaves the footer floating short of the bottom of the screen with blank space below it. */
 body.legal {
@@ -169,4 +169,323 @@ body.read-zone h1 {
     align-items: center;
     justify-content: center;
     gap: 4px;
+}
+
+/* ==== Articles ==== */
+
+.article-container h2 {
+    color: var(--link);
+}
+
+.title-center {
+    font-size: 40px;
+    color: var(--link);
+    font-weight: bold;
+    line-height: 50px;
+    margin-bottom: 25px;
+}
+
+.second-title {
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+/* ==== Career Timeline ==== */
+
+.animation-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin: 40px 0;
+    padding-left: 50px;
+}
+
+.road {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 4px;
+    background: repeating-linear-gradient(to bottom, var(--main) 0, var(--main) 10px, transparent 10px, transparent 20px);
+    border-radius: 2px;
+}
+
+#car {
+    position: absolute;
+    left: 22px;
+    top: 0;
+    font-size: 28px;
+    line-height: 1;
+    transform: translate(-50%, -50%) translateY(var(--car-offset, 0));
+    transition: transform 0.1s linear;
+    z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #car {
+        transition: none;
+    }
+}
+
+.city {
+    position: relative;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--link);
+}
+
+.city::before {
+    content: '';
+    position: absolute;
+    left: -35px;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    background: var(--main);
+    border: 3px solid var(--background);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--main);
+    transform: translateY(-50%);
+}
+
+.step {
+    position: relative;
+    font-size: 15px;
+    padding-left: 4px;
+}
+
+.step::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background: var(--background);
+    border: 2px solid var(--main);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+/* ==== Rotating Box ==== */
+
+#mountain {
+    width: 100%;
+}
+
+#future {
+    margin: clamp(12px, 4vw, 30px);
+    place-items: center;
+}
+
+.box-rotate {
+    position: relative;
+    width: min(300px, 80vw);
+    aspect-ratio: 1;
+    animation: rotate 8s infinite alternate;
+    transform-style: preserve-3d;
+}
+
+.img-rotate {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.span-inside {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--white);
+    font-size: 20px;
+    text-shadow: 0 2px 5px var(--dark);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateX(20deg) rotateY(20deg);
+    }
+
+    to {
+        transform: rotateX(-15deg) rotateY(-40deg);
+    }
+}
+
+/* ==== Article Images ==== */
+
+#inpi-process {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    position: relative;
+    box-shadow: 0 4px 8px 0 var(--shadow-xs);
+}
+
+#mcs-design,
+#mcs-example,
+#programming {
+    max-width: 70vw;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+#pattern {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ==== Video ==== */
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ==== Cards ==== */
+
+html.dark-mode .card h2 {
+    color: initial !important;
+}
+
+html.dark-mode .card {
+    color: var(--dark);
+}
+
+.card {
+    background: var(--white);
+    border-radius: 1rem;
+    box-shadow: 0 0 4px var(--shadow-sm);
+    padding: 1.5rem;
+    margin: 20px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 12px var(--shadow-lg);
+}
+
+.bien {
+    border-left: 5px solid var(--green);
+}
+
+.pas-bien {
+    border-left: 5px solid var(--red);
+}
+
+.modere {
+    border-left: 5px solid var(--yellow);
+}
+
+.bloc-code {
+    position: relative;
+    background: var(--dark);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.bloc-code .lang-label {
+    position: absolute;
+    top: 1px;
+    left: 10px;
+    color: var(--yellow);
+    font-size: 10px;
+}
+
+.bloc-code .lang-code {
+    white-space: pre;
+    color: var(--white);
+    font-size: 13px;
+}
+
+/* ==== Badges ==== */
+
+.badge-definition {
+    top: 35px;
+    right: 70px;
+    left: inherit;
+}
+
+/* ==== FAQ Accordion ==== */
+
+.accordion > .card {
+    position: relative;
+    margin: 0.5rem 0;
+    border-radius: 0;
+    transition: none;
+}
+
+.accordion > .card:hover {
+    transform: none;
+    box-shadow: 0 0 4px var(--shadow-sm);
+}
+
+.accordion > .card .card-header {
+    padding: 0;
+}
+
+.accordion .card > input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.accordion .card-header label {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--dark);
+    transition: background 0.2s;
+}
+
+.accordion .card > input:focus-visible ~ .card-header label {
+    outline: 2px solid var(--dark);
+    outline-offset: -2px;
+}
+
+.accordion .card-header label::after {
+    content: '+';
+    font-size: 20px;
+    transition: transform 0.3s;
+}
+
+.accordion .card > input:checked ~ .card-header label::after {
+    transform: rotate(45deg);
+}
+
+.accordion .card-body {
+    display: none;
+    padding: 0 20px;
+    font-size: 0.95rem;
+    color: var(--dark);
+}
+
+.accordion .card > input:checked ~ .card-body {
+    display: block;
+    padding: 15px 20px;
 }
