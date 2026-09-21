@@ -312,9 +312,7 @@ sup:hover {
     padding: 3em 0;
 }
 
-#ftco-footer .ftco-footer-widget h2 {
-    font-weight: 600;
-    font-size: 22px;
+#ftco-footer .ftco-footer-widget h4 {
     color: var(--white);
     margin-bottom: 40px;
 }

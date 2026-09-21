@@ -2219,17 +2219,15 @@ textarea.form-control {
     color: var(--main);
 }
 
-.services-1 .desc h3 {
-    line-height: 1.3;
-    font-size: 13px;
+.services-1 .desc h6 {
     font-weight: 500;
     letter-spacing: 3px;
     text-transform: uppercase;
     position: relative;
-    color: #000;
+    color: var(--text-color);
 }
 
-.services-1 .desc h3::after {
+.services-1 .desc h6::after {
     position: absolute;
     bottom: -15px;
     left: 0;
@@ -2241,14 +2239,8 @@ textarea.form-control {
     margin: 0 auto;
 }
 
-.services-1 .desc h3 a {
+.services-1 .desc h6 a {
     color: #fff;
-}
-
-.services-1 .desc h4 {
-    font-size: 20px;
-    font-weight: 300;
-    margin-bottom: 18px;
 }
 
 .services-1 .desc span {
@@ -2272,11 +2264,11 @@ textarea.form-control {
     color: #fff;
 }
 
-.services-1:hover h3 {
+.services-1:hover h6 {
     color: var(--white) !important;
 }
 
-.services-1:hover h3::after {
+.services-1:hover h6::after {
     background: #000;
 }
 

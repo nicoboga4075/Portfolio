@@ -128,7 +128,7 @@ body.legal #ftco-main {
     flex: 1;
 }
 
-/* Page title only: policy/terms (bodyClass: "legal") and projects (bodyClass: "read-zone"; articles share it but have no h1). */
+/* Page title only: policy/terms (bodyClass: "legal") and projects (bodyClass: "read-zone", shared with articles - .article-container h1 above already covers those, this is what colours the projects' own h1). */
 body.legal h1,
 body.read-zone h1 {
     color: var(--main);
@@ -173,19 +173,16 @@ body.read-zone h1 {
 
 /* ==== Articles ==== */
 
-.article-container h2 {
-    color: var(--link);
-}
-
-.title-center {
-    font-size: 40px;
-    color: var(--link);
+.article-container h1 {
+    color: var(--main);
     font-weight: bold;
-    line-height: 50px;
-    margin-bottom: 25px;
 }
 
-.second-title {
+.article-container h2 {
+    color: var(--main);
+}
+
+.article-intro {
     font-style: italic;
     margin-bottom: 20px;
 }
@@ -221,8 +218,7 @@ body.read-zone h1 {
     position: absolute;
     left: 22px;
     top: 0;
-    font-size: 28px;
-    line-height: 1;
+    margin: 0;
     transform: translate(-50%, -50%);
     z-index: 2;
     animation-name: drive-car;
@@ -245,9 +241,8 @@ body.read-zone h1 {
 
 .city {
     position: relative;
-    font-size: 22px;
-    font-weight: bold;
-    color: var(--link);
+    margin: 0;
+    color: var(--main);
 }
 
 .city::before {
@@ -266,8 +261,9 @@ body.read-zone h1 {
 
 .step {
     position: relative;
-    font-size: 15px;
+    margin: 0;
     padding-left: 4px;
+    color: var(--gray);
 }
 
 .step::before {
