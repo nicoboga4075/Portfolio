@@ -244,8 +244,7 @@ Please use this SVG with attribution to the author i.e Saleh Riaz
            cy="93.32"
            r="6.99"
            transform="translate(-38.64 42.68) rotate(-30.05)"
-           id="circle15"
-           style="fill:#3e64ff;fill-opacity:1" />
+           id="circle15" />
         <g
            class="cls-13"
            clip-path="url(#clip-path-2)"
@@ -419,8 +418,7 @@ Please use this SVG with attribution to the author i.e Saleh Riaz
            rx="2.62"
            ry="2.62"
            transform="translate(-42.31 56.3) rotate(-30.6)"
-           id="rect33"
-           style="fill:#3e64ff;fill-opacity:1" />
+           id="rect33" />
         <rect
            class="cls-15"
            x="124.79"
@@ -684,14 +682,12 @@ Please use this SVG with attribution to the author i.e Saleh Riaz
         <path
            id="purple"
            class="cls-27"
-           d="M68,25.49c7.78,13.45,3.6,29.1-9.85,36.88S27.1,67.12,19.32,53.67s-1.63-30.24,11.82-38S60.25,12,68,25.49Z"
-           style="fill:#3e64ff;fill-opacity:1" />
+           d="M68,25.49c7.78,13.45,3.6,29.1-9.85,36.88S27.1,67.12,19.32,53.67s-1.63-30.24,11.82-38S60.25,12,68,25.49Z" />
         <path
            id="purple-2"
            data-name="purple"
            class="cls-28"
-           d="M67.61,24.72c7.53,13,4.26,27.7-7.7,34.62a26.11,26.11,0,0,1-26.15-45.2C45.72,7.22,60.08,11.71,67.61,24.72Z"
-           style="fill:#3e64ff;fill-opacity:1" />
+           d="M67.61,24.72c7.53,13,4.26,27.7-7.7,34.62a26.11,26.11,0,0,1-26.15-45.2C45.72,7.22,60.08,11.71,67.61,24.72Z" />
         <g
            id="outline">
           <path
