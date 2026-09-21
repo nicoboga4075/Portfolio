@@ -925,11 +925,6 @@ function createCircularChart({
 
 })(jQuery);
 
-function initArticle() {
-    loadImages('.article-image', 'png');
-    loadImages('.icon.svg', 'svg');
-}
-
 function labelCarouselControls(target) {
     // Owl Carousel marks these role="presentation" by default, which conflicts
     // with the aria-label they need since they're real, focusable controls.
@@ -1414,11 +1409,7 @@ function initBlogPage(langPage) {
             saveHashToSession(currentHash);
             clearUrlPath();
 
-            // Injected article content (career timeline, cards, accordion, ...)
-            // relies on standalone.css/standalone.js (fillCareerCounts, ...),
-            // which this page's own <head> never loads - load them once here
-            // instead of duplicating that code into app.css/app.js or
-            // common.css.
+            // The blog page's <head> never loads standalone.css/js, needed by injected articles (career timeline, cards, accordion...).
             if (!document.querySelector('link[href="css/standalone.css"]')) {
                 const standaloneCss = document.createElement('link');
                 standaloneCss.rel = 'stylesheet';
@@ -1507,7 +1498,7 @@ function initBlogPage(langPage) {
                     sanitizedNodes.forEach(node => articleShape[0].appendChild(node));
                     articleShape.append(existingShapeContent);
 
-                    initArticle();
+                    initArticle(false);
                     initProfile();
                     $('a[article-link]').each(function () {
                         const articleId = $(this).attr('article-link');

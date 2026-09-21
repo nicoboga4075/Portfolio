@@ -82,6 +82,7 @@ export default defineConfig([
     files: ["js/app.js"],
     languageOptions: {
       globals: {
+        initArticle: "readonly",
         appName: "readonly",
         appRoutes: "readonly",
         getHashFromSession: "readonly",
