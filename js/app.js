@@ -1413,14 +1413,36 @@ function initBlogPage(langPage) {
         if (currentHash) {
             saveHashToSession(currentHash);
             clearUrlPath();
+
+            // Injected article content (career timeline, cards, accordion, ...)
+            // relies on standalone.css/standalone.js (fillCareerCounts, ...),
+            // which this page's own <head> never loads - load them once here
+            // instead of duplicating that code into app.css/app.js or
+            // common.css.
+            if (!document.querySelector('link[href="css/standalone.css"]')) {
+                const standaloneCss = document.createElement('link');
+                standaloneCss.rel = 'stylesheet';
+                standaloneCss.href = 'css/standalone.css';
+                document.head.appendChild(standaloneCss);
+            }
+
+            const standaloneJsReady = document.querySelector('script[src="js/standalone.js"]')
+                ? Promise.resolve()
+                : new Promise((resolve, reject) => {
+                    const standaloneJs = document.createElement('script');
+                    standaloneJs.src = 'js/standalone.js';
+                    standaloneJs.onload = resolve;
+                    standaloneJs.onerror = () => reject(new Error('Failed to load js/standalone.js'));
+                    document.head.appendChild(standaloneJs);
+                });
+
             const urlArticle = `${host}/.netlify/functions/article?filename=${currentHash}_${langPage}.html`;
 
             // Fetched directly (no hidden trigger <iframe>): article responses
             // carry frame-ancestors 'none', so framing them only logged a CSP
             // violation and a second request for the URL fetch() already loads.
-            fetch(urlArticle)
-                .then(response => response.text())
-                .then(html => {
+            Promise.all([fetch(urlArticle).then(response => response.text()), standaloneJsReady])
+                .then(([html]) => {
                     if (html.includes("It seems you've hit a broken link or the page has moved") || html.toLowerCase().includes('"error"')) {
                         throw new Error("Resource not found"); // Catch directly to show error message when fetch redirects to 404 page
                     }
