@@ -86,7 +86,7 @@ body.error-page .space-decor {
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
     #astronaut {
         width: 44px;
         right: 8%;
