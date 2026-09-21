@@ -569,7 +569,7 @@ function fitCenterTextToHole(chartInstance) {
     ctx.font = `${labelOption.font.weight} ${CENTER_TEXT_BASE_FONT_SIZE}px ${labelOption.font.family}`;
     const textWidth = ctx.measureText(labelOption.text).width;
     const textHeight = CENTER_TEXT_BASE_FONT_SIZE * 1.2;
-    const diagonal = Math.sqrt(textWidth ** 2 + textHeight ** 2);
+    const diagonal = Math.hypot(textWidth, textHeight);
     const scale = Math.min(1, (2 * innerRadius) / diagonal);
     labelOption.font.size = Math.max(8, Math.floor(CENTER_TEXT_BASE_FONT_SIZE * scale));
 }

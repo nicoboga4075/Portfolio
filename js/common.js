@@ -227,7 +227,7 @@ function toggleDarkMode(event) {
     // class; others fall back to a sun/moon emoji, same split as footer.html's
     // icon-heart/icon-shield vs their emoji equivalents.
     const icon = document.getElementById('dark-icon');
-    if (icon && icon.dataset.iconMode === 'emoji') {
+    if (icon?.dataset.iconMode === 'emoji') {
         icon.textContent = isDark ? '🌙' : '☀️';
     } else if (icon) {
         icon.className = isDark ? 'icon-moon-o' : 'icon-sun-o';
