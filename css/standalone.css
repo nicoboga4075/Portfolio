@@ -1,4 +1,4 @@
-/* General */
+/* ==== Utilities ==== */
 
 [hidden] {
     display: none !important;
@@ -12,15 +12,14 @@
     display: none !important;
 }
 
-/* 404 */
+/* ==== 404 ==== */
 
 .space-decor {
     position: relative;
     min-height: 100vh;
 }
 
-/* On the 404 page only: fit everything (message, decor, footer) in one
-   viewport height so the copyright is visible without scrolling. */
+/* On the 404 page only: fit everything (message, decor, footer) in one viewport height so the copyright is visible without scrolling. */
 body.error-page {
     display: flex;
     flex-direction: column;
@@ -42,19 +41,7 @@ body.error-page .space-decor {
     min-height: 0;
 }
 
-/* On short legal pages (policy, terms), same sticky-footer pattern as
-   body.error-page above: without it, short content leaves the footer
-   floating short of the bottom of the screen with blank space below it. */
-body.legal {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-body.legal #ftco-main {
-    flex: 1;
-}
-
+/* Space icons floating over .space-decor (positions/sizes set here, colours in the SVGs themselves). */
 #astronaut {
     position: absolute;
     top: 50%;
@@ -126,4 +113,60 @@ body.legal #ftco-main {
             transform: translate(120px, -60px);
         }
     }
+}
+
+/* ==== Copyrights, Terms / Projects ==== */
+
+/* On short legal pages (policy, terms), same sticky-footer pattern as body.error-page above: without it, short content leaves the footer floating short of the bottom of the screen with blank space below it. */
+body.legal {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.legal #ftco-main {
+    flex: 1;
+}
+
+/* Page title only: policy/terms (bodyClass: "legal") and projects (bodyClass: "read-zone"; articles share it but have no h1). */
+body.legal h1,
+body.read-zone h1 {
+    color: var(--main);
+}
+
+/* Constrain the article/project content column only (not .read-zone itself, the <body>) so the footer, a sibling of <main>, still spans the full page. */
+.read-zone > main {
+    max-width: 50%;
+    margin: 1rem auto;
+}
+
+@media (max-width: 1199.98px) {
+    .read-zone > main {
+        max-width: 75%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .read-zone > main {
+        max-width: 90%;
+    }
+}
+
+.read-zone main > a#index {
+    display: block;
+    text-align: center;
+}
+
+.read-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Wraps #dark-icon and #language-switcher on their own centred row below the "Updated on ..." date, on policy / terms (a lone block in <main>'s centered flow, unlike .read-title's projects where the pair sits flush right of the h1 instead). */
+.page-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
 }
