@@ -749,13 +749,6 @@ function createCircularChart({
     };
     carousel();
 
-    $('nav .dropdown').hover(function (event) {
-        const isOpen = event.type === 'mouseenter';
-        $(this).toggleClass('show', isOpen);
-        $(this).find('> a').attr('aria-expanded', isOpen);
-        $(this).find('.dropdown-menu').toggleClass('show', isOpen);
-    });
-
     $(window).scroll(function () {
         const scrollTop = $(this).scrollTop(),
             navbar = $('#ftco-navbar'),
@@ -829,35 +822,6 @@ function createCircularChart({
         });
     };
     contentWayPoint();
-
-    $('.image-popup').magnificPopup({
-        type: 'image',
-        closeOnContentClick: true,
-        closeBtnInside: false,
-        fixedContentPos: true,
-        mainClass: 'mfp-no-margins mfp-with-zoom', // Class to remove default margin from left and right side
-        gallery: {
-            enabled: true,
-            navigateByImgClick: true,
-            preload: [0, 1] // Will preload 0 before current and 1 after the current image
-        },
-        image: {
-            verticalFit: true
-        },
-        zoom: {
-            enabled: true,
-            duration: 300 // Don't forget to change the duration also in CSS
-        }
-    });
-
-    $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-        disableOn: 700,
-        type: 'iframe',
-        mainClass: 'mfp-fade',
-        removalDelay: 160,
-        preloader: false,
-        fixedContentPos: false
-    });
 
     const goHere = function () {
         $('.mouse-icon').on('click', function (event) {

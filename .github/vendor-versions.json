@@ -5,7 +5,6 @@
   { "name": "Bootstrap", "file": "js/bootstrap.min.js", "source": "npm", "npm": "bootstrap", "version": "4.3.1" },
   { "name": "Popper.js", "file": "js/popper.min.js", "source": "npm", "npm": "popper.js", "version": "1.16.1" },
   { "name": "Chart.js", "file": "js/chart.umd.min.js", "source": "npm", "npm": "chart.js", "version": "4.5.1" },
-  { "name": "Magnific Popup", "file": "js/jquery.magnific-popup.min.js", "source": "npm", "npm": "magnific-popup", "version": "1.2.0" },
   { "name": "Stellar.js", "file": "js/jquery.stellar.min.js", "source": "npm", "npm": "jquery.stellar", "version": "0.6.2" },
   { "name": "Waypoints", "file": "js/jquery.waypoints.min.js", "source": "npm", "npm": "waypoints", "version": "4.0.1" },
   { "name": "Owl Carousel", "file": "js/owl.carousel.min.js", "source": "npm", "npm": "owl.carousel", "version": "2.3.4" },
