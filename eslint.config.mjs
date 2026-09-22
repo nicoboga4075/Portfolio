@@ -11,7 +11,6 @@ const vendorJs = [
   "js/i18next.min.js",
   "js/jquery-migrate.min.js",
   "js/jquery.easing.min.js",
-  "js/jquery.magnific-popup.min.js",
   "js/jquery.min.js",
   "js/jquery.stellar.min.js",
   "js/jquery.waypoints.min.js",

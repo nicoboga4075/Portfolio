@@ -14,7 +14,6 @@ The third-party libraries in `js/` and `css/` are downloaded manually (not npm d
 | Bootstrap | 4.3.1 | [npm](https://www.npmjs.com/package/bootstrap) |
 | Popper.js | 1.16.1 | [npm](https://www.npmjs.com/package/popper.js) |
 | Chart.js | 4.5.1 | [npm](https://www.npmjs.com/package/chart.js) |
-| Magnific Popup | 1.2.0 | [npm](https://www.npmjs.com/package/magnific-popup) |
 | Stellar.js | 0.6.2 | [npm](https://www.npmjs.com/package/jquery.stellar) |
 | Waypoints | 4.0.1 | [npm](https://www.npmjs.com/package/waypoints) |
 | Owl Carousel | 2.3.4 | [npm](https://www.npmjs.com/package/owl.carousel) |
