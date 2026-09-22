@@ -1,4 +1,4 @@
 {%- set parts = page.fileSlug.split("_") -%}
 {%- set suffix = parts[parts.length - 1] -%}
 {%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
-<button id="dark-icon" type="button" class="{% if assets %}icon-sun-o{% endif %}" data-icon-mode="{% if assets %}font{% else %}emoji{% endif %}" onclick="toggleDarkMode(event)" aria-label="{{ nav[lang].darkMode }}">{%- if not assets %}<span aria-hidden="true" data-emoji-light="&#9728;&#65039;" data-emoji-dark="&#127769;">&#9728;&#65039;</span>{% endif -%}</button>
+<button id="dark-icon" type="button" class="{% if assets %}icon-sun-o{% endif %}" data-icon-mode="{% if assets %}font{% else %}emoji{% endif %}" onclick="toggleDarkMode(event)" aria-label="{{ nav[lang].darkMode }}">{%- if not assets %}<span aria-hidden="true" data-emoji-light="&#9728;&#65039;" data-emoji-dark="&#127769;">&#9728;&#65039;</span>{% endif -%}<span class="sr-only">{{ nav[lang].darkMode }}</span></button>
