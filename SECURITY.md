@@ -25,23 +25,7 @@ If you discover an issue with a third-party service, please report it directly.
 
 ## Utilities
 
-Versions are tracked in [`.github/vendor-versions.json`](.github/vendor-versions.json) and checked weekly by the [`vendor-versions`](.github/workflows/vendor-versions.yml) workflow, which opens a GitHub issue when an update is available.
-
-| Version |                       |
-| ------- | --------------------  |
-| 4.3.1   | Bootstrap             |
-| 3.7.1   | jQuery                |            
-| 3.6.0   | jQuery Migrate        |
-| 1.4.1   | jQuery Easing         |
-| 0.6.2   | jQuery Stellar        |
-| 4.0.1   | jQuery Waypoints      |
-| 2.3.4   | Owl Carousel          |
-| 1.16.1  | Popper                |
-| 1.0.0   | Scrollax              |
-| 4.5.1   | Chart.js              |
-| 3.4.0   | Animate.css           |
-| 26.4.2  | i18next               |
-| 1.2.0   | chartjs-plugin-doughnutlabel-v3 |
+Versions are tracked in [`.github/vendor-versions.json`](.github/vendor-versions.json) and checked weekly by the [`vendor-versions`](.github/workflows/vendor-versions.yml) workflow, which opens a GitHub issue when an update is available. See [README.md](README.md#-vendored-libraries) for the full list of vendored libraries and what each one is used for.
 
 ### Major versions held back on purpose
 
