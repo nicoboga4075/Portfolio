@@ -221,7 +221,7 @@ input[name="search-input"].highlight-flash {
 }
 
 .slider-text p strong {
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .slider-text p strong a {
@@ -385,7 +385,7 @@ input[name="search-input"].highlight-flash {
 }
 
 #navi li {
-    font-weight: 700;
+    font-weight: bold;
     list-style: none;
     margin-bottom: 10px;
 }
@@ -436,7 +436,7 @@ input[name="search-input"].highlight-flash {
 }
 
 #counter-section .text strong.number {
-    font-weight: 700;
+    font-weight: bold;
     font-size: 30px;
     color: var(--main);
     display: block;
@@ -526,19 +526,19 @@ input[name="search-input"].highlight-flash {
 }
 
 .resume-wrap .date {
-    font-weight: 700;
+    font-weight: bold;
     color: rgb(0 0 0 / 60%);
     color: var(--main);
 }
 
 .resume-wrap h2 {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .resume-wrap .position {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: bold;
     color: #000;
 }
 
@@ -797,7 +797,7 @@ progress::-webkit-progress-value {
 
 .heading-section h2 {
     font-size: 50px;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .heading-section h2 span {
