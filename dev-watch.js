@@ -7,7 +7,7 @@ const path = require('node:path');
 // Every executable is an absolute path: node itself, the project's Eleventy, the global netlify-cli installed next to node, and taskkill in System32. Nothing is looked up through PATH, and no shell wraps the commands.
 const eleventyCli = path.join(__dirname, 'node_modules', '@11ty', 'eleventy', 'cmd.cjs');
 const netlifyCli = path.join(path.dirname(process.execPath), 'node_modules', 'netlify-cli', 'bin', 'run.js');
-const taskkill = path.join(process.env.SystemRoot ?? 'C:\\Windows', 'System32', 'taskkill.exe');
+const taskkill = path.join(process.env.SystemRoot ?? String.raw`C:\Windows`, 'System32', 'taskkill.exe');
 
 if (!fs.existsSync(netlifyCli)) {
     console.error(`netlify-cli not found at ${netlifyCli}: install it globally with npm install -g netlify-cli.`);
