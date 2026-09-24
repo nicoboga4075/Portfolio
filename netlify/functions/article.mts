@@ -20,12 +20,19 @@ export default async function handlerArticle(req: Request, context: Context): Pr
         // Local preview (npm run dev) compiles to .eleventy/ instead of in-place,
         // so prefer that compiled copy when present; production builds compile
         // articles/*.html in place and never leave a .eleventy/ folder behind.
-        const candidatePaths = [
-            path.join(process.cwd(), ".eleventy", "articles", filename),
-            path.join(process.cwd(), "articles", filename)
+        const articleDirs = [
+            path.join(process.cwd(), ".eleventy", "articles"),
+            path.join(process.cwd(), "articles")
         ];
 
-        for (const candidatePath of candidatePaths) {
+        for (const articleDir of articleDirs) {
+            const candidatePath = path.resolve(articleDir, filename);
+
+            // Second barrier behind the filename allowlist above: never read outside the articles folder, even if that regex is loosened later.
+            if (!candidatePath.startsWith(articleDir + path.sep)) {
+                continue;
+            }
+
             try {
                 const fileContent = await fs.readFile(candidatePath, "utf-8");
                 return new Response(fileContent, {
