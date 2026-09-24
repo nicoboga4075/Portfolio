@@ -212,7 +212,9 @@ function toggleDarkMode(event) {
     // icon-heart/icon-shield vs their emoji equivalents.
     const icon = document.getElementById('dark-icon');
     if (icon?.dataset.iconMode === 'emoji') {
-        icon.textContent = isDark ? '🌙' : '☀️';
+        // aria-hidden span, not the button's own textContent, so the accessible name (aria-label) keeps naming it, not the glyph.
+        const span = icon.querySelector('span');
+        span.textContent = isDark ? span.dataset.emojiDark : span.dataset.emojiLight;
     } else if (icon) {
         icon.className = isDark ? 'icon-moon-o' : 'icon-sun-o';
     }

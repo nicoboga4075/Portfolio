@@ -767,54 +767,6 @@ progress::-webkit-progress-value {
     color: #fff !important;
 }
 
-.btn.btn-secondary {
-    background: #a0f669 !important;
-    border: 1px solid #a0f669 !important;
-    color: #fff !important;
-}
-
-.btn.btn-secondary:hover {
-    border: 1px solid #a0f669 !important;
-    background: transparent !important;
-    color: #a0f669 !important;
-}
-
-.btn.btn-secondary.btn-outline-primary {
-    border: 1px solid #a0f669;
-    background: transparent;
-    color: #a0f669;
-}
-
-.btn.btn-secondary.btn-outline-primary:hover {
-    border: 1px solid transparent;
-    background: #a0f669;
-    color: #fff;
-}
-
-.btn.btn-white {
-    background: #fff !important;
-    border: 1px solid #fff !important;
-    color: #000 !important;
-}
-
-.btn.btn-white:hover {
-    border: 1px solid #000;
-    background: #fff !important;
-    color: #fff;
-}
-
-.btn.btn-white.btn-outline-white {
-    border: 1px solid rgb(255 255 255 / 50%) !important;
-    background: transparent !important;
-    color: #fff !important;
-}
-
-.btn.btn-white.btn-outline-white:hover {
-    border: 1px solid transparent;
-    background: var(--main);
-    color: #fff;
-}
-
 .bg-primary {
     background: var(--main) !important;
 }
@@ -1399,76 +1351,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     opacity: .7;
 }
 
-.comment-form-wrap {
-    clear: both;
-}
-
-.comment-list {
-    padding: 0;
-    margin: 0;
-}
-
-.comment-list .children {
-    padding: 50px 0 0 40px;
-    margin: 0;
-    float: left;
-    width: 100%;
-}
-
-.comment-list li {
-    padding: 0;
-    margin: 0 0 30px;
-    float: left;
-    width: 100%;
-    clear: both;
-    list-style: none;
-}
-
-.comment-list li .vcard {
-    width: 80px;
-    float: left;
-}
-
-.comment-list li .vcard img {
-    width: 50px;
-    border-radius: 50%;
-}
-
-.comment-list li .comment-body {
-    float: right;
-    width: calc(100% - 80px);
-}
-
-.comment-list li .comment-body h3 {
-    font-size: 20px;
-}
-
-.comment-list li .comment-body .meta {
-    text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: .1em;
-    color: rgb(255 255 255 / 30%);
-    color: var(--main);
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
-.comment-list li .comment-body .reply {
-    padding: 5px 10px;
-    background: rgb(0 0 0 / 10%);
-    color: #000;
-    text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: .1em;
-    font-weight: 600;
-    border-radius: 4px;
-}
-
-.comment-list li .comment-body .reply:hover {
-    color: #fff;
-    background: black;
-}
-
 .search-form .form-group {
     position: relative;
     margin-bottom: 0;
@@ -1691,19 +1573,19 @@ textarea.form-control {
     height: inherit !important;
 }
 
-.contact-section .box {
+#contact-section .box {
     width: 100%;
     display: block;
     border-radius: 4px;
 }
 
 @media (max-width: 991.98px) {
-    .contact-section .box {
+    #contact-section .box {
         margin-bottom: 30px;
     }
 }
 
-.contact-section .box .icon {
+#contact-section .box .icon {
     width: 100px;
     height: 100px;
     background: var(--main);
@@ -1712,37 +1594,37 @@ textarea.form-control {
     border-radius: 50%;
 }
 
-.contact-section .box .icon span {
+#contact-section .box .icon span {
     color: #fff;
     font-size: 30px;
 }
 
-.contact-section .box h3 {
+#contact-section .box h3 {
     font-size: 18px;
     font-weight: 600;
 }
 
-.contact-section .contact-form {
+#contact-section .contact-form {
     width: 100%;
 }
 
-.contact-section .img {
+#contact-section .img {
     width: 100%;
     background-position: top center;
 }
 
 @media (max-width: 991.98px) {
-    .contact-section .img {
+    #contact-section .img {
         height: 500px;
     }
 }
 
-.contact-section .contact-info p a {
+#contact-section .contact-info p a {
     color: var(--main);
 }
 
 @media (max-width: 767.98px) {
-    .contact-section .contact-form .btn-primary {
+    #contact-section .contact-form .btn-primary {
         display: block;
         width: 100%;
     }
@@ -1994,7 +1876,7 @@ textarea.form-control {
 }
 
 .company-type-badge {
-    background-color: var(--black);
+    background-color: var(--dark);
 }
 
 .company-size-badge {
