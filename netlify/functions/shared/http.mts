@@ -20,8 +20,8 @@ export function isTrustedRequest(req: Request): boolean {
         // Missing or malformed Referer: treat as not originating from the site.
     }
 
-    // Netlify sets CONTEXT to "dev" only under `netlify dev` (npm run dev / dev:live);
-    // in that mode the Live Share tunnel serves the site from a *.netlify.live origin.
+    // Netlify sets CONTEXT to "dev" only under `netlify dev` (npm run dev, dev:watch, dev:live);
+    // only with --live (npm run dev:live) is the site served from a *.netlify.live tunnel origin.
     const isDevTunnel = process.env.CONTEXT === "dev" &&
         /^https:\/\/[^/]+\.netlify\.live$/.test(refererOrigin);
 
