@@ -228,12 +228,6 @@ input[name="search-input"].highlight-flash {
     color: #000;
 }
 
-.slider-text .bread {
-    font-weight: 700;
-    color: #000;
-    font-size: 60px;
-}
-
 .mouse {
     position: absolute;
     left: 0;
@@ -433,7 +427,7 @@ input[name="search-input"].highlight-flash {
     }
 }
 
-#counter-section .block-18 {
+#counter-section .stat-card {
     display: block;
     width: 100%;
     text-align: center;
@@ -754,23 +748,7 @@ progress::-webkit-progress-value {
     color: #fff !important;
 }
 
-.bg-primary {
-    background: var(--main) !important;
-}
-
 /* ==== Utilities ==== */
-
-.ftco-vh-100 {
-    height: 100vh;
-}
-
-@media (max-width: 1199.98px) {
-    .ftco-vh-100 {
-        height: inherit;
-        padding-top: 5em;
-        padding-bottom: 5em;
-    }
-}
 
 /* Scroll-reveal: index/blog sections and the footer's synopsis widget start hidden, then app.js adds ftco-animated (plus a fadeInUp class) once the element scrolls into view. Kept together and in this order so cascade order still resolves visibility to visible even after app.css loads. */
 .ftco-animate {
@@ -803,16 +781,6 @@ progress::-webkit-progress-value {
     padding-bottom: 0 !important;
 }
 
-#map {
-    width: 100%;
-}
-
-@media (max-width: 767.98px) {
-    #map {
-        height: 300px;
-    }
-}
-
 .heading-section {
     position: relative;
 }
@@ -825,20 +793,6 @@ progress::-webkit-progress-value {
     text-transform: uppercase;
     color: black;
     letter-spacing: 3px;
-}
-
-.heading-section h1.big {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 7vw;
-    color: rgb(255 255 255 / 10%);
-    z-index: -1;
-    font-weight: 900;
-}
-
-.heading-section h1.big.big-2 {
-    right: 0;
 }
 
 .heading-section h2 {
@@ -856,27 +810,14 @@ progress::-webkit-progress-value {
     }
 }
 
-.heading-section.heading-section-white .subheading {
-    color: rgb(255 255 255 / 90%) !important;
-}
-
-.heading-section.heading-section-white h2 {
-    color: #fff;
-}
-
-.heading-section.heading-section-white p {
-    color: rgb(255 255 255 / 90%);
-}
-
 .img,
-.blog-img,
-.user-img {
+.blog-img {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
 }
 
-.block-20 {
+.blog-preview-thumb {
     overflow: hidden;
     background-size: cover;
     background-repeat: no-repeat;
@@ -996,30 +937,6 @@ progress::-webkit-progress-value {
     }
 }
 
-.ftco-navbar-light .navbar-nav>.nav-item.cta>a {
-    color: #fff;
-    border: 1px solid var(--main);
-    padding: 11.2px 18px;
-    background: var(--main);
-    margin-top: 0;
-    border-radius: 5px;
-}
-
-.ftco-navbar-light .navbar-nav>.nav-item.cta>a span {
-    display: inline-block;
-    color: #fff;
-}
-
-.ftco-navbar-light .navbar-nav>.nav-item.cta>a:hover {
-    background: var(--main);
-    border: 1px solid var(--main);
-}
-
-.ftco-navbar-light .navbar-nav>.nav-item.cta.cta-colored a {
-    border: 1px solid #a0f669;
-    background: #a0f669 !important;
-}
-
 .ftco-navbar-light .navbar-nav>.nav-item .nav-link.active {
     background: transparent;
     background: 0;
@@ -1093,24 +1010,6 @@ progress::-webkit-progress-value {
 
 .ftco-navbar-light.scrolled .nav-item.active>a {
     color: var(--main) !important;
-}
-
-.ftco-navbar-light.scrolled .nav-item.cta>a {
-    color: #fff !important;
-    background: var(--main);
-    border: none !important;
-    padding: 8px 20px !important;
-    margin-top: 5px !important;
-    border-radius: 5px;
-}
-
-.ftco-navbar-light.scrolled .nav-item.cta>a span {
-    display: inline-block;
-    color: #fff !important;
-}
-
-.ftco-navbar-light.scrolled .nav-item.cta.cta-colored span {
-    border-color: var(--main);
 }
 
 @media (max-width: 991.98px) {
@@ -1265,56 +1164,38 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     color: var(--main);
 }
 
-.block-23 ul {
+.footer-list ul {
     padding: 0;
 }
 
-.block-23 ul li {
+.footer-list ul li {
     display: table;
     margin-bottom: 15px;
 }
 
-.block-23 ul li span {
+.footer-list ul li span {
     color: rgb(255 255 255 / 70%);
 }
 
-.block-23 ul li .text {
+.footer-list ul li .text {
     display: table-cell;
     vertical-align: top;
 }
 
-.block-21 .blog-img {
+.media-row .blog-img {
     display: block;
     height: 80px;
     width: 80px;
     border-radius: 50%;
 }
 
-.block-21 .text {
+.media-row .text {
     width: calc(100% - 100px);
 }
 
-.block-21 .text .heading {
+.media-row .text .heading {
     font-size: 18px;
     font-weight: 300;
-}
-
-.post-info {
-    font-size: 12px;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #fff;
-    letter-spacing: .1em;
-}
-
-.post-info>div {
-    display: inline-block;
-}
-
-.post-info>div .seperator {
-    display: inline-block;
-    margin: 0 10px;
-    opacity: .5;
 }
 
 .tagcloud a {
@@ -1367,54 +1248,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     font-weight: 600;
     margin-bottom: 20px;
     font-size: 20px;
-}
-
-.categories,
-.sidelink {
-    padding: 0;
-    margin: 0;
-}
-
-.categories li,
-.sidelink li {
-    position: relative;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    list-style: none;
-}
-
-.categories li:last-child,
-.sidelink li:last-child {
-    margin-bottom: 0;
-    border-bottom: 0;
-    padding-bottom: 0;
-}
-
-.categories li a,
-.sidelink li a {
-    display: block;
-    color: #000;
-}
-
-.categories li a span,
-.sidelink li a span {
-    position: absolute;
-    right: 0;
-    top: 0;
-    color: var(--main);
-}
-
-.categories li a:hover,
-.categories li a:focus,
-.sidelink li a:hover,
-.sidelink li a:focus {
-    color: var(--main);
-}
-
-.categories li.active a,
-.sidelink li.active a {
-    color: #000;
-    font-style: italic;
 }
 
 .blog-entry .article-image:hover {
@@ -1613,7 +1446,7 @@ textarea.form-control {
     }
 }
 
-.block-9 .form-control {
+.contact-row .form-control {
     outline: none !important;
     box-shadow: none !important;
     font-size: 15px;
@@ -1653,46 +1486,6 @@ textarea.form-control {
     margin-bottom: 0;
     position: relative;
     z-index: 0;
-}
-
-.project.img-2 {
-    height: 600px;
-}
-
-@media (max-width: 767.98px) {
-    .project.img-2 {
-        height: 285px;
-    }
-}
-
-.project.img-2 .text {
-    max-width: 45%;
-    z-index: 1;
-}
-
-.project.img-2 .text h3 {
-    font-size: 22px;
-}
-
-.project.img-2 .text h3 a {
-    color: #fff;
-}
-
-.project.img-2 .text span {
-    color: rgb(255 255 255 / 80%);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-@media (max-width: 767.98px) {
-    .project.img-2 .text {
-        max-width: 100%;
-        opacity: 1;
-    }
-
-    .project.img-2 .text span {
-        color: rgb(255 255 255 / 80%);
-    }
 }
 
 .project .overlay {
@@ -1752,31 +1545,6 @@ textarea.form-control {
 .project:hover .text,
 .project:focus .text {
     opacity: 1;
-}
-
-.aside-stretch {
-    background: #718dff;
-}
-
-.aside-stretch::after {
-    position: absolute;
-    top: 0;
-    right: 100%;
-    bottom: 0;
-    content: '';
-    width: 360%;
-    background: #718dff;
-}
-
-@media (max-width: 767.98px) {
-    .aside-stretch {
-        background: transparent;
-    }
-
-    .aside-stretch::after {
-        background: transparent;
-        display: none;
-    }
 }
 
 #projects-section {
@@ -2003,24 +1771,24 @@ textarea.form-control {
 
 /* ==== Services Section ==== */
 
-.services-1 {
+.services {
     margin-bottom: 40px;
     padding: 2em;
     background: rgb(255 255 255 / 10%);
     width: 100%;
 }
 
-.services-1 .icon {
+.services .icon {
     display: block;
     margin-bottom: 30px;
 }
 
-.services-1 .icon i {
+.services .icon i {
     font-size: 60px;
     color: var(--main);
 }
 
-.services-1 .desc h6 {
+.services .desc h6 {
     font-weight: 500;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -2028,7 +1796,7 @@ textarea.form-control {
     color: var(--text-color);
 }
 
-.services-1 .desc h6::after {
+.services .desc h6::after {
     position: absolute;
     bottom: -15px;
     left: 0;
@@ -2040,11 +1808,11 @@ textarea.form-control {
     margin: 0 auto;
 }
 
-.services-1 .desc h6 a {
+.services .desc h6 a {
     color: #fff;
 }
 
-.services-1 .desc span {
+.services .desc span {
     display: block;
     text-transform: uppercase;
     font-size: 12px;
@@ -2052,33 +1820,25 @@ textarea.form-control {
     color: var(--main);
 }
 
-.services-1 .desc p {
+.services .desc p {
     color: rgb(0 0 0 / 70%);
 }
 
-.services-1:hover {
+.services:hover {
     background: var(--main);
     opacity: 0.8;
 }
 
-.services-1:hover .icon i {
+.services:hover .icon i {
     color: #fff;
 }
 
-.services-1:hover h6 {
+.services:hover h6 {
     color: var(--white) !important;
 }
 
-.services-1:hover h6::after {
+.services:hover h6::after {
     background: #000;
-}
-
-/* ==== Article Iframe ==== */
-
-#iframe-article {
-    visibility: hidden;
-    height: 0;
-    width: 0;
 }
 
 /* ==== Footer ==== */
@@ -2110,19 +1870,6 @@ textarea.form-control {
 
 .ftco-footer-links li a:hover {
     color: #fff;
-}
-
-.footer-small-nav>li {
-    display: inline-block;
-}
-
-.footer-small-nav>li a {
-    margin: 0 10px 10px 0;
-}
-
-.footer-small-nav>li a:hover,
-.footer-small-nav>li a:focus {
-    color: var(--main);
 }
 
 #bingo-timer {

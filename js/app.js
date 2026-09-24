@@ -1130,7 +1130,7 @@ function initIndexPage(langPage) {
             navLink.href = `/${langPage}/blog#${appArticles[index].slug}`;
         });
 
-        $('.services-1').each(function (index, navLink) {
+        $('.services').each(function (index, navLink) {
             navLink.href = buildSafeRedirection(appServices[index], langPage);
         });
 
