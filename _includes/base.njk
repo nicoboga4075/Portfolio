@@ -46,9 +46,6 @@ bodyClass: ""
         {%- if botpress and viewport == "desktop" %}
         <script defer src="js/botpress.js"></script>
         {%- endif %}
-        {%- if profile %}
-        <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
-        {%- endif %}
     </head>
     <body class="{{ bodyClass }}"{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}">
         <div id="ftco-loader" class="show fullscreen" role="status" aria-live="polite" aria-atomic="true" aria-label="{{ common.loading[lang] }}">
