@@ -217,9 +217,14 @@ module.exports = function configureEleventy(eleventyConfig) {
         }
         return content;
     });
-    eleventyConfig.on("eleventy.before", () => {
+    let cleaned = false;
+    eleventyConfig.on("eleventy.before", ({ runMode }) => {
         // Always start from a clean output folder so a stale preview build
         // can never leak into a production (in-place) compile, or vice versa.
+        // Under --watch only the first build cleans: a rebuild re-copies just
+        // the changed passthrough files, so wiping would delete the rest.
+        if (runMode === "watch" && cleaned) return;
+        cleaned = true;
         fs.rmSync(path.join(__dirname, outputFolder), {
             recursive: true,
             force: true

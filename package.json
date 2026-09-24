@@ -4,7 +4,8 @@
   "description": "This project is deployed on **Netlify** : https://nicoboga.netlify.app",
   "scripts": {
     "dev": "npm run gen:redirects && cross-env ELEVENTY_PREVIEW=1 npm run eleventy && npm run uglify:preview && netlify dev",
-    "dev:live": "npm run gen:redirects && cross-env ELEVENTY_PREVIEW=1 npm run eleventy && npm run uglify:preview && netlify dev --live=dev",
+    "dev:watch": "npm run gen:redirects && node dev-watch.js",
+    "dev:live": "npm run gen:redirects && node dev-watch.js --live=dev",
     "build": "npm run gen:redirects && npm run eleventy && npm run uglify:js",
     "gen:redirects": "node gen-redirects.js",
     "kill": "taskkill /IM node.exe /F",
