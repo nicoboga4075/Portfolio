@@ -370,6 +370,15 @@ function highlightKeywords(keywords) {
     });
 }
 
+// The FAQ accordion (css/standalone.css) hides a closed card's body with display: none, so a mark inside it has no box to scroll to: open its card first.
+function scrollToHighlight($mark) {
+    $mark.closest('.card').children('input[type="checkbox"]').prop('checked', true);
+    $mark.addClass('current-match')[0].scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+    });
+}
+
 function scrollToNextHighlight() {
     const $marks = $('.article-container mark.highlight');
     if ($marks.length === 0) return;
@@ -378,11 +387,7 @@ function scrollToNextHighlight() {
         indexSearchOccurence = 0;
     }
     $marks.removeClass('current-match');
-    const $target = $marks.eq(indexSearchOccurence);
-    $target.addClass('current-match')[0].scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-    });
+    scrollToHighlight($marks.eq(indexSearchOccurence));
 }
 
 // initTranslator() only bakes the language-switcher hrefs once, at page load (see its own comment in common.js) - without re-running it here, the switcher keeps pointing at whatever section was current at load time, however far the visitor scrolls afterward. Skip when the hash didn't actually change so scrolling within the same section doesn't re-run it every tick.
@@ -1220,6 +1225,14 @@ function initBlogPage(langPage) {
             const $searchSpan = $('.icon-search');
             const $searchInfo = $('#search-info');
 
+            // Points the visitor at the search icon: clicking it again (or pressing Enter) jumps to the next occurrence.
+            function pulseSearchButton() {
+                $searchSpan.addClass('search-help');
+                setTimeout(() => {
+                    $searchSpan.removeClass('search-help');
+                }, 2500);
+            }
+
             $resetSpan.hide();
             $suggestions.hide();
 
@@ -1270,13 +1283,7 @@ function initBlogPage(langPage) {
             $searchInput.on('keydown', function (event) {
                 if (event.key === 'Enter') {
                     event.preventDefault();
-                    scrollToNextHighlight();
-                    if ($searchInput.val() !== '' && !$searchInfo.hasClass('no-result')) {
-                        $searchSpan.addClass('search-help');
-                        setTimeout(() => {
-                            $searchSpan.removeClass('search-help');
-                        }, 2500);
-                    }
+                    $searchSpan.trigger('click');
                 } else {
                     $('.article-container').html(originalArticleContent);
                     $searchInfo.hide().removeClass('no-result').text('');
@@ -1293,13 +1300,9 @@ function initBlogPage(langPage) {
                 indexSearchOccurence = -1;
                 const countHighLight = $('.article-container mark.highlight').length;
                 if (countHighLight > 0) {
-                    const firstMark = $('.article-container mark.highlight').first();
+                    // Only report the count here: the next click on the search icon goes to the first occurrence (indexSearchOccurence is -1).
                     $searchInfo.text(`${countHighLight} occurrence${countHighLight > 1 ? 's' : ''}`);
-                    indexSearchOccurence = 0;
-                    firstMark.addClass('current-match')[0].scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
+                    pulseSearchButton();
                 } else {
                     $searchInfo.text(getMessage('search-no-result')).addClass('no-result');
                 }
