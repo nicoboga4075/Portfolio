@@ -17,7 +17,7 @@ export default async function handlerArticle(req: Request, context: Context): Pr
             return redirectTo404();
         }
 
-        // Local preview (npm run dev, dev:watch, dev:live) compiles to .eleventy/ instead of in-place,
+        // Local preview (npm run dev, dev:watch, dev:live, dev:live:watch) compiles to .eleventy/ instead of in-place,
         // so prefer that compiled copy when present; production builds compile
         // articles/*.html in place and never leave a .eleventy/ folder behind.
         const articleDirs = [
