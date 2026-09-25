@@ -646,7 +646,7 @@ progress::-webkit-progress-value {
 }
 
 .bg-dark {
-    background: #191919 !important;
+    background: var(--black) !important;
 }
 
 .btn {
@@ -1598,8 +1598,8 @@ textarea.form-control {
 }
 
 .owl-menu.active {
-    color: #6e8bff;
-    border-bottom-color: #6e8bff;
+    color: color-mix(in srgb, var(--main) 85%, white 15%);
+    border-bottom-color: currentColor;
 }
 
 .owl-carousel {
