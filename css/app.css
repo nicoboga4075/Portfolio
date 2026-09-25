@@ -225,7 +225,7 @@ input[name="search-input"].highlight-flash {
     position: absolute;
     inset: 0;
     content: '';
-    background: #edf0ff;
+    background: color-mix(in srgb, var(--main) 10%, white);
     z-index: -1;
     transform: rotate(45deg);
 }
@@ -362,7 +362,7 @@ input[name="search-input"].highlight-flash {
 }
 
 #navi li a {
-    color: #000;
+    color: var(--black);
     padding: 0;
 }
 
@@ -477,7 +477,7 @@ input[name="search-input"].highlight-flash {
 }
 
 .resume-wrap .icon span {
-    color: #fff;
+    color: var(--white);
     font-size: 28px;
 }
 
@@ -498,7 +498,7 @@ input[name="search-input"].highlight-flash {
 .resume-wrap .position {
     font-size: 18px;
     font-weight: bold;
-    color: #000;
+    color: var(--black);
 }
 
 .about-author {
@@ -642,7 +642,7 @@ progress::-webkit-progress-value {
 /* ==== Buttons ==== */
 
 .bg-light {
-    background: #f8f9fa !important;
+    background: var(--light) !important;
 }
 
 .bg-dark {
@@ -652,7 +652,7 @@ progress::-webkit-progress-value {
 .btn {
     cursor: pointer;
     border-radius: 40px;
-    box-shadow: 0 24px 36px -11px rgb(0 0 0 / 9%);
+    box-shadow: 0 24px 36px -11px var(--shadow-sm);
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -704,7 +704,7 @@ progress::-webkit-progress-value {
 .btn.btn-primary.btn-outline-primary:hover {
     border: 2px solid transparent !important;
     background: var(--main) !important;
-    color: #fff !important;
+    color: var(--white) !important;
 }
 
 /* ==== Utilities ==== */
@@ -750,7 +750,7 @@ progress::-webkit-progress-value {
     display: block;
     margin-bottom: 5px;
     text-transform: uppercase;
-    color: black;
+    color: var(--black);
     letter-spacing: 3px;
 }
 
@@ -802,7 +802,7 @@ progress::-webkit-progress-value {
 
 @media (max-width: 991.98px) {
     .ftco-navbar-light {
-        background: #000 !important;
+        background: var(--black) !important;
         position: relative;
         top: 0;
         padding: 0 15px;
@@ -816,19 +816,19 @@ progress::-webkit-progress-value {
 }
 
 .ftco-navbar-light .navbar-brand {
-    color: #000;
+    color: var(--black);
     padding-top: 11.2px;
     padding-bottom: 11.2px;
 }
 
 .ftco-navbar-light .navbar-brand:hover,
 .ftco-navbar-light .navbar-brand:focus {
-    color: #000 !important;
+    color: var(--black) !important;
 }
 
 @media (max-width: 991.98px) {
     .ftco-navbar-light .navbar-brand {
-        color: #fff;
+        color: var(--white);
     }
 
     .ftco-navbar-light .navbar-nav {
@@ -839,7 +839,7 @@ progress::-webkit-progress-value {
 
 .ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
     padding: 11.2px 20px;
-    color: #000;
+    color: var(--black);
     font-weight: 400;
     opacity: 1 !important;
 }
@@ -877,7 +877,7 @@ progress::-webkit-progress-value {
 @media (max-width: 991.98px) {
     .ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
         padding: 0 0 16px;
-        color: #fff;
+        color: var(--white);
     }
 }
 
@@ -935,13 +935,13 @@ progress::-webkit-progress-value {
     left: 0;
     top: 0;
     margin-top: -130px;
-    background: #fff !important;
-    box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%);
+    background: var(--white) !important;
+    box-shadow: 0 0 10px 0 var(--shadow-sm);
     padding: 0 15px;
 }
 
 .ftco-navbar-light.scrolled .nav-item>.nav-link {
-    color: #000 !important;
+    color: var(--black) !important;
 }
 
 @media (max-width: 991.98px) {
@@ -976,7 +976,7 @@ progress::-webkit-progress-value {
 }
 
 .ftco-navbar-light.scrolled .nav-link {
-    color: #000 !important;
+    color: var(--black) !important;
 }
 
 .ftco-navbar-light.scrolled .nav-link.active {
@@ -993,7 +993,7 @@ progress::-webkit-progress-value {
 }
 
 .ftco-navbar-light.scrolled .navbar-brand {
-    color: #000;
+    color: var(--black);
     padding-top: 16px;
     padding-bottom: 16px;
     font-size: 24px;
@@ -1020,7 +1020,7 @@ progress::-webkit-progress-value {
 }
 
 .navbar-brand span {
-    color: #fff;
+    color: var(--white);
 }
 
 /* ==== Navbar Brand ==== */
@@ -1076,7 +1076,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 }
 
 .blog-entry .text .heading a {
-    color: #000;
+    color: var(--black);
 }
 
 .blog-entry .text .heading a:hover,
@@ -1150,7 +1150,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 }
 
 .tagcloud a:hover {
-    border: 1px solid #718dff;
+    border: 1px solid color-mix(in srgb, var(--main) 85%, white 15%);
     opacity: .7;
 }
 
@@ -1295,8 +1295,8 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 
 .form-control {
     height: 52px !important;
-    background: #fff !important;
-    color: #000 !important;
+    background: var(--white) !important;
+    color: var(--black) !important;
     font-size: 18px;
     border-radius: 5px;
     box-shadow: none !important;
@@ -1304,7 +1304,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 
 .form-control:focus,
 .form-control:active {
-    border-color: #000;
+    border-color: var(--black);
 }
 
 textarea.form-control {
@@ -1333,7 +1333,7 @@ textarea.form-control {
 }
 
 #contact-section .box .icon span {
-    color: #fff;
+    color: var(--white);
     font-size: 30px;
 }
 
@@ -1734,7 +1734,7 @@ textarea.form-control {
 }
 
 .ftco-footer-links li a:hover {
-    color: #fff;
+    color: var(--white);
 }
 
 #bingo-timer {
