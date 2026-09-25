@@ -76,10 +76,6 @@
 
   [[context.production.plugins.inputs.audits]]
     url = "https://nicoboga.netlify.app"
-    path = "404"
-
-  [[context.production.plugins.inputs.audits]]
-    url = "https://nicoboga.netlify.app"
     path = "en/blog"
 
   [[context.production.plugins.inputs.audits]]
