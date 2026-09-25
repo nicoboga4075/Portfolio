@@ -641,11 +641,19 @@ progress::-webkit-progress-value {
 
 /* ==== Buttons ==== */
 
+.bg-white {
+    background: var(--white) !important;
+}
+
 .bg-light {
     background: var(--light) !important;
 }
 
 .bg-dark {
+    background: var(--dark) !important;
+}
+
+.bg-black {
     background: var(--black) !important;
 }
 
