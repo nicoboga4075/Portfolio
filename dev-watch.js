@@ -2,18 +2,36 @@
 // Unlike npm run dev this doesn't minify the js copy (a rebuild only re-copies the files that changed).
 const { spawn } = require('node:child_process');
 const fs = require('node:fs');
+const http = require('node:http');
 const os = require('node:os');
 const path = require('node:path');
+const browserSync = require('browser-sync').create();
+const toml = require('toml');
 
-// Every executable is an absolute path: node itself, the project's Eleventy and browser-sync, the global netlify-cli installed next to node, and taskkill in System32. Nothing is looked up through PATH, and no shell wraps the commands.
+// Every executable is an absolute path: node itself, the project's Eleventy, the global netlify-cli installed next to node, and taskkill in System32. Nothing is looked up through PATH, and no shell wraps the commands.
 const eleventyCli = path.join(__dirname, 'node_modules', '@11ty', 'eleventy', 'cmd.cjs');
-const browserSyncCli = path.join(__dirname, 'node_modules', 'browser-sync', 'dist', 'bin.js');
 const netlifyCli = path.join(path.dirname(process.execPath), 'node_modules', 'netlify-cli', 'bin', 'run.js');
 const taskkill = path.join(process.env.SystemRoot ?? String.raw`C:\Windows`, 'System32', 'taskkill.exe');
 
 // Visitors browse browser-sync on 8888 (the only localhost origin isTrustedRequest lets call the functions), which proxies netlify dev on 8889.
 const sitePort = 8888;
 const netlifyPort = 8889;
+const { staticServerPort } = toml.parse(fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8')).dev;
+
+// netlify dev (27.9.0) answers 403 on Windows for any static file that a _redirects rule matches: its getStatic() builds the path with path.relative, so it hands its own static server /docs\public\CV_en.pdf, which that server refuses. /docs/public/* is matched by such a rule, so the CV and the other public documents never load through 8888. Serve them straight from netlify dev's static server instead (production isn't affected: Netlify runs on Linux). Only the security headers of _headers are lost on those files locally.
+function serveDocsPublic(req, res, next) {
+    // new URL resolves any "../" before the prefix is checked.
+    const { pathname, search } = new URL(req.url, 'http://localhost');
+    if (!['GET', 'HEAD'].includes(req.method) || !pathname.toLowerCase().startsWith('/docs/public/')) {
+        return next();
+    }
+    const upstream = http.request({ host: 'localhost', port: staticServerPort, method: req.method, path: pathname + search }, response => {
+        res.writeHead(response.statusCode, response.headers);
+        response.pipe(res);
+    });
+    upstream.on('error', next);
+    upstream.end();
+}
 
 // browser-sync watches only this file, which is rewritten at the end of every Eleventy build. Letting it watch .eleventy itself made its process grow past 2 GB in a few rebuilds (each rebuild rewrites every page and, when full, re-copies ~300 MB of static files) until Node ran out of memory. It lives in the temp folder, outside the repo, so it never shows up in git.
 const reloadTrigger = path.join(os.tmpdir(), 'portfolio-dev-reload').replaceAll(path.sep, '/');
@@ -66,10 +84,15 @@ eleventy.stdout.on('data', chunk => {
         servingStarted = true;
         run(netlifyCli, ['dev', '--port', String(netlifyPort), ...netlifyArgs], {}, 'inherit');
         // One full reload per build (css included), triggered by the file above.
-        run(browserSyncCli, [
-            'start', '--proxy', `http://localhost:${netlifyPort}`, '--port', String(sitePort),
-            '--files', reloadTrigger,
-            '--no-open', '--no-notify', '--no-ui', '--no-ghost-mode'
-        ], {}, 'inherit');
+        browserSync.init({
+            proxy: `http://localhost:${netlifyPort}`,
+            port: sitePort,
+            files: reloadTrigger,
+            middleware: [serveDocsPublic],
+            open: false,
+            notify: false,
+            ui: false,
+            ghostMode: false
+        });
     }
 });
