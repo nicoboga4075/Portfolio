@@ -2,7 +2,6 @@ const appHomeSection = "home-section";
 const appProjectSection = "projects-section";
 const appBlogSection = "blog-section";
 const appContactSection = "contact-section";
-const goHereSection = "resume-section";
 
 const appMainSections = [
     "about-section",
@@ -828,19 +827,17 @@ function createCircularChart({
     };
     contentWayPoint();
 
-    const goHere = function () {
-        $('.mouse-icon').on('click', function (event) {
-            event.preventDefault();
-            const target = $(`#${goHereSection}`);
-            if (!target.length) {
-                return;
-            }
-            $('html,body').animate({
-                scrollTop: target.offset().top
-            }, 500, 'easeInOutExpo');
-        });
-    };
-    goHere();
+    // The scroll-down arrow's own href (#resume-section) is its target; preventDefault keeps the animated scroll and leaves the URL hash alone.
+    $('.mouse-icon').on('click', function (event) {
+        event.preventDefault();
+        const target = $(this.hash);
+        if (!target.length) {
+            return;
+        }
+        $('html,body').animate({
+            scrollTop: target.offset().top
+        }, 500, 'easeInOutExpo');
+    });
 
     const TxtRotate = function (el, toRotate, period) {
         this.toRotate = toRotate;
@@ -1063,7 +1060,7 @@ function initIndexPage(langPage) {
 
         // :not(.mouse-icon) excludes the hero's scroll-down arrow, which also
         // carries .nav-link for its Bootstrap base styling but isn't part of
-        // the appAllSections sequence (it has its own click handler via goHere()).
+        // the appAllSections sequence (it has its own click handler).
         $('.nav-link:not(.mouse-icon)').each(function (index, navLink) {
             navLink.href = `#${appAllSections[index]}`;
             const scrollTarget = $($(navLink).attr('href'));
