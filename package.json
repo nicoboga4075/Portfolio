@@ -83,6 +83,7 @@
     "@playwright/test": "^1.63.0",
     "@types/jest": "^30.0.0",
     "auto-changelog": "^2.6.1",
+    "browser-sync": "^3.0.4",
     "cross-env": "^10.1.0",
     "cypress": "^16.1.0",
     "eslint": "^10.9.0",
