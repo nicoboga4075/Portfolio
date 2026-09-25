@@ -34,7 +34,7 @@ body.article-error #ftco-main {
     width: 14px;
     height: 14px;
     margin-right: 8px;
-    border: 2px solid #fff6;
+    border: 2px solid color-mix(in srgb, var(--white) 50%, transparent);
     border-top-color: var(--white);
     border-radius: 50%;
     vertical-align: middle;
