@@ -1635,7 +1635,12 @@ textarea.form-control {
     right: -28px;
 }
 
+.owl-theme .owl-nav [class*="owl-"] {
+    color: var(--white);
+}
+
 .owl-theme .owl-nav [class*="owl-"]:hover {
+    color: var(--white);
     background: inherit;
     opacity: 0.7;
 }
