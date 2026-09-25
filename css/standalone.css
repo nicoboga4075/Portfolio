@@ -175,7 +175,6 @@ body.read-zone h1 {
 
 .article-container h1 {
     color: var(--main);
-    font-weight: bold;
 }
 
 .article-container h2 {
@@ -468,7 +467,7 @@ html.dark-mode .card {
     padding: 5px 20px;
     margin-bottom: 0;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: bold;
     color: var(--dark);
     transition: background 0.2s;
 }

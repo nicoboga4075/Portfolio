@@ -113,6 +113,16 @@ h6,
     color: var(--text-color);
 }
 
+h1,
+.h1,
+strong {
+    font-weight: bold;
+}
+
+section h2 {
+    font-weight: bold;
+}
+
 a {
     cursor: pointer;
     text-decoration: none;

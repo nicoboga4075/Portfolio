@@ -45,10 +45,6 @@ body.article-error #ftco-main {
     display: inline-block;
 }
 
-#about-section #cv-download .btn-label {
-    color: inherit;
-}
-
 html.dark-mode .ftco-navbar-light:not(.awake,.scrolled) .navbar-nav > .nav-item > .nav-link span,
 html.dark-mode .resume-wrap .position,
 html.dark-mode #about-section ul.about-info li span:first-child,
@@ -152,7 +148,6 @@ input[name="search-input"].highlight-flash {
 
 #search-info.no-result {
     color: var(--negative) !important;
-    font-style: italic;
 }
 
 #search-info.no-result:not(:empty)::before {
@@ -188,15 +183,12 @@ input[name="search-input"].highlight-flash {
 }
 
 .slider-text .subheading {
-    text-transform: uppercase;
-    font-weight: 800;
     color: var(--main);
     letter-spacing: 4px;
 }
 
 .slider-text h1 {
     font-size: 60px;
-    font-weight: 800;
 }
 
 @media (max-width: 767.98px) {
@@ -205,27 +197,9 @@ input[name="search-input"].highlight-flash {
     }
 }
 
-.slider-text h2 {
-    font-weight: 800;
-}
-
 .slider-text h2 span {
     color: var(--main);
     text-decoration: underline;
-}
-
-.slider-text p {
-    font-size: 20px;
-    font-weight: 300;
-    color: rgb(255 255 255 / 80%);
-}
-
-.slider-text p strong {
-    font-weight: bold;
-}
-
-.slider-text p strong a {
-    color: #000;
 }
 
 .mouse {
@@ -290,7 +264,6 @@ input[name="search-input"].highlight-flash {
 
 .slider-text .hero-tagline {
     font-size: 16px;
-    font-weight: 400;
     max-width: 544px;
     margin-inline: auto;
     margin-bottom: 0;
@@ -354,7 +327,7 @@ input[name="search-input"].highlight-flash {
 
 #about-section ul.about-info li span:first-child {
     font-weight: 600;
-    color: #000;
+    color: var(--text-color);
     width: 130px;
     margin-right: 8px;
 }
@@ -363,13 +336,11 @@ input[name="search-input"].highlight-flash {
     font-size: 20px;
 }
 
-#about-section .counter-wrap .text p span {
-    font-weight: 400;
-    color: #000;
+#about-section .counter-wrap .text p > span {
+    color: var(--text-color);
 }
 
 #about-section .counter-wrap .text p span.number {
-    font-weight: 600;
     color: var(--main);
 }
 
@@ -436,7 +407,6 @@ input[name="search-input"].highlight-flash {
 }
 
 #counter-section .text strong.number {
-    font-weight: bold;
     font-size: 30px;
     color: var(--main);
     display: block;
@@ -470,18 +440,8 @@ input[name="search-input"].highlight-flash {
     opacity: 0.5 !important;
 }
 
-#hireme-section h2 {
-    color: #fff;
-    font-size: 40px;
-    font-weight: 900;
-}
-
-#hireme-section h2 span {
-    color: #a0f669;
-}
-
 #hireme-section p {
-    color: rgb(255 255 255 / 90%);
+    color: var(--white);
 }
 
 /* ==== Resume Section ==== */
@@ -533,7 +493,6 @@ input[name="search-input"].highlight-flash {
 
 .resume-wrap h2 {
     font-size: 24px;
-    font-weight: bold;
 }
 
 .resume-wrap .position {
@@ -731,8 +690,8 @@ progress::-webkit-progress-value {
 }
 
 .btn.btn-primary:hover {
-    border: 1px solid var(--main) !important;
     background: var(--main) !important;
+	border: 1px solid var(--main) !important;
     color: var(--white) !important;
 }
 
@@ -793,21 +752,6 @@ progress::-webkit-progress-value {
     text-transform: uppercase;
     color: black;
     letter-spacing: 3px;
-}
-
-.heading-section h2 {
-    font-size: 50px;
-    font-weight: bold;
-}
-
-.heading-section h2 span {
-    font-weight: 400;
-}
-
-@media (max-width: 767.98px) {
-    .heading-section h2 {
-        font-size: 38px;
-    }
 }
 
 .img,
@@ -1292,11 +1236,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     border-top-right-radius: 10px;
 }
 
-#contact-header h6 {
-    font-weight: bold;
-    margin-top: 8px;
-}
-
 #contact-link {
     font-size: 14px;
 }
@@ -1323,7 +1262,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 }
 
 #contact-link a:hover {
-    font-weight: bold;
     text-decoration: underline;
 }
 
@@ -1413,11 +1351,6 @@ textarea.form-control {
 #contact-section .box .icon span {
     color: #fff;
     font-size: 30px;
-}
-
-#contact-section .box h3 {
-    font-size: 18px;
-    font-weight: 600;
 }
 
 #contact-section .contact-form {
@@ -1763,7 +1696,6 @@ textarea.form-control {
 }
 
 .services .desc h6 {
-    font-weight: 500;
     letter-spacing: 3px;
     text-transform: uppercase;
     position: relative;
@@ -1782,37 +1714,21 @@ textarea.form-control {
     margin: 0 auto;
 }
 
-.services .desc h6 a {
-    color: #fff;
-}
-
-.services .desc span {
-    display: block;
-    text-transform: uppercase;
-    font-size: 12px;
-    margin-bottom: 10px;
-    color: var(--main);
-}
-
-.services .desc p {
-    color: rgb(0 0 0 / 70%);
-}
-
 .services:hover {
     background: var(--main);
     opacity: 0.8;
 }
 
 .services:hover .icon i {
-    color: #fff;
+    color: var(--white);
 }
 
 .services:hover h6 {
-    color: var(--white) !important;
+    color: var(--white);
 }
 
 .services:hover h6::after {
-    background: #000;
+    background: var(--white);
 }
 
 /* ==== Footer ==== */
@@ -1848,15 +1764,15 @@ textarea.form-control {
 
 #bingo-timer {
     font-size: 40px;
-    font-weight: bold;
 }
 
 #bingo-btn {
     padding: 10px 30px;
     background-color: var(--main);
     cursor: pointer;
-    font-weight: bold;
     font-size: 30px;
+    text-transform: none;
+    letter-spacing: normal;
     border-radius: 5px;
     margin: 20px;
 }
