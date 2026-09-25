@@ -1023,10 +1023,6 @@ progress::-webkit-progress-value {
     color: #fff;
 }
 
-.navbar-nav > .nav-item .nav-link.active span {
-    color: #385ae6;
-}
-
 /* ==== Navbar Brand ==== */
 
 html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
