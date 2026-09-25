@@ -20,7 +20,7 @@
                     <div class="project-title text-center"><h5>{{ p.title | safe }}</h5></div>
                     <span class="badge">{{ p.badge }}</span>
                     <div class="text text-center p-4">
-                        <h3>{{ (p.heading[lang] if p.heading else p.title) | safe }}</h3>
+                        <h5>{{ (p.heading[lang] if p.heading else p.title) | safe }}</h5>
                         <span>
                             <p><u>{{ projectsLang.context }}</u> : {{ p.context[lang] | safe }}</p>
                             <p><u>Description</u> : {{ p.description[lang] | safe }}
