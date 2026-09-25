@@ -1137,9 +1137,8 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     width: calc(100% - 100px);
 }
 
-.media-row .text .heading {
-    font-size: 18px;
-    font-weight: 300;
+#recent-article-heading {
+    color: var(--main);
 }
 
 .tagcloud a {
@@ -1181,17 +1180,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     padding: 25px;
     font-size: 15px;
     width: 100%;
-}
-
-.sidebar-box h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-.sidebar-box .heading-sidebar {
-    font-weight: 600;
-    margin-bottom: 20px;
-    font-size: 20px;
 }
 
 .blog-entry .article-image:hover {

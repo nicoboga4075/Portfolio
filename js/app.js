@@ -1330,7 +1330,7 @@ function initBlogPage(langPage) {
                     window.location.href = `/${langPage}/blog#${recentArticle.slug}`;
                     setTimeout(() => location.reload(), 150);
                 });
-                $('.heading').text(recentArticle.title);
+                $('#recent-article-heading').text(recentArticle.title);
                 $('.meta')
                     .text(convertDate(recentArticle.date, langPage))
                     .prepend($('<i>', { 'class': 'icon-calendar' }), ' ');
