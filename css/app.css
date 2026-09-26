@@ -227,7 +227,7 @@ input[name="search-input"].highlight-flash {
     position: absolute;
     inset: 0;
     content: '';
-    background: color-mix(in srgb, var(--primary) 10%, white);
+    border: 2px outset var(--primary);
     z-index: -1;
     transform: rotate(45deg);
 }
