@@ -250,8 +250,22 @@ function toggleDarkMode(event) {
         } else {
             icon.className = { auto: 'icon-adjust', light: 'icon-sun-o', dark: 'icon-moon-o' }[choice];
         }
-        icon.title = icon.dataset[`label${suffix}`];
-        icon.querySelector('.sr-only').textContent = icon.title;
+        const label = icon.dataset[`label${suffix}`];
+        icon.querySelector('.sr-only').textContent = label;
+        // Where app.js turned it into a Bootstrap tooltip (index/blog), the text lives in
+        // data-original-title and is read on each show; an open one is edited in place,
+        // since Bootstrap 4's show() on a shown tooltip stacks a second one over it.
+        // Elsewhere the native title is the tooltip.
+        if (icon.hasAttribute('data-original-title')) {
+            icon.setAttribute('data-original-title', label);
+            const openTip = document.getElementById(icon.getAttribute('aria-describedby'));
+            if (openTip) {
+                openTip.querySelector('.tooltip-inner').textContent = label;
+                icon.tooltip?.update();
+            }
+        } else {
+            icon.title = label;
+        }
     }
     document.dispatchEvent(new CustomEvent('darkmodechange'));
 }
