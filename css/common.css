@@ -4,7 +4,6 @@
 
 :root {
     color-scheme: light;
-
     --blue: #3e64ff;
     --indigo: #6610f2;
     --purple: #6f42c1;
@@ -38,7 +37,6 @@
 
 html.dark-mode {
     color-scheme: dark;
-
     --background: var(--black);
     --text-color: var(--white);
     --gray: #adb5bd;
