@@ -1267,7 +1267,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     background-repeat: no-repeat;
 }
 
-/* stays --main, not --link: #contact-window is bg-white in both themes */
 #contact-link a {
     color: var(--main);
     text-decoration: none;

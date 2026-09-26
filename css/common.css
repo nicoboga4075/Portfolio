@@ -29,7 +29,6 @@ html.dark-mode {
     --background: var(--black);
     --text-color: var(--white);
     --gray: #adb5bd;
-    --link: #5b7bff;
     --positive: #28a745;
     --negative: #dc3545;
     --shadow-xs: #ffffff0d;
