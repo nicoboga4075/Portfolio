@@ -3,9 +3,9 @@
   "version": "2.1.0",
   "description": "This project is deployed on **Netlify** : https://nicoboga.netlify.app",
   "scripts": {
-    "dev": "npm run gen:redirects && cross-env ELEVENTY_PREVIEW=1 npm run eleventy && npm run uglify:preview && netlify dev",
+    "dev": "npm run gen:redirects && node dev-watch.js --once",
     "dev:watch": "npm run gen:redirects && node dev-watch.js",
-    "dev:live": "npm run gen:redirects && cross-env ELEVENTY_PREVIEW=1 npm run eleventy && npm run uglify:preview && netlify dev --live=dev",
+    "dev:live": "npm run gen:redirects && node dev-watch.js --once --live=dev",
     "dev:live:watch": "npm run gen:redirects && node dev-watch.js --live=dev",
     "adb:devices": "adb devices",
     "adb:reverse": "adb reverse tcp:8888 tcp:8888",

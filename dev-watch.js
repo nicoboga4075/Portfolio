@@ -1,5 +1,6 @@
 // npm run dev:watch [-- <netlify dev args>]: rebuild .eleventy on every source change while netlify dev serves it, and reload the browser when the output changes.
-// Unlike npm run dev this doesn't minify the js copy (a rebuild only re-copies the files that changed).
+// This doesn't minify the js copy (a rebuild only re-copies the files that changed).
+// npm run dev (--once): build .eleventy a single time, minify its js copy, then serve it the same way, without watching.
 const { spawn } = require('node:child_process');
 const fs = require('node:fs');
 const http = require('node:http');
@@ -11,6 +12,7 @@ const toml = require('toml');
 // Every executable is an absolute path: node itself, the project's Eleventy, the global netlify-cli installed next to node, and taskkill in System32. Nothing is looked up through PATH, and no shell wraps the commands.
 const eleventyCli = path.join(__dirname, 'node_modules', '@11ty', 'eleventy', 'cmd.cjs');
 const netlifyCli = path.join(path.dirname(process.execPath), 'node_modules', 'netlify-cli', 'bin', 'run.js');
+const uglifyScript = path.join(__dirname, 'uglify-code.js');
 const taskkill = path.join(process.env.SystemRoot ?? String.raw`C:\Windows`, 'System32', 'taskkill.exe');
 
 // Visitors browse browser-sync on 8888 (the only localhost origin isTrustedRequest lets call the functions), which proxies netlify dev on 8889.
@@ -42,7 +44,8 @@ if (!fs.existsSync(netlifyCli)) {
     process.exit(1);
 }
 
-const netlifyArgs = process.argv.slice(2);
+const once = process.argv.includes('--once');
+const netlifyArgs = process.argv.slice(2).filter(arg => arg !== '--once');
 const children = [];
 
 // Only Eleventy's output is captured (to spot the end of its first build); netlify dev keeps the real terminal, otherwise it takes stdout for a non-interactive shell and can sit there without ever starting.
@@ -54,6 +57,18 @@ function run(script, args, env, stdout) {
     children.push(child);
     child.on('exit', () => shutdown());
     return child;
+}
+
+// A build step of --once: runs to completion instead of shutting everything down when it exits, and aborts the script if it fails.
+function runStep(script, args, env) {
+    return new Promise(resolve => {
+        const child = spawn(process.execPath, [script, ...args], {
+            stdio: 'inherit',
+            env: { ...process.env, ...env }
+        });
+        children.push(child);
+        child.on('exit', code => (code === 0 ? resolve() : process.exit(code ?? 1)));
+    });
 }
 
 function shutdown() {
@@ -69,30 +84,48 @@ function shutdown() {
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
 
-let servingStarted = false;
-// --incremental keeps a rebuild to ~0.3s for a css/js edit and ~2-3s for an include, layout or _data edit (each of those rebuilt the pages that use it in a test), against a full rebuild of all 36 pages plus a re-copy of every static file otherwise. Not tested: edits to .eleventy.js or package.json (the source of the routes/linkedin/siteLanguages globals) - restart this script after those if a page looks stale.
-const eleventy = run(eleventyCli, ['--watch', '--incremental'], { ELEVENTY_PREVIEW: '1' }, 'pipe');
-eleventy.stdout.on('data', chunk => {
-    process.stdout.write(chunk);
-    const output = chunk.toString();
-    // Eleventy ends every build with a "Copied N Wrote M files" line.
-    if (servingStarted && output.includes('Wrote')) {
-        fs.writeFileSync(reloadTrigger, String(Date.now()));
-    }
-    // Wait for the first build to land, otherwise netlify dev would serve an empty .eleventy.
-    if (!servingStarted && output.includes('Watching')) {
-        servingStarted = true;
-        run(netlifyCli, ['dev', '--port', String(netlifyPort), ...netlifyArgs], {}, 'inherit');
+function startServing() {
+    run(netlifyCli, ['dev', '--port', String(netlifyPort), ...netlifyArgs], {}, 'inherit');
+    browserSync.init({
+        proxy: `http://localhost:${netlifyPort}`,
+        port: sitePort,
         // One full reload per build (css included), triggered by the file above.
-        browserSync.init({
-            proxy: `http://localhost:${netlifyPort}`,
-            port: sitePort,
-            files: reloadTrigger,
-            middleware: [serveDocsPublic],
-            open: false,
-            notify: false,
-            ui: false,
-            ghostMode: false
-        });
-    }
-});
+        files: once ? [] : reloadTrigger,
+        middleware: [serveDocsPublic],
+        open: false,
+        notify: false,
+        ui: false,
+        ghostMode: false
+    });
+}
+
+async function buildOnce() {
+    await runStep(eleventyCli, [], { ELEVENTY_PREVIEW: '1' });
+    await runStep(uglifyScript, ['.eleventy/js'], {});
+    startServing();
+}
+
+function watch() {
+    let servingStarted = false;
+    // --incremental keeps a rebuild to ~0.3s for a css/js edit and ~2-3s for an include, layout or _data edit (each of those rebuilt the pages that use it in a test), against a full rebuild of all 36 pages plus a re-copy of every static file otherwise. Not tested: edits to .eleventy.js or package.json (the source of the routes/linkedin/siteLanguages globals) - restart this script after those if a page looks stale.
+    const eleventy = run(eleventyCli, ['--watch', '--incremental'], { ELEVENTY_PREVIEW: '1' }, 'pipe');
+    eleventy.stdout.on('data', chunk => {
+        process.stdout.write(chunk);
+        const output = chunk.toString();
+        // Eleventy ends every build with a "Copied N Wrote M files" line.
+        if (servingStarted && output.includes('Wrote')) {
+            fs.writeFileSync(reloadTrigger, String(Date.now()));
+        }
+        // Wait for the first build to land, otherwise netlify dev would serve an empty .eleventy.
+        if (!servingStarted && output.includes('Watching')) {
+            servingStarted = true;
+            startServing();
+        }
+    });
+}
+
+if (once) {
+    buildOnce();
+} else {
+    watch();
+}
