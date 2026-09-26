@@ -89,7 +89,7 @@ html.dark-mode .about-author {
 }
 
 html.dark-mode #article-shape .author {
-    color: initial !important;
+    color: var(--dark) !important;
 }
 
 html.dark-mode #partners-section .partner img {

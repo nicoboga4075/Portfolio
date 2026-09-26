@@ -371,10 +371,6 @@ body.read-zone h1 {
 
 /* ==== Cards ==== */
 
-html.dark-mode .card h2 {
-    color: initial !important;
-}
-
 html.dark-mode .card {
     color: var(--dark);
 }
