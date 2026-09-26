@@ -641,7 +641,7 @@ function createCircularChart({
                 subtitle: {
                     display: true,
                     text: subtitles,
-                    color: getComputedStyle(document.documentElement).getPropertyValue('--gray').trim(),
+                    color: getComputedStyle(document.documentElement).getPropertyValue('--secondary').trim(),
                     font: {
                         family: 'Poppins',
                         size: 14,
@@ -1713,7 +1713,7 @@ function initCaptcha() {
 
 // common.js owns the toggle (class + icon + storage) and fires darkmodechange;
 // the skills chart just needs its title and center label recoloured to the
-// new --text-color and its subtitle to the new --gray (doughnutLabel bakes its
+// new --text-color and its subtitle to the new --secondary (doughnutLabel bakes its
 // color into the options, unlike our previous custom plugin which read
 // --text-color fresh on every draw).
 document.addEventListener('darkmodechange', function () {
@@ -1721,7 +1721,7 @@ document.addEventListener('darkmodechange', function () {
         const rootStyle = getComputedStyle(document.documentElement);
         const textColor = rootStyle.getPropertyValue('--text-color').trim();
         chart.options.plugins.title.color = textColor;
-        chart.options.plugins.subtitle.color = rootStyle.getPropertyValue('--gray').trim();
+        chart.options.plugins.subtitle.color = rootStyle.getPropertyValue('--secondary').trim();
         if (chart.options.plugins.doughnutLabel) {
             chart.options.plugins.doughnutLabel.labels[0].color = textColor;
         }
