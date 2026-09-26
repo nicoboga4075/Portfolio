@@ -175,7 +175,7 @@ input[name="search-input"].highlight-flash {
     position: absolute;
     inset: 0;
     content: '';
-    opacity: .1;
+    opacity: 0.1;
     width: 50%;
     background: var(--primary);
 }
@@ -750,7 +750,7 @@ progress::-webkit-progress-value {
 
 .ftco-animated {
     visibility: visible;
-    animation-duration: .5s;
+    animation-duration: 0.5s;
     animation-fill-mode: both;
 }
 
@@ -899,7 +899,7 @@ progress::-webkit-progress-value {
     background: var(--primary);
     visibility: visible;
     transform: scaleX(0);
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item>.nav-link:hover span::before {
@@ -1008,11 +1008,11 @@ progress::-webkit-progress-value {
 
 .ftco-navbar-light.scrolled.awake {
     margin-top: 0;
-    transition: .3s all ease-out;
+    transition: 0.3s all ease-out;
 }
 
 .ftco-navbar-light.scrolled.sleep {
-    transition: .3s all ease-out;
+    transition: 0.3s all ease-out;
 }
 
 .ftco-navbar-light.scrolled .navbar-brand {
@@ -1174,7 +1174,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 
 .tagcloud a:hover {
     border: 1px solid color-mix(in srgb, var(--primary) 85%, white 15%);
-    opacity: .7;
+    opacity: 0.7;
 }
 
 .search-form .form-group {
@@ -1408,12 +1408,12 @@ textarea.form-control {
     opacity: 0;
     background: var(--primary);
     z-index: -1;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 }
 
 @media (max-width: 767.98px) {
     .project .overlay {
-        opacity: .2;
+        opacity: 0.2;
     }
 }
 
@@ -1421,7 +1421,7 @@ textarea.form-control {
     max-width: 80%;
     z-index: 1;
     opacity: 0;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 }
 
 .project .text span {
@@ -1443,7 +1443,7 @@ textarea.form-control {
 
 .project:hover .overlay,
 .project:focus .overlay {
-    opacity: .9;
+    opacity: 0.9;
 }
 
 .project:hover .text,

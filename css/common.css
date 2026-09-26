@@ -140,7 +140,7 @@ a {
     text-decoration: none;
     color: var(--primary);
     font-weight: bold;
-    transition: .3s all ease;
+    transition: 0.3s all ease;
 }
 
 a[href="#"] {
