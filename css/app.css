@@ -34,7 +34,7 @@ body.article-error #ftco-main {
     width: 14px;
     height: 14px;
     margin-right: 8px;
-    border: 2px solid color-mix(in srgb, var(--white) 50%, transparent);
+    border: 2px solid var(--white);
     border-top-color: var(--white);
     border-radius: 50%;
     vertical-align: middle;
@@ -420,7 +420,7 @@ input[name="search-input"].highlight-flash {
 
 #counter-section .text span {
     display: block;
-    color: color-mix(in srgb, var(--black) 80%, transparent);
+    color: var(--black);
 }
 
 @media (max-width: 767.98px) {
@@ -483,7 +483,7 @@ input[name="search-input"].highlight-flash {
 .resume-wrap {
     width: 100%;
     margin-bottom: 30px;
-    border-bottom: 1px solid color-mix(in srgb, var(--black) 10%, transparent);
+    border-bottom: 1px solid var(--shadow-sm);
     padding-bottom: 10px;
 }
 
@@ -505,7 +505,6 @@ input[name="search-input"].highlight-flash {
 
 .resume-wrap .date {
     font-weight: bold;
-    color: color-mix(in srgb, var(--black) 60%, transparent);
     color: var(--primary);
 }
 
@@ -714,8 +713,8 @@ progress::-webkit-progress-value {
     color: var(--primary) !important;
 }
 
-.btn-secondary:focus,
 .btn-primary:focus,
+.btn-secondary:focus,
 .btn-outline-primary:focus {
     box-shadow: 0 0 0 3.2px var(--shadow-lg) !important;
 }
@@ -987,9 +986,7 @@ progress::-webkit-progress-value {
 }
 
 .ftco-navbar-light.scrolled .navbar-toggler {
-    border: 0;
-    color: color-mix(in srgb, var(--black) 50%, transparent) !important;
-    border-color: color-mix(in srgb, var(--black) 50%, transparent);
+    color: var(--secondary);
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 1.6px;
@@ -1134,7 +1131,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 }
 
 .footer-list ul li span {
-    color: color-mix(in srgb, var(--white) 70%, transparent);
+    color: var(--gray-light);
 }
 
 .footer-list ul li .text {
@@ -1427,16 +1424,6 @@ textarea.form-control {
     letter-spacing: inherit;
 }
 
-@media (max-width: 767.98px) {
-    .project .text {
-        opacity: 1;
-    }
-
-    .project .text span {
-        color: color-mix(in srgb, var(--white) 80%, transparent);
-    }
-}
-
 .project:hover .overlay,
 .project:focus .overlay {
     opacity: 0.9;
@@ -1679,7 +1666,7 @@ textarea.form-control {
 .services {
     margin-bottom: 40px;
     padding: 32px;
-    background: color-mix(in srgb, var(--white) 10%, transparent);
+    background: var(--white);
     width: 100%;
 }
 
@@ -1697,7 +1684,7 @@ textarea.form-control {
     letter-spacing: 3px;
     text-transform: uppercase;
     position: relative;
-    color: var(--text-color);
+    color: var(--black);
 }
 
 .services .desc h6::after {
