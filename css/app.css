@@ -122,7 +122,7 @@ mark.highlight.current-match {
 }
 
 input[name="search-input"].highlight-flash {
-    box-shadow: 0 0 3px 3px var(--gray) !important;
+    box-shadow: 0 0 3px 3px var(--shadow-lg) !important;
     transition: box-shadow 0.3s ease;
 }
 
