@@ -26,6 +26,7 @@
     --light: #f8f9fa;
     --dark: #343a40;
     --black: #000000;
+    --gray-light: #adb5bd;
     --lavender: #e6e6fa;
     --background: var(--white);
     --text-color: var(--black);
@@ -39,7 +40,7 @@ html.dark-mode {
     color-scheme: dark;
     --background: var(--black);
     --text-color: var(--white);
-    --gray: #adb5bd;
+    --gray: var(--gray-light);
     --success: var(--green);
     --danger: var(--red);
     --shadow-xs: #ffffff0d;
