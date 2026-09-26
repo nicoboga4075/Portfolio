@@ -8,8 +8,8 @@
 
     --blue: #3e64ff;
     --primary: var(--blue);
-    --black: #000;
-    --white: #fff;
+    --black: #000000;
+    --white: #ffffff;
     --gray: #6c757d;
     --green: #28a745;
     --red: #dc3545;
@@ -25,7 +25,7 @@
     --text-color: var(--black);
     --shadow-xs: #0000000d;
     --shadow-sm: #0000001a;
-    --shadow-md: #0003;
+    --shadow-md: #00000033;
     --shadow-lg: #0000004d;
 }
 
@@ -40,7 +40,7 @@ html.dark-mode {
     --shadow-xs: #ffffff0d;
     --shadow-sm: #ffffff14;
     --shadow-md: #ffffff1f;
-    --shadow-lg: #fff3;
+    --shadow-lg: #ffffff33;
 }
 
 /* ==== Fonts ==== */

@@ -28,6 +28,7 @@
 	"no-duplicate-selectors": [true, { "severity": "warning" }],
 	"at-rule-no-vendor-prefix": null,
 	"property-no-vendor-prefix": null,
-	"media-feature-range-notation": "prefix"
+	"media-feature-range-notation": "prefix",
+	"color-hex-length": "long"
   }
 }
