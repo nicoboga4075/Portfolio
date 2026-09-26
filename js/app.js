@@ -661,8 +661,8 @@ function createCircularChart({
                             size: 13,
                             weight: '400'
                         },
-                        boxWidth: 16,
-                        boxHeight: 16,
+                        boxWidth: 14,
+                        boxHeight: 14,
                         padding: 14,
                         usePointStyle: false,
                         generateLabels: function (chart) {
@@ -673,8 +673,8 @@ function createCircularChart({
                                 return {
                                     text: `${label} (${percentage}%)`,
                                     fillStyle: chart.data.datasets[0].backgroundColor[i],
-                                    strokeStyle: getComputedStyle(document.documentElement).getPropertyValue('--background').trim(),
-                                    lineWidth: 2,
+                                    // 0, not omitted: Chart.js would default to a 1px #666 stroke.
+                                    lineWidth: 0,
                                     fontColor: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim()
                                 };
                             });
