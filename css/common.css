@@ -306,29 +306,15 @@ sup:hover {
 
 #ftco-loader {
     position: fixed;
-    width: 96px;
-    height: 96px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: var(--background);
-    box-shadow: 0 24px 64px var(--shadow-md);
-    border-radius: 16px;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease-out, visibility 0s linear 0.2s;
     z-index: 1000;
-}
-
-#ftco-loader.fullscreen {
-    padding: 0;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    transform: none;
-    border-radius: 0;
-    box-shadow: none;
 }
 
 #ftco-loader.show {
