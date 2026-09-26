@@ -1766,17 +1766,12 @@ textarea.form-control {
 
 #bingo-btn {
     padding: 10px 30px;
-    background-color: var(--primary);
     cursor: pointer;
     font-size: 30px;
     text-transform: none;
     letter-spacing: normal;
     border-radius: 5px;
     margin: 20px;
-}
-
-#bingo-btn:hover {
-    opacity: 0.8;
 }
 
 /* --green / --red, not --success / --danger: #bingo-timer sits on the
