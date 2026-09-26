@@ -311,7 +311,7 @@ sup:hover {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: color-mix(in srgb, var(--white) 90%, transparent);
+    background-color: var(--background);
     box-shadow: 0 24px 64px var(--shadow-md);
     border-radius: 16px;
     opacity: 0;
@@ -327,7 +327,6 @@ sup:hover {
     width: 100%;
     height: 100%;
     transform: none;
-    background-color: var(--background);
     border-radius: 0;
     box-shadow: none;
 }
