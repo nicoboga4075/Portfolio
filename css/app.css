@@ -457,6 +457,18 @@ input[name="search-input"].highlight-flash {
     margin-bottom: 0;
 }
 
+/* Skill cards (skill pairs, languages, tools): on phones each name only gets half a card, so trim the paddings to keep two-word names (Entity Framework, Machine Learning) on one line from 360px up. */
+@media (max-width: 575.98px) {
+    .progress-circle .shadow.p-4 {
+        padding: 8px !important;
+    }
+
+    .progress-circle .row.text-center > .col-6 {
+        padding-right: 2px;
+        padding-left: 2px;
+    }
+}
+
 .page .heading {
     font-weight: 800;
     font-size: 30px;
