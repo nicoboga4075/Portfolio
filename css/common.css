@@ -18,7 +18,7 @@
     --gray: #6c757d;
     --gray-dark: #343a40;
     --primary: var(--blue);
-    --secondary: #6c757d;
+    --secondary: var(--gray);
     --success: #1e7e34;
     --info: #17a2b8;
     --warning: #ffc107;
@@ -99,7 +99,7 @@ body {
     font-weight: 400;
     line-height: 1.5;
     background-color: var(--background);
-    color: var(--gray);
+    color: var(--secondary);
 }
 
 main {
