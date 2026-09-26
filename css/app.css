@@ -75,7 +75,7 @@ html.dark-mode #about-section #last-update-date {
 }
 
 html.dark-mode .hero-wrap .overlay {
-    background: var(--white) !important;
+    background: var(--white);
 }
 
 html.dark-mode #article-shape {
@@ -89,7 +89,7 @@ html.dark-mode .about-author {
 }
 
 html.dark-mode #article-shape .author {
-    color: var(--dark) !important;
+    color: var(--dark);
 }
 
 html.dark-mode #partners-section .partner img {
@@ -149,7 +149,7 @@ input[name="search-input"].highlight-flash {
 }
 
 #search-info.no-result {
-    color: var(--danger) !important;
+    color: var(--danger);
 }
 
 #search-info.no-result:not(:empty)::before {
@@ -396,7 +396,7 @@ input[name="search-input"].highlight-flash {
 
 @media (max-width: 1199.98px) {
     #counter-section {
-        background-position: center center !important;
+        background-position: center center;
     }
 }
 
@@ -439,7 +439,7 @@ input[name="search-input"].highlight-flash {
     inset: 0;
     content: '';
     background: var(--primary);
-    opacity: 0.5 !important;
+    opacity: 0.5;
 }
 
 #hireme-section p {
@@ -762,11 +762,11 @@ progress::-webkit-progress-value {
 }
 
 .ftco-no-pt {
-    padding-top: 0 !important;
+    padding-top: 0;
 }
 
 .ftco-no-pb {
-    padding-bottom: 0 !important;
+    padding-bottom: 0;
 }
 
 .heading-section {
@@ -804,7 +804,7 @@ progress::-webkit-progress-value {
 /* ==== Partners ==== */
 
 #partners-section {
-    padding: 4em 0 !important;
+    padding: 4em 0;
 }
 
 #partners-section .partner {
@@ -941,7 +941,7 @@ progress::-webkit-progress-value {
 .ftco-navbar-light .navbar-toggler:focus {
     text-decoration: none;
     color: var(--primary);
-    outline: none !important;
+    outline: none;
 }
 
 /* Centre the pill on the navbar's wrapped mobile row (a flex item there, so still block-level and needs auto margins to centre within that row). In .page-controls (policy / terms) and .read-title (projects) it's one part of a flex row that's already centred (or space-between, for .read-title) as a whole, so no auto margins there. */
@@ -989,8 +989,8 @@ progress::-webkit-progress-value {
     .ftco-navbar-light.scrolled .navbar-nav {
         background: 0;
         border-radius: 0;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        padding-left: 0;
+        padding-right: 0;
         margin-left: 0 !important;
     }
 }
@@ -998,7 +998,7 @@ progress::-webkit-progress-value {
 .ftco-navbar-light.scrolled .navbar-toggler {
     border: 0;
     color: color-mix(in srgb, var(--black) 50%, transparent) !important;
-    border-color: color-mix(in srgb, var(--black) 50%, transparent) !important;
+    border-color: color-mix(in srgb, var(--black) 50%, transparent);
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: .1em;
@@ -1392,7 +1392,7 @@ textarea.form-control {
 }
 
 .contact-row .form-control {
-    outline: none !important;
+    outline: none;
     box-shadow: none !important;
     font-size: 15px;
 }
@@ -1433,8 +1433,8 @@ textarea.form-control {
 .project .text span {
     color: var(--white);
     font-size: 12px;
-    text-transform: inherit !important;
-    letter-spacing: inherit !important;
+    text-transform: inherit;
+    letter-spacing: inherit;
 }
 
 @media (max-width: 767.98px) {
@@ -1462,7 +1462,7 @@ textarea.form-control {
 }
 
 .project p {
-    font-size: 13px !important;
+    font-size: 13px;
 }
 
 @media (max-width: 767.98px) {
