@@ -34,8 +34,8 @@ html.dark-mode {
     --background: var(--black);
     --text-color: var(--white);
     --gray: #adb5bd;
-    --positive: #28a745;
-    --negative: #dc3545;
+    --positive: var(--green);
+    --negative: var(--red);
     --shadow-xs: #ffffff0d;
     --shadow-sm: #ffffff14;
     --shadow-md: #ffffff1f;
