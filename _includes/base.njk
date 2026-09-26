@@ -17,7 +17,6 @@ bodyClass: ""
         <meta name="google" content="notranslate">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="{{ author }}">
-        <meta name="theme-color" content="#ffffff">
         <meta name="title" property="og:title" content="{{ title | safe }}">
         <meta name="image" property="og:image" content="{{ image }}">
         <meta name="description" content="{{ description | safe }}">
@@ -46,6 +45,16 @@ bodyClass: ""
         {%- if botpress and viewport == "desktop" %}
         <script defer src="js/botpress.js"></script>
         {%- endif %}
+        <!-- Inline, after the stylesheets and before first paint: the deferred common.js applies the theme too late (white flash in dark mode). It waits for the CSS above, so --background is already resolved. -->
+        <script>
+            {
+                document.documentElement.classList.toggle('dark-mode', localStorage.getItem('darkMode') === 'true');
+                const themeColor = document.createElement('meta');
+                themeColor.name = 'theme-color';
+                themeColor.content = getComputedStyle(document.documentElement).getPropertyValue('--background').trim();
+                document.head.appendChild(themeColor);
+            }
+        </script>
     </head>
     <body class="{{ bodyClass }}"{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}">
         <div id="ftco-loader" class="show fullscreen" role="status" aria-live="polite" aria-atomic="true" aria-label="{{ common.loading[lang] }}">

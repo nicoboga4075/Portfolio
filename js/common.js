@@ -207,6 +207,12 @@ function toggleDarkMode(event) {
     }
     const isDark = localStorage.getItem('darkMode') === 'true';
     document.documentElement.classList.toggle('dark-mode', isDark);
+    // Browser chrome (Android address bar, Safari tab bar, PWA title bar) follows
+    // the page background; the meta itself is created by base.njk's inline script.
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) {
+        themeColor.content = getComputedStyle(document.documentElement).getPropertyValue('--background').trim();
+    }
     // Pages with the icon font (assets set in front matter) swap the icon-*
     // class; others fall back to a sun/moon emoji, same split as footer.html's
     // icon-heart/icon-shield vs their emoji equivalents.
