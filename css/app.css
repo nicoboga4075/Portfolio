@@ -1170,7 +1170,6 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 }
 
 .tagcloud a:hover {
-    border: 1px solid var(--blue-light);
     opacity: 0.7;
 }
 
