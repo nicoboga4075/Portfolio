@@ -1,5 +1,7 @@
 /* Shared rules, loaded before standalone.css and app.css. */
 
+/* Sizes are in px. They used to be rem / em: 1rem = the root font size (16px here); 1em = the font size of the element itself (of its parent, for font-size), so each em value was converted with the font size it applied to, e.g. 7em of padding on a 16px section = 112px. */
+
 /* ==== Variables ==== */
 
 :root {
@@ -357,11 +359,11 @@ sup:hover {
 
 #ftco-footer {
     background: var(--black);
-    padding: 7em 0;
+    padding: 112px 0;
 }
 
 #ftco-footer.standalone {
-    padding: 3em 0;
+    padding: 48px 0;
 }
 
 #ftco-footer .ftco-footer-widget h4 {

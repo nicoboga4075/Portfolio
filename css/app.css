@@ -261,7 +261,7 @@ input[name="search-input"].highlight-flash {
 }
 
 .txt-rotate>.wrap {
-    border-right: 0.08em solid var(--dark);
+    border-right: 2px solid var(--dark);
 }
 
 .slider-text .hero-tagline {
@@ -281,6 +281,10 @@ input[name="search-input"].highlight-flash {
 @media (max-width: 767.98px) {
     .slider-text h2 {
         font-size: 20px;
+    }
+
+    .txt-rotate>.wrap {
+        border-right-width: 1px;
     }
 }
 
@@ -450,7 +454,7 @@ input[name="search-input"].highlight-flash {
 
 .page {
     width: 100%;
-    margin-bottom: 7em;
+    margin-bottom: 112px;
 }
 
 .page.four {
@@ -751,13 +755,13 @@ progress::-webkit-progress-value {
 }
 
 .ftco-section {
-    padding: 7em 0;
+    padding: 112px 0;
     position: relative;
 }
 
 @media (max-width: 767.98px) {
     .ftco-section {
-        padding: 6em 0;
+        padding: 96px 0;
     }
 }
 
@@ -804,7 +808,7 @@ progress::-webkit-progress-value {
 /* ==== Partners ==== */
 
 #partners-section {
-    padding: 4em 0;
+    padding: 64px 0;
 }
 
 #partners-section .partner {
@@ -928,7 +932,7 @@ progress::-webkit-progress-value {
     padding-right: 0;
     text-transform: uppercase;
     font-size: 16px;
-    letter-spacing: .1em;
+    letter-spacing: 1.6px;
 }
 
 .ftco-navbar-light .navbar-toggler:hover,
@@ -991,7 +995,7 @@ progress::-webkit-progress-value {
     border-color: color-mix(in srgb, var(--black) 50%, transparent);
     cursor: pointer;
     text-transform: uppercase;
-    letter-spacing: .1em;
+    letter-spacing: 1.6px;
 }
 
 .ftco-navbar-light.scrolled .nav-link {
@@ -1501,7 +1505,7 @@ textarea.form-control {
     display: block;
     font-style: italic;
     color: var(--gray);
-    font-size: 0.85em;
+    font-size: 13.6px;
 }
 
 .sector-tag {
@@ -1550,14 +1554,14 @@ textarea.form-control {
 
 .filter-group-label {
     font-weight: 600;
-    font-size: 0.85em;
+    font-size: 13.6px;
     margin-right: 4px;
 }
 
 .filter-chip {
     display: inline-block;
     padding: 3px 12px;
-    font-size: 0.8em;
+    font-size: 12.8px;
     color: var(--dark);
     background-color: var(--lavender);
     border: 1px solid var(--background);
@@ -1578,7 +1582,7 @@ textarea.form-control {
 
 #experience-filters-reset {
     padding: 3px 12px;
-    font-size: 0.8em;
+    font-size: 12.8px;
     color: var(--primary);
     background: none;
     border: 1px solid var(--primary);
@@ -1678,7 +1682,7 @@ textarea.form-control {
 
 .services {
     margin-bottom: 40px;
-    padding: 2em;
+    padding: 32px;
     background: color-mix(in srgb, var(--white) 10%, transparent);
     width: 100%;
 }
@@ -1872,7 +1876,7 @@ textarea.form-control {
     margin: 0;
     padding: 0;
     z-index: 1000;
-    font-size: 0.9em;
+    font-size: 13.5px;
 }
 
 #search-suggestions li {
