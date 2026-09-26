@@ -256,8 +256,8 @@ function toggleDarkMode(event) {
         // data-original-title and is read on each show; an open one is edited in place,
         // since Bootstrap 4's show() on a shown tooltip stacks a second one over it.
         // Elsewhere the native title is the tooltip.
-        if (icon.hasAttribute('data-original-title')) {
-            icon.setAttribute('data-original-title', label);
+        if ('originalTitle' in icon.dataset) {
+            icon.dataset.originalTitle = label;
             const openTip = document.getElementById(icon.getAttribute('aria-describedby'));
             if (openTip) {
                 openTip.querySelector('.tooltip-inner').textContent = label;
