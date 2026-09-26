@@ -456,18 +456,17 @@ function loadBingo() {
 
     $('#bingo-btn').click(function () {
         if (number === 0) {
-            $('#bingo-timer').removeClass();
+            $('#bingo-timer').removeClass('victory defeat');
             $('#bingo-btn').text($('#bingo-btn').data('stop'));
             timer = setInterval(() => {
                 number++;
                 $('#bingo-timer').text(number);
             }, 10);
-        } else if (number == target) {
-            $('#bingo-timer').addClass('victory');
         } else {
-            $('#bingo-timer').addClass('defeat');
-            $('#bingo-btn').text(labelBtn);
+            // Win or lose, the round ends: stop counting and reset for a replay.
             clearInterval(timer);
+            $('#bingo-timer').addClass(number === target ? 'victory' : 'defeat');
+            $('#bingo-btn').text(labelBtn);
             number = 0;
         }
     });
