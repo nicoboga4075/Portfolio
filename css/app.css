@@ -1641,8 +1641,8 @@ textarea.form-control {
     box-sizing: border-box;
 }
 
-.owl-item img {
-    width: 50% !important;
+.owl-carousel .owl-item img {
+    width: 50%;
     height: 50%;
     aspect-ratio: 1 / 1;
     object-fit: contain;
