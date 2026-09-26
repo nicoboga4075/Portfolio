@@ -2,7 +2,7 @@
     "en": { "heading": "Services", "devAlt": "Developer Avatar", "tagline": "Programming, Customer Support &amp; Training" },
     "fr": { "heading": "Services", "devAlt": "Avatar Développeur", "tagline": "Programmation, Assistance Technique &amp; Formation" },
     "cards": [
-        { "icon": "flaticon-analysis", "ariaLabel": { "en": "Data Visualization", "fr": "Data Viz" }, "title": { "en": "Data Visualization", "fr": "Data Viz" } },
+        { "icon": "flaticon-analysis", "ariaLabel": { "en": "Data Viz", "fr": "Data Viz" }, "title": { "en": "Data Viz", "fr": "Data Viz" } },
         { "icon": "flaticon-flasks", "ariaLabel": { "en": "Customer Care", "fr": "Relation Client" }, "title": { "en": "Customer Care", "fr": "Relation Client" } },
         { "icon": "flaticon-ideas", "ariaLabel": { "en": "Web Development", "fr": "Développement Web" }, "title": { "en": "Web Development", "fr": "Développement Web" } },
         { "icon": "flaticon-innovation", "ariaLabel": { "en": "Digital Transformation", "fr": "Transformation Digitale" }, "title": { "en": "Digital Transformation", "fr": "Transformation Digitale" } },
