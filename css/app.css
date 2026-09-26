@@ -140,7 +140,7 @@ input[name="search-input"].highlight-flash {
 }
 
 #search-info {
-    color: var(--positive);
+    color: var(--success);
     font-style: italic;
 }
 
@@ -149,7 +149,7 @@ input[name="search-input"].highlight-flash {
 }
 
 #search-info.no-result {
-    color: var(--negative) !important;
+    color: var(--danger) !important;
 }
 
 #search-info.no-result:not(:empty)::before {
@@ -1789,7 +1789,7 @@ textarea.form-control {
     opacity: 0.8;
 }
 
-/* --green / --red, not --positive / --negative: #bingo-timer sits on the
+/* --green / --red, not --success / --danger: #bingo-timer sits on the
    always-black footer, where the light-theme (darkened) variants fail. */
 .victory {
     color: var(--green);
