@@ -196,16 +196,34 @@ function fillCareerCounts() {
     }
 }
 
-// No argument: apply the stored preference (on page load). With an event (the
-// #dark-icon button's onclick): flip the stored preference first, then apply.
+const darkSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+// The stored choice wins; until the visitor makes one, follow the OS setting.
+// base.njk's inline script applies the same rule before first paint.
+function isDarkModePreferred() {
+    const stored = localStorage.getItem('darkMode');
+    return stored === null ? darkSchemeQuery.matches : stored === 'true';
+}
+
+// No argument: apply the preference (on page load, or when the OS setting
+// changes). With an event (the #dark-icon button's onclick): switch to the
+// opposite of the theme on screen - not of the stored value, which is absent
+// while the OS setting is followed - then apply. A choice is only stored when
+// it goes against the OS setting; toggling back to the OS theme clears it, so
+// the site follows the OS again (no separate "auto" state to offer).
 // Fires `darkmodechange` so app.js can recolour the skills chart.
 function toggleDarkMode(event) {
     if (event) {
         event.preventDefault();
         event.stopPropagation();
-        localStorage.setItem('darkMode', localStorage.getItem('darkMode') !== 'true');
+        const wantDark = !document.documentElement.classList.contains('dark-mode');
+        if (wantDark === darkSchemeQuery.matches) {
+            localStorage.removeItem('darkMode');
+        } else {
+            localStorage.setItem('darkMode', wantDark);
+        }
     }
-    const isDark = localStorage.getItem('darkMode') === 'true';
+    const isDark = isDarkModePreferred();
     document.documentElement.classList.toggle('dark-mode', isDark);
     // Browser chrome (Android address bar, Safari tab bar, PWA title bar) follows
     // the page background; the meta itself is created by base.njk's inline script.
@@ -266,6 +284,11 @@ function setCopyrightYear() {
 // Run on every page as soon as this (deferred) script loads.
 registerServiceWorker();
 toggleDarkMode();
+darkSchemeQuery.addEventListener('change', function () {
+    if (localStorage.getItem('darkMode') === null) {
+        toggleDarkMode();
+    }
+});
 hideLoader();
 setCopyrightYear();
 Object.keys(appRoutes).forEach(addRedirectById);

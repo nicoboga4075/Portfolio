@@ -2,7 +2,10 @@
 
 /* ==== Variables ==== */
 
+/* color-scheme: native scrollbars, form controls and autofill follow the theme. */
 :root {
+    color-scheme: light;
+
     --main: #3e64ff;
     --black: #000;
     --white: #fff;
@@ -26,6 +29,8 @@
 }
 
 html.dark-mode {
+    color-scheme: dark;
+
     --background: var(--black);
     --text-color: var(--white);
     --gray: #adb5bd;
