@@ -27,6 +27,7 @@
     --dark: #343a40;
     --black: #000000;
     --gray-light: #adb5bd;
+    --blue-light: #5b7bff;
     --lavender: #e6e6fa;
     --background: var(--white);
     --text-color: var(--black);
@@ -191,6 +192,14 @@ sup:hover {
 /* Bootstrap's, from the palette; !important like Bootstrap's. .text-black has no Bootstrap equivalent. */
 .text-white {
     color: var(--white) !important;
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.text-secondary {
+    color: var(--secondary) !important;
 }
 
 .text-light {
