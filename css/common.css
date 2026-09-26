@@ -205,6 +205,14 @@ sup:hover {
     color: var(--black) !important;
 }
 
+.text-black-50 {
+    color: color-mix(in srgb, var(--black) 50%, transparent) !important;
+}
+
+.text-white-50 {
+    color: color-mix(in srgb, var(--white) 50%, transparent) !important;
+}
+
 /* ==== Accessibility ==== */
 
 /* Visually hidden but readable by screen readers - loads on every page
