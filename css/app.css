@@ -104,10 +104,12 @@ html.dark-mode #partners-section .partner img {
     position: relative;
 }
 
-.open-mfp:hover,
-.btn.btn-primary:hover {
-    color: var(--white) !important;
-    opacity: 0.7;
+/* Touch screens keep :hover on the last tapped element (the contact bubble stayed faded after a tap closed its window), so hover effects only apply to devices that can really hover; same for the .btn-primary family below. */
+@media (hover: hover) {
+    .open-mfp:hover {
+        color: var(--white) !important;
+        opacity: 0.7;
+    }
 }
 
 mark.highlight {
@@ -684,11 +686,13 @@ progress::-webkit-progress-value {
     color: var(--main);
 }
 
-.btn-primary:hover,
-.btn-outline-primary:hover {
-    background-color: var(--main);
-    border-color: var(--main);
-    color: var(--white);
+@media (hover: hover) {
+    .btn-primary:hover,
+    .btn-outline-primary:hover {
+        background-color: var(--main);
+        border-color: var(--main);
+        color: var(--white);
+    }
 }
 
 .btn.btn-primary {
@@ -697,10 +701,13 @@ progress::-webkit-progress-value {
     color: var(--white) !important;
 }
 
-.btn.btn-primary:hover {
-    background: var(--main) !important;
-	border: 1px solid var(--main) !important;
-    color: var(--white) !important;
+@media (hover: hover) {
+    .btn.btn-primary:hover {
+        background: var(--main) !important;
+        border: 1px solid var(--main) !important;
+        color: var(--white) !important;
+        opacity: 0.7;
+    }
 }
 
 .btn.btn-primary.btn-outline-primary {
@@ -709,10 +716,12 @@ progress::-webkit-progress-value {
     color: var(--main) !important;
 }
 
-.btn.btn-primary.btn-outline-primary:hover {
-    border: 2px solid transparent !important;
-    background: var(--main) !important;
-    color: var(--white) !important;
+@media (hover: hover) {
+    .btn.btn-primary.btn-outline-primary:hover {
+        border: 2px solid transparent !important;
+        background: var(--main) !important;
+        color: var(--white) !important;
+    }
 }
 
 /* ==== Utilities ==== */
