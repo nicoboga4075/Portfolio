@@ -9,11 +9,11 @@
 // missing. The navbar's own height shifts (.scrolled shrinks its padding),
 // so the offset is recomputed - fixed pixels drift out of center between
 // the two states - on every re-apply and on navbar resize.
-// The same style also recolors the button (--main) and its icon (--white) with
+// The same style also recolors the button (--primary) and its icon (--white) with
 // the site's colors, which custom properties carry into the shadow root
 // (page-level CSS can't reach it).
 const BP_FAB_OVERRIDE_ID = 'bp-fab-position-override';
-const BP_FAB_OVERRIDE_CSS = top => `.bpFabWrapper { bottom: auto !important; top: ${top}px !important; right: 20px !important; } .bpFabContainer { background-color: var(--main) !important; } .bpFabIcon { background-color: var(--white) !important; }`;
+const BP_FAB_OVERRIDE_CSS = top => `.bpFabWrapper { bottom: auto !important; top: ${top}px !important; right: 20px !important; } .bpFabContainer { background-color: var(--primary) !important; } .bpFabIcon { background-color: var(--white) !important; }`;
 
 function watchBotpressFab(shadowRoot) {
 	function applyOverride() {

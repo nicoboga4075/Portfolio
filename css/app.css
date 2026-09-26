@@ -54,12 +54,12 @@ html.dark-mode #navi li a:not(.current) {
 }
 
 html.dark-mode .ftco-navbar-light:not(.awake,.scrolled) .navbar-nav > .nav-item > .nav-link.active span {
-    color: var(--main) !important;
+    color: var(--primary) !important;
 }
 
 html.dark-mode .heading-section h2,
 html.dark-mode h2.heading {
-    color: var(--main) !important;
+    color: var(--primary) !important;
 }
 
 html.dark-mode #about-section .heading-section h2 {
@@ -67,7 +67,7 @@ html.dark-mode #about-section .heading-section h2 {
 }
 
 html.dark-mode #about-section .counter-wrap .text .number.xp {
-    color: var(--main) !important;
+    color: var(--primary) !important;
 }
 
 html.dark-mode #about-section #last-update-date {
@@ -99,7 +99,7 @@ html.dark-mode #partners-section .partner img {
 }
 
 #navi li a.current {
-    color: var(--main) !important;
+    color: var(--primary) !important;
     margin-left: 20px;
     position: relative;
 }
@@ -114,7 +114,7 @@ html.dark-mode #partners-section .partner img {
 
 mark.highlight {
     background-color: var(--lavender);
-    border: 1px solid var(--main);
+    border: 1px solid var(--primary);
 }
 
 mark.highlight.current-match {
@@ -129,14 +129,14 @@ input[name="search-input"].highlight-flash {
 @keyframes pulse-blue {
     0%,
     100% {
-        filter: drop-shadow(0 0 5px var(--main));
+        filter: drop-shadow(0 0 5px var(--primary));
     }
 }
 
 .icon-search.search-help {
     animation: pulse-blue 2s ease-in-out;
     cursor: pointer;
-    color: var(--main);
+    color: var(--primary);
 }
 
 #search-info {
@@ -177,7 +177,7 @@ input[name="search-input"].highlight-flash {
     content: '';
     opacity: .1;
     width: 50%;
-    background: var(--main);
+    background: var(--primary);
 }
 
 .hero-wrap .text {
@@ -185,7 +185,7 @@ input[name="search-input"].highlight-flash {
 }
 
 .slider-text .subheading {
-    color: var(--main);
+    color: var(--primary);
     letter-spacing: 4px;
 }
 
@@ -200,7 +200,7 @@ input[name="search-input"].highlight-flash {
 }
 
 .slider-text h2 span {
-    color: var(--main);
+    color: var(--primary);
     text-decoration: underline;
 }
 
@@ -227,7 +227,7 @@ input[name="search-input"].highlight-flash {
     position: absolute;
     inset: 0;
     content: '';
-    background: color-mix(in srgb, var(--main) 10%, white);
+    background: color-mix(in srgb, var(--primary) 10%, white);
     z-index: -1;
     transform: rotate(45deg);
 }
@@ -240,7 +240,7 @@ input[name="search-input"].highlight-flash {
     background: transparent;
     border-radius: 50%;
     animation: 1.6s ease infinite wheel-up-down;
-    color: var(--main);
+    color: var(--primary);
     font-size: 30px;
 }
 
@@ -343,7 +343,7 @@ input[name="search-input"].highlight-flash {
 }
 
 #about-section .counter-wrap .text p span.number {
-    color: var(--main);
+    color: var(--primary);
 }
 
 #navi {
@@ -376,7 +376,7 @@ input[name="search-input"].highlight-flash {
     height: 2px;
     content: '';
     transform: translateY(-50%);
-    background: var(--main);
+    background: var(--primary);
 }
 
 .profile-photo {
@@ -410,7 +410,7 @@ input[name="search-input"].highlight-flash {
 
 #counter-section .text strong.number {
     font-size: 30px;
-    color: var(--main);
+    color: var(--primary);
     display: block;
 }
 
@@ -428,7 +428,7 @@ input[name="search-input"].highlight-flash {
 /* ==== Hire Me ==== */
 
 #hireme-section {
-    background-color: var(--main);
+    background-color: var(--primary);
     z-index: 0;
     position: relative;
     background-image: url("/images/background.webp");
@@ -438,7 +438,7 @@ input[name="search-input"].highlight-flash {
     position: absolute;
     inset: 0;
     content: '';
-    background: var(--main);
+    background: var(--primary);
     opacity: 0.5 !important;
 }
 
@@ -473,7 +473,7 @@ input[name="search-input"].highlight-flash {
     font-weight: 800;
     font-size: 30px;
     margin-bottom: 30px;
-    color: var(--main);
+    color: var(--primary);
 }
 
 .resume-wrap {
@@ -486,7 +486,7 @@ input[name="search-input"].highlight-flash {
 .resume-wrap .icon {
     width: 50px;
     height: 50px;
-    background: var(--main);
+    background: var(--primary);
     border-radius: 50%;
 }
 
@@ -502,7 +502,7 @@ input[name="search-input"].highlight-flash {
 .resume-wrap .date {
     font-weight: bold;
     color: color-mix(in srgb, var(--black) 60%, transparent);
-    color: var(--main);
+    color: var(--primary);
 }
 
 .resume-wrap h2 {
@@ -596,7 +596,7 @@ input[name="search-input"].highlight-flash {
     bottom: 0;
     width: 100%;
     height: 2px;
-    background: var(--main);
+    background: var(--primary);
     transform: scaleX(0);
     transition: transform 0.3s ease-in-out;
 }
@@ -646,11 +646,11 @@ progress::-webkit-progress-bar {
 
 progress::-moz-progress-bar {
     border-radius: 8px;
-    background-color: var(--main);
+    background-color: var(--primary);
 }
 
 progress::-webkit-progress-value {
-    background-color: var(--main);
+    background-color: var(--primary);
 }
 
 /* ==== Buttons ==== */
@@ -689,49 +689,49 @@ progress::-webkit-progress-value {
 
 .btn-primary,
 .btn-outline-primary {
-    background-color: var(--main);
-    border-color: var(--main);
+    background-color: var(--primary);
+    border-color: var(--primary);
 }
 
 .btn-outline-primary {
     background-color: transparent;
-    color: var(--main);
+    color: var(--primary);
 }
 
 @media (hover: hover) {
     .btn-primary:hover,
     .btn-outline-primary:hover {
-        background-color: var(--main);
-        border-color: var(--main);
+        background-color: var(--primary);
+        border-color: var(--primary);
         color: var(--white);
     }
 }
 
 .btn.btn-primary {
-    background: var(--main) !important;
-    border: 1px solid var(--main) !important;
+    background: var(--primary) !important;
+    border: 1px solid var(--primary) !important;
     color: var(--white) !important;
 }
 
 @media (hover: hover) {
     .btn.btn-primary:hover {
-        background: var(--main) !important;
-        border: 1px solid var(--main) !important;
+        background: var(--primary) !important;
+        border: 1px solid var(--primary) !important;
         color: var(--white) !important;
         opacity: 0.7;
     }
 }
 
 .btn.btn-primary.btn-outline-primary {
-    border: 2px solid var(--main) !important;
+    border: 2px solid var(--primary) !important;
     background: transparent !important;
-    color: var(--main) !important;
+    color: var(--primary) !important;
 }
 
 @media (hover: hover) {
     .btn.btn-primary.btn-outline-primary:hover {
         border: 2px solid transparent !important;
-        background: var(--main) !important;
+        background: var(--primary) !important;
         color: var(--white) !important;
     }
 }
@@ -892,7 +892,7 @@ progress::-webkit-progress-value {
     height: 2px;
     bottom: 0;
     left: 0;
-    background: var(--main);
+    background: var(--primary);
     visibility: visible;
     transform: scaleX(0);
     transition: all .3s ease-in-out;
@@ -913,7 +913,7 @@ progress::-webkit-progress-value {
 .ftco-navbar-light .navbar-nav>.nav-item .nav-link.active {
     background: transparent;
     background: 0;
-    color: var(--main);
+    color: var(--primary);
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item .nav-link.active span::before {
@@ -923,7 +923,7 @@ progress::-webkit-progress-value {
 
 @media (max-width: 991.98px) {
     .ftco-navbar-light .navbar-nav>.nav-item.active>a {
-        color: var(--main);
+        color: var(--primary);
     }
 }
 
@@ -940,7 +940,7 @@ progress::-webkit-progress-value {
 .ftco-navbar-light .navbar-toggler:hover,
 .ftco-navbar-light .navbar-toggler:focus {
     text-decoration: none;
-    color: var(--main);
+    color: var(--primary);
     outline: none !important;
 }
 
@@ -982,7 +982,7 @@ progress::-webkit-progress-value {
 }
 
 .ftco-navbar-light.scrolled .nav-item.active>a {
-    color: var(--main) !important;
+    color: var(--primary) !important;
 }
 
 @media (max-width: 991.98px) {
@@ -1009,7 +1009,7 @@ progress::-webkit-progress-value {
 }
 
 .ftco-navbar-light.scrolled .nav-link.active {
-    color: var(--main) !important;
+    color: var(--primary) !important;
 }
 
 .ftco-navbar-light.scrolled.awake {
@@ -1042,7 +1042,7 @@ progress::-webkit-progress-value {
     width: 40px;
     height: 40px;
     content: '';
-    background: var(--main);
+    background: var(--primary);
     z-index: -1;
     transform: translateY(-50%);
     border-radius: 50%;
@@ -1111,7 +1111,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 .blog-entry .text .heading a:hover,
 .blog-entry .text .heading a:focus,
 .blog-entry .text .heading a:active {
-    color: var(--main);
+    color: var(--primary);
 }
 
 .blog-entry .meta {
@@ -1122,15 +1122,15 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 }
 
 .blog-entry .meta span {
-    color: var(--main);
+    color: var(--primary);
 }
 
 .blog-entry .meta a {
-    color: var(--main);
+    color: var(--primary);
 }
 
 .blog-entry .meta a:hover {
-    color: var(--main);
+    color: var(--primary);
 }
 
 .footer-list ul {
@@ -1163,7 +1163,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 }
 
 #recent-article-heading {
-    color: var(--main);
+    color: var(--primary);
 }
 
 .tagcloud a {
@@ -1173,13 +1173,13 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     margin-bottom: 7px;
     margin-right: 4px;
     border-radius: 4px;
-    color: var(--main);
-    border: 1px solid var(--main);
+    color: var(--primary);
+    border: 1px solid var(--primary);
     font-size: 11px;
 }
 
 .tagcloud a:hover {
-    border: 1px solid color-mix(in srgb, var(--main) 85%, white 15%);
+    border: 1px solid color-mix(in srgb, var(--primary) 85%, white 15%);
     opacity: .7;
 }
 
@@ -1218,7 +1218,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     bottom: 20px;
     right: 20px;
     width: 60px;
-    background-color: var(--main);
+    background-color: var(--primary);
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0 4px 6px var(--shadow-lg);
@@ -1243,7 +1243,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 }
 
 #contact-header {
-    background-color: var(--main);
+    background-color: var(--primary);
     padding: 8px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -1268,7 +1268,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
 }
 
 #contact-link a {
-    color: var(--main);
+    color: var(--primary);
     text-decoration: none;
     transition: color 0.3s;
 }
@@ -1354,7 +1354,7 @@ textarea.form-control {
 #contact-section .box .icon {
     width: 100px;
     height: 100px;
-    background: var(--main);
+    background: var(--primary);
     margin: 0 auto;
     margin-bottom: 10px;
     border-radius: 50%;
@@ -1381,7 +1381,7 @@ textarea.form-control {
 }
 
 #contact-section .contact-info p a {
-    color: var(--main);
+    color: var(--primary);
 }
 
 @media (max-width: 767.98px) {
@@ -1412,7 +1412,7 @@ textarea.form-control {
     inset: 0;
     content: '';
     opacity: 0;
-    background: var(--main);
+    background: var(--primary);
     z-index: -1;
     transition: all .3s ease;
 }
@@ -1482,7 +1482,7 @@ textarea.form-control {
 
 .project-title h5 {
     font-weight: bold;
-    color: var(--main);
+    color: var(--primary);
 }
 
 .project:hover .project-title {
@@ -1577,28 +1577,28 @@ textarea.form-control {
 
 .filter-chip:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--main);
+    box-shadow: 0 0 0 2px var(--primary);
 }
 
 .filter-chip.active {
     color: var(--white);
-    background-color: var(--main);
-    border-color: var(--main);
+    background-color: var(--primary);
+    border-color: var(--primary);
 }
 
 #experience-filters-reset {
     padding: 3px 12px;
     font-size: 0.8em;
-    color: var(--main);
+    color: var(--primary);
     background: none;
-    border: 1px solid var(--main);
+    border: 1px solid var(--primary);
     border-radius: 20px;
     cursor: pointer;
 }
 
 #experience-filters-reset:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--main);
+    box-shadow: 0 0 0 2px var(--primary);
 }
 
 /* .resume-wrap also carries Bootstrap's .d-flex (display: flex !important),
@@ -1626,7 +1626,7 @@ textarea.form-control {
 }
 
 .owl-menu.active {
-    color: color-mix(in srgb, var(--main) 85%, white 15%);
+    color: color-mix(in srgb, var(--primary) 85%, white 15%);
     border-bottom-color: currentcolor;
 }
 
@@ -1681,7 +1681,7 @@ textarea.form-control {
 }
 
 .owl-dot.active span {
-    background: var(--main) !important;
+    background: var(--primary) !important;
 }
 
 /* ==== Services Section ==== */
@@ -1700,7 +1700,7 @@ textarea.form-control {
 
 .services .icon i {
     font-size: 60px;
-    color: var(--main);
+    color: var(--primary);
 }
 
 .services .desc h6 {
@@ -1718,12 +1718,12 @@ textarea.form-control {
     content: '';
     width: 30px;
     height: 1px;
-    background: var(--main);
+    background: var(--primary);
     margin: 0 auto;
 }
 
 .services:hover {
-    background: var(--main);
+    background: var(--primary);
     opacity: 0.8;
 }
 
@@ -1752,7 +1752,7 @@ textarea.form-control {
     width: 50px;
     display: block;
     float: left;
-    background: var(--main);
+    background: var(--primary);
     border-radius: 50%;
     position: relative;
 }
@@ -1776,7 +1776,7 @@ textarea.form-control {
 
 #bingo-btn {
     padding: 10px 30px;
-    background-color: var(--main);
+    background-color: var(--primary);
     cursor: pointer;
     font-size: 30px;
     text-transform: none;
@@ -1845,7 +1845,7 @@ textarea.form-control {
     position: absolute;
     top: 20px;
     right: 20px;
-    border: 2px solid var(--main);
+    border: 2px solid var(--primary);
     border-radius: 10px;
     padding: 10px;
     max-width: 200px;
@@ -1859,7 +1859,7 @@ textarea.form-control {
     left: 20px;
     border-width: 8px;
     border-style: solid;
-    border-color: var(--main) transparent transparent transparent;
+    border-color: var(--primary) transparent transparent transparent;
 }
 
 .profile-photo:hover .bulle-bd {
@@ -1879,7 +1879,7 @@ textarea.form-control {
     left: 0;
     right: 0;
     background: var(--white);
-    border: 1px solid var(--main);
+    border: 1px solid var(--primary);
     border-top: none;
     max-height: 150px;
     overflow-y: auto;
@@ -1900,5 +1900,5 @@ textarea.form-control {
 }
 
 input[name="search-input"] {
-    border-color: var(--main) !important;
+    border-color: var(--primary) !important;
 }

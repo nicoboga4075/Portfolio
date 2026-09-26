@@ -6,7 +6,8 @@
 :root {
     color-scheme: light;
 
-    --main: #3e64ff;
+    --blue: #3e64ff;
+    --primary: var(--blue);
     --black: #000;
     --white: #fff;
     --gray: #6c757d;
@@ -130,7 +131,7 @@ section h2 {
 a {
     cursor: pointer;
     text-decoration: none;
-    color: var(--main);
+    color: var(--primary);
     font-weight: bold;
     transition: .3s all ease;
 }
@@ -142,7 +143,7 @@ a[href="#"] {
 a:hover,
 a:focus {
     text-decoration: none;
-    color: var(--main);
+    color: var(--primary);
     outline: none !important;
 }
 
@@ -165,7 +166,7 @@ td {
 }
 
 td strong {
-    color: var(--main);
+    color: var(--primary);
 }
 
 sup {
@@ -178,7 +179,7 @@ sup {
 }
 
 sup:hover {
-    background-color: var(--main);
+    background-color: var(--primary);
 }
 
 /* ==== Accessibility ==== */
@@ -200,7 +201,7 @@ sup:hover {
 /* ==== Dark Mode Toggle ==== */
 
 #dark-icon {
-    color: var(--main);
+    color: var(--primary);
     font-size: 24px;
     margin: 10px;
     border: none;
@@ -238,7 +239,7 @@ sup:hover {
 
 #language-switcher .lang-text.on {
     color: var(--white);
-    background-color: var(--main);
+    background-color: var(--primary);
 }
 
 #language-switcher .lang-text[aria-current] {
@@ -255,7 +256,7 @@ sup:hover {
     color: var(--white);
     padding: 5px 10px;
     border-radius: 20px;
-    background-color: var(--main);
+    background-color: var(--primary);
 }
 
 /* ==== Loader ==== */
@@ -301,7 +302,7 @@ sup:hover {
     width: 48px;
     height: 48px;
     border: 4px solid var(--lavender);
-    border-top-color: var(--main);
+    border-top-color: var(--primary);
     border-radius: 50%;
     animation: spinner-rotate 1s linear infinite;
 }
@@ -359,14 +360,14 @@ sup:hover {
 }
 
 #ftco-footer a:hover {
-    color: var(--main);
+    color: var(--primary);
 }
 
 #ftco-footer a[aria-current="page"] {
     cursor: default;
-    color: color-mix(in srgb, var(--main) 85%, white 15%);
+    color: color-mix(in srgb, var(--primary) 85%, white 15%);
 }
 
 #ftco-footer a[aria-current="page"]:hover {
-    color: color-mix(in srgb, var(--main) 85%, white 15%);
+    color: color-mix(in srgb, var(--primary) 85%, white 15%);
 }

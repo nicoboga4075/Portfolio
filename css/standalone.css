@@ -131,7 +131,7 @@ body.legal #ftco-main {
 /* Page title only: policy/terms (bodyClass: "legal") and projects (bodyClass: "read-zone", shared with articles - .article-container h1 above already covers those, this is what colours the projects' own h1). */
 body.legal h1,
 body.read-zone h1 {
-    color: var(--main);
+    color: var(--primary);
 }
 
 /* Constrain the article/project content column only (not .read-zone itself, the <body>) so the footer, a sibling of <main>, still spans the full page. */
@@ -174,11 +174,11 @@ body.read-zone h1 {
 /* ==== Articles ==== */
 
 .article-container h1 {
-    color: var(--main);
+    color: var(--primary);
 }
 
 .article-container h2 {
-    color: var(--main);
+    color: var(--primary);
 }
 
 .article-intro {
@@ -204,7 +204,7 @@ body.read-zone h1 {
     bottom: 0;
     left: 20px;
     width: 4px;
-    background: repeating-linear-gradient(to bottom, var(--main) 0, var(--main) 10px, transparent 10px, transparent 20px);
+    background: repeating-linear-gradient(to bottom, var(--primary) 0, var(--primary) 10px, transparent 10px, transparent 20px);
     border-radius: 2px;
 }
 
@@ -241,7 +241,7 @@ body.read-zone h1 {
 .city {
     position: relative;
     margin: 0;
-    color: var(--main);
+    color: var(--primary);
 }
 
 .city::before {
@@ -251,10 +251,10 @@ body.read-zone h1 {
     top: 50%;
     width: 14px;
     height: 14px;
-    background: var(--main);
+    background: var(--primary);
     border: 3px solid var(--background);
     border-radius: 50%;
-    box-shadow: 0 0 0 2px var(--main);
+    box-shadow: 0 0 0 2px var(--primary);
     transform: translateY(-50%);
 }
 
@@ -273,7 +273,7 @@ body.read-zone h1 {
     width: 8px;
     height: 8px;
     background: var(--background);
-    border: 2px solid var(--main);
+    border: 2px solid var(--primary);
     border-radius: 50%;
     transform: translateY(-50%);
 }

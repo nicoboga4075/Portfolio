@@ -1102,8 +1102,8 @@ function initIndexPage(langPage) {
 
         $('#calendly-cta').on('click', function (event) {
             event.preventDefault();
-            const mainColor = getComputedStyle(document.documentElement).getPropertyValue('--main').trim().replace('#', '');
-            Calendly.initPopupWidget({ url: this.dataset.calendlyUrl, color: mainColor });
+            const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim().replace('#', '');
+            Calendly.initPopupWidget({ url: this.dataset.calendlyUrl, color: primaryColor });
         });
 
         $(window).scroll(function () {
