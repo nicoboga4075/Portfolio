@@ -672,7 +672,7 @@ function createCircularChart({
                                 return {
                                     text: `${label} (${percentage}%)`,
                                     fillStyle: chart.data.datasets[0].backgroundColor[i],
-                                    strokeStyle: '#ffffff',
+                                    strokeStyle: getComputedStyle(document.documentElement).getPropertyValue('--white').trim(),
                                     lineWidth: 2,
                                     fontColor: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim()
                                 };
