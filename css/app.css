@@ -924,7 +924,7 @@ progress::-webkit-progress-value {
 
 .ftco-navbar-light .navbar-toggler {
     border: 0;
-    color: color-mix(in srgb, var(--white) 50%, transparent) !important;
+    color: var(--primary);
     cursor: pointer;
     padding-right: 0;
     text-transform: uppercase;
