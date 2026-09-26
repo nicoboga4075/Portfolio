@@ -408,9 +408,9 @@ sup:hover {
 
 #ftco-footer a[aria-current="page"] {
     cursor: default;
-    color: color-mix(in srgb, var(--primary) 85%, white 15%);
+    color: var(--blue-light);
 }
 
 #ftco-footer a[aria-current="page"]:hover {
-    color: color-mix(in srgb, var(--primary) 85%, white 15%);
+    color: var(--blue-light);
 }
