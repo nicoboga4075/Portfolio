@@ -1,11 +1,19 @@
 {
     "en": {
-        "darkMode": "Toggle dark mode",
+        "theme": {
+            "auto": "Theme: automatic",
+            "light": "Theme: light",
+            "dark": "Theme: dark"
+        },
         "navigation": "Toggle navigation",
         "language": "Language"
     },
     "fr": {
-        "darkMode": "Basculer le mode sombre",
+        "theme": {
+            "auto": "Thème : automatique",
+            "light": "Thème : clair",
+            "dark": "Thème : sombre"
+        },
         "navigation": "Basculer la navigation",
         "language": "Langue"
     },

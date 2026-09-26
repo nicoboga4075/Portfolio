@@ -48,9 +48,15 @@ bodyClass: ""
         <!-- Inline, after the stylesheets and before first paint: the deferred common.js applies the theme too late (white flash in dark mode). It waits for the CSS above, so --background is already resolved. -->
         <script>
             {
+                // One-off migration from the two-state button's 'darkMode' ('true'/'false') to 'theme' ('light'/'dark', absent = auto).
+                const legacy = localStorage.getItem('darkMode');
+                if (legacy !== null) {
+                    localStorage.setItem('theme', legacy === 'true' ? 'dark' : 'light');
+                    localStorage.removeItem('darkMode');
+                }
                 // Same rule as isDarkModePreferred() in common.js, which isn't loaded yet.
-                const stored = localStorage.getItem('darkMode');
-                document.documentElement.classList.toggle('dark-mode', stored === null ? matchMedia('(prefers-color-scheme: dark)').matches : stored === 'true');
+                const choice = localStorage.getItem('theme');
+                document.documentElement.classList.toggle('dark-mode', choice === null ? matchMedia('(prefers-color-scheme: dark)').matches : choice === 'dark');
                 const themeColor = document.createElement('meta');
                 themeColor.name = 'theme-color';
                 themeColor.content = getComputedStyle(document.documentElement).getPropertyValue('--background').trim();

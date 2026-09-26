@@ -198,31 +198,37 @@ function fillCareerCounts() {
 
 const darkSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-// The stored choice wins; until the visitor makes one, follow the OS setting.
-// base.njk's inline script applies the same rule before first paint.
-function isDarkModePreferred() {
-    const stored = localStorage.getItem('darkMode');
-    return stored === null ? darkSchemeQuery.matches : stored === 'true';
+// The #dark-icon button cycles through these; auto (nothing stored) follows
+// the OS setting. base.njk's inline script applies the same rule before first
+// paint, and migrates the old 'darkMode' key to this one.
+const themeChoices = ['auto', 'light', 'dark'];
+
+function getThemeChoice() {
+    return localStorage.getItem('theme') ?? 'auto';
 }
 
-// No argument: apply the preference (on page load, or when the OS setting
-// changes). With an event (the #dark-icon button's onclick): switch to the
-// opposite of the theme on screen - not of the stored value, which is absent
-// while the OS setting is followed - then apply. A choice is only stored when
-// it goes against the OS setting; toggling back to the OS theme clears it, so
-// the site follows the OS again (no separate "auto" state to offer).
+function isDarkModePreferred() {
+    const choice = getThemeChoice();
+    return choice === 'auto' ? darkSchemeQuery.matches : choice === 'dark';
+}
+
+// No argument: apply the choice (on page load, or when the OS setting
+// changes). With an event (the #dark-icon button's onclick): move to the next
+// choice first, then apply. The icon, title and sr-only label show the choice,
+// not the theme on screen, so auto keeps its own icon in both themes.
 // Fires `darkmodechange` so app.js can recolour the skills chart.
 function toggleDarkMode(event) {
     if (event) {
         event.preventDefault();
         event.stopPropagation();
-        const wantDark = !document.documentElement.classList.contains('dark-mode');
-        if (wantDark === darkSchemeQuery.matches) {
-            localStorage.removeItem('darkMode');
+        const next = themeChoices[(themeChoices.indexOf(getThemeChoice()) + 1) % themeChoices.length];
+        if (next === 'auto') {
+            localStorage.removeItem('theme');
         } else {
-            localStorage.setItem('darkMode', wantDark);
+            localStorage.setItem('theme', next);
         }
     }
+    const choice = getThemeChoice();
     const isDark = isDarkModePreferred();
     document.documentElement.classList.toggle('dark-mode', isDark);
     // Browser chrome (Android address bar, Safari tab bar, PWA title bar) follows
@@ -232,15 +238,20 @@ function toggleDarkMode(event) {
         themeColor.content = getComputedStyle(document.documentElement).getPropertyValue('--background').trim();
     }
     // Pages with the icon font (assets set in front matter) swap the icon-*
-    // class; others fall back to a sun/moon emoji, same split as footer.html's
+    // class; others fall back to an emoji, same split as footer.html's
     // icon-heart/icon-shield vs their emoji equivalents.
     const icon = document.getElementById('dark-icon');
-    if (icon?.dataset.iconMode === 'emoji') {
-        // aria-hidden span, not the button's own textContent, so the accessible name (aria-label) keeps naming it, not the glyph.
-        const span = icon.querySelector('span');
-        span.textContent = isDark ? span.dataset.emojiDark : span.dataset.emojiLight;
-    } else if (icon) {
-        icon.className = isDark ? 'icon-moon-o' : 'icon-sun-o';
+    if (icon) {
+        const suffix = choice.charAt(0).toUpperCase() + choice.slice(1);
+        if (icon.dataset.iconMode === 'emoji') {
+            // aria-hidden span, not the button's own textContent, so the accessible name keeps coming from the sr-only label, not the glyph.
+            const span = icon.querySelector('span[aria-hidden]');
+            span.textContent = span.dataset[`emoji${suffix}`];
+        } else {
+            icon.className = { auto: 'icon-adjust', light: 'icon-sun-o', dark: 'icon-moon-o' }[choice];
+        }
+        icon.title = icon.dataset[`label${suffix}`];
+        icon.querySelector('.sr-only').textContent = icon.title;
     }
     document.dispatchEvent(new CustomEvent('darkmodechange'));
 }
@@ -285,7 +296,7 @@ function setCopyrightYear() {
 registerServiceWorker();
 toggleDarkMode();
 darkSchemeQuery.addEventListener('change', function () {
-    if (localStorage.getItem('darkMode') === null) {
+    if (getThemeChoice() === 'auto') {
         toggleDarkMode();
     }
 });
