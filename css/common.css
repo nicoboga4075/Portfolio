@@ -30,10 +30,11 @@
     --lavender: #e6e6fa;
     --background: var(--white);
     --text-color: var(--black);
-    --shadow-xs: #0000000d;
-    --shadow-sm: #0000001a;
-    --shadow-md: #00000033;
-    --shadow-lg: #0000004d;
+    --shadow-color: var(--black);
+    --shadow-xs: color-mix(in srgb, var(--shadow-color) 5%, transparent);
+    --shadow-sm: color-mix(in srgb, var(--shadow-color) 10%, transparent);
+    --shadow-md: color-mix(in srgb, var(--shadow-color) 20%, transparent);
+    --shadow-lg: color-mix(in srgb, var(--shadow-color) 30%, transparent);
 }
 
 html.dark-mode {
@@ -43,10 +44,7 @@ html.dark-mode {
     --gray: var(--gray-light);
     --success: var(--green);
     --danger: var(--red);
-    --shadow-xs: #ffffff0d;
-    --shadow-sm: #ffffff14;
-    --shadow-md: #ffffff1f;
-    --shadow-lg: #ffffff33;
+    --shadow-color: var(--white);
 }
 
 /* ==== Fonts ==== */
