@@ -1592,7 +1592,9 @@ function gisLoaded() {
                     throw resp;
                 }
             }
-        }));
+        }))
+        // appGoogleToken stays undefined, so a later form submit fails through handleSendFailure.
+        .catch(error => console.error(error));
 }
 
 async function sendEmail(senderName, subject, message) {
