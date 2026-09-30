@@ -125,7 +125,12 @@ function watch() {
 }
 
 if (once) {
-    buildOnce();
+    buildOnce().catch(error => {
+        console.error(error);
+        // shutdown()'s bare process.exit() picks this up.
+        process.exitCode = 1;
+        shutdown();
+    });
 } else {
     watch();
 }

@@ -40,18 +40,25 @@ const outdated = [];
 const unknown = [];
 const failed = [];
 
-for (const lib of manifest) {
-  let latest;
-  try {
-    latest = lib.source === "github" ? await latestGithubTag(lib.repo) : await latestNpmVersion(lib.npm);
-  } catch (err) {
-    failed.push({ ...lib, error: err.message });
-    continue;
-  }
-  if (lib.version === null) {
-    unknown.push({ ...lib, latest });
-  } else if (isNewer(latest, lib.version)) {
-    outdated.push({ ...lib, latest });
+function latestVersion(library) {
+  return library.source === "github" ? latestGithubTag(library.repo) : latestNpmVersion(library.npm);
+}
+
+// Every check settles to { library, latest } or { library, error }, so one failed request doesn't abort the others.
+const checks = await Promise.all(
+  manifest.map(library => latestVersion(library).then(
+    latest => ({ library, latest }),
+    error => ({ library, error })
+  ))
+);
+
+for (const { library, latest, error } of checks) {
+  if (error) {
+    failed.push({ ...library, error: error.message });
+  } else if (library.version === null) {
+    unknown.push({ ...library, latest });
+  } else if (isNewer(latest, library.version)) {
+    outdated.push({ ...library, latest });
   }
 }
 

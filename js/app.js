@@ -527,33 +527,35 @@ function loadScript(src) {
     });
 }
 
-// `type` decides whether the doughnutLabel plugin (only useful for
-// doughnut/pie's cutout) is worth fetching alongside Chart.js core.
-function loadChartJs(type = 'doughnut') {
-    if (!loadChartJs.corePromise) {
-        loadChartJs.corePromise = window.Chart ? Promise.resolve() : loadScript('js/chart.umd.min.js').catch(error => {
+const scriptPromises = new Map();
+function loadScriptOnce(src) {
+    if (!scriptPromises.has(src)) {
+        scriptPromises.set(src, loadScript(src).catch(error => {
             // Don't cache a failed load (offline, dropped connection while
             // the machine slept): drop the memoised promise so a later
             // trigger can retry from scratch.
-            loadChartJs.corePromise = null;
+            scriptPromises.delete(src);
             throw error;
-        });
+        }));
     }
+    return scriptPromises.get(src);
+}
+
+function loadDoughnutLabelPlugin() {
+    if (window.Chart.registry.plugins.get('doughnutLabel')) {
+        return undefined;
+    }
+    return loadScriptOnce('js/chartjs-plugin-doughnutlabel.min.js');
+}
+
+// `type` decides whether the doughnutLabel plugin (only useful for
+// doughnut/pie's cutout) is worth fetching alongside Chart.js core.
+function loadChartJs(type = 'doughnut') {
+    const corePromise = window.Chart ? Promise.resolve() : loadScriptOnce('js/chart.umd.min.js');
     if (type !== 'doughnut' && type !== 'pie') {
-        return loadChartJs.corePromise;
+        return corePromise;
     }
-    return loadChartJs.corePromise.then(() => {
-        if (window.Chart.registry.plugins.get('doughnutLabel')) {
-            return;
-        }
-        if (!loadChartJs.pluginPromise) {
-            loadChartJs.pluginPromise = loadScript('js/chartjs-plugin-doughnutlabel.min.js').catch(error => {
-                loadChartJs.pluginPromise = null;
-                throw error;
-            });
-        }
-        return loadChartJs.pluginPromise;
-    });
+    return corePromise.then(loadDoughnutLabelPlugin);
 }
 
 // doughnutlabel's auto-shrink is broken (reads the wrong innerRadius), so refit the text ourselves.
