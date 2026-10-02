@@ -104,7 +104,7 @@
     "toml": "^5.0.0",
     "ts-jest": "^29.4.14",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.70.1"
+    "typescript-eslint": "^8.71.0"
   },
   "overrides": {
     "braces": "3.0.3",
