@@ -252,20 +252,19 @@ function toggleDarkMode(event) {
         }
         const label = icon.dataset[`label${suffix}`];
         icon.querySelector('.sr-only').textContent = label;
-        // Where app.js turned it into a Bootstrap tooltip (index/blog), the text lives in
-        // data-original-title and is read on each show; an open one is edited in place,
-        // since Bootstrap 4's show() on a shown tooltip stacks a second one over it.
-        // Elsewhere the native title is the tooltip.
         if ('originalTitle' in icon.dataset) {
+            // Index/blog once app.js created the Bootstrap tooltip: its text lives in data-original-title, and an open one is edited in place since Bootstrap 4's show() on a shown tooltip stacks a second one.
             icon.dataset.originalTitle = label;
             const openTip = document.getElementById(icon.getAttribute('aria-describedby'));
             if (openTip) {
                 openTip.querySelector('.tooltip-inner').textContent = label;
                 icon.tooltip?.update();
             }
-        } else {
+        } else if (icon.hasAttribute('title')) {
+            // Index/blog on page load: this runs before app.js creates the Bootstrap tooltip, which then copies its text from this title.
             icon.title = label;
         }
+        // Pages without Bootstrap have no title: standalone.css shows the .sr-only label updated above as the tooltip.
     }
     document.dispatchEvent(new CustomEvent('darkmodechange'));
 }

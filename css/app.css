@@ -1874,3 +1874,10 @@ textarea.form-control {
 input[name="search-input"] {
     border-color: var(--primary) !important;
 }
+
+/* ==== Tooltips ==== */
+
+/* Bootstrap's tooltip sets its own system font stack; the site font everywhere (same as the standalone pages' tooltip in standalone.css). */
+.tooltip {
+    font-family: Poppins, 'Poppins Windows', 'Poppins Mac/iOS', 'Poppins Linux', 'Poppins Android', sans-serif;
+}

@@ -492,3 +492,44 @@ html.dark-mode .card {
     display: block;
     padding: 15px 20px;
 }
+
+/* ==== Theme Tooltip ==== */
+
+/* Pages without Bootstrap: the button's own .sr-only label (kept up to date by toggleDarkMode() in common.js) shows as a Bootstrap 4 look-alike tooltip below it on hover / keyboard focus. :not([data-original-title]) leaves out the blog page, which loads this file for injected articles but already has app.js's Bootstrap tooltip. */
+#dark-icon:not([data-original-title]) {
+    position: relative;
+}
+
+#dark-icon:not([data-original-title]):is(:hover, :focus-visible) .sr-only {
+    top: 100%;
+    left: 50%;
+    z-index: 3;
+    width: auto;
+    height: auto;
+    padding: 4px 8px;
+    margin: 6px 0 0;
+    overflow: visible;
+    clip-path: none;
+    font-family: Poppins, 'Poppins Windows', 'Poppins Mac/iOS', 'Poppins Linux', 'Poppins Android', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--white);
+    background-color: var(--black);
+    border-radius: 4px;
+    opacity: 0.9;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+/* The arrow, pointing up at the button. */
+#dark-icon:not([data-original-title]):is(:hover, :focus-visible) .sr-only::before {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -6px;
+    content: "";
+    border-color: transparent transparent var(--black);
+    border-style: solid;
+    border-width: 0 6px 6px;
+}
