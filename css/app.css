@@ -23,6 +23,11 @@ body.article-error #ftco-main {
     align-items: center;
 }
 
+/* The article is fetched after load: reserving a screen's height keeps the sidebar and footer out of view until it lands, instead of showing them and pushing them down (CLS) */
+body.blog-page:not(.article-error) #article-shape {
+    min-height: 100vh;
+}
+
 .error-message {
     color: var(--red) !important;
     text-align: center;

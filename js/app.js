@@ -1230,6 +1230,11 @@ function initBlogPage(langPage) {
 
         $(`.nav-link[href*="${appBlogSection}"]`).addClass('active');
 
+        // A bare /blog (direct link, bookmark, Lighthouse) shows the presentation article instead of the error; an unknown #slug still errors.
+        if (!window.location.hash && !getCurrentArticle()) {
+            history.replaceState(null, null, `${window.location.pathname}#presentation`);
+        }
+
         const currentArticle = getCurrentArticle();
         const recentArticle = getRecentArticle();
 
