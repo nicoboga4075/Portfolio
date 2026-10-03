@@ -171,6 +171,11 @@ input[name="search-input"].highlight-flash {
     background-repeat: no-repeat;
 }
 
+/* The window height fullHeight() in app.js sets, applied before the JS runs: otherwise the hero starts short and the next sections jump down (CLS 0.4) */
+.js-fullheight {
+    height: 100vh;
+}
+
 .hero-wrap .overlay {
     position: absolute;
     inset: 0;
