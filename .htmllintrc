@@ -1,7 +1,7 @@
 {
     "plugins": [],
     "maxerr": false,
-    "raw-ignore-regex": false,
+    "raw-ignore-regex": "\\{%[\\s\\S]*?%\\}",
     "attr-bans": [
         "align",
         "background",

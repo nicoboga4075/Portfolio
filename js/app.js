@@ -940,7 +940,7 @@ function initCarousel(target) {
 }
 
 function buildSafeRedirection(redirect, langPage) {
-    let safeRedirection = '';
+    let safeRedirection;
     if (redirect.startsWith('https://')) {
         safeRedirection = redirect;
     } else if (redirect.startsWith('http://')) {
