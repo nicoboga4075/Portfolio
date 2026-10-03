@@ -1457,7 +1457,7 @@ textarea.form-control {
 	padding: 4px;
 }
 
-.project-title h5 {
+.project-title h3 {
     font-weight: bold;
     color: var(--primary);
 }
@@ -1680,14 +1680,14 @@ textarea.form-control {
     color: var(--primary);
 }
 
-.services .desc h6 {
+.services .desc h3 {
     letter-spacing: 3px;
     text-transform: uppercase;
     position: relative;
     color: var(--black);
 }
 
-.services .desc h6::after {
+.services .desc h3::after {
     position: absolute;
     bottom: -15px;
     left: 0;
@@ -1708,11 +1708,11 @@ textarea.form-control {
     color: var(--white);
 }
 
-.services:hover h6 {
+.services:hover h3 {
     color: var(--white);
 }
 
-.services:hover h6::after {
+.services:hover h3::after {
     background: var(--white);
 }
 
