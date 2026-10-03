@@ -916,6 +916,13 @@ progress::-webkit-progress-value {
     color: var(--primary);
 }
 
+/* Over the hero's tinted overlay, --primary only reaches 4.1:1 (WCAG AA needs 4.5:1) */
+@media (min-width: 992px) {
+    html:not(.dark-mode) .ftco-navbar-light:not(.scrolled) .navbar-nav>.nav-item .nav-link.active {
+        color: var(--blue-dark);
+    }
+}
+
 .ftco-navbar-light .navbar-nav>.nav-item .nav-link.active span::before {
     visibility: visible;
     transform: scaleX(1);
