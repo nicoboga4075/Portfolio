@@ -514,6 +514,9 @@ function loadContactScripts() {
     document.body.appendChild(recaptcha);
 }
 
+// Live SaaS embed tied to Calendly's booking backend, not vendored like the static libs.
+const CALENDLY_WIDGET = 'https://assets.calendly.com/assets/external/widget';
+
 function loadScript(src) {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
@@ -1104,8 +1107,22 @@ function initIndexPage(langPage) {
 
         $('#calendly-cta').on('click', function (event) {
             event.preventDefault();
+            const url = this.dataset.calendlyUrl;
             const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim().replace('#', '');
-            Calendly.initPopupWidget({ url: this.dataset.calendlyUrl, color: primaryColor });
+            // Calendly's widget is only fetched on the first click, not on every page load.
+            if (!document.querySelector(`link[href="${CALENDLY_WIDGET}.css"]`)) {
+                const css = document.createElement('link');
+                css.rel = 'stylesheet';
+                css.href = `${CALENDLY_WIDGET}.css`;
+                document.head.appendChild(css);
+            }
+            loadScriptOnce(`${CALENDLY_WIDGET}.js`)
+                .then(() => Calendly.initPopupWidget({ url, color: primaryColor }))
+                .catch(error => {
+                    // Without the widget, the booking page itself still works.
+                    console.error(error);
+                    window.open(url, '_blank', 'noopener');
+                });
         });
 
         $(window).scroll(function () {
