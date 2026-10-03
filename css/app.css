@@ -1241,11 +1241,23 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     border: 0;
     border-radius: 50%;
     background-color: var(--primary);
-    color: var(--white);
-    font-size: 25px;
-    box-shadow: 0 4px 6px var(--shadow-lg);
     cursor: pointer;
     z-index: 1000;
+}
+
+/* Bootstrap's reboot rings every focused button in black, mouse clicks included; keep a blue ring for keyboard focus only */
+#bp-fab-stub:focus:not(:focus-visible) {
+    outline: 0;
+}
+
+#bp-fab-stub:focus-visible {
+    outline: 3px solid var(--blue-light);
+    outline-offset: 2px;
+}
+
+/* Same path as Botpress's own bubble icon, so the icon doesn't change when the real bubble takes over; an SVG fills black unless told otherwise */
+#bp-fab-stub .bp-fab-icon {
+    fill: var(--white);
 }
 
 #bp-fab-stub .spinner {
@@ -1263,7 +1275,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     cursor: progress;
 }
 
-#bp-fab-stub[aria-busy="true"] .icon-commenting {
+#bp-fab-stub[aria-busy="true"] .bp-fab-icon {
     display: none;
 }
 

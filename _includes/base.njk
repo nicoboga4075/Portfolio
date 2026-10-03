@@ -71,7 +71,7 @@ bodyClass: ""
         </div>
         <div id="ftco-visitor" hidden aria-label="{{ landmarkLang.visitor }}"></div>
         {%- if botpress and viewport == "desktop" %}
-        <button id="bp-fab-stub" type="button" aria-label="{{ common.chatLabel[lang] }}"><span class="icon-commenting" aria-hidden="true"></span><span class="spinner" aria-hidden="true"></span></button>
+        <button id="bp-fab-stub" type="button" aria-label="{{ common.chatLabel[lang] }}"><svg class="bp-fab-icon" width="24" height="24" viewbox="0 0 20 20" aria-hidden="true"><path d="M4.583 14.894l-3.256 3.78c-.7.813-1.26.598-1.25-.46a10689.413 10689.413 0 0 1 .035-4.775V4.816a3.89 3.89 0 0 1 3.88-3.89h12.064a3.885 3.885 0 0 1 3.882 3.89v6.185a3.89 3.89 0 0 1-3.882 3.89H4.583z" fill-rule="evenodd"/></svg><span class="spinner" aria-hidden="true"></span></button>
         {%- endif %}
         {%- if showContact %}
         <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" role="button" tabindex="0" data-target="#contact-window" aria-expanded="false" aria-controls="contact-window" aria-label="{{ contact.title[lang] }}">
