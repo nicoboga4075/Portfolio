@@ -909,7 +909,9 @@ function labelCarouselControls(target) {
 function initCarousel(target) {
     const itemCount = $(target).children().length;
     $(target).owlCarousel({
-        loop: true,
+        // rewind instead of loop: loop clones items at both ends (+100 extra DOM nodes for hard skills alone)
+        loop: false,
+        rewind: true,
         lazyLoad: true,
         autoplay: true,
         margin: 10,
