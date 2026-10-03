@@ -1760,8 +1760,6 @@ textarea.form-control {
 }
 
 .services .desc h3 {
-    letter-spacing: 3px;
-    text-transform: uppercase;
     position: relative;
     color: var(--black);
 }
