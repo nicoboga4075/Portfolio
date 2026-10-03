@@ -1219,6 +1219,56 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     z-index: 1000;
 }
 
+/* Stand-in for the Botpress bubble (same spot and colours as botpress.js gives it) until a click loads the 300 KB widget */
+#bp-fab-stub {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: var(--white);
+    font-size: 25px;
+    box-shadow: 0 4px 6px var(--shadow-lg);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#bp-fab-stub .spinner {
+    display: none;
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--blue-light);
+    border-top-color: var(--white);
+    border-radius: 50%;
+    animation: spinner-rotate 0.6s linear infinite;
+}
+
+/* While Botpress loads after the click, the spinner stands in for the icon */
+#bp-fab-stub[aria-busy="true"] {
+    cursor: progress;
+}
+
+#bp-fab-stub[aria-busy="true"] .icon-commenting {
+    display: none;
+}
+
+#bp-fab-stub[aria-busy="true"] .spinner {
+    display: block;
+}
+
+@media (min-width: 1024px) {
+    #bp-fab-stub {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 #contact-icon .icon-user {
     padding: 15px;
     font-size: 25px;

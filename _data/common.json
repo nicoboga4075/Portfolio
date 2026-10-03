@@ -20,5 +20,9 @@
     "loading": {
         "en": "Loading…",
         "fr": "Chargement…"
+    },
+    "chatLabel": {
+        "en": "Chat with NicoBot",
+        "fr": "Discuter avec NicoBot"
     }
 }

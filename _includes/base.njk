@@ -70,6 +70,9 @@ bodyClass: ""
             <span class="sr-only">{{ common.loading[lang] }}</span>
         </div>
         <div id="ftco-visitor" hidden aria-label="{{ landmarkLang.visitor }}"></div>
+        {%- if botpress and viewport == "desktop" %}
+        <button id="bp-fab-stub" type="button" aria-label="{{ common.chatLabel[lang] }}"><span class="icon-commenting" aria-hidden="true"></span><span class="spinner" aria-hidden="true"></span></button>
+        {%- endif %}
         {%- if showContact %}
         <div id="contact-icon" class="open-mfp d-flex justify-content-center text-white" role="button" tabindex="0" data-target="#contact-window" aria-expanded="false" aria-controls="contact-window" aria-label="{{ contact.title[lang] }}">
             <span class="icon-user" aria-hidden="true"></span>
