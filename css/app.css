@@ -1057,6 +1057,49 @@ progress::-webkit-progress-value {
     color: var(--white);
 }
 
+/* The badges sit next to the logo link, not inside it, so they aren't clickable. */
+#brand {
+    align-items: flex-start;
+}
+
+#brand .navbar-brand {
+    margin-right: 0;
+}
+
+/* Version on top, initials underneath. */
+#brand-badges {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 6px;
+    font-weight: bold;
+    text-align: center;
+    cursor: default;
+}
+
+/* Keeps 2.1.0 where it sat inside the link, before NBO was added. */
+.ftco-navbar-light.scrolled #brand-badges {
+    margin-top: 12px;
+}
+
+/* Stacked, the sups become blocks, and Bootstrap's line-height: 0 would leave the text overflowing the background. */
+#brand-badges sup {
+    line-height: 1;
+    top: 0;
+}
+
+/* Fixed colours: common.css turns every sup to --primary on hover. */
+#version-badge,
+#version-badge:hover {
+    background-color: var(--dark);
+}
+
+#author-badge,
+#author-badge:hover {
+    background-color: var(--orange);
+}
+
 /* ==== Navbar Brand ==== */
 
 html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,

@@ -1,7 +1,7 @@
 {%- set lang = page.fileSlug.slice(-2) -%}
 {%- set navLang = nav[lang] -%}
 <div class="container">
-    <a id="index" class="navbar-brand"><span>P</span>ortfolio<sup id="version-badge" class="d-none d-lg-inline">{{ version }}</sup></a>
+    <span id="brand" class="d-inline-flex"><a id="index" class="navbar-brand"><span>P</span>ortfolio</a><span id="brand-badges" class="d-none d-lg-inline-flex"><sup id="version-badge">{{ version }}</sup><sup id="author-badge">NBO</sup></span></span>
     {% include "dark-mode.html" %}
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="{{ navLang.navigation }}"><span class="icon-menu"></span> Menu</button>
     <div id="ftco-nav" class="collapse navbar-collapse">
