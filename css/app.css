@@ -694,10 +694,14 @@ progress::-webkit-progress-value {
     font-weight: 600;
 }
 
-.btn:hover,
-.btn:active,
-.btn:focus {
+/* No ring after a mouse click, a visible one for keyboard focus. */
+.btn:focus:not(:focus-visible) {
     outline: 0;
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .btn:disabled,
@@ -952,7 +956,15 @@ progress::-webkit-progress-value {
 .ftco-navbar-light .navbar-toggler:focus {
     text-decoration: none;
     color: var(--primary);
+}
+
+.ftco-navbar-light .navbar-toggler:focus:not(:focus-visible) {
     outline: none;
+}
+
+.ftco-navbar-light .navbar-toggler:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 /* Centre the pill on the navbar's wrapped mobile row (a flex item there, so still block-level and needs auto margins to centre within that row). In .page-controls (policy / terms) and .read-title (projects) it's one part of a flex row that's already centred (or space-between, for .read-title) as a whole, so no auto margins there. */
@@ -1722,7 +1734,11 @@ textarea.form-control {
 
 .filter-chip:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--primary);
+}
+
+/* The gap in --background keeps the ring visible on an active (--primary) chip. */
+.filter-chip:focus-visible {
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
 }
 
 .filter-chip.active {
@@ -1743,7 +1759,10 @@ textarea.form-control {
 
 #experience-filters-reset:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--primary);
+}
+
+#experience-filters-reset:focus-visible {
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
 }
 
 /* .resume-wrap also carries Bootstrap's .d-flex (display: flex !important),
@@ -1822,7 +1841,19 @@ textarea.form-control {
 .owl-next:focus,
 .owl-dot:focus {
     background: transparent;
+}
+
+.owl-prev:focus:not(:focus-visible),
+.owl-next:focus:not(:focus-visible),
+.owl-dot:focus:not(:focus-visible) {
     outline: none;
+}
+
+.owl-prev:focus-visible,
+.owl-next:focus-visible,
+.owl-dot:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .owl-dot.active span {
