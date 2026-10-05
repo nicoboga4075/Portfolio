@@ -1606,6 +1606,52 @@ textarea.form-control {
     margin-bottom: 32px;
 }
 
+#experience-filters-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 3px 12px;
+    font-size: 12.8px;
+    color: var(--primary);
+    background: none;
+    border: 1px solid var(--primary);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#experience-filters-toggle.active {
+    color: var(--white);
+    background-color: var(--primary);
+}
+
+#experience-filters-toggle:focus {
+    outline: none;
+}
+
+#experience-filters-toggle:focus-visible {
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+}
+
+.filter-toggle-caret {
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid currentcolor;
+    border-bottom: 1.5px solid currentcolor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform .2s;
+}
+
+#experience-filters-toggle[aria-expanded="true"] .filter-toggle-caret {
+    transform: translateY(1px) rotate(-135deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .filter-toggle-caret {
+        transition: none;
+    }
+}
+
 .filter-group {
     display: flex;
     flex-wrap: wrap;

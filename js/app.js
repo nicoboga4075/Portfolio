@@ -970,8 +970,34 @@ function initExperienceFilters() {
     const active = new Set();
     const toolbar = document.createElement('div');
     toolbar.id = 'experience-filters';
+    // Collapsed by default so the experiences, not ~25 chips, come first.
+    toolbar.hidden = true;
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.type = 'button';
+    toggleBtn.id = 'experience-filters-toggle';
+    toggleBtn.setAttribute('aria-controls', toolbar.id);
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    const toggleLabel = document.createElement('span');
+    const toggleCaret = document.createElement('span');
+    toggleCaret.className = 'filter-toggle-caret';
+    toggleCaret.setAttribute('aria-hidden', 'true');
+    toggleBtn.append(toggleLabel, toggleCaret);
+    toggleBtn.addEventListener('click', () => {
+        toolbar.hidden = !toolbar.hidden;
+        toggleBtn.setAttribute('aria-expanded', String(!toolbar.hidden));
+    });
+
+    // The count keeps an active filter visible once the panel is closed again.
+    function updateToggleLabel() {
+        const label = getMessage('filter-toggle');
+        toggleLabel.textContent = active.size ? `${label} (${active.size})` : label;
+        toggleBtn.classList.toggle('active', active.size > 0);
+    }
+    updateToggleLabel();
 
     function applyFilters() {
+        updateToggleLabel();
         let visibleCount = 0;
         wraps.forEach(wrap => {
             const texts = new Set([...wrap.querySelectorAll('.badge, .company-type-badge, .company-size-badge, .sector-tag')]
@@ -1038,7 +1064,7 @@ function initExperienceFilters() {
     empty.className = 'd-none';
     empty.textContent = getMessage('filter-no-results');
 
-    container.querySelector('h2.heading').after(toolbar, empty);
+    container.querySelector('h2.heading').after(toggleBtn, toolbar, empty);
 }
 
 function initIndexPage(langPage) {
