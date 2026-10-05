@@ -50,18 +50,6 @@ const appProjects = [
     'opale_snitem'
 ];
 
-const appServices = [
-    'https://www.soft-concept.com/sondages-presidentielle/WebReports.dll',
-    'https://www.salesforce.com/fr/resources/definition/gestion-relation-client',
-    'https://github.com/nicoboga4075',
-    'https://www.lumapps.com/fr/digital-workplace/outils-transformation-digitale',
-    appProjectSection,
-    'https://www.linkedin.com/pulse/fundamentals-support-structures-david-apollon',
-    'https://www.ibm.com/fr-fr/topics/ai-automation',
-    'https://cyber.gouv.fr/',
-    appBlogSection
-];
-
 const appArticles = JSON.parse($('meta[name="articles"]').attr('content'));
 
 const appKeywords = [
@@ -1099,14 +1087,6 @@ function initIndexPage(langPage) {
             navLink.href = buildSafeRedirection(appProjects[index], langPage);
         });
 
-        $('.blog-entry .article-image').each(function (index, navLink) {
-            navLink.href = `/${langPage}/blog#${appArticles[index].slug}`;
-        });
-
-        $('.services').each(function (index, navLink) {
-            navLink.href = buildSafeRedirection(appServices[index], langPage);
-        });
-
         $('#calendly-cta').on('click', function (event) {
             event.preventDefault();
             const url = this.dataset.calendlyUrl;
@@ -1352,8 +1332,11 @@ function initBlogPage(langPage) {
 
             if (recentArticle) {
                 loadImages('.blog-img', 'avif', true);
-                $('.blog-img').on('click', function () {
-                    window.location.href = `/${langPage}/blog#${recentArticle.slug}`;
+                const recentArticleUrl = `/${langPage}/blog#${recentArticle.slug}`;
+                // Real href for middle-click / new tab; a plain click only changes the hash on this same page, hence the reload.
+                $('.blog-img').attr('href', recentArticleUrl).on('click', function (event) {
+                    event.preventDefault();
+                    window.location.href = recentArticleUrl;
                     setTimeout(() => location.reload(), 150);
                 });
                 $('#recent-article-heading').text(recentArticle.title);
@@ -1717,7 +1700,7 @@ async function sendEmail(senderName, subject, message) {
 }
 
 function enableSubmitForm() {
-    const submitButton = $('input[type="submit"]');
+    const submitButton = $('form[name="contactForm"] [type="submit"]');
     const recaptchaResponse = grecaptcha.getResponse();
     submitButton.prop('disabled', !(recaptchaResponse.length));
 }

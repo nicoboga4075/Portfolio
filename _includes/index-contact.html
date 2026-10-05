@@ -43,7 +43,7 @@
             <div class="col-md-6 order-md-last d-flex">
                 <form class="bg-light p-4 p-md-5 contact-form" name="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
                     <p hidden>
-                        <label>{{ contactPage.honeypot }}<input name="bot-field"></label>
+                        <label>{{ contactPage.honeypot }}<input type="text" name="bot-field"></label>
                     </p>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="{{ contactPage.namePlaceholder }}" name="name" required autocomplete="name" aria-label="{{ contactPage.nameLabel }}">
@@ -57,7 +57,7 @@
                     <div id="captchaCheck"></div>
                     <div id="callback-form" class="text-center"></div>
                     <div class="form-group text-right">
-                        <input type="submit" value="{{ contactPage.send }}" class="btn btn-primary py-3 px-5" disabled>
+                        <button type="submit" class="btn btn-primary py-3 px-5" disabled>{{ contactPage.send }}</button>
                     </div>
                 </form>
             </div>

@@ -2,14 +2,14 @@
     "en": { "heading": "Services", "devAlt": "Developer Avatar", "tagline": "Programming, Customer Support &amp; Training" },
     "fr": { "heading": "Services", "devAlt": "Avatar Développeur", "tagline": "Programmation, Assistance Technique &amp; Formation" },
     "cards": [
-        { "icon": "flaticon-analysis", "ariaLabel": { "en": "Data Viz", "fr": "Data Viz" }, "title": { "en": "Data Viz", "fr": "Data Viz" } },
-        { "icon": "flaticon-flasks", "ariaLabel": { "en": "Customer Care", "fr": "Relation Client" }, "title": { "en": "Customer Care", "fr": "Relation Client" } },
-        { "icon": "flaticon-ideas", "ariaLabel": { "en": "Web Development", "fr": "Développement Web" }, "title": { "en": "Web Development", "fr": "Développement Web" } },
-        { "icon": "flaticon-innovation", "ariaLabel": { "en": "Digital Transformation", "fr": "Transformation Digitale" }, "title": { "en": "Digital Transformation", "fr": "Transformation Digitale" } },
-        { "icon": "flaticon-ux-design", "ariaLabel": { "en": "Project Management", "fr": "Gestion de Projet" }, "title": { "en": "Project Management", "fr": "Gestion De Projet" } },
-        { "icon": "flaticon-idea", "ariaLabel": { "en": "Technical Support", "fr": "Support technique" }, "title": { "en": "Technical Support", "fr": "Support Technique" } },
-        { "icon": "icon-microchip", "ariaLabel": { "en": "AI and Automation", "fr": "IA et Automatisation" }, "title": { "en": "AI &amp; Automation", "fr": "IA &amp; Automatisation" } },
-        { "icon": "icon-shield", "ariaLabel": { "en": "Cybersecurity", "fr": "Cybersécurité" }, "title": { "en": "Cybersecurity", "fr": "Cybersécurité" } },
-        { "icon": "icon-graduation-cap", "ariaLabel": { "en": "Training and CV review", "fr": "Formation et révision de CV" }, "title": { "en": "Training &amp; CV Review", "fr": "Formation &amp; Révision de CV" } }
+        { "icon": "flaticon-analysis", "href": "https://www.soft-concept.com/sondages-presidentielle/WebReports.dll", "ariaLabel": { "en": "Data Viz", "fr": "Data Viz" }, "title": { "en": "Data Viz", "fr": "Data Viz" } },
+        { "icon": "flaticon-flasks", "href": "https://www.salesforce.com/fr/resources/definition/gestion-relation-client", "ariaLabel": { "en": "Customer Care", "fr": "Relation Client" }, "title": { "en": "Customer Care", "fr": "Relation Client" } },
+        { "icon": "flaticon-ideas", "href": "https://github.com/nicoboga4075", "ariaLabel": { "en": "Web Development", "fr": "Développement Web" }, "title": { "en": "Web Development", "fr": "Développement Web" } },
+        { "icon": "flaticon-innovation", "href": "https://www.lumapps.com/fr/digital-workplace/outils-transformation-digitale", "ariaLabel": { "en": "Digital Transformation", "fr": "Transformation Digitale" }, "title": { "en": "Digital Transformation", "fr": "Transformation Digitale" } },
+        { "icon": "flaticon-ux-design", "href": "#projects-section", "ariaLabel": { "en": "Project Management", "fr": "Gestion de Projet" }, "title": { "en": "Project Management", "fr": "Gestion De Projet" } },
+        { "icon": "flaticon-idea", "href": "https://www.linkedin.com/pulse/fundamentals-support-structures-david-apollon", "ariaLabel": { "en": "Technical Support", "fr": "Support technique" }, "title": { "en": "Technical Support", "fr": "Support Technique" } },
+        { "icon": "icon-microchip", "href": "https://www.ibm.com/fr-fr/topics/ai-automation", "ariaLabel": { "en": "AI and Automation", "fr": "IA et Automatisation" }, "title": { "en": "AI &amp; Automation", "fr": "IA &amp; Automatisation" } },
+        { "icon": "icon-shield", "href": "https://cyber.gouv.fr/", "ariaLabel": { "en": "Cybersecurity", "fr": "Cybersécurité" }, "title": { "en": "Cybersecurity", "fr": "Cybersécurité" } },
+        { "icon": "icon-graduation-cap", "href": "#blog-section", "ariaLabel": { "en": "Training and CV review", "fr": "Formation et révision de CV" }, "title": { "en": "Training &amp; CV Review", "fr": "Formation &amp; Révision de CV" } }
     ]
 }

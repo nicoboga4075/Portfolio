@@ -21,7 +21,7 @@
                     <span class="badge">{{ p.badge }}</span>
                     <div class="text text-center p-4">
                         <h3>{{ (p.heading[lang] if p.heading else p.title) | safe }}</h3>
-                        <span>
+                        <div class="details">
                             <p><u>{{ projectsLang.context }}</u> : {{ p.context[lang] | safe }}</p>
                             <p><u>Description</u> : {{ p.description[lang] | safe }}
                                 <br><u>Technologies</u> : {{ p.technologies | safe }}
@@ -30,7 +30,7 @@
                             <p>{{ p.note[lang] }}</p>
                             {%- endif %}
                             <a class="explore btn btn-light py-3 px-3">{{ projectsLang.explore }}</a>
-                        </span>
+                        </div>
                     </div>
                 </div>
             </div>

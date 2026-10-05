@@ -1496,7 +1496,7 @@ textarea.form-control {
     transition: all 0.3s ease;
 }
 
-.project .text span {
+.project .text .details {
     color: var(--white);
     font-size: 12px;
     text-transform: inherit;

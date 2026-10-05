@@ -1,0 +1,20 @@
+{
+    "extends": ["html-validate:recommended"],
+    "transform": {
+        "\\.html$": "./html-validate-nunjucks.js"
+    },
+    "rules": {
+        "attr-quotes": ["error", { "style": "double" }],
+        "long-title": ["error", { "maxlength": 60 }],
+        "no-style-tag": "error",
+        "no-inline-style": "error",
+        "element-required-attributes": "off",
+        "no-trailing-whitespace": "off",
+        "aria-label-misuse": "warn",
+        "element-permitted-content": "warn",
+        "no-autoplay": "warn",
+        "no-implicit-input-type": "warn",
+        "prefer-button": "warn",
+        "wcag/h32": "warn"
+    }
+}

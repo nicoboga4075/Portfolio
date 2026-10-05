@@ -36,13 +36,14 @@
                             <span class="icon icon-search"></span>
                             <ul id="search-suggestions" aria-label="{{ labels.searchSuggestions }}"></ul>
                         </div>
+                        <button type="submit" hidden>{{ labels.searchAria }}</button>
                     </form>
                     <div id="search-info"></div>
                 </div>
                 <div class="sidebar-box">
                     <h5 class="heading-sidebar font-weight-bold">{{ labels.recent }}</h5>
                     <div class="media-row mb-4 d-flex justify-content-center">
-                        <a id="crm" class="blog-img mr-4" aria-labelledby="recent-article-heading" aria-label="{{ labels.recentAria }}"></a>
+                        <a id="crm" class="blog-img mr-4" href="/{{ lang }}/blog" aria-labelledby="recent-article-heading"><span class="sr-only">{{ labels.recentAria }}</span></a>
                         <div class="text">
                             <h6 id="recent-article-heading">{{ labels.recentAria }}</h6>
                             <div class="meta"></div>
