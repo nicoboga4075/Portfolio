@@ -3,6 +3,8 @@
 {%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
 {%- set projectsLang = projects[lang] -%}
+{#- French puts a space before the colon, English doesn't. -#}
+{%- set colon = " :" if lang == "fr" else ":" -%}
 <section id="projects-section" class="ftco-section">
     <div class="container-fluid px-md-0">
         <div class="row no-gutters justify-content-center pb-5">
@@ -22,9 +24,9 @@
                     <div class="text text-center p-4">
                         <h3>{{ (p.heading[lang] if p.heading else p.title) | safe }}</h3>
                         <div class="details">
-                            <p><u>{{ projectsLang.context }}</u> : {{ p.context[lang] | safe }}</p>
-                            <p><u>Description</u> : {{ p.description[lang] | safe }}
-                                <br><u>Technologies</u> : {{ p.technologies | safe }}
+                            <p><u>{{ projectsLang.context }}</u>{{ colon }} {{ p.context[lang] | safe }}</p>
+                            <p><u>Description</u>{{ colon }} {{ p.description[lang] | safe }}
+                                <br><u>Technologies</u>{{ colon }} {{ p.technologies | safe }}
                             </p>
                             {%- if p.note %}
                             <p>{{ p.note[lang] }}</p>

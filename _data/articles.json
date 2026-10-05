@@ -5,7 +5,7 @@
     { "slug": "du-voc-de-dev", "title": { "en": "From the dev vocab", "fr": "Du voc' de dev" }, "date": "2025-05-05", "tags": [
         "Framework", { "en": "Library", "fr": "Bibliothèque" }, "Package", "Module"
     ] },
-    { "slug": "mcs", "title": { "en": "What is a MSC application ?", "fr": "Une application MCS : Kézako ?" }, "date": "2024-12-23", "tags": [
+    { "slug": "mcs", "title": { "en": "What is a MSC application?", "fr": "Une application MCS : Kézako ?" }, "date": "2024-12-23", "tags": [
         { "MCS": "https://gimelec.fr/wp-content/uploads/2025/03/GIMELEC-Cyber-OT-Livre-blanc-MCS-2025-web.pdf" },
         { "name": { "en": "CyberSecurity", "fr": "Cybersécurité" }, "url": "https://cyber.gouv.fr/le-cyberdico" },
         { "name": { "en": "Vulnerability", "fr": "Vulnérabilité" }, "url": "https://www.cvedetails.com/vulnerability-list" },
@@ -20,7 +20,7 @@
         { "ESILV": "https://www.esilv.fr/ingenieur/classement" },
         { "UQAC": "https://www.uqac.ca/programme/3037-maitrise-en-informatique-professionnel" }
     ] },
-    { "slug": "sur-quels-criteres-choisir-une-agence-web", "title": { "en": "How to choose a web agency ?", "fr": "Sur quels critères choisir une agence web ?" }, "date": "2019-07-31", "tags": [
+    { "slug": "sur-quels-criteres-choisir-une-agence-web", "title": { "en": "How to choose a web agency?", "fr": "Sur quels critères choisir une agence web ?" }, "date": "2019-07-31", "tags": [
         { "en": "Web Agency", "fr": "Agence Web" },
         { "en": "Digital Transformation", "fr": "Transformation Digitale" },
         { "en": "Project Management", "fr": "Gestion de Projet" },
