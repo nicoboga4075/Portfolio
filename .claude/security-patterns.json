@@ -1,0 +1,101 @@
+{
+  "patterns": [
+    {
+      "rule_name": "jquery_html_setter",
+      "regex": "\\.html\\(\\s*[^)\\s]",
+      "paths": ["*js/*.js"],
+      "exclude_paths": ["*.min.js"],
+      "reminder": "jQuery .html(value) parses its argument as HTML. Only pass first-party, already-sanitised markup; never a fetch response, location (hash, search, pathname), storage or form input. Use .text() for visitor-facing messages and insert fetched article HTML as parsed, sanitised nodes (see the article loader in js/app.js)."
+    },
+    {
+      "rule_name": "jquery_html_template",
+      "regex": "\\$\\(\\s*`[^`]*\\$\\{",
+      "paths": ["*js/*.js"],
+      "exclude_paths": ["*.min.js"],
+      "reminder": "$(`...${x}...`) builds HTML from an interpolated string, which is an XSS sink. Create the element with a fixed tag and set dynamic values with .text() / .attr() instead."
+    },
+    {
+      "rule_name": "location_input",
+      "regex": "location\\.(hash|search|pathname)",
+      "paths": ["*js/*.js"],
+      "exclude_paths": ["*.min.js"],
+      "reminder": "location.hash / search / pathname are attacker-controlled. Validate them against an allowlist before they reach a URL, a selector or an HTML sink; the article hash is only safe because netlify/functions/article.mts re-validates the filename."
+    },
+    {
+      "rule_name": "server_secret_in_client",
+      "regex": "GITHUB_API_TOKEN|SUPABASE_URL|SUPABASE_ANON_KEY|service_role",
+      "paths": ["*js/*.js", "*_includes/*", "*_data/*", "*.html", "*.njk"],
+      "exclude_paths": ["*.min.js"],
+      "reminder": "GITHUB_API_TOKEN and the Supabase settings are server-side only. Read them in netlify/functions/*.mts and never ship them in js/, _includes/, _data/ or built HTML. A Supabase service_role key must never be used by this site."
+    },
+    {
+      "rule_name": "hardcoded_token",
+      "regex": "eyJ[A-Za-z0-9_-]{10,}\\.[A-Za-z0-9_-]{10,}|gh[pousr]_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{22,}",
+      "exclude_paths": ["*.min.js", "package-lock.json"],
+      "reminder": "This looks like a JWT (e.g. a Supabase key) or a GitHub token. Never commit credentials: use Netlify environment variables (process.env) for functions and GitHub secrets for workflows."
+    },
+    {
+      "rule_name": "public_env_vars",
+      "substrings": ["PUBLIC_ENV_VARS"],
+      "paths": ["env.mts"],
+      "reminder": "Everything in PUBLIC_ENV_VARS is returned to any visitor. Only list values that are public by design (ENV_CLIENT_ID, SITE_RECAPTCHA_KEY); never a token, an API key or a Supabase setting."
+    },
+    {
+      "rule_name": "article_path_barriers",
+      "substrings": ["isValidFilename", "articleDir + path.sep"],
+      "paths": ["article.mts"],
+      "reminder": "article.mts keeps two barriers against path traversal: the anchored filename regex (letters, digits, _ and - only, then _xx.html) and the path.resolve + startsWith(articleDir + path.sep) check. Do not loosen the regex or drop either barrier."
+    },
+    {
+      "rule_name": "function_handler",
+      "regex": "export default async function",
+      "paths": ["*netlify/functions/*"],
+      "reminder": "Every Netlify function starts with isTrustedRequest(req) -> redirectTo404(), validates each query parameter with an anchored allowlist regex, and ends with catch -> internalError(context, error). isTrustedRequest is Referer-based, not authentication: a handler that writes data, sends mail or spends quota needs real protection."
+    },
+    {
+      "rule_name": "function_error_leak",
+      "regex": "\\b(error|err|e)\\.(message|stack)\\b",
+      "paths": ["*netlify/functions/*"],
+      "reminder": "Do not send error.message or error.stack back to the client: internalError() logs the error and returns only { error, requestId }."
+    },
+    {
+      "rule_name": "function_outbound_url",
+      "regex": "fetch\\(\\s*`[^`]*\\$\\{",
+      "paths": ["*netlify/functions/*"],
+      "reminder": "An outbound URL built from a template string is an SSRF risk. Only interpolate values from process.env or from a fixed allowlist (like routes.cvLangs), never raw request input."
+    },
+    {
+      "rule_name": "function_cors",
+      "substrings": ["Access-Control-Allow-"],
+      "paths": ["*netlify/functions/*", "_headers", "netlify.toml"],
+      "reminder": "The functions are same-origin only. Do not add CORS headers, and never Access-Control-Allow-Origin: * or a reflected Origin."
+    },
+    {
+      "rule_name": "csp_change",
+      "substrings": ["Content-Security-Policy"],
+      "paths": ["_headers", "netlify.toml", "*.html", "*.njk"],
+      "reminder": "Do not widen the CSP: no wildcard source, no http:, no new third-party origin without the feature that needs it, and keep frame-ancestors 'none', base-uri 'self' and form-action 'self'. 'unsafe-inline' and 'unsafe-eval' are existing debt, not something to extend."
+    },
+    {
+      "rule_name": "google_oauth_scope",
+      "substrings": ["googleapis.com/auth/"],
+      "paths": ["*js/*.js"],
+      "exclude_paths": ["*.min.js"],
+      "reminder": "The contact form only needs the gmail.send scope. Do not request broader Google scopes (gmail.readonly, gmail.modify, mail.google.com, drive...)."
+    },
+    {
+      "rule_name": "token_in_localstorage",
+      "regex": "localStorage\\.setItem\\(\\s*['\"][^'\"]*(token|Token|auth|Auth)",
+      "paths": ["*js/*.js", "*.html", "*.njk"],
+      "exclude_paths": ["*.min.js"],
+      "reminder": "OAuth tokens stay in sessionStorage (tokenAPI) and are cleared after sending. Never persist a token in localStorage."
+    },
+    {
+      "rule_name": "email_header_injection",
+      "regex": "Subject: \\$\\{|From: \\$\\{|To: \\$\\{",
+      "paths": ["*js/*.js"],
+      "exclude_paths": ["*.min.js"],
+      "reminder": "Email header values built from form input must have CR/LF stripped first (see safeSubject / safeSenderName in sendEmail), and the recipient stays hard-coded."
+    }
+  ]
+}
