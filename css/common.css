@@ -30,12 +30,14 @@
     --light: #f8f9fa;
     --dark: #343a40;
 
-    /* Shades of --primary and --secondary: change those two to recolour the site. oklch(), not color-mix(): mixing with white or black would change three of these four colours, oklch() keeps them identical. */
+    /* Shades of --primary and --secondary: change those two to recolour the site. oklch(), not color-mix(): mixing with white or black would change most of these colours, oklch() keeps them identical. */
     --primary-light: oklch(from var(--primary) calc(l + 0.056) calc(c * 0.852) calc(h + 2.1)); /* #5b7bff */
     --primary-dark: oklch(from var(--primary) calc(l - 0.04) calc(c * 1.034) calc(h - 0.8)); /* #2f55f5 */
     --primary-pale: oklch(from var(--primary) 93.1% calc(c * 0.115) calc(h + 18.3)); /* #e6e6fa (lavender) */
     --secondary-light: oklch(from var(--secondary) calc(l + 0.212) calc(c * 0.88) calc(h + 3.1)); /* #adb5bd */
-    --background: var(--white);
+    --secondary-dark: oklch(from var(--secondary) calc(l - 0.066) calc(c * 0.839) calc(h - 4.8)); /* #5a6268 */
+    --accent-color: var(--orange);
+    --background-color: var(--white);
     --text-color: var(--black);
     --shadow-color: var(--black);
     --shadow-xs: color-mix(in srgb, var(--shadow-color) 5%, transparent);
@@ -46,7 +48,7 @@
 
 html.dark-mode {
     color-scheme: dark;
-    --background: var(--black);
+    --background-color: var(--black);
     --text-color: var(--white);
     --success: var(--green);
     --danger: var(--red);
@@ -110,7 +112,7 @@ body {
     font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
-    background-color: var(--background);
+    background-color: var(--background-color);
     color: var(--secondary);
 }
 
@@ -327,7 +329,7 @@ sup:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--background);
+    background-color: var(--background-color);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease-out, visibility 0s linear 0.2s;

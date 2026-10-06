@@ -45,7 +45,7 @@ bodyClass: ""
         {%- if botpress and viewport == "desktop" %}
         <script defer src="js/botpress.js"></script>
         {%- endif %}
-        <!-- Inline, after the stylesheets and before first paint: the deferred common.js applies the theme too late (white flash in dark mode). It waits for the CSS above, so --background is already resolved. -->
+        <!-- Inline, after the stylesheets and before first paint: the deferred common.js applies the theme too late (white flash in dark mode). It waits for the CSS above, so --background-color is already resolved. -->
         <script>
             {
                 // One-off migration from the two-state button's 'darkMode' ('true'/'false') to 'theme' ('light'/'dark', absent = auto).
@@ -59,7 +59,7 @@ bodyClass: ""
                 document.documentElement.classList.toggle('dark-mode', choice === null ? matchMedia('(prefers-color-scheme: dark)').matches : choice === 'dark');
                 const themeColor = document.createElement('meta');
                 themeColor.name = 'theme-color';
-                themeColor.content = getComputedStyle(document.documentElement).getPropertyValue('--background').trim();
+                themeColor.content = getComputedStyle(document.documentElement).getPropertyValue('--background-color').trim();
                 document.head.appendChild(themeColor);
             }
         </script>

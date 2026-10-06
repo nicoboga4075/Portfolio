@@ -235,7 +235,7 @@ function toggleDarkMode(event) {
     // the page background; the meta itself is created by base.njk's inline script.
     const themeColor = document.querySelector('meta[name="theme-color"]');
     if (themeColor) {
-        themeColor.content = getComputedStyle(document.documentElement).getPropertyValue('--background').trim();
+        themeColor.content = getComputedStyle(document.documentElement).getPropertyValue('--background-color').trim();
     }
     // Pages with the icon font (assets set in front matter) swap the icon-*
     // class; others fall back to an emoji, same split as footer.html's

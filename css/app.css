@@ -718,7 +718,7 @@ progress::-webkit-progress-value {
 .btn-secondary {
     background-color: var(--secondary) !important;
     border: 1px solid var(--secondary) !important;
-    color: var(--background) !important;
+    color: var(--background-color) !important;
 }
 
 .btn-outline-primary {
@@ -1109,7 +1109,7 @@ progress::-webkit-progress-value {
 
 #author-badge,
 #author-badge:hover {
-    background-color: var(--orange);
+    background-color: var(--accent-color);
 }
 
 /* ==== Navbar Brand ==== */
@@ -1652,7 +1652,7 @@ textarea.form-control {
 }
 
 .company-size-badge {
-    background-color: var(--orange);
+    background-color: var(--accent-color);
 }
 
 /* Experience filters: built from the already-rendered badges/tags by
@@ -1685,7 +1685,7 @@ textarea.form-control {
 }
 
 #experience-filters-toggle:focus-visible {
-    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+    box-shadow: 0 0 0 2px var(--background-color), 0 0 0 4px var(--primary);
 }
 
 .filter-toggle-caret {
@@ -1727,7 +1727,7 @@ textarea.form-control {
     font-size: 12.8px;
     color: var(--dark);
     background-color: var(--primary-pale);
-    border: 1px solid var(--background);
+    border: 1px solid var(--background-color);
     border-radius: 20px;
     cursor: pointer;
 }
@@ -1736,9 +1736,9 @@ textarea.form-control {
     outline: none;
 }
 
-/* The gap in --background keeps the ring visible on an active (--primary) chip. */
+/* The gap in --background-color keeps the ring visible on an active (--primary) chip. */
 .filter-chip:focus-visible {
-    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+    box-shadow: 0 0 0 2px var(--background-color), 0 0 0 4px var(--primary);
 }
 
 .filter-chip.active {
@@ -1762,7 +1762,7 @@ textarea.form-control {
 }
 
 #experience-filters-reset:focus-visible {
-    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
+    box-shadow: 0 0 0 2px var(--background-color), 0 0 0 4px var(--primary);
 }
 
 /* .resume-wrap also carries Bootstrap's .d-flex (display: flex !important),
