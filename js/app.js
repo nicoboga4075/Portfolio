@@ -586,6 +586,8 @@ function createCircularChart({
     const total = data.reduce((a, b) => a + b, 0);
     // doughnutLabel needs a cutout hole to draw into - only doughnut/pie have one.
     const supportsCenterText = centerText && (type === 'doughnut' || type === 'pie');
+    // The site font (--font-family in common.css), so the chart follows it.
+    const fontFamily = getComputedStyle(document.documentElement).getPropertyValue('--font-family').trim();
 
     chart = new Chart(context, {
         type,
@@ -611,7 +613,7 @@ function createCircularChart({
                     doughnutLabel: {
                         labels: [{
                             text: centerText,
-                            font: { family: 'Poppins', size: 16, weight: 'bold' },
+                            font: { family: fontFamily, size: 16, weight: 'bold' },
                             color: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim()
                         }]
                     }
@@ -621,12 +623,11 @@ function createCircularChart({
                     text: titles,
                     color: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim(),
                     font: {
-                        family: 'Poppins',
+                        family: fontFamily,
                         size: 18,
                         weight: 'bold'
                     },
                     padding: {
-                        family: 'Poppins',
                         top: 10,
                         bottom: 20
                     }
@@ -636,7 +637,7 @@ function createCircularChart({
                     text: subtitles,
                     color: `#${cssVarToHex('--secondary')}`,
                     font: {
-                        family: 'Poppins',
+                        family: fontFamily,
                         size: 14,
                         weight: 'normal'
                     },
@@ -649,7 +650,7 @@ function createCircularChart({
                     align: 'center',
                     labels: {
                         font: {
-                            family: 'Poppins',
+                            family: fontFamily,
                             size: 13,
                             weight: '400'
                         },

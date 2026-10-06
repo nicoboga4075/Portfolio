@@ -511,7 +511,7 @@ html.dark-mode .card {
     margin: 6px 0 0;
     overflow: visible;
     clip-path: none;
-    font-family: Poppins, 'Poppins Windows', 'Poppins Mac/iOS', 'Poppins Linux', 'Poppins Android', sans-serif;
+    font-family: var(--font-family);
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5;

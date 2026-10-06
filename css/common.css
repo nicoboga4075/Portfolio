@@ -44,6 +44,9 @@
     --shadow-sm: color-mix(in srgb, var(--shadow-color) 10%, transparent);
     --shadow-md: color-mix(in srgb, var(--shadow-color) 20%, transparent);
     --shadow-lg: color-mix(in srgb, var(--shadow-color) 30%, transparent);
+
+    /* The site font, read by the skills chart too. To change it, also edit the Google Fonts link in _includes/base.njk; the Fallback faces below are metric-matched to Poppins, retune them for another font. */
+    --font-family: 'Poppins', 'Fallback Windows', 'Fallback Mac/iOS', 'Fallback Linux', 'Fallback Android', sans-serif;
 }
 
 html.dark-mode {
@@ -63,8 +66,10 @@ html.dark-mode body {
 
 /* ==== Fonts ==== */
 
+/* Local stand-ins shown while the web font loads, sized like it to avoid layout shift. */
+
 @font-face {
-    font-family: 'Poppins Windows';
+    font-family: 'Fallback Windows';
     src: local('Arial');
     size-adjust: 110.7%;
     ascent-override: 105%;
@@ -73,7 +78,7 @@ html.dark-mode body {
 }
 
 @font-face {
-    font-family: 'Poppins Mac/iOS';
+    font-family: 'Fallback Mac/iOS';
     src: local('Helvetica Neue'), local('Helvetica');
     size-adjust: 110.7%;
     ascent-override: 105%;
@@ -82,7 +87,7 @@ html.dark-mode body {
 }
 
 @font-face {
-    font-family: 'Poppins Linux';
+    font-family: 'Fallback Linux';
     src: local('Liberation Sans');
     size-adjust: 110.7%;
     ascent-override: 105%;
@@ -91,7 +96,7 @@ html.dark-mode body {
 }
 
 @font-face {
-    font-family: 'Poppins Android';
+    font-family: 'Fallback Android';
     src: local('Roboto');
     size-adjust: 111.1%;
     ascent-override: 105%;
@@ -108,7 +113,7 @@ body {
 
 body {
     margin: 0;
-    font-family: Poppins, 'Poppins Windows', 'Poppins Mac/iOS', 'Poppins Linux', 'Poppins Android', sans-serif;
+    font-family: var(--font-family);
     font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
