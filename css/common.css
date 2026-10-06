@@ -267,7 +267,7 @@ sup:hover {
     font-size: 24px;
     margin: 10px;
     border: none;
-    background: none;
+    background-color: transparent;
     padding: 0;
     cursor: pointer;
 }
@@ -363,7 +363,7 @@ sup:hover {
 /* ==== Footer ==== */
 
 #ftco-footer {
-    background: var(--black);
+    background-color: var(--black);
     padding: 112px 0;
 }
 
