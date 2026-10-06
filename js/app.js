@@ -634,7 +634,7 @@ function createCircularChart({
                 subtitle: {
                     display: true,
                     text: subtitles,
-                    color: getComputedStyle(document.documentElement).getPropertyValue('--secondary').trim(),
+                    color: `#${cssVarToHex('--secondary')}`,
                     font: {
                         family: 'Poppins',
                         size: 14,
@@ -1067,6 +1067,21 @@ function initExperienceFilters() {
     container.querySelector('h2.heading').after(toggleBtn, toolbar, empty);
 }
 
+// Calendly and Chart.js need a hex, but --primary / --secondary can be oklch() expressions (dark mode): an element resolves them, a 1px canvas turns them into sRGB bytes.
+function cssVarToHex(name) {
+    const probe = document.createElement('span');
+    probe.style.color = `var(${name})`;
+    document.body.appendChild(probe);
+    const color = getComputedStyle(probe).color;
+    probe.remove();
+    const ctx = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
+    ctx.canvas.width = ctx.canvas.height = 1;
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, 1, 1);
+    const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+    return [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+}
+
 function initIndexPage(langPage) {
         if (window.location.protocol === 'https:') {
             fetch('/.netlify/functions/visit')
@@ -1116,7 +1131,7 @@ function initIndexPage(langPage) {
         $('#calendly-cta').on('click', function (event) {
             event.preventDefault();
             const url = this.dataset.calendlyUrl;
-            const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim().replace('#', '');
+            const primaryColor = cssVarToHex('--primary');
             // Calendly's widget is only fetched on the first click, not on every page load.
             if (!document.querySelector(`link[href="${CALENDLY_WIDGET}.css"]`)) {
                 const css = document.createElement('link');
@@ -1758,7 +1773,7 @@ document.addEventListener('darkmodechange', function () {
         const rootStyle = getComputedStyle(document.documentElement);
         const textColor = rootStyle.getPropertyValue('--text-color').trim();
         chart.options.plugins.title.color = textColor;
-        chart.options.plugins.subtitle.color = rootStyle.getPropertyValue('--secondary').trim();
+        chart.options.plugins.subtitle.color = `#${cssVarToHex('--secondary')}`;
         if (chart.options.plugins.doughnutLabel) {
             chart.options.plugins.doughnutLabel.labels[0].color = textColor;
         }
