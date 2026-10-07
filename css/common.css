@@ -179,6 +179,10 @@ a:focus-visible {
     outline-offset: 2px;
 }
 
+html.dark-mode a:focus-visible {
+    outline-color: var(--primary-dark);
+}
+
 [disabled] {
     pointer-events: none;
     cursor: default;
@@ -212,6 +216,10 @@ sup {
 
 sup:hover {
     background-color: var(--primary);
+}
+
+html.dark-mode sup:hover {
+    background-color: var(--primary-dark);
 }
 
 /* ==== Text Colours ==== */
@@ -277,8 +285,18 @@ sup:hover {
     cursor: pointer;
 }
 
-#dark-icon:focus {
-    outline: unset;
+/* No ring after a mouse click, a visible one for keyboard focus. */
+#dark-icon:focus:not(:focus-visible) {
+    outline: none;
+}
+
+#dark-icon:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+html.dark-mode #dark-icon:focus-visible {
+    outline-color: var(--primary-dark);
 }
 
 /* ==== Language Switcher ==== */
@@ -309,6 +327,10 @@ sup:hover {
     background-color: var(--primary);
 }
 
+html.dark-mode #language-switcher .lang-text.on {
+    background-color: var(--primary-dark);
+}
+
 #language-switcher .lang-text[aria-current] {
     cursor: default;
     pointer-events: none;
@@ -324,6 +346,10 @@ sup:hover {
     padding: 5px 10px;
     border-radius: 20px;
     background-color: var(--primary);
+}
+
+html.dark-mode .badge {
+    background-color: var(--primary-dark);
 }
 
 /* ==== Loader ==== */
@@ -411,8 +437,9 @@ sup:hover {
     color: var(--white);
 }
 
-#ftco-footer a:hover {
-    color: var(--primary);
+#ftco-footer a:hover,
+#ftco-footer a:focus {
+    color: var(--primary-light);
 }
 
 #ftco-footer a[aria-current="page"] {
