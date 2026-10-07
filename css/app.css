@@ -1512,9 +1512,19 @@ textarea.form-control {
 }
 
 .contact-row .form-control {
+    border-color: var(--gray);
     outline: none;
     box-shadow: none !important;
     font-size: 15px;
+}
+
+.contact-row .form-control:focus {
+    border-color: transparent;
+}
+
+.contact-row .form-control:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 /* ==== Projects Section ==== */
