@@ -310,8 +310,8 @@ body.read-zone h1 {
     inset: 0;
     display: grid;
     place-items: center;
-    color: var(--white);
-    text-shadow: 0 2px 5px var(--dark);
+    color: var(--dark);
+    text-shadow: 0 0 4px var(--light);
 }
 
 @keyframes rotate {
@@ -374,6 +374,10 @@ body.read-zone h1 {
 
 html.dark-mode .card {
     color: var(--dark);
+}
+
+html.dark-mode .card a {
+    color: var(--primary-dark);
 }
 
 .card {
