@@ -879,6 +879,12 @@ function createCircularChart({
 
     $('[data-bs-toggle="tooltip"]').each(function () {
         this.tooltip = new bootstrap.Tooltip(this);
+        // A mouse click focuses the control, and Bootstrap's focus trigger then kept the tooltip open until a click elsewhere: drop that focus so it closes with the pointer; a keyboard press (detail 0) keeps it
+        this.addEventListener('click', event => {
+            if (event.detail > 0) {
+                this.blur();
+            }
+        });
     });
 
     initProfile();
