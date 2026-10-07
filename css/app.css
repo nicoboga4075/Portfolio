@@ -394,11 +394,21 @@ input[name="search-input"].highlight-flash {
 }
 
 .profile-photo {
+    position: relative;
     background-image: url("/images/profile.webp");
 }
 
-.profile-photo:hover {
-    opacity: 0.9;
+/* Fades the photo only, like opacity: 0.9 did, but not the bubble shown on hover (painted after it) */
+.profile-photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--background-color);
+    opacity: 0;
+}
+
+.profile-photo:hover::before {
+    opacity: 0.1;
 }
 
 /* ==== Counter Section ==== */
@@ -2034,6 +2044,17 @@ html.dark-mode .owl-dot:focus-visible {
 .icon-heart,
 .icon-shield {
     color: var(--red);
+}
+
+.bulle-bd,
+.bulle-bd p {
+    color: var(--secondary);
+}
+
+/* White in both themes */
+html.dark-mode .bulle-bd,
+html.dark-mode .bulle-bd p {
+    color: var(--secondary-dark);
 }
 
 .bulle-bd {
