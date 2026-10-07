@@ -460,6 +460,10 @@ input[name="search-input"].highlight-flash {
     color: var(--white);
 }
 
+#hireme-section .btn:focus-visible {
+    outline-color: var(--white);
+}
+
 /* ==== Resume Section ==== */
 
 .page {
