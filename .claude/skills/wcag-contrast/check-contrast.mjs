@@ -75,7 +75,7 @@ if (!pages.length) {
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.avif': 'image/avif', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.woff': 'font/woff', '.woff2': 'font/woff2', '.ttf': 'font/ttf', '.mp4': 'video/mp4', '.webm': 'video/webm', '.pdf': 'application/pdf' };
 const byUrl = new Map(rewrites.map(p => [p.url, p.file]));
 const server = http.createServer((req, res) => {
-    const url = new URL(req.url, 'http://x');
+    const url = new URL(req.url, 'https://x');
     const pathname = decodeURIComponent(url.pathname).replace(/\/$/, '') || '/';
     let file = byUrl.get(pathname) ?? pathname.slice(1);
     if (pathname === '/.netlify/functions/article') {
@@ -139,9 +139,10 @@ async function prepare(page) {
     await page.waitForTimeout(600);
 }
 
-// Decodes PNG shots in the page and compares them pixel by pixel (fn gets the three RGBA arrays and returns the result).
-function comparePixels(page, shots, fnSource, extra) {
-    return page.evaluate(async ({ b64s, src, extra }) => {
+// Decodes PNG shots in the page and compares them pixel by pixel with one of the measures below, named by `measure`
+// (the measures are written here rather than passed as source, so nothing is ever evaluated from a string).
+function comparePixels(page, shots, measure, extra) {
+    return page.evaluate(async ({ b64s, measure, extra }) => {
         const read = async b64 => {
             const img = new Image();
             img.src = `data:image/png;base64,${b64}`;
@@ -163,8 +164,36 @@ function comparePixels(page, shots, fnSource, extra) {
         };
         const lum = (r, g, b) => [r, g, b].map(v => (v /= 255) <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4).reduce((a, v, i) => a + v * [0.2126, 0.7152, 0.0722][i], 0);
         const ratio = (l1, l2) => (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
-        return new Function('images', 'rgb', 'lum', 'ratio', 'extra', src)(images, rgb, lum, ratio, extra);
-    }, { b64s: shots.map(s => s.toString('base64')), src: fnSource, extra });
+        const measures = {
+            // Text over an image: the worst ratio between the text colour and what is behind its glyphs (shots: with text, without, with again).
+            behindText() {
+                const [withText, behind, again] = images.map(i => i.data);
+                const fg = rgb(extra.colour), lf = lum(fg[0], fg[1], fg[2]);
+                let worst = Infinity, glyphs = 0;
+                for (let i = 0; i < behind.length; i += 4) {
+                    const changed = Math.max(...[0, 1, 2].map(k => Math.abs(withText[i + k] - behind[i + k])));
+                    const offColour = Math.max(...[0, 1, 2].map(k => Math.abs(withText[i + k] - fg[k])));
+                    const moved = Math.max(...[0, 1, 2].map(k => Math.abs(withText[i + k] - again[i + k])));
+                    if (changed < 40 || offColour > 48 || moved > 8) continue;
+                    glyphs++;
+                    worst = Math.min(worst, ratio(lf, lum(behind[i], behind[i + 1], behind[i + 2])));
+                }
+                return glyphs >= 5 ? worst : null;
+            },
+            // Focus indicator: how many pixels change on focus, and how many of them reach 3:1 against what they covered (shots: before, after).
+            focusChange() {
+                const [a, b] = images.map(i => i.data);
+                let changed = 0, strong = 0;
+                for (let i = 0; i < a.length; i += 4) {
+                    if (Math.max(...[0, 1, 2].map(k => Math.abs(a[i + k] - b[i + k]))) < 24) continue;
+                    changed++;
+                    if (ratio(lum(a[i], a[i + 1], a[i + 2]), lum(b[i], b[i + 1], b[i + 2])) >= 3) strong++;
+                }
+                return { changed, strong };
+            },
+        };
+        return measures[measure]();
+    }, { b64s: shots.map(s => s.toString('base64')), measure, extra });
 }
 
 function clipFor(page, box, margin = 0) {
@@ -191,27 +220,15 @@ async function measureBehind(page, target, { need } = {}) {
     const info = await el.evaluate(e => {
         const s = getComputedStyle(e);
         const colour = e instanceof SVGElement && s.fill && s.fill !== 'none' && !s.fill.startsWith('url') ? s.fill : s.color;
-        return { colour, size: parseFloat(s.fontSize), weight: parseInt(s.fontWeight, 10) || 400 };
+        return { colour, size: Number.parseFloat(s.fontSize), weight: Number.parseInt(s.fontWeight, 10) || 400 };
     });
     // Transparent text rather than a hidden element: an element that paints its own background (a tooltip, a badge) keeps it.
     const shown = await page.screenshot({ clip });
-    await el.evaluate(e => e.setAttribute('data-contrast-hide', ''));
+    await el.evaluate(e => { e.dataset.contrastHide = ''; });
     const hidden = await page.screenshot({ clip });
-    await el.evaluate(e => e.removeAttribute('data-contrast-hide'));
+    await el.evaluate(e => { delete e.dataset.contrastHide; });
     const shownAgain = await page.screenshot({ clip });
-    const ratio = await comparePixels(page, [shown, hidden, shownAgain], `
-        const [withText, behind, again] = images.map(i => i.data);
-        const fg = rgb(extra.colour), lf = lum(fg[0], fg[1], fg[2]);
-        let worst = Infinity, glyphs = 0;
-        for (let i = 0; i < behind.length; i += 4) {
-            const changed = Math.max(...[0, 1, 2].map(k => Math.abs(withText[i + k] - behind[i + k])));
-            const offColour = Math.max(...[0, 1, 2].map(k => Math.abs(withText[i + k] - fg[k])));
-            const moved = Math.max(...[0, 1, 2].map(k => Math.abs(withText[i + k] - again[i + k])));
-            if (changed < 40 || offColour > 48 || moved > 8) continue;
-            glyphs++;
-            worst = Math.min(worst, ratio(lf, lum(behind[i], behind[i + 1], behind[i + 2])));
-        }
-        return glyphs >= 5 ? worst : null;`, { colour: info.colour });
+    const ratio = await comparePixels(page, [shown, hidden, shownAgain], 'behindText', { colour: info.colour });
     if (ratio === null) {
         return null;
     }
@@ -224,7 +241,7 @@ async function auditScope(page, scope, kind, where, failures) {
     const result = await page.evaluate(sel => axe.run(sel ? { include: [[sel]] } : document, { runOnly: ['color-contrast'], resultTypes: ['violations', 'incomplete'] }), scope);
     for (const node of result.violations.flatMap(v => v.nodes)) {
         const d = node.any[0]?.data ?? {};
-        failures.push({ ...where, kind, target: node.target.join(' '), html: node.html, fg: d.fgColor, bg: d.bgColor, ratio: d.contrastRatio, need: parseFloat(d.expectedContrastRatio) });
+        failures.push({ ...where, kind, target: node.target.join(' '), html: node.html, fg: d.fgColor, bg: d.bgColor, ratio: d.contrastRatio, need: Number.parseFloat(d.expectedContrastRatio) });
     }
     for (const node of result.incomplete.flatMap(v => v.nodes)) {
         const target = node.target.join(' ');
@@ -447,15 +464,7 @@ async function focusPass(page, where, failures) {
         const target = await mark(el, `f${n}`);
         await auditScope(page, target, 'focus', where, failures);
         // The indicator: pixels that change on focus. Enough of them must reach 3:1 against what they covered, about a 1px ring all around.
-        const indicator = () => comparePixels(page, [before, after], `
-            const [a, b] = images.map(i => i.data);
-            let changed = 0, strong = 0;
-            for (let i = 0; i < a.length; i += 4) {
-                if (Math.max(...[0, 1, 2].map(k => Math.abs(a[i + k] - b[i + k]))) < 24) continue;
-                changed++;
-                if (ratio(lum(a[i], a[i + 1], a[i + 2]), lum(b[i], b[i + 1], b[i + 2])) >= 3) strong++;
-            }
-            return { changed, strong };`);
+        const indicator = () => comparePixels(page, [before, after], 'focusChange');
         let { changed, strong } = await indicator();
         // Under load the ring can be painted after the shot: one retry before calling it missing.
         if (!changed) {
@@ -527,7 +536,7 @@ async function nonTextPass(page, where, failures) {
                 p = p.parentElement;
             }
             const s = getComputedStyle(e);
-            const width = parseFloat(s.borderTopWidth) + parseFloat(s.borderBottomWidth);
+            const width = Number.parseFloat(s.borderTopWidth) + Number.parseFloat(s.borderBottomWidth);
             const border = width > 0 ? ratio(rgba(s.borderTopColor), rgba(outside)) : 1;
             const fill = ratio(rgba(s.backgroundColor === 'rgba(0, 0, 0, 0)' ? outside : s.backgroundColor), rgba(outside));
             return { border, fill, borderColour: s.borderTopColor, fillColour: s.backgroundColor, outside, name: e.name || e.id || e.placeholder || e.tagName };
@@ -600,7 +609,7 @@ server.close();
 // ---- Report: one entry per distinct problem, with where it shows up ----
 const groups = new Map();
 for (const f of all) {
-    const text = String(f.html).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 50) || String(f.html).slice(0, 50);
+    const text = String(f.html).replace(/<[^<>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 50) || String(f.html).slice(0, 50);
     const target = f.target.replace(/\[data-contrast-probe="[^"]+"\]/g, '').replace(/:nth-child\(\d+\)/g, '').trim() || text;
     const key = [f.kind, target, f.fg, f.bg, f.ratio, f.need].join('|');
     if (!groups.has(key)) {
