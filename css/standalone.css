@@ -8,7 +8,8 @@
     text-align: center !important;
 }
 
-.d-none {
+/* :where() keeps it below Bootstrap's responsive d-*-flex: the blog page adds this sheet last when it opens an article, where a plain .d-none won the tie and hid the navbar badges */
+:where(.d-none) {
     display: none !important;
 }
 
