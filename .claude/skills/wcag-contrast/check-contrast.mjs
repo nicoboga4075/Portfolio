@@ -67,7 +67,8 @@ const pages = [...rewrites, ...articles]
     .filter(p => typeof args.pages !== 'string' || args.pages.split(',').map(u => u.replace(/^.*?(?=\/(en|fr)(\/|#|$))/, '')).includes(p.url))
     .sort((a, b) => a.url.localeCompare(b.url));
 if (!pages.length) {
-    console.error(`No page to check${args.only ? ` matching "${args.only}"` : ''}`);
+    const filter = args.only ? ` matching "${args.only}"` : '';
+    console.error(`No page to check${filter}`);
     process.exit(2);
 }
 
@@ -133,7 +134,7 @@ async function prepare(page) {
         }
         scrollTo(0, 0);
         document.querySelectorAll('img[loading="lazy"]').forEach(i => { i.loading = 'eager'; });
-        await Promise.all([...document.images].map(i => i.complete ? null : new Promise(r => { i.onload = i.onerror = r; setTimeout(r, 5000); })));
+        await Promise.all([...document.images].filter(i => !i.complete).map(i => new Promise(r => { i.onload = i.onerror = r; setTimeout(r, 5000); })));
         await document.fonts.ready;
     });
     await page.waitForTimeout(600);
@@ -276,6 +277,21 @@ async function hoverTargets(page) {
             }
             return [...out, list.slice(start)].map(s => s.trim());
         };
+        // The element a :hover selector styles (what comes before :hover), or null when there is none to hover.
+        const hoverHead = sel => {
+            const at = sel.indexOf(':hover');
+            if (at < 0) return null;
+            let head = sel.slice(0, at);
+            // :hover inside :is(...) / :where(...): keep what comes before that pseudo-class.
+            // Parentheses still open before :hover (each ( counted, each ) taken off).
+            let open = head.split('(').length - head.split(')').length;
+            while (open > 0) {
+                head = head.slice(0, head.lastIndexOf('(')).replace(/:[\w-]+$/, '');
+                open--;
+            }
+            head = head.replace(/::?[\w-]+$/, '').trim();
+            return head && !/[>+~]$/.test(head) ? head : null;
+        };
         const targets = new Set();
         const walk = rules => {
             for (const rule of rules) {
@@ -284,18 +300,8 @@ async function hoverTargets(page) {
                     continue;
                 }
                 for (const sel of split(rule.selectorText ?? '')) {
-                    const at = sel.indexOf(':hover');
-                    if (at < 0) continue;
-                    let head = sel.slice(0, at);
-                    // :hover inside :is(...) / :where(...): keep what comes before that pseudo-class.
-                    let open = 0;
-                    for (const ch of head) open += ch === '(' ? 1 : ch === ')' ? -1 : 0;
-                    while (open > 0) {
-                        head = head.slice(0, head.lastIndexOf('(')).replace(/:[\w-]+$/, '');
-                        open--;
-                    }
-                    head = head.replace(/::?[\w-]+$/, '').trim();
-                    if (head && !/[>+~]$/.test(head)) targets.add(head);
+                    const head = hoverHead(sel);
+                    if (head) targets.add(head);
                 }
             }
         };
@@ -368,6 +374,13 @@ const INTERACTIONS = [
 ];
 
 async function interactionPass(page, where, failures) {
+    await openedComponentsPass(page, where, failures);
+    await carouselPass(page, where, failures);
+    await tooltipPass(page, where, failures);
+}
+
+// Each component of INTERACTIONS: open it, audit what it shows, close it.
+async function openedComponentsPass(page, where, failures) {
     for (const it of INTERACTIONS) {
         const trigger = page.locator(it.trigger).first();
         if (!(await trigger.count()) || (!it.anyVisibility && !(await trigger.isVisible()))) {
@@ -385,7 +398,10 @@ async function interactionPass(page, where, failures) {
             failures.push({ ...where, kind: 'error', target: it.name, html: String(error.message).split('\n')[0], ratio: 0, need: 0 });
         }
     }
-    // Every slide of every carousel (the carousel section switches between carousels with its .owl-menu tabs).
+}
+
+// Every slide of every carousel (the carousel section switches between carousels with its .owl-menu tabs).
+async function carouselPass(page, where, failures) {
     const menus = await page.locator('.owl-menu').filter({ visible: true }).all();
     for (const menu of menus.length ? menus : [null]) {
         if (menu) {
@@ -399,7 +415,10 @@ async function interactionPass(page, where, failures) {
             await auditScope(page, '.owl-carousel:not(.d-none)', 'after: carousel slide', where, failures);
         }
     }
-    // Tooltips.
+}
+
+// The first tooltips of the page, one hover each.
+async function tooltipPass(page, where, failures) {
     for (const el of (await page.locator('[data-toggle="tooltip"], [data-original-title]').filter({ visible: true }).all()).slice(0, 6)) {
         await el.hover({ timeout: 2000 }).catch(() => {});
         await pause(page, 300);
@@ -459,36 +478,42 @@ async function focusPass(page, where, failures) {
             continue;
         }
         await pause(page, 80);
-        let after = await page.screenshot({ clip });
+        const after = await page.screenshot({ clip });
         const label = (await el.evaluate(e => (e.innerText || e.getAttribute('aria-label') || e.value || e.id || e.tagName).trim().slice(0, 40))) || '?';
         const target = await mark(el, `f${n}`);
         await auditScope(page, target, 'focus', where, failures);
-        // The indicator: pixels that change on focus. Enough of them must reach 3:1 against what they covered, about a 1px ring all around.
-        const indicator = () => comparePixels(page, [before, after], 'focusChange');
-        let { changed, strong } = await indicator();
-        // Under load the ring can be painted after the shot: one retry before calling it missing.
-        if (!changed) {
-            await pause(page, 300);
-            after = await page.screenshot({ clip });
-            ({ changed, strong } = await indicator());
-        }
-        // Only the part of the element on screen can show a ring.
-        const vp = page.viewportSize();
-        const visibleWidth = Math.min(vp.width, box.x + box.width) - Math.max(0, box.x), visibleHeight = Math.min(vp.height, box.y + box.height) - Math.max(0, box.y);
-        const perimeter = 2 * (Math.max(0, visibleWidth) + Math.max(0, visibleHeight));
-        const fails = !changed || strong < perimeter * 0.75;
-        if (fails && args.shots) {
-            const name = `${where.url}-${where.viewport}-${where.scheme}-${label}`.replace(/[^\w-]+/g, '_').slice(0, 120);
-            fs.mkdirSync(args.shots, { recursive: true });
-            fs.writeFileSync(path.join(args.shots, `${name}-before.png`), before);
-            fs.writeFileSync(path.join(args.shots, `${name}-after.png`), after);
-        }
-        if (!changed) {
-            failures.push({ ...where, kind: 'focus indicator', target, html: label, fg: 'none', bg: 'no visible change on focus', ratio: 1, need: 3 });
-        } else if (strong < perimeter * 0.75) {
-            failures.push({ ...where, kind: 'focus indicator', target, html: label, fg: `${strong} px at 3:1`, bg: `needs ~${Math.round(perimeter * 0.75)} px (a ring around)`, ratio: +(strong / perimeter).toFixed(2), need: 3 });
-        }
+        await checkFocusIndicator(page, { clip, box, before, after, label, target }, where, failures);
         await page.evaluate(() => document.activeElement?.blur());
+    }
+}
+
+// The indicator: pixels that change on focus. Enough of them must reach 3:1 against what they covered, about a 1px ring all around.
+async function checkFocusIndicator(page, shots, where, failures) {
+    const { clip, box, before, label, target } = shots;
+    let { after } = shots;
+    const indicator = () => comparePixels(page, [before, after], 'focusChange');
+    let { changed, strong } = await indicator();
+    // Under load the ring can be painted after the shot: one retry before calling it missing.
+    if (!changed) {
+        await pause(page, 300);
+        after = await page.screenshot({ clip });
+        ({ changed, strong } = await indicator());
+    }
+    // Only the part of the element on screen can show a ring.
+    const vp = page.viewportSize();
+    const visibleWidth = Math.min(vp.width, box.x + box.width) - Math.max(0, box.x), visibleHeight = Math.min(vp.height, box.y + box.height) - Math.max(0, box.y);
+    const perimeter = 2 * (Math.max(0, visibleWidth) + Math.max(0, visibleHeight));
+    const fails = !changed || strong < perimeter * 0.75;
+    if (fails && args.shots) {
+        const name = `${where.url}-${where.viewport}-${where.scheme}-${label}`.replace(/[^\w-]+/g, '_').slice(0, 120);
+        fs.mkdirSync(args.shots, { recursive: true });
+        fs.writeFileSync(path.join(args.shots, `${name}-before.png`), before);
+        fs.writeFileSync(path.join(args.shots, `${name}-after.png`), after);
+    }
+    if (!changed) {
+        failures.push({ ...where, kind: 'focus indicator', target, html: label, fg: 'none', bg: 'no visible change on focus', ratio: 1, need: 3 });
+    } else if (strong < perimeter * 0.75) {
+        failures.push({ ...where, kind: 'focus indicator', target, html: label, fg: `${strong} px at 3:1`, bg: `needs ~${Math.round(perimeter * 0.75)} px (a ring around)`, ratio: +(strong / perimeter).toFixed(2), need: 3 });
     }
 }
 
@@ -617,7 +642,8 @@ for (const f of all) {
     }
     groups.get(key).where.add(`${f.url} ${f.viewport} ${f.scheme}`);
 }
-console.log(`Pages: ${pages.length}  Sizes: ${VIEWPORTS.map(v => `${v.name} ${v.width}px`).join(', ')}  Modes: ${SCHEMES.join(', ')}`);
+const sizes = VIEWPORTS.map(v => `${v.name} ${v.width}px`).join(', ');
+console.log(`Pages: ${pages.length}  Sizes: ${sizes}  Modes: ${SCHEMES.join(', ')}`);
 console.log('Checked: text on load, on hover, after interactions; keyboard focus and non-text contrast (phone and desktop).');
 if (!groups.size) {
     console.log('PASS: every check meets WCAG AA (text 4.5:1 or 3:1 when large; focus indicators, icons and field boundaries 3:1).');
