@@ -28,7 +28,7 @@ function committedFiles() {
     const runs = [...command.matchAll(/\bgit\s(add|commit)\s([^;&|]*)/g)].map(([, verb, args]) => [verb, args.trim().split(/\s+/)]);
     const everything = runs.some(([verb, args]) => (verb === 'add'
         ? args.some(a => a === '.' || a === '-A' || a === '--all')
-        : args.some(a => a === '--all' || /^-[a-z]*a[a-z]*$/i.test(a))));
+        : args.some(a => a === '--all' || (/^-[a-z]+$/i.test(a) && a.toLowerCase().includes('a')))));
     if (everything) {
         git(['diff', '--name-only']).forEach(f => files.add(f));
         git(['ls-files', '--others', '--exclude-standard']).forEach(f => files.add(f));
