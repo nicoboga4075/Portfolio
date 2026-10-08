@@ -89,49 +89,15 @@ function pagesForChanges() {
     // A range (A..B) compares two commits; a single ref compares it with the working tree, untracked files included.
     const untracked = ref.includes('..') ? [] : git(['ls-files', '--others', '--exclude-standard']);
     const files = [...new Set([...git(['diff', '--name-only', ref]), ...untracked])];
-    const read = file => { try { return fs.readFileSync(path.join(ROOT, file), 'utf8'); } catch { return ''; } };
     const list = dir => { try { return fs.readdirSync(path.join(ROOT, dir)).filter(f => /\.(html|njk)$/.test(f)).map(f => (dir === '.' ? f : `${dir}/${f}`)); } catch { return []; } };
     const templates = ['.', 'articles', 'projects', '_includes'].flatMap(list);
-    // The page sources that pull a template in, through other templates too (by its quoted name: {% include "x.html" %} or an assets: [...] list).
-    const sourcesIncluding = name => {
-        const sources = new Set(), seen = new Set([name]), queue = [name];
-        while (queue.length) {
-            const current = queue.shift();
-            for (const t of templates.filter(t => new RegExp(`["']${current.replaceAll('.', '\\.')}["']`).test(read(t)))) {
-                const base = path.basename(t);
-                if (!t.startsWith('_includes/')) sources.add(t);
-                else if (!seen.has(base)) { seen.add(base); queue.push(base); }
-            }
-        }
-        return { sources, all: seen.has('base.njk') };
-    };
-    const scopes = {
-        all: () => true,
-        app: p => /^(index|blog)_/.test(p.file),
-        standalone: p => Boolean(p.article) || /^(projects\/|policy_|terms_)/.test(p.file),
-        articles: p => Boolean(p.article),
-    };
     const rules = [], report = [], reaching = [];
-    const add = (file, why, test) => { rules.push(test); report.push(`${file} → ${why}`); reaching.push(file); };
     for (const file of files) {
-        const base = path.basename(file);
-        if (/^(css\/common\.css|js\/common\.js|_data\/|_redirects$|\.eleventy\.js$|_includes\/base\.njk$)/.test(file)) add(file, 'every page', scopes.all);
-        else if (/^(css\/(app|bootstrap\.min)\.css|js\/(app|botpress)\.js)$/.test(file)) add(file, 'home and blog pages (articles included)', scopes.app);
-        else if (/^(css\/standalone\.css|js\/standalone\.js)$/.test(file)) add(file, 'projects, policy, terms and articles', scopes.standalone);
-        else if (file === 'netlify/functions/article.mts') add(file, 'articles', scopes.articles);
-        else if (/^articles\/[\w-]+_[a-z]{2}\.html$/.test(file)) add(file, 'that article', p => p.article === base);
-        else if (file.startsWith('_includes/')) {
-            const { sources, all } = sourcesIncluding(base);
-            if (all) add(file, 'every page (through the layout)', scopes.all);
-            else if (sources.size) add(file, [...sources].join(', '), p => sources.has(p.article ? `articles/${p.article}` : p.file) || (p.article && sources.has(p.file)));
-        } else if (templates.includes(file)) add(file, 'that page', p => p.file === file || (p.article && p.file === file));
-        else if (/^(images|docs)\//.test(file)) {
-            // An image reaches the pages that reference it, or every page of a stylesheet that does.
-            const sheets = ['common', 'app', 'standalone'].filter(s => read(`css/${s}.css`).includes(base));
-            const builtPages = new Set([...rewrites.map(p => p.file), ...articles.map(p => `articles/${p.article}`)].filter(f => read(`.eleventy/${f}`).includes(base)));
-            if (sheets.includes('common')) add(file, 'every page (common.css)', scopes.all);
-            else if (sheets.length || builtPages.size) add(file, [...sheets.map(s => `${s}.css`), ...builtPages].join(', '), p => (sheets.includes('app') && scopes.app(p)) || (sheets.includes('standalone') && scopes.standalone(p)) || builtPages.has(p.article ? `articles/${p.article}` : p.file));
-        }
+        const reach = reachOf(file, templates);
+        if (!reach) continue;
+        rules.push(reach.test);
+        report.push(`${file} → ${reach.why}`);
+        reaching.push(file);
     }
     // When the only changes that reach a page are stylesheets, the selectors of the changed rules narrow it further (null: check every reached page).
     const sheets = reaching.filter(f => /^css\/(common|app|standalone)\.css$/.test(f));
@@ -142,43 +108,77 @@ function pagesForChanges() {
     return { ref, report, reaches: p => rules.some(test => test(p)), selectors: usable, scheme };
 }
 
+// A source file of the site, or '' when it is missing.
+function readSource(file) {
+    try {
+        return fs.readFileSync(path.join(ROOT, file), 'utf8');
+    } catch {
+        return '';
+    }
+}
+
+// The groups of pages a change can reach.
+function pageScopes() {
+    return {
+        all: () => true,
+        app: p => /^(index|blog)_/.test(p.file),
+        standalone: p => Boolean(p.article) || /^(projects\/|policy_|terms_)/.test(p.file),
+        articles: p => Boolean(p.article),
+    };
+}
+
+// The pages a changed file can show on, as { why, test }, or null when it reaches none.
+function reachOf(file, templates) {
+    const scopes = pageScopes();
+    const base = path.basename(file);
+    const byPath = [
+        [/^(css\/common\.css|js\/common\.js|_data\/|_redirects$|\.eleventy\.js$|_includes\/base\.njk$)/, 'every page', scopes.all],
+        [/^(css\/(app|bootstrap\.min)\.css|js\/(app|botpress)\.js)$/, 'home and blog pages (articles included)', scopes.app],
+        [/^(css\/standalone\.css|js\/standalone\.js)$/, 'projects, policy, terms and articles', scopes.standalone],
+        [/^netlify\/functions\/article\.mts$/, 'articles', scopes.articles],
+    ].find(([pattern]) => pattern.test(file));
+    if (byPath) return { why: byPath[1], test: byPath[2] };
+    if (/^articles\/[\w-]+_[a-z]{2}\.html$/.test(file)) return { why: 'that article', test: p => p.article === base };
+    if (file.startsWith('_includes/')) return reachOfInclude(base, templates);
+    if (templates.includes(file)) return { why: 'that page', test: p => p.file === file || (p.article && p.file === file) };
+    if (/^(images|docs)\//.test(file)) return reachOfImage(base);
+    return null;
+}
+
+// An include reaches the pages that pull it in, or every page when the layout does.
+function reachOfInclude(base, templates) {
+    const { sources, all } = sourcesIncluding(base, templates);
+    if (all) return { why: 'every page (through the layout)', test: pageScopes().all };
+    if (!sources.size) return null;
+    return { why: [...sources].join(', '), test: p => sources.has(p.article ? `articles/${p.article}` : p.file) || (p.article && sources.has(p.file)) };
+}
+
+// The page sources that pull a template in, through other templates too (by its quoted name: {% include "x.html" %} or an assets: [...] list).
+function sourcesIncluding(name, templates) {
+    const sources = new Set(), seen = new Set([name]), queue = [name];
+    while (queue.length) {
+        const current = queue.shift();
+        for (const t of templates.filter(t => new RegExp(`["']${current.replaceAll('.', '\.')}["']`).test(readSource(t)))) {
+            const base = path.basename(t);
+            if (!t.startsWith('_includes/')) sources.add(t);
+            else if (!seen.has(base)) { seen.add(base); queue.push(base); }
+        }
+    }
+    return { sources, all: seen.has('base.njk') };
+}
+
+// An image reaches the pages that reference it, or every page of a stylesheet that does.
+function reachOfImage(base) {
+    const scopes = pageScopes();
+    const sheets = ['common', 'app', 'standalone'].filter(s => readSource(`css/${s}.css`).includes(base));
+    const builtPages = new Set([...rewrites.map(p => p.file), ...articles.map(p => `articles/${p.article}`)].filter(f => readSource(`.eleventy/${f}`).includes(base)));
+    if (sheets.includes('common')) return { why: 'every page (common.css)', test: scopes.all };
+    if (!sheets.length && !builtPages.size) return null;
+    return { why: [...sheets.map(s => `${s}.css`), ...builtPages].join(', '), test: p => (sheets.includes('app') && scopes.app(p)) || (sheets.includes('standalone') && scopes.standalone(p)) || builtPages.has(p.article ? `articles/${p.article}` : p.file) };
+}
+
 // The selectors of the rules a stylesheet's diff touches, on either side of it (null for a change outside any rule: a variable, an @-rule line).
 function changedSelectors(ref, file, git) {
-    const ruleByLine = text => {
-        const rules = [];
-        const stack = [];
-        let buf = '', line = 1, start = 1, comment = false, content = false, closing;
-        for (let i = 0; i < text.length; i++) {
-            const ch = text[i];
-            if (!comment && ch.trim() && !(ch === '/' && text[i + 1] === '*')) content = true;
-            if (comment) {
-                if (ch === '*' && text[i + 1] === '/') { comment = false; i++; }
-            } else if (ch === '/' && text[i + 1] === '*') {
-                comment = true; i++;
-            } else if (ch === '{') {
-                const header = buf.trim();
-                stack.push(header);
-                if (!header.startsWith('@')) for (let l = start; l <= line; l++) rules[l] = header;
-                buf = '';
-            } else if (ch === '}') {
-                const closed = stack.pop();
-                if (closed && !closed.startsWith('@')) closing = closed;
-                buf = '';
-            } else if (ch === ';') {
-                buf = '';
-            } else if (ch !== '\n') {
-                if (!buf.trim() && ch.trim()) start = line;
-                buf += ch;
-            }
-            if (ch === '\n' || i === text.length - 1) {
-                // Blank and comment-only lines change nothing; a line of CSS outside any rule (an @-rule, a top-level statement) is unknown (null).
-                const inner = stack.findLast(h => !h.startsWith('@'));
-                if (content) rules[line] ??= inner ?? closing ?? null;
-                if (ch === '\n') { line++; content = false; closing = undefined; if (buf.trim()) buf += ' '; }
-            }
-        }
-        return rules;
-    };
     const [from, to] = ref.split('..');
     const show = rev => {
         const r = spawnSync('git', ['show', `${rev}:${file}`], { cwd: ROOT, encoding: 'utf8' });
@@ -192,8 +192,79 @@ function changedSelectors(ref, file, git) {
         for (let l = +oldStart; l < +oldStart + +oldCount; l++) if (oldRules[l] !== undefined) headers.add(oldRules[l]);
         for (let l = +newStart; l < +newStart + +newCount; l++) if (newRules[l] !== undefined) headers.add(newRules[l]);
     }
-    const split = header => header.split(/,(?![^(]*\))/).map(s => s.trim()).filter(Boolean);
-    return [...headers].flatMap(h => (h === null ? [null] : split(h)));
+    return [...headers].flatMap(h => (h === null ? [null] : splitSelectorList(h)));
+}
+
+// The selectors of a selector list, split on the commas outside parentheses (a, b:is(c, d) → a | b:is(c, d)).
+function splitSelectorList(header) {
+    const parts = [];
+    let depth = 0, start = 0;
+    for (let i = 0; i < header.length; i++) {
+        if (header[i] === '(') depth++;
+        else if (header[i] === ')') depth = Math.max(0, depth - 1);
+        else if (header[i] === ',' && depth === 0) { parts.push(header.slice(start, i)); start = i + 1; }
+    }
+    parts.push(header.slice(start));
+    return parts.map(s => s.trim()).filter(Boolean);
+}
+
+// The selector of the rule each line of a stylesheet belongs to, by line number.
+function ruleByLine(text) {
+    const state = { rules: [], stack: [], buf: '', line: 1, start: 1, comment: false, content: false, closing: undefined };
+    for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        i = readCssChar(state, text, i);
+        if (ch === '\n' || i === text.length - 1) endCssLine(state, ch);
+    }
+    return state.rules;
+}
+
+// Reads the character at i, and returns the index of the last character it used (a comment delimiter uses two).
+function readCssChar(state, text, i) {
+    const ch = text[i];
+    const opensComment = ch === '/' && text[i + 1] === '*';
+    if (!state.comment && ch.trim() && !opensComment) state.content = true;
+    if (state.comment) {
+        if (ch !== '*' || text[i + 1] !== '/') return i;
+        state.comment = false;
+        return i + 1;
+    }
+    if (opensComment) {
+        state.comment = true;
+        return i + 1;
+    }
+    readCssCode(state, ch);
+    return i;
+}
+
+// A character of CSS outside comments: opens or closes a block, ends a declaration, or adds to the selector or declaration being read.
+function readCssCode(state, ch) {
+    if (ch === '{') {
+        const header = state.buf.trim();
+        state.stack.push(header);
+        if (!header.startsWith('@')) for (let l = state.start; l <= state.line; l++) state.rules[l] = header;
+        state.buf = '';
+    } else if (ch === '}') {
+        const closed = state.stack.pop();
+        if (closed && !closed.startsWith('@')) state.closing = closed;
+        state.buf = '';
+    } else if (ch === ';') {
+        state.buf = '';
+    } else if (ch !== '\n') {
+        if (!state.buf.trim() && ch.trim()) state.start = state.line;
+        state.buf += ch;
+    }
+}
+
+// Blank and comment-only lines change nothing; a line of CSS outside any rule (an @-rule, a top-level statement) is unknown (null).
+function endCssLine(state, ch) {
+    const inner = state.stack.findLast(h => !h.startsWith('@'));
+    if (state.content) state.rules[state.line] ??= inner ?? state.closing ?? null;
+    if (ch !== '\n') return;
+    state.line++;
+    state.content = false;
+    state.closing = undefined;
+    if (state.buf.trim()) state.buf += ' ';
 }
 
 // Which of the changed selectors match something on a page once its scripts ran (hover, focus and theme qualifiers dropped).
@@ -208,26 +279,57 @@ async function matchSelectors(browser, pageInfo, selectors) {
             await page.waitForFunction(() => document.querySelector('#article-shape')?.childElementCount, null, { timeout: 15000 });
             await page.waitForTimeout(800);
         }
-        return await page.evaluate(list => list.map(sel => {
-            // Elements the page only builds on interaction: matched through what declares them.
-            const built = { '.tooltip': '[data-bs-toggle="tooltip"]' };
-            let bare = sel.replace(/:not\(\.dark-mode\)|\.dark-mode/g, '').replace(/::?(before|after|placeholder|marker|selection|first-line|first-letter|-webkit-[\w-]+|-moz-[\w-]+)\b/g, '')
-                .replace(/:(hover|focus-visible|focus-within|focus|active|visited|target)\b/g, '').trim();
-            bare = Object.entries(built).reduce((s, [from, to]) => (s.startsWith(from) ? to : s), bare);
-            // Not there on load: drop a state class set later (.scrolled, .active), then try the nearest ancestor (a list item added on typing), stopping before html / body, which every page has.
-            while (bare && !/^(html|body|:root|\*)$/i.test(bare)) {
-                try {
-                    if (document.querySelector(bare)) return true;
-                } catch {
-                    return true;
+        return await page.evaluate(list => {
+            const isCombinator = c => /[\s>+~]/.test(c ?? '');
+            // The selector without its last class, attribute or pseudo-class (a.b.active → a.b), or null when nothing but a combinator precedes it.
+            const withoutState = s => {
+                let at;
+                if (s.endsWith(']')) {
+                    at = s.lastIndexOf('[');
+                    if (at < 0 || s.indexOf(']', at) !== s.length - 1) return null;
+                } else {
+                    const end = s.endsWith(')') ? s.lastIndexOf('(') : s.length;
+                    if (end < 0 || (end < s.length && s.indexOf(')', end) !== s.length - 1)) return null;
+                    at = end;
+                    while (at > 0 && /[\w-]/.test(s[at - 1])) at--;
+                    // A class or a pseudo-class needs a name; only a pseudo-class takes arguments.
+                    if (at === end || !(s[at - 1] === ':' || (s[at - 1] === '.' && end === s.length))) return null;
+                    at--;
                 }
-                const state = bare.match(/^(.*[^\s>+~])(\.[\w-]+|\[[^\]]*\]|:[\w-]+(\([^()]*\))?)$/);
-                const cut = bare.search(/\s*[\s>+~]\s*[^\s>+~()]*(\([^)]*\)[^\s>+~]*)*\s*$/);
-                if (state) bare = state[1];
-                else bare = cut > 0 ? bare.slice(0, cut).trim() : '';
-            }
-            return false;
-        }), selectors);
+                const prefix = s.slice(0, at);
+                return prefix && !isCombinator(prefix.at(-1)) ? prefix : null;
+            };
+            // Where the last combinator outside parentheses starts (a > b:not(c d) → 1), or -1 when there is none.
+            const lastCombinator = s => {
+                let depth = 0, at = -1;
+                for (let i = 0; i < s.length; i++) {
+                    if (s[i] === '(') depth++;
+                    else if (s[i] === ')') depth = Math.max(0, depth - 1);
+                    else if (depth === 0 && isCombinator(s[i]) && !isCombinator(s[i - 1])) at = i;
+                }
+                return at;
+            };
+            return list.map(sel => {
+                // Elements the page only builds on interaction: matched through what declares them.
+                const built = { '.tooltip': '[data-bs-toggle="tooltip"]' };
+                let bare = sel.replace(/:not\(\.dark-mode\)|\.dark-mode/g, '').replace(/::?(before|after|placeholder|marker|selection|first-line|first-letter|-webkit-[\w-]+|-moz-[\w-]+)\b/g, '')
+                    .replace(/:(hover|focus-visible|focus-within|focus|active|visited|target)\b/g, '').trim();
+                bare = Object.entries(built).reduce((s, [from, to]) => (s.startsWith(from) ? to : s), bare);
+                // Not there on load: drop a state class set later (.scrolled, .active), then try the nearest ancestor (a list item added on typing), stopping before html / body, which every page has.
+                while (bare && !/^(html|body|:root|\*)$/i.test(bare)) {
+                    try {
+                        if (document.querySelector(bare)) return true;
+                    } catch {
+                        return true;
+                    }
+                    const state = withoutState(bare);
+                    const cut = lastCombinator(bare);
+                    if (state) bare = state;
+                    else bare = cut > 0 ? bare.slice(0, cut).trim() : '';
+                }
+                return false;
+            });
+        }, selectors);
     } catch {
         return selectors.map(() => true);
     } finally {

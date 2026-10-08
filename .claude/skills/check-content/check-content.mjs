@@ -63,8 +63,8 @@ if (!appProjects) {
     if (appProjects.length !== cards.length) {
         errors.push(`js/app.js appProjects has ${appProjects.length} entries but _data/projects.json has ${cards.length} cards: the Explore button of card n opens appProjects[n]`);
     }
-    cards.forEach((card, i) => warnings.push(`project card ${i + 1} "${card.title.replace(/<[^>]+>/g, '')}" → ${appProjects[i] ?? '(nothing)'}`));
-    for (const target of appProjects.filter(t => !/^https?:|#|\//.test(t))) {
+    cards.forEach((card, i) => warnings.push(`project card ${i + 1} "${card.title.replace(/<[^<>]+>/g, '')}" → ${appProjects[i] ?? '(nothing)'}`));
+    for (const target of appProjects.filter(t => !/(?:^https?:)|[#/]/.test(t))) {
         checkPages('projects', target);
         if (!routes.projects.includes(target)) errors.push(`project "${target}" is not in package.json routes.projects`);
     }
