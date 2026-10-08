@@ -25,6 +25,7 @@
     "lint:js": "npx eslint .",
     "contrast": "node .claude/skills/wcag-contrast/check-contrast.mjs",
     "contrast:quick": "node .claude/skills/wcag-contrast/check-contrast.mjs --quick",
+    "check:content": "node .claude/skills/check-content/check-content.mjs",
     "jest": "npx jest --coverage --passWithNoTests",
     "playwright": "playwright test",
     "cypress": "npx cypress run",
