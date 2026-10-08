@@ -89,6 +89,7 @@ Give the user the result in numbers: what failed (kind, element, ratio, needed r
 
 ## What it does not cover
 
+- Text that is part of a logo or a brand name, which WCAG 1.4.3 exempts: the Portfolio logo (`#site-logo`: the name and its version and initials badges, the initials white on the orange accent at 2.57:1), listed in `LOGO_TEXT` in the script. Add an element there only if it really is part of a logo.
 - Third-party widgets drawn in their own frame or shadow root once loaded: the Botpress chat window and the Calendly booking popup (their launcher buttons are checked).
 - Text inside images, and text with partial transparency over a photo (the pixel measure only counts pixels of the text's own colour).
 - The `:active` (pressed) and `:visited` states.

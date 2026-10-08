@@ -512,9 +512,12 @@ async function measureBehind(page, target, { need } = {}) {
     return { ratio, need: need ?? (large ? 3 : 4.5), colour: info.colour };
 }
 
-// axe color-contrast on a scope, plus the pixel measure of what it leaves undecided.
+// Text that is part of a logo or a brand name, which WCAG 1.4.3 exempts from contrast: the Portfolio logo with its version and initials badges.
+const LOGO_TEXT = ['#site-logo'];
+
+// axe color-contrast on a scope (minus the logo text), plus the pixel measure of what it leaves undecided.
 async function auditScope(page, scope, kind, where, failures) {
-    const result = await page.evaluate(sel => axe.run(sel ? { include: [[sel]] } : document, { runOnly: ['color-contrast'], resultTypes: ['violations', 'incomplete'] }), scope);
+    const result = await page.evaluate(([sel, logo]) => axe.run({ ...(sel ? { include: [[sel]] } : {}), exclude: logo.map(s => [s]) }, { runOnly: ['color-contrast'], resultTypes: ['violations', 'incomplete'] }), [scope, LOGO_TEXT]);
     for (const node of result.violations.flatMap(v => v.nodes)) {
         const d = node.any[0]?.data ?? {};
         failures.push({ ...where, kind, target: node.target.join(' '), html: node.html, fg: d.fgColor, bg: d.bgColor, ratio: d.contrastRatio, need: Number.parseFloat(d.expectedContrastRatio) });

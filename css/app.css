@@ -1091,11 +1091,11 @@ html.dark-mode .ftco-navbar-light .navbar-toggler:focus-visible {
 }
 
 /* The badges sit next to the logo link, not inside it, so they aren't clickable. */
-#brand {
+#site-logo {
     align-items: flex-start;
 }
 
-#brand .navbar-brand {
+#site-logo .navbar-brand {
     margin-right: 0;
 }
 
@@ -1128,6 +1128,7 @@ html.dark-mode .ftco-navbar-light .navbar-toggler:focus-visible {
     background-color: var(--dark);
 }
 
+/* The initials are part of the logo, which WCAG 1.4.3 exempts from contrast (like the rest of #site-logo): white on the accent stays, at 2.57:1 */
 #author-badge,
 #author-badge:hover {
     background-color: var(--accent-color);
