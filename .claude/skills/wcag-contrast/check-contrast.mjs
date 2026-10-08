@@ -517,7 +517,12 @@ const LOGO_TEXT = ['#site-logo'];
 
 // axe color-contrast on a scope (minus the logo text), plus the pixel measure of what it leaves undecided.
 async function auditScope(page, scope, kind, where, failures) {
-    const result = await page.evaluate(([sel, logo]) => axe.run({ ...(sel ? { include: [[sel]] } : {}), exclude: logo.map(s => [s]) }, { runOnly: ['color-contrast'], resultTypes: ['violations', 'incomplete'] }), [scope, LOGO_TEXT]);
+    const result = await page.evaluate(async ([sel, logo]) => {
+        const found = await axe.run({ ...(sel ? { include: [[sel]] } : {}), exclude: logo.map(s => [s]) }, { runOnly: ['color-contrast'], resultTypes: ['violations', 'incomplete'], elementRef: true });
+        // axe keeps an included scope that sits inside an excluded one (a hovered or focused part of the logo), so the logo text is also dropped by element.
+        const keep = nodes => nodes.filter(n => !n.element?.closest(logo.join(','))).map(({ element, ...n }) => n);
+        return { violations: found.violations.map(v => ({ nodes: keep(v.nodes) })), incomplete: found.incomplete.map(v => ({ nodes: keep(v.nodes) })) };
+    }, [scope, LOGO_TEXT]);
     for (const node of result.violations.flatMap(v => v.nodes)) {
         const d = node.any[0]?.data ?? {};
         failures.push({ ...where, kind, target: node.target.join(' '), html: node.html, fg: d.fgColor, bg: d.bgColor, ratio: d.contrastRatio, need: Number.parseFloat(d.expectedContrastRatio) });
