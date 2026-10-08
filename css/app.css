@@ -1553,10 +1553,20 @@ textarea.form-control {
 
 .project {
     width: 100%;
-    height: 350px;
+    min-height: 350px;
+    height: 100%;
     margin-bottom: 0;
     position: relative;
     z-index: 0;
+}
+
+.project::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--background-color);
+    opacity: 0.2;
+    z-index: -1;
 }
 
 .project .overlay {
@@ -1569,6 +1579,10 @@ textarea.form-control {
     transition: all 0.3s ease;
 }
 
+html.dark-mode .project .overlay {
+    background-color: var(--primary-dark);
+}
+
 @media (max-width: 767.98px) {
     .project .overlay {
         opacity: 0.2;
@@ -1576,6 +1590,8 @@ textarea.form-control {
 }
 
 .project .text {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
     max-width: 80%;
     z-index: 1;
     opacity: 0;
@@ -1590,17 +1606,29 @@ textarea.form-control {
 }
 
 .project:hover .overlay,
-.project:focus .overlay {
-    opacity: 0.9;
-}
-
-.project:hover .text,
-.project:focus .text {
+.project:focus .overlay,
+.project:focus-within .overlay {
     opacity: 1;
 }
 
-#projects-section {
-    opacity: 0.8;
+.project:hover .text,
+.project:focus .text,
+.project:focus-within .text {
+    opacity: 1;
+}
+
+.project .text h3 {
+    color: var(--white);
+}
+
+.project .explore,
+.project .explore:focus {
+    color: var(--dark);
+}
+
+.project .explore:focus-visible,
+html.dark-mode .project .explore:focus-visible {
+    outline-color: var(--white);
 }
 
 .project p {
@@ -1627,7 +1655,8 @@ textarea.form-control {
     color: var(--primary);
 }
 
-.project:hover .project-title {
+.project:hover .project-title,
+.project:focus-within .project-title {
     display: none;
 }
 
