@@ -20,7 +20,9 @@ async function runningRoot() {
 
 const root = await runningRoot();
 if (root && path.resolve(root) !== ROOT) {
-    console.error(`Port ${PORT} is used by the translation hook server of ${root}: _data edits of this project won't be checked (set TRANSLATION_HOOK_PORT to another port).`);
+    // The root comes from whatever answers on the port: its control characters are dropped so it can't forge log lines.
+    const shownRoot = String(root).replaceAll(/\p{Cc}/gu, '');
+    console.error(`Port ${PORT} is used by the translation hook server of ${shownRoot}: _data edits of this project won't be checked (set TRANSLATION_HOOK_PORT to another port).`);
 } else if (!root) {
     spawn(process.execPath, [path.join(HERE, 'translation-hook-server.mjs')], { cwd: ROOT, detached: true, stdio: 'ignore', windowsHide: true }).unref();
     // Wait until it answers, so the first edit of the session is already checked.
