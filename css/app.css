@@ -1992,7 +1992,7 @@ html.dark-mode .owl-dot:focus-visible {
     width: 50px;
     display: block;
     float: left;
-    background-color: var(--primary);
+    background-color: var(--primary-dark);
     border-radius: 50%;
     position: relative;
 }
