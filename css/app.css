@@ -745,7 +745,7 @@ html.dark-mode .btn:focus-visible {
     color: var(--white) !important;
 }
 
-html.dark-mode .btn-primary,
+html.dark-mode .btn-primary:not(.btn-outline-primary),
 html.dark-mode .btn-outline-primary:active {
     background-color: var(--primary-dark) !important;
     border-color: var(--primary-dark) !important;
