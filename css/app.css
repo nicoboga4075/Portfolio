@@ -547,6 +547,10 @@ input[name="search-input"].highlight-flash {
     margin-top: 20px;
 }
 
+.about-author p {
+    color: var(--secondary-dark);
+}
+
 .about-author .desc {
     display: flex;
     flex-direction: column;
