@@ -59,4 +59,6 @@ if (ask.status === 0 && /^OK\.?$/i.test(answer)) {
 // Haiku answered with a reminder; when it could not be reached, the reminder is the plain list of files.
 const reminder = ask.status === 0 && answer ? answer : `No test in this commit for ${code.join(', ')}: make sure a unit, integration or E2E test covers them, one that exists or one to add later.`;
 const message = `Test reminder (not blocking): ${reminder}`;
-console.log(JSON.stringify({ systemMessage: message, hookSpecificOutput: { hookEventName: 'PreToolUse', additionalContext: message } }));
+// Claude also learns which sub-agent writes the tests, so a plain "yes, write them" from the developer is enough.
+const context = `${message} If the developer asks for these tests, delegate them to the test-writer sub-agent (.claude/agents/test-writer.md) with these files: ${code.join(', ')}.`;
+console.log(JSON.stringify({ systemMessage: `${message} Ask "write the tests" to have the test-writer agent write them.`, hookSpecificOutput: { hookEventName: 'PreToolUse', additionalContext: context } }));
