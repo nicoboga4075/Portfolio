@@ -2139,10 +2139,15 @@ html.dark-mode .bulle-bd p {
 #search-suggestions li {
     padding: 8px 12px;
     cursor: pointer;
+    color: var(--secondary);
+}
+
+html.dark-mode #search-suggestions li {
+    color: var(--secondary-dark);
 }
 
 #search-suggestions li:hover {
-    background-color: var(--light);
+    text-decoration: underline;
 }
 
 input[name="search-input"] {
@@ -2151,7 +2156,6 @@ input[name="search-input"] {
 
 input[name="search-input"]:focus-visible {
     outline: 2px solid var(--primary);
-    outline-offset: 2px;
 }
 
 html.dark-mode input[name="search-input"]:focus-visible {
