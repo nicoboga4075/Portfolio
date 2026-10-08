@@ -371,8 +371,8 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, { 'Content-Type': TYPES[path.extname(full).toLowerCase()] ?? 'application/octet-stream' }).end(data);
     });
 });
-await new Promise(r => server.listen(0, '127.0.0.1', r));
-const BASE = `http://127.0.0.1:${server.address().port}`;
+await new Promise(r => server.listen(0, 'localhost', r));
+const BASE = `http://localhost:${server.address().port}`;
 
 // ---- Helpers ----
 const pause = (page, ms = 150) => page.waitForTimeout(ms);

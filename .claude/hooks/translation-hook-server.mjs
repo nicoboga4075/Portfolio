@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // HTTP hook server (PostToolUse on Edit / Write / MultiEdit): when Claude edits a _data/*.json file, checks that it is valid JSON and that every text has every language of routes.locales with the same shape, and answers {"decision":"block","reason":...} so Claude sees the problem next to its edit.
-// Started by start-translation-hook-server.mjs (SessionStart hook); listens on 127.0.0.1 only and stops after 2 hours without a request.
+// Started by start-translation-hook-server.mjs (SessionStart hook); listens on localhost only and stops after 2 hours without a request.
 import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
@@ -102,4 +102,4 @@ const server = http.createServer((req, res) => {
     });
 });
 
-server.listen(PORT, '127.0.0.1', () => keepAlive(server));
+server.listen(PORT, 'localhost', () => keepAlive(server));

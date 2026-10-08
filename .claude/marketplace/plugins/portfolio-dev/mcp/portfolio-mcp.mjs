@@ -140,7 +140,7 @@ function startServer() {
             else res.writeHead(200, { 'Content-Type': TYPES[path.extname(full).toLowerCase()] ?? 'application/octet-stream' }).end(data);
         });
     });
-    return new Promise(resolve => server.listen(0, '127.0.0.1', () => resolve(server)));
+    return new Promise(resolve => server.listen(0, 'localhost', () => resolve(server)));
 }
 
 async function preview({ url = '/en', theme = 'light', width = 1280, height = 800, full_page = false } = {}) {
@@ -153,7 +153,7 @@ async function preview({ url = '/en', theme = 'light', width = 1280, height = 80
     try {
         const size = { width: Math.min(Math.max(Number(width) || 1280, 320), 1920), height: Math.min(Math.max(Number(height) || 800, 480), 1600) };
         const page = await browser.newPage({ viewport: size, colorScheme: theme === 'dark' ? 'dark' : 'light' });
-        await page.goto(`http://127.0.0.1:${server.address().port}${url}`, { waitUntil: 'load', timeout: 60000 });
+        await page.goto(`http://localhost:${server.address().port}${url}`, { waitUntil: 'load', timeout: 60000 });
         // An article is loaded into the blog after the page: wait for it.
         if (url.includes('#')) await page.waitForFunction(() => document.querySelector('#article-shape')?.childElementCount, null, { timeout: 15000 }).catch(() => {});
         await page.waitForTimeout(1200);

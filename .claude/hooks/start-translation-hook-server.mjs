@@ -11,7 +11,7 @@ const PORT = Number(process.env.TRANSLATION_HOOK_PORT) || 4799;
 // The project root the server on the port belongs to, or null when nothing answers.
 async function runningRoot() {
     try {
-        const res = await fetch(`http://127.0.0.1:${PORT}/health`, { signal: AbortSignal.timeout(1000) });
+        const res = await fetch(`http://localhost:${PORT}/health`, { signal: AbortSignal.timeout(1000) });
         return res.ok ? (await res.json()).root : null;
     } catch {
         return null;
