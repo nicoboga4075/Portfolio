@@ -106,7 +106,9 @@ function pagesForChanges() {
     const selectors = sheets.length && sheets.length === reaching.length ? sheets.flatMap(f => changedSelectors(ref, f, git)) : null;
     const usable = selectors && !selectors.includes(null) && selectors.length ? selectors : null;
     // Rules all scoped to one theme (html.dark-mode ..., html:not(.dark-mode) ...) only need that theme.
-    const scheme = usable?.every(s => s.startsWith('html.dark-mode')) ? 'dark' : usable?.every(s => s.startsWith('html:not(.dark-mode)')) ? 'light' : null;
+    let scheme = null;
+    if (usable?.every(s => s.startsWith('html.dark-mode'))) scheme = 'dark';
+    else if (usable?.every(s => s.startsWith('html:not(.dark-mode)'))) scheme = 'light';
     return { ref, report, reaches: p => rules.some(test => test(p)), selectors: usable, scheme };
 }
 
@@ -160,7 +162,7 @@ function sourcesIncluding(name, templates) {
     const sources = new Set(), seen = new Set([name]), queue = [name];
     while (queue.length) {
         const current = queue.shift();
-        for (const t of templates.filter(t => new RegExp(`["']${current.replaceAll('.', '\.')}["']`).test(readSource(t)))) {
+        for (const t of templates.filter(t => new RegExp(`["']${current.replaceAll('.', String.raw`\.`)}["']`).test(readSource(t)))) {
             const base = path.basename(t);
             if (!t.startsWith('_includes/')) sources.add(t);
             else if (!seen.has(base)) { seen.add(base); queue.push(base); }
@@ -186,8 +188,8 @@ function changedSelectors(ref, file, git) {
         const r = spawnSync('git', ['show', `${rev}:${file}`], { cwd: ROOT, encoding: 'utf8' });
         return r.status === 0 ? r.stdout : '';
     };
-    const oldRules = ruleByLine(show(from).replace(/\r\n/g, '\n'));
-    const newRules = ruleByLine((to === undefined ? fs.readFileSync(path.join(ROOT, file), 'utf8') : show(to || 'HEAD')).replace(/\r\n/g, '\n'));
+    const oldRules = ruleByLine(show(from).replaceAll('\r\n', '\n'));
+    const newRules = ruleByLine((to === undefined ? fs.readFileSync(path.join(ROOT, file), 'utf8') : show(to || 'HEAD')).replaceAll('\r\n', '\n'));
     const headers = new Set();
     for (const hunk of git(['diff', '-U0', ref, '--', file]).filter(l => l.startsWith('@@'))) {
         const [, oldStart, oldCount = '1', newStart, newCount = '1'] = hunk.match(/^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/);
@@ -213,10 +215,12 @@ function splitSelectorList(header) {
 // The selector of the rule each line of a stylesheet belongs to, by line number.
 function ruleByLine(text) {
     const state = { rules: [], stack: [], buf: '', line: 1, start: 1, comment: false, content: false, closing: undefined };
-    for (let i = 0; i < text.length; i++) {
+    let i = 0;
+    while (i < text.length) {
         const ch = text[i];
-        i = readCssChar(state, text, i);
-        if (ch === '\n' || i === text.length - 1) endCssLine(state, ch);
+        const last = readCssChar(state, text, i);
+        if (ch === '\n' || last === text.length - 1) endCssLine(state, ch);
+        i = last + 1;
     }
     return state.rules;
 }
@@ -284,21 +288,23 @@ async function matchSelectors(browser, pageInfo, selectors) {
         return await page.evaluate(list => {
             const isCombinator = c => /[\s>+~]/.test(c ?? '');
             // The selector without its last class, attribute or pseudo-class (a.b.active → a.b), or null when nothing but a combinator precedes it.
+            // Where a trailing attribute ([x="y"]) starts, or -1.
+            const attributeStart = s => {
+                const at = s.lastIndexOf('[');
+                return at >= 0 && s.indexOf(']', at) === s.length - 1 ? at : -1;
+            };
+            // Where a trailing class (.x) or pseudo-class (:x, :x(y)) starts, or -1; only a pseudo-class takes arguments.
+            const nameStart = s => {
+                const end = s.endsWith(')') ? s.lastIndexOf('(') : s.length;
+                if (end < 0 || (end < s.length && s.indexOf(')', end) !== s.length - 1)) return -1;
+                let at = end;
+                while (at > 0 && /[\w-]/.test(s[at - 1])) at--;
+                const mark = s[at - 1];
+                return at < end && (mark === ':' || (mark === '.' && end === s.length)) ? at - 1 : -1;
+            };
             const withoutState = s => {
-                let at;
-                if (s.endsWith(']')) {
-                    at = s.lastIndexOf('[');
-                    if (at < 0 || s.indexOf(']', at) !== s.length - 1) return null;
-                } else {
-                    const end = s.endsWith(')') ? s.lastIndexOf('(') : s.length;
-                    if (end < 0 || (end < s.length && s.indexOf(')', end) !== s.length - 1)) return null;
-                    at = end;
-                    while (at > 0 && /[\w-]/.test(s[at - 1])) at--;
-                    // A class or a pseudo-class needs a name; only a pseudo-class takes arguments.
-                    if (at === end || !(s[at - 1] === ':' || (s[at - 1] === '.' && end === s.length))) return null;
-                    at--;
-                }
-                const prefix = s.slice(0, at);
+                const at = s.endsWith(']') ? attributeStart(s) : nameStart(s);
+                const prefix = at > 0 ? s.slice(0, at) : '';
                 return prefix && !isCombinator(prefix.at(-1)) ? prefix : null;
             };
             // Where the last combinator outside parentheses starts (a > b:not(c d) → 1), or -1 when there is none.

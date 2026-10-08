@@ -1,0 +1,14 @@
+{
+    "name": "portfolio",
+    "description": "Claude Code plugins of the portfolio repository, declared for this project only (.claude/settings.json).",
+    "owner": {
+        "name": "Nicolas BOGALHEIRO"
+    },
+    "plugins": [
+        {
+            "name": "portfolio-dev",
+            "source": "./plugins/portfolio-dev",
+            "description": "An MCP server exposing the portfolio as tools: articles, projects, texts, translation gaps, page previews, site health."
+        }
+    ]
+}

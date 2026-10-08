@@ -13,5 +13,16 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "portfolio-dev@portfolio": true
+  },
+  "extraKnownMarketplaces": {
+    "portfolio": {
+      "source": {
+        "source": "directory",
+        "path": "./.claude/marketplace"
+      }
+    }
   }
 }

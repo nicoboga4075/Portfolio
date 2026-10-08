@@ -70,7 +70,7 @@ function compareValues(a, b, [langA, langB], where) {
 }
 
 function compareTexts(a, b, [langA, langB], where) {
-    if (!a.trim() !== !b.trim()) {
+    if (Boolean(a.trim()) !== Boolean(b.trim())) {
         errors.push(`${where}: empty in "${a.trim() ? langB : langA}" only`);
     } else if (a === b && languageOf(a)) {
         warnings.push(`${where}: same ${languageOf(a)} text in "${langA}" and "${langB}": "${a.slice(0, 70)}"`);
@@ -131,12 +131,25 @@ for (const [base, found] of translated) {
         }
     }
 }
+// The Nunjucks tags of a line ({{ ... }} and {% ... %}), read with indexOf rather than a backtracking regex.
+function templateTags(line) {
+    const tags = [];
+    let from = line.indexOf('{');
+    while (from >= 0) {
+        const closing = { '{': '}}', '%': '%}' }[line[from + 1]];
+        const end = closing ? line.indexOf(closing, from + 2) : -1;
+        if (end >= 0) tags.push(line.slice(from, end + 2));
+        from = line.indexOf('{', end >= 0 ? end + 2 : from + 1);
+    }
+    return tags;
+}
+
 // {{ x.en }} or {{ x['fr'] }} shows the same language on every page: templates read x[lang].
 const templates = [...sources, ...list('_includes').filter(f => /\.(html|njk)$/.test(f)).map(f => `_includes/${f}`)];
-const langAccess = new RegExp(`(?:\\.(?:${langs.join('|')})\\b(?!\\.html)|\\[\\s*['"](?:${langs.join('|')})['"]\\s*\\])`);
+const langAccess = new RegExp(String.raw`(?:\.(?:${langs.join('|')})\b(?!\.html)|\[\s*['"](?:${langs.join('|')})['"]\s*\])`);
 for (const file of templates) {
     read(file).split(/\r?\n/).forEach((line, i) => {
-        for (const [tag] of line.matchAll(/\{\{[^}]*\}\}|\{%[^%]*%\}/g)) {
+        for (const tag of templateTags(line)) {
             if (langAccess.test(tag)) errors.push(`${file}:${i + 1}: ${tag.trim()} is locked to one language (use [lang])`);
         }
     });
@@ -155,52 +168,61 @@ if (!args.has('--no-build')) {
 const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
 const SKIPPED = new Set(['script', 'style', 'pre', 'code', 'svg', 'template', 'noscript']);
 const TEXT_ATTRIBUTES = ['alt', 'title', 'aria-label', 'placeholder'];
-const attribute = (attrs, name) => attrs.match(new RegExp(`(?:^|\\s)${name}="([^"]*)"`))?.[1];
-const decode = text => text.replace(/&nbsp;|&#160;/g, ' ').replace(/&#39;|&#x27;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+const attribute = (attrs, name) => attrs.match(new RegExp(String.raw`(?:^|\s)${name}="([^"]*)"`))?.[1];
+const decode = text => text.replaceAll(/&nbsp;|&#160;/g, ' ').replaceAll(/&#39;|&#x27;|&apos;/g, "'").replaceAll('&quot;', '"').replaceAll('&amp;', '&').replaceAll(/\s+/g, ' ').trim();
 
 // The visible texts of a page (text and the text attributes), each with the element it sits in; code, scripts and anything marked translate="no" or in another language (lang="xx") are left out.
 function textsOf(html, pageLang) {
-    const texts = [];
-    const stack = [];
+    const state = { html, pageLang, texts: [], stack: [] };
     let i = 0;
-    const skipped = () => stack.some(e => e.skip);
     while (i < html.length) {
         const open = html.indexOf('<', i);
-        const text = decode(html.slice(i, open < 0 ? html.length : open));
-        if (text && !skipped()) texts.push({ text, tag: stack.at(-1)?.tag ?? 'html' });
-        if (open < 0) break;
-        if (html.startsWith('<!--', open)) {
-            const end = html.indexOf('-->', open);
-            i = end < 0 ? html.length : end + 3;
-            continue;
-        }
-        const close = html.indexOf('>', open);
-        if (close < 0) break;
-        const raw = html.slice(open + 1, close);
-        i = close + 1;
-        const name = raw.match(/^\/?([a-zA-Z][\w-]*)/)?.[1]?.toLowerCase();
-        if (!name || raw.startsWith('!')) continue;
-        if (raw.startsWith('/')) {
-            const at = stack.findLastIndex(e => e.tag === name);
-            if (at >= 0) stack.length = at;
-            continue;
-        }
-        const own = attribute(raw, 'lang');
-        const skip = SKIPPED.has(name) || /(?:^|\s)class="[^"]*\blang-code\b/.test(raw) || attribute(raw, 'translate') === 'no' || Boolean(own && own !== pageLang && name !== 'html');
-        if (!skip && !skipped()) {
-            for (const attr of TEXT_ATTRIBUTES) {
-                const value = attribute(raw, attr);
-                if (value !== undefined) texts.push({ text: decode(value), tag: `${name}[${attr}]` });
-            }
-        }
-        if (SKIPPED.has(name) && name !== 'svg') {
-            const end = html.toLowerCase().indexOf(`</${name}`, i);
-            i = end < 0 ? html.length : end;
-            continue;
-        }
-        if (!VOID.has(name) && !raw.endsWith('/')) stack.push({ tag: name, skip });
+        addText(state, decode(html.slice(i, open < 0 ? html.length : open)), state.stack.at(-1)?.tag ?? 'html');
+        i = open < 0 ? html.length : readMarkup(state, open);
     }
-    return texts;
+    return state.texts;
+}
+
+const isSkipped = state => state.stack.some(e => e.skip);
+
+function addText(state, text, tag) {
+    if (text && !isSkipped(state)) state.texts.push({ text, tag });
+}
+
+// Reads the comment or tag that starts at `open`, and returns where the text after it starts.
+function readMarkup(state, open) {
+    const { html } = state;
+    if (html.startsWith('<!--', open)) {
+        const end = html.indexOf('-->', open);
+        return end < 0 ? html.length : end + 3;
+    }
+    const close = html.indexOf('>', open);
+    if (close < 0) return html.length;
+    const raw = html.slice(open + 1, close);
+    const name = raw.match(/^\/?([a-zA-Z][\w-]*)/)?.[1]?.toLowerCase();
+    if (!name || raw.startsWith('!')) return close + 1;
+    if (!raw.startsWith('/')) return openTag(state, name, raw, close + 1);
+    const at = state.stack.findLastIndex(e => e.tag === name);
+    if (at >= 0) state.stack.length = at;
+    return close + 1;
+}
+
+// An opening tag: its text attributes, then its content skipped (script, style, code...) or entered.
+function openTag(state, name, raw, after) {
+    const own = attribute(raw, 'lang');
+    const skip = SKIPPED.has(name) || /(?:^|\s)class="[^"]*\blang-code\b/.test(raw) || attribute(raw, 'translate') === 'no' || Boolean(own && own !== state.pageLang && name !== 'html');
+    if (!skip) {
+        for (const attr of TEXT_ATTRIBUTES) {
+            const value = attribute(raw, attr);
+            if (value !== undefined) addText(state, decode(value), `${name}[${attr}]`);
+        }
+    }
+    if (SKIPPED.has(name) && name !== 'svg') {
+        const end = state.html.toLowerCase().indexOf(`</${name}`, after);
+        return end < 0 ? state.html.length : end;
+    }
+    if (!VOID.has(name) && !raw.endsWith('/')) state.stack.push({ tag: name, skip });
+    return after;
 }
 
 // The path the language switcher must open for a page in `lang`, as the localisedHref filter builds it.
@@ -220,7 +242,7 @@ for (const [base, found] of translated) {
         }
         checkedPages++;
         const html = fs.readFileSync(builtFile, 'utf8');
-        const tags = name => [...html.matchAll(new RegExp(`<${name}\\s[^>]*>`, 'g'))].map(([tag]) => tag);
+        const tags = name => [...html.matchAll(new RegExp(String.raw`<${name}\s[^>]*>`, 'g'))].map(([tag]) => tag);
         const [htmlTag] = tags('html');
         // Articles are fragments loaded into the blog: they have no <html> of their own.
         if (htmlTag && attribute(htmlTag, 'lang') !== lang) errors.push(`${file}: <html lang="${attribute(htmlTag, 'lang') ?? ''}"> instead of "${lang}"`);
@@ -234,7 +256,7 @@ for (const [base, found] of translated) {
             const written = languageOf(text);
             if (written && written !== lang) warnings.push(`${file} <${tag}>: ${written} text in the ${lang} page: "${text.slice(0, 80)}" (translate it, or mark it lang="${written}" if it is meant to stay in ${written})`);
             for (const other of langs.filter(l => l !== lang)) {
-                const month = MONTHS[other]?.find(m => new RegExp(`(?:\\d\\s+${m}(?!\\p{L})|(?<!\\p{L})${m}\\s+\\d)`, 'iu').test(text) && !(MONTHS[lang] ?? []).includes(m));
+                const month = MONTHS[other]?.find(m => new RegExp(String.raw`(?:\d\s+${m}(?!\p{L})|(?<!\p{L})${m}\s+\d)`, 'iu').test(text) && !(MONTHS[lang] ?? []).includes(m));
                 if (month) warnings.push(`${file} <${tag}>: a date in ${other} ("${month}") in the ${lang} page: "${text.slice(0, 80)}"`);
             }
         }
@@ -249,8 +271,8 @@ if (!sitemap) warnings.push('.eleventy/sitemap.xml not found: hreflang alternate
 
 // ---- Report ----
 for (const note of notes) console.log(`note: ${note}`);
-for (const warning of [...new Set(warnings)]) console.log(`warning: ${warning}`);
-for (const error of [...new Set(errors)]) console.error(`error: ${error}`);
+for (const warning of new Set(warnings)) console.log(`warning: ${warning}`);
+for (const error of new Set(errors)) console.error(`error: ${error}`);
 const summary = `${langs.join(' / ')}: ${translated.size} translated pages, ${checkedPages} built pages read`;
 if (errors.length) {
     console.error(`\n${new Set(errors).size} error(s). ${summary}`);
