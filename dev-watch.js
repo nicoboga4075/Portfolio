@@ -84,19 +84,29 @@ function shutdown() {
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
 
+// Calls back once netlify dev answers on its port (any status): it takes about a minute to start.
+function whenNetlifyAnswers(callback) {
+    const request = http.get({ host: 'localhost', port: netlifyPort, path: '/' }, response => {
+        response.resume();
+        callback();
+    });
+    request.on('error', () => setTimeout(() => whenNetlifyAnswers(callback), 1000));
+}
+
 function startServing() {
     run(netlifyCli, ['dev', '--port', String(netlifyPort), ...netlifyArgs], {}, 'inherit');
-    browserSync.init({
+    // browser-sync starts, and opens 8888 in the browser, only once netlify dev answers: earlier, the tab would open on a proxy error (netlify dev itself no longer opens 8889, see autoLaunch in netlify.toml).
+    whenNetlifyAnswers(() => browserSync.init({
         proxy: `http://localhost:${netlifyPort}`,
         port: sitePort,
         // One full reload per build (css included), triggered by the file above.
         files: once ? [] : reloadTrigger,
         middleware: [serveDocsPublic],
-        open: false,
+        open: 'local',
         notify: false,
         ui: false,
         ghostMode: false
-    });
+    }));
 }
 
 async function buildOnce() {

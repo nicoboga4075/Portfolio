@@ -4,6 +4,8 @@
 
 [dev]
   port = 8888
+  # dev-watch.js opens 8888 (browser-sync) once netlify dev is up: netlify dev must not open its own port
+  autoLaunch = false
   framework = "#static"
   publish = ".eleventy"
   staticServerPort = 3999
