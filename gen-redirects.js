@@ -86,7 +86,8 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /reports/* /404.html 404!
 /logs/* /404.html 404!
 /docs/* /404.html 404!
-/.github/* /404.html 404!`;
+/.github/* /404.html 404!
+/.claude/* /404.html 404!`;
 
 const out = [
     "# ---------------------------------------------------------------------------",
