@@ -108,7 +108,7 @@ function translationGaps({ build = false } = {}) {
     const pick = prefix => lines.filter(l => l.startsWith(`${prefix}: `)).map(l => l.slice(prefix.length + 2));
     return {
         complete: run.status === 0,
-        summary: lines.filter(Boolean).at(-1) ?? '',
+        summary: lines.findLast(Boolean) ?? '',
         errors: pick('error'),
         warnings: pick('warning'),
         notes: pick('note'),

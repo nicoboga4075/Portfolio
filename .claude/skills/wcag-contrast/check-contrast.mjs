@@ -162,7 +162,9 @@ function sourcesIncluding(name, templates) {
     const sources = new Set(), seen = new Set([name]), queue = [name];
     while (queue.length) {
         const current = queue.shift();
-        for (const t of templates.filter(t => new RegExp(`["']${current.replaceAll('.', String.raw`\.`)}["']`).test(readSource(t)))) {
+        const escaped = current.replaceAll('.', String.raw`\.`);
+        const quoted = new RegExp(`["']${escaped}["']`);
+        for (const t of templates.filter(t => quoted.test(readSource(t)))) {
             const base = path.basename(t);
             if (!t.startsWith('_includes/')) sources.add(t);
             else if (!seen.has(base)) { seen.add(base); queue.push(base); }
