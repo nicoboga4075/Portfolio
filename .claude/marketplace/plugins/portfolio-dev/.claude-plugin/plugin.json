@@ -1,6 +1,6 @@
 {
     "name": "portfolio-dev",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "description": "The portfolio for Claude Code: an MCP server exposing its articles, projects, texts, translation gaps, page previews and site health as tools.",
     "author": {
         "name": "Nicolas BOGALHEIRO"

@@ -15,7 +15,7 @@ A Claude Code marketplace that lives in this repository and is declared for this
 | `find_text` | Where a text seen on the site lives: the `_data` key path, or the page / include and line |
 | `translation_gaps` | The result of `check-translation.mjs` as lists of errors, warnings and notes (`build: true` rebuilds first) |
 | `preview` | A PNG of a page of the last build, served like Netlify (`/fr/blog#mcs`, `/en/panel_mnt`), light or dark, 320 to 1920 px wide |
-| `site_health` | The live pages (status, time), the repository (unpushed commits, uncommitted files), the GitHub CI checks of `origin/main`, the SonarCloud quality gate (through the `sonar` CLI) |
+| `site_health` | The live pages (status, time), the repository (unpushed commits, uncommitted files), the GitHub CI checks of `origin/main`, the SonarCloud quality gate (through the `sonar` CLI); `hook: true` returns it as one line of PreToolUse hook output, which the `mcp_tool` hook of `.claude/settings.json` shows before each commit |
 
 It reads no secret: the visitor counter is left out, since its Supabase key exists only on Netlify.
 
