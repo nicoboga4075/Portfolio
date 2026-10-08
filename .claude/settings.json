@@ -12,6 +12,30 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/start-translation-hook-server.mjs\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://127.0.0.1:4799/post-edit",
+            "timeout": 10,
+            "statusMessage": "Checking the translations of the edited data file..."
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {
