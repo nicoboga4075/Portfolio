@@ -26,9 +26,11 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.
 const OUT = path.join(ROOT, '.eleventy');
 const AXE = require.resolve('axe-core/axe.min.js', { paths: [ROOT] });
 const args = Object.fromEntries(process.argv.slice(2).map(a => a.replace(/^--/, '').split('=')).map(([k, v]) => [k, v ?? true]));
+// The site's languages (en|fr), from package.json routes.locales.
+const LANGS = Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).routes.locales).join('|');
 // Git Bash turns a leading /en/... into C:/Program Files/Git/en/...: keep only the URL part.
 if (typeof args.only === 'string') {
-    args.only = args.only.replace(/^.*?(?=\/(en|fr)(\/|$))/, '');
+    args.only = args.only.replace(new RegExp(`^.*?(?=/(${LANGS})(/|$))`), '');
 }
 
 const VIEWPORTS = [
@@ -61,14 +63,14 @@ const rewrites = fs.readFileSync(path.join(ROOT, '_redirects'), 'utf8').split(/\
     .map(line => line.match(/^(\/(?:en|fr)(?:\/[\w-]+)?)\s+\/(\S+\.html)\s+200\b/))
     .filter(Boolean)
     .map(([, url, file]) => ({ url, file }));
-const blogs = rewrites.filter(p => /^\/(en|fr)\/blog$/.test(p.url));
+const blogs = rewrites.filter(p => new RegExp(`^/(${LANGS})/blog$`).test(p.url));
 const articles = JSON.parse(fs.readFileSync(path.join(ROOT, '_data', 'articles.json'), 'utf8'))
     .flatMap(({ slug }) => blogs.map(blog => ({ url: `${blog.url}#${slug}`, file: blog.file, article: `${slug}_${blog.url.slice(1, 3)}.html` })));
 const changed = args.quick ? pagesForChanges() : null;
 const pages = [...rewrites, ...articles]
     .filter(p => !changed || changed.reaches(p))
     .filter(p => !args.only || p.url.includes(args.only))
-    .filter(p => typeof args.pages !== 'string' || args.pages.split(',').map(u => u.replace(/^.*?(?=\/(en|fr)(\/|#|$))/, '')).includes(p.url))
+    .filter(p => typeof args.pages !== 'string' || args.pages.split(',').map(u => u.replace(new RegExp(`^.*?(?=/(${LANGS})(/|#|$))`), '')).includes(p.url))
     .sort((a, b) => a.url.localeCompare(b.url));
 if (changed) {
     console.log(`Changed since ${changed.ref}: ${changed.report.join('; ') || 'nothing'}`);
