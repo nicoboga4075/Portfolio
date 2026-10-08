@@ -99,3 +99,4 @@
 /logs/* /404.html 404!
 /docs/* /404.html 404!
 /.github/* /404.html 404!
+/.claude/* /404.html 404!
