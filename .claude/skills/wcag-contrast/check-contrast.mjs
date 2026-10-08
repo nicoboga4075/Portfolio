@@ -5,10 +5,11 @@
 // Usage: node .claude/skills/wcag-contrast/check-contrast.mjs [--no-build] [--only=<substring>] [--quick] [--json=<file>]
 //   --no-build   reuse the current .eleventy output instead of rebuilding it (ELEVENTY_PREVIEW=1, sources untouched)
 //   --only=blog  only pages whose URL contains the substring (no leading slash: Git Bash rewrites /en/... into a Windows path)
-//   --quick      phone and desktop only
+//   --quick[=<ref>]        only the pages the files changed since <ref> (HEAD by default, untracked files included; A..B between two commits) can show
 //   --sizes=phone,tablet   only these sizes (phone, tablet, laptop, desktop)
 //   --modes=dark           only this theme (light, dark)
 //   --pages=/fr/blog,/en   only these exact URLs (to recheck what failed without redoing the rest)
+//   --list       print the pages a run would check, then stop (no browser)
 //   --json=f     also write the full report to f
 //   --shots=dir  save the before / after shots of each focus indicator failure into dir
 // Exit code 1 when anything fails, 0 otherwise.
@@ -35,15 +36,16 @@ const VIEWPORTS = [
     { name: 'tablet', width: 768, height: 1024, isMobile: true, hasTouch: true },
     { name: 'laptop', width: 1280, height: 800 },
     { name: 'desktop', width: 1920, height: 1080 }
-].filter(v => !args.quick || v.name === 'phone' || v.name === 'desktop')
-    .filter(v => typeof args.sizes !== 'string' || args.sizes.split(',').includes(v.name));
+].filter(v => typeof args.sizes !== 'string' || args.sizes.split(',').includes(v.name));
 // Focus and non-text contrast depend on the theme, not on the width: checked at both ends (mobile and desktop navbar).
 const FOCUS_VIEWPORTS = new Set(['phone', 'desktop']);
 const SCHEMES = ['light', 'dark'].filter(s => typeof args.modes !== 'string' || args.modes.split(',').includes(s));
 const CONCURRENCY = 3;
 
 // ---- Build ----
-if (!args['no-build']) {
+// --list reuses the last build, unless it is incomplete (a dev server stopped mid-build leaves no js/ or css/).
+const builtComplete = ['js/app.js', 'css/common.css'].every(f => fs.existsSync(path.join(OUT, f)));
+if (!args['no-build'] && (!args.list || !builtComplete)) {
     const eleventy = path.join(ROOT, 'node_modules', '@11ty', 'eleventy', 'cmd.cjs');
     const r = spawnSync(process.execPath, [eleventy], { cwd: ROOT, env: { ...process.env, ELEVENTY_PREVIEW: '1' }, stdio: ['ignore', 'ignore', 'inherit'] });
     if (r.status !== 0) {
@@ -62,14 +64,175 @@ const rewrites = fs.readFileSync(path.join(ROOT, '_redirects'), 'utf8').split(/\
 const blogs = rewrites.filter(p => /^\/(en|fr)\/blog$/.test(p.url));
 const articles = JSON.parse(fs.readFileSync(path.join(ROOT, '_data', 'articles.json'), 'utf8'))
     .flatMap(({ slug }) => blogs.map(blog => ({ url: `${blog.url}#${slug}`, file: blog.file, article: `${slug}_${blog.url.slice(1, 3)}.html` })));
+const changed = args.quick ? pagesForChanges() : null;
 const pages = [...rewrites, ...articles]
+    .filter(p => !changed || changed.reaches(p))
     .filter(p => !args.only || p.url.includes(args.only))
     .filter(p => typeof args.pages !== 'string' || args.pages.split(',').map(u => u.replace(/^.*?(?=\/(en|fr)(\/|#|$))/, '')).includes(p.url))
     .sort((a, b) => a.url.localeCompare(b.url));
+if (changed) {
+    console.log(`Changed since ${changed.ref}: ${changed.report.join('; ') || 'nothing'}`);
+    if (!pages.length) {
+        console.log('No page can show these changes: nothing to check.');
+        process.exit(0);
+    }
+}
 if (!pages.length) {
     const filter = args.only ? ` matching "${args.only}"` : '';
     console.error(`No page to check${filter}`);
     process.exit(2);
+}
+// --quick[=<ref>]: the files changed since <ref> (HEAD by default, untracked ones included), mapped to the pages that can show them.
+function pagesForChanges() {
+    const ref = typeof args.quick === 'string' ? args.quick : 'HEAD';
+    const git = gitArgs => (spawnSync('git', gitArgs, { cwd: ROOT, encoding: 'utf8' }).stdout ?? '').split(/\r?\n/).filter(Boolean);
+    // A range (A..B) compares two commits; a single ref compares it with the working tree, untracked files included.
+    const untracked = ref.includes('..') ? [] : git(['ls-files', '--others', '--exclude-standard']);
+    const files = [...new Set([...git(['diff', '--name-only', ref]), ...untracked])];
+    const read = file => { try { return fs.readFileSync(path.join(ROOT, file), 'utf8'); } catch { return ''; } };
+    const list = dir => { try { return fs.readdirSync(path.join(ROOT, dir)).filter(f => /\.(html|njk)$/.test(f)).map(f => (dir === '.' ? f : `${dir}/${f}`)); } catch { return []; } };
+    const templates = ['.', 'articles', 'projects', '_includes'].flatMap(list);
+    // The page sources that pull a template in, through other templates too (by its quoted name: {% include "x.html" %} or an assets: [...] list).
+    const sourcesIncluding = name => {
+        const sources = new Set(), seen = new Set([name]), queue = [name];
+        while (queue.length) {
+            const current = queue.shift();
+            for (const t of templates.filter(t => new RegExp(`["']${current.replaceAll('.', '\\.')}["']`).test(read(t)))) {
+                const base = path.basename(t);
+                if (!t.startsWith('_includes/')) sources.add(t);
+                else if (!seen.has(base)) { seen.add(base); queue.push(base); }
+            }
+        }
+        return { sources, all: seen.has('base.njk') };
+    };
+    const scopes = {
+        all: () => true,
+        app: p => /^(index|blog)_/.test(p.file),
+        standalone: p => Boolean(p.article) || /^(projects\/|policy_|terms_)/.test(p.file),
+        articles: p => Boolean(p.article),
+    };
+    const rules = [], report = [], reaching = [];
+    const add = (file, why, test) => { rules.push(test); report.push(`${file} → ${why}`); reaching.push(file); };
+    for (const file of files) {
+        const base = path.basename(file);
+        if (/^(css\/common\.css|js\/common\.js|_data\/|_redirects$|\.eleventy\.js$|_includes\/base\.njk$)/.test(file)) add(file, 'every page', scopes.all);
+        else if (/^(css\/(app|bootstrap\.min)\.css|js\/(app|botpress)\.js)$/.test(file)) add(file, 'home and blog pages (articles included)', scopes.app);
+        else if (/^(css\/standalone\.css|js\/standalone\.js)$/.test(file)) add(file, 'projects, policy, terms and articles', scopes.standalone);
+        else if (file === 'netlify/functions/article.mts') add(file, 'articles', scopes.articles);
+        else if (/^articles\/[\w-]+_[a-z]{2}\.html$/.test(file)) add(file, 'that article', p => p.article === base);
+        else if (file.startsWith('_includes/')) {
+            const { sources, all } = sourcesIncluding(base);
+            if (all) add(file, 'every page (through the layout)', scopes.all);
+            else if (sources.size) add(file, [...sources].join(', '), p => sources.has(p.article ? `articles/${p.article}` : p.file) || (p.article && sources.has(p.file)));
+        } else if (templates.includes(file)) add(file, 'that page', p => p.file === file || (p.article && p.file === file));
+        else if (/^(images|docs)\//.test(file)) {
+            // An image reaches the pages that reference it, or every page of a stylesheet that does.
+            const sheets = ['common', 'app', 'standalone'].filter(s => read(`css/${s}.css`).includes(base));
+            const builtPages = new Set([...rewrites.map(p => p.file), ...articles.map(p => `articles/${p.article}`)].filter(f => read(`.eleventy/${f}`).includes(base)));
+            if (sheets.includes('common')) add(file, 'every page (common.css)', scopes.all);
+            else if (sheets.length || builtPages.size) add(file, [...sheets.map(s => `${s}.css`), ...builtPages].join(', '), p => (sheets.includes('app') && scopes.app(p)) || (sheets.includes('standalone') && scopes.standalone(p)) || builtPages.has(p.article ? `articles/${p.article}` : p.file));
+        }
+    }
+    // When the only changes that reach a page are stylesheets, the selectors of the changed rules narrow it further (null: check every reached page).
+    const sheets = reaching.filter(f => /^css\/(common|app|standalone)\.css$/.test(f));
+    const selectors = sheets.length && sheets.length === reaching.length ? sheets.flatMap(f => changedSelectors(ref, f, git)) : null;
+    const usable = selectors && !selectors.includes(null) && selectors.length ? selectors : null;
+    // Rules all scoped to one theme (html.dark-mode ..., html:not(.dark-mode) ...) only need that theme.
+    const scheme = usable?.every(s => s.startsWith('html.dark-mode')) ? 'dark' : usable?.every(s => s.startsWith('html:not(.dark-mode)')) ? 'light' : null;
+    return { ref, report, reaches: p => rules.some(test => test(p)), selectors: usable, scheme };
+}
+
+// The selectors of the rules a stylesheet's diff touches, on either side of it (null for a change outside any rule: a variable, an @-rule line).
+function changedSelectors(ref, file, git) {
+    const ruleByLine = text => {
+        const rules = [];
+        const stack = [];
+        let buf = '', line = 1, start = 1, comment = false, content = false, closing;
+        for (let i = 0; i < text.length; i++) {
+            const ch = text[i];
+            if (!comment && ch.trim() && !(ch === '/' && text[i + 1] === '*')) content = true;
+            if (comment) {
+                if (ch === '*' && text[i + 1] === '/') { comment = false; i++; }
+            } else if (ch === '/' && text[i + 1] === '*') {
+                comment = true; i++;
+            } else if (ch === '{') {
+                const header = buf.trim();
+                stack.push(header);
+                if (!header.startsWith('@')) for (let l = start; l <= line; l++) rules[l] = header;
+                buf = '';
+            } else if (ch === '}') {
+                const closed = stack.pop();
+                if (closed && !closed.startsWith('@')) closing = closed;
+                buf = '';
+            } else if (ch === ';') {
+                buf = '';
+            } else if (ch !== '\n') {
+                if (!buf.trim() && ch.trim()) start = line;
+                buf += ch;
+            }
+            if (ch === '\n' || i === text.length - 1) {
+                // Blank and comment-only lines change nothing; a line of CSS outside any rule (an @-rule, a top-level statement) is unknown (null).
+                const inner = stack.findLast(h => !h.startsWith('@'));
+                if (content) rules[line] ??= inner ?? closing ?? null;
+                if (ch === '\n') { line++; content = false; closing = undefined; if (buf.trim()) buf += ' '; }
+            }
+        }
+        return rules;
+    };
+    const [from, to] = ref.split('..');
+    const show = rev => {
+        const r = spawnSync('git', ['show', `${rev}:${file}`], { cwd: ROOT, encoding: 'utf8' });
+        return r.status === 0 ? r.stdout : '';
+    };
+    const oldRules = ruleByLine(show(from).replace(/\r\n/g, '\n'));
+    const newRules = ruleByLine((to === undefined ? fs.readFileSync(path.join(ROOT, file), 'utf8') : show(to || 'HEAD')).replace(/\r\n/g, '\n'));
+    const headers = new Set();
+    for (const hunk of git(['diff', '-U0', ref, '--', file]).filter(l => l.startsWith('@@'))) {
+        const [, oldStart, oldCount = '1', newStart, newCount = '1'] = hunk.match(/^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/);
+        for (let l = +oldStart; l < +oldStart + +oldCount; l++) if (oldRules[l] !== undefined) headers.add(oldRules[l]);
+        for (let l = +newStart; l < +newStart + +newCount; l++) if (newRules[l] !== undefined) headers.add(newRules[l]);
+    }
+    const split = header => header.split(/,(?![^(]*\))/).map(s => s.trim()).filter(Boolean);
+    return [...headers].flatMap(h => (h === null ? [null] : split(h)));
+}
+
+// Which of the changed selectors match something on a page once its scripts ran (hover, focus and theme qualifiers dropped).
+async function matchSelectors(browser, pageInfo, selectors) {
+    const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    const page = await context.newPage();
+    try {
+        await page.goto(BASE + pageInfo.url, { waitUntil: 'load', timeout: 60000 });
+        await page.waitForTimeout(1200);
+        // An article that did not load proves nothing: keep the page (the catch below).
+        if (pageInfo.article) {
+            await page.waitForFunction(() => document.querySelector('#article-shape')?.childElementCount, null, { timeout: 15000 });
+            await page.waitForTimeout(800);
+        }
+        return await page.evaluate(list => list.map(sel => {
+            // Elements the page only builds on interaction: matched through what declares them.
+            const built = { '.tooltip': '[data-bs-toggle="tooltip"]' };
+            let bare = sel.replace(/:not\(\.dark-mode\)|\.dark-mode/g, '').replace(/::?(before|after|placeholder|marker|selection|first-line|first-letter|-webkit-[\w-]+|-moz-[\w-]+)\b/g, '')
+                .replace(/:(hover|focus-visible|focus-within|focus|active|visited|target)\b/g, '').trim();
+            bare = Object.entries(built).reduce((s, [from, to]) => (s.startsWith(from) ? to : s), bare);
+            // Not there on load: drop a state class set later (.scrolled, .active), then try the nearest ancestor (a list item added on typing), stopping before html / body, which every page has.
+            while (bare && !/^(html|body|:root|\*)$/i.test(bare)) {
+                try {
+                    if (document.querySelector(bare)) return true;
+                } catch {
+                    return true;
+                }
+                const state = bare.match(/^(.*[^\s>+~])(\.[\w-]+|\[[^\]]*\]|:[\w-]+(\([^()]*\))?)$/);
+                const cut = bare.search(/\s*[\s>+~]\s*[^\s>+~()]*(\([^)]*\)[^\s>+~]*)*\s*$/);
+                if (state) bare = state[1];
+                else bare = cut > 0 ? bare.slice(0, cut).trim() : '';
+            }
+            return false;
+        }), selectors);
+    } catch {
+        return selectors.map(() => true);
+    } finally {
+        await context.close();
+    }
 }
 
 // ---- Static server: the _redirects rewrites, the article function, no CSP ----
@@ -614,7 +777,39 @@ async function checkPage(browser, pageInfo, viewport, scheme) {
 
 // ---- Run ----
 const browser = await chromium.launch();
-const jobs = pages.flatMap(p => VIEWPORTS.flatMap(v => SCHEMES.map(s => [p, v, s])));
+let targets = pages;
+if (changed?.selectors) {
+    // Keep the pages where a changed rule matches something; a selector that matches no page at all is unused CSS, reported but not checked.
+    const results = new Map();
+    const queue = [...pages];
+    await Promise.all(Array.from({ length: CONCURRENCY + 1 }, async () => {
+        while (queue.length) {
+            const p = queue.shift();
+            results.set(p, await matchSelectors(browser, p, changed.selectors));
+        }
+    }));
+    const unused = changed.selectors.filter((_, i) => ![...results.values()].some(r => r[i]));
+    targets = pages.filter(p => results.get(p).some(Boolean));
+    const theme = changed.scheme ? `, ${changed.scheme} theme only` : '';
+    console.log(`Changed rules: ${changed.selectors.length} selector(s), ${targets.length} of ${pages.length} pages use them${theme}`);
+    if (unused.length) {
+        console.log(`Matching no page: ${unused.join(' | ')}`);
+    }
+    if (!targets.length) {
+        console.log('No page uses the changed rules: nothing to check.');
+        await browser.close();
+        server.close();
+        process.exit(0);
+    }
+}
+const schemes = changed?.scheme ? SCHEMES.filter(s => s === changed.scheme) : SCHEMES;
+if (args.list) {
+    console.log(`${targets.length} page(s) × ${VIEWPORTS.length} size(s) × ${schemes.length} theme(s): ${targets.map(p => p.url).join(' ')}`);
+    await browser.close();
+    server.close();
+    process.exit(0);
+}
+const jobs = targets.flatMap(p => VIEWPORTS.flatMap(v => schemes.map(s => [p, v, s])));
 const total = jobs.length;
 const all = [];
 let done = 0;
@@ -643,7 +838,7 @@ for (const f of all) {
     groups.get(key).where.add(`${f.url} ${f.viewport} ${f.scheme}`);
 }
 const sizes = VIEWPORTS.map(v => `${v.name} ${v.width}px`).join(', ');
-console.log(`Pages: ${pages.length}  Sizes: ${sizes}  Modes: ${SCHEMES.join(', ')}`);
+console.log(`Pages: ${targets.length}  Sizes: ${sizes}  Modes: ${schemes.join(', ')}`);
 console.log('Checked: text on load, on hover, after interactions; keyboard focus and non-text contrast (phone and desktop).');
 if (!groups.size) {
     console.log('PASS: every check meets WCAG AA (text 4.5:1 or 3:1 when large; focus indicators, icons and field boundaries 3:1).');
