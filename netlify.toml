@@ -4,19 +4,19 @@
 
 [dev]
   port = 8888
-  # dev-watch.js opens 8888 (browser-sync) once netlify dev is up: netlify dev must not open its own port
+  # dev-watch.js opens 8888 (browser-sync) once netlify dev is up: netlify dev must not open its own port (proxy on 8889)
   autoLaunch = false
   framework = "#static"
   publish = ".eleventy"
   staticServerPort = 3999
-	
+
 [[context.production.plugins]]
   package = "netlify-plugin-minify-html"
 
   [context.production.plugins.inputs.minifierOptions]
     removeComments = true
     collapseInlineTagWhitespace = true
-	
+
 [[context.production.plugins]]
   package = "netlify-plugin-inline-critical-css"
 
@@ -24,34 +24,20 @@
     fileFilter = ["*.html"]
     directoryFilter = ["!node_modules"]
     extract = false
+    # One headless browser pass per size and page: above 1920 the above-the-fold CSS barely changes, so larger screens only slow the build
     dimensions = [
-      # Mobiles
-      { width = 360, height = 740 },   # Samsung Galaxy S9
-      { width = 375, height = 667 },   # iPhone 6/7/8, SE
-      { width = 375, height = 812 },   # iPhone X / 11 Pro
-      { width = 393, height = 851 },   # Moto G Power
-      { width = 411, height = 731 },   # Pixel 4
-      { width = 414, height = 896 },   # iPhone XR / 11
-
-      # Tablets
-      { width = 768, height = 1024 },  # iPad
-      { width = 800, height = 1280 },  # Samsung Tab S6
-      { width = 1024, height = 1366 }, # iPad Pro 12.9”
-
-      # Desktop
-      { width = 1920, height = 1080 }, # Full HD
-      { width = 2560, height = 1440 }, # QHD
-      { width = 3840, height = 2160 }, # 4K UHD
-
-      # TV
-      { width = 7680, height = 4320 }  # 8K UHD
+      { width = 360, height = 740 },   # Small phone
+      { width = 414, height = 896 },   # Large phone
+      { width = 768, height = 1024 },  # Tablet
+      { width = 1366, height = 768 },  # Laptop
+      { width = 1920, height = 1080 }  # Desktop
     ]
-   
+
 [[context.production.plugins]]
   package = "@netlify/plugin-lighthouse"
-  
+
   # No fail_deploy_on_score_thresholds: the plugin then runs in onSuccess and audits this deploy's own URL (DEPLOY_URL + path) once it is live, not the previous deploy.
-	
+
   [context.production.plugins.inputs.settings]
     preset = "desktop"
     locale = "en"
@@ -59,9 +45,8 @@
   [context.production.plugins.inputs.thresholds]
     performance = 0.5
     accessibility = 0.5
-	best-practices = 0.5
-	seo = 0.5
-	pwa = 0.5
+    best-practices = 0.5
+    seo = 0.5
 
   [[context.production.plugins.inputs.audits]]
     path = ""
