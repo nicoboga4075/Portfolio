@@ -564,10 +564,6 @@ html:not(.dark-mode) .slider-text .hero-tagline {
     flex-direction: column;
 }
 
-.about-author .desc h3 {
-    font-size: 24px;
-}
-
 .qrcode-group {
     display: flex;
     flex-flow: column nowrap;
