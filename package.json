@@ -44,6 +44,7 @@
     "contrast:quick": "node .claude/skills/wcag-contrast/check-contrast.mjs --quick",
     "check:content": "node .claude/skills/check-content/check-content.mjs",
     "check:translation": "node .claude/skills/i18n-l10n/check-translation.mjs",
+    "check:links": "node .claude/skills/check-links/check-links.mjs",
     "jest": "npx jest --coverage --passWithNoTests",
     "playwright": "playwright test",
     "cypress": "npx cypress run",
