@@ -1544,6 +1544,8 @@ function initBlogPage(langPage) {
             });
             const $imgDiploma = $('<img>', {
                 src: 'images/diploma.png',
+                // The alt text is translated in _data/blog.json and passed on by the sidebar.
+                alt: $('.sidebar').data('diplomaAlt'),
                 class: 'img-fluid',
                 css: {
                     height: '400px',
