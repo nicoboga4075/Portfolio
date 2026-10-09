@@ -135,6 +135,9 @@
     "nwsapi": "2.2.27",
     "@tootallnate/once": "^2.0.1",
     "handlebars": "^4.7.10",
+    "js-yaml@^3": {
+      "argparse": "^2.0.1"
+    },
     "inline-critical": {
       "css": "npm:@adobe/css-tools@^4.5.0"
     },
