@@ -34,12 +34,15 @@ function sourceFiles() {
     return files.map(f => f.replace(/^\.\//, ''));
 }
 
+// A link that ends with a slash, with the files that hold it: the portfolio writes its links without one.
+const trailingSlashes = new Map();
+
 // Every external URL with the files that hold it.
 function collectLinks() {
     const links = new Map();
     for (const file of sourceFiles()) {
         const text = fs.readFileSync(path.join(ROOT, file), 'utf8');
-        for (const [raw] of text.matchAll(/https?:\/\/[^\s"'<>`\\)]+/g)) {
+        for (const { 0: raw, index } of text.matchAll(/https?:\/\/[^\s"'<>`\\)]+/g)) {
             // Templated URLs ({{ ... }}) are built at compile time: they are not real links.
             if (raw.includes('{{') || raw.includes('{%')) continue;
             const url = raw.replace(/&amp;/g, '&').replace(/[.,;:!?]+$/, '');
@@ -51,6 +54,11 @@ function collectLinks() {
             }
             if (host === siteHost || SKIPPED_HOSTS.some(re => re.test(host))) continue;
             if (only && !url.includes(only)) continue;
+            // Only a whole link (an href or a JSON value) counts: a template prefix such as urlPrefix = "https://.../" is completed later.
+            if (url.endsWith('/') && /(?:href=|":\s*)"$/.test(text.slice(Math.max(0, index - 12), index))) {
+                if (!trailingSlashes.has(url)) trailingSlashes.set(url, new Set());
+                trailingSlashes.get(url).add(file);
+            }
             if (!links.has(url)) links.set(url, new Set());
             links.get(url).add(file);
         }
@@ -120,6 +128,10 @@ if (blocked.length) {
 if (errors.length) {
     console.error(`\n${errors.length} broken link(s):`);
     for (const url of errors) print(console.error, '✖', url);
-    process.exit(1);
 }
+if (trailingSlashes.size) {
+    console.error(`\n${trailingSlashes.size} link(s) ending with a slash (remove it):`);
+    for (const [url, files] of trailingSlashes) console.error(`  ✖ ${url}\n      in ${[...files].join(', ')}`);
+}
+if (errors.length || trailingSlashes.size) process.exit(1);
 console.log(`\nExternal links are alive: ${urls.length - blocked.length} answer 200 with no 404 in their page, ${blocked.length} to check by hand.`);
