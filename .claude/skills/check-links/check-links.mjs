@@ -37,39 +37,93 @@ function sourceFiles() {
 // A link that ends with a slash, with the files that hold it: the portfolio writes its links without one.
 const trailingSlashes = new Map();
 
+// The external link a raw match stands for, or null when it is not one to check.
+function toLink(raw) {
+    // Templated URLs ({{ ... }}) are built at compile time: they are not real links.
+    if (raw.includes('{{') || raw.includes('{%')) return null;
+    let url = raw.replaceAll('&amp;', '&');
+    // A trailing punctuation mark ends the sentence, not the URL.
+    while (/[.,;:!?]$/.test(url)) url = url.slice(0, -1);
+    let host;
+    try {
+        host = new URL(url).hostname;
+    } catch {
+        return null;
+    }
+    if (host === siteHost || SKIPPED_HOSTS.some(re => re.test(host))) return null;
+    if (only && !url.includes(only)) return null;
+    return url;
+}
+
+// Only a whole link (an href or a JSON value) counts: a template prefix such as urlPrefix = "https://.../" is completed later.
+function isWholeLink(text, index) {
+    const before = text.slice(Math.max(0, index - 12), index);
+    return before.endsWith('href="') || (before.endsWith('"') && before.slice(0, -1).trimEnd().endsWith('":'));
+}
+
+const addTo = (map, url, file) => {
+    if (!map.has(url)) map.set(url, new Set());
+    map.get(url).add(file);
+};
+
 // Every external URL with the files that hold it.
 function collectLinks() {
     const links = new Map();
     for (const file of sourceFiles()) {
         const text = fs.readFileSync(path.join(ROOT, file), 'utf8');
         for (const { 0: raw, index } of text.matchAll(/https?:\/\/[^\s"'<>`\\)]+/g)) {
-            // Templated URLs ({{ ... }}) are built at compile time: they are not real links.
-            if (raw.includes('{{') || raw.includes('{%')) continue;
-            const url = raw.replace(/&amp;/g, '&').replace(/[.,;:!?]+$/, '');
-            let host;
-            try {
-                host = new URL(url).hostname;
-            } catch {
-                continue;
-            }
-            if (host === siteHost || SKIPPED_HOSTS.some(re => re.test(host))) continue;
-            if (only && !url.includes(only)) continue;
-            // Only a whole link (an href or a JSON value) counts: a template prefix such as urlPrefix = "https://.../" is completed later.
-            if (url.endsWith('/') && /(?:href=|":\s*)"$/.test(text.slice(Math.max(0, index - 12), index))) {
-                if (!trailingSlashes.has(url)) trailingSlashes.set(url, new Set());
-                trailingSlashes.get(url).add(file);
-            }
-            if (!links.has(url)) links.set(url, new Set());
-            links.get(url).add(file);
+            const url = toLink(raw);
+            if (!url) continue;
+            if (url.endsWith('/') && isWholeLink(text, index)) addTo(trailingSlashes, url, file);
+            addTo(links, url, file);
         }
     }
     return links;
 }
 
+// The html without its open ... close blocks (scripts, styles, comments), found with indexOf rather than a backtracking regex.
+function stripBlocks(html, open, close) {
+    const lower = html.toLowerCase();
+    let out = '';
+    let from = 0;
+    let start = lower.indexOf(open);
+    while (start !== -1) {
+        out += html.slice(from, start);
+        const end = lower.indexOf(close, start);
+        from = end === -1 ? html.length : end + close.length;
+        start = lower.indexOf(open, from);
+    }
+    return out + html.slice(from);
+}
+
+// The inner html of every <tag ...>...</tag> of the page.
+function innerHtml(html, tag) {
+    const lower = html.toLowerCase();
+    const found = [];
+    let start = lower.indexOf(`<${tag}`);
+    while (start !== -1) {
+        const next = lower[start + tag.length + 1];
+        const open = lower.indexOf('>', start);
+        const close = lower.indexOf(`</${tag}>`, open);
+        if (open === -1 || close === -1) break;
+        // <h1 must not match <h10 nor <title match <titlebar: the tag name ends with > or a space.
+        if (next === '>' || /\s/.test(next)) found.push(html.slice(open + 1, close));
+        start = lower.indexOf(`<${tag}`, start + 1);
+    }
+    return found;
+}
+
+// The text of an html fragment, with its tags turned into spaces and its whitespace collapsed, split on single characters rather than a backtracking regex.
+function textOf(fragment) {
+    const text = fragment.split('<').map((part, i) => (i ? part.slice(part.indexOf('>') + 1) : part)).join(' ');
+    return text.split(/\s/).filter(Boolean).join(' ');
+}
+
 // The visible text of the title and the h1 / h2 headings, where a "not found" page says so.
 function notFoundSignal(html) {
-    const clean = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<!--[\s\S]*?-->/gi, '');
-    const parts = [...clean.matchAll(/<(title|h1|h2)\b[^>]*>([\s\S]*?)<\/\1>/gi)].map(m => m[2].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
+    let clean = html;
+    for (const [open, close] of [['<script', '</script>'], ['<style', '</style>'], ['<!--', '-->']]) clean = stripBlocks(clean, open, close);
+    const parts = ['title', 'h1', 'h2'].flatMap(tag => innerHtml(clean, tag)).map(textOf);
     return parts.find(p => p && NOT_FOUND.test(p));
 }
 
