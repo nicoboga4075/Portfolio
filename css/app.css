@@ -586,7 +586,7 @@ html:not(.dark-mode) .slider-text .hero-tagline {
 }
 
 .qrcode-img {
-    max-width: clamp(90px, 9vw, 140px);
+    max-width: clamp(90px, 5vw, 140px);
     height: auto;
 }
 
