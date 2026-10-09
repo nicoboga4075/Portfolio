@@ -1543,15 +1543,15 @@ function initBlogPage(langPage) {
                 class: 'sidebar-box'
             });
             const $imgDiploma = $('<img>', {
-                src: 'images/diploma.png',
+                src: 'images/diploma.avif',
                 // The alt text is translated in _data/blog.json and passed on by the sidebar.
                 alt: $('.sidebar').data('diplomaAlt'),
                 class: 'img-fluid',
                 css: {
-                    height: '400px',
                     display: 'none'
                 }
-            });
+            // Its displayed size, which reserves the space before it loads (the file is twice as large for high-density screens); set with attr because width and height in the props object would become inline styles.
+            }).attr({ width: 267, height: 400 });
             $sidebarBox.append($imgDiploma);
             $('.sidebar').append($sidebarBox);
             $imgDiploma.fadeIn(600);
