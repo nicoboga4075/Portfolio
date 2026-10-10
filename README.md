@@ -26,3 +26,4 @@ jQuery, jQuery Migrate, Bootstrap and Animate.css are intentionally kept below t
 
 ### 📄 License
 This project is licensed under [MIT License](LICENSE).
+
