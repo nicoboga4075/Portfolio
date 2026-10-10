@@ -30,6 +30,15 @@ jobs:
         with:
           fetch-depth: 1
 
+      # The lint-before-commit hook of .claude/settings.json runs ESLint and stylelint, so Claude can't commit without node_modules
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22.x
+          cache: 'npm'
+
+      - run: npm ci --ignore-scripts
+
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@2dca132ff0e0c4094ce6048b422c6915a071210b # v1.0.247
