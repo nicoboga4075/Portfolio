@@ -100,10 +100,10 @@ function buildSitemap() {
 }
 
 const xmlEscape = s => String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 
 function sitemapXml(urls) {
     const body = urls.map(u => {
