@@ -12,8 +12,8 @@ on:
 
 jobs:
   claude-review:
-    # Review only the PRs of the repo owner and Dependabot
-    # To also review the PRs Claude opens itself, add || github.event.pull_request.user.login == 'claude[bot]' and add claude to allowed_bots below
+    # Review only the PRs of the repo owner and Dependabot, including the commits Claude pushes on them
+    # To also review the PRs Claude opens itself, add || github.event.pull_request.user.login == 'claude[bot]'
     if: |
       github.event.pull_request.author_association == 'OWNER' ||
       github.event.pull_request.user.login == 'dependabot[bot]'
@@ -36,9 +36,8 @@ jobs:
         uses: anthropics/claude-code-action@2dca132ff0e0c4094ce6048b422c6915a071210b # v1.0.247
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          # The action rejects bot actors not listed here
-          allowed_bots: 'dependabot'
-          # To let Claude review the commits it pushes on a PR after an @claude (costs usage quota on each push), use: allowed_bots: 'claude,dependabot'
+          # The action rejects bot actors not listed here: claude lets Claude review the commits it pushes on a PR after an @claude (costs usage quota on each push)
+          allowed_bots: 'claude,dependabot'
           plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
           plugins: 'code-review@claude-code-plugins'
           prompt: '/code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}'
