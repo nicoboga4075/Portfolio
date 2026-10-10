@@ -13,6 +13,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     strategy:
       matrix:
@@ -34,6 +36,8 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
     - uses: actions/checkout@v5
       with:
@@ -60,6 +64,8 @@ jobs:
     needs: test
     if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     continue-on-error: true
     steps:
     - uses: actions/checkout@v5
