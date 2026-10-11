@@ -108,7 +108,7 @@
     "@capacitor/core": "^8.5.2",
     "@eslint/js": "^10.0.1",
     "@netlify/functions": "^6.0.2",
-    "@playwright/test": "^1.63.0",
+    "@playwright/test": "^1.64.0",
     "@sonar/scan": "^5.0.1",
     "@types/jest": "^30.0.0",
     "auto-changelog": "^2.7.0",
