@@ -2,6 +2,10 @@
   publish = "."
   command = "npm run build"
 
+# Same as "Pretty URLs: enabled" in the Netlify UI, kept in the repository: post processing drops .html and index.html from the internal links (the clean URLs themselves come from _redirects)
+[build.processing.html]
+  pretty_urls = true
+
 [dev]
   port = 8888
   # dev-watch.js opens 8888 (browser-sync) once netlify dev is up: netlify dev must not open its own port (proxy on 8889)
