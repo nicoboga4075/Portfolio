@@ -5,7 +5,7 @@ description: Writes a Robot Framework test of the portfolio (SeleniumLibrary, br
 
 # Write a Robot Framework test
 
-The reference is **ROBOT_FRAMEWORK.md** (the suite template and the test list) and the "Add a Robot Framework test" section of **CONTRIBUTING.md** (the writing rules). Read both before writing anything: this skill only adds what they leave open, and fixes the one thing of the template that Robot Framework 7 rejects.
+The reference is **ROBOT_FRAMEWORK.md** (the suite template and the test list) and the "Add a Robot Framework test" section of **CONTRIBUTING.md** (the writing rules). Read both before writing anything: ROBOT_FRAMEWORK.md gives the layout, the template and the run commands; this skill adds a worked example and the steps.
 
 ## Layout
 
@@ -27,9 +27,8 @@ Create the shared files the first time they are needed, then reuse them: never c
 
 ## The suite
 
-Start from the template of ROBOT_FRAMEWORK.md, with these choices:
+Start from the template of ROBOT_FRAMEWORK.md:
 
-- **One `*** Settings ***` section** (the template has two; Robot accepts it, but one reads better).
 - **No `[Arguments]` in a test case**: Robot 7 fails with `Setting 'Arguments' is not allowed with tests or tasks`. A test takes its values from `*** Variables ***`, or uses `[Template]` for data-driven cases (one row per equivalence class or boundary value).
 - **Test id and name**: `TC_<SECTION>_<Nominal|Degraded>_<NNNN> <a real sentence>`, numbered after the last id of that section in ROBOT_FRAMEWORK.md, e.g. `TC_HOME_Nominal_0001 Open the English home page and read the name in the hero`. Nominal = the expected path works; Degraded = wrong input, missing data, network or API error, narrow screen.
 - `Metadata    Criticality    Low|Medium|High`, and `[Tags]` with the section and the case type (`Home    Nominal`); add `Disabled` when the test documents a *Known Error*.
