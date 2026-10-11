@@ -46,6 +46,7 @@
     "check:docs": "node .claude/skills/update-docs/check-docs.mjs",
     "check:translation": "node .claude/skills/i18n-l10n/check-translation.mjs",
     "check:links": "node .claude/skills/check-links/check-links.mjs",
+    "check:overrides": "node .claude/skills/check-overrides/check-overrides.mjs",
     "jest": "npx jest --coverage --passWithNoTests",
     "playwright": "playwright test",
     "cypress": "npx cypress run",

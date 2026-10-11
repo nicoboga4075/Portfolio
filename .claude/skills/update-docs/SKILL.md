@@ -17,6 +17,7 @@ That is `node .claude/skills/update-docs/check-docs.mjs`. It exits with code 1 a
 |---|---|
 | Every vendored library has a row in the README table, at the right version, and no row is left over | `.github/vendor-versions.json` |
 | The "Pinned" column of the SECURITY.md held-back table, and its Status and Acknowledgement cells | `.github/vendor-versions.json`, `node_modules/typescript`, the local Node (a warning only: the CI may differ) |
+| One row of the npm overrides table per entry of `overrides`, and no row left over | `package.json` |
 | The links between the two files (`README.md#-vendored-libraries`, `SECURITY.md#utilities`, `SECURITY.md#major-versions-held-back-on-purpose`) still point to a heading | the headings of both files |
 | Every open Dependabot alert (GHSA or CVE) and every open code scanning alert (rule id) is in the Vulnerability Disclosure Log | the GitHub API |
 | Every issue linked from a :hourglass: row is still open (warning) | the GitHub API |
@@ -29,6 +30,7 @@ It can't check prose: read the sections below against the change.
 |---|---|---|
 | A vendored library added, removed or bumped in `js/` / `css/` (and `.github/vendor-versions.json`) | its row of the Vendored Libraries table (version, npm link, purpose) | the held-back table if it is one of its rows (Pinned, Latest, Status); a new major held back gets a row and an upgrade issue |
 | `typescript` or the project's Node version | - | the TypeScript or Node.js row of the held-back table |
+| An entry of `overrides` added or removed in `package.json` | - | its row of the npm overrides table (the `check-overrides` skill gives the path and the reason) |
 | A font (Google Fonts link, `font-family`, `@font-face` fallbacks in `css/common.css`) or an icon set | - | Fonts / Icons |
 | A security alert opened (Dependabot, CodeQL, SonarCloud, `npm audit`) | - | a row of the Vulnerability Disclosure Log |
 | An alert fixed, dismissed or its issue closed | - | that row's Status, and :hourglass: -> :white_check_mark: when it's fixed |

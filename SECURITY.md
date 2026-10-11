@@ -40,6 +40,21 @@ These libraries and tools are intentionally kept below their latest major releas
 | **TypeScript** | 6.0.3 | 7.0.2 | TypeScript 7 (the native compiler) no longer ships the JavaScript compiler API, and the `typescript` peer ranges of `typescript-eslint` (`<6.1.0`) and `ts-jest` (`<7`) exclude it: `npm install` fails, and ESLint can't lint `netlify/functions/**/*.mts`. | Held back, tracked in [#434](https://github.com/nicoboga4075/Portfolio/issues/434) | :hourglass: |
 | **Node.js** | 22.23.3 (LTS "Jod") | 24.21.0 (Active LTS "Krypton") | Node 22 is still a supported LTS. Moving to 24 means reinstalling the global tools of nvm-windows (with a hand patch of `netlify-cli`), meeting npm 12's Node requirement and aligning the CI jobs and the GitLab runner. The CI build already runs on 20.x, 22.x and 24.x, 20.x being kept for backward compatibility. | Held back, tracked in [#435](https://github.com/nicoboga4075/Portfolio/issues/435) | :hourglass: |
 
+## npm overrides
+
+`overrides` in `package.json` force a version of a transitive dev dependency that a package still asks for in an older, vulnerable or unmaintained version. All of them are dev only: nothing here is shipped with the site. `npm run check:overrides` (the `check-overrides` skill) tells after each dependency update which ones are still needed.
+
+| Override | Forces | Comes through | Why | Added in |
+|---|---|---|---|---|
+| `nwsapi` | 2.2.27 | `netlify-plugin-inline-critical-css` → `critical` → `inline-critical` → `jsdom` 16 | Pinned below 2.2.28, which `jsdom` would get otherwise; no reason recorded | 42cd9ee |
+| `@tootallnate/once` | ^2.0.1 | … `jsdom` 16 → `http-proxy-agent` 4 | Low advisory GHSA-vpq2-c234-7xj6 in 1.1.2; version 2 exports the same function | 9da9e45 |
+| `handlebars` | ^4.7.10 | `auto-changelog`, `ts-jest` | Advisories GHSA-p8wg-vrv2-v86f, GHSA-8r5x-fm3f-whwj (critical) and GHSA-xw65-4hp5-5hc7 fixed in 4.7.10 | 98a8434 |
+| `js-yaml@^3 > argparse` | ^2.0.1 | `@11ty/eleventy` → `gray-matter` → `js-yaml` 3 | Drops the vulnerable `sprintf-js` of `argparse` 1 (GHSA-hp3w-g68c-fv3c) | 7e4c8c2 |
+| `inline-critical > css` | `npm:@adobe/css-tools@^4.5.0` | `critical` → `inline-critical` 8 | `css` is unmaintained and pulled `decode-uri-component` 0.2.2 (4 moderate advisories); only its CLI used it | d9f2468 |
+| `critical > oust` | ^2.0.4 | `critical` 4 | `oust` 2 uses `cheerio` 1, dropping `nth-check` 1 and `lodash.pick` (high advisories); same stylesheets found | 4e6ae6b |
+| `critical > postcss-image-inliner` | ^7.0.1 | `critical` 4 | Version 7 uses `svgo` 3, dropping `nth-check` 1 (high advisory); only loaded, `inlineImages` is off | 4e6ae6b |
+| `@capacitor/cli > xcode > uuid` | ^11.1.1 | `@capacitor/cli` → `xcode` 3 | Medium advisory GHSA-w5hq-g745-h8pq in `uuid` 7 | 1b49b05 |
+
 ## Vulnerability Disclosure Log
 
 | Date             | Description                   | Criticity | Status                             | Acknowledgement    |

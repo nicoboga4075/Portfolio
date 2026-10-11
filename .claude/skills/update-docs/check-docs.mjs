@@ -77,6 +77,22 @@ if (!heldRows) {
     }
 }
 
+// SECURITY: one row per entry of "overrides" in package.json, labelled like npm run check:overrides ("critical > oust")
+const flatten = (tree, prefix = '') => Object.entries(tree).flatMap(([key, value]) => (typeof value === 'object' ? flatten(value, `${prefix}${key} > `) : [`${prefix}${key}`]));
+const overrideRows = tableAfter(security, '## npm overrides');
+if (!overrideRows) {
+    errors.push('SECURITY.md: no table under the "npm overrides" heading');
+} else {
+    const listed = overrideRows.map(row => row[0].replaceAll('`', '').trim());
+    const declared = flatten(json('package.json').overrides ?? {});
+    for (const label of declared) {
+        if (!listed.includes(label)) errors.push(`SECURITY.md: the override ${label} of package.json is missing from the npm overrides table`);
+    }
+    for (const label of listed) {
+        if (!declared.includes(label)) errors.push(`SECURITY.md: ${label} is in the npm overrides table but no longer in the overrides of package.json`);
+    }
+}
+
 // Anchors between the two files: a renamed heading breaks the links silently
 const slug = heading => heading.toLowerCase().replaceAll(/[^\p{L}\p{N} _-]/gu, '').replaceAll(' ', '-');
 const anchors = markdown => new Set(markdown.split(/\r?\n/).filter(line => /^#{1,6} /.test(line)).map(line => slug(line.replace(/^#{1,6} /, ''))));
