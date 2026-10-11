@@ -62,6 +62,7 @@ Keep each file's formatting (one entry per line block, 4-space indent): edit, do
 
 1. `npm run check:content` (the check-content skill): no error. Read the "blog card n → article" lines: the new card must open the new article.
 2. `npm run lint`: no error, no warning.
-3. Show it: `/en/blog#<slug>` and `/fr/blog#<slug>` with `npm run dev`, and the card on the home page.
+3. The Atom feed and the JSON-LD come from these data entries, built by `.eleventy.js`: nothing to write by hand, but check them. After `ELEVENTY_PREVIEW=1 npx eleventy` (never a plain `npx eleventy`), `feed_en.xml` and `feed_fr.xml` have the article with its `<summary>` (the excerpt of its card), and `.eleventy/articles/<slug>_<lang>.html` has a `BlogPosting` JSON-LD with its title, date and tags. A missing summary means the card is not at the position of its article.
+4. Show it: `/en/blog#<slug>` and `/fr/blog#<slug>` with `npm run dev`, and the card on the home page.
 
 A colour or a new style rule also needs `npm run contrast:quick`, but only when the user asks for it.
