@@ -8,6 +8,12 @@ updates:
       interval: "cron"
       cronjob: "0 6 * * *"
       timezone: "Europe/Paris"
+    # The test runner and the browser library share one engine and release together: one pull request keeps their versions aligned
+    groups:
+      playwright:
+        patterns:
+          - "playwright"
+          - "@playwright/test"
   - package-ecosystem: "github-actions"
     # Keep the actions of .github/workflows up to date (checkout, setup-node, artifacts, scan actions), including the ones pinned to a commit SHA
     directory: "/"
