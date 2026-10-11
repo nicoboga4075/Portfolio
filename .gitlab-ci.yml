@@ -80,7 +80,7 @@ sonar-job:
     - test-job
   script:
     - echo "Running SonarCloud analysis..."
-    - npx sonar-scanner "-Dsonar.token=$env:SONAR_TOKEN"
+    - npx @sonar/scan "-Dsonar.token=$env:SONAR_TOKEN"
     - echo "Sonar analysis done!"
 
 cleanup-job:
