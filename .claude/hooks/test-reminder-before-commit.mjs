@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // PreToolUse hook (Bash / PowerShell): before a `git commit` that contains code, asks Claude Haiku whether a unit, integration or E2E test covers it (in the commit, already in the repository, or to add later) and shows its reminder; it never blocks the commit.
 import { spawnSync } from 'node:child_process';
+import { hookCommand, isGitCommit } from './git-commit.mjs';
 
 const ROOT = process.env.CLAUDE_PROJECT_DIR || process.cwd();
 const MODEL = 'claude-haiku-5-5';
@@ -10,12 +11,9 @@ const TEST_DIR = /(?:^|\/)(?:tests|cypress)\//i;
 const TEST_FILE = /\.(?:test|spec|cy)\.(?:m?js|cjs|ts)$/i;
 const isTest = file => TEST_DIR.test(file) || TEST_FILE.test(file);
 
-let input = '';
-for await (const chunk of process.stdin) input += chunk;
-const command = JSON.parse(input || '{}').tool_input?.command ?? '';
+const command = await hookCommand();
 
-// Only `git commit` (not git commit-tree, nor the word "commit" inside a message of another command)
-if (!/(^|[\s;&|(])git(\s+-\S+(\s+\S+)?)*\s+commit(\s|$)/.test(command) || /\s--dry-run(\s|$)/.test(command)) {
+if (!isGitCommit(command) || /\s--dry-run(\s|$)/.test(command)) {
     process.exit(0);
 }
 

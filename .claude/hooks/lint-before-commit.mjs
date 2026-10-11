@@ -1,13 +1,9 @@
 #!/usr/bin/env node
 // PreToolUse hook (Bash / PowerShell): before a `git commit`, runs the HTML, CSS and JS/MTS lints and blocks the commit (exit 2) on any error or warning.
 import { spawnSync } from 'node:child_process';
+import { hookCommand, isGitCommit } from './git-commit.mjs';
 
-let input = '';
-for await (const chunk of process.stdin) input += chunk;
-const command = JSON.parse(input || '{}').tool_input?.command ?? '';
-
-// Only `git commit` (not git commit-tree, nor the word "commit" inside a message of another command)
-if (!/(^|[\s;&|(])git(\s+-\S+(\s+\S+)?)*\s+commit(\s|$)/.test(command)) {
+if (!isGitCommit(await hookCommand())) {
     process.exit(0);
 }
 

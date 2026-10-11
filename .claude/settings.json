@@ -17,24 +17,8 @@
             "statusMessage": "Asking Claude Haiku whether the committed code has a test..."
           },
           {
-            "type": "mcp_tool",
-            "if": "Bash(git commit *)",
-            "server": "plugin:portfolio-dev:portfolio",
-            "tool": "site_health",
-            "input": {
-              "hook": true
-            },
-            "timeout": 90,
-            "statusMessage": "Checking the health of the site before the commit..."
-          },
-          {
-            "type": "mcp_tool",
-            "if": "PowerShell(git commit *)",
-            "server": "plugin:portfolio-dev:portfolio",
-            "tool": "site_health",
-            "input": {
-              "hook": true
-            },
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/site-health-before-commit.mjs\"",
             "timeout": 90,
             "statusMessage": "Checking the health of the site before the commit..."
           }
@@ -48,6 +32,21 @@
             "type": "command",
             "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/start-translation-hook-server.mjs\"",
             "timeout": 15
+          }
+        ]
+      },
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "mcp_tool",
+            "server": "plugin:portfolio-dev:portfolio",
+            "tool": "site_health",
+            "input": {
+              "hook": "SessionStart"
+            },
+            "timeout": 90,
+            "statusMessage": "Checking the health of the site at the start of the session..."
           }
         ]
       }

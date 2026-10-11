@@ -7,10 +7,11 @@ import http from 'node:http';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import readline from 'node:readline';
+import { fullHealth, healthForHook } from './site-health.mjs';
 
 const ROOT = path.resolve(process.env.CLAUDE_PROJECT_DIR || process.cwd());
 const OUT = path.join(ROOT, '.eleventy');
-const SERVER = { name: 'portfolio', version: '1.2.0' };
+const SERVER = { name: 'portfolio', version: '1.3.0' };
 const read = file => fs.readFileSync(path.join(ROOT, file), 'utf8');
 const json = file => JSON.parse(read(file));
 const exists = file => fs.existsSync(path.join(ROOT, file));
@@ -166,91 +167,10 @@ async function preview({ url = '/en', theme = 'light', width = 1280, height = 80
 }
 
 // ---- site_health ----
-async function timed(url) {
-    const start = Date.now();
-    try {
-        const res = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
-        return { url, status: res.status, ms: Date.now() - start };
-    } catch (error) {
-        return { url, status: null, error: error.message };
-    }
-}
-
-function git(args) {
-    const run = spawnSync('git', args, { cwd: ROOT, encoding: 'utf8' });
-    return run.status === 0 ? run.stdout.trimEnd() : null;
-}
-
-async function ciChecks(sha) {
-    try {
-        const res = await fetch(`https://api.github.com/repos/nicoboga4075/Portfolio/commits/${sha}/check-runs`, { headers: { Accept: 'application/vnd.github+json' }, signal: AbortSignal.timeout(15000) });
-        if (!res.ok) return { error: `GitHub API ${res.status}` };
-        return (await res.json()).check_runs.map(run => ({ name: run.name, status: run.status, conclusion: run.conclusion }));
-    } catch (error) {
-        return { error: error.message };
-    }
-}
-
-function qualityGate() {
-    const run = spawnSync('sonar', ['quality-gate', 'status', '--format', 'json'], { cwd: ROOT, encoding: 'utf8', timeout: 60000, shell: process.platform === 'win32' });
-    try {
-        const gate = JSON.parse(run.stdout).qualityGate;
-        return { status: gate.status, failing: gate.conditions.filter(c => c.status !== 'OK').map(c => `${c.metricName ?? c.metric}: ${c.formattedActualValue ?? c.actualValue} (needs ${c.comparator === 'LT' ? '≥' : '≤'} ${c.formattedThreshold ?? c.threshold})`) };
-    } catch {
-        return { error: 'sonar CLI unavailable or not logged in (sonar auth login)' };
-    }
-}
-
-// The health in one line, as the output of a PreToolUse hook: shown to the developer and passed to Claude, never blocking.
-function healthForHook(health) {
-    const parts = [livePart(health.live), `CI of ${health.ci.commit}: ${ciPart(health.ci.checks)}`, `SonarCloud: ${gatePart(health.sonarcloud)}`, `${health.repository.unpushed} unpushed commit(s)`];
-    const message = `Site health before the commit: ${parts.join(' · ')}`;
-    return { systemMessage: message, hookSpecificOutput: { hookEventName: 'PreToolUse', additionalContext: message } };
-}
-
-function livePart(pages) {
-    const down = pages.filter(p => !p.status || p.status >= 400).map(p => `${p.url} ${p.status ?? p.error}`);
-    return down.length ? `live pages down: ${down.join(', ')}` : `live pages OK (${pages.length})`;
-}
-
-function ciPart(checks) {
-    if (!Array.isArray(checks)) return checks.error;
-    const failed = [...new Set(checks.filter(c => c.conclusion && !['success', 'skipped', 'neutral'].includes(c.conclusion)).map(c => c.name))];
-    if (failed.length) return `failed ${failed.join(', ')}`;
-    const running = checks.filter(c => c.status !== 'completed').length;
-    return running ? `${running} running` : 'green';
-}
-
-function gatePart(gate) {
-    if (gate.error) return gate.error;
-    return gate.failing.length ? `${gate.status}, ${gate.failing.join('; ')}` : gate.status;
-}
-
-async function siteHealth({ hook = false } = {}) {
-    const health = await fullHealth();
-    return hook ? healthForHook(health) : health;
-}
-
-async function fullHealth() {
-    const { site, locales } = routes();
-    const head = git(['rev-parse', 'HEAD']);
-    const remote = git(['rev-parse', 'origin/main']);
-    const [pages, ci] = await Promise.all([
-        Promise.all(['', ...Object.keys(locales).flatMap(code => [`/${code}`, `/${code}/blog`])].map(p => timed(site + p))),
-        remote ? ciChecks(remote) : Promise.resolve({ error: 'no origin/main' }),
-    ]);
-    return {
-        live: pages,
-        repository: {
-            branch: git(['rev-parse', '--abbrev-ref', 'HEAD']),
-            head: head?.slice(0, 7),
-            pushed: remote?.slice(0, 7),
-            unpushed: Number(git(['rev-list', '--count', 'origin/main..HEAD']) ?? 0),
-            uncommitted: (git(['status', '--porcelain']) ?? '').split('\n').filter(Boolean),
-        },
-        ci: { commit: remote?.slice(0, 7), checks: ci },
-        sonarcloud: qualityGate(),
-    };
+async function siteHealth({ hook } = {}) {
+    routes();
+    const health = await fullHealth(ROOT);
+    return hook ? healthForHook(health, hook) : health;
 }
 
 // ---- MCP ----
@@ -261,7 +181,7 @@ const TOOLS = [
     { name: 'find_text', description: 'Where a visible text lives: the _data/*.json path (file → key path) or the page / include and line. HTML tags are ignored. Use it before editing a text seen on the site.', inputSchema: { type: 'object', properties: { query: { type: 'string', description: 'Text to look for (case-insensitive, at least 2 characters)' }, lang: { type: 'string', description: 'Only this language (en, fr)' } }, required: ['query'] }, run: findText },
     { name: 'translation_gaps', description: 'Runs the translation check (check-translation.mjs): missing languages in _data, missing pages, templates locked to one language, unknown getMessage keys, wrong html lang, broken language switcher, text left in another language.', inputSchema: { type: 'object', properties: { build: { type: 'boolean', description: 'Rebuild with Eleventy first (about 10 s). Default false: reads the last build' } } }, run: translationGaps },
     { name: 'preview', description: 'A PNG screenshot of a page of the last build (.eleventy), served like Netlify: /en, /fr/blog, /en/blog#<article slug>, /fr/<project>, /en/policy. Light or dark theme, any width from 320 to 1920.', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Site path, default /en' }, theme: { type: 'string', enum: ['light', 'dark'] }, width: { type: 'number', description: '320 to 1920, default 1280' }, height: { type: 'number', description: '480 to 1600, default 800' }, full_page: { type: 'boolean', description: 'The whole page instead of the first screen' } } }, run: preview },
-    { name: 'site_health', description: 'The state of the site in one call: the live pages (HTTP status and time), the repository (branch, unpushed commits, uncommitted files), the CI checks of origin/main on GitHub, and the SonarCloud quality gate.', inputSchema: { type: 'object', properties: { hook: { type: 'boolean', description: 'Return a one-line summary as PreToolUse hook output (systemMessage and additionalContext) instead of the full report. Default false' } } }, run: siteHealth },
+    { name: 'site_health', description: 'The state of the site in one call: the live pages (HTTP status and time), the repository (branch, unpushed commits, uncommitted files), the CI checks of origin/main on GitHub, and the SonarCloud quality gate.', inputSchema: { type: 'object', properties: { hook: { type: 'string', enum: ['PreToolUse', 'SessionStart'], description: 'Return a one-line summary as the output of this hook event (systemMessage and additionalContext) instead of the full report' } } }, run: siteHealth },
 ];
 
 const send = message => process.stdout.write(`${JSON.stringify({ jsonrpc: '2.0', ...message })}\n`);
