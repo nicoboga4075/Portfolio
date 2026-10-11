@@ -43,6 +43,8 @@ jQuery, jQuery Migrate, Bootstrap and Animate.css are intentionally pinned below
 | 2020-04-29       | **CVE-2020-11022** : *jQuery* | Medium    | Patched, jQuery upgraded to 3.7.1  | :white_check_mark: |
 | 2020-04-29       | **CVE-2020-11023** : *jQuery* | Medium    | Patched, jQuery upgraded to 3.7.1  | :white_check_mark: |
 | 2023-06-26       | **CVE-2020-23064** : *jQuery* | Medium    | Patched, jQuery upgraded to 3.7.1  | :white_check_mark: |
+| 2026-10-11       | **CodeQL** *js/incomplete-multi-character-sanitization* : `plainText` in `.eleventy.js` | Low | Patched, leftover `<` and `>` are stripped. Not exploitable: it only reads `_data` and its output is escaped | :white_check_mark: |
+| 2026-10-11       | **GHSA-86w9-cpqp-85rv** : *node-forge* (via `@sonar/scan`, dev only) | High | Open, no patched release yet ([#461](https://github.com/nicoboga4075/Portfolio/issues/461)). Not exploitable: `@sonar/scan` only reads PKCS#12 truststores and never verifies RSA signatures | :hourglass: |
 
 *This section will be updated if and when vulnerabilities are responsibly disclosed.*
  
@@ -53,6 +55,11 @@ To maintain the security of this portfolio, I follow these practices:
 - **HTTPS enforced** :white_check_mark:: All traffic is served over HTTPS to prevent data interception.
 - **Content Security Policy (CSP)**: CSP headers are configured to mitigate cross-site scripting (XSS) and data injection attacks.
 - **Secure hosting**: The site is hosted on *Netlify* with built-in security measures.
+- **Protected `main` branch**: A repository ruleset blocks force pushes and deletion of `main`; only the repository admin can bypass it.
+- **Interaction limits**: Opening issues and pull requests and commenting are limited to collaborators (renewed every six months).
+- **Least-privilege CI**: The default `GITHUB_TOKEN` is read-only, and every GitHub Actions job declares its own `permissions` (`contents: read` unless more is needed).
+- **Automated scanning**: *Dependabot* (dependency alerts and updates), *CodeQL* and *SonarCloud* analyse every change.
+- **AI automation boundaries**: The Claude Code workflows only review pull requests of the owner and Dependabot, only answer `@claude` from people with write access (never from bots, so they can't trigger themselves), and cannot modify `.github/workflows/`.
 
 ## Reporting a Vulnerability
 
