@@ -68,7 +68,7 @@ To maintain the security of this portfolio, I follow these practices:
 - **Protected `main` branch**: A repository ruleset blocks force pushes and deletion of `main`; only the repository admin can bypass it.
 - **Interaction limits**: Opening issues and pull requests and commenting are limited to collaborators (renewed every six months).
 - **Least-privilege CI**: The default `GITHUB_TOKEN` is read-only, and every GitHub Actions job declares its own `permissions` (`contents: read` unless more is needed).
-- **Automated scanning**: *Dependabot* (dependency alerts and updates), *CodeQL* and *SonarCloud* analyse every change.
+- **Automated scanning**: *Dependabot* (dependency alerts, npm updates every day and GitHub Actions updates every week), *CodeQL* and *SonarCloud* analyse every change.
 - **AI automation boundaries**: The Claude Code workflows only review pull requests of the owner and Dependabot, only answer `@claude` from people with write access (never from bots, so they can't trigger themselves), and cannot modify `.github/workflows/`.
 
 ## Reporting a Vulnerability
