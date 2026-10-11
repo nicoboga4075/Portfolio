@@ -20,6 +20,10 @@ bodyClass: ""
         <meta name="title" property="og:title" content="{{ title | safe }}">
         <meta name="image" property="og:image" content="{{ image }}">
         <meta name="description" content="{{ description | safe }}">
+        {%- set structuredData = page | jsonLd(lang, title, description, image) %}
+        {%- if structuredData %}
+        <script type="application/ld+json">{{ structuredData | safe }}</script>
+        {%- endif %}
         {%- if assets and "head-scripts.html" in assets %}
         <meta name="articles" content="{{ articles | resolveArticles(lang, siteLanguages.default, siteLanguages.locales) | dump }}">
         <meta name="i18n-messages" content="{{ messages | dump }}">

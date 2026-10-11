@@ -125,6 +125,73 @@ ${body}
 `;
 }
 
+// Read at each call rather than required, so npm run dev:watch picks up a change of _data.
+const readData = name => JSON.parse(fs.readFileSync(path.join(__dirname, "_data", `${name}.json`), "utf8"));
+const inLang = (value, lang) => (value && typeof value === "object" && lang in value ? value[lang] : value);
+const plainText = html => String(html).replaceAll(/<[^<>]*>/g, "").replaceAll("&quot;", '"').replaceAll("&amp;", "&").replaceAll(/\s+/g, " ").trim();
+const tagName = (tag, lang) => {
+    if (typeof tag === "string") return tag;
+    if ("name" in tag) return inLang(tag.name, lang);
+    return lang in tag ? tag[lang] : Object.keys(tag)[0];
+};
+
+function jsonLd({ page, lang, title, description, image, author, socials }) {
+    const parts = page.fileSlug.split("_");
+    parts.pop();
+    const slug = parts.join("_");
+    const inLanguage = locales[lang].replace("_", "-");
+    const person = { "@type": "Person", "@id": `${site}/#person`, name: author, url: `${site}/${lang}`, sameAs: socials.map(s => s.href) };
+    let data = null;
+    // Home: who the author is, and the site itself
+    if (slug === "index") {
+        const roles = JSON.parse(plainText(readData("hero")[lang].roles));
+        const about = readData("about")[lang];
+        data = {
+            "@graph": [
+                { ...person, jobTitle: roles[0].replace(/\.$/, ""), description: plainText(description), alumniOf: { "@type": "CollegeOrUniversity", name: "ESILV", url: about.esilvHref } },
+                { "@type": "WebSite", "@id": `${site}/#website`, name: plainText(title), url: site, inLanguage: langs.map(code => locales[code].replace("_", "-")), author: { "@id": `${site}/#person` } }
+            ]
+        };
+    }
+    // Blog: the list of the articles
+    else if (slug === "blog") {
+        data = {
+            "@type": "Blog",
+            name: plainText(title),
+            description: plainText(description),
+            url: `${site}/${lang}/blog`,
+            inLanguage,
+            author: person,
+            blogPost: readData("articles").map(article => ({ "@type": "BlogPosting", headline: inLang(article.title, lang), datePublished: article.date, url: `${site}/${lang}/blog#${article.slug}` }))
+        };
+    }
+    // Article: its title, date, tags and excerpt from _data, at the URL of the sitemap
+    else if (page.inputPath.includes("/articles/")) {
+        const article = readData("articles").find(a => a.slug === slug);
+        const card = readData("blog").entries.find(entry => entry.id === slug);
+        if (article) {
+            data = {
+                "@type": "BlogPosting",
+                headline: inLang(article.title, lang),
+                description: card ? plainText(inLang(card.excerpt, lang)) : plainText(description),
+                datePublished: article.date,
+                inLanguage,
+                keywords: article.tags.map(tag => tagName(tag, lang)).join(", "),
+                image,
+                url: `${site}/.netlify/functions/article?filename=${slug}_${lang}.html`,
+                mainEntityOfPage: `${site}/${lang}/blog#${slug}`,
+                author: person
+            };
+        }
+    }
+    // Project: its name and the page
+    else if (page.inputPath.includes("/projects/")) {
+        data = { "@type": "CreativeWork", name: plainText(description), url: `${site}/${lang}/${slug}`, inLanguage, image, author: person };
+    }
+    // Escape "<" so no value can close the <script> element
+    return data ? JSON.stringify({ "@context": "https://schema.org", ...data }).replaceAll("<", String.raw`\u003c`) : "";
+}
+
 module.exports = function configureEleventy(eleventyConfig) {
     // -> repo root (the publish dir); passthrough-copied for the preview server.
     fs.writeFileSync(path.join(__dirname, "sitemap.xml"), sitemapXml(buildSitemap()));
@@ -139,7 +206,8 @@ module.exports = function configureEleventy(eleventyConfig) {
     const lighthousePlugin = toml.parse(fs.readFileSync("./netlify.toml", "utf-8")).context.production.plugins.find(p => p.package === "@netlify/plugin-lighthouse");
     const preset = lighthousePlugin?.inputs?.settings?.preset ?? "mobile";
     eleventyConfig.addGlobalData("viewport", preset);
-    eleventyConfig.addGlobalData("author", "Nicolas BOGALHEIRO");
+    const author = "Nicolas BOGALHEIRO";
+    eleventyConfig.addGlobalData("author", author);
     eleventyConfig.addGlobalData("version", pkg.version);
     const linkedinDomain = "https://www.linkedin.com";
     const linkedinVanity = "nicolas-bogalheiro-126a7616b";
@@ -150,12 +218,15 @@ module.exports = function configureEleventy(eleventyConfig) {
     });
     const calendlyUrl = "https://calendly.com/nicolas-bogalheiro/30min";
     eleventyConfig.addGlobalData("calendly", { en: calendlyUrl, fr: calendlyUrl });
-    eleventyConfig.addGlobalData("socials", [
+    const socials = [
         { href: `${linkedinDomain}/in/${linkedinVanity}`, label: "LinkedIn", icon: "linkedin" },
         { href: "https://github.com/nicoboga4075", label: "GitHub", icon: "github" },
         { href: "https://www.codingame.com/profile/8755914e3c5aeab435bb5ec921b9237e8911643", label: "CodinGame", icon: "gamepad" },
         { href: "https://www.chess.com/member/nicoboga4075knight", label: "Chess", icon: "king-outlined", modalIcon: "chessboard" }
-    ]);
+    ];
+    eleventyConfig.addGlobalData("socials", socials);
+    // The schema.org JSON-LD of a page (Person + WebSite for home, Blog, BlogPosting for an article, CreativeWork for a project), or "" for the other pages.
+    eleventyConfig.addFilter("jsonLd", (page, lang, title, description, image) => jsonLd({ page, lang, title, description, image, author, socials }));
     eleventyConfig.addGlobalData("siteLanguages", {
         default: defaultLang,
         author: authorLang,
