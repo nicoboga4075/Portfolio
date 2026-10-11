@@ -1,4 +1,5 @@
-# Auto detect text files and perform LF normalization
-* text=auto
-*.mp4 !text !filter !merge !diff
+# Auto detect text files, store them with LF and check them out with LF on every OS (npm, Node and the tools write LF; core.autocrlf would turn them into CRLF and show unchanged files as modified)
+* text=auto eol=lf
+# Videos are binary: never converted, diffed nor merged ("!text" alone would leave them to eol=lf as text)
+*.mp4 binary !filter
 *.ps1 text eol=lf
