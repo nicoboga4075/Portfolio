@@ -105,7 +105,7 @@
     "@11ty/eleventy": "^3.1.6",
     "@capacitor/android": "^8.5.3",
     "@capacitor/cli": "^8.5.3",
-    "@capacitor/core": "^8.5.2",
+    "@capacitor/core": "^8.5.3",
     "@eslint/js": "^10.0.1",
     "@netlify/functions": "^6.0.2",
     "@playwright/test": "^1.64.0",
