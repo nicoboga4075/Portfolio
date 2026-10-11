@@ -77,7 +77,8 @@ Dependabot alerts on dev dependencies that a version update fixes are not listed
 To maintain the security of this portfolio, I follow these practices:
 
 - **HTTPS enforced** :white_check_mark:: All traffic is served over HTTPS to prevent data interception.
-- **Content Security Policy (CSP)**: CSP headers are configured to mitigate cross-site scripting (XSS) and data injection attacks.
+- **Content Security Policy (CSP)**: CSP headers are configured to mitigate cross-site scripting (XSS) and data injection attacks. `script-src` still allows `'unsafe-inline'` and `'unsafe-eval'`; removing them is tracked in [#399](https://github.com/nicoboga4075/Portfolio/issues/399).
+- **No inline third-party snippet**: Google Analytics is loaded from the site's own `js/analytics.js`, added by the build to the production pages only (not to deploy previews nor local builds), instead of a script injected by Netlify. It loads `gtag.js` from Google after the page has finished loading.
 - **Secure hosting**: The site is hosted on *Netlify* with built-in security measures.
 - **Protected `main` branch**: A repository ruleset blocks force pushes and deletion of `main`; only the repository admin can bypass it.
 - **Interaction limits**: Opening issues and pull requests and commenting are limited to collaborators (renewed every six months).
