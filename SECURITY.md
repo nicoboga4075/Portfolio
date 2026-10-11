@@ -46,7 +46,7 @@ These libraries and tools are intentionally kept below their latest major releas
 
 | Override | Forces | Comes through | Why | Added in |
 |---|---|---|---|---|
-| `nwsapi` | 2.2.27 | `netlify-plugin-inline-critical-css` → `critical` → `inline-critical` → `jsdom` 16 | Pinned below 2.2.28, which `jsdom` would get otherwise; no reason recorded | 42cd9ee |
+| `nwsapi` | 2.2.27 | `netlify-plugin-inline-critical-css` → `critical` → `inline-critical` → `jsdom` 16 | Pinned below 2.2.28, which broke the Netlify deploy: 2.2.28 lost the helper of its media pseudo-class resolvers ([dperini/nwsapi#218](https://github.com/dperini/nwsapi/issues/218)), fixed by [dperini/nwsapi#219](https://github.com/dperini/nwsapi/pull/219) but not released yet. Remove the override once a release after 2.2.28 ships the fix | 42cd9ee |
 | `@tootallnate/once` | ^2.0.1 | … `jsdom` 16 → `http-proxy-agent` 4 | Low advisory GHSA-vpq2-c234-7xj6 in 1.1.2; version 2 exports the same function | 9da9e45 |
 | `js-yaml@^3 > argparse` | ^2.0.1 | `@11ty/eleventy` → `gray-matter` → `js-yaml` 3 | Drops the vulnerable `sprintf-js` of `argparse` 1 (GHSA-hp3w-g68c-fv3c) | 7e4c8c2 |
 | `inline-critical > css` | `npm:@adobe/css-tools@^4.5.0` | `critical` → `inline-critical` 8 | `css` is unmaintained and pulled `decode-uri-component` 0.2.2 (4 moderate advisories); only its CLI used it | d9f2468 |
