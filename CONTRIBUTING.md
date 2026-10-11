@@ -35,6 +35,7 @@ This project uses multiple Git remotes to manage code across GitHub and GitLab a
 - Netlify does not receive code via Git commands directly, but via repository integration.
 - Netlify automatically serves `index.html` when you visit a directory URL ending with a slash (e.g., /fr/ serves /fr/index.html). It also serves .html files when the extension is omitted in the URL, so /toto_fr will serve /toto_fr.html if that file exists. If a requested path does not match any file or redirect rule, Netlify serves the custom `/404.html` page if it is present in the site root. Otherwise, it displays its default 404 error page. Redirect rules in `_redirects` or `netlify.toml` are applied before this fallback behavior.
 - Netlify builds run in a `Linux` (Ubuntu) environment. The shell used is `Bash`.
+- The build also writes `api/articles.json` and `api/projects.json` (git-ignored, like `sitemap.xml` and the feeds): the articles and projects in every language, for the Botpress chatbot (an API call or its knowledge base, set up in Botpress Studio).
 - Google Analytics (`js/analytics.js`) is only added to the pages by the production build on Netlify (`CONTEXT=production`): `npm run dev`, the preview build, deploy previews and branch deploys don't count visits. Don't add it again as a snippet injection in the Netlify settings, or every visit would count twice.
 
 ---

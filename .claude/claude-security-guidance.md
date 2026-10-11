@@ -30,6 +30,7 @@ Static Eleventy site deployed on Netlify (https://nicoboga.netlify.app). The onl
 
 - The JSON-LD of each page is written into a `<script type="application/ld+json">`: keep the escape of every `<` as `\u003c` in `jsonLd()`, or a value could close the element.
 - The Atom feeds (`feed_<lang>.xml`) and `sitemap.xml` go through `xmlEscape()`; `plainText()` strips tags until none is left (a single pass rebuilds `<scr<b>ipt>`). Keep both.
+- `api/articles.json` and `api/projects.json` (public, for the Botpress chatbot) only hold what the pages already show (titles, dates, tags, excerpts, contexts, links), as plain text. Report anything read from git, the environment, a secret, or `site_health` of the MCP server being added to them.
 - These read `_data/` only, never a request, but they are the pattern to follow for any new generated file.
 
 ## GitHub workflows (`.github/workflows/`)

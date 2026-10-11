@@ -247,6 +247,45 @@ ${entries.map(e => e.xml).join("\n")}
 `;
 }
 
+// Public data for the Botpress chatbot (and anyone): the articles and the projects in every language, the same fields as list_articles and list_projects of the portfolio-dev MCP server, without anything read from git or a secret.
+function apiData() {
+    const both = value => Object.fromEntries(langs.map(lang => [lang, plainText(inLang(value, lang) ?? "")]));
+    const cards = readData("blog").entries;
+    const articleList = readData("articles").map((article, index) => ({
+        slug: article.slug,
+        date: article.date,
+        readTime: cards[index]?.readTime ?? null,
+        title: both(article.title),
+        // The card at the same position (its id is the card image, not the slug)
+        excerpt: both(cards[index]?.excerpt),
+        tags: Object.fromEntries(langs.map(lang => [lang, article.tags.map(tag => tagName(tag, lang))])),
+        url: Object.fromEntries(langs.map(lang => [lang, `${site}/${lang}/blog#${article.slug}`]))
+    }));
+    // What the Explore button of each card opens, in the order of _data/projects.json (js/app.js appProjects, checked by npm run check:content)
+    const block = fs.readFileSync(path.join(__dirname, "js", "app.js"), "utf8").match(/const appProjects = \[([^\]]*)\];/);
+    const targets = block ? [...block[1].matchAll(/'([^']+)'/g)].map(m => m[1]) : [];
+    const targetUrl = (target, lang) => {
+        // An external page
+        if (!target || /^https?:/.test(target)) return target ?? null;
+        // A project page or an article of the blog
+        return `${site}/${lang}/${target}`;
+    };
+    const projectList = readData("projects").cards.map((card, index) => ({
+        id: card.id,
+        title: plainText(inLang(card.title, defaultLang)),
+        badge: plainText(card.badge ?? ""),
+        context: both(card.context),
+        description: both(card.description),
+        technologies: plainText(inLang(card.technologies, defaultLang) ?? ""),
+        hasPage: projects.includes(targets[index]),
+        url: Object.fromEntries(langs.map(lang => [lang, targetUrl(targets[index], lang)]))
+    }));
+    return {
+        articles: { site, languages: langs, articles: articleList },
+        projects: { site, languages: langs, projects: projectList }
+    };
+}
+
 module.exports = function configureEleventy(eleventyConfig) {
     // -> repo root (the publish dir); passthrough-copied for the preview server.
     fs.writeFileSync(path.join(__dirname, "sitemap.xml"), sitemapXml(buildSitemap()));
@@ -284,6 +323,13 @@ module.exports = function configureEleventy(eleventyConfig) {
     eleventyConfig.addGlobalData("socials", socials);
     // The schema.org JSON-LD of a page (Person + WebSite for home, Blog, BlogPosting for an article, CreativeWork for a project), or "" for the other pages.
     eleventyConfig.addFilter("jsonLd", (page, lang, title, description, image) => jsonLd({ page, lang, title, description, image, author, socials }));
+    // -> api/ at the repo root, like the feeds: /api/articles.json and /api/projects.json for the chatbot.
+    const api = apiData();
+    fs.mkdirSync(path.join(__dirname, "api"), { recursive: true });
+    for (const [name, data] of Object.entries(api)) {
+        fs.writeFileSync(path.join(__dirname, "api", `${name}.json`), `${JSON.stringify(data, null, 2)}\n`);
+    }
+    eleventyConfig.addPassthroughCopy("api");
     // -> repo root next to sitemap.xml, one Atom feed per language (/feed_en.xml, /feed_fr.xml).
     for (const lang of langs) {
         fs.writeFileSync(path.join(__dirname, `feed_${lang}.xml`), feedXml(lang, author));

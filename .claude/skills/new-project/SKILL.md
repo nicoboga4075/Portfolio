@@ -81,7 +81,7 @@ description: "<title without HTML>"
 
 1. `npm run check:content` (the check-content skill): no error. Read the "project card n → target" lines: the new card must open the new target, and the cards after it must still open theirs.
 2. `npm run lint`: no error, no warning.
-3. A project with its own page gets a `CreativeWork` JSON-LD, built by `.eleventy.js` from the `description` of its pages: after `ELEVENTY_PREVIEW=1 npx eleventy` (never a plain `npx eleventy`), `.eleventy/projects/<slug>_<lang>.html` has it with the project name and `/<lang>/<slug>`. Projects have no feed.
+3. A project with its own page gets a `CreativeWork` JSON-LD, built by `.eleventy.js` from the `description` of its pages: after `ELEVENTY_PREVIEW=1 npx eleventy` (never a plain `npx eleventy`), `.eleventy/projects/<slug>_<lang>.html` has it with the project name and `/<lang>/<slug>`. Projects have no feed. Every card (with or without its own page) is in `api/projects.json`, with the URL its Explore button opens.
 4. Show it with `npm run dev`: the card on `/en` and `/fr`, its Explore button, and `/en/<slug>`, `/fr/<slug>`.
 
 A colour or a new style rule also needs `npm run contrast:quick`, but only when the user asks for it.
