@@ -1,6 +1,6 @@
 ---
 name: update-docs
-description: Keeps README.md and SECURITY.md in step with the repository - the vendored libraries table, the fonts and icons, the major versions held back on purpose, the Vulnerability Disclosure Log (Dependabot, CodeQL, SonarCloud, npm audit) and the security practices (CSP, rulesets, interaction limits, workflow permissions, Claude Code workflows) - then checks them with npm run check:docs. Use it whenever a change touches one of these - a file of js/ or css/ or .github/vendor-versions.json, typescript or the Node version, a font or icon set, _headers, a GitHub Actions workflow, a ruleset or repository setting - when a security alert is opened, dismissed or fixed, when an upgrade issue is closed, or when the user asks to update, check or sync the README or the security policy, even if they don't name the files.
+description: Keeps README.md and SECURITY.md in step with the repository - the vendored libraries table, the fonts and icons, the major versions held back on purpose, the Vulnerability Disclosure Log (Dependabot, CodeQL, SonarCloud, npm audit) and the security practices (CSP, rulesets, interaction limits, workflow permissions, Claude Code workflows) - then checks them with npm run check:docs. Use it whenever a change touches one of these - a file of js/ or css/ or .github/vendor-versions.json, typescript or the Node version, a font or icon set, _headers, a GitHub Actions workflow, a ruleset or repository setting, a new public file or endpoint (a file the build writes such as the feeds or /api/*.json, a Netlify function, a third-party script) - when a security alert is opened, dismissed or fixed, when an upgrade issue is closed, or when the user asks to update, check or sync the README or the security policy, even if they don't name the files.
 ---
 
 # Update README.md and SECURITY.md
@@ -34,6 +34,7 @@ It can't check prose: read the sections below against the change.
 | A font (Google Fonts link, `font-family`, `@font-face` fallbacks in `css/common.css`) or an icon set | - | Fonts / Icons |
 | A security alert opened (Dependabot, CodeQL, SonarCloud, `npm audit`) | - | a row of the Vulnerability Disclosure Log |
 | An alert fixed, dismissed or its issue closed | - | that row's Status, and :hourglass: -> :white_check_mark: when it's fixed |
+| A new public file or endpoint: a file written by `.eleventy.js` (`sitemap.xml`, `feed_<lang>.xml`, `api/*.json`), a Netlify function, a third-party script or service | - (README if visitors use it, e.g. the feed links) | Security Best Practices: what it exposes, that it holds nothing from git, the environment or a secret, how it is served (`_headers`) |
 | `_headers` (CSP and other headers), a ruleset, interaction limits, workflow `permissions`, a scanning tool, the Claude Code workflows | - | Security Best Practices |
 | A heading renamed in either file | every link to it (`check:docs` lists them) | same |
 
