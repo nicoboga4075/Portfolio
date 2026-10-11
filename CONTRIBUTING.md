@@ -4,7 +4,7 @@ Thank you for your interest in contributing to this portfolio.
 
 ## Getting Started
 
-This repository is private : external contributions are limited.
+This repository is public, but external contributions are not open: opening issues and pull requests and commenting are limited to collaborators (GitHub interaction limits, renewed every six months). To report a vulnerability, follow [SECURITY.md](SECURITY.md#reporting-a-vulnerability).
 
 ## Development Workflow
 
@@ -31,7 +31,7 @@ This project uses multiple Git remotes to manage code across GitHub and GitLab a
 ### Deployment with Netlify
 
 - Netlify is connected to the GitHub repository only.
-- Every push to the `main` branch triggers an automatic build and deployment on Netlify **if buid status is not set to Stopped and if "Lock auto-publishing" is not enabled**.
+- Every push to the `main` branch triggers an automatic build and deployment on Netlify **if build status is not set to Stopped and if "Lock auto-publishing" is not enabled**. Netlify runs `npm run build` and publishes the repository root. If the live site doesn't show the last commits, check *Deploys* in Netlify: no deploy, a failed build or locked auto-publishing.
 - Netlify does not receive code via Git commands directly, but via repository integration.
 - Netlify automatically serves `index.html` when you visit a directory URL ending with a slash (e.g., /fr/ serves /fr/index.html). It also serves .html files when the extension is omitted in the URL, so /toto_fr will serve /toto_fr.html if that file exists. If a requested path does not match any file or redirect rule, Netlify serves the custom `/404.html` page if it is present in the site root. Otherwise, it displays its default 404 error page. Redirect rules in `_redirects` or `netlify.toml` are applied before this fallback behavior.
 - Netlify builds run in a `Linux` (Ubuntu) environment. The shell used is `Bash`.
@@ -48,7 +48,15 @@ Make sure to push changes to the appropriate remote(s) depending on your workflo
     - `git rebase gitlab/main` to keep the same history (**do not use `git merge gitlab/main`**)
     - `git push --force github main` to overwrite history
 
-No ruleset is declared by default in GitHub but in GitLab, when importing the repo, the `main` branch is set with labels `default` and `protected`. **Push force is not allowed by default in GitLab**.
+In GitHub, the "Protect main" ruleset blocks force pushes and deletion of `main`; only the repository admin can bypass it (GitHub logs every bypass). In GitLab, when importing the repo, the `main` branch is set with labels `default` and `protected`. **Push force is not allowed by default in GitLab**.
+
+### Conventions
+
+- **Commits**: start the message with the [gitmoji](https://gitmoji.dev) of the change, as the character itself (`🐛 Fix ...`, `✨ Add ...`, `📝 Update ...`), one per commit. See [CLAUDE.md](CLAUDE.md).
+- **Comments**: single-line comments in every language, one per branch rather than a block above several branches.
+- **Before a commit**: the Claude Code hooks of `.claude/settings.json` run the HTML, CSS and JS lints (`npm run lint`) and block the commit on any error or warning.
+- **README.md and SECURITY.md**: after changing a vendored library, a dependency version, a font, a security setting or a security alert, run `npm run check:docs` (the `update-docs` skill lists what to update).
+- **Articles and projects**: use the `new-article` and `new-project` skills, then `npm run check:content`.
 
 ### Add a video (.mp4 only, < 10 min and < 100Mo)
 

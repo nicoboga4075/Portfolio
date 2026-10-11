@@ -1,6 +1,43 @@
-# CI/CD Installation
+# CI/CD
 
-## Gitlab-Runner
+The project runs two CI pipelines on every push to `main`: GitHub Actions in the cloud, and GitLab CI on a local runner (installed below). Netlify builds and deploys the site on its own.
+
+## GitHub Actions
+
+| Workflow | Trigger | What it does |
+|---|---|---|
+| `node.js.yml` (Node.js CI) | push and pull request on `main` | `build`: `npm ci` and `npm run build` on Node 20.x, 22.x and 24.x (20.x kept for backward compatibility). `test`: Jest and Playwright on Node 22.x, reports uploaded as the `reports` artifact. `sonar`: SonarCloud scan of those reports, skipped for Dependabot. Every job declares `permissions: contents: read` |
+| `claude-code-review.yml` (Claude Code Review) | pull request opened, pushed or reopened | Claude reviews the pull requests of the repository owner and of Dependabot, including the commits Claude pushes on them, and leaves inline comments. Skipped on a pull request that changes this workflow itself |
+| `claude.yml` (Claude Code) | an issue or comment that mentions `@claude` | Claude answers, edits the code and pushes a branch with a "Create PR" link. Only people with write access can call it (never a bot, so it can't trigger itself). It can't change `.github/workflows/` (the Claude GitHub App has no `workflows` permission) nor open pull requests itself |
+| `vendor-versions.yml` (Vendor library version check) | every Monday at 06:00 UTC, or by hand | Compares the libraries vendored in `js/` and `css/` (`.github/vendor-versions.json`) with npm, and opens or updates the "Vendor library updates available" issue with the latest release of the current major and the latest release |
+| CodeQL (default setup) | push and pull request | Security analysis of the JavaScript / TypeScript (including the scripts inside the HTML) and of the workflows |
+
+### Dependabot
+
+`.github/dependabot.yml` checks:
+
+- the npm dependencies every day at 06:00 Europe/Paris, weekends included (a cron schedule: the `daily` interval only runs on weekdays);
+- the actions of the workflows every week, including the ones pinned to a commit SHA.
+
+Security updates don't wait for the schedule: Dependabot opens them as soon as an advisory is published.
+
+### Secrets
+
+| Secret | Where | Used by |
+|---|---|---|
+| `CLAUDE_CODE_OAUTH_TOKEN` | Actions **and** Dependabot secrets | the Claude Code workflows (a workflow started by Dependabot only receives the Dependabot secrets). Generate it with `claude setup-token` |
+| `SONAR_TOKEN` | Actions secrets, and a GitLab CI/CD variable | the SonarCloud scans |
+
+## SonarCloud
+
+Both pipelines analyse `main`: the `sonar` job of GitHub Actions (`sonarqube-scan-action`) and the `sonar-job` of GitLab CI (`npx @sonar/scan`). They must send the same project version: `@sonar/scan` reads it from `package.json`, and the GitHub job passes `-Dsonar.projectVersion` read from `package.json` too. Two different versions would make SonarCloud reset its "previous version" new code period at every analysis, and the coverage condition of the quality gate would be skipped.
+
+## GitLab CI
+
+`.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (Jest, Playwright), `sonar` (`npx @sonar/scan`, allowed to fail) and `teardown` (cleans the build folder).
+
+
+### Install the GitLab Runner
 
 - The `gitlab-runner` will execute the pipeline on the local computer.  
 - Download the `gitlab-runner.exe` `64bit version` file from [official website](https://docs.gitlab.com/runner/install/windows.html).  
