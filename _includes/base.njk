@@ -112,5 +112,8 @@ bodyClass: ""
         <footer id="ftco-footer"{% if standalone %} class="standalone"{% endif %} aria-label="{{ landmarkLang.footer }}">
             {% include "footer.html" %}
         </footer>
+        {%- if analytics.enabled %}
+        <script src="js/analytics.js" data-ga-id="{{ analytics.id }}" defer></script>
+        {%- endif %}
     </body>
 </html>

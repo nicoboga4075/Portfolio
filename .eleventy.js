@@ -264,6 +264,8 @@ module.exports = function configureEleventy(eleventyConfig) {
     const author = "Nicolas BOGALHEIRO";
     eleventyConfig.addGlobalData("author", author);
     eleventyConfig.addGlobalData("version", pkg.version);
+    // Google Analytics only on the Netlify production build: not in npm run dev, the preview build, deploy previews or branch deploys
+    eleventyConfig.addGlobalData("analytics", { id: "G-S08CZ1FDQM", enabled: process.env.CONTEXT === "production" && !isPreview });
     const linkedinDomain = "https://www.linkedin.com";
     const linkedinVanity = "nicolas-bogalheiro-126a7616b";
     eleventyConfig.addGlobalData("linkedin", {
