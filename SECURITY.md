@@ -43,7 +43,7 @@ jQuery, jQuery Migrate, Bootstrap and Animate.css are intentionally pinned below
 | 2020-04-29       | **CVE-2020-11022** : *jQuery* | Medium    | Patched, jQuery upgraded to 3.7.1  | :white_check_mark: |
 | 2020-04-29       | **CVE-2020-11023** : *jQuery* | Medium    | Patched, jQuery upgraded to 3.7.1  | :white_check_mark: |
 | 2023-06-26       | **CVE-2020-23064** : *jQuery* | Medium    | Patched, jQuery upgraded to 3.7.1  | :white_check_mark: |
-| 2026-10-11       | **CodeQL** *js/incomplete-multi-character-sanitization* : `plainText` in `.eleventy.js` | Low | Patched, leftover `<` and `>` are stripped. Not exploitable: it only reads `_data` and its output is escaped | :white_check_mark: |
+| 2026-10-11       | **CodeQL** *js/incomplete-multi-character-sanitization* : `plainText` in `.eleventy.js` | Low | Patched, tags are stripped until none is left, then any lone `<` or `>`. Not exploitable: it only reads `_data` and its output is escaped | :white_check_mark: |
 | 2026-10-11       | **GHSA-86w9-cpqp-85rv** : *node-forge* (via `@sonar/scan`, dev only) | High | Open, no patched release yet ([#461](https://github.com/nicoboga4075/Portfolio/issues/461)). Not exploitable: `@sonar/scan` only reads PKCS#12 truststores and never verifies RSA signatures | :hourglass: |
 
 *This section will be updated if and when vulnerabilities are responsibly disclosed.*
