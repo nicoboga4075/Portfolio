@@ -82,7 +82,9 @@ npm run lint
 ```
 
 - `check:translation` rebuilds the site: 0 error, then read the warnings (a text left in another language, the same sentence in two languages).
-- `_redirects` and `sitemap.xml` are generated: commit the regenerated files, don't edit them by hand.
+- `_redirects` is generated: commit the regenerated file, don't edit it by hand. `sitemap.xml` and the Atom feeds are written by every build from `routes` and are never committed.
+- After `ELEVENTY_PREVIEW=1 npx eleventy` (never a plain `npx eleventy`), `feed_<code>.xml` exists with every article in the new language, and the pages carry their JSON-LD with `inLanguage` set to the new locale (`es-ES`).
+- The language switcher shows the new code; its flag comes with #448 (`Show flags in the language switcher`).
 - Open `/<code>`, `/<code>/blog` and a project with `npm run dev`, and switch languages with the switcher on each.
 - Offer `npm run contrast:quick` (longer texts can wrap differently), but run it only if the user agrees.
 

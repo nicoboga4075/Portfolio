@@ -19,6 +19,8 @@ The project runs two CI pipelines on every push to `main`: GitHub Actions in the
 - the npm dependencies every day at 06:00 Europe/Paris, weekends included (a cron schedule: the `daily` interval only runs on weekdays);
 - the actions of the workflows every week, including the ones pinned to a commit SHA.
 
+Packages that release together come in one pull request: the `playwright` group (`playwright`, `@playwright/test`) and the `capacitor` group (`@capacitor/*`). A Dependabot pull request gets a Claude review of its release notes (see the table above).
+
 Security updates don't wait for the schedule: Dependabot opens them as soon as an advisory is published.
 
 ### Secrets
