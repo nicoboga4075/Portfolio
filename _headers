@@ -17,6 +17,10 @@
 /sitemap.xml
   Cache-Control: public, max-age=3600
   X-Robots-Tag: noindex
+/feed_*
+  Content-Type: application/atom+xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+  X-Robots-Tag: noindex
 # Served (200) for Search Console verification, but never a search result.
 /googled72e0253bbe65a2f.html
   X-Robots-Tag: noindex

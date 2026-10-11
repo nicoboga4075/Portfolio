@@ -192,6 +192,49 @@ function jsonLd({ page, lang, title, description, image, author, socials }) {
     return data ? JSON.stringify({ "@context": "https://schema.org", ...data }).replaceAll("<", String.raw`\u003c`) : "";
 }
 
+// The Atom feed of the blog in one language: each article's title, dates, excerpt and tags, linked to its place in the blog.
+function feedXml(lang, author) {
+    const blog = readData("blog");
+    const cards = new Map(blog.entries.map(entry => [entry.id, entry]));
+    const atomDate = day => `${day}T00:00:00Z`;
+    const entries = readData("articles").map(article => {
+        const link = `${site}/${lang}/blog#${article.slug}`;
+        const excerpt = cards.get(article.slug)?.excerpt;
+        const categories = article.tags.map(tag => `        <category term="${xmlEscape(tagName(tag, lang))}"/>`);
+        const updated = gitDate(`articles/${article.slug}_${lang}.html`);
+        return {
+            updated,
+            xml: [
+                "    <entry>",
+                `        <title>${xmlEscape(inLang(article.title, lang))}</title>`,
+                `        <link rel="alternate" type="text/html" href="${xmlEscape(link)}"/>`,
+                `        <id>${xmlEscape(link)}</id>`,
+                `        <published>${atomDate(article.date)}</published>`,
+                `        <updated>${atomDate(updated)}</updated>`,
+                ...(excerpt ? [`        <summary>${xmlEscape(plainText(inLang(excerpt, lang)))}</summary>`] : []),
+                ...categories,
+                "    </entry>"
+            ].join("\n")
+        };
+    });
+    const updated = entries.map(e => e.updated).sort().at(-1);
+    return `<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="${locales[lang].replace("_", "-")}">
+    <title>Portfolio - Blog</title>
+    <subtitle>${xmlEscape(blog.sectionText[lang].tagline)}</subtitle>
+    <link rel="self" type="application/atom+xml" href="${site}/feed_${lang}.xml"/>
+    <link rel="alternate" type="text/html" href="${site}/${lang}/blog"/>
+    <id>${site}/${lang}/blog</id>
+    <updated>${atomDate(updated)}</updated>
+    <author>
+        <name>${xmlEscape(author)}</name>
+        <uri>${site}/${lang}</uri>
+    </author>
+${entries.map(e => e.xml).join("\n")}
+</feed>
+`;
+}
+
 module.exports = function configureEleventy(eleventyConfig) {
     // -> repo root (the publish dir); passthrough-copied for the preview server.
     fs.writeFileSync(path.join(__dirname, "sitemap.xml"), sitemapXml(buildSitemap()));
@@ -227,6 +270,11 @@ module.exports = function configureEleventy(eleventyConfig) {
     eleventyConfig.addGlobalData("socials", socials);
     // The schema.org JSON-LD of a page (Person + WebSite for home, Blog, BlogPosting for an article, CreativeWork for a project), or "" for the other pages.
     eleventyConfig.addFilter("jsonLd", (page, lang, title, description, image) => jsonLd({ page, lang, title, description, image, author, socials }));
+    // -> repo root next to sitemap.xml, one Atom feed per language (/feed_en.xml, /feed_fr.xml).
+    for (const lang of langs) {
+        fs.writeFileSync(path.join(__dirname, `feed_${lang}.xml`), feedXml(lang, author));
+        eleventyConfig.addPassthroughCopy(`feed_${lang}.xml`);
+    }
     eleventyConfig.addGlobalData("siteLanguages", {
         default: defaultLang,
         author: authorLang,
