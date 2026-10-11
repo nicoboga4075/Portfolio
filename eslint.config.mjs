@@ -104,6 +104,11 @@ export default defineConfig([
     files: ["js/common.js"],
     rules: { "no-unused-vars": "off" }
   },
+  // Jest unit tests (js/*.test.js, netlify/**/*.test.js): describe, test, expect, jest...
+  {
+    files: ["**/*.test.js"],
+    languageOptions: { globals: { ...globals.jest } }
+  },
   // MTS config
   {
     files: ["netlify/functions/**/*.mts"],
