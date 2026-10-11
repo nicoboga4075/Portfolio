@@ -128,7 +128,8 @@ ${body}
 // Read at each call rather than required, so npm run dev:watch picks up a change of _data.
 const readData = name => JSON.parse(fs.readFileSync(path.join(__dirname, "_data", `${name}.json`), "utf8"));
 const inLang = (value, lang) => (value && typeof value === "object" && lang in value ? value[lang] : value);
-const plainText = html => String(html).replaceAll(/<[^<>]*>/g, "").replaceAll("&quot;", '"').replaceAll("&amp;", "&").replaceAll(/\s+/g, " ").trim();
+// Drop the "<" and ">" left by a tag split around another one ("<scr<b>ipt>" -> "<script>" after one pass), so no tag can remain.
+const plainText = html => String(html).replaceAll(/<[^<>]*>/g, "").replaceAll(/[<>]/g, "").replaceAll("&quot;", '"').replaceAll("&amp;", "&").replaceAll(/\s+/g, " ").trim();
 const tagName = (tag, lang) => {
     if (typeof tag === "string") return tag;
     if ("name" in tag) return inLang(tag.name, lang);
