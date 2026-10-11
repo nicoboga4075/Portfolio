@@ -176,8 +176,11 @@ function jsonLd({ page, lang, title, description, image, author, socials }) {
     }
     // Article: its title, date, tags and excerpt from _data, at the URL of the sitemap
     else if (page.inputPath.includes("/articles/")) {
-        const article = readData("articles").find(a => a.slug === slug);
-        const card = readData("blog").entries.find(entry => entry.id === slug);
+        const articles = readData("articles");
+        const index = articles.findIndex(a => a.slug === slug);
+        const article = articles[index];
+        // A blog card sits at the position of its article (npm run check:content): its id is the card image, not the slug
+        const card = readData("blog").entries[index];
         if (article) {
             data = {
                 "@type": "BlogPosting",
@@ -204,11 +207,11 @@ function jsonLd({ page, lang, title, description, image, author, socials }) {
 // The Atom feed of the blog in one language: each article's title, dates, excerpt and tags, linked to its place in the blog.
 function feedXml(lang, author) {
     const blog = readData("blog");
-    const cards = new Map(blog.entries.map(entry => [entry.id, entry]));
     const atomDate = day => `${day}T00:00:00Z`;
-    const entries = readData("articles").map(article => {
+    const entries = readData("articles").map((article, index) => {
         const link = `${site}/${lang}/blog#${article.slug}`;
-        const excerpt = cards.get(article.slug)?.excerpt;
+        // The card at the same position (its id is the card image, not the slug)
+        const excerpt = blog.entries[index]?.excerpt;
         const categories = article.tags.map(tag => `        <category term="${xmlEscape(tagName(tag, lang))}"/>`);
         const updated = gitDate(`articles/${article.slug}_${lang}.html`);
         return {
