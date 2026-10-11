@@ -50,8 +50,11 @@ These libraries and tools are intentionally kept below their latest major releas
 | 2026-09-25       | **CVE-2026-19693** (GHSA-7pqw-9j4j-h8q3) : *extract-zip* (via Puppeteer 2.1.1 of `netlify-plugin-inline-critical-css`, dev only) | High | Accepted risk, no patched release; goes away with [#436](https://github.com/nicoboga4075/Portfolio/issues/436). Not exploitable: Puppeteer only extracts the Chromium archive it downloads at install | :hourglass: |
 | 2026-09-25       | **CVE-2026-56876** (GHSA-jmr9-qjv8-65gv) : *extract-zip* (same path) | High | Accepted risk, no patched release; goes away with [#436](https://github.com/nicoboga4075/Portfolio/issues/436). Not exploitable, for the same reason | :hourglass: |
 | 2026-10-03       | **CVE-2026-93687** (GHSA-vfj7-8cjw-p6xm) : *braces* (via Eleventy's chokidar and browser-sync's micromatch, dev only) | High | Open, no patched release yet ([#433](https://github.com/nicoboga4075/Portfolio/issues/433)). Not exploitable: braces only expands the project's own build and watch globs, never untrusted input | :hourglass: |
+| 2026-10-10       | **CodeQL** *actions/missing-workflow-permissions* : the 3 jobs of `.github/workflows/node.js.yml` | Medium | Patched, each job declares `permissions: contents: read` | :white_check_mark: |
 | 2026-10-11       | **CodeQL** *js/incomplete-multi-character-sanitization* : `plainText` in `.eleventy.js` | Low | Patched, tags are stripped until none is left, then any lone `<` or `>`. Not exploitable: it only reads `_data` and its output is escaped | :white_check_mark: |
-| 2026-10-11       | **GHSA-86w9-cpqp-85rv** : *node-forge* (via `@sonar/scan`, dev only) | High | Open, no patched release yet ([#461](https://github.com/nicoboga4075/Portfolio/issues/461)). Not exploitable: `@sonar/scan` only reads PKCS#12 truststores and never verifies RSA signatures | :hourglass: |
+| 2026-10-11       | **GHSA-86w9-cpqp-85rv** : *node-forge* (via `@sonar/scan`, dev only) | High | Accepted risk (Dependabot alert dismissed as tolerable risk), no patched release yet ([#461](https://github.com/nicoboga4075/Portfolio/issues/461)). Not exploitable: `@sonar/scan` only reads PKCS#12 truststores and never verifies RSA signatures | :hourglass: |
+
+Dependabot alerts on dev dependencies that a version update fixes are not listed one by one: Dependabot closes them with its pull requests (see the repository's Security tab).
 
 *This section will be updated if and when vulnerabilities are responsibly disclosed.*
  
