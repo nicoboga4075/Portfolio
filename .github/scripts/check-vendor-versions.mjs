@@ -20,45 +20,54 @@ function isNewer(latest, current) {
   return false;
 }
 
-async function latestNpmVersion(pkg) {
+// A release version (1.2.3), not a pre-release (1.2.3-beta.1) nor a tag that isn't a version.
+const isRelease = version => /^\d+(\.\d+)*$/.test(version);
+const majorOf = version => Number(version.split(".")[0]);
+const newest = versions => versions.filter(isRelease).reduce((best, v) => (best === null || isNewer(v, best) ? v : best), null);
+
+// The latest release, and every published version so the latest one of the current major can be picked too.
+async function npmVersions(pkg) {
   const res = await fetch(`https://registry.npmjs.org/${pkg}`);
   if (!res.ok) throw new Error(`npm registry HTTP ${res.status}`);
   const data = await res.json();
-  return data["dist-tags"].latest;
+  return { latest: data["dist-tags"].latest, versions: Object.keys(data.versions) };
 }
 
-async function latestGithubTag(repo) {
-  const res = await fetch(`https://api.github.com/repos/${repo}/tags`, {
+async function githubVersions(repo) {
+  const res = await fetch(`https://api.github.com/repos/${repo}/tags?per_page=100`, {
     headers: { "User-Agent": "vendor-version-check", Accept: "application/vnd.github+json" }
   });
   if (!res.ok) throw new Error(`GitHub API HTTP ${res.status}`);
-  const tags = await res.json();
-  return tags[0]?.name.replace(/^v/, "") ?? null;
+  const versions = (await res.json()).map(tag => tag.name.replace(/^v/, ""));
+  return { latest: versions[0] ?? null, versions };
 }
 
 const outdated = [];
 const unknown = [];
 const failed = [];
 
-function latestVersion(library) {
-  return library.source === "github" ? latestGithubTag(library.repo) : latestNpmVersion(library.npm);
+function publishedVersions(library) {
+  return library.source === "github" ? githubVersions(library.repo) : npmVersions(library.npm);
 }
 
-// Every check settles to { library, latest } or { library, error }, so one failed request doesn't abort the others.
+// Every check settles to { library, latest, versions } or { library, error }, so one failed request doesn't abort the others.
 const checks = await Promise.all(
-  manifest.map(library => latestVersion(library).then(
-    latest => ({ library, latest }),
+  manifest.map(library => publishedVersions(library).then(
+    ({ latest, versions }) => ({ library, latest, versions }),
     error => ({ library, error })
   ))
 );
 
-for (const { library, latest, error } of checks) {
+for (const { library, latest, versions, error } of checks) {
   if (error) {
     failed.push({ ...library, error: error.message });
   } else if (library.version === null) {
     unknown.push({ ...library, latest });
-  } else if (isNewer(latest, library.version)) {
-    outdated.push({ ...library, latest });
+  } else {
+    // A minor or patch release of the current major can be taken even when the next major is held back on purpose.
+    const inMajor = newest(versions.filter(v => majorOf(v) === majorOf(library.version)));
+    const minorUpdate = inMajor !== null && isNewer(inMajor, library.version) ? inMajor : null;
+    if (minorUpdate || isNewer(latest, library.version)) outdated.push({ ...library, latest, inMajor: minorUpdate });
   }
 }
 
@@ -66,8 +75,10 @@ let body = "Automated weekly check of the third-party libraries vendored in `js/
   "(not managed by Dependabot since they are not npm dependencies of this project).\n\n";
 
 if (outdated.length) {
-  body += "### Updates available\n\n| Library | File | Current | Latest |\n|---|---|---|---|\n";
-  for (const r of outdated) body += `| ${r.name} | \`${r.file}\` | ${r.version} | ${r.latest} |\n`;
+  body += "### Updates available\n\n" +
+    "_Latest in current major_ is a minor or patch release that keeps the same API; _Latest_ may be a new major, held back on purpose for some libraries (see SECURITY.md).\n\n" +
+    "| Library | File | Current | Latest in current major | Latest |\n|---|---|---|---|---|\n";
+  for (const r of outdated) body += `| ${r.name} | \`${r.file}\` | ${r.version} | ${r.inMajor ?? "-"} | ${r.latest} |\n`;
   body += "\n";
 }
 if (unknown.length) {
