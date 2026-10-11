@@ -11,15 +11,15 @@ The third-party libraries in `js/` and `css/` are downloaded manually (not npm d
 | jQuery | 3.7.1 | [npm](https://www.npmjs.com/package/jquery) | DOM manipulation and events used across the site's JS |
 | jQuery Migrate | 3.6.0 | [npm](https://www.npmjs.com/package/jquery-migrate) | Restores legacy jQuery APIs some vendored plugins still call |
 | jQuery Easing | 1.4.1 | [npm](https://www.npmjs.com/package/jquery.easing) | Extra easing functions for the smooth-scroll nav links |
-| Bootstrap | 4.3.1 | [npm](https://www.npmjs.com/package/bootstrap) | CSS grid/layout and UI components on the index and blog pages |
+| Bootstrap | 4.6.2 | [npm](https://www.npmjs.com/package/bootstrap) | CSS grid/layout and UI components on the index and blog pages |
 | Popper.js | 1.16.1 | [npm](https://www.npmjs.com/package/popper.js) | Positions Bootstrap's dropdowns and tooltips |
 | Chart.js | 4.5.1 | [npm](https://www.npmjs.com/package/chart.js) | Renders the skills/career doughnut charts |
 | Stellar.js | 0.6.2 | [npm](https://www.npmjs.com/package/jquery.stellar) | Parallax scrolling on background images |
 | Waypoints | 4.0.1 | [npm](https://www.npmjs.com/package/waypoints) | Triggers scroll-based animations when sections enter the viewport |
 | Owl Carousel | 2.3.4 | [npm](https://www.npmjs.com/package/owl.carousel) | Powers the testimonial/project carousels |
 | Scrollax | 1.0.0 | [npm](https://www.npmjs.com/package/scrollax) | Waypoints wrapper driving the scroll-in animations |
-| Animate.css | 3.4.0 | [npm](https://www.npmjs.com/package/animate.css) | CSS animation classes applied on scroll-in |
-| i18next | 26.4.2 | [npm](https://www.npmjs.com/package/i18next) | Client-side translations for the multi-language pages |
+| Animate.css | 3.7.2 | [npm](https://www.npmjs.com/package/animate.css) | CSS animation classes applied on scroll-in |
+| i18next | 26.4.3 | [npm](https://www.npmjs.com/package/i18next) | Client-side translations for the multi-language pages |
 | chartjs-plugin-doughnutlabel-v3 | 1.2.0 | [npm](https://www.npmjs.com/package/chartjs-plugin-doughnutlabel-v3) | Draws the centered label inside Chart.js doughnut charts |
 
 jQuery, jQuery Migrate, Bootstrap and Animate.css are intentionally kept below their latest major release - see [SECURITY.md](SECURITY.md#major-versions-held-back-on-purpose) for why each one is pinned.
