@@ -3,6 +3,8 @@
 ### 🚀  Live Site
 This project is deployed on **Netlify** : https://nicoboga.netlify.app
 
+The blog has an Atom feed in each language: [English](https://nicoboga.netlify.app/feed_en.xml) and [French](https://nicoboga.netlify.app/feed_fr.xml).
+
 ### 🗂️ Project Structure
 The site is built with [Eleventy](https://www.11ty.dev): the pages are HTML files with a front matter, laid out by `_includes/base.njk` and filled from `_data/`. `npm run build` compiles them in place, and the repository root is the folder Netlify publishes.
 
