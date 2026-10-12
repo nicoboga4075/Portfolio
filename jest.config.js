@@ -1,6 +1,7 @@
 module.exports = {
   roots: ["<rootDir>/js", "<rootDir>/netlify"],
   collectCoverageFrom: [
+    "service-worker.js",
     "js/standalone.js",
     "js/analytics.js",
     "js/app.js"
