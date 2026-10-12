@@ -19,8 +19,8 @@ jobs:
       (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: read
+      contents: write # Required for Claude to push its branch
+      pull-requests: write # Required for Claude to open the pull request
       issues: read
       id-token: write
       actions: read # Required for Claude to read CI results on PRs
@@ -55,5 +55,7 @@ jobs:
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
-          # To let Claude open PRs itself, use claude_args: '--allowedTools "Bash(gh pr create:*)"' (not gh pr *, which also allows merge and close), then see claude-code-review.yml to have them reviewed
+
+          # Lets Claude open its PRs (gh pr create only, not gh pr *, which also allows merge and close) and run the docs check and the lints before it commits
+          claude_args: '--allowedTools "Bash(gh pr create:*),Bash(npm run check:docs),Bash(npm run lint),Bash(npm run lint:*)"'
 
