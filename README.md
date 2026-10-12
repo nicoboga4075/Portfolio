@@ -1,4 +1,4 @@
-# Portfolio&nbsp;[![Netlify Status](https://api.netlify.com/api/v1/badges/3ca3f0ca-21e5-4549-a46e-a8dc9a87131c/deploy-status)](https://app.netlify.com/sites/nicoboga/deploys)&nbsp;[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nicoboga4075_Portfolio&metric=alert_status&token=f7fc3565e07a56df5e54ce88e0c6292896b4b4ef)](https://sonarcloud.io/summary/new_code?id=nicoboga4075_Portfolio)
+# Portfolio&nbsp;[![Netlify Status](https://api.netlify.com/api/v1/badges/3ca3f0ca-21e5-4549-a46e-a8dc9a87131c/deploy-status)](https://app.netlify.com/sites/nicoboga/deploys)&nbsp;[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nicoboga4075_Portfolio&metric=alert_status&token=f7fc3565e07a56df5e54ce88e0c6292896b4b4ef)](https://sonarcloud.io/summary/new_code?id=nicoboga4075_Portfolio)&nbsp;[![Coverage](https://gitlab.com/nicoboga4075/Portfolio/badges/main/coverage.svg)](https://gitlab.com/nicoboga4075/Portfolio/-/pipelines?ref=main)
 
 ### 🚀  Live Site
 This project is deployed on **Netlify** : https://nicoboga.netlify.app
