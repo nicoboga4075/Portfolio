@@ -1,4 +1,4 @@
-function Invoke-WithTimestamp {
+﻿function Invoke-WithTimestamp {
     param(
         [string]$Command,
         $LogPath
@@ -20,15 +20,22 @@ Import-Module powershell-yaml
 # Load pipeline config
 $yamlPath = ".\.gitlab-ci.yml"
 if (-not (Test-Path $yamlPath)) {
-    Write-Output "❌ .gitlab-ci.yml not found!" -ForegroundColor Red
+    Write-Host "❌ .gitlab-ci.yml not found!" -ForegroundColor Red
     exit 1
 }
-$ciConfig = ConvertFrom-Yaml (Get-Content $yamlPath -Raw)
+# powershell-yaml loads its YamlDotNet DLLs from the module folder: under OneDrive\Documents they may be online-only files that can't be read while OneDrive isn't running
+try {
+    $ciConfig = ConvertFrom-Yaml (Get-Content $yamlPath -Raw) -ErrorAction Stop
+} catch {
+    Write-Host "❌ Can't read .gitlab-ci.yml with powershell-yaml: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "   If the module is under OneDrive, start OneDrive or keep its folder on this device: $((Get-Module powershell-yaml).ModuleBase)" -ForegroundColor Red
+    exit 1
+}
 
 # Stages list
 $stages = $ciConfig.stages
 if (-not $stages) {
-    Write-Output "❌ No stages defined." -ForegroundColor Red
+    Write-Host "❌ No stages defined." -ForegroundColor Red
     exit 1
 }
 
@@ -42,10 +49,10 @@ if (-not (Test-Path $logDir)) { New-Item -ItemType Directory -Path $logDir }
 
 $results = @()
 
-Write-Output "`n🚀 Local GitLab CI Simulator (Windows Runner)`n" -ForegroundColor Cyan
+Write-Host "`n🚀 Local GitLab CI Simulator (Windows Runner)`n" -ForegroundColor Cyan
 
 foreach ($stage in $stages) {
-    Write-Output "=== Stage: $stage ===" -ForegroundColor Yellow
+    Write-Host "=== Stage: $stage ===" -ForegroundColor Yellow
 
     $jobs = $ciConfig.Keys | Where-Object {
         ($ciConfig[$_] -is [hashtable]) -and
@@ -62,21 +69,21 @@ foreach ($stage in $stages) {
         $jobStart = Get-Date
         $logPath = "$logDir\$jobName.log"
 
-        Write-Output "`n▶️  Job: $jobName`n" -ForegroundColor Green
+        Write-Host "`n▶️  Job: $jobName`n" -ForegroundColor Green
         "=== Job: $jobName ===" | Out-File $logPath
 
 		$dangerousPatterns = "Remove-Item|Remove-ItemProperty|Clear-Content|Clear-Item|Clear-ItemProperty|Stop-Computer|Restart-Computer|Format-Volume|Stop-Process|Set-ExecutionPolicy|Uninstall-Module|Remove-Module|Start-Process|New-Item|rm|rmdir|unlink|shutdown|reboot|halt|mkfs|dd|:\(\)\s*\{\s*:\|\s*:\&\s*\};:|curl\s+\|\s*sh|wget\s+\|\s*sh|mv|chmod|chown|killall|kill\s+-9"
 
         foreach ($cmd in $jobValue.script) {
 			if ($cmd -match $dangerousPatterns) {
-				Write-Output "⚠️  Skipping dangerous command: $cmd" -ForegroundColor Red
+				Write-Host "⚠️  Skipping dangerous command: $cmd" -ForegroundColor Red
 				Add-Content -Path $logPath -Value "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ⚠️  Skipped command: $cmd"
 				continue
 			}
             try {
                 Invoke-WithTimestamp -Command $cmd -LogPath $logPath
             } catch {
-                Write-Output "❌ Error: $cmd" -ForegroundColor Red
+                Write-Host "❌ Error: $cmd" -ForegroundColor Red
                 $results += @{ job=$jobName; stage=$stage; status="failed"; duration=0 }
                 exit 1
             }
@@ -84,14 +91,14 @@ foreach ($stage in $stages) {
 
         $jobEnd = Get-Date
         $duration = [math]::Round(($jobEnd - $jobStart).TotalSeconds, 2)
-        Write-Output "`n✅ Job finished in $duration sec`n" -ForegroundColor Green
+        Write-Host "`n✅ Job finished in $duration sec`n" -ForegroundColor Green
         $results += @{ job=$jobName; stage=$stage; status="success"; duration=$duration }
     }
 }
 
 $results | ConvertTo-Json | Out-File "$logDir\pipeline-result.json"
 
-Write-Output "`n🎉 Pipeline completed!" -ForegroundColor Cyan
+Write-Host "`n🎉 Pipeline completed!" -ForegroundColor Cyan
 Write-Output "📊 Logs: $logDir"
 Write-Output "📑 Summary: $logDir\pipeline-result.json`n"
 
