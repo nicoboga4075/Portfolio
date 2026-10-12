@@ -20,8 +20,9 @@ Prefer single-line comments, even long ones, in every language (CSS, JS, HTML, N
 
 ## Skills
 
-The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fits before doing the task by hand.
+The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fits before doing the task by hand. The table is kept in step by `.claude/hooks/sync-skills-table.mjs` (after a SKILL.md is written, and before each commit): edit the "Use it to" text freely, the rows and scripts follow the skill folders.
 
+<!-- skills:start -->
 | Skill | Use it to | Script |
 |---|---|---|
 | `new-article` | Add a blog article in English and French (pages, data, route, images) | - |
@@ -30,8 +31,9 @@ The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fi
 | `check-content` | Check that articles and projects are wired everywhere, in the same order | `npm run check:content` |
 | `i18n-l10n` | Check the translations and the built pages in every language | `npm run check:translation` |
 | `check-links` | Check the external links (status, trailing slash, soft 404) | `npm run check:links` |
-| `wcag-contrast` | Check and fix WCAG AA contrast after a colour or style change, only when asked | `npm run contrast:quick`, `npm run contrast` |
+| `wcag-contrast` | Check and fix WCAG AA contrast after a colour or style change, only when asked | `npm run contrast`, `npm run contrast:quick` |
 | `update-docs` | Keep README.md and SECURITY.md in step (vendored libraries, held-back versions, overrides, security log and practices) | `npm run check:docs` |
 | `check-overrides` | Tell which npm overrides are still needed after a dependency update | `npm run check:overrides` |
 | `robot-test` | Write and run a Robot Framework test following ROBOT_FRAMEWORK.md | - |
 | `netlify-ops` | Check and operate the live Netlify site (builds, lock, build without cache, restore), asking before any change | `npm run netlify:ops` |
+<!-- skills:end -->

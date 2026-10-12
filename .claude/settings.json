@@ -21,6 +21,12 @@
             "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/site-health-before-commit.mjs\"",
             "timeout": 90,
             "statusMessage": "Checking the health of the site before the commit..."
+          },
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/sync-skills-table.mjs\" --before-commit",
+            "timeout": 30,
+            "statusMessage": "Checking the skills table of CLAUDE.md before the commit..."
           }
         ]
       }
@@ -60,6 +66,12 @@
             "url": "http://localhost:4799/post-edit",
             "timeout": 10,
             "statusMessage": "Checking the translations of the edited data file..."
+          },
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/sync-skills-table.mjs\" --edit",
+            "timeout": 30,
+            "statusMessage": "Updating the skills table of CLAUDE.md..."
           }
         ]
       },
