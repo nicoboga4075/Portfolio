@@ -6,6 +6,8 @@ This project is deployed on **Netlify** : https://nicoboga.netlify.app
 ### 🗂️ Project Structure
 The site is built with [Eleventy](https://www.11ty.dev): the pages are HTML files with a front matter, laid out by `_includes/base.njk` and filled from `_data/`. `npm run build` compiles them in place, and the repository root is the folder Netlify publishes.
 
+For an interactive diagram of this architecture, open [GitDiagram](https://gitdiagram.com/nicoboga4075/Portfolio): it generates it from the GitHub repository (replace `hub` with `diagram` in any GitHub URL), and each box links to its file or folder.
+
 ```
 Portfolio/
 ├── index_en.html, index_fr.html   Home page, one file per language (as are all the pages below)
