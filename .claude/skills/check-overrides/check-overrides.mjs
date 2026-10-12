@@ -39,7 +39,7 @@ function versionsOf(name) {
     if (!published.has(name)) {
         // No shell: the package name is passed as one argument
         const run = spawnSync(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['view', name, 'versions', '--json'], { cwd: ROOT, encoding: 'utf8', shell: process.platform === 'win32' });
-        published.set(name, run.status === 0 ? [].concat(JSON.parse(run.stdout)) : null);
+        published.set(name, run.status === 0 ? [JSON.parse(run.stdout)].flat() : null);
     }
     return published.get(name);
 }
@@ -69,12 +69,16 @@ for (const entry of entries(overrides)) {
     console.log(`  added by ${origin}`);
 
     if (!asked.length) {
-        console.log(`  ✖ obsolete: no installed package${entry.parent ? ` ${entry.parent.name}${entry.parent.range ? `@${entry.parent.range}` : ''}` : ''} depends on ${entry.dep} any more`);
+        // For a nested override, only the packages of its parent count
+        let scope = '';
+        if (entry.parent) scope = entry.parent.range ? ` ${entry.parent.name}@${entry.parent.range}` : ` ${entry.parent.name}`;
+        console.log(`  ✖ obsolete: no installed package${scope} depends on ${entry.dep} any more`);
         problems++;
         continue;
     }
     if (alias) {
-        console.log(`  ✔ active: replaces ${entry.dep} with ${spec.slice(4)} for ${asked.map(r => `${r.name}@${r.version} (asks ${r.range})`).join(', ')}`);
+        const users = asked.map(r => `${r.name}@${r.version} (asks ${r.range})`).join(', ');
+        console.log(`  ✔ active: replaces ${entry.dep} with ${spec.slice(4)} for ${users}`);
         continue;
     }
 
@@ -85,7 +89,9 @@ for (const entry of entries(overrides)) {
         // The version npm would install for this package without the override
         const natural = versions ? semver.maxSatisfying(versions.filter(v => !semver.prerelease(v)), r.range) : null;
         const ok = natural && semver.satisfies(natural, spec);
-        console.log(`  ${ok ? '·' : '→'} ${r.name}@${r.version} asks ${entry.dep} ${r.range}: without the override npm would install ${natural ?? '?'}${ok ? `, which already matches ${spec}` : ''}`);
+        const marker = ok ? '·' : '→';
+        const matches = ok ? `, which already matches ${spec}` : '';
+        console.log(`  ${marker} ${r.name}@${r.version} asks ${entry.dep} ${r.range}: without the override npm would install ${natural ?? '?'}${matches}`);
         if (!ok) needed.push(r);
         // The override holds the dependency below the version npm would pick: the reason it was added may be gone
         if (!ok && natural && semver.gt(natural, semver.maxSatisfying(versions, spec) ?? '0.0.0')) older.push(`${r.name} would get ${natural}`);
@@ -101,5 +107,6 @@ for (const entry of entries(overrides)) {
     if (now.length) console.log(`  installed: ${[...new Set(now)].join(', ')}`);
 }
 
-console.log(`\n${problems ? `${problems} override(s) to remove or review` : 'Every override still changes what npm installs'}`);
+const summary = problems ? `${problems} override(s) to remove or review` : 'Every override still changes what npm installs';
+console.log(`\n${summary}`);
 process.exit(problems ? 1 : 0);
