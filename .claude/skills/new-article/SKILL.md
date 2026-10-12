@@ -56,6 +56,7 @@ Keep each file's formatting (one entry per line block, 4-space indent): edit, do
 
 - Add the slug to `routes.articles` in `package.json` (the sitemap is built from it).
 - Put the card picture at `images/<card id>.avif` and every article picture at `images/<image-id>.avif`. Ask the user for the files; don't create placeholder images.
+- Add a JPEG copy of the card picture for the Atom feeds (feed readers don't show AVIF), else the build fails: `ffmpeg -i images/<card id>.avif -vf "scale='min(1200,iw)':-2" -q:v 4 images/feed/<card id>.jpg`.
 - Optional: a Lighthouse audit in `netlify.toml`, like the existing ones (`path = ".netlify/functions/article?filename=<slug>_en.html"`).
 
 ## 5. Check

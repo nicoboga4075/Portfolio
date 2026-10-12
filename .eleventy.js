@@ -212,6 +212,12 @@ function feedXml(lang, author) {
         const link = `${site}/${lang}/blog#${article.slug}`;
         // The card at the same position (its id is the card image, not the slug)
         const excerpt = blog.entries[index]?.excerpt;
+        // The card picture as a JPEG, a format every feed reader shows (not every one decodes AVIF), read as Media RSS by Feedly and as an enclosure by the others
+        const picture = `images/feed/${blog.entries[index]?.id}.jpg`;
+        if (!fs.existsSync(path.join(__dirname, picture))) {
+            throw new Error(`Atom feed: ${picture} is missing (a JPEG copy of the card picture of ${article.slug})`);
+        }
+        const image = `${site}/${picture}`;
         const categories = article.tags.map(tag => `        <category term="${xmlEscape(tagName(tag, lang))}"/>`);
         const updated = gitDate(`articles/${article.slug}_${lang}.html`);
         return {
@@ -220,18 +226,21 @@ function feedXml(lang, author) {
                 "    <entry>",
                 `        <title>${xmlEscape(inLang(article.title, lang))}</title>`,
                 `        <link rel="alternate" type="text/html" href="${xmlEscape(link)}"/>`,
+                `        <link rel="enclosure" type="image/jpeg" href="${xmlEscape(image)}" length="${fs.statSync(path.join(__dirname, picture)).size}"/>`,
                 `        <id>${xmlEscape(link)}</id>`,
                 `        <published>${atomDate(article.date)}</published>`,
                 `        <updated>${atomDate(updated)}</updated>`,
                 ...(excerpt ? [`        <summary>${xmlEscape(plainText(inLang(excerpt, lang)))}</summary>`] : []),
                 ...categories,
+                `        <media:thumbnail url="${xmlEscape(image)}"/>`,
+                `        <media:content url="${xmlEscape(image)}" medium="image" type="image/jpeg"/>`,
                 "    </entry>"
             ].join("\n")
         };
     });
     const updated = entries.map(e => e.updated).sort().at(-1);
     return `<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="${locales[lang].replace("_", "-")}">
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="${locales[lang].replace("_", "-")}">
     <title>Portfolio - Blog</title>
     <subtitle>${xmlEscape(blog.sectionText[lang].tagline)}</subtitle>
     <link rel="self" type="application/atom+xml" href="${site}/feed_${lang}.xml"/>
