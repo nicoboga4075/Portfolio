@@ -32,7 +32,7 @@ Security updates don't wait for the schedule: Dependabot opens them as soon as a
 
 ## SonarCloud
 
-The `sonar` job of GitHub Actions (`sonarqube-scan-action`) analyses every pushed commit of `main`. The `sonar-job` of GitLab CI first asks the GitHub API whether a Node.js CI run exists for its commit (same SHA on both remotes): if so it skips its analysis, so a late GitLab analysis never overwrites the state of `main` in SonarCloud nor creates a VERSION event that resets the new code; only when GitHub has no run for the commit (or its API can't be reached) does GitLab analyse with `npx @sonar/scan`. Both send the same project version: `@sonar/scan` reads it from `package.json`, and the GitHub job passes `-Dsonar.projectVersion` read from `package.json` too, so SonarCloud keeps its "previous version" new code period across both.
+The `sonar` job of GitHub Actions (`sonarqube-scan-action`) analyses every pushed commit of `main`. The `sonar-job` of GitLab CI first asks the GitHub API whether a Node.js CI run exists for its commit (same SHA on both remotes): if so it skips its analysis, so a late GitLab analysis never overwrites the state of `main` in SonarCloud nor creates a VERSION event that resets the new code, and waits (up to 20 minutes) for the GitHub `sonar` job to finish to take its verdict: it fails when that job failed (the quality gate included), was cancelled or timed out; only when GitHub has no run for the commit (or its API can't be reached) does GitLab analyse with `npx @sonar/scan`. Both send the same project version: `@sonar/scan` reads it from `package.json`, and the GitHub job passes `-Dsonar.projectVersion` read from `package.json` too, so SonarCloud keeps its "previous version" new code period across both.
 
 ## GitLab CI
 

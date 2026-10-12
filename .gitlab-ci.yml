@@ -89,7 +89,27 @@ sonar-job:
         $runs = @()
       }
       if ($runs.Count -gt 0) {
-        echo "GitHub Actions analyses $env:CI_COMMIT_SHA (Node.js CI: $($runs[0].status) $($runs[0].conclusion)): SonarCloud analysis skipped on GitLab"
+        # Skip the analysis here, but wait for the sonar job of GitHub (quality gate included) and take its verdict, polling once a minute for up to 20 minutes
+        $run = $runs[0]
+        echo "GitHub Actions analyses $env:CI_COMMIT_SHA (Node.js CI run $($run.id)): SonarCloud analysis skipped on GitLab, waiting for the GitHub sonar job..."
+        $deadline = (Get-Date).AddMinutes(20)
+        $job = $null
+        while ((Get-Date) -lt $deadline) {
+          try {
+            $job = (Invoke-RestMethod "https://api.github.com/repos/nicoboga4075/Portfolio/actions/runs/$($run.id)/jobs").jobs | Where-Object { $_.name -eq 'sonar' } | Select-Object -First 1
+          } catch {
+            echo "Could not read the jobs of run $($run.id) ($($_.Exception.Message)), retrying"
+          }
+          if ($job -and $job.status -eq 'completed') { break }
+          Start-Sleep -Seconds 60
+        }
+        if (-not $job -or $job.status -ne 'completed') {
+          echo "The GitHub sonar job did not finish within 20 minutes: see https://github.com/nicoboga4075/Portfolio/actions/runs/$($run.id)"
+          exit 1
+        }
+        echo "GitHub sonar job: $($job.conclusion) ($($job.html_url))"
+        # failure (the quality gate included), cancelled or timed_out fail this job; success and skipped (Dependabot) pass
+        if ($job.conclusion -in @('failure', 'cancelled', 'timed_out')) { exit 1 }
       } else {
         echo "No GitHub Actions run for ${env:CI_COMMIT_SHA}: running the SonarCloud analysis on GitLab..."
         npx @sonar/scan "-Dsonar.token=$env:SONAR_TOKEN"
