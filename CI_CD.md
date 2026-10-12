@@ -32,11 +32,11 @@ Security updates don't wait for the schedule: Dependabot opens them as soon as a
 
 ## SonarCloud
 
-Both pipelines analyse `main`: the `sonar` job of GitHub Actions (`sonarqube-scan-action`) and the `sonar-job` of GitLab CI (`npx @sonar/scan`). They must send the same project version: `@sonar/scan` reads it from `package.json`, and the GitHub job passes `-Dsonar.projectVersion` read from `package.json` too. Two different versions would make SonarCloud reset its "previous version" new code period at every analysis, and the coverage condition of the quality gate would be skipped.
+The `sonar` job of GitHub Actions (`sonarqube-scan-action`) analyses every pushed commit of `main`. The `sonar-job` of GitLab CI first asks the GitHub API whether a Node.js CI run exists for its commit (same SHA on both remotes): if so it skips its analysis, so a late GitLab analysis never overwrites the state of `main` in SonarCloud nor creates a VERSION event that resets the new code; only when GitHub has no run for the commit (or its API can't be reached) does GitLab analyse with `npx @sonar/scan`. Both send the same project version: `@sonar/scan` reads it from `package.json`, and the GitHub job passes `-Dsonar.projectVersion` read from `package.json` too, so SonarCloud keeps its "previous version" new code period across both.
 
 ## GitLab CI
 
-`.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (Jest, Playwright), `sonar` (`npx @sonar/scan`, allowed to fail) and `teardown` (cleans the build folder).
+`.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (Jest, Playwright), `sonar` (`npx @sonar/scan` only when GitHub Actions doesn't analyse the commit, allowed to fail) and `teardown` (cleans the build folder).
 
 
 ### Install the GitLab Runner

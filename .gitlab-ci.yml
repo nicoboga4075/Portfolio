@@ -79,9 +79,23 @@ sonar-job:
   dependencies:
     - test-job
   script:
-    - echo "Running SonarCloud analysis..."
-    - npx @sonar/scan "-Dsonar.token=$env:SONAR_TOKEN"
-    - echo "Sonar analysis done!"
+    - |
+      # GitHub Actions analyses every pushed commit: run this analysis only when it doesn't, so GitLab never overwrites the main branch of SonarCloud (late analyses, VERSION events)
+      try {
+        $runs = @((Invoke-RestMethod "https://api.github.com/repos/nicoboga4075/Portfolio/actions/runs?head_sha=$env:CI_COMMIT_SHA").workflow_runs | Where-Object { $_.name -eq 'Node.js CI' })
+      } catch {
+        # GitHub API unreachable or rate limited: analyse here rather than skip blindly
+        echo "Could not read the GitHub Actions runs ($($_.Exception.Message)): analysing on GitLab"
+        $runs = @()
+      }
+      if ($runs.Count -gt 0) {
+        echo "GitHub Actions analyses $env:CI_COMMIT_SHA (Node.js CI: $($runs[0].status) $($runs[0].conclusion)): SonarCloud analysis skipped on GitLab"
+      } else {
+        echo "No GitHub Actions run for ${env:CI_COMMIT_SHA}: running the SonarCloud analysis on GitLab..."
+        npx @sonar/scan "-Dsonar.token=$env:SONAR_TOKEN"
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        echo "Sonar analysis done!"
+      }
 
 cleanup-job:
   stage: teardown
