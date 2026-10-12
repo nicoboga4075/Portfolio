@@ -55,7 +55,8 @@ test-job:
     - echo "Running Playwright tests..."
     - npx playwright test *> $null -ErrorAction SilentlyContinue; if ($LASTEXITCODE -ne 0) { echo "No tests found, exiting with code 0" }
     - echo "Run done!"
-  coverage: '/All files\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+\d+\s+\|\s+([\d\.]+)/'
+  # % Lines of Jest's "All files" row; the other columns hold decimals too (1.47), not only whole numbers
+  coverage: '/All files\s+\|\s+[\d.]+\s+\|\s+[\d.]+\s+\|\s+[\d.]+\s+\|\s+([\d.]+)/'
   artifacts:
     when: always
     reports:
