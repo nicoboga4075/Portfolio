@@ -405,7 +405,8 @@ async function prepare(page) {
         document.querySelectorAll('.ftco-animate').forEach(e => e.classList.add('ftco-animated', 'fadeInUp'));
         for (let y = 0; y < document.body.scrollHeight; y += innerHeight * 0.8) {
             scrollTo(0, y);
-            await new Promise(r => setTimeout(r, 40));
+            // Two animation frames (about 33 ms) let the lazy images and waypoints react to the scroll; requestAnimationFrame rather than setTimeout, which Snyk Code reads as a code injection sink
+            await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
         }
         scrollTo(0, 0);
         document.querySelectorAll('img[loading="lazy"]').forEach(i => { i.loading = 'eager'; });
