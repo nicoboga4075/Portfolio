@@ -40,4 +40,5 @@ The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fi
 | `check-overrides` | Tell which npm overrides are still needed after a dependency update | `npm run check:overrides` |
 | `robot-test` | Write and run a Robot Framework test following ROBOT_FRAMEWORK.md | - |
 | `netlify-ops` | Check and operate the live Netlify site (builds, lock, build without cache, restore), asking before any change | `npm run netlify:ops` |
+| `netlify-prod` | Publish the latest commit of main in one go (`/netlify-prod` only): start the builds, unlock auto publishing, build, publish | - |
 <!-- skills:end -->
