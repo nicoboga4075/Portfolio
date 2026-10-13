@@ -18,6 +18,10 @@ One emoji per commit: pick the one for the main intent of the change.
 
 Prefer single-line comments, even long ones, in every language (CSS, JS, HTML, Nunjucks): no comment wrapped over several lines, and no numbered lists (`1.`, `2.`) inside a comment. When a comment explains several cases or branches, put one single-line comment on each branch instead of a block above them.
 
+## File size
+
+**Never commit a file of 100 MB or more, whatever the reason.** GitHub refuses any file over 100 MiB and GitLab any new file of 100 MiB or more, and `origin` pushes to both, so one such file blocks every push. Git warns from 50 MiB: keep each file well under that, and compress or host elsewhere (YouTube, Vimeo) a video that would get close, such as `docs/public/Bien_PasBien.mp4` at 95 MB already.
+
 ## Skills
 
 The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fits before doing the task by hand. The table is kept in step by `.claude/hooks/sync-skills-table.mjs` (after a SKILL.md is written, and before each commit): edit the "Use it to" text freely, the rows and scripts follow the skill folders.
