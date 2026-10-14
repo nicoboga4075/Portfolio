@@ -44,8 +44,6 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /README.md /404.html 404!
 /security.md /404.html 404!
 /SECURITY.md /404.html 404!
-/ci_cd.md /404.html 404!
-/CI_CD.md /404.html 404!
 /robot_framework.md /404.html 404!
 /ROBOT_FRAMEWORK.md /404.html 404!
 /license /404.html 404!
