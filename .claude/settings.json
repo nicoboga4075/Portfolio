@@ -45,12 +45,8 @@
         "matcher": "startup",
         "hooks": [
           {
-            "type": "mcp_tool",
-            "server": "plugin:portfolio-dev:portfolio",
-            "tool": "site_health",
-            "input": {
-              "hook": "SessionStart"
-            },
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/site-health-at-start.mjs\"",
             "timeout": 90,
             "statusMessage": "Checking the health of the site at the start of the session..."
           }

@@ -1,4 +1,4 @@
-// The health of the portfolio in one call: the live pages, the repository, the CI checks of origin/main on GitHub and the SonarCloud quality gate. Shared by the site_health tool of portfolio-mcp.mjs and the site-health-before-commit hook.
+// The health of the portfolio in one call: the live pages, the repository, the CI checks of origin/main on GitHub and the SonarCloud quality gate. Shared by the site_health tool of portfolio-mcp.mjs and the site-health-at-start and site-health-before-commit hooks.
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
