@@ -20,7 +20,7 @@ const sitePort = 8888;
 const netlifyPort = 8889;
 const { staticServerPort } = toml.parse(fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8')).dev;
 
-// netlify dev (27.9.0) answers 403 on Windows for any static file that a _redirects rule matches: its getStatic() builds the path with path.relative, so it hands its own static server /docs\public\CV_en.pdf, which that server refuses. /docs/public/* is matched by such a rule, so the CV and the other public documents never load through 8888. Serve them straight from netlify dev's static server instead (production isn't affected: Netlify runs on Linux). Only the security headers of _headers are lost on those files locally.
+// netlify dev (27.9.0) answers 403 on Windows for any static file that a _redirects rule matches: its getStatic() builds the path with path.relative, so it hands its own static server /docs\public\CV_en.pdf, which that server refuses. /docs/public/* is matched by such a rule, so the CV and the other public documents never load through 8888. Serve them straight from netlify dev's static server instead (production isn't affected: Netlify runs on Linux), with the headers _headers gives them, which that static server leaves out.
 function serveDocsPublic(req, res, next) {
     // new URL resolves any "../" before the prefix is checked.
     const { pathname, search } = new URL(req.url, 'http://localhost');
@@ -28,11 +28,31 @@ function serveDocsPublic(req, res, next) {
         return next();
     }
     const upstream = http.request({ host: 'localhost', port: staticServerPort, method: req.method, path: pathname + search }, response => {
-        res.writeHead(response.statusCode, response.headers);
+        res.writeHead(response.statusCode, { ...response.headers, ...headersFor(pathname) });
         response.pipe(res);
     });
     upstream.on('error', next);
     upstream.end();
+}
+
+// The headers _headers sets on a path, as Netlify reads it: a path pattern at the start of a line (* for any rest, :name for one segment), its "Name: value" lines indented below, # for comments. Read on every request so an edit applies without a restart; for a header two matching rules both set, the longer pattern wins, as the /docs/public/* rule of _headers expects.
+function headersFor(pathname) {
+    const rules = [];
+    for (const raw of fs.readFileSync(path.join(__dirname, '_headers'), 'utf8').split(/\r?\n/)) {
+        const line = raw.trim();
+        if (!line || line.startsWith('#')) continue;
+        const colon = line.indexOf(':');
+        // An indented line is a header of the rule above it.
+        if (/^\s/.test(raw)) {
+            if (rules.length && colon > 0) rules.at(-1).headers.push([line.slice(0, colon).trim().toLowerCase(), line.slice(colon + 1).trim()]);
+        } else {
+            // Any other line starts a rule.
+            const source = line.replaceAll(/[.+?^${}()|[\]\\]/g, String.raw`\$&`).replaceAll('*', '.*').replaceAll(/:\w+/g, '[^/]+');
+            rules.push({ pattern: line, match: new RegExp(`^${source}$`), headers: [] });
+        }
+    }
+    const matching = rules.filter(rule => rule.match.test(pathname)).sort((a, b) => a.pattern.length - b.pattern.length);
+    return Object.fromEntries(matching.flatMap(rule => rule.headers));
 }
 
 // browser-sync watches only this file, which is rewritten at the end of every Eleventy build. Letting it watch .eleventy itself made its process grow past 2 GB in a few rebuilds (each rebuild rewrites every page and, when full, re-copies ~300 MB of static files) until Node ran out of memory. It lives in the temp folder, outside the repo, so it never shows up in git.
