@@ -1,4 +1,22 @@
 {
+  "permissions": {
+    "allow": [
+      "Edit(/tests/**)",
+      "Edit(/cypress/**)",
+      "Edit(/js/**/*.test.js)",
+      "Edit(/netlify/**/*.test.js)",
+      "Bash(git show *)",
+      "Bash(npx jest *)",
+      "Bash(npx playwright test *)",
+      "Bash(npx cypress run *)",
+      "Bash(npx @11ty/eleventy*)",
+      "PowerShell(git show *)",
+      "PowerShell(npx jest *)",
+      "PowerShell(npx playwright test *)",
+      "PowerShell(npx cypress run *)",
+      "PowerShell(npx @11ty/eleventy*)"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
