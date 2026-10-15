@@ -6,7 +6,6 @@ const fs = require('node:fs');
 const http = require('node:http');
 const os = require('node:os');
 const path = require('node:path');
-const browserSync = require('browser-sync').create();
 const toml = require('toml');
 
 // Every executable is an absolute path: node itself, the project's Eleventy, the global netlify-cli installed next to node, and taskkill in System32. Nothing is looked up through PATH, and no shell wraps the commands.
@@ -35,10 +34,10 @@ function serveDocsPublic(req, res, next) {
     upstream.end();
 }
 
-// The headers _headers sets on a path, as Netlify reads it: a path pattern at the start of a line (* for any rest, :name for one segment), its "Name: value" lines indented below, # for comments. Read on every request so an edit applies without a restart; for a header two matching rules both set, the longer pattern wins, as the /docs/public/* rule of _headers expects.
-function headersFor(pathname) {
+// The headers _headers sets on a path, as Netlify reads it: a path pattern at the start of a line (* for any rest, :name for one segment), its "Name: value" lines indented below, # for comments. The file is read on every call so an edit applies without a restart; for a header two matching rules both set, the longer pattern wins, as the /docs/public/* rule of _headers expects.
+function headersFor(pathname, headersFile = path.join(__dirname, '_headers')) {
     const rules = [];
-    for (const raw of fs.readFileSync(path.join(__dirname, '_headers'), 'utf8').split(/\r?\n/)) {
+    for (const raw of fs.readFileSync(headersFile, 'utf8').split(/\r?\n/)) {
         const line = raw.trim();
         if (!line || line.startsWith('#')) continue;
         const colon = line.indexOf(':');
@@ -57,12 +56,6 @@ function headersFor(pathname) {
 
 // browser-sync watches only this file, which is rewritten at the end of every Eleventy build. Letting it watch .eleventy itself made its process grow past 2 GB in a few rebuilds (each rebuild rewrites every page and, when full, re-copies ~300 MB of static files) until Node ran out of memory. It lives in the temp folder, outside the repo, so it never shows up in git.
 const reloadTrigger = path.join(os.tmpdir(), 'portfolio-dev-reload').replaceAll(path.sep, '/');
-fs.writeFileSync(reloadTrigger, '');
-
-if (!fs.existsSync(netlifyCli)) {
-    console.error(`netlify-cli not found at ${netlifyCli}: install it globally with npm install -g netlify-cli.`);
-    process.exit(1);
-}
 
 const once = process.argv.includes('--once');
 const netlifyArgs = process.argv.slice(2).filter(arg => arg !== '--once');
@@ -101,8 +94,6 @@ function shutdown() {
     process.exit();
 }
 
-process.on('SIGINT', shutdown);
-process.on('SIGTERM', shutdown);
 
 // Calls back once netlify dev answers on its port (any status): it takes about a minute to start.
 function whenNetlifyAnswers(callback) {
@@ -116,7 +107,8 @@ function whenNetlifyAnswers(callback) {
 function startServing() {
     run(netlifyCli, ['dev', '--port', String(netlifyPort), ...netlifyArgs], {}, 'inherit');
     // browser-sync starts, and opens 8888 in the browser, only once netlify dev answers: earlier, the tab would open on a proxy error (netlify dev itself no longer opens 8889, see autoLaunch in netlify.toml).
-    whenNetlifyAnswers(() => browserSync.init({
+    // Required here rather than at the top, so a test that requires this file for headersFor doesn't load browser-sync.
+    whenNetlifyAnswers(() => require('browser-sync').create().init({
         proxy: `http://localhost:${netlifyPort}`,
         port: sitePort,
         // One full reload per build (css included), triggered by the file above.
@@ -154,13 +146,25 @@ function watch() {
     });
 }
 
-if (once) {
-    buildOnce().catch(error => {
-        console.error(error);
-        // shutdown()'s bare process.exit() picks this up.
-        process.exitCode = 1;
-        shutdown();
-    });
-} else {
-    watch();
+module.exports = { headersFor };
+
+// The servers start only when the file runs as a script (npm run dev), not when a test requires it for headersFor.
+if (require.main === module) {
+    fs.writeFileSync(reloadTrigger, '');
+    if (!fs.existsSync(netlifyCli)) {
+        console.error(`netlify-cli not found at ${netlifyCli}: install it globally with npm install -g netlify-cli.`);
+        process.exit(1);
+    }
+    process.on('SIGINT', shutdown);
+    process.on('SIGTERM', shutdown);
+    if (once) {
+        buildOnce().catch(error => {
+            console.error(error);
+            // shutdown()'s bare process.exit() picks this up.
+            process.exitCode = 1;
+            shutdown();
+        });
+    } else {
+        watch();
+    }
 }
