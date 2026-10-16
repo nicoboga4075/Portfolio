@@ -18,7 +18,7 @@ Keep the code files: `*.js`, `*.mjs`, `*.cjs`, `*.ts`, `*.mts`, `*.njk`, `*.html
 For each file, look for an existing test, wherever it is and whenever it was written:
 
 - Jest unit tests: `*.test.js` / `*.spec.js` under `js/` or `netlify/` (the Jest roots)
-- Playwright tests: `tests/*.spec.js`
+- Playwright tests: `tests/playwright/*.spec.js`
 - Cypress tests: `tests/cypress/**`
 - Robot Framework suites: `tests/robot/**/*.robot` (end-to-end tests written with the robot-test skill, see ROBOT_FRAMEWORK.md)
 
@@ -29,8 +29,8 @@ A test covers a file when it imports it, or exercises the page, template, select
 Read `jest.config.js`, `playwright.config.js` and `package.json` first, then pick the most fitting kind for each uncovered feature:
 
 - **Unit (Jest)** for functions and logic you can import: `js/<name>.test.js` or `netlify/functions/<name>.test.js`, next to the code. Jest runs in the `node` environment with no TypeScript transform: if a `.mts` file can't be loaded as is, test its logic through Playwright instead and say so.
-- **Integration or E2E (Playwright)** for page behaviour, templates and styles: `tests/<name>.spec.js`. Playwright has no `webServer` nor `baseURL`: build the site with `npx @11ty/eleventy` when needed and serve the output folder from the test with a small `node:http` static server started in `beforeAll`, the way the repository already serves pages in `.claude/skills/wcag-contrast/check-contrast.mjs`.
-- **Dev scripts of `.claude/`** sit outside the Jest roots: test them with Playwright's runner in `tests/<name>.spec.js`, without a browser, by running the script (`node:child_process`) or talking to it (stdio for the MCP server, HTTP for the translation hook server).
+- **Integration or E2E (Playwright)** for page behaviour, templates and styles: `tests/playwright/<name>.spec.js`. Playwright has no `webServer` nor `baseURL`: build the site with `npx @11ty/eleventy` when needed and serve the output folder from the test with a small `node:http` static server started in `beforeAll`, the way the repository already serves pages in `.claude/skills/wcag-contrast/check-contrast.mjs`.
+- **Dev scripts of `.claude/`** sit outside the Jest roots: test them with Playwright's runner in `tests/playwright/<name>.spec.js`, without a browser, by running the script (`node:child_process`) or talking to it (stdio for the MCP server, HTTP for the translation hook server).
 
 Test real behaviour, not implementation details. One focused test file per feature is enough.
 

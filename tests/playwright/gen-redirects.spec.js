@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-const root = path.join(__dirname, '..');
+const root = path.join(__dirname, '..', '..');
 const dirs = [];
 
 // The _redirects gen-redirects.js writes next to a package.json with these routes, as its lines.

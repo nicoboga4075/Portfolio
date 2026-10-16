@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { headersFor } = require('../dev-watch');
+const { headersFor } = require('../../dev-watch');
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'dev-watch-headers-'));
 let files = 0;
