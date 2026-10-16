@@ -2,7 +2,6 @@
   "permissions": {
     "allow": [
       "Edit(/tests/**)",
-      "Edit(/cypress/**)",
       "Edit(/js/**/*.test.js)",
       "Edit(/netlify/**/*.test.js)",
       "Bash(git show *)",

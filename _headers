@@ -36,8 +36,6 @@
   X-Robots-Tag: noindex, nofollow
 /tests/*
   X-Robots-Tag: noindex, nofollow
-/cypress/*
-  X-Robots-Tag: noindex, nofollow
 /reports/*
   X-Robots-Tag: noindex, nofollow
 /logs/*

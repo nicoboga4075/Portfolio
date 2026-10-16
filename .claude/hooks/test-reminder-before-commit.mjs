@@ -6,8 +6,8 @@ import { hookCommand, isGitCommit } from './git-commit.mjs';
 const ROOT = process.env.CLAUDE_PROJECT_DIR || process.cwd();
 const MODEL = 'claude-haiku-5-5';
 const CODE = /\.(m?js|cjs|ts|njk|html|css)$/i;
-// A test is a file under a tests/ or cypress/ folder, or a *.test / *.spec / *.cy script anywhere.
-const TEST_DIR = /(?:^|\/)(?:tests|cypress)\//i;
+// A test is a file under a tests/ folder (Playwright, tests/cypress, tests/robot), or a *.test / *.spec / *.cy script anywhere.
+const TEST_DIR = /(?:^|\/)tests\//i;
 const TEST_FILE = /\.(?:test|spec|cy)\.(?:m?js|cjs|ts)$/i;
 const isTest = file => TEST_DIR.test(file) || TEST_FILE.test(file);
 

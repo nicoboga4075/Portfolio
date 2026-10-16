@@ -51,7 +51,7 @@
     "test": "npm run jest & npm run cypress & npm run playwright & npm run robot",
     "jest": "npx jest --coverage --passWithNoTests",
     "playwright": "playwright test",
-    "cypress": "npx cypress run",
+    "cypress": "npx cypress run --project tests",
     "robot": "robot --outputdir reports/robot tests/robot",
     "simu:ci": "powershell.exe -Command \"Start-Process powershell.exe -ArgumentList '-NoExit','-Command','Set-Location -LiteralPath \\\"%CD%\\\"; ./simulator_ci.ps1' -Verb RunAs\"",
     "uglify:js": "node uglify-code.js",
