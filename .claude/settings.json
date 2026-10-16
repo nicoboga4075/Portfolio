@@ -116,7 +116,7 @@
             "model": "claude-sonnet-5-5",
             "timeout": 900,
             "statusMessage": "Claude Sonnet is checking the tests of the commit and writing the missing ones...",
-            "prompt": "A git command just ran in this portfolio repository. Its tool call and output, as JSON: $ARGUMENTS\n\nIf the command created no commit (git commit --dry-run, nothing to commit, an amend that only rewords, or git commit only as text in a string), answer ok true and stop.\nOtherwise read .claude/agents/test-writer.md and follow it exactly, with the files of the last commit (no file is named to you, so files under .claude/ are skipped).\n\nAnswer ok true when nothing had to be written. When you wrote tests, answer ok false with its report as reason.\n\nIf a tool call is refused, quote the exact command or file path in your reason."
+            "prompt": "A git command just ran in this portfolio repository. Its tool call and output, as JSON: $ARGUMENTS\n\nIf the command created no commit (git commit --dry-run, nothing to commit, an amend that only rewords, or git commit only as text in a string), answer ok true and stop.\nOtherwise read .claude/agents/test-writer.md and follow it exactly, with the files of the last commit (no file is named to you, so files under .claude/ are skipped).\n\nAnswer ok true when nothing had to be written. When you wrote tests, answer ok false with its report as reason.\n\nYou already run at the root of the repository: never cd or Set-Location, since Claude Code refuses a cd followed by git in one command; run git, ls, grep and the tests directly, one command per call.\n\nIf a tool call is refused, quote the exact command or file path in your reason."
           },
           {
             "type": "agent",
@@ -124,7 +124,7 @@
             "model": "claude-sonnet-5-5",
             "timeout": 900,
             "statusMessage": "Claude Sonnet is checking the tests of the commit and writing the missing ones...",
-            "prompt": "A git command just ran in this portfolio repository. Its tool call and output, as JSON: $ARGUMENTS\n\nIf the command created no commit (git commit --dry-run, nothing to commit, an amend that only rewords, or git commit only as text in a string), answer ok true and stop.\nOtherwise read .claude/agents/test-writer.md and follow it exactly, with the files of the last commit (no file is named to you, so files under .claude/ are skipped).\n\nAnswer ok true when nothing had to be written. When you wrote tests, answer ok false with its report as reason.\n\nIf a tool call is refused, quote the exact command or file path in your reason."
+            "prompt": "A git command just ran in this portfolio repository. Its tool call and output, as JSON: $ARGUMENTS\n\nIf the command created no commit (git commit --dry-run, nothing to commit, an amend that only rewords, or git commit only as text in a string), answer ok true and stop.\nOtherwise read .claude/agents/test-writer.md and follow it exactly, with the files of the last commit (no file is named to you, so files under .claude/ are skipped).\n\nAnswer ok true when nothing had to be written. When you wrote tests, answer ok false with its report as reason.\n\nYou already run at the root of the repository: never cd or Set-Location, since Claude Code refuses a cd followed by git in one command; run git, ls, grep and the tests directly, one command per call.\n\nIf a tool call is refused, quote the exact command or file path in your reason."
           }
         ]
       }
