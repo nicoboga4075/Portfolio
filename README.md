@@ -22,9 +22,10 @@ Portfolio/
 ├── _data/                         Texts of the site in every language (nav, hero, about, resume, projects, blog...)
 ├── js/                            Site scripts (app.js, common.js, botpress.js, analytics.js...), vendored *.min.js, Jest tests
 ├── css/                           Site styles (common.css, app.css, standalone.css) and vendored styles
-├── fonts/, images/, videos/       Icon fonts, pictures, background video and its subtitles
-├── docs/public/                   CVs, certificates and project videos offered for download
+├── fonts/, images/                Icon fonts and pictures
+├── docs/public/                   CVs, certificates, project videos and the background video of the presentation article, with their subtitles
 ├── netlify/functions/             Netlify functions in TypeScript (article, env, visit) and their shared HTTP helpers
+├── api/                           articles.json and projects.json for the chatbot, written by the build (not committed)
 ├── service-worker.js              Offline cache (network first for pages, scripts and styles)
 ├── tests/                         Playwright, Cypress (tests/cypress) and Robot Framework (tests/robot, with ROBOT_FRAMEWORK.md) tests
 ├── .github/                       GitHub Actions workflows, Dependabot, vendored versions check
@@ -35,7 +36,7 @@ Portfolio/
 ├── _headers, _redirects           Netlify headers (CSP, cache) and redirects
 ├── netlify.toml                   Netlify build settings and plugins
 ├── .gitlab-ci.yml                 GitLab CI pipeline (self-hosted Windows runner, see CI/CD below)
-└── *.md                           CHANGELOG, CONTRIBUTING, SECURITY
+└── *.md                           README.md, SECURITY.md, CHANGELOG.md, CONTRIBUTING.md, CLAUDE.md
 ```
 
 Generated and not committed: `.eleventy/` (output of `npm run dev`), `api/`, `sitemap.xml`, `feed_*.xml`, `reports/` (test reports) and `logs/`.
