@@ -35,7 +35,7 @@ Portfolio/
 ├── uglify-code.js                 Minifies the site scripts after the build
 ├── _headers, _redirects           Netlify headers (CSP, cache) and redirects
 ├── netlify.toml                   Netlify build settings and plugins
-├── .gitlab-ci.yml                 GitLab CI pipeline (self-hosted Windows runner, see CI/CD below)
+├── .gitlab/.gitlab-ci.yml         GitLab CI pipeline (self-hosted Windows runner, see CI/CD below)
 └── *.md                           README.md, SECURITY.md, CHANGELOG.md, CONTRIBUTING.md, CLAUDE.md
 ```
 
@@ -99,7 +99,9 @@ The `sonar` job of GitHub Actions (`sonarqube-scan-action`) analyses every pushe
 
 #### GitLab CI
 
-`.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (Jest, Playwright), `sonar` (`npx @sonar/scan` only when GitHub Actions doesn't analyse the commit, allowed to fail) and `teardown` (cleans the build folder).
+`.gitlab/.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (Jest, Playwright), `sonar` (`npx @sonar/scan` only when GitHub Actions doesn't analyse the commit, allowed to fail) and `teardown` (cleans the build folder).
+
+The file is not at the root, where GitLab looks by default: the project setting **Settings → CI/CD → General pipelines → CI/CD configuration file** is set to `.gitlab/.gitlab-ci.yml`.
 
 ##### Install the GitLab Runner
 

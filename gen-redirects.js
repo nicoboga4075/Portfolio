@@ -53,7 +53,6 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /.eleventy.js /404.html 404!
 /.gitattributes /404.html 404!
 /.gitignore /404.html 404!
-/.gitlab-ci.yml /404.html 404!
 /.htmlvalidate.json /404.html 404!
 /.stylelintrc.json /404.html 404!
 /netlify.toml /404.html 404!
@@ -71,8 +70,6 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /dev-watch.js /404.html 404!
 /html-validate-nunjucks.js /404.html 404!
 /update-version.js /404.html 404!
-/runner_status.ps1 /404.html 404!
-/simulator_ci.ps1 /404.html 404!
 /_redirects /404.html 404!
 /_headers /404.html 404!
 
@@ -85,6 +82,7 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /logs/* /404.html 404!
 /docs/* /404.html 404!
 /.github/* /404.html 404!
+/.gitlab/* /404.html 404!
 /.claude/* /404.html 404!`;
 
 const out = [

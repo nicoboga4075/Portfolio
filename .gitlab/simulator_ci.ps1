@@ -18,16 +18,16 @@ if (-not (Get-Module -ListAvailable -Name powershell-yaml)) {
 Import-Module powershell-yaml
 
 # Load pipeline config
-$yamlPath = ".\.gitlab-ci.yml"
+$yamlPath = ".\.gitlab\.gitlab-ci.yml"
 if (-not (Test-Path $yamlPath)) {
-    Write-Host "❌ .gitlab-ci.yml not found!" -ForegroundColor Red
+    Write-Host "❌ .gitlab/.gitlab-ci.yml not found!" -ForegroundColor Red
     exit 1
 }
 # powershell-yaml loads its YamlDotNet DLLs from the module folder: under OneDrive\Documents they may be online-only files that can't be read while OneDrive isn't running
 try {
     $ciConfig = ConvertFrom-Yaml (Get-Content $yamlPath -Raw) -ErrorAction Stop
 } catch {
-    Write-Host "❌ Can't read .gitlab-ci.yml with powershell-yaml: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "❌ Can't read .gitlab/.gitlab-ci.yml with powershell-yaml: $($_.Exception.Message)" -ForegroundColor Red
     Write-Host "   If the module is under OneDrive, start OneDrive or keep its folder on this device: $((Get-Module powershell-yaml).ModuleBase)" -ForegroundColor Red
     exit 1
 }

@@ -16,7 +16,7 @@ stages:
 status-job:
   stage: setup
   script:
-    - powershell -ExecutionPolicy Bypass -File ./runner_status.ps1
+    - powershell -ExecutionPolicy Bypass -File ./.gitlab/runner_status.ps1
   artifacts:
     expire_in: 1 day
 
