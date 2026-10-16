@@ -110,7 +110,7 @@ The `Setup` & `Teardown` functions are used before and after each test execution
 
 #### Test Case - Description
 
-A test case description should follow [this template](./ROBOT_FRAMEWORK.md)
+A test case description should follow [this template](./tests/robot/ROBOT_FRAMEWORK.md)
 ```python
 [Documentation]
     ...    *Description*

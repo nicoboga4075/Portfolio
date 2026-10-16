@@ -26,7 +26,7 @@ Portfolio/
 ├── docs/public/                   CVs, certificates and project videos offered for download
 ├── netlify/functions/             Netlify functions in TypeScript (article, env, visit) and their shared HTTP helpers
 ├── service-worker.js              Offline cache (network first for pages, scripts and styles)
-├── tests/, cypress/               Playwright and Cypress end-to-end tests
+├── tests/, cypress/               Playwright, Cypress and Robot Framework (tests/robot, with ROBOT_FRAMEWORK.md) tests
 ├── .github/                       GitHub Actions workflows, Dependabot, vendored versions check
 ├── .claude/                       Claude Code settings, hooks, skills, agents and the portfolio-dev plugin
 ├── .eleventy.js                   Eleventy configuration (also writes sitemap.xml, feed_*.xml and api/*.json)
@@ -35,7 +35,7 @@ Portfolio/
 ├── _headers, _redirects           Netlify headers (CSP, cache) and redirects
 ├── netlify.toml                   Netlify build settings and plugins
 ├── .gitlab-ci.yml                 GitLab CI pipeline (self-hosted Windows runner, see CI/CD below)
-└── *.md                           CHANGELOG, CONTRIBUTING, ROBOT_FRAMEWORK, SECURITY
+└── *.md                           CHANGELOG, CONTRIBUTING, SECURITY
 ```
 
 Generated and not committed: `.eleventy/` (output of `npm run dev`), `api/`, `sitemap.xml`, `feed_*.xml`, `reports/` (test reports) and `logs/`.
