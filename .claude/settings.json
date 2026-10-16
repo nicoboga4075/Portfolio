@@ -32,7 +32,15 @@
       "PowerShell(npx jest *)",
       "PowerShell(npx playwright test *)",
       "PowerShell(npx cypress run *)",
-      "PowerShell(npx @11ty/eleventy*)"
+      "PowerShell(npx @11ty/eleventy*)",
+      "Bash(git grep *)",
+      "Bash(git rev-list *)",
+      "Bash(npm ls *)",
+      "Bash(npm view *)",
+      "Bash(npm audit)",
+      "Bash(npm audit --json)",
+      "PowerShell(Select-String *)",
+      "PowerShell(Format-Table *)"
     ]
   },
   "hooks": {
