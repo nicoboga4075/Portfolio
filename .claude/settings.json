@@ -6,11 +6,24 @@
       "Edit(/js/**/*.test.js)",
       "Edit(/netlify/**/*.test.js)",
       "Bash(git show *)",
+      "Bash(git log *)",
+      "Bash(git ls-files *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(grep *)",
+      "Bash(wc *)",
       "Bash(npx jest *)",
       "Bash(npx playwright test *)",
       "Bash(npx cypress run *)",
       "Bash(npx @11ty/eleventy*)",
       "PowerShell(git show *)",
+      "PowerShell(git log *)",
+      "PowerShell(git ls-files *)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(Get-Content *)",
+      "PowerShell(Select-Object *)",
       "PowerShell(npx jest *)",
       "PowerShell(npx playwright test *)",
       "PowerShell(npx cypress run *)",
@@ -98,7 +111,7 @@
             "model": "claude-sonnet-5-5",
             "timeout": 900,
             "statusMessage": "Claude Sonnet is checking the tests of the commit and writing the missing ones...",
-            "prompt": "A git command just ran in this portfolio repository. Its tool call and output, as JSON: $ARGUMENTS\n\nIf the command created no commit (git commit --dry-run, nothing to commit, an amend that only rewords, or git commit only as text in a string), answer ok true and stop.\nOtherwise read .claude/agents/test-writer.md and follow it exactly, with the files of the last commit (no file is named to you, so files under .claude/ are skipped).\n\nAnswer ok true when nothing had to be written. When you wrote tests, answer ok false with its report as reason."
+            "prompt": "A git command just ran in this portfolio repository. Its tool call and output, as JSON: $ARGUMENTS\n\nIf the command created no commit (git commit --dry-run, nothing to commit, an amend that only rewords, or git commit only as text in a string), answer ok true and stop.\nOtherwise read .claude/agents/test-writer.md and follow it exactly, with the files of the last commit (no file is named to you, so files under .claude/ are skipped).\n\nAnswer ok true when nothing had to be written. When you wrote tests, answer ok false with its report as reason.\n\nIf a tool call is refused, quote the exact command or file path in your reason."
           },
           {
             "type": "agent",
@@ -106,7 +119,7 @@
             "model": "claude-sonnet-5-5",
             "timeout": 900,
             "statusMessage": "Claude Sonnet is checking the tests of the commit and writing the missing ones...",
-            "prompt": "A git command just ran in this portfolio repository. Its tool call and output, as JSON: $ARGUMENTS\n\nIf the command created no commit (git commit --dry-run, nothing to commit, an amend that only rewords, or git commit only as text in a string), answer ok true and stop.\nOtherwise read .claude/agents/test-writer.md and follow it exactly, with the files of the last commit (no file is named to you, so files under .claude/ are skipped).\n\nAnswer ok true when nothing had to be written. When you wrote tests, answer ok false with its report as reason."
+            "prompt": "A git command just ran in this portfolio repository. Its tool call and output, as JSON: $ARGUMENTS\n\nIf the command created no commit (git commit --dry-run, nothing to commit, an amend that only rewords, or git commit only as text in a string), answer ok true and stop.\nOtherwise read .claude/agents/test-writer.md and follow it exactly, with the files of the last commit (no file is named to you, so files under .claude/ are skipped).\n\nAnswer ok true when nothing had to be written. When you wrote tests, answer ok false with its report as reason.\n\nIf a tool call is refused, quote the exact command or file path in your reason."
           }
         ]
       }
