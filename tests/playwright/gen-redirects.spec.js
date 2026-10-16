@@ -8,10 +8,12 @@ const path = require('node:path');
 const root = path.join(__dirname, '..', '..');
 const dirs = [];
 
-// The _redirects gen-redirects.js writes next to a package.json with these routes, as its lines.
-function generate(routes) {
+// The _redirects gen-redirects.js writes next to a package.json with these routes and a js/ folder with these files, as its lines.
+function generate(routes, jsFiles = []) {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'gen-redirects-'));
     dirs.push(dir);
+    fs.mkdirSync(path.join(dir, 'js'));
+    for (const file of jsFiles) fs.writeFileSync(path.join(dir, 'js', file), '');
     fs.copyFileSync(path.join(root, 'gen-redirects.js'), path.join(dir, 'gen-redirects.js'));
     fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify({ routes }));
     execFileSync(process.execPath, [path.join(dir, 'gen-redirects.js')], { stdio: 'pipe' });
@@ -58,6 +60,13 @@ test.describe('gen-redirects', () => {
         }
     });
 
+    test('blocks each Jest test of js/, and only them', () => {
+        const lines = generate(routes, ['app.js', 'app.test.js', 'analytics.test.js']);
+        expect(lines).toContain('/js/analytics.test.js /404.html 404!');
+        expect(lines).toContain('/js/app.test.js /404.html 404!');
+        expect(lines).not.toContain('/js/app.js /404.html 404!');
+    });
+
     test('ends with a single newline', () => {
         const lines = generate(routes);
         expect(lines.at(-1)).toBe('');
@@ -67,6 +76,7 @@ test.describe('gen-redirects', () => {
     test('matches the committed _redirects for the real routes', () => {
         const { routes: real } = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
         const committed = fs.readFileSync(path.join(root, '_redirects'), 'utf8').replaceAll('\r\n', '\n');
-        expect(generate(real).join('\n')).toBe(committed);
+        const jsFiles = fs.readdirSync(path.join(root, 'js'));
+        expect(generate(real, jsFiles).join('\n')).toBe(committed);
     });
 });

@@ -1,7 +1,8 @@
 const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
-    testDir: './tests',
+    // Only the Playwright tests: tests/jest, tests/cypress and tests/robot belong to the other runners
+    testDir: './tests/playwright',
     fullyParallel: true,
     retries: 1,
     reporter: [

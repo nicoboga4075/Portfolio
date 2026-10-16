@@ -36,6 +36,10 @@
 /terms_* /404.html 404!
 /policy_* /404.html 404!
 
+# --- Jest tests next to the site scripts (js/ is published as is) --------
+/js/analytics.test.js /404.html 404!
+/js/service-worker.test.js /404.html 404!
+
 # The 404 page itself must not be reachable directly with a 200
 /404.html /404 404!
 /404 /404.html 404!

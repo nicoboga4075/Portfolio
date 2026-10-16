@@ -60,7 +60,7 @@ In GitHub, the "Protect main" ruleset blocks force pushes and deletion of `main`
 - **Before a commit**: the Claude Code hooks of `.claude/settings.json` run the HTML, CSS and JS lints (`npm run lint`) and block the commit on any error or warning.
 - **README.md and SECURITY.md**: after changing a vendored library, a dependency version, a font, a security setting or a security alert, run `npm run check:docs` (the `update-docs` skill lists what to update).
 - **Articles and projects**: use the `new-article` and `new-project` skills, then `npm run check:content`.
-- **Tests**: a Jest unit test sits next to the module it tests (`js/analytics.js` → `js/analytics.test.js`, the same for `netlify/`); the integration and E2E tests, which test the built site or a whole script, go in `tests/<tool>/` (`tests/playwright/`, `tests/cypress/`, `tests/robot/`).
+- **Tests**: a Jest unit test of `js/` sits next to the module it tests (`js/analytics.js` → `js/analytics.test.js`); those of the Netlify functions go in `tests/jest/netlify/` (`visit.mts` → `visit.test.ts`), since Netlify deploys every file of `netlify/functions/` as a function; the integration and E2E tests, which test the built site or a whole script, go in `tests/<tool>/` (`tests/playwright/`, `tests/cypress/`, `tests/robot/`).
 
 ### Add a video (.mp4 only, < 10 min and < 100Mo)
 

@@ -27,7 +27,7 @@ Portfolio/
 ├── netlify/functions/             Netlify functions in TypeScript (article, env, visit) and their shared HTTP helpers
 ├── api/                           articles.json and projects.json for the chatbot, written by the build (not committed)
 ├── service-worker.js              Offline cache (network first for pages, scripts and styles)
-├── tests/                         Playwright (tests/playwright), Cypress (tests/cypress) and Robot Framework (tests/robot, with ROBOT_FRAMEWORK.md) tests
+├── tests/                         Jest tests of the Netlify functions (tests/jest), Playwright (tests/playwright), Cypress (tests/cypress) and Robot Framework (tests/robot, with ROBOT_FRAMEWORK.md) tests
 ├── .github/                       GitHub Actions workflows, Dependabot, vendored versions check
 ├── .claude/                       Claude Code settings, hooks, skills, agents and the portfolio-dev plugin
 ├── .eleventy.js                   Eleventy configuration (also writes sitemap.xml, feed_*.xml and api/*.json)
