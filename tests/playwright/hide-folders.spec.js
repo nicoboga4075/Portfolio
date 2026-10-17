@@ -29,15 +29,26 @@ test.afterEach(() => {
     fs.rmSync(tmp, { recursive: true, force: true });
 });
 
-test('runs without throwing and creates nothing', () => {
+// On a Linux desktop (outside CI and Netlify) the script writes the .hidden file the file managers read
+const writesHiddenFile = process.platform === 'linux' && !process.env.CI && !process.env.NETLIFY;
+
+test('runs without throwing and creates no folder', () => {
     execFileSync(process.execPath, [path.join(tmp, 'hide-folders.js')]);
-    expect(fs.readdirSync(tmp).sort()).toEqual(['api', 'hide-folders.js', 'logs', 'other', 'reports']);
+    const expected = ['api', 'hide-folders.js', 'logs', 'other', 'reports', ...(writesHiddenFile ? ['.hidden'] : [])];
+    expect(fs.readdirSync(tmp).sort()).toEqual(expected.sort());
 });
 
 test('exports hideFolders and does nothing on import', () => {
     const result = execFileSync(process.execPath, ['-e', `const m = require(${JSON.stringify(path.join(tmp, 'hide-folders.js'))}); console.log(typeof m.hideFolders)`], { encoding: 'utf8' });
     expect(result.trim()).toBe('function');
     if (process.platform === 'win32') expect(isHidden(path.join(tmp, 'api'))).toBe(false);
+});
+
+test('lists the existing folders without a dot in .hidden on Linux, keeping its other lines', () => {
+    test.skip(!writesHiddenFile, 'the .hidden file is written on a Linux desktop only');
+    fs.writeFileSync(path.join(tmp, '.hidden'), 'mine\nlogs\n');
+    execFileSync(process.execPath, [path.join(tmp, 'hide-folders.js')]);
+    expect(fs.readFileSync(path.join(tmp, '.hidden'), 'utf8')).toBe('mine\nlogs\napi\nreports\n');
 });
 
 test('hides the listed folders that exist, and only them', () => {
