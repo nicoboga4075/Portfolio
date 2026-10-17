@@ -1,11 +1,11 @@
-// standalone: false when injected into the blog page (js/app.js), whose own flow already refreshes the language switcher (saveHashToSession) right around this call.
-function initArticle(standalone = true) {
+// standalone: false when injected into the blog page (js/app.js), whose own flow already refreshes the language switcher (saveHashToSession) right around this call. Set on window like initPage below, the onload of the article and project pages and app.js call it.
+window.initArticle = function (standalone = true) {
     loadImages('.article-image', 'png');
     loadImages('.icon.svg', 'svg');
     if (standalone) {
         initTranslator();
     }
-}
+};
 
 // Guarded: on the blog page, app.js's own (richer) initPage() already ran via <body onload> before standalone.js ever loads.
 if (typeof initPage !== 'function') {

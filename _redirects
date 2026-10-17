@@ -39,6 +39,7 @@
 # --- Jest tests next to the site scripts (js/ is published as is) --------
 /js/analytics.test.js /404.html 404!
 /js/service-worker.test.js /404.html 404!
+/js/standalone.test.js /404.html 404!
 
 # The 404 page itself must not be reachable directly with a 200
 /404.html /404 404!
