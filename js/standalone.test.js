@@ -8,10 +8,13 @@ function fakePage(links = []) {
     global.document = { querySelectorAll: jest.fn(() => links) };
 }
 
+// Loads standalone.js on the fake page and returns its top-level functions, exported by tests/jest/browser-globals-transform.cjs
 function runScript() {
+    let script;
     jest.isolateModules(() => {
-        require('./standalone.js');
+        script = require('./standalone.js');
     });
+    return script;
 }
 
 // A link with href="#", keeping the click listener the script adds
@@ -24,22 +27,20 @@ function fakeLink() {
 }
 
 afterEach(() => {
-    for (const name of ['window', 'document', 'loadImages', 'initTranslator', 'initArticle', 'initPage']) delete global[name];
+    for (const name of ['window', 'document', 'loadImages', 'initTranslator', 'initPage']) delete global[name];
 });
 
 describe('initArticle', () => {
     test('loads the article images and the svg icons, then the translator on a page of its own', () => {
         fakePage();
-        runScript();
-        window.initArticle();
+        runScript().initArticle();
         expect(global.loadImages.mock.calls).toEqual([['.article-image', 'png'], ['.icon.svg', 'svg']]);
         expect(global.initTranslator).toHaveBeenCalledTimes(1);
     });
 
     test('leaves the translator to the blog page when the article is injected into it', () => {
         fakePage();
-        runScript();
-        window.initArticle(false);
+        runScript().initArticle(false);
         expect(global.loadImages).toHaveBeenCalledTimes(2);
         expect(global.initTranslator).not.toHaveBeenCalled();
     });

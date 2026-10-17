@@ -12,7 +12,9 @@ module.exports = {
   // tests/jest/ts-transform.cjs compiles the Netlify functions (.mts) and their tests (.ts) to CommonJS, the module system Jest runs, so they can be measured and tested
   moduleFileExtensions: ["js", "mjs", "cjs", "json", "ts", "mts"],
   transform: {
-    "^.+\\.m?ts$": "<rootDir>/tests/jest/ts-transform.cjs"
+    "^.+\\.m?ts$": "<rootDir>/tests/jest/ts-transform.cjs",
+    // js/common.js and js/standalone.js are classic browser scripts: tests/jest/browser-globals-transform.cjs exports their top-level declarations to their Jest tests
+    "[/\\\\]js[/\\\\](common|standalone)\\.js$": "<rootDir>/tests/jest/browser-globals-transform.cjs"
   },
   // The functions import each other as ./shared/http.mjs, the name of the compiled file: Jest resolves it to the .mts source
   moduleNameMapper: {
