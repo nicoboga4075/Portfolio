@@ -44,18 +44,32 @@ test('exports hideFolders and does nothing on import', () => {
     if (process.platform === 'win32') expect(isHidden(path.join(tmp, 'api'))).toBe(false);
 });
 
-test('lists the existing folders without a dot in .hidden on Linux, keeping its other lines', () => {
-    test.skip(!writesHiddenFile, 'the .hidden file is written on a Linux desktop only');
-    fs.writeFileSync(path.join(tmp, '.hidden'), 'mine\nlogs\n');
-    execFileSync(process.execPath, [path.join(tmp, 'hide-folders.js')]);
-    expect(fs.readFileSync(path.join(tmp, '.hidden'), 'utf8')).toBe('mine\nlogs\napi\nreports\n');
-});
-
-test('hides the listed folders that exist, and only them', () => {
-    test.skip(process.platform !== 'win32', 'attrib exists on Windows only');
-    execFileSync(process.execPath, [path.join(tmp, 'hide-folders.js')]);
-    for (const folder of created) expect(isHidden(path.join(tmp, folder)), folder).toBe(true);
-    expect(isHidden(path.join(tmp, 'other'))).toBe(false);
+// Each system checks its own way of hiding, so the test runs everywhere instead of being skipped
+test('hides the listed folders that exist the way the system does, and only them', () => {
+    // Windows: the hidden attribute on each folder
+    if (process.platform === 'win32') {
+        execFileSync(process.execPath, [path.join(tmp, 'hide-folders.js')]);
+        for (const folder of created) expect(isHidden(path.join(tmp, folder)), folder).toBe(true);
+        expect(isHidden(path.join(tmp, 'other'))).toBe(false);
+    }
+    // macOS: the hidden flag, which ls -lO prints
+    else if (process.platform === 'darwin') {
+        execFileSync(process.execPath, [path.join(tmp, 'hide-folders.js')]);
+        const flags = dir => execFileSync('/bin/ls', ['-lOd', dir], { encoding: 'utf8' });
+        for (const folder of created) expect(flags(path.join(tmp, folder)), folder).toContain('hidden');
+        expect(flags(path.join(tmp, 'other'))).not.toContain('hidden');
+    }
+    // Linux desktop: the names in .hidden, after the lines it already had
+    else if (writesHiddenFile) {
+        fs.writeFileSync(path.join(tmp, '.hidden'), 'mine\nlogs\n');
+        execFileSync(process.execPath, [path.join(tmp, 'hide-folders.js')]);
+        expect(fs.readFileSync(path.join(tmp, '.hidden'), 'utf8')).toBe('mine\nlogs\napi\nreports\n');
+    }
+    // Linux in CI or on Netlify: nothing is written
+    else {
+        execFileSync(process.execPath, [path.join(tmp, 'hide-folders.js')]);
+        expect(fs.existsSync(path.join(tmp, '.hidden'))).toBe(false);
+    }
     // A folder that was missing is not created
     expect(fs.existsSync(path.join(tmp, '.netlify'))).toBe(false);
 });
