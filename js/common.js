@@ -1,20 +1,10 @@
-/* Shared helpers loaded before both standalone.js (light pages) and app.js
-   (index/blog). Code that was identical (or trivially reconcilable) in both. */
+// Shared helpers loaded before both standalone.js (light pages) and app.js (index/blog): the code that was identical (or trivially reconcilable) in both.
 
-const appDefaultRoutes = {
-    "policy": "/{lng}/policy",
-    "terms": "/{lng}/terms",
-    "error404": "/404"
-};
+// The routes of package.json (routes.appRoutes), written into the routes meta of every page by base.njk; light pages only ever match policy, terms and error404, and the "/{lng}" or "/{lng}/blog" patterns of index and blog cannot match their paths
+const appRoutes = JSON.parse(document.querySelector('meta[name="routes"]').content);
 
-// Light pages only ever match the appDefaultRoutes entries; index/blog also need
-// "index"/"blog". The superset is safe on light pages: their paths cannot match
-// the "/{lng}" or "/{lng}/blog" patterns anyway.
-const appRoutes = {
-    "index": "/{lng}",
-    "blog": "/{lng}/blog",
-    ...appDefaultRoutes
-};
+// The pages that restore the remembered #hash, whose own link resets it on click instead of being marked as the current page
+const hashRoutes = new Set(['index', 'blog']);
 
 // The languages the switcher offers (rendered by Eleventy from package.json routes).
 const appLanguages = new Set(
@@ -49,18 +39,7 @@ function capitalize(string, locale, allWords = true) {
     }).join(' ');
 }
 
-// `date` is anything `new Date()` accepts: an ISO string ("2025-07-26",
-// "2026-05-24T13:48:02Z") or a timestamp (Date.now()); omitted -> now.
-// `options` is forwarded to toLocaleString. For 2000-01-01 13:05:09, en / fr:
-//   dateStyle: 'full'    "Saturday, January 1, 2000"     "samedi 1 janvier 2000"
-//              'long'     "January 1, 2000"              "1 janvier 2000"
-//              'medium'   "Jan 1, 2000"                  "1 janv. 2000"
-//              'short'    "1/1/00"                       "01/01/2000"
-//   timeStyle: 'full'    "1:05:09 PM <timezone name>"    "13:05:09 <nom du fuseau>"
-//              'long'     "1:05:09 PM UTC"               "13:05:09 UTC"
-//              'medium'   "1:05:09 PM"                   "13:05:09"
-//              'short'    "1:05 PM"                       "13:05"
-// Combined, the date/time connector follows dateStyle: 'full'/'long' -> " at " / " à ", 'medium'/'short' -> ", " (en) / ", " or " " (fr).
+// `date` is anything `new Date()` accepts, an ISO string ("2025-07-26", "2026-05-24T13:48:02Z") or a timestamp (Date.now()), now when omitted; `options` goes to toLocaleString, so for 2000-01-01 13:05:09 in en / fr dateStyle 'full' gives "Saturday, January 1, 2000" / "samedi 1 janvier 2000", 'long' "January 1, 2000" / "1 janvier 2000", 'medium' "Jan 1, 2000" / "1 janv. 2000", 'short' "1/1/00" / "01/01/2000", and timeStyle 'full' "1:05:09 PM <timezone name>" / "13:05:09 <nom du fuseau>", 'long' "1:05:09 PM UTC" / "13:05:09 UTC", 'medium' "1:05:09 PM" / "13:05:09", 'short' "1:05 PM" / "13:05"; combined, the date/time connector follows dateStyle: " at " / " à " for 'full' and 'long', ", " (en) / ", " or " " (fr) for 'medium' and 'short'.
 function convertDate(date, lang, options, capitalized = true) {
     const text = new Date(date ?? Date.now()).toLocaleString(lang, options ?? { dateStyle: 'long' });
     return capitalized ? capitalize(text, lang) : text;
@@ -73,13 +52,7 @@ function getCurrentFullDate(lang, withTime = true) {
     }, false);
 }
 
-// Inverse of convertDate. `text` is a written date in `lang` (as produced by
-// convertDate with dateStyle 'long'), optionally with a time; matching is
-// case-insensitive. For 2000-01-01 13:05, en / fr:
-//   "January 1, 2000"             "1 janvier 2000"          -> "01/01/2000"
-//   "January 1, 2000 at 1:05 PM"  "1 janvier 2000 à 13:05"  -> "01/01/2000 13:05"
-// With `iso: true`: "2000-01-01" / "2000-01-01T13:05". The time part is kept
-// only if present, converted to 24h unless `hour12` is true (ignored when iso).
+// Inverse of convertDate: `text` is a written date in `lang` (as convertDate writes it with dateStyle 'long'), optionally with a time, matched case-insensitively, so for 2000-01-01 13:05 "January 1, 2000" / "1 janvier 2000" gives "01/01/2000" and "January 1, 2000 at 1:05 PM" / "1 janvier 2000 à 13:05" gives "01/01/2000 13:05"; with `iso: true` "2000-01-01" / "2000-01-01T13:05"; the time is kept only if present, in 24h unless `hour12` is true (ignored when iso).
 function parseDate(text, lang, iso = false, hour12 = false) {
     const months = Array.from({ length: 12 }, (_, i) =>
         new Date(2000, i, 15).toLocaleDateString(lang, { month: 'long' }).toLocaleLowerCase(lang)
@@ -117,12 +90,7 @@ function switchLanguage(url, langTarget) {
         if (pathParts.length > 0 && appLanguages.has(pathParts[0])) {
             pathParts[0] = langTarget;
             urlObj.pathname = `/${pathParts.join('/')}`;
-            // initTranslator() runs (and bakes this href) before the page's own
-            // init saves the *current* hash to session - e.g. on the blog page,
-            // before initBlogPage() has saved the article slug - so the session
-            // value can still be stale (a leftover nav-link section hash). The
-            // hash already on `url` (read before clearUrlPath() strips it) is
-            // always the current page's real hash; prefer it.
+            // initTranslator() runs (and bakes this href) before the page's own init saves the *current* hash to session - e.g. on the blog page, before initBlogPage() has saved the article slug - so the session value can still be stale (a leftover nav-link section hash); the hash already on `url` (read before clearUrlPath() strips it) is always the current page's real hash, so it wins.
             const urlHash = urlObj.hash ? urlObj.hash.slice(1) : '';
             const hash = urlHash || getHashFromSession();
             urlObj.hash = (hash && /^[\w-]+$/.test(hash)) ? `#${hash}` : '';
@@ -131,13 +99,11 @@ function switchLanguage(url, langTarget) {
         throw new Error("Language not recognized in URL");
     } catch (error) {
         console.error(error);
-        return appDefaultRoutes['error404'];
+        return appRoutes['error404'];
     }
 }
 
-// #language-switcher (language-switcher.html) lists every language, each already
-// carrying a crawlable href to this page in that language. Mark the current one
-// and refresh every link's href (including the current one) with the remembered #hash.
+// #language-switcher (language-switcher.html) lists every language, each already carrying a crawlable href to this page in that language: mark the current one and refresh every link's href (including the current one) with the remembered #hash.
 function initTranslator() {
     const currentLang = getCurrentLanguage();
     document.querySelectorAll('#language-switcher [hreflang]').forEach(link => {
@@ -148,10 +114,9 @@ function initTranslator() {
         } else {
             link.removeAttribute('aria-current');
         }
-        // Refresh the server-rendered href with the remembered #hash; keep it
-        // untouched if the URL can't be parsed (switchLanguage returns /404).
+        // Refresh the server-rendered href with the remembered #hash; keep it untouched if the URL can't be parsed (switchLanguage returns /404).
         const target = switchLanguage(window.location.href, link.hreflang);
-        if (target !== appDefaultRoutes['error404']) {
+        if (target !== appRoutes['error404']) {
             link.href = target;
         }
     });
@@ -173,9 +138,7 @@ function loadImages(selector, extension, one = false) {
 
 const darkSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-// The #dark-icon button cycles through these; auto (nothing stored) follows
-// the OS setting. base.njk's inline script applies the same rule before first
-// paint, and migrates the old 'darkMode' key to this one.
+// The #dark-icon button cycles through these; auto (nothing stored) follows the OS setting. base.njk's inline script applies the same rule before first paint, and migrates the old 'darkMode' key to this one.
 const themeChoices = ['auto', 'light', 'dark'];
 
 function getThemeChoice() {
@@ -187,11 +150,7 @@ function isDarkModePreferred() {
     return choice === 'auto' ? darkSchemeQuery.matches : choice === 'dark';
 }
 
-// No argument: apply the choice (on page load, or when the OS setting
-// changes). With an event (the #dark-icon button's onclick): move to the next
-// choice first, then apply. The icon, title and sr-only label show the choice,
-// not the theme on screen, so auto keeps its own icon in both themes.
-// Fires `darkmodechange` so app.js can recolour the skills chart.
+// No argument: apply the choice (on page load, or when the OS setting changes); with an event (the #dark-icon button's onclick): move to the next choice first, then apply. The icon, title and sr-only label show the choice, not the theme on screen, so auto keeps its own icon in both themes; fires `darkmodechange` so app.js can recolour the skills chart.
 function toggleDarkMode(event) {
     if (event) {
         event.preventDefault();
@@ -206,15 +165,12 @@ function toggleDarkMode(event) {
     const choice = getThemeChoice();
     const isDark = isDarkModePreferred();
     document.documentElement.classList.toggle('dark-mode', isDark);
-    // Browser chrome (Android address bar, Safari tab bar, PWA title bar) follows
-    // the page background; the meta itself is created by base.njk's inline script.
+    // Browser chrome (Android address bar, Safari tab bar, PWA title bar) follows the page background; the meta itself is created by base.njk's inline script.
     const themeColor = document.querySelector('meta[name="theme-color"]');
     if (themeColor) {
         themeColor.content = getComputedStyle(document.documentElement).getPropertyValue('--background-color').trim();
     }
-    // Pages with the icon font (assets set in front matter) swap the icon-*
-    // class; others fall back to an emoji, same split as footer.html's
-    // icon-heart/icon-shield vs their emoji equivalents.
+    // Pages with the icon font (assets set in front matter) swap the icon-* class; others fall back to an emoji, same split as footer.html's icon-heart/icon-shield vs their emoji equivalents.
     const icon = document.getElementById('dark-icon');
     if (icon) {
         const suffix = choice.charAt(0).toUpperCase() + choice.slice(1);
@@ -253,7 +209,7 @@ function addRedirectById(elementId) {
     const path = appRoutes[elementId];
     el.setAttribute('href', path ? path.replace('{lng}', currentLang) : `/${currentLang}`);
     // Self-links for policy/terms keep a real (crawlable) href but are marked current instead of getting the click handler below.
-    if (elementId in appDefaultRoutes && elementId === getCurrentRoute()) {
+    if (!hashRoutes.has(elementId) && elementId === getCurrentRoute()) {
         el.setAttribute('aria-current', 'page');
         return;
     }

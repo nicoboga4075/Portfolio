@@ -67,7 +67,6 @@ export default defineConfig([
     files: ["js/standalone.js", "js/app.js"],
     languageOptions: {
       globals: {
-        appDefaultRoutes: "readonly",
         getCurrentRoute: "readonly",
         getCurrentLanguage: "readonly",
         initTranslator: "readonly",

@@ -225,6 +225,13 @@
       "du-voc-de-dev",
       "sur-quels-criteres-choisir-une-agence-web",
       "5-conseils-pour-un-nom-de-marque-parfait"
-    ]
+    ],
+    "appRoutes": {
+      "index": "/{lng}",
+      "blog": "/{lng}/blog",
+      "policy": "/{lng}/policy",
+      "terms": "/{lng}/terms",
+      "error404": "/404"
+    }
   }
 }

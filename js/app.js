@@ -912,7 +912,7 @@ function buildSafeRedirection(redirect, langPage) {
     if (redirect.startsWith('https://')) {
         safeRedirection = redirect;
     } else if (redirect.startsWith('http://')) {
-        safeRedirection = appDefaultRoutes["error404"];
+        safeRedirection = appRoutes["error404"];
     } else if (appAllSections.includes(redirect)) {
         safeRedirection = `/${langPage}#${redirect}`;
     } else {
@@ -1477,7 +1477,7 @@ function initBlogPage(langPage) {
                     links.forEach(link => {
                         const href = link.getAttribute('href');
                         if (!href.startsWith('https')) {
-                            link.setAttribute('href', appDefaultRoutes['error404']);
+                            link.setAttribute('href', appRoutes['error404']);
                         }
                     });
 

@@ -18,6 +18,7 @@ bodyClass: ""
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="{{ author }}">
         <meta name="email" content="{{ profile.email }}">
+        <meta name="routes" content="{{ appRoutes | dump }}">
         <meta name="twitter:card" content="summary_large_image">
         {%- for tag in page | openGraph(lang, title, description, image) %}
         <meta property="{{ tag[0] }}" content="{{ tag[1] }}">
