@@ -10,7 +10,8 @@ const resume = require(path.join(root, '_data', 'resume.json'));
 const site = pkg.routes.site;
 
 const read = file => fs.readFileSync(path.join(out, file), 'utf8');
-const decode = text => text.replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#39;', "'").replaceAll('&lt;', '<').replaceAll('&gt;', '>');
+// &amp; last, so a "&amp;lt;" in the page stays "&lt;" instead of being decoded twice into "<"
+const decode = text => text.replaceAll('&quot;', '"').replaceAll('&#39;', "'").replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&amp;', '&');
 
 // Every <meta> of the head as [attribute value, content] pairs, keyed by name or property
 function metas(html) {
