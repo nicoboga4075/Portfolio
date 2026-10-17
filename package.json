@@ -148,6 +148,7 @@
     "jest-html-reporter": "^4.4.2",
     "jest-junit": "^17.0.0",
     "netlify-plugin-inline-critical-css": "2.0.0",
+    "nunjucks": "^3.2.4",
     "playwright": "^1.64.0",
     "prettier": "^3.9.10",
     "stylelint": "^17.16.0",
