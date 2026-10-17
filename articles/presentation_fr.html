@@ -1,12 +1,12 @@
 ---
 permalink: "articles/presentation_fr.html"
-title: "Portfolio - Mon parcours pro en quelques lignes"
-description: "Mon parcours pro en quelques lignes"
+title: "Mon parcours pro en quelques lignes"
+description: "Mon parcours sur une page : chronologie, stages, CDI, projets et langues d'un ingénieur logiciel"
 ---
 <article class="article-container">
     <h1>Mon parcours pro en quelques lignes</h1>
     <div class="article-intro">Je suis développeur but what else ? Stages, contrats, projets, langages... Une page recto pour en savoir un peu plus sur mes expériences.</div>
-    <p>Je m'appelle Nicolas, j'ai <span class="age"></span> ans et je suis <b>ingénieur logiciel avec <span class="xp"></span> années d'expérience professionnelle</b>. En 2021, je suis diplômé de l'<a target="_blank" rel="noopener" href="https://www.esilv.fr">ESILV</a>, une école d'ingénieurs spécialisée dans le numérique à <b>Paris La Défense</b> et j'ai également suivi une maîtrise en informatique à l’<a target="_blank" rel="noopener" href="https://www.uqac.ca">UQAC</a> au Canada. Au fil de mon parcours, j'ai effectué <b><span id="internshipsCount"></span> stages</b> et occupé <b><span id="cdiCount"></span> postes en CDI</b>.</p>
+    <p>Je m'appelle Nicolas, j'ai {{ profile.age }} ans et je suis <b>ingénieur logiciel avec {{ profile.xp }} années d'expérience professionnelle</b>. En 2021, je suis diplômé de l'<a target="_blank" rel="noopener" href="https://www.esilv.fr">ESILV</a>, une école d'ingénieurs spécialisée dans le numérique à <b>Paris La Défense</b> et j'ai également suivi une maîtrise en informatique à l’<a target="_blank" rel="noopener" href="https://www.uqac.ca">UQAC</a> au Canada. Au fil de mon parcours, j'ai effectué <b>{{ profile.internshipsCount }} stages</b> et occupé <b>{{ profile.cdiCount }} postes en CDI</b>.</p>
     <h2>Parcours</h2>
     <div class="animation-container">
         <h3 class="road"><span class="sr-only">Itinéraire</span></h3>

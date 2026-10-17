@@ -70,6 +70,7 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /dev-watch.js /404.html 404!
 /html-validate-nunjucks.js /404.html 404!
 /update-version.js /404.html 404!
+/hide-folders.js /404.html 404!
 /_redirects /404.html 404!
 /_headers /404.html 404!
 

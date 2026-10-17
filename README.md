@@ -33,6 +33,7 @@ Portfolio/
 ├── .eleventy.js                   Eleventy configuration (also writes sitemap.xml, feed_*.xml and api/*.json)
 ├── gen-redirects.js               Writes _redirects from the routes of package.json
 ├── uglify-code.js                 Minifies the site scripts after the build
+├── hide-folders.js                Gives the generated folders (.eleventy, .netlify, api, logs, node_modules, reports) the Windows hidden attribute
 ├── _headers, _redirects           Netlify headers (CSP, cache) and redirects
 ├── netlify.toml                   Netlify build settings and plugins
 ├── .gitlab/.gitlab-ci.yml         GitLab CI pipeline (self-hosted Windows runner, see CI/CD below)

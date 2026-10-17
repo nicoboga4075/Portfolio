@@ -54,8 +54,9 @@
                             {%- endif %}
                             <h2>{{ e.title[lang] }}</h2>
                             <span class="position">
+                                {#- "current": true in resume.json marks the job held today, whatever the language of its dates #}
                                 {%- if e.href -%}
-                                <a target="_blank" rel="noopener" href="{{ e.href[lang] if e.href[lang] else e.href }}">{{ e.company }}</a>
+                                <a target="_blank" rel="noopener" href="{{ e.href[lang] if e.href[lang] else e.href }}"{% if e.current %} class="victory"{% endif %}>{{ e.company }}</a>
                                 {%- else -%}
                                 {{ e.company }}
                                 {%- endif -%}
@@ -78,7 +79,7 @@
                 <div id="skills" class="page">
                     <h2 class="heading">{{ resumeLang.skills }}</h2>
                     <div class="chart-container d-flex justify-content-center mb-5">
-                        <canvas id="skillsChart" data-labels="{{ skills.chart[lang].labels | dump }}" data-title="{{ skills.chart[lang].title }}" data-subtitle-template="{{ skills.chart[lang].subtitleTemplate }}" data-center="{{ skills.chart[lang].centerText }}"></canvas>
+                        <canvas id="skillsChart" data-labels="{{ skills.chart[lang].labels | dump }}" data-title="{{ skills.chart[lang].title }}" data-subtitle="{{ skills.chart[lang].subtitleTemplate | replace('{xp}', profile.xp) }}" data-center="{{ skills.chart[lang].centerText }}"></canvas>
                     </div>
                     {% include "languages.html" %}
                     {%- for row in skills.cards | batch(3) %}

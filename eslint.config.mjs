@@ -72,7 +72,6 @@ export default defineConfig([
         getCurrentLanguage: "readonly",
         initTranslator: "readonly",
         loadImages: "readonly",
-        fillCareerCounts: "readonly",
         addRedirectById: "readonly"
       }
     }
@@ -82,21 +81,12 @@ export default defineConfig([
     languageOptions: {
       globals: {
         initArticle: "readonly",
-        appName: "readonly",
         appRoutes: "readonly",
         getHashFromSession: "readonly",
         i18next: "readonly",
         Calendly: "readonly",
         convertDate: "readonly",
-        getCurrentFullDate: "readonly",
-        xp: "readonly",
-        email: "readonly",
-        address: "readonly",
-        dateBirth: "readonly",
-        certifsCount: "readonly",
-        projectsCount: "readonly",
-        experiencesCount: "readonly",
-        countriesCount: "readonly"
+        getCurrentFullDate: "readonly"
       }
     }
   },

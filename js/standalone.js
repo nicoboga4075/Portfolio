@@ -1,10 +1,9 @@
-// standalone: false when injected into the blog page (js/app.js), whose own flow already refreshes the language switcher (saveHashToSession) and the career counts (initProfile) right around this call.
+// standalone: false when injected into the blog page (js/app.js), whose own flow already refreshes the language switcher (saveHashToSession) right around this call.
 function initArticle(standalone = true) {
     loadImages('.article-image', 'png');
     loadImages('.icon.svg', 'svg');
     if (standalone) {
         initTranslator();
-        fillCareerCounts();
     }
 }
 

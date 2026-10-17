@@ -1,8 +1,6 @@
 /* Shared helpers loaded before both standalone.js (light pages) and app.js
    (index/blog). Code that was identical (or trivially reconcilable) in both. */
 
-const appName = 'Portfolio';
-
 const appDefaultRoutes = {
     "policy": "/{lng}/policy",
     "terms": "/{lng}/terms",
@@ -22,18 +20,6 @@ const appRoutes = {
 const appLanguages = new Set(
     Array.from(document.querySelectorAll('#language-switcher [hreflang]'), a => a.hreflang)
 );
-
-// Profile / CV facts, rendered into the page by fillCareerCounts and initProfile (app.js).
-const xp = 5;
-const email = 'nicolas.bogalheiro@gmail.com';
-const address = 'Paris';
-const dateBirth = '1997-11-19';
-const cdiCount = 4;
-const internshipsCount = 3;
-const certifsCount = 5;
-const projectsCount = 20;
-const experiencesCount = 6;
-const countriesCount = 15;
 
 function getCurrentRoute() {
     const path = window.location.pathname;
@@ -183,17 +169,6 @@ function loadImages(selector, extension, one = false) {
         // If first iteration, return true to stop further iteration
         return index === 0 && one;
     });
-}
-
-function fillCareerCounts() {
-    const cdiCountEl = document.getElementById('cdiCount');
-    if (cdiCountEl) {
-        cdiCountEl.textContent = cdiCount;
-    }
-    const internshipsCountEl = document.getElementById('internshipsCount');
-    if (internshipsCountEl) {
-        internshipsCountEl.textContent = internshipsCount;
-    }
 }
 
 const darkSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');

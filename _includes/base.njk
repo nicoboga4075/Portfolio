@@ -13,12 +13,15 @@ bodyClass: ""
 <html lang="{{ lang }}">
     <head>
         <meta charset="utf-8">
-        <title>{{ title | safe }}</title>
+        <title>{{ siteName }}{% if title %} - {{ title | safe }}{% endif %} - {{ author }}</title>
         <meta name="google" content="notranslate">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="{{ author }}">
-        <meta name="title" property="og:title" content="{{ title | safe }}">
-        <meta name="image" property="og:image" content="{{ image }}">
+        <meta name="email" content="{{ profile.email }}">
+        <meta name="twitter:card" content="summary_large_image">
+        {%- for tag in page | openGraph(lang, title, description, image) %}
+        <meta property="{{ tag[0] }}" content="{{ tag[1] }}">
+        {%- endfor %}
         <meta name="description" content="{{ description | safe }}">
         {%- set structuredData = page | jsonLd(lang, title, description, image) %}
         {%- if structuredData %}
@@ -36,7 +39,7 @@ bodyClass: ""
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
         <link rel="manifest" href="site.webmanifest">
-        <link rel="alternate" type="application/atom+xml" title="Portfolio - Blog" href="/feed_{{ lang }}.xml">
+        <link rel="alternate" type="application/atom+xml" title="{{ siteName }} - Blog - {{ author }}" href="/feed_{{ lang }}.xml">
         {%- if assets %}
         {%- for partial in assets %}
         {% include partial %}
@@ -90,7 +93,7 @@ bodyClass: ""
             <div id="contact-link" class="text-dark">
                 <p class="d-flex align-items-center">
                     <i class="icon-envelope"></i>
-                    <span class="email"></span>
+                    <span class="email">{{ profile.email }}</span>
                 </p>
                 {%- for s in socials %}
                 <p class="d-flex align-items-center">

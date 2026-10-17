@@ -25,8 +25,8 @@ Don't invent the article's content: write only what the user gave or asked for.
 ```html
 ---
 permalink: "articles/<slug>_en.html"
-title: "Portfolio - <title>"
-description: "<title>"
+title: "<title>"
+description: "<a one-line summary of the article in that language, without HTML: the meta description, og:description and the JSON-LD use it>"
 ---
 <article class="article-container">
     <h1><title></h1>

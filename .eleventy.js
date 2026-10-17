@@ -1,6 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { execSync } = require("node:child_process");
+const { hideFolders } = require("./hide-folders");
 const toml = require("toml");
 const prettier = require("prettier");
 const pkg = require("./package.json");
@@ -154,11 +155,12 @@ function jsonLd({ page, lang, title, description, image, author, socials }) {
     // Home: who the author is, and the site itself
     if (slug === "index") {
         const roles = JSON.parse(plainText(readData("hero")[lang].roles));
-        const about = readData("about")[lang];
+        // Every school of the resume's education, with its link in the page's language
+        const alumniOf = readData("resume").education.map(school => ({ "@type": "EducationalOrganization", name: school.school, url: inLang(school.href, lang) }));
         data = {
             "@graph": [
-                { ...person, jobTitle: roles[0].replace(/\.$/, ""), description: plainText(description), alumniOf: { "@type": "CollegeOrUniversity", name: "ESILV", url: about.esilvHref } },
-                { "@type": "WebSite", "@id": `${site}/#website`, name: plainText(title), url: site, inLanguage: langs.map(code => locales[code].replace("_", "-")), author: { "@id": `${site}/#person` } }
+                { ...person, jobTitle: roles[0].replace(/\.$/, ""), description: plainText(description), alumniOf },
+                { "@type": "WebSite", "@id": `${site}/#website`, name: pkg.name, url: site, inLanguage: langs.map(code => locales[code].replace("_", "-")), author: { "@id": `${site}/#person` } }
             ]
         };
     }
@@ -176,16 +178,12 @@ function jsonLd({ page, lang, title, description, image, author, socials }) {
     }
     // Article: its title, date, tags and excerpt from _data, at the URL of the sitemap
     else if (page.inputPath.includes("/articles/")) {
-        const articles = readData("articles");
-        const index = articles.findIndex(a => a.slug === slug);
-        const article = articles[index];
-        // A blog card sits at the position of its article (npm run check:content): its id is the card image, not the slug
-        const card = readData("blog").entries[index];
+        const article = readData("articles").find(a => a.slug === slug);
         if (article) {
             data = {
                 "@type": "BlogPosting",
                 headline: inLang(article.title, lang),
-                description: card ? plainText(inLang(card.excerpt, lang)) : plainText(description),
+                description: plainText(description),
                 datePublished: article.date,
                 inLanguage,
                 keywords: article.tags.map(tag => tagName(tag, lang)).join(", "),
@@ -198,10 +196,52 @@ function jsonLd({ page, lang, title, description, image, author, socials }) {
     }
     // Project: its name and the page
     else if (page.inputPath.includes("/projects/")) {
-        data = { "@type": "CreativeWork", name: plainText(description), url: `${site}/${lang}/${slug}`, inLanguage, image, author: person };
+        data = { "@type": "CreativeWork", name: plainText(title), description: plainText(description), url: `${site}/${lang}/${slug}`, inLanguage, image, author: person };
     }
     // Escape "<" so no value can close the <script> element
     return data ? JSON.stringify({ "@context": "https://schema.org", ...data }).replaceAll("<", String.raw`\u003c`) : "";
+}
+
+// Width and height of a PNG of the site, read from its IHDR chunk, for og:image:width and og:image:height; null for any other image
+function pngSize(url) {
+    if (!url.startsWith(`${site}/`) || !url.endsWith(".png")) return null;
+    try {
+        const header = fs.readFileSync(path.join(__dirname, url.slice(site.length + 1)));
+        return { width: header.readUInt32BE(16), height: header.readUInt32BE(20) };
+    } catch {
+        return null;
+    }
+}
+
+// The Open Graph tags of a page, as [property, content] pairs: the page and its languages, its share image, and for an article its date, author and tags (ogp.me)
+function openGraph({ page, lang, title, description, image, siteName }) {
+    const parts = page.fileSlug.split("_");
+    parts.pop();
+    const slug = parts.join("_");
+    const isArticle = page.inputPath.includes("/articles/");
+    let url = `${site}/${lang}${slug === "index" ? "" : `/${slug}`}`;
+    if (isArticle) url = `${site}/${lang}/blog#${slug}`;
+    if (page.fileSlug === "404") url = `${site}/404`;
+    const ogTitle = plainText(title || siteName);
+    const article = isArticle && readData("articles").find(a => a.slug === slug);
+    const tags = [
+        ["og:site_name", siteName],
+        ["og:title", ogTitle],
+        ["og:image", image],
+        ["og:type", isArticle ? "article" : "website"],
+        ["og:url", url],
+        ["og:description", plainText(description)],
+        ["og:locale", locales[lang]],
+        ...langs.filter(code => code !== lang).map(code => ["og:locale:alternate", locales[code]]),
+        ["og:image:alt", ogTitle]
+    ];
+    const size = pngSize(image);
+    if (size) tags.push(["og:image:type", "image/png"], ["og:image:width", String(size.width)], ["og:image:height", String(size.height)]);
+    if (article) {
+        tags.push(["article:published_time", article.date], ["article:author", `${site}/${lang}`]);
+        for (const tag of article.tags) tags.push(["article:tag", tagName(tag, lang)]);
+    }
+    return tags;
 }
 
 // The Atom feed of the blog in one language: each article's title, dates, excerpt and tags, linked to its place in the blog.
@@ -241,7 +281,7 @@ function feedXml(lang, author) {
     const updated = entries.map(e => e.updated).sort().at(-1);
     return `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="${locales[lang].replace("_", "-")}">
-    <title>Portfolio - Blog</title>
+    <title>${xmlEscape(pkg.name)} - Blog</title>
     <subtitle>${xmlEscape(blog.sectionText[lang].tagline)}</subtitle>
     <link rel="self" type="application/atom+xml" href="${site}/feed_${lang}.xml"/>
     <link rel="alternate" type="text/html" href="${site}/${lang}/blog"/>
@@ -309,9 +349,18 @@ module.exports = function configureEleventy(eleventyConfig) {
     const lighthousePlugin = toml.parse(fs.readFileSync("./netlify.toml", "utf-8")).context.production.plugins.find(p => p.package === "@netlify/plugin-lighthouse");
     const preset = lighthousePlugin?.inputs?.settings?.preset ?? "mobile";
     eleventyConfig.addGlobalData("viewport", preset);
-    const author = "Nicolas BOGALHEIRO";
+    // The author of package.json, its name on every page and its e-mail in the contact window and the email meta
+    const { name: author, email } = pkg.author;
     eleventyConfig.addGlobalData("author", author);
     eleventyConfig.addGlobalData("version", pkg.version);
+    // The name of the site, the og:site_name of every page, from the name of package.json
+    eleventyConfig.addGlobalData("siteName", pkg.name);
+    // Profile and CV facts of config.profile in package.json, written into the pages at build time (about, counters, contact, skills chart, presentation article); the age is the one on the build day
+    const { birthDate, ...facts } = pkg.config.profile;
+    const birth = new Date(birthDate);
+    const today = new Date();
+    const age = today.getFullYear() - birth.getFullYear() - (today < new Date(today.getFullYear(), birth.getMonth(), birth.getDate()) ? 1 : 0);
+    eleventyConfig.addGlobalData("profile", { ...facts, email, age });
     // Google Analytics only on the Netlify production build: not in npm run dev, the preview build, deploy previews or branch deploys
     eleventyConfig.addGlobalData("analytics", { id: "G-S08CZ1FDQM", enabled: process.env.CONTEXT === "production" && !isPreview });
     const linkedinDomain = "https://www.linkedin.com";
@@ -331,6 +380,7 @@ module.exports = function configureEleventy(eleventyConfig) {
     ];
     eleventyConfig.addGlobalData("socials", socials);
     // The schema.org JSON-LD of a page (Person + WebSite for home, Blog, BlogPosting for an article, CreativeWork for a project), or "" for the other pages.
+    eleventyConfig.addFilter("openGraph", (page, lang, title, description, image) => openGraph({ page, lang, title, description, image, siteName: pkg.name }));
     eleventyConfig.addFilter("jsonLd", (page, lang, title, description, image) => jsonLd({ page, lang, title, description, image, author, socials }));
     // -> api/ at the repo root, like the feeds: /api/articles.json and /api/projects.json for the chatbot.
     const api = apiData();
@@ -419,6 +469,8 @@ module.exports = function configureEleventy(eleventyConfig) {
         });
     });
     eleventyConfig.on("eleventy.after", () => {
+        // The output folder (kept by the preview, recreated by every clean build) and api/ get back their Windows hidden attribute, with the other generated folders
+        hideFolders();
         if (isPreview) return;
         const publicDir = path.join(__dirname, outputFolder);
         if (!fs.existsSync(publicDir)) return;

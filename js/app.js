@@ -404,12 +404,6 @@ function getCurrentArticle() {
     return appArticles.find(article => article.slug === currentSlug);
 }
 
-function computeAge(englishDate) {
-    const d = new Date(englishDate);
-    const today = new Date();
-    return today.getFullYear() - d.getFullYear() - (today < new Date(today.getFullYear(), d.getMonth(), d.getDate()) ? 1 : 0);
-}
-
 function toggleVisibility(selector, visibleClass = 'd-flex') {
     const $element = $(selector);
     if ($element.is('[hidden]') || $element.hasClass('d-none')) {
@@ -458,27 +452,6 @@ function loadBingo() {
             number = 0;
         }
     });
-}
-
-function initProfile() {
-    $('.author').text($('meta[name="author"]').attr('content'));
-    $('#address').text(address);
-    $('.email').text(email);
-    $('.age').text(computeAge(dateBirth));
-    $('.xp').each(function () {
-        if ($(this).hasClass('number')) {
-            $(this).attr('data-number', xp);
-        } else {
-            $(this).text(xp);
-        }
-    });
-    fillCareerCounts();
-    $('#experiences .resume-wrap .date:contains("Today"), #experiences .resume-wrap .date:contains("Aujourd\'hui")')
-        .closest('.resume-wrap').find('a:first').addClass('victory');
-    $('#certifsCount').attr('data-number', certifsCount);
-    $('#projectsCount').attr('data-number', projectsCount);
-    $('#experiencesCount').attr('data-number', experiencesCount);
-    $('#countriesCount').attr('data-number', countriesCount);
 }
 
 function loadContactScripts() {
@@ -572,8 +545,8 @@ function createCircularChart({
     data,
     backgroundColor,
     labels,
-    titles,
-    subtitles,
+    title,
+    subtitle,
     centerText,
     cutout = '50%'
 }) {
@@ -620,7 +593,7 @@ function createCircularChart({
                 }),
                 title: {
                     display: true,
-                    text: titles,
+                    text: title,
                     color: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim(),
                     font: {
                         family: fontFamily,
@@ -634,7 +607,7 @@ function createCircularChart({
                 },
                 subtitle: {
                     display: true,
-                    text: subtitles,
+                    text: subtitle,
                     color: `#${cssVarToHex('--secondary')}`,
                     font: {
                         family: fontFamily,
@@ -886,8 +859,6 @@ function createCircularChart({
             }
         });
     });
-
-    initProfile();
 
 })(jQuery);
 
@@ -1208,8 +1179,8 @@ function initIndexPage(langPage) {
                         data: [45, 25, 15, 10, 5],
                         backgroundColor: [cssVar('--blue'), cssVar('--orange'), cssVar('--green'), cssVar('--red'), cssVar('--purple')],
                         labels: JSON.parse(skillsChartCanvas.dataset.labels),
-                        titles: skillsChartCanvas.dataset.title,
-                        subtitles: skillsChartCanvas.dataset.subtitleTemplate.replace('{xp}', xp),
+                        title: skillsChartCanvas.dataset.title,
+                        subtitle: skillsChartCanvas.dataset.subtitle,
                         centerText: skillsChartCanvas.dataset.center
                     });
                 }).catch(() => {
@@ -1520,7 +1491,6 @@ function initBlogPage(langPage) {
                     articleShape.append(existingShapeContent);
 
                     initArticle(false);
-                    initProfile();
                     $('a[article-link]').each(function () {
                         const articleId = $(this).attr('article-link');
                         $(this).attr('href', `/${langPage}/blog#${articleId}`);
@@ -1658,9 +1628,11 @@ async function sendEmail(senderName, subject, message) {
     // Strip CR/LF from header fields to prevent email header injection
     const safeSubject = String(subject).replace(/[\r\n]+/g, ' ');
     const safeSenderName = String(senderName).replace(/[\r\n]+/g, ' ');
+    const appName = document.querySelector('meta[property="og:site_name"]').content;
+    const recipient = document.querySelector('meta[name="email"]').content;
     const emailString = [
         'From: me',
-        'To: nicolas.bogalheiro@gmail.com',
+        `To: ${recipient}`,
         `Subject: ${safeSubject}`,
         '',
         `${message}`,
