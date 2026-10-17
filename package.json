@@ -50,6 +50,7 @@
     "profile": {
       "birthDate": "1997-11-19",
       "address": "Paris",
+      "openToWork": "listening",
       "xp": 5,
       "cdiCount": 4,
       "internshipsCount": 3,

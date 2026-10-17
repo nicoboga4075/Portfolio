@@ -2,16 +2,19 @@
 {%- set suffix = parts[parts.length - 1] -%}
 {%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
+{#- config.profile.openToWork of package.json: true is an active search, "listening" is open to opportunities, false hides the section #}
+{%- if profile.openToWork -%}
 {%- set hiremeLang = hireme[lang] -%}
 <section id="hireme-section" class="ftco-section img d-none d-sm-flex">
     <div class="overlay"></div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-7 ftco-animate text-center">
-                <h2 class="text-white">{{ hiremeLang.heading }}</h2>
+                <h2 class="text-white">{{ hiremeLang.heading.active if profile.openToWork === true else hiremeLang.heading.listening }}</h2>
                 <p>{{ hiremeLang.location }}</p>
                 <p class="mb-0"><a target="_blank" rel="noopener" href="{{ linkedin.messaging }}" class="btn btn-primary py-3 px-5">{{ hiremeLang.cta }}</a></p>
             </div>
         </div>
     </div>
 </section>
+{%- endif %}

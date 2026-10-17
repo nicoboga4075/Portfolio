@@ -1,11 +1,17 @@
 {
     "en": {
-        "heading": "Attentive to opportunities",
+        "heading": {
+            "listening": "Attentive to opportunities",
+            "active": "Actively looking for a job"
+        },
         "location": "In Paris area",
         "cta": "Contact me"
     },
     "fr": {
-        "heading": "À l'écoute d'opportunités",
+        "heading": {
+            "listening": "À l'écoute d'opportunités",
+            "active": "En recherche active d'emploi"
+        },
         "location": "En région parisienne",
         "cta": "Me contacter"
     }
