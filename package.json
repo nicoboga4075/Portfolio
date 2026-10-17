@@ -86,7 +86,6 @@
     "deps:audit:signatures": "npm audit signatures",
     "deps:install": "npm install",
     "deps:install:ci": "npm ci",
-    "postinstall": "node hide-folders.js",
     "deps:outdated": "npm outdated",
     "deps:updates": "npx --yes npm-check-updates",
     "deps:updates:minor": "npx --yes npm-check-updates --target minor",
