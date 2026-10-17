@@ -51,6 +51,7 @@ bodyClass: ""
         <script src="js/standalone.js" defer></script>
         {%- endif %}
         {%- if botpress and viewport == "desktop" %}
+        <meta name="botpress" content="{{ botpressScripts | dump }}">
         <script defer src="js/botpress.js"></script>
         {%- endif %}
         <!-- Inline, after the stylesheets and before first paint: the deferred common.js applies the theme too late (white flash in dark mode). It waits for the CSS above, so --background-color is already resolved. -->

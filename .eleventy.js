@@ -355,6 +355,8 @@ module.exports = function configureEleventy(eleventyConfig) {
     eleventyConfig.addGlobalData("version", pkg.version);
     // The name of the site, the og:site_name of every page, from the name of package.json
     eleventyConfig.addGlobalData("siteName", pkg.name);
+    // The Botpress scripts of config.botpress in package.json (the pinned inject.js and its hash, the bot script with the bot's own settings, "bot"), handed to js/botpress.js through the botpress meta
+    eleventyConfig.addGlobalData("botpressScripts", pkg.config.botpress);
     // Profile and CV facts of config.profile in package.json, written into the pages at build time (about, counters, contact, skills chart, presentation article); the age is the one on the build day
     const { birthDate, ...facts } = pkg.config.profile;
     const birth = new Date(birthDate);
