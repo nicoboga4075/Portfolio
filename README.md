@@ -34,6 +34,7 @@ Portfolio/
 ├── gen-redirects.js               Writes _redirects from config of package.json
 ├── uglify-code.js                 Minifies the site scripts after the build
 ├── hide-folders.js                Hides the generated folders (.eleventy, .netlify, api, logs, node_modules, reports): hidden attribute on Windows, hidden flag on macOS, .hidden file on Linux
+├── adb-reverse.js                 Forwards the dev port of netlify.toml from the Android device (npm run adb:reverse, adb:unreverse)
 ├── _headers, _redirects           Netlify headers (CSP, cache) and redirects
 ├── netlify.toml                   Netlify build settings and plugins
 ├── .gitlab/.gitlab-ci.yml         GitLab CI pipeline (self-hosted Windows runner, see CI/CD below)
@@ -61,15 +62,15 @@ actor "Browser" as browser
 actor "Claude Code" as claude
 
 node "npm run dev (dev-watch.js)" {
-  component "browser-sync\nport 8888 (netlify.toml)" as bs
+  component "browser-sync\nport (netlify.toml)" as bs
   component "netlify dev\nproxy port (free, .netlify/dev-proxy-port)" as nd
-  component "static server\nstaticServerPort 3999 (netlify.toml)" as st
+  component "static server\nstaticServerPort (netlify.toml)" as st
   component "Netlify functions\n/.netlify/functions/*" as fn
 }
 folder ".eleventy" as out
 
 node "Claude Code hooks" {
-  component "translation-hook-server.mjs\ntranslation port 4799 (.claude/settings.json)" as th
+  component "translation-hook-server.mjs\ntranslation port (.claude/settings.json)" as th
 }
 folder "_data/*.json" as data
 
