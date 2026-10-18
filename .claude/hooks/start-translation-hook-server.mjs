@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 // SessionStart hook: starts translation-hook-server.mjs in the background unless this project's server already answers on its port, so the PostToolUse http hook has something to call.
 import { spawn } from 'node:child_process';
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
-const PORT = Number(process.env.TRANSLATION_HOOK_PORT) || 4799;
+// The port of the url the PostToolUse http hook of .claude/settings.json calls, the only place it is written
+const hookUrl = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude', 'settings.json'), 'utf8')).hooks.PostToolUse.flatMap(entry => entry.hooks).find(hook => hook.type === 'http' && hook.url.endsWith('/post-edit')).url;
+const PORT = Number(new URL(hookUrl).port);
 
 // The project root the server on the port belongs to, or null when nothing answers.
 async function runningRoot() {
@@ -22,9 +25,9 @@ const root = await runningRoot();
 if (root && path.resolve(root) !== ROOT) {
     // The root comes from whatever answers on the port: its control characters are dropped so it can't forge log lines.
     const shownRoot = String(root).replaceAll(/\p{Cc}/gu, '');
-    console.error(`Port ${PORT} is used by the translation hook server of ${shownRoot}: _data edits of this project won't be checked (set TRANSLATION_HOOK_PORT to another port).`);
+    console.error(`Port ${PORT} is used by the translation hook server of ${shownRoot}: _data edits of this project won't be checked (change the port of the /post-edit hook url in .claude/settings.json).`);
 } else if (!root) {
-    spawn(process.execPath, [path.join(HERE, 'translation-hook-server.mjs')], { cwd: ROOT, detached: true, stdio: 'ignore', windowsHide: true }).unref();
+    spawn(process.execPath, [path.join(HERE, 'translation-hook-server.mjs'), String(PORT)], { cwd: ROOT, detached: true, stdio: 'ignore', windowsHide: true }).unref();
     // Wait until it answers, so the first edit of the session is already checked.
     for (let i = 0; i < 30 && !(await runningRoot()); i++) await new Promise(resolve => setTimeout(resolve, 100));
 }

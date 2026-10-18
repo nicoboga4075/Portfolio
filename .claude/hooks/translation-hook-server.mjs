@@ -6,7 +6,8 @@ import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const PORT = Number(process.env.TRANSLATION_HOOK_PORT) || 4799;
+// The port start-translation-hook-server.mjs passes, read from the hook url of .claude/settings.json
+const PORT = Number(process.argv[2]);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const DATA = path.join(ROOT, '_data');
 const IDLE_MS = 2 * 60 * 60 * 1000;
