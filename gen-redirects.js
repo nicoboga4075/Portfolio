@@ -13,7 +13,7 @@ const { locales, defaultLang } = require("./package.json").config;
 // The sections, the pages of the root besides the home (blog, policy, terms), from the files themselves
 const sections = require("./resolve-sections")(__dirname, defaultLang);
 // The projects with a page of their own, from the explore of their _data/projects.json card
-const projects = require("./projects/project-pages")(JSON.parse(fs.readFileSync(path.join(__dirname, "_data", "projects.json"), "utf8")).cards);
+const projects = require("./projects/resolve-projects")(JSON.parse(fs.readFileSync(path.join(__dirname, "_data", "projects.json"), "utf8")).cards);
 const langs = Object.keys(locales);
 
 // pretty url -> real file (rewrite, 200). No source file exists at these paths, so no force flag.

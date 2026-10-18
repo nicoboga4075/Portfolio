@@ -132,7 +132,7 @@ ${body}
 const readData = name => JSON.parse(fs.readFileSync(path.join(__dirname, "_data", `${name}.json`), "utf8"));
 // The pages of the articles and of the projects, from their data rather than a list of package.json: the slugs of _data/articles.json, and the projects whose card opens a page of its own
 const articles = readData("articles").map(article => article.slug);
-const projects = require("./projects/project-pages")(readData("projects").cards);
+const projects = require("./projects/resolve-projects")(readData("projects").cards);
 const inLang = (value, lang) => (value && typeof value === "object" && lang in value ? value[lang] : value);
 // Strip tags until none is left: one pass would rebuild a tag split around another one ("<scr<b>ipt>" -> "<script>"), then drop any lone "<" or ">".
 function plainText(html) {

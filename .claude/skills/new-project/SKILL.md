@@ -72,7 +72,7 @@ description: "<the one-line description of the card in that language, without HT
 
 ## 4. Routes, redirects, audits
 
-- Run `npm run gen:redirects`: it reads the projects with a page of their own from the `explore` of the cards (`projects/project-pages.js`) and writes `/en/<slug>` and `/fr/<slug>` into `_redirects`.
+- Run `npm run gen:redirects`: it reads the projects with a page of their own from the `explore` of the cards (`projects/resolve-projects.js`) and writes `/en/<slug>` and `/fr/<slug>` into `_redirects`.
 - Add two Lighthouse audits to `netlify.toml`, like the others: `url = "https://nicoboga.netlify.app"` with `path = "en/<slug>"`, and the same with `fr/<slug>`.
 - Put the card picture at `images/<card id>.avif`. Ask the user for the file; don't create a placeholder.
 - The "Delivered projects" counter is `projectsCount` in `js/common.js`: ask before changing it.

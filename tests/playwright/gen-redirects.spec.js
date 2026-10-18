@@ -16,7 +16,7 @@ function generate(routes, { sections = [], explore = [], jsFiles = [] } = {}) {
     for (const name of ['index', ...sections]) fs.writeFileSync(path.join(dir, `${name}_${routes.defaultLang}.html`), '');
     for (const file of jsFiles) fs.writeFileSync(path.join(dir, 'js', file), '');
     fs.copyFileSync(path.join(root, 'gen-redirects.js'), path.join(dir, 'gen-redirects.js'));
-    fs.copyFileSync(path.join(root, 'projects', 'project-pages.js'), path.join(dir, 'projects', 'project-pages.js'));
+    fs.copyFileSync(path.join(root, 'projects', 'resolve-projects.js'), path.join(dir, 'projects', 'resolve-projects.js'));
     fs.copyFileSync(path.join(root, 'resolve-sections.js'), path.join(dir, 'resolve-sections.js'));
     fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify({ config: routes }));
     fs.writeFileSync(path.join(dir, '_data', 'projects.json'), JSON.stringify({ cards: explore.map(target => ({ explore: target })) }));

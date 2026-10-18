@@ -66,12 +66,12 @@ cards.forEach((card, i) => {
 for (const target of exploreTargets.filter(t => t?.startsWith('blog#'))) {
     if (!articles.some(a => a.slug === target.slice(5))) errors.push(`a project card opens "${target}", which is not an article`);
 }
-// The projects with a page of their own: the cards whose explore is a slug (projects/project-pages.js, as the build and gen-redirects.js read them)
-const projectPages = createRequire(import.meta.url)(path.join(ROOT, 'projects', 'project-pages.js'))(cards);
+// The projects with a page of their own: the cards whose explore is a slug (projects/resolve-projects.js, as the build and gen-redirects.js read them)
+const resolveProjects = createRequire(import.meta.url)(path.join(ROOT, 'projects', 'resolve-projects.js'))(cards);
 for (const slug of pageSlugs('projects')) {
-    if (!projectPages.includes(slug)) warnings.push(`projects/${slug}_${routes.defaultLang}.html is opened by no project card: no redirect, no sitemap entry`);
+    if (!resolveProjects.includes(slug)) warnings.push(`projects/${slug}_${routes.defaultLang}.html is opened by no project card: no redirect, no sitemap entry`);
 }
-for (const slug of projectPages) {
+for (const slug of resolveProjects) {
     checkPages('projects', slug);
     for (const lang of langs) {
         if (!toml.includes(`path = "${lang}/${slug}"`)) warnings.push(`netlify.toml has no Lighthouse audit for ${lang}/${slug}`);

@@ -54,7 +54,7 @@ function listProjects({ lang } = {}) {
     const pick = lang && lang in locales ? lang : defaultLang;
     const cards = json('_data/projects.json').cards;
     // The projects with a page of their own, as the build reads them
-    const projects = createRequire(path.join(ROOT, 'package.json'))('./projects/project-pages.js')(cards);
+    const projects = createRequire(path.join(ROOT, 'package.json'))('./projects/resolve-projects.js')(cards);
     return cards.map(card => {
         // What its Explore button opens: a project slug, blog#<article> or an address
         const target = card.explore ?? null;
