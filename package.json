@@ -79,6 +79,7 @@
   "config": {
     "site": "https://nicoboga.netlify.app",
     "host": "Netlify",
+    "generator": "Eleventy",
     "locales": {
       "en": "en_US",
       "fr": "fr_FR"
