@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom
- * @jest-environment-options {"url": "http://localhost:8888"}
+ * @jest-environment-options {"url": "http://localhost"}
  */
-// Unit tests of js/app.js on http, the local site of netlify dev (the docblock above, a block by Jest's syntax, picks jsdom and that origin, each test setting its own path): no visit is counted, the contact form is not submitted to Netlify after its e-mail, and the session is kept.
+// Unit tests of js/app.js on http, as on the local site of npm run dev, whatever its port since js/app.js only reads the protocol (the docblock above, a block by Jest's syntax, picks jsdom and that origin, each test setting its own path): no visit is counted, the contact form is not submitted to Netlify after its e-mail, and the session is kept.
 const { loadApp, cleanUp, flush, routeFetch } = require('../tests/jest/fixture.cjs');
 
 afterEach(cleanUp);

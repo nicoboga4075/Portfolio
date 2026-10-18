@@ -1,8 +1,13 @@
 // Unit tests of netlify/functions/shared/http.mts: which requests count as coming from the site, and the 404 redirect, JSON and 500 responses every function returns.
 import { internalError, isTrustedRequest, jsonResponse, redirectTo404 } from "../../../netlify/functions/shared/http.mjs";
+import fs from "node:fs";
+import path from "node:path";
+import toml from "toml";
 import pkg from "../../../package.json";
 
 const { site } = pkg.config;
+// The port of the local site, the one of [dev] in netlify.toml that dev-watch.js opens
+const devPort = toml.parse(fs.readFileSync(path.join(__dirname, "..", "..", "..", "netlify.toml"), "utf8")).dev.port;
 
 const context = { requestId: "req-1" } as any;
 
@@ -22,7 +27,7 @@ afterEach(() => {
 describe("isTrustedRequest", () => {
     test("trusts the production site and the local dev server", () => {
         expect(isTrustedRequest(request({ referer: `${site}/en/` }))).toBe(true);
-        expect(isTrustedRequest(request({ referer: "http://localhost:8888/fr/blog" }))).toBe(true);
+        expect(isTrustedRequest(request({ referer: `http://localhost:${devPort}/fr/blog` }))).toBe(true);
     });
 
     test("rejects a third-party, a missing or a malformed Referer", () => {
