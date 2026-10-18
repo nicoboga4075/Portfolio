@@ -94,7 +94,7 @@ Documentation     Keywords and variables shared by at least two test folders
 Library           SeleniumLibrary
 
 *** Variables ***
-${BASE_URL}       http://localhost:8888
+${BASE_URL}       http://localhost:${PORT}
 ${BROWSER}        headlesschrome
 
 *** Keywords ***
@@ -133,8 +133,8 @@ Robot Framework and SeleniumLibrary must be installed (`pip install robotframewo
 
 1. Check the syntax first: `robot --dryrun --output NONE --log NONE --report NONE tests/robot`
 2. Build and serve the site, then run the suite against it:
-   - Static pages (fast, no Netlify functions): `ELEVENTY_PREVIEW=1 npx eleventy`, then `node .claude/skills/robot-test/serve-build.mjs 8899` in the background, then `robot --outputdir reports/robot --variable BASE_URL:http://localhost:8899 tests/robot/<section>`
-   - Pages that call a Netlify function (contact form, CV date, visit counter): `npm run dev` (port 8888, the default `BASE_URL`; it takes about a minute), then `robot --outputdir reports/robot tests/robot/<section>`
+   - Static pages (fast, no Netlify functions): `ELEVENTY_PREVIEW=1 npx eleventy`, then `node .claude/skills/robot-test/serve-build.mjs` in the background (it serves on a free port and prints its address), then `robot --outputdir reports/robot --variable BASE_URL:<that address> tests/robot/<section>`
+   - Pages that call a Netlify function (contact form, CV date, visit counter): `npm run dev` then `robot --outputdir reports/robot tests/robot/<section>`
 3. Read `reports/robot/log.html` on a failure (SeleniumLibrary saves a screenshot next to it). `reports/` is git-ignored.
 4. Stop the server you started.
 

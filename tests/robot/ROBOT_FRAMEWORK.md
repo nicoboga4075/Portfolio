@@ -60,8 +60,8 @@ TC_XXXXXX_Nominal_0001 Generate XXXXXX and verify YYYYYY
 |---|---|
 | Install | `pip install robotframework robotframework-seleniumlibrary` |
 | Check the syntax only | `robot --dryrun --output NONE --log NONE --report NONE tests/robot` |
-| Run against the built site (no Netlify functions) | `ELEVENTY_PREVIEW=1 npx eleventy`, `node .claude/skills/robot-test/serve-build.mjs 8899`, then `robot --outputdir reports/robot --variable BASE_URL:http://localhost:8899 tests/robot` |
-| Run against `npm run dev` (port 8888, with the Netlify functions) | `robot --outputdir reports/robot tests/robot` |
+| Run against the built site (no Netlify functions) | `ELEVENTY_PREVIEW=1 npx eleventy`, `node .claude/skills/robot-test/serve-build.mjs` (it serves on a free port and prints its address), then `robot --outputdir reports/robot --variable BASE_URL:<that address> tests/robot` |
+| Run against `npm run dev` (with the Netlify functions) | `robot --outputdir reports/robot tests/robot` |
 
 The reports (`output.xml`, `log.html`, `report.html`, screenshots on failure) go to `reports/robot/`, which is git-ignored.
 
