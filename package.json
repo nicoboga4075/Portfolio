@@ -81,10 +81,7 @@
     },
     "defaultLang": "en",
     "authorLang": "fr",
-    "cvLangs": [
-      "en",
-      "fr"
-    ],
+    "cvLangs": ["en", "fr"],
     "cvDefaultLang": "en",
     "appRoutes": {
       "index": "/{lng}",
@@ -112,11 +109,7 @@
       },
       "bot": "https://files.bpcontent.cloud/2025/10/06/10/20251006102232-ANM8U0DA.js"
     },
-    "authorCities": [
-      "Paris",
-      "Lyon",
-      "Dax"
-    ]
+    "authorCities": ["Paris", "Lyon", "Dax"]
   },
   "scripts": {
     "dev": "npm run gen:redirects && node dev-watch.js --once",
