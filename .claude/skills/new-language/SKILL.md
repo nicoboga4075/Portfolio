@@ -45,8 +45,8 @@ Each error `<file>.<path>: has "en", "fr" but not "<code>"` is a text to transla
 Each page needs its `<name>_<code>.html` next to the others, made from the English (or French) one:
 
 - the root pages of `routes.sections` and the home: `index`, `blog`, `policy`, `terms`;
-- `projects/<slug>_<code>.html` for every `routes.projects`;
-- `articles/<slug>_<code>.html` for every `routes.articles`.
+- `projects/<slug>_<code>.html` for every project with its own page (a card of `_data/projects.json` whose `explore` is a slug);
+- `articles/<slug>_<code>.html` for every article of `_data/articles.json`.
 
 In each copy:
 

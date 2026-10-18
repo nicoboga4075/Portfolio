@@ -1,6 +1,6 @@
 ---
 name: check-content
-description: Checks that the portfolio's articles and projects are wired everywhere they must be - pages in English and French with the right permalink, _data/articles.json and _data/blog.json in the same order, _data/projects.json cards with what their Explore button opens (explore), package.json routes, card images, Lighthouse audits. Use it after adding, removing, renaming or reordering an article or a project (by hand or with new-article / new-project), after editing those data files, or when a blog card or an Explore button opens the wrong page.
+description: Checks that the portfolio's articles and projects are wired everywhere they must be - pages in English and French with the right permalink, _data/articles.json and _data/blog.json in the same order, _data/projects.json cards with what their Explore button opens (explore), card images, Lighthouse audits. Use it after adding, removing, renaming or reordering an article or a project (by hand or with new-article / new-project), after editing those data files, or when a blog card or an Explore button opens the wrong page.
 ---
 
 # Check content
@@ -19,11 +19,11 @@ That is `node .claude/skills/check-content/check-content.mjs`. It exits with cod
 | `_data/blog.json` and `_data/articles.json` of different lengths | Blog card n opens article n: one missing entry shifts every card after it |
 | `_data/articles.json` not newest first | The blog's "recent publication" is the first one |
 | A `_data/projects.json` card without `explore`, or with an `http://` one | An Explore button that opens nothing, or the 404 page (only https addresses are followed) |
-| An article or a project page missing from `package.json` `routes` | No sitemap entry, no redirect (`/en/<slug>` is a 404) |
+| A page in `articles/` with no `_data/articles.json` entry, or in `projects/` that no card opens | No blog card or no redirect (`/en/<slug>` is a 404), and no sitemap entry |
 | A card whose `explore` is `blog#<slug>` with no such article | A dead Explore button |
 | A blog or project card with no `images/<id>.avif` | An empty card |
 
-It also prints, as notes, a project in `routes.projects` that no card opens, a project with no Lighthouse audit in `netlify.toml`, and the "card n → target" mapping of every blog and project card: read it after a change, a shifted list shows there even when the lengths match.
+It also prints, as notes, a page in `projects/` or `articles/` that no card or `_data/articles.json` entry opens, a project with no Lighthouse audit in `netlify.toml`, and the "card n → target" mapping of every blog and project card: read it after a change, a shifted list shows there even when the lengths match.
 
 ## What it does not check
 

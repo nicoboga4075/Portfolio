@@ -69,7 +69,7 @@
     "authorCities": [
       "Paris",
       "Lyon",
-	  "Dax"
+      "Dax"
     ]
   },
   "scripts": {
@@ -214,23 +214,6 @@
       "blog",
       "terms",
       "policy"
-    ],
-    "projects": [
-      "crm_elphicom",
-      "ebatisoft",
-      "panel_mnt",
-      "jca_sushirobots",
-      "ref230_afnor",
-      "opale_snitem",
-      "pragma_surveys"
-    ],
-    "articles": [
-      "presentation",
-      "mcs",
-      "bien-pasbien",
-      "du-voc-de-dev",
-      "sur-quels-criteres-choisir-une-agence-web",
-      "5-conseils-pour-un-nom-de-marque-parfait"
     ],
     "appRoutes": {
       "index": "/{lng}",

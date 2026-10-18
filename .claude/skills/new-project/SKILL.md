@@ -1,6 +1,6 @@
 ---
 name: new-project
-description: Adds a project to the portfolio - its card in _data/projects.json with what its Explore button opens, and for a project with its own page the two pages in projects/, the slug in package.json routes.projects, the redirects and the Lighthouse audits - then checks the wiring with npm run check:content and lints. Use it when the user asks to add, create or showcase a project, a realisation or a case study.
+description: Adds a project to the portfolio - its card in _data/projects.json with what its Explore button opens, and for a project with its own page the two pages in projects/, the redirects and the Lighthouse audits - then checks the wiring with npm run check:content and lints. Use it when the user asks to add, create or showcase a project, a realisation or a case study.
 ---
 
 # New project
@@ -72,7 +72,7 @@ description: "<the one-line description of the card in that language, without HT
 
 ## 4. Routes, redirects, audits
 
-- Add the slug to `routes.projects` in `package.json`, then run `npm run gen:redirects` (it writes `/en/<slug>` and `/fr/<slug>` into `_redirects`).
+- Run `npm run gen:redirects`: it reads the projects with a page of their own from the `explore` of the cards (`projects/project-pages.js`) and writes `/en/<slug>` and `/fr/<slug>` into `_redirects`.
 - Add two Lighthouse audits to `netlify.toml`, like the others: `url = "https://nicoboga.netlify.app"` with `path = "en/<slug>"`, and the same with `fr/<slug>`.
 - Put the card picture at `images/<card id>.avif`. Ask the user for the file; don't create a placeholder.
 - The "Delivered projects" counter is `projectsCount` in `js/common.js`: ask before changing it.

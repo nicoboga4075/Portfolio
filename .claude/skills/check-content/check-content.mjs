@@ -2,6 +2,7 @@
 // Checks that articles and projects are wired everywhere they must be: pages in every language, data entries in the same order, routes, images, Lighthouse audits.
 // Usage: npm run check:content (exit 1 on an error; warnings are printed but don't fail)
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -9,6 +10,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.
 const read = file => fs.readFileSync(path.join(ROOT, file), 'utf8');
 const exists = file => fs.existsSync(path.join(ROOT, file));
 const json = file => JSON.parse(read(file));
+// The slugs of the pages of a folder, from its files in the default language (projects/<slug>_en.html)
+const pageSlugs = folder => fs.readdirSync(path.join(ROOT, folder)).map(file => file.match(new RegExp(String.raw`^(.+)_${routes.defaultLang}\.html$`))?.[1]).filter(Boolean);
 
 const routes = json('package.json').routes;
 const langs = Object.keys(routes.locales);
@@ -37,10 +40,9 @@ function checkPages(folder, slug) {
 // ---- Articles ----
 for (const { slug } of articles) {
     checkPages('articles', slug);
-    if (!routes.articles.includes(slug)) errors.push(`article "${slug}" is not in package.json routes.articles`);
 }
-for (const slug of routes.articles) {
-    if (!articles.some(a => a.slug === slug)) errors.push(`routes.articles lists "${slug}", which is not in _data/articles.json`);
+for (const slug of pageSlugs('articles')) {
+    if (!articles.some(a => a.slug === slug)) warnings.push(`articles/${slug}_${routes.defaultLang}.html has no entry in _data/articles.json: no blog card, no sitemap entry`);
 }
 // The blog section links card n to article n: both lists must line up.
 if (blog.entries.length !== articles.length) {
@@ -61,16 +63,16 @@ cards.forEach((card, i) => {
     else if (card.explore.startsWith('http://')) errors.push(`project card "${card.id}" opens ${card.explore}: only https addresses are followed, http ones go to the 404 page`);
     warnings.push(`project card ${i + 1} "${card.title.replace(/<[^<>]+>/g, '')}" → ${card.explore ?? '(nothing)'}`);
 });
-for (const target of exploreTargets.filter(t => t && !/(?:^https?:)|[#/]/.test(t))) {
-    checkPages('projects', target);
-    if (!routes.projects.includes(target)) errors.push(`project "${target}" is not in package.json routes.projects`);
-}
 for (const target of exploreTargets.filter(t => t?.startsWith('blog#'))) {
     if (!articles.some(a => a.slug === target.slice(5))) errors.push(`a project card opens "${target}", which is not an article`);
 }
-for (const slug of routes.projects) {
+// The projects with a page of their own: the cards whose explore is a slug (projects/project-pages.js, as the build and gen-redirects.js read them)
+const projectPages = createRequire(import.meta.url)(path.join(ROOT, 'projects', 'project-pages.js'))(cards);
+for (const slug of pageSlugs('projects')) {
+    if (!projectPages.includes(slug)) warnings.push(`projects/${slug}_${routes.defaultLang}.html is opened by no project card: no redirect, no sitemap entry`);
+}
+for (const slug of projectPages) {
     checkPages('projects', slug);
-    if (!exploreTargets.includes(slug)) warnings.push(`routes.projects has "${slug}", which no project card opens`);
     for (const lang of langs) {
         if (!toml.includes(`path = "${lang}/${slug}"`)) warnings.push(`netlify.toml has no Lighthouse audit for ${lang}/${slug}`);
     }

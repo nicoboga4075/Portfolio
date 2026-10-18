@@ -35,7 +35,7 @@ const passthroughFiles = [
 //   defaultLang - "/" redirect + hreflang x-default
 //   authorLang  - the author's own language (vs. the deployed default)
 // Add a language: add its routes.locales entry + create the *_<lang>.html files.
-const { site, locales, defaultLang, authorLang, sections, projects, articles } = pkg.routes;
+const { site, locales, defaultLang, authorLang, sections } = pkg.routes;
 const langs = Object.keys(locales);
 for (const lang of [defaultLang, authorLang]) {
     if (!locales[lang]) {
@@ -128,6 +128,9 @@ ${body}
 
 // Read at each call rather than required, so npm run dev:watch picks up a change of _data.
 const readData = name => JSON.parse(fs.readFileSync(path.join(__dirname, "_data", `${name}.json`), "utf8"));
+// The pages of the articles and of the projects, from their data rather than a list of package.json: the slugs of _data/articles.json, and the projects whose card opens a page of its own
+const articles = readData("articles").map(article => article.slug);
+const projects = require("./projects/project-pages")(readData("projects").cards);
 const inLang = (value, lang) => (value && typeof value === "object" && lang in value ? value[lang] : value);
 // Strip tags until none is left: one pass would rebuild a tag split around another one ("<scr<b>ipt>" -> "<script>"), then drop any lone "<" or ">".
 function plainText(html) {

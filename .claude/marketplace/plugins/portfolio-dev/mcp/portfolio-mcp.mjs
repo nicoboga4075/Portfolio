@@ -50,9 +50,12 @@ function listArticles({ lang } = {}) {
 
 // ---- list_projects ----
 function listProjects({ lang } = {}) {
-    const { locales, defaultLang, projects } = routes();
+    const { locales, defaultLang } = routes();
     const pick = lang && lang in locales ? lang : defaultLang;
-    return json('_data/projects.json').cards.map(card => {
+    const cards = json('_data/projects.json').cards;
+    // The projects with a page of their own, as the build reads them
+    const projects = createRequire(path.join(ROOT, 'package.json'))('./projects/project-pages.js')(cards);
+    return cards.map(card => {
         // What its Explore button opens: a project slug, blog#<article> or an address
         const target = card.explore ?? null;
         const page = target && projects.includes(target);

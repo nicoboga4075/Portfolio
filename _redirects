@@ -19,16 +19,16 @@
 /fr/crm_elphicom /projects/crm_elphicom_fr.html 200
 /en/ebatisoft /projects/ebatisoft_en.html 200
 /fr/ebatisoft /projects/ebatisoft_fr.html 200
-/en/panel_mnt /projects/panel_mnt_en.html 200
-/fr/panel_mnt /projects/panel_mnt_fr.html 200
 /en/jca_sushirobots /projects/jca_sushirobots_en.html 200
 /fr/jca_sushirobots /projects/jca_sushirobots_fr.html 200
-/en/ref230_afnor /projects/ref230_afnor_en.html 200
-/fr/ref230_afnor /projects/ref230_afnor_fr.html 200
-/en/opale_snitem /projects/opale_snitem_en.html 200
-/fr/opale_snitem /projects/opale_snitem_fr.html 200
 /en/pragma_surveys /projects/pragma_surveys_en.html 200
 /fr/pragma_surveys /projects/pragma_surveys_fr.html 200
+/en/ref230_afnor /projects/ref230_afnor_en.html 200
+/fr/ref230_afnor /projects/ref230_afnor_fr.html 200
+/en/panel_mnt /projects/panel_mnt_en.html 200
+/fr/panel_mnt /projects/panel_mnt_fr.html 200
+/en/opale_snitem /projects/opale_snitem_en.html 200
+/fr/opale_snitem /projects/opale_snitem_fr.html 200
 
 # --- Un-rendered source pages (real files live in the deploy root) --------
 /index_* /404.html 404!
