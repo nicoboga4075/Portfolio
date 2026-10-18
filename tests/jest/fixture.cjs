@@ -1,14 +1,13 @@
 // The fixture of the Jest tests of js/app.js, the page it runs on in the jsdom environment: the real jQuery with its plugins stubbed, the globals of common.js, standalone.js, i18next, Bootstrap, Chart.js and the Google scripts as fakes, the metas of base.njk, and a loader that runs app.js on the page and returns its top-level declarations.
 const path = require('node:path');
 
-const messages = require(path.join(__dirname, '..', '..', '_data', 'messages.json'));
-const { appRoutes } = require(path.join(__dirname, '..', '..', 'package.json')).routes;
+const root = path.join(__dirname, '..', '..');
+const messages = require(path.join(root, '_data', 'messages.json'));
+const { appRoutes, locales, defaultLang } = require(path.join(root, 'package.json')).routes;
+const resolveArticles = require(path.join(root, 'articles', 'resolve-articles.js'));
 
-// The articles of the articles meta, as resolveArticles writes them
-const defaultArticles = [
-    { slug: 'presentation', title: 'My career', date: '2025-01-02', tags: ['HTML', { WCAG: 'https://www.w3.org/WAI/standards-guidelines/wcag' }] },
-    { slug: 'mcs', title: 'What is MCS?', date: '2024-12-23', tags: ['MCS'] }
-];
+// The articles meta of a page in that language, as base.njk writes it from the real _data/articles.json
+const articlesIn = lang => resolveArticles(require(path.join(root, '_data', 'articles.json')), lang, defaultLang, locales);
 
 const $ = require(path.join(__dirname, '..', '..', 'js', 'jquery.min.js'));
 
@@ -124,7 +123,7 @@ function writeHead(lang, articles) {
 }
 
 // Sets the page (body, URL, language, articles) and runs app.js on it, returning its top-level declarations; before runs once the fakes are installed, to change one
-function loadApp({ body = '', url = '/en', lang = 'en', route = 'index', articles = defaultArticles, before } = {}) {
+function loadApp({ body = '', url = '/en', lang = 'en', route = 'index', articles = articlesIn(lang), before } = {}) {
     installGlobals();
     before?.();
     writeHead(lang, articles);
@@ -172,4 +171,4 @@ function routeFetch(routes) {
     return window.fetch;
 }
 
-module.exports = { $, defaultArticles, messages, observers, observerOf, installChart, loadApp, cleanUp, flush, scriptFor, routeFetch };
+module.exports = { $, articlesIn, messages, observers, observerOf, installChart, loadApp, cleanUp, flush, scriptFor, routeFetch };

@@ -3,7 +3,11 @@
  * @jest-environment-options {"url": "https://nicoboga.netlify.app"}
  */
 // Unit tests of js/app.js, the script of the home and blog pages, on the jsdom page of tests/jest/fixture.cjs (the docblock above, a block by Jest's syntax, picks that environment and the https origin of the live site, each test setting its own path; js/app.http.test.js covers the http one).
-const { observers, observerOf, installChart, loadApp, cleanUp, flush, scriptFor, routeFetch } = require('../tests/jest/fixture.cjs');
+const { articlesIn, observers, observerOf, installChart, loadApp, cleanUp, flush, scriptFor, routeFetch } = require('../tests/jest/fixture.cjs');
+
+// The real articles of the English pages, and the one the sidebar offers next to the article of a slug: the first other one
+const articles = articlesIn('en');
+const recentTo = slug => articles.find(article => article.slug !== slug);
 
 afterEach(cleanUp);
 
@@ -84,11 +88,11 @@ describe('small helpers', () => {
     test('the current and the recent article come from the hash, or else from the session', () => {
         let app = loadApp({ url: '/en/blog#mcs' });
         expect(app.getCurrentArticle().slug).toBe('mcs');
-        expect(app.getRecentArticle().slug).toBe('presentation');
+        expect(app.getRecentArticle().slug).toBe(recentTo('mcs').slug);
         app = loadApp({ url: '/en/blog' });
         sessionStorage.setItem('currentHash', 'presentation');
         expect(app.getCurrentArticle().slug).toBe('presentation');
-        expect(app.getRecentArticle().slug).toBe('mcs');
+        expect(app.getRecentArticle().slug).toBe(recentTo('presentation').slug);
     });
 
     test('cssVarToHex resolves a CSS variable through a canvas pixel', () => {
@@ -680,12 +684,15 @@ describe('the blog page', () => {
         expect(window.injected).toBeUndefined();
         expect(window.initArticle).toHaveBeenCalledWith(false);
         expect($('.about-author').hasClass('d-flex')).toBe(true);
-        expect($('.blog-img').attr('href')).toBe('/en/blog#mcs');
+        const recent = recentTo('presentation');
+        expect($('.blog-img').attr('href')).toBe(`/en/blog#${recent.slug}`);
         expect(window.loadImages).toHaveBeenCalledWith('.blog-img', 'avif', true);
-        expect($('#recent-article-heading').text()).toBe('What is MCS?');
-        expect($('.meta').text()).toBe(' date 2024-12-23');
+        expect($('#recent-article-heading').text()).toBe(recent.title);
+        expect($('.meta').text()).toBe(` date ${recent.date}`);
         expect($('.meta i').hasClass('icon-calendar')).toBe(true);
-        expect($('.tagcloud a').map((index, link) => [[link.textContent, link.getAttribute('href')]]).get()).toEqual([['HTML', '#'], ['WCAG', 'https://www.w3.org/WAI/standards-guidelines/wcag']]);
+        // A plain tag links nowhere, a tag with an address links to it
+        const tags = articles.find(article => article.slug === 'presentation').tags.map(tag => (typeof tag === 'string' ? [tag, '#'] : Object.entries(tag)[0]));
+        expect($('.tagcloud a').map((index, link) => [[link.textContent, link.getAttribute('href')]]).get()).toEqual(tags);
         const diploma = $('.sidebar img');
         expect(diploma.attr('alt')).toBe('My diploma');
         expect(diploma.attr('width')).toBe('267');
@@ -701,7 +708,7 @@ describe('the blog page', () => {
         expect(document.querySelectorAll('script[src="js/standalone.js"]')).toHaveLength(1);
         expect($('#article-shape .article-container').text()).toBe('MCS');
         expect($('.sidebar img')).toHaveLength(0);
-        expect($('.blog-img').attr('href')).toBe('/en/blog#presentation');
+        expect($('.blog-img').attr('href')).toBe(`/en/blog#${recentTo('mcs').slug}`);
     });
 
     test('ignores a remembered section that is not an article, and opens the presentation', async () => {
@@ -710,7 +717,7 @@ describe('the blog page', () => {
     });
 
     test('has no recent article to show when the blog holds one article only', async () => {
-        await openBlog({ articles: [{ slug: 'presentation', title: 'My career', date: '2025-01-02', tags: [] }] });
+        await openBlog({ articles: articles.filter(article => article.slug === 'presentation') });
         expect($('#recent-article-heading').text()).toBe('');
         expect($('.blog-img').attr('href')).toBeUndefined();
     });
@@ -838,7 +845,7 @@ describe('the blog page', () => {
         const event = $.Event('click');
         $('.blog-img').trigger(event);
         expect(event.isDefaultPrevented()).toBe(true);
-        expect(window.location.hash).toBe('#mcs');
+        expect(window.location.hash).toBe(`#${recentTo('presentation').slug}`);
         jest.advanceTimersByTime(150);
     });
 });
