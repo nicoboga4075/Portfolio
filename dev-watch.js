@@ -54,6 +54,8 @@ function headersFor(pathname, headersFile = path.join(__dirname, '_headers')) {
 
 // browser-sync watches only this file, which is rewritten at the end of every Eleventy build. Letting it watch .eleventy itself made its process grow past 2 GB in a few rebuilds (each rebuild rewrites every page and, when full, re-copies ~300 MB of static files) until Node ran out of memory. It lives in the temp folder, outside the repo, so it never shows up in git.
 const reloadTrigger = path.join(os.tmpdir(), 'portfolio-dev-reload').replaceAll(path.sep, '/');
+// The free port netlify dev got, written while it runs so the status line can show it (.netlify is git-ignored)
+const proxyPortFile = path.join(__dirname, '.netlify', 'dev-proxy-port');
 
 const once = process.argv.includes('--once');
 const netlifyArgs = process.argv.slice(2).filter(arg => arg !== '--once');
@@ -83,6 +85,7 @@ function runStep(script, args, env) {
 }
 
 function shutdown() {
+    fs.rmSync(proxyPortFile, { force: true });
     for (const child of children) {
         if (child.exitCode === null) {
             // netlify dev starts its own child processes, so kill the whole process tree.
@@ -115,6 +118,8 @@ function startServing() {
 }
 
 function serveThrough(netlifyPort) {
+    fs.mkdirSync(path.dirname(proxyPortFile), { recursive: true });
+    fs.writeFileSync(proxyPortFile, String(netlifyPort));
     run(netlifyCli, ['dev', '--port', String(netlifyPort), ...netlifyArgs], {}, 'inherit');
     // browser-sync starts, and opens the site port in the browser, only once netlify dev answers: earlier, the tab would open on a proxy error (netlify dev itself no longer opens its own port, see autoLaunch in netlify.toml).
     // Required here rather than at the top, so a test that requires this file for headersFor doesn't load browser-sync.
