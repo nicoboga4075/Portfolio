@@ -66,7 +66,7 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /eslint.config.mjs /404.html 404!
 /jest.config.js /404.html 404!
 /playwright.config.js /404.html 404!
-/capacitor.config.json /404.html 404!
+/capacitor.config.js /404.html 404!
 /sonar-project.properties /404.html 404!
 /changelog.hbs /404.html 404!
 /gen-redirects.js /404.html 404!
