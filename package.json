@@ -210,11 +210,6 @@
       "fr"
     ],
     "cvDefaultLang": "en",
-    "sections": [
-      "blog",
-      "terms",
-      "policy"
-    ],
     "appRoutes": {
       "index": "/{lng}",
       "blog": "/{lng}/blog",

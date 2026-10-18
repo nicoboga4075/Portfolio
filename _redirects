@@ -11,10 +11,10 @@
 /fr /index_fr.html 200
 /en/blog /blog_en.html 200
 /fr/blog /blog_fr.html 200
-/en/terms /terms_en.html 200
-/fr/terms /terms_fr.html 200
 /en/policy /policy_en.html 200
 /fr/policy /policy_fr.html 200
+/en/terms /terms_en.html 200
+/fr/terms /terms_fr.html 200
 /en/crm_elphicom /projects/crm_elphicom_en.html 200
 /fr/crm_elphicom /projects/crm_elphicom_fr.html 200
 /en/ebatisoft /projects/ebatisoft_en.html 200
@@ -33,8 +33,8 @@
 # --- Un-rendered source pages (real files live in the deploy root) --------
 /index_* /404.html 404!
 /blog_* /404.html 404!
-/terms_* /404.html 404!
 /policy_* /404.html 404!
+/terms_* /404.html 404!
 
 # --- Jest tests next to the site scripts (js/ is published as is) --------
 /js/analytics.test.js /404.html 404!
@@ -92,6 +92,7 @@
 /html-validate-nunjucks.js /404.html 404!
 /update-version.js /404.html 404!
 /hide-folders.js /404.html 404!
+/resolve-sections.js /404.html 404!
 /.hidden /404.html 404!
 /_redirects /404.html 404!
 /_headers /404.html 404!

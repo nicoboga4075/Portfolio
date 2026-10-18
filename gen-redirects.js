@@ -9,7 +9,9 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
-const { locales, defaultLang, sections } = require("./package.json").routes;
+const { locales, defaultLang } = require("./package.json").routes;
+// The sections, the pages of the root besides the home (blog, policy, terms), from the files themselves
+const sections = require("./resolve-sections")(__dirname, defaultLang);
 // The projects with a page of their own, from the explore of their _data/projects.json card
 const projects = require("./projects/project-pages")(JSON.parse(fs.readFileSync(path.join(__dirname, "_data", "projects.json"), "utf8")).cards);
 const langs = Object.keys(locales);
@@ -73,6 +75,7 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /html-validate-nunjucks.js /404.html 404!
 /update-version.js /404.html 404!
 /hide-folders.js /404.html 404!
+/resolve-sections.js /404.html 404!
 /.hidden /404.html 404!
 /_redirects /404.html 404!
 /_headers /404.html 404!

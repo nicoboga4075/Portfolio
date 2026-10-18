@@ -35,7 +35,9 @@ const passthroughFiles = [
 //   defaultLang - "/" redirect + hreflang x-default
 //   authorLang  - the author's own language (vs. the deployed default)
 // Add a language: add its routes.locales entry + create the *_<lang>.html files.
-const { site, locales, defaultLang, authorLang, sections } = pkg.routes;
+const { site, locales, defaultLang, authorLang } = pkg.routes;
+// The sections, the pages of the root besides the home (blog, policy, terms), from the files themselves
+const sections = require("./resolve-sections")(__dirname, defaultLang);
 const langs = Object.keys(locales);
 for (const lang of [defaultLang, authorLang]) {
     if (!locales[lang]) {
