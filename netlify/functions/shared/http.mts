@@ -1,11 +1,8 @@
 import { Context } from "@netlify/functions";
 import pkg from "../../../package.json" with { type: "json" };
 
-// Origins the site is actually served from, the dev server (see dev-watch.js) and config.site of package.json; anything else is treated as third-party.
-const allowedOrigins = new Set([
-    "http://localhost:8888",
-    pkg.config.site
-]);
+// The origin the site is actually served from, config.site of package.json; anything else is treated as third-party, but the local site under netlify dev (below).
+const siteOrigin = new URL(pkg.config.site).origin;
 
 // Every function is a same-origin XHR target, never a page a visitor navigates to
 // directly. Allow requests coming from the site (or the dev tunnel), plus the
@@ -21,12 +18,13 @@ export function isTrustedRequest(req: Request): boolean {
         // Missing or malformed Referer: treat as not originating from the site.
     }
 
-    // Netlify sets CONTEXT to "dev" only under `netlify dev` (npm run dev, dev:watch, dev:live, dev:live:watch);
+    // Netlify sets CONTEXT to "dev" only under `netlify dev` (npm run dev, dev:watch, dev:live, dev:live:watch): the site is then served on localhost, on the port of [dev] in netlify.toml whatever it is;
     // only with --live (npm run dev:live, dev:live:watch) is the site served from a *.netlify.live tunnel origin.
-    const isDevTunnel = process.env.CONTEXT === "dev" &&
-        /^https:\/\/[^/]+\.netlify\.live$/.test(refererOrigin);
+    const isDev = process.env.CONTEXT === "dev";
+    const isLocalSite = isDev && /^http:\/\/localhost:\d+$/.test(refererOrigin);
+    const isDevTunnel = isDev && /^https:\/\/[^/]+\.netlify\.live$/.test(refererOrigin);
 
-    const isFromSite = allowedOrigins.has(refererOrigin) || isDevTunnel;
+    const isFromSite = refererOrigin === siteOrigin || isLocalSite || isDevTunnel;
     const isFromLighthouse = /Lighthouse|Chrome-Lighthouse/i.test(userAgent);
 
     return isFromSite || isFromLighthouse;

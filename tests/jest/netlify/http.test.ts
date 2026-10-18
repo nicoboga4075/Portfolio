@@ -25,9 +25,17 @@ afterEach(() => {
 });
 
 describe("isTrustedRequest", () => {
-    test("trusts the production site and the local dev server", () => {
+    test("trusts the production site", () => {
         expect(isTrustedRequest(request({ referer: `${site}/en/` }))).toBe(true);
-        expect(isTrustedRequest(request({ referer: `http://localhost:${devPort}/fr/blog` }))).toBe(true);
+    });
+
+    test("trusts the local site only under netlify dev, on localhost over http", () => {
+        const local = request({ referer: `http://localhost:${devPort}/fr/blog` });
+        expect(isTrustedRequest(local)).toBe(false);
+        process.env.CONTEXT = "dev";
+        expect(isTrustedRequest(local)).toBe(true);
+        expect(isTrustedRequest(request({ referer: `https://localhost:${devPort}/` }))).toBe(false);
+        expect(isTrustedRequest(request({ referer: `http://localhost.evil.example:${devPort}/` }))).toBe(false);
     });
 
     test("rejects a third-party, a missing or a malformed Referer", () => {

@@ -17,7 +17,7 @@ const taskkill = path.join(process.env.SystemRoot ?? String.raw`C:\Windows`, 'Sy
 // Visitors browse browser-sync on the port of [dev] in netlify.toml (the only localhost origin isTrustedRequest lets call the functions), which proxies netlify dev on a free port the system picks.
 const { port: sitePort, staticServerPort } = toml.parse(fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8')).dev;
 
-// netlify dev (27.9.0) answers 403 on Windows for any static file that a _redirects rule matches: its getStatic() builds the path with path.relative, so it hands its own static server /docs\public\CV_en.pdf, which that server refuses. /docs/public/* is matched by such a rule, so the CV and the other public documents never load through 8888. Serve them straight from netlify dev's static server instead (production isn't affected: Netlify runs on Linux), with the headers _headers gives them, which that static server leaves out.
+// netlify dev (27.9.0) answers 403 on Windows for any static file that a _redirects rule matches: its getStatic() builds the path with path.relative, so it hands its own static server /docs\public\CV_en.pdf, which that server refuses. /docs/public/* is matched by such a rule, so the CV and the other public documents never load through the site port. Serve them straight from netlify dev's static server instead (production isn't affected: Netlify runs on Linux), with the headers _headers gives them, which that static server leaves out.
 function serveDocsPublic(req, res, next) {
     // new URL resolves any "../" before the prefix is checked.
     const { pathname, search } = new URL(req.url, 'http://localhost');
