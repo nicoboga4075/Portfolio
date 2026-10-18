@@ -310,24 +310,22 @@ function apiData() {
         tags: Object.fromEntries(langs.map(lang => [lang, article.tags.map(tag => tagName(tag, lang))])),
         url: Object.fromEntries(langs.map(lang => [lang, `${site}/${lang}/blog#${article.slug}`]))
     }));
-    // What the Explore button of each card opens, in the order of _data/projects.json (js/app.js appProjects, checked by npm run check:content)
-    const block = fs.readFileSync(path.join(__dirname, "js", "app.js"), "utf8").match(/const appProjects = \[([^\]]*)\];/);
-    const targets = block ? [...block[1].matchAll(/'([^']+)'/g)].map(m => m[1]) : [];
+    // What the Explore button of each card opens: its explore in _data/projects.json (checked by npm run check:content)
     const targetUrl = (target, lang) => {
         // An external page
         if (!target || /^https?:/.test(target)) return target ?? null;
         // A project page or an article of the blog
         return `${site}/${lang}/${target}`;
     };
-    const projectList = readData("projects").cards.map((card, index) => ({
+    const projectList = readData("projects").cards.map(card => ({
         id: card.id,
         title: plainText(inLang(card.title, defaultLang)),
         badge: plainText(card.badge ?? ""),
         context: both(card.context),
         description: both(card.description),
         technologies: plainText(inLang(card.technologies, defaultLang) ?? ""),
-        hasPage: projects.includes(targets[index]),
-        url: Object.fromEntries(langs.map(lang => [lang, targetUrl(targets[index], lang)]))
+        hasPage: projects.includes(card.explore),
+        url: Object.fromEntries(langs.map(lang => [lang, targetUrl(card.explore, lang)]))
     }));
     return {
         articles: { site, languages: langs, articles: articleList },
@@ -412,6 +410,12 @@ module.exports = function configureEleventy(eleventyConfig) {
         parts.pop();
         const slug = parts.join("_");
         return slug === "index" ? `/${lang}` : `/${lang}/${slug}`;
+    });
+    // The href of the Explore button of a project card, from its explore in _data/projects.json: an https address as it is, a project page or an article of the blog in the page's language, and an http address to the 404 page, never followed
+    eleventyConfig.addFilter("exploreHref", (target, lang) => {
+        if (target.startsWith("https://")) return target;
+        if (target.startsWith("http://")) return pkg.routes.appRoutes.error404;
+        return `/${lang}/${target}`;
     });
     // Resolves each article's bilingual title/tags to `lang` (falling back to `defaultLang`), leaving already single-language tags untouched; in articles/resolve-articles.js, which the tests of js/app.js use too
     eleventyConfig.addFilter("resolveArticles", require("./articles/resolve-articles"));

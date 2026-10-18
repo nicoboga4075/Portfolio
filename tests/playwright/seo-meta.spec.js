@@ -113,3 +113,13 @@ test.describe('JSON-LD', () => {
         });
     }
 });
+
+test.describe('Explore buttons of the project cards', () => {
+    const cards = require(path.join(root, '_data', 'projects.json')).cards;
+    for (const lang of ['en', 'fr']) {
+        test(`open what each card's explore says, in the page's language (${lang})`, () => {
+            const hrefs = [...read(`index_${lang}.html`).matchAll(/<a\s+class="explore[^"]*"\s+href="([^"]*)"/g)].map(m => decode(m[1]));
+            expect(hrefs).toEqual(cards.map(card => (card.explore.startsWith('https://') ? card.explore : `/${lang}/${card.explore}`)));
+        });
+    }
+});

@@ -1,6 +1,6 @@
 ---
 name: new-project
-description: Adds a project to the portfolio - its card in _data/projects.json, its target in appProjects (js/app.js, same position), and for a project with its own page the two pages in projects/, the slug in package.json routes.projects, the redirects and the Lighthouse audits - then checks the wiring with npm run check:content and lints. Use it when the user asks to add, create or showcase a project, a realisation or a case study.
+description: Adds a project to the portfolio - its card in _data/projects.json with what its Explore button opens, and for a project with its own page the two pages in projects/, the slug in package.json routes.projects, the redirects and the Lighthouse audits - then checks the wiring with npm run check:content and lints. Use it when the user asks to add, create or showcase a project, a realisation or a case study.
 ---
 
 # New project
@@ -11,7 +11,7 @@ A project is a card in the home page's Projects section. Its **Explore** button 
 - an article of the blog, `blog#<article-slug>`;
 - an external URL.
 
-The card and its target are linked **by position**: card n opens `appProjects[n]`. Follow every step.
+The card says itself what its Explore button opens, in its `explore`: the exploreHref filter of .eleventy.js turns it into the button's href in _includes/index-projects.html at build time. Follow every step.
 
 ## 1. Gather
 
@@ -26,10 +26,10 @@ Ask for what is missing, in one message:
 
 Don't invent the project's content: write only what the user gave or asked for.
 
-## 2. The card and its target, at the same position
+## 2. The card and its target
 
-- `_data/projects.json` `cards`: `{ "id": "<card image name>", "title": "...", "badge": "...", "context": { "en", "fr" }, "description": { "en", "fr" }, "technologies": "..." }`, plus `"heading": { "en", "fr" }` when the title differs per language, `"note": { "en", "fr" }` if any.
-- `js/app.js` `appProjects`: the target **at the same index**: `'<slug>'`, `'blog#<article-slug>'` or `'https://...'`.
+- `_data/projects.json` `cards`: `{ "id": "<card image name>", "explore": "<target>", "title": "...", "badge": "...", "context": { "en", "fr" }, "description": { "en", "fr" }, "technologies": "..." }`, plus `"heading": { "en", "fr" }` when the title differs per language, `"note": { "en", "fr" }` if any.
+- `explore`, the target: `<slug>` (its own page, `/<lang>/<slug>`), `blog#<article-slug>` or `https://...` (an `http://` one goes to the 404 page).
 
 Keep each file's formatting: edit, don't rewrite the file.
 

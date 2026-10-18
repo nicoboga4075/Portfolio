@@ -11,7 +11,7 @@ A Claude Code marketplace that lives in this repository and is declared for this
 | Tool | What it gives |
 |---|---|
 | `list_articles` | The blog articles newest first, in one language: slug, title, date, read time, excerpt, tags, blog URL, source pages |
-| `list_projects` | The project cards in home page order, with what their Explore button opens (`appProjects`) and their pages |
+| `list_projects` | The project cards in home page order, with what their Explore button opens (their `explore` in `_data/projects.json`) and their pages |
 | `find_text` | Where a text seen on the site lives: the `_data` key path, or the page / include and line |
 | `translation_gaps` | The result of `check-translation.mjs` as lists of errors, warnings and notes (`build: true` rebuilds first) |
 | `preview` | A PNG of a page of the last build, served like Netlify (`/fr/blog#mcs`, `/en/panel_mnt`), light or dark, 320 to 1920 px wide |

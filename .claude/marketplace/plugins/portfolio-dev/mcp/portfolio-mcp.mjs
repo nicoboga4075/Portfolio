@@ -52,10 +52,9 @@ function listArticles({ lang } = {}) {
 function listProjects({ lang } = {}) {
     const { locales, defaultLang, projects } = routes();
     const pick = lang && lang in locales ? lang : defaultLang;
-    const block = read('js/app.js').match(/const appProjects = \[([^\]]*)\];/);
-    const targets = block ? [...block[1].matchAll(/'([^']+)'/g)].map(m => m[1]) : [];
-    return json('_data/projects.json').cards.map((card, i) => {
-        const target = targets[i] ?? null;
+    return json('_data/projects.json').cards.map(card => {
+        // What its Explore button opens: a project slug, blog#<article> or an address
+        const target = card.explore ?? null;
         const page = target && projects.includes(target);
         return {
             id: card.id,
@@ -177,7 +176,7 @@ async function siteHealth({ hook } = {}) {
 const LANG = { type: 'string', description: 'Language code of routes.locales (en, fr). Default: routes.defaultLang' };
 const TOOLS = [
     { name: 'list_articles', description: 'The blog articles, newest first: slug, title, date, read time, excerpt, tags, blog URL and source pages, in one language.', inputSchema: { type: 'object', properties: { lang: LANG } }, run: listArticles },
-    { name: 'list_projects', description: 'The project cards in their order on the home page: title, description, context, technologies, what the Explore button opens (appProjects) and the project pages.', inputSchema: { type: 'object', properties: { lang: LANG } }, run: listProjects },
+    { name: 'list_projects', description: 'The project cards in their order on the home page: title, description, context, technologies, what the Explore button opens (explore in _data/projects.json) and the project pages.', inputSchema: { type: 'object', properties: { lang: LANG } }, run: listProjects },
     { name: 'find_text', description: 'Where a visible text lives: the _data/*.json path (file → key path) or the page / include and line. HTML tags are ignored. Use it before editing a text seen on the site.', inputSchema: { type: 'object', properties: { query: { type: 'string', description: 'Text to look for (case-insensitive, at least 2 characters)' }, lang: { type: 'string', description: 'Only this language (en, fr)' } }, required: ['query'] }, run: findText },
     { name: 'translation_gaps', description: 'Runs the translation check (check-translation.mjs): missing languages in _data, missing pages, templates locked to one language, unknown getMessage keys, wrong html lang, broken language switcher, text left in another language.', inputSchema: { type: 'object', properties: { build: { type: 'boolean', description: 'Rebuild with Eleventy first (about 10 s). Default false: reads the last build' } } }, run: translationGaps },
     { name: 'preview', description: 'A PNG screenshot of a page of the last build (.eleventy), served like Netlify: /en, /fr/blog, /en/blog#<article slug>, /fr/<project>, /en/policy. Light or dark theme, any width from 320 to 1920.', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Site path, default /en' }, theme: { type: 'string', enum: ['light', 'dark'] }, width: { type: 'number', description: '320 to 1920, default 1280' }, height: { type: 'number', description: '480 to 1600, default 800' }, full_page: { type: 'boolean', description: 'The whole page instead of the first screen' } } }, run: preview },

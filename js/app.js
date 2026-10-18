@@ -38,18 +38,6 @@ const appSkills = [
     "mad-skills"
 ];
 
-const appProjects = [
-    'https://www.esilv.fr/challenges-citoyens-cgi-2019-deux-premiers-prix-esilv-categories-environnement-et-handicap',
-    'blog#mcs',
-    'crm_elphicom',
-    'ebatisoft',
-    'jca_sushirobots',
-    'pragma_surveys',
-    'ref230_afnor',
-    'panel_mnt',
-    'opale_snitem'
-];
-
 const appArticles = JSON.parse($('meta[name="articles"]').attr('content'));
 
 const appKeywords = [
@@ -907,20 +895,6 @@ function initCarousel(target) {
     $(target).addClass('active');
 }
 
-function buildSafeRedirection(redirect, langPage) {
-    let safeRedirection;
-    if (redirect.startsWith('https://')) {
-        safeRedirection = redirect;
-    } else if (redirect.startsWith('http://')) {
-        safeRedirection = appRoutes["error404"];
-    } else if (appAllSections.includes(redirect)) {
-        safeRedirection = `/${langPage}#${redirect}`;
-    } else {
-        safeRedirection = `/${langPage}/${redirect}`;
-    }
-    return safeRedirection;
-}
-
 // Badge/tag text is already localized server-side (separate _en/_fr builds),
 // so filters are built straight from the rendered DOM instead of duplicating
 // the experience data in JS.
@@ -1101,10 +1075,6 @@ function initIndexPage(langPage) {
             saveHashToSession(getSlugFromUrl());
             clearUrlPath();
         }
-
-        $('.project .explore').each(function (index, navLink) {
-            navLink.href = buildSafeRedirection(appProjects[index], langPage);
-        });
 
         $('#calendly-cta').on('click', function (event) {
             event.preventDefault();

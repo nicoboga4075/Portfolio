@@ -48,14 +48,6 @@ describe('small helpers', () => {
         expect(loadApp({ lang: 'fr' }).getMessage('carousel-prev')).toBe('Précédent');
     });
 
-    test('buildSafeRedirection keeps https, blocks http, and builds the section and page paths', () => {
-        const app = loadApp();
-        expect(app.buildSafeRedirection('https://example.com', 'en')).toBe('https://example.com');
-        expect(app.buildSafeRedirection('http://example.com', 'en')).toBe('/404');
-        expect(app.buildSafeRedirection('about-section', 'fr')).toBe('/fr#about-section');
-        expect(app.buildSafeRedirection('blog#mcs', 'fr')).toBe('/fr/blog#mcs');
-    });
-
     test('toggleVisibility shows a hidden or d-none element with its class, and hides a shown one', () => {
         const app = loadApp({ body: '<div id="a" hidden></div><div id="b" class="d-none"></div><div id="c" class="d-flex"></div>' });
         app.toggleVisibility('#a');
@@ -444,10 +436,9 @@ describe('the home page', () => {
     const homeBody = `<nav id="ftco-navbar">${navLinks}<a class="nav-link mouse-icon" href="#resume-section">Down</a></nav>
         <div id="navi"><a class="nav-link">Education</a></div>
         <section id="home-section"></section><section id="about-section"></section><section id="education"></section>
-        <span id="ftco-visitor"></span><span id="last-update-date"></span>
-        <div class="project"><a class="explore"></a></div><div class="project"><a class="explore"></a></div>`;
+        <span id="ftco-visitor"></span><span id="last-update-date"></span>`;
 
-    test('counts the visit, sets the menu and the project links, keeps the hash of the URL, and dates the CV', async () => {
+    test('counts the visit, sets the menu, keeps the hash of the URL, and dates the CV', async () => {
         const app = loadApp({ body: homeBody, url: '/en#about-section', before: () => routeFetch({ 'functions/visit': { visits: 42 }, 'functions/env?lang=en': { date: '2026-10-01T16:40:00Z' } }) });
         app.initIndexPage('en');
         await flush();
@@ -456,7 +447,6 @@ describe('the home page', () => {
         expect($('.mouse-icon').attr('href')).toBe('#resume-section');
         expect(sessionStorage.getItem('currentHash')).toBe('about-section');
         expect(window.location.hash).toBe('');
-        expect($('.explore').map((index, link) => link.getAttribute('href')).get()).toEqual([expect.stringMatching(/^https:\/\/www\.esilv\.fr\//), '/en/blog#mcs']);
         expect(window.loadImages.mock.calls.map(call => call[0])).toEqual(['.logo-school', '.blog-img', '.project.img', '.article-image']);
         expect($('#last-update-date').text()).toBe('date 2026-10-01T16:40:00Z');
         expect(window.convertDate).toHaveBeenCalledWith('2026-10-01T16:40:00Z', 'en', { dateStyle: 'short', timeStyle: 'medium' }, false);

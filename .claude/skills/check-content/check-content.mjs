@@ -16,8 +16,8 @@ const articles = json('_data/articles.json');
 const blog = json('_data/blog.json');
 const cards = json('_data/projects.json').cards;
 const toml = read('netlify.toml');
-const appProjectsBlock = read('js/app.js').match(/const appProjects = \[([\s\S]*?)\];/);
-const appProjects = appProjectsBlock ? [...appProjectsBlock[1].matchAll(/'([^']+)'/g)].map(m => m[1]) : null;
+// What the Explore button of each card opens: its explore, a project slug, blog#<article> or an https address
+const exploreTargets = cards.map(card => card.explore);
 
 const errors = [];
 const warnings = [];
@@ -56,25 +56,21 @@ if (dates.some((d, i) => i && d > dates[i - 1])) {
 }
 
 // ---- Projects ----
-if (!appProjects) {
-    errors.push('js/app.js: const appProjects = [...] not found');
-} else {
-    // The Explore button of card n opens appProjects[n].
-    if (appProjects.length !== cards.length) {
-        errors.push(`js/app.js appProjects has ${appProjects.length} entries but _data/projects.json has ${cards.length} cards: the Explore button of card n opens appProjects[n]`);
-    }
-    cards.forEach((card, i) => warnings.push(`project card ${i + 1} "${card.title.replace(/<[^<>]+>/g, '')}" → ${appProjects[i] ?? '(nothing)'}`));
-    for (const target of appProjects.filter(t => !/(?:^https?:)|[#/]/.test(t))) {
-        checkPages('projects', target);
-        if (!routes.projects.includes(target)) errors.push(`project "${target}" is not in package.json routes.projects`);
-    }
-    for (const target of appProjects.filter(t => t.startsWith('blog#'))) {
-        if (!articles.some(a => a.slug === target.slice(5))) errors.push(`appProjects opens "${target}", which is not an article`);
-    }
+cards.forEach((card, i) => {
+    if (!card.explore) errors.push(`project card "${card.id}" has no explore: what its Explore button opens`);
+    else if (card.explore.startsWith('http://')) errors.push(`project card "${card.id}" opens ${card.explore}: only https addresses are followed, http ones go to the 404 page`);
+    warnings.push(`project card ${i + 1} "${card.title.replace(/<[^<>]+>/g, '')}" → ${card.explore ?? '(nothing)'}`);
+});
+for (const target of exploreTargets.filter(t => t && !/(?:^https?:)|[#/]/.test(t))) {
+    checkPages('projects', target);
+    if (!routes.projects.includes(target)) errors.push(`project "${target}" is not in package.json routes.projects`);
+}
+for (const target of exploreTargets.filter(t => t?.startsWith('blog#'))) {
+    if (!articles.some(a => a.slug === target.slice(5))) errors.push(`a project card opens "${target}", which is not an article`);
 }
 for (const slug of routes.projects) {
     checkPages('projects', slug);
-    if (appProjects && !appProjects.includes(slug)) warnings.push(`routes.projects has "${slug}", which no project card opens`);
+    if (!exploreTargets.includes(slug)) warnings.push(`routes.projects has "${slug}", which no project card opens`);
     for (const lang of langs) {
         if (!toml.includes(`path = "${lang}/${slug}"`)) warnings.push(`netlify.toml has no Lighthouse audit for ${lang}/${slug}`);
     }

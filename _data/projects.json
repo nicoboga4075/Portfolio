@@ -16,6 +16,7 @@
     "cards": [
         {
             "id": "esh",
+            "explore": "https://www.esilv.fr/challenges-citoyens-cgi-2019-deux-premiers-prix-esilv-categories-environnement-et-handicap",
             "title": "Easy Student Housing",
             "badge": "Microsoft Office",
             "context": {
@@ -30,6 +31,7 @@
         },
         {
             "id": "cpmcs",
+            "explore": "blog#mcs",
             "title": "CPMCS",
             "badge": "Python/Angular",
             "context": {
@@ -48,6 +50,7 @@
         },
         {
             "id": "crm",
+            "explore": "crm_elphicom",
             "title": "CRM <i>Elphicom</i>",
             "badge": "HTML/CSS/JS",
             "context": {
@@ -62,6 +65,7 @@
         },
         {
             "id": "building",
+            "explore": "ebatisoft",
             "title": "EBati <i>Carto Amiante</i>",
             "badge": "C#",
             "context": {
@@ -76,6 +80,7 @@
         },
         {
             "id": "sushi",
+            "explore": "jca_sushirobots",
             "title": "JCA <i>Sushi Robots</i>",
             "badge": "C#",
             "context": {
@@ -90,6 +95,7 @@
         },
         {
             "id": "pragma",
+            "explore": "pragma_surveys",
             "title": "Enquêtes Internes <i>Pragma</i>",
             "badge": "C#",
             "heading": {
@@ -108,6 +114,7 @@
         },
         {
             "id": "smiley",
+            "explore": "ref230_afnor",
             "title": "REF230 <i>AFNOR</i>",
             "badge": "C#",
             "context": {
@@ -122,6 +129,7 @@
         },
         {
             "id": "satisfaction",
+            "explore": "panel_mnt",
             "title": "Panel <i>MNT</i>",
             "badge": "HTML/CSS/JS",
             "context": {
@@ -136,6 +144,7 @@
         },
         {
             "id": "health",
+            "explore": "opale_snitem",
             "title": "OPALE <i>SNITEM</i>",
             "badge": "C#",
             "context": {
