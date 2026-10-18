@@ -1,4 +1,4 @@
-// The page js/app.js runs on, for its Jest tests in the jsdom environment: the real jQuery with its plugins stubbed, the globals of common.js, standalone.js, i18next, Bootstrap, Chart.js and the Google scripts as fakes, the metas of base.njk, and a loader that runs app.js on the page and returns its top-level declarations.
+// The fixture of the Jest tests of js/app.js, the page it runs on in the jsdom environment: the real jQuery with its plugins stubbed, the globals of common.js, standalone.js, i18next, Bootstrap, Chart.js and the Google scripts as fakes, the metas of base.njk, and a loader that runs app.js on the page and returns its top-level declarations.
 const path = require('node:path');
 
 const messages = require(path.join(__dirname, '..', '..', '_data', 'messages.json'));

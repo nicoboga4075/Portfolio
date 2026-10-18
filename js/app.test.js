@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
- * @jest-environment-options {"url": "https://nicoboga.netlify.app/en"}
+ * @jest-environment-options {"url": "https://nicoboga.netlify.app"}
  */
-// Unit tests of js/app.js, the script of the home and blog pages, on the jsdom page of tests/jest/app-harness.cjs (the docblock above, a block by Jest's syntax, picks that environment and an https URL; js/app.http.test.js covers the http one).
-const { observers, observerOf, installChart, loadApp, cleanUp, flush, scriptFor, routeFetch } = require('../tests/jest/app-harness.cjs');
+// Unit tests of js/app.js, the script of the home and blog pages, on the jsdom page of tests/jest/fixture.cjs (the docblock above, a block by Jest's syntax, picks that environment and the https origin of the live site, each test setting its own path; js/app.http.test.js covers the http one).
+const { observers, observerOf, installChart, loadApp, cleanUp, flush, scriptFor, routeFetch } = require('../tests/jest/fixture.cjs');
 
 afterEach(cleanUp);
 
