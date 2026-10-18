@@ -1334,7 +1334,7 @@ function initBlogPage(langPage) {
                 indexSearchOccurence = -1;
                 $searchInput.val('').focus();
                 $suggestions.empty().hide();
-                if (originalArticleContent != undefined) {
+                if (originalArticleContent) {
                     $('.article-container').html(originalArticleContent);
                 }
                 $(this).hide();

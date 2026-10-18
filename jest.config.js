@@ -13,8 +13,8 @@ module.exports = {
   moduleFileExtensions: ["js", "mjs", "cjs", "json", "ts", "mts"],
   transform: {
     "^.+\\.m?ts$": "<rootDir>/tests/jest/ts-transform.cjs",
-    // js/common.js and js/standalone.js are classic browser scripts: tests/jest/browser-globals-transform.cjs exports their top-level declarations to their Jest tests
-    "[/\\\\]js[/\\\\](common|standalone)\\.js$": "<rootDir>/tests/jest/browser-globals-transform.cjs"
+    // js/app.js, js/common.js and js/standalone.js are classic browser scripts: tests/jest/browser-globals-transform.cjs exports their top-level declarations to their Jest tests
+    "[/\\\\]js[/\\\\](app|common|standalone)\\.js$": "<rootDir>/tests/jest/browser-globals-transform.cjs"
   },
   // The functions import each other as ./shared/http.mjs, the name of the compiled file: Jest resolves it to the .mts source
   moduleNameMapper: {

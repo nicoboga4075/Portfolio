@@ -1,4 +1,4 @@
-// Jest transform of a classic browser script (js/common.js, js/standalone.js): its top-level declarations are globals in the browser but stay inside the module under Jest, so this appends a module.exports of them for the tests to read, the script itself unchanged.
+// Jest transform of a classic browser script (js/app.js, js/common.js, js/standalone.js): its top-level declarations are globals in the browser but stay inside the module under Jest, so this appends a module.exports of them for the tests to read, the script itself unchanged.
 module.exports = {
     process(source, filename) {
         const names = [...source.matchAll(/^(?:async\s+)?(?:function\*?|const|let|class)\s+([A-Za-z_$][\w$]*)/gm)].map(match => match[1]);
