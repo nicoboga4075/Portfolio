@@ -3,7 +3,9 @@ const path = require('node:path');
 
 const root = path.join(__dirname, '..', '..');
 const messages = require(path.join(root, '_data', 'messages.json'));
-const { appRoutes, locales, defaultLang } = require(path.join(root, 'package.json')).routes;
+const pkg = require(path.join(root, 'package.json'));
+const { appRoutes, locales, defaultLang } = pkg.routes;
+const { authorCities } = pkg.config;
 const resolveArticles = require(path.join(root, 'articles', 'resolve-articles.js'));
 
 // The articles meta of a page in that language, as base.njk writes it from the real _data/articles.json
@@ -117,6 +119,7 @@ function writeHead(lang, articles) {
     document.head.innerHTML = [
         `<meta name="articles" content='${attribute(articles)}'>`,
         `<meta name="i18n-messages" content='${attribute(messages)}'>`,
+        `<meta name="author-cities" content='${attribute(authorCities)}'>`,
         '<meta property="og:site_name" content="Portfolio">',
         '<meta name="email" content="me@example.com">'
     ].join('');

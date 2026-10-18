@@ -353,6 +353,8 @@ module.exports = function configureEleventy(eleventyConfig) {
     eleventyConfig.addGlobalData("version", pkg.version);
     // The name of the site, the og:site_name of every page, from the name of package.json
     eleventyConfig.addGlobalData("siteName", pkg.name);
+    // The cities of the author, config.authorCities of package.json, which the article search suggests, in the author-cities meta of the home and blog pages where js/app.js reads them
+    eleventyConfig.addGlobalData("authorCities", pkg.config.authorCities);
     // The client-side routes of package.json (routes.appRoutes), in the routes meta of every page where js/common.js reads them
     eleventyConfig.addGlobalData("appRoutes", pkg.routes.appRoutes);
     // The Botpress scripts of config.botpress in package.json (the pinned inject.js and its hash, the bot script with the bot's own settings, "bot"), handed to js/botpress.js through the botpress meta

@@ -248,9 +248,8 @@ const appKeywords = [
     "Medium",
     "Survey Magazine",
     "OpenClassrooms",
-    // Main Cities
-    "Paris",
-    "Lyon",
+    // Main Cities, from config.authorCities of package.json (the author-cities meta of base.njk)
+    ...JSON.parse($('meta[name="author-cities"]').attr('content')),
     // Editor Softwares
     "Ethnos",
     "Web Reports",

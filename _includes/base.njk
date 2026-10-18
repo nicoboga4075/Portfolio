@@ -31,6 +31,7 @@ bodyClass: ""
         {%- if assets and "head-scripts.html" in assets %}
         <meta name="articles" content="{{ articles | resolveArticles(lang, siteLanguages.default, siteLanguages.locales) | dump }}">
         <meta name="i18n-messages" content="{{ messages | dump }}">
+        <meta name="author-cities" content="{{ authorCities | dump }}">
         {%- endif %}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">

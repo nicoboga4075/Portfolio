@@ -65,7 +65,12 @@
         "integrity": "sha384-rIz8hhxDTms5tHY2DgfjlCHykKqWkDUXz06Qy4BCWj5iTYn2btB2cBPhJlaQQ7JR"
       },
       "bot": "https://files.bpcontent.cloud/2025/10/06/10/20251006102232-ANM8U0DA.js"
-    }
+    },
+    "authorCities": [
+      "Paris",
+      "Lyon",
+	  "Dax"
+    ]
   },
   "scripts": {
     "dev": "npm run gen:redirects && node dev-watch.js --once",

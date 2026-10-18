@@ -757,6 +757,11 @@ describe('the blog page', () => {
         suggestions.find('li').trigger('mousedown');
         expect(input.val()).toBe('HTML');
         expect($('.article-container mark.highlight')).toHaveLength(3);
+        // The cities of config.authorCities in package.json are keywords too
+        const [city] = require('../package.json').config.authorCities;
+        input.val(city.toLowerCase()).trigger('input');
+        jest.advanceTimersByTime(300);
+        expect(suggestions.find('li').map((index, item) => item.textContent).get()).toContain(city);
         input.val('zzzz').trigger('input');
         jest.advanceTimersByTime(300);
         expect(suggestions.css('display')).toBe('none');
