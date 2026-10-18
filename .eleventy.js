@@ -35,7 +35,7 @@ const passthroughFiles = [
 //   defaultLang - "/" redirect + hreflang x-default
 //   authorLang  - the author's own language (vs. the deployed default)
 // Add a language: add its config.locales entry + create the *_<lang>.html files.
-const { site, locales, defaultLang, authorLang, appRoutes, authorCities, botpress, profile } = pkg.config;
+const { site, locales, defaultLang, authorLang, appRoutes, authorCities, botpress, profile, analyticsId, calendly, socials } = pkg.config;
 // The sections, the pages of the root served at /<lang>/<name> from <name>_<lang>.html: the routes of config.appRoutes except the home and the 404 page
 const sections = Object.keys(appRoutes).filter(name => !["index", "error404"].includes(name));
 const langs = Object.keys(locales);
@@ -150,7 +150,7 @@ const tagName = (tag, lang) => {
     return lang in tag ? tag[lang] : Object.keys(tag)[0];
 };
 
-function jsonLd({ page, lang, title, description, image, author, socials }) {
+function jsonLd({ page, lang, title, description, image, author }) {
     const parts = page.fileSlug.split("_");
     parts.pop();
     const slug = parts.join("_");
@@ -371,26 +371,17 @@ module.exports = function configureEleventy(eleventyConfig) {
     const age = today.getFullYear() - birth.getFullYear() - (today < new Date(today.getFullYear(), birth.getMonth(), birth.getDate()) ? 1 : 0);
     eleventyConfig.addGlobalData("profile", { ...facts, email, age });
     // Google Analytics only on the Netlify production build: not in npm run dev, the preview build, deploy previews or branch deploys
-    eleventyConfig.addGlobalData("analytics", { id: "G-S08CZ1FDQM", enabled: process.env.CONTEXT === "production" && !isPreview });
-    const linkedinDomain = "https://www.linkedin.com";
-    const linkedinVanity = "nicolas-bogalheiro-126a7616b";
-    eleventyConfig.addGlobalData("linkedin", {
-        vanity: linkedinVanity,
-        url: `${linkedinDomain}/in/${linkedinVanity}`,
-        messaging: `${linkedinDomain}/messaging/thread/new`
-    });
-    const calendlyUrl = "https://calendly.com/nicolas-bogalheiro/30min";
-    eleventyConfig.addGlobalData("calendly", { en: calendlyUrl, fr: calendlyUrl });
-    const socials = [
-        { href: `${linkedinDomain}/in/${linkedinVanity}`, label: "LinkedIn", icon: "linkedin" },
-        { href: "https://github.com/nicoboga4075", label: "GitHub", icon: "github" },
-        { href: "https://www.codingame.com/profile/8755914e3c5aeab435bb5ec921b9237e8911643", label: "CodinGame", icon: "gamepad" },
-        { href: "https://www.chess.com/member/nicoboga4075knight", label: "Chess", icon: "king-outlined", modalIcon: "chessboard" }
-    ];
+    eleventyConfig.addGlobalData("analytics", { id: analyticsId, enabled: process.env.CONTEXT === "production" && !isPreview });
+    // The LinkedIn profile of config.socials, linked from the tools section, and its new message page, the Hire me button
+    const linkedinUrl = socials.find(s => s.icon === "linkedin").href;
+    eleventyConfig.addGlobalData("linkedin", { url: linkedinUrl, messaging: new URL("/messaging/thread/new", linkedinUrl).href });
+    // The Calendly booking page of config.calendly, opened by the contact section
+    eleventyConfig.addGlobalData("calendly", calendly);
+    // The social links of config.socials, in the nav, the footer and the sameAs of the JSON-LD
     eleventyConfig.addGlobalData("socials", socials);
     // The schema.org JSON-LD of a page (Person + WebSite for home, Blog, BlogPosting for an article, CreativeWork for a project), or "" for the other pages.
     eleventyConfig.addFilter("openGraph", (page, lang, title, description, image) => openGraph({ page, lang, title, description, image, siteName: pkg.name }));
-    eleventyConfig.addFilter("jsonLd", (page, lang, title, description, image) => jsonLd({ page, lang, title, description, image, author, socials }));
+    eleventyConfig.addFilter("jsonLd", (page, lang, title, description, image) => jsonLd({ page, lang, title, description, image, author }));
     // -> api/ at the repo root, like the feeds: /api/articles.json and /api/projects.json for the chatbot.
     const api = apiData();
     fs.mkdirSync(path.join(__dirname, "api"), { recursive: true });
