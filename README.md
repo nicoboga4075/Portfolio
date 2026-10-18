@@ -42,6 +42,48 @@ Portfolio/
 
 Generated and not committed: `.eleventy/` (output of `npm run dev`), `api/`, `sitemap.xml`, `feed_*.xml`, `reports/` (test reports) and `logs/`.
 
+### 🔌 Local Ports
+`npm run dev` ([`dev-watch.js`](dev-watch.js)) and the Claude Code hooks listen on four local ports:
+
+| Port | Value | Set in | Listened on by | Role |
+|---|---|---|---|---|
+| `port` | 8888 | `[dev]` of [`netlify.toml`](netlify.toml) | browser-sync | The local site, the one address to open: it reloads the page after each build and forwards everything else to netlify dev. The Netlify functions trust `http://localhost` on any port only under netlify dev (`CONTEXT` is `dev`) |
+| proxy port | free, picked by the system | `dev-watch.js`, written to `.netlify/dev-proxy-port` while it runs (read by the status line) | netlify dev | Serves `.eleventy` with `_redirects`, `_headers`, the environment variables and the functions (`/.netlify/functions/*`), behind browser-sync |
+| `staticServerPort` | 3999 | `[dev]` of `netlify.toml` | the static server of netlify dev | Serves the files of `.eleventy`; `dev-watch.js` reads `docs/public/*` straight from it, since netlify dev answers 403 on Windows for a static file matched by a `_redirects` rule |
+| translation port | 4799 | the url of the `/post-edit` http hook in [`.claude/settings.json`](.claude/settings.json) | [`translation-hook-server.mjs`](.claude/hooks/translation-hook-server.mjs) | Checks every `_data/*.json` file Claude edits (valid JSON, every language with the same shape); started by a SessionStart hook, stops after 2 hours without a request. Not part of the site |
+
+The Robot Framework tests on the built site use one more, a free port that [`serve-build.mjs`](.claude/skills/robot-test/serve-build.mjs) prints at start-up. The Android app ([`capacitor.config.js`](capacitor.config.js)) loads the local site on `port` too, forwarded from the device by `npm run adb:reverse`.
+
+```plantuml
+@startuml
+left to right direction
+actor "Browser" as browser
+actor "Claude Code" as claude
+
+node "npm run dev (dev-watch.js)" {
+  component "browser-sync\nport 8888 (netlify.toml)" as bs
+  component "netlify dev\nproxy port (free, .netlify/dev-proxy-port)" as nd
+  component "static server\nstaticServerPort 3999 (netlify.toml)" as st
+  component "Netlify functions\n/.netlify/functions/*" as fn
+}
+folder ".eleventy" as out
+
+node "Claude Code hooks" {
+  component "translation-hook-server.mjs\ntranslation port 4799 (.claude/settings.json)" as th
+}
+folder "_data/*.json" as data
+
+browser --> bs : the site, on localhost
+bs --> nd : every request but docs/public/*
+bs --> st : docs/public/*
+nd --> st : static files
+nd --> fn : functions
+st --> out
+claude --> th : POST /post-edit after Edit / Write
+th --> data : checks the edited file
+@enduml
+```
+
 ### 📦 Vendored Libraries
 The third-party libraries in `js/` and `css/` are downloaded manually (not npm dependencies), so [Dependabot](.github/dependabot.yml) can't track them. Their versions are recorded in [`.github/vendor-versions.json`](.github/vendor-versions.json) and checked weekly by the [`vendor-versions`](.github/workflows/vendor-versions.yml) workflow, which opens a GitHub issue when a newer release is available. See also [SECURITY.md](SECURITY.md#utilities).
 
