@@ -1,7 +1,7 @@
 {
   "name": "Portfolio",
   "version": "2.1.0",
-  "description": "This project is deployed on **Netlify** : https://nicoboga.netlify.app",
+  "description": "Bilingual portfolio (English and French) of Nicolas BOGALHEIRO, software engineer: profile, experiences, projects, certifications and blog articles, built as a static site with Eleventy and Nunjucks, with Netlify functions, a Botpress chatbot, an offline service worker, and tests in Jest, Playwright, Cypress and Robot Framework",
   "keywords": [
     "portfolio",
     "web",
@@ -34,7 +34,33 @@
     "Beacons",
     "Jest",
     "Playwright",
-    "Cypress"
+    "Cypress",
+    "Nunjucks",
+    "Static Site",
+    "i18n",
+    "i18next",
+    "PWA",
+    "Service Worker",
+    "Netlify Functions",
+    "Capacitor",
+    "Android",
+    "Botpress",
+    "Chatbot",
+    "reCAPTCHA",
+    "SEO",
+    "Open Graph",
+    "Sitemap",
+    "Atom",
+    "Accessibility",
+    "WCAG",
+    "Critical CSS",
+    "Prettier",
+    "html-validate",
+    "Robot Framework",
+    "CodeQL",
+    "GitHub Actions",
+    "GitLab CI",
+    "Claude Code"
   ],
   "license": "MIT",
   "author": {
@@ -48,6 +74,7 @@
   },
   "config": {
     "site": "https://nicoboga.netlify.app",
+    "host": "Netlify",
     "locales": {
       "en": "en_US",
       "fr": "fr_FR"
