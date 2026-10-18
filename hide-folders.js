@@ -30,5 +30,5 @@ function hideFolders(root = __dirname) {
 
 module.exports = { hideFolders };
 
-// Run on its own with node hide-folders.js, for instance after npm ci recreated node_modules
+// Run on its own with npm run hide:folders, which the postinstall script of package.json runs after each npm install or npm ci
 if (require.main === module) hideFolders();
