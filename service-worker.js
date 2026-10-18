@@ -84,8 +84,8 @@ async function staleWhileRevalidate(event) {
         })
         .catch(() => cached ?? Response.error());
     if (cached) {
-        // Keep the SW alive until the background refresh finishes.
-        event.waitUntil(update.catch(() => {}));
+        // Keep the SW alive until the background refresh finishes; update never rejects, its own catch above turns a failure into the cached copy.
+        event.waitUntil(update);
         return cached;
     }
     return update;
