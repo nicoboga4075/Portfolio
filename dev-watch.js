@@ -14,10 +14,8 @@ const netlifyCli = path.join(path.dirname(process.execPath), 'node_modules', 'ne
 const uglifyScript = path.join(__dirname, 'uglify-code.js');
 const taskkill = path.join(process.env.SystemRoot ?? String.raw`C:\Windows`, 'System32', 'taskkill.exe');
 
-// Visitors browse browser-sync on 8888 (the only localhost origin isTrustedRequest lets call the functions), which proxies netlify dev on 8889.
-const sitePort = 8888;
-const netlifyPort = 8889;
-const { staticServerPort } = toml.parse(fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8')).dev;
+// Visitors browse browser-sync on the port of [dev] in netlify.toml (the only localhost origin isTrustedRequest lets call the functions), which proxies netlify dev on a free port the system picks.
+const { port: sitePort, staticServerPort } = toml.parse(fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8')).dev;
 
 // netlify dev (27.9.0) answers 403 on Windows for any static file that a _redirects rule matches: its getStatic() builds the path with path.relative, so it hands its own static server /docs\public\CV_en.pdf, which that server refuses. /docs/public/* is matched by such a rule, so the CV and the other public documents never load through 8888. Serve them straight from netlify dev's static server instead (production isn't affected: Netlify runs on Linux), with the headers _headers gives them, which that static server leaves out.
 function serveDocsPublic(req, res, next) {
@@ -95,20 +93,32 @@ function shutdown() {
 }
 
 
+// Calls back with a port no program listens on, the one the system gives to a server on port 0, closed right away for netlify dev to take.
+function freePort(callback) {
+    const probe = http.createServer().listen(0, 'localhost', () => {
+        const { port } = probe.address();
+        probe.close(() => callback(port));
+    });
+}
+
 // Calls back once netlify dev answers on its port (any status): it takes about a minute to start.
-function whenNetlifyAnswers(callback) {
+function whenNetlifyAnswers(netlifyPort, callback) {
     const request = http.get({ host: 'localhost', port: netlifyPort, path: '/' }, response => {
         response.resume();
         callback();
     });
-    request.on('error', () => setTimeout(() => whenNetlifyAnswers(callback), 1000));
+    request.on('error', () => setTimeout(() => whenNetlifyAnswers(netlifyPort, callback), 1000));
 }
 
 function startServing() {
+    freePort(netlifyPort => serveThrough(netlifyPort));
+}
+
+function serveThrough(netlifyPort) {
     run(netlifyCli, ['dev', '--port', String(netlifyPort), ...netlifyArgs], {}, 'inherit');
-    // browser-sync starts, and opens 8888 in the browser, only once netlify dev answers: earlier, the tab would open on a proxy error (netlify dev itself no longer opens 8889, see autoLaunch in netlify.toml).
+    // browser-sync starts, and opens the site port in the browser, only once netlify dev answers: earlier, the tab would open on a proxy error (netlify dev itself no longer opens its own port, see autoLaunch in netlify.toml).
     // Required here rather than at the top, so a test that requires this file for headersFor doesn't load browser-sync.
-    whenNetlifyAnswers(() => require('browser-sync').create().init({
+    whenNetlifyAnswers(netlifyPort, () => require('browser-sync').create().init({
         proxy: `http://localhost:${netlifyPort}`,
         port: sitePort,
         // One full reload per build (css included), triggered by the file above.

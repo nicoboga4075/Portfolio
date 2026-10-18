@@ -1,9 +1,10 @@
 import { Context } from "@netlify/functions";
+import pkg from "../../../package.json" with { type: "json" };
 
-// Origins the site is actually served from; anything else is treated as third-party.
+// Origins the site is actually served from, the dev server (see dev-watch.js) and config.site of package.json; anything else is treated as third-party.
 const allowedOrigins = new Set([
     "http://localhost:8888",
-    "https://nicoboga.netlify.app"
+    pkg.config.site
 ]);
 
 // Every function is a same-origin XHR target, never a page a visitor navigates to

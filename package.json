@@ -63,6 +63,10 @@
     "Claude Code"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicoboga4075/Portfolio"
+  },
   "author": {
     "name": "Nicolas BOGALHEIRO",
     "email": "nicolas.bogalheiro@gmail.com"

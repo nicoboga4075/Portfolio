@@ -1,8 +1,9 @@
 // Unit tests of netlify/functions/env.mts: the public environment variables, Google's test reCAPTCHA key under netlify dev, and the date of the last commit of a CV through the GitHub API, fetch mocked.
 import handlerEnv from "../../../netlify/functions/env.mjs";
+import pkg from "../../../package.json";
 
 const context = { requestId: "req-1" } as any;
-const SITE = "https://nicoboga.netlify.app";
+const SITE = pkg.config.site;
 const RECAPTCHA_TEST_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
 
 // A call of the function from the site, with the given query string

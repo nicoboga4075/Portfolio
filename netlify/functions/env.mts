@@ -36,11 +36,13 @@ type GithubCommit = {
 // The languages a docs/public/CV_<lang>.pdf is published for; anything else
 // serves config.cvDefaultLang.
 const { cvLangs, cvDefaultLang } = pkg.config;
+// The owner/name of the GitHub repository of package.json (nicoboga4075/Portfolio), whose commits date the CV
+const repository = new URL(pkg.repository.url).pathname.slice(1);
 
 function getLastCvUpdate(lang: string): Promise<Response> {
     const cvLang = cvLangs.includes(lang) ? lang : cvDefaultLang;
     return webhook<GithubCommit[]>(
-        `https://api.github.com/repos/nicoboga4075/Portfolio/commits?path=docs/public/CV_${cvLang}.pdf&per_page=1`,
+        `https://api.github.com/repos/${repository}/commits?path=docs/public/CV_${cvLang}.pdf&per_page=1`,
         data => ({
             date: data[0]?.commit.committer.date
         })

@@ -1,5 +1,8 @@
 // Unit tests of netlify/functions/shared/http.mts: which requests count as coming from the site, and the 404 redirect, JSON and 500 responses every function returns.
 import { internalError, isTrustedRequest, jsonResponse, redirectTo404 } from "../../../netlify/functions/shared/http.mjs";
+import pkg from "../../../package.json";
+
+const { site } = pkg.config;
 
 const context = { requestId: "req-1" } as any;
 
@@ -8,7 +11,7 @@ function request({ referer, userAgent }: { referer?: string, userAgent?: string 
     const headers = new Headers();
     if (referer) headers.set("referer", referer);
     if (userAgent) headers.set("user-agent", userAgent);
-    return new Request("https://nicoboga.netlify.app/.netlify/functions/env", { headers });
+    return new Request(`${site}/.netlify/functions/env`, { headers });
 }
 
 afterEach(() => {
@@ -18,7 +21,7 @@ afterEach(() => {
 
 describe("isTrustedRequest", () => {
     test("trusts the production site and the local dev server", () => {
-        expect(isTrustedRequest(request({ referer: "https://nicoboga.netlify.app/en/" }))).toBe(true);
+        expect(isTrustedRequest(request({ referer: `${site}/en/` }))).toBe(true);
         expect(isTrustedRequest(request({ referer: "http://localhost:8888/fr/blog" }))).toBe(true);
     });
 
@@ -29,7 +32,7 @@ describe("isTrustedRequest", () => {
     });
 
     test("rejects an origin that only starts like the site's", () => {
-        expect(isTrustedRequest(request({ referer: "https://nicoboga.netlify.app.evil.example/" }))).toBe(false);
+        expect(isTrustedRequest(request({ referer: `${site}.evil.example/` }))).toBe(false);
     });
 
     test("trusts a *.netlify.live tunnel only under netlify dev", () => {
