@@ -34,7 +34,6 @@ Portfolio/
 ├── gen-redirects.js               Writes _redirects from config of package.json
 ├── uglify-code.js                 Minifies the site scripts after the build
 ├── hide-folders.js                Hides the generated folders (.eleventy, .netlify, api, logs, node_modules, reports): hidden attribute on Windows, hidden flag on macOS, .hidden file on Linux
-├── resolve-sections.js            Lists the sections of the site (blog, policy, terms) from the root pages, for the build and gen-redirects.js
 ├── _headers, _redirects           Netlify headers (CSP, cache) and redirects
 ├── netlify.toml                   Netlify build settings and plugins
 ├── .gitlab/.gitlab-ci.yml         GitLab CI pipeline (self-hosted Windows runner, see CI/CD below)
