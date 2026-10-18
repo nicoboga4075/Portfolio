@@ -47,6 +47,25 @@
     "npm": ">=10"
   },
   "config": {
+    "site": "https://nicoboga.netlify.app",
+    "locales": {
+      "en": "en_US",
+      "fr": "fr_FR"
+    },
+    "defaultLang": "en",
+    "authorLang": "fr",
+    "cvLangs": [
+      "en",
+      "fr"
+    ],
+    "cvDefaultLang": "en",
+    "appRoutes": {
+      "index": "/{lng}",
+      "blog": "/{lng}/blog",
+      "policy": "/{lng}/policy",
+      "terms": "/{lng}/terms",
+      "error404": "/404"
+    },
     "profile": {
       "birthDate": "1997-11-19",
       "address": "Paris",
@@ -196,26 +215,5 @@
     "unrs-resolver@1.12.2": true,
     "cypress@16.1.1": true,
     "puppeteer@2.1.1": true
-  },
-  "routes": {
-    "site": "https://nicoboga.netlify.app",
-    "locales": {
-      "en": "en_US",
-      "fr": "fr_FR"
-    },
-    "defaultLang": "en",
-    "authorLang": "fr",
-    "cvLangs": [
-      "en",
-      "fr"
-    ],
-    "cvDefaultLang": "en",
-    "appRoutes": {
-      "index": "/{lng}",
-      "blog": "/{lng}/blog",
-      "policy": "/{lng}/policy",
-      "terms": "/{lng}/terms",
-      "error404": "/404"
-    }
   }
 }

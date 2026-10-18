@@ -1,7 +1,7 @@
 // Unit tests of js/common.js, the helpers shared by every page: routes, dates, the language switcher, images, the theme cycle, the redirect links, the service worker, the loader and the copyright year, on a fake page.
 
 // The routes meta base.njk writes from package.json, read by common.js on load
-const routesMeta = { content: JSON.stringify(require('../package.json').routes.appRoutes) };
+const routesMeta = { content: JSON.stringify(require('../package.json').config.appRoutes) };
 
 // A storage like localStorage and sessionStorage
 function fakeStorage(entries = {}) {

@@ -14,7 +14,7 @@ test('gives a page to every real card that opens a slug, each with its two pages
     const pages = projectPages(cards);
     expect(pages.length).toBeGreaterThan(0);
     for (const slug of pages) {
-        for (const lang of Object.keys(require('../../package.json').routes.locales)) {
+        for (const lang of Object.keys(require('../../package.json').config.locales)) {
             expect(fs.existsSync(path.join(root, 'projects', `${slug}_${lang}.html`))).toBe(true);
         }
     }

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// HTTP hook server (PostToolUse on Edit / Write / MultiEdit): when Claude edits a _data/*.json file, checks that it is valid JSON and that every text has every language of routes.locales with the same shape, and answers {"decision":"block","reason":...} so Claude sees the problem next to its edit.
+// HTTP hook server (PostToolUse on Edit / Write / MultiEdit): when Claude edits a _data/*.json file, checks that it is valid JSON and that every text has every language of config.locales with the same shape, and answers {"decision":"block","reason":...} so Claude sees the problem next to its edit.
 // Started by start-translation-hook-server.mjs (SessionStart hook); listens on localhost only and stops after 2 hours without a request.
 import fs from 'node:fs';
 import http from 'node:http';
@@ -12,7 +12,7 @@ const DATA = path.join(ROOT, '_data');
 const IDLE_MS = 2 * 60 * 60 * 1000;
 const MAX_ISSUES = 20;
 
-const languages = () => Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).routes.locales);
+const languages = () => Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).config.locales);
 const kind = value => (Array.isArray(value) ? 'array' : typeof value);
 
 // Two versions of a text compared all the way down: same type, same keys, same list lengths, both empty or both filled.

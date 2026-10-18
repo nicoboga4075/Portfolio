@@ -1,18 +1,18 @@
 ---
 name: new-language
-description: Adds a language to the portfolio (Spanish, German, Italian...) next to English and French - its routes.locales entry in package.json, its version of every text in _data/*.json, its page for every page (home, blog, policy, terms, every project and article), its entries in the translation check, optionally its CV and Lighthouse audits - then checks everything with npm run check:translation, check:content and lint. Use it when the user asks to add, support or translate the site into a new language or locale, or to remove one.
+description: Adds a language to the portfolio (Spanish, German, Italian...) next to English and French - its config.locales entry in package.json, its version of every text in _data/*.json, its page for every page (home, blog, policy, terms, every project and article), its entries in the translation check, optionally its CV and Lighthouse audits - then checks everything with npm run check:translation, check:content and lint. Use it when the user asks to add, support or translate the site into a new language or locale, or to remove one.
 ---
 
 # New language
 
-The site has one page per language (`index_en.html`, `index_fr.html`...) and one version per language of every text in `_data`. The language list is the keys of `routes.locales` in `package.json`: the redirects, the sitemap and its `hreflang` alternates, the language switcher, i18next and every check read it, so adding a key there is what makes a language exist. Everything else is translation work, and `npm run check:translation` lists it.
+The site has one page per language (`index_en.html`, `index_fr.html`...) and one version per language of every text in `_data`. The language list is the keys of `config.locales` in `package.json`: the redirects, the sitemap and its `hreflang` alternates, the language switcher, i18next and every check read it, so adding a key there is what makes a language exist. Everything else is translation work, and `npm run check:translation` lists it.
 
 ## 1. Gather
 
 Ask for what is missing, in one message:
 
 - the **language code**: two lowercase letters, ISO 639-1 (`es`, `de`, `it`, `pt`). A regional code (`pt-BR`) is not supported: the routes (`js/common.js`), the article and env functions and the templates (`suffix.length == 2`) expect two letters;
-- the **locale** for `routes.locales` (`es_ES`, `de_DE`);
+- the **locale** for `config.locales` (`es_ES`, `de_DE`);
 - who **translates**: the user, or Claude with the user reviewing. Claude may translate the site's own texts; say clearly that the result needs a review by a speaker of the language before it goes live;
 - whether a **CV** exists in that language (`docs/public/CV_<code>.pdf`).
 
@@ -20,7 +20,7 @@ Ask for what is missing, in one message:
 
 ## 2. Register the language
 
-In `package.json` `routes.locales`, add `"<code>": "<locale>"` after the existing ones: the order of the keys is the order of the language switcher.
+In `package.json` `config.locales`, add `"<code>": "<locale>"` after the existing ones: the order of the keys is the order of the language switcher.
 
 From here on, `npm run check:translation` fails until the language is complete: that is expected, it is the to-do list.
 
@@ -68,7 +68,7 @@ Without them, the check still requires every text and page, but can't spot a tex
 
 ## 6. Optional
 
-- **CV**: `docs/public/CV_<code>.pdf` and the code in `routes.cvLangs`. Without it, the env function serves `routes.cvDefaultLang`.
+- **CV**: `docs/public/CV_<code>.pdf` and the code in `config.cvLangs`. Without it, the env function serves `config.cvDefaultLang`.
 - **Lighthouse audits** in `netlify.toml`: copy the `[[plugins.inputs.audits]]` blocks of `en` (`path = "en"`, `"en/blog"`, the projects, the articles) with the new code.
 - The **404 page** (`404.html`) is a single page in English for every language: leave it.
 
@@ -82,7 +82,7 @@ npm run lint
 ```
 
 - `check:translation` rebuilds the site: 0 error, then read the warnings (a text left in another language, the same sentence in two languages).
-- `_redirects` is generated: commit the regenerated file, don't edit it by hand. `sitemap.xml` and the Atom feeds are written by every build from `routes` and are never committed.
+- `_redirects` is generated: commit the regenerated file, don't edit it by hand. `sitemap.xml` and the Atom feeds are written by every build from `config` and are never committed.
 - After `ELEVENTY_PREVIEW=1 npx eleventy` (never a plain `npx eleventy`), `feed_<code>.xml` exists with every article in the new language, and the pages carry their JSON-LD with `inLanguage` set to the new locale (`es-ES`).
 - The language switcher shows the new code; its flag comes with #448 (`Show flags in the language switcher`).
 - Open `/<code>`, `/<code>/blog` and a project with `npm run dev`, and switch languages with the switcher on each.
@@ -92,4 +92,4 @@ The new-article and new-project skills say "English and French": with a third la
 
 ## Removing a language
 
-The reverse: remove its key from `routes.locales` (and `routes.cvLangs`), delete its `*_<code>.html` pages, then remove its `"<code>"` keys from `_data` (`check:translation` doesn't report extra languages: search for `"<code>":`). Never remove `defaultLang` or `authorLang` without changing them first: `.eleventy.js` refuses to build.
+The reverse: remove its key from `config.locales` (and `config.cvLangs`), delete its `*_<code>.html` pages, then remove its `"<code>"` keys from `_data` (`check:translation` doesn't report extra languages: search for `"<code>":`). Never remove `defaultLang` or `authorLang` without changing them first: `.eleventy.js` refuses to build.

@@ -1,4 +1,4 @@
-// gen-redirects.js, which writes _redirects from the routes of package.json: run without a browser in a temporary folder, on made-up routes, then on the real ones.
+// gen-redirects.js, which writes _redirects from config of package.json: run without a browser in a temporary folder, on made-up routes, then on the real ones.
 const { test, expect } = require('@playwright/test');
 const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
@@ -18,7 +18,7 @@ function generate(routes, { sections = [], explore = [], jsFiles = [] } = {}) {
     fs.copyFileSync(path.join(root, 'gen-redirects.js'), path.join(dir, 'gen-redirects.js'));
     fs.copyFileSync(path.join(root, 'projects', 'project-pages.js'), path.join(dir, 'projects', 'project-pages.js'));
     fs.copyFileSync(path.join(root, 'resolve-sections.js'), path.join(dir, 'resolve-sections.js'));
-    fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify({ routes }));
+    fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify({ config: routes }));
     fs.writeFileSync(path.join(dir, '_data', 'projects.json'), JSON.stringify({ cards: explore.map(target => ({ explore: target })) }));
     execFileSync(process.execPath, [path.join(dir, 'gen-redirects.js')], { stdio: 'pipe' });
     return fs.readFileSync(path.join(dir, '_redirects'), 'utf8').split('\n');
@@ -81,7 +81,7 @@ test.describe('gen-redirects', () => {
     });
 
     test('matches the committed _redirects for the real routes', () => {
-        const { routes: real } = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+        const { config: real } = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
         const committed = fs.readFileSync(path.join(root, '_redirects'), 'utf8').replaceAll('\r\n', '\n');
         const jsFiles = fs.readdirSync(path.join(root, 'js'));
         const cards = require(path.join(root, '_data', 'projects.json')).cards;

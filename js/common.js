@@ -1,12 +1,12 @@
 // Shared helpers loaded before both standalone.js (light pages) and app.js (index/blog): the code that was identical (or trivially reconcilable) in both.
 
-// The routes of package.json (routes.appRoutes), written into the routes meta of every page by base.njk; light pages only ever match policy, terms and error404, and the "/{lng}" or "/{lng}/blog" patterns of index and blog cannot match their paths
+// The routes of package.json (config.appRoutes), written into the routes meta of every page by base.njk; light pages only ever match policy, terms and error404, and the "/{lng}" or "/{lng}/blog" patterns of index and blog cannot match their paths
 const appRoutes = JSON.parse(document.querySelector('meta[name="routes"]').content);
 
 // The pages that restore the remembered #hash, whose own link resets it on click instead of being marked as the current page
 const hashRoutes = new Set(['index', 'blog']);
 
-// The languages the switcher offers (rendered by Eleventy from package.json routes).
+// The languages the switcher offers (rendered by Eleventy from package.json config).
 const appLanguages = new Set(
     Array.from(document.querySelectorAll('#language-switcher [hreflang]'), a => a.hreflang)
 );

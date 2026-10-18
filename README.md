@@ -31,7 +31,7 @@ Portfolio/
 ├── .github/                       GitHub Actions workflows, Dependabot, vendored versions check
 ├── .claude/                       Claude Code settings, hooks, skills, agents and the portfolio-dev plugin
 ├── .eleventy.js                   Eleventy configuration (also writes sitemap.xml, feed_*.xml and api/*.json)
-├── gen-redirects.js               Writes _redirects from the routes of package.json
+├── gen-redirects.js               Writes _redirects from config of package.json
 ├── uglify-code.js                 Minifies the site scripts after the build
 ├── hide-folders.js                Hides the generated folders (.eleventy, .netlify, api, logs, node_modules, reports): hidden attribute on Windows, hidden flag on macOS, .hidden file on Linux
 ├── resolve-sections.js            Lists the sections of the site (blog, policy, terms) from the root pages, for the build and gen-redirects.js

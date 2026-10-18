@@ -34,8 +34,8 @@ type GithubCommit = {
 };
 
 // The languages a docs/public/CV_<lang>.pdf is published for; anything else
-// serves routes.cvDefaultLang.
-const { cvLangs, cvDefaultLang } = pkg.routes;
+// serves config.cvDefaultLang.
+const { cvLangs, cvDefaultLang } = pkg.config;
 
 function getLastCvUpdate(lang: string): Promise<Response> {
     const cvLang = cvLangs.includes(lang) ? lang : cvDefaultLang;

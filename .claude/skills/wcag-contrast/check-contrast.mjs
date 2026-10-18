@@ -26,8 +26,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.
 const OUT = path.join(ROOT, '.eleventy');
 const AXE = require.resolve('axe-core/axe.min.js', { paths: [ROOT] });
 const args = Object.fromEntries(process.argv.slice(2).map(a => a.replace(/^--/, '').split('=')).map(([k, v]) => [k, v ?? true]));
-// The site's languages (en|fr), from package.json routes.locales.
-const LANGS = Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).routes.locales).join('|');
+// The site's languages (en|fr), from package.json config.locales.
+const LANGS = Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).config.locales).join('|');
 // Git Bash turns a leading /en/... into C:/Program Files/Git/en/...: keep only the URL part.
 if (typeof args.only === 'string') {
     args.only = args.only.replace(new RegExp(`^.*?(?=/(${LANGS})(/|$))`), '');

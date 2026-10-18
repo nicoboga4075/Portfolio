@@ -62,7 +62,7 @@
       "rule_name": "function_outbound_url",
       "regex": "fetch\\(\\s*`[^`]*\\$\\{",
       "paths": ["*netlify/functions/*"],
-      "reminder": "An outbound URL built from a template string is an SSRF risk. Only interpolate values from process.env or from a fixed allowlist (like routes.cvLangs), never raw request input."
+      "reminder": "An outbound URL built from a template string is an SSRF risk. Only interpolate values from process.env or from a fixed allowlist (like config.cvLangs), never raw request input."
     },
     {
       "rule_name": "function_cors",

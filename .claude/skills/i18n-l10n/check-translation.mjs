@@ -14,7 +14,7 @@ const read = file => fs.readFileSync(path.join(ROOT, file), 'utf8');
 const exists = file => fs.existsSync(path.join(ROOT, file));
 const list = dir => (exists(dir) ? fs.readdirSync(path.join(ROOT, dir)) : []);
 
-const langs = Object.keys(JSON.parse(read('package.json')).routes.locales);
+const langs = Object.keys(JSON.parse(read('package.json')).config.locales);
 const PAGE_DIRS = ['.', 'articles', 'projects'];
 const errors = [];
 const warnings = [];
@@ -263,7 +263,7 @@ for (const [base, found] of translated) {
         for (const [, attr] of html.matchAll(/\s(aria-label|title)=""/g)) warnings.push(`${file}: an empty ${attr}`);
     }
 }
-// Search engines find each page's translations through the hreflang alternates of the sitemap (built by .eleventy.js from routes.locales).
+// Search engines find each page's translations through the hreflang alternates of the sitemap (built by .eleventy.js from config.locales).
 const sitemap = fs.existsSync(path.join(OUT, 'sitemap.xml')) ? fs.readFileSync(path.join(OUT, 'sitemap.xml'), 'utf8') : '';
 const declared = new Set([...sitemap.matchAll(/hreflang="([^"]+)"/g)].map(([, code]) => code));
 for (const lang of langs.filter(l => sitemap && !declared.has(l))) errors.push(`sitemap.xml: no hreflang="${lang}" alternate (search engines won't find the ${lang} pages)`);

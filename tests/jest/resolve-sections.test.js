@@ -17,7 +17,7 @@ test('lists the root pages of the default language but the home, sorted, and not
 
 test('finds the real sections, each in every language', () => {
     const root = path.join(__dirname, '..', '..');
-    const { locales, defaultLang } = require('../../package.json').routes;
+    const { locales, defaultLang } = require('../../package.json').config;
     const sections = resolveSections(root, defaultLang);
     expect(sections).toEqual(expect.arrayContaining(['blog', 'policy', 'terms']));
     for (const name of sections) {

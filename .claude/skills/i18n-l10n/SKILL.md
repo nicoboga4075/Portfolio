@@ -11,7 +11,7 @@ npm run check:translation
 
 That is `node .claude/skills/i18n-l10n/check-translation.mjs`. It rebuilds the site into `.eleventy` (`ELEVENTY_PREVIEW=1`, sources untouched), exits with code 1 and lists each error, 0 when the translations are complete. `npm run check:translation -- --no-build` reuses the last build (only when nothing changed since).
 
-The languages are the keys of `routes.locales` in `package.json`: adding one there makes the check require it everywhere.
+The languages are the keys of `config.locales` in `package.json`: adding one there makes the check require it everywhere.
 
 ## How the site is translated
 

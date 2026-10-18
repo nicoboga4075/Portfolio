@@ -13,7 +13,7 @@ const json = file => JSON.parse(read(file));
 // The slugs of the pages of a folder, from its files in the default language (projects/<slug>_en.html)
 const pageSlugs = folder => fs.readdirSync(path.join(ROOT, folder)).map(file => file.match(new RegExp(String.raw`^(.+)_${routes.defaultLang}\.html$`))?.[1]).filter(Boolean);
 
-const routes = json('package.json').routes;
+const routes = json('package.json').config;
 const langs = Object.keys(routes.locales);
 const articles = json('_data/articles.json');
 const blog = json('_data/blog.json');

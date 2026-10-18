@@ -20,8 +20,8 @@ const plain = html => String(html).replaceAll(/<[^<>]*>/g, '').replaceAll('&quot
 // The project's languages and routes, or an error when the server runs outside the portfolio.
 function routes() {
     if (!exists('package.json')) throw new Error(`No package.json in ${ROOT}: start Claude Code from the portfolio repository`);
-    const found = json('package.json').routes;
-    if (!found?.locales) throw new Error(`${ROOT}/package.json has no routes.locales: this is not the portfolio`);
+    const found = json('package.json').config;
+    if (!found?.locales) throw new Error(`${ROOT}/package.json has no config.locales: this is not the portfolio`);
     return found;
 }
 
@@ -176,7 +176,7 @@ async function siteHealth({ hook } = {}) {
 }
 
 // ---- MCP ----
-const LANG = { type: 'string', description: 'Language code of routes.locales (en, fr). Default: routes.defaultLang' };
+const LANG = { type: 'string', description: 'Language code of config.locales (en, fr). Default: config.defaultLang' };
 const TOOLS = [
     { name: 'list_articles', description: 'The blog articles, newest first: slug, title, date, read time, excerpt, tags, blog URL and source pages, in one language.', inputSchema: { type: 'object', properties: { lang: LANG } }, run: listArticles },
     { name: 'list_projects', description: 'The project cards in their order on the home page: title, description, context, technologies, what the Explore button opens (explore in _data/projects.json) and the project pages.', inputSchema: { type: 'object', properties: { lang: LANG } }, run: listProjects },

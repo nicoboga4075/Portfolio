@@ -7,7 +7,7 @@ const root = path.join(__dirname, '..', '..');
 const out = path.join(root, '.eleventy');
 const pkg = require(path.join(root, 'package.json'));
 const resume = require(path.join(root, '_data', 'resume.json'));
-const site = pkg.routes.site;
+const site = pkg.config.site;
 
 const read = file => fs.readFileSync(path.join(out, file), 'utf8');
 // &amp; last, so a "&amp;lt;" in the page stays "&lt;" instead of being decoded twice into "<"
@@ -57,8 +57,8 @@ test.describe('head metas', () => {
         expect(values(list, 'og:type')).toEqual(['website']);
         expect(values(list, 'og:url')).toEqual([`${site}/en`]);
         expect(values(list, 'og:description')[0]).toBeTruthy();
-        expect(values(list, 'og:locale')).toEqual([pkg.routes.locales.en.replace('-', '_')]);
-        expect(values(list, 'og:locale:alternate')).toEqual([pkg.routes.locales.fr.replace('-', '_')]);
+        expect(values(list, 'og:locale')).toEqual([pkg.config.locales.en.replace('-', '_')]);
+        expect(values(list, 'og:locale:alternate')).toEqual([pkg.config.locales.fr.replace('-', '_')]);
         expect(values(list, 'og:image:alt')).toEqual([pkg.name]);
         expect(values(list, 'og:image:type')).toEqual(['image/png']);
         expect(Number(values(list, 'og:image:width')[0])).toBeGreaterThan(0);

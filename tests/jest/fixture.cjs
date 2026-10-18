@@ -4,7 +4,7 @@ const path = require('node:path');
 const root = path.join(__dirname, '..', '..');
 const messages = require(path.join(root, '_data', 'messages.json'));
 const pkg = require(path.join(root, 'package.json'));
-const { appRoutes, locales, defaultLang } = pkg.routes;
+const { appRoutes, locales, defaultLang } = pkg.config;
 const { authorCities } = pkg.config;
 const resolveArticles = require(path.join(root, 'articles', 'resolve-articles.js'));
 

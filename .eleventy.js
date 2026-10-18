@@ -34,14 +34,14 @@ const passthroughFiles = [
 //   locales    - language -> BCP-47 tag; its keys are the language list
 //   defaultLang - "/" redirect + hreflang x-default
 //   authorLang  - the author's own language (vs. the deployed default)
-// Add a language: add its routes.locales entry + create the *_<lang>.html files.
-const { site, locales, defaultLang, authorLang } = pkg.routes;
+// Add a language: add its config.locales entry + create the *_<lang>.html files.
+const { site, locales, defaultLang, authorLang } = pkg.config;
 // The sections, the pages of the root besides the home (blog, policy, terms), from the files themselves
 const sections = require("./resolve-sections")(__dirname, defaultLang);
 const langs = Object.keys(locales);
 for (const lang of [defaultLang, authorLang]) {
     if (!locales[lang]) {
-        throw new Error(`package.json routes: "${lang}" is not a key of routes.locales`);
+        throw new Error(`package.json config: "${lang}" is not a key of config.locales`);
     }
 }
 
@@ -360,8 +360,8 @@ module.exports = function configureEleventy(eleventyConfig) {
     eleventyConfig.addGlobalData("siteName", pkg.name);
     // The cities of the author, config.authorCities of package.json, which the article search suggests, in the author-cities meta of the home and blog pages where js/app.js reads them
     eleventyConfig.addGlobalData("authorCities", pkg.config.authorCities);
-    // The client-side routes of package.json (routes.appRoutes), in the routes meta of every page where js/common.js reads them
-    eleventyConfig.addGlobalData("appRoutes", pkg.routes.appRoutes);
+    // The client-side routes of package.json (config.appRoutes), in the routes meta of every page where js/common.js reads them
+    eleventyConfig.addGlobalData("appRoutes", pkg.config.appRoutes);
     // The Botpress scripts of config.botpress in package.json (the pinned inject.js and its hash, the bot script with the bot's own settings, "bot"), handed to js/botpress.js through the botpress meta
     eleventyConfig.addGlobalData("botpressScripts", pkg.config.botpress);
     // Profile and CV facts of config.profile in package.json, written into the pages at build time (about, counters, contact, skills chart, presentation article); the age is the one on the build day
@@ -421,7 +421,7 @@ module.exports = function configureEleventy(eleventyConfig) {
     // The href of the Explore button of a project card, from its explore in _data/projects.json: an https address as it is, a project page or an article of the blog in the page's language, and an http address to the 404 page, never followed
     eleventyConfig.addFilter("exploreHref", (target, lang) => {
         if (target.startsWith("https://")) return target;
-        if (target.startsWith("http://")) return pkg.routes.appRoutes.error404;
+        if (target.startsWith("http://")) return pkg.config.appRoutes.error404;
         return `/${lang}/${target}`;
     });
     // Resolves each article's bilingual title/tags to `lang` (falling back to `defaultLang`), leaving already single-language tags untouched; in articles/resolve-articles.js, which the tests of js/app.js use too
