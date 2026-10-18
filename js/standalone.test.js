@@ -8,7 +8,7 @@ function fakePage(links = []) {
     global.document = { querySelectorAll: jest.fn(() => links) };
 }
 
-// Loads standalone.js on the fake page and returns its top-level functions, exported by tests/jest/browser-globals-transform.cjs
+// Loads standalone.js on the fake page and returns its top-level functions, exported by tests/jest/transform.cjs
 function runScript() {
     let script;
     jest.isolateModules(() => {
