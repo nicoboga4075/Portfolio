@@ -143,7 +143,7 @@ The `sonar` job of GitHub Actions (`sonarqube-scan-action`) analyses every pushe
 
 #### GitLab CI
 
-`.gitlab/.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (Jest, Playwright), `sonar` (`npx @sonar/scan` only when GitHub Actions doesn't analyse the commit, allowed to fail) and `teardown` (cleans the build folder).
+`.gitlab/.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (one job per framework, one after the other since the runner runs one job at a time: Jest, Playwright, and Cypress and Robot Framework once their tests exist, the latter on the built site served by `serve-build.mjs`), `sonar` (`npx @sonar/scan` only when GitHub Actions doesn't analyse the commit, allowed to fail) and `teardown` (cleans the build folder).
 
 The file is not at the root, where GitLab looks by default: the project setting **Settings → CI/CD → General pipelines → CI/CD configuration file** is set to `.gitlab/.gitlab-ci.yml`.
 

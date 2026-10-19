@@ -44,17 +44,12 @@ build-job:
       - .npm-cache/
     policy: pull-push
 
-test-job:
+# The test stage: one job per framework, the Cypress and Robot Framework ones only once their tests exist; each fails the pipeline on a failed test and keeps its reports even then
+jest-job:
   stage: test
   script:
-    - New-Item -ItemType Directory -Force -Path reports/jest/html, reports/jest/coverage, reports/playwright/html, reports/playwright/test-results | Out-Null
-    - Set-Content -Path reports/jest/junit.xml -Value '<?xml version="1.0" encoding="UTF-8"?><testsuites></testsuites>'
-    - Set-Content -Path reports/playwright/junit.xml -Value '<?xml version="1.0" encoding="UTF-8"?><testsuites></testsuites>'
     - echo "Running Jest tests..."
     - npm run jest
-    - echo "Running Playwright tests..."
-    - npx playwright test *> $null -ErrorAction SilentlyContinue; if ($LASTEXITCODE -ne 0) { echo "No tests found, exiting with code 0" }
-    - echo "Run done!"
   # % Lines of Jest's "All files" row; the other columns hold decimals too (1.47), not only whole numbers
   coverage: '/All files\s+\|\s+[\d.]+\s+\|\s+[\d.]+\s+\|\s+[\d.]+\s+\|\s+([\d.]+)/'
   artifacts:
@@ -62,23 +57,76 @@ test-job:
     reports:
       junit:
         - reports/jest/junit.xml
-        - reports/playwright/junit.xml
     paths:
       - reports/jest/junit.xml
-      - reports/playwright/junit.xml
       - reports/jest/html/
       - reports/jest/coverage/
+    expire_in: 1 week
+
+playwright-job:
+  stage: test
+  script:
+    - echo "Running Playwright tests..."
+    - npm run playwright
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - reports/playwright/junit.xml
+    paths:
+      - reports/playwright/junit.xml
       - reports/playwright/html/
       - reports/playwright/test-results/
     expire_in: 1 week
-    
+
+cypress-job:
+  stage: test
+  rules:
+    - exists:
+        - tests/cypress/**/*.cy.js
+        - tests/cypress/**/*.cy.ts
+  script:
+    - echo "Running Cypress tests..."
+    - npm run cypress
+  artifacts:
+    when: always
+    paths:
+      - tests/cypress/screenshots/
+      - tests/cypress/videos/
+    expire_in: 1 week
+
+robot-job:
+  stage: test
+  rules:
+    - exists:
+        - tests/robot/**/*.robot
+  script:
+    - echo "Building and serving the site for the Robot Framework tests..."
+    - $env:ELEVENTY_PREVIEW = "1"; npx eleventy
+    # The built site on a free port, in the background for the length of the job, which writes the port it got to reports/robot/port for the tests
+    - Remove-Item reports/robot/port -ErrorAction SilentlyContinue
+    - $server = Start-Process -FilePath node -ArgumentList ".claude/skills/robot-test/serve-build.mjs", "--port-file", "reports/robot/port" -PassThru -WindowStyle Hidden
+    - for ($i = 0; $i -lt 50 -and -not (Test-Path reports/robot/port); $i++) { Start-Sleep -Milliseconds 200 }
+    - $port = Get-Content reports/robot/port
+    - echo "Running Robot Framework tests on http://localhost:$port..."
+    - robot --outputdir reports/robot --xunit junit.xml --variable "BASE_URL:http://localhost:$port" tests/robot; $code = $LASTEXITCODE; Stop-Process -Id $server.Id -Force; exit $code
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - reports/robot/junit.xml
+    paths:
+      - reports/robot/
+    expire_in: 1 week
+
 sonar-job:
   allow_failure: true
   stage: sonar
   variables:
     GIT_DEPTH: 0
   dependencies:
-    - test-job
+    - jest-job
+    - playwright-job
   script:
     - |
       # GitHub Actions analyses every pushed commit: run this analysis only when it doesn't, so GitLab never overwrites the main branch of SonarCloud (late analyses, VERSION events)
