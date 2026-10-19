@@ -30,9 +30,6 @@ const sections = Object.keys(routes.appRoutes).filter(name => !['index', 'error4
 const explore = ['demo', 'blog#mcs', 'https://example.com'];
 
 test.describe('gen-redirects', () => {
-    // A pure Node test: one browser project is enough.
-    test.skip(({ browserName }) => browserName !== 'chromium');
-
     test.afterAll(() => {
         for (const dir of dirs) fs.rmSync(dir, { recursive: true, force: true });
     });

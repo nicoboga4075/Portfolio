@@ -36,7 +36,7 @@ Test real behaviour, not implementation details. One focused test file per featu
 
 ## Running them
 
-Run each new test (`npx jest <file>`, or `npx playwright test <file> --project=Chromium`) and fix the test until it passes. Never change the code under test to make a test pass: if a test reveals a real bug, keep it, mark it `test.fail` or `test.skip` with a single-line comment naming the bug, and report it.
+Run each new test (`npx jest <file>`, or `npx playwright test <file>`, which runs a test without a browser once in the Node project and a `*.browser.spec.js` one in each browser) and fix the test until it passes. Never change the code under test to make a test pass: if a test reveals a real bug, keep it, mark it `test.fail` or `test.skip` with a single-line comment naming the bug, and report it.
 
 ## Rules
 

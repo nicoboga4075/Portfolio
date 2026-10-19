@@ -17,9 +17,6 @@ function rulesOf(content) {
 }
 
 test.describe('headersFor', () => {
-    // A pure Node test: one browser project is enough.
-    test.skip(({ browserName }) => browserName !== 'chromium');
-
     test.beforeAll(() => {
         dir = fs.mkdtempSync(path.join(os.tmpdir(), 'dev-watch-headers-'));
     });

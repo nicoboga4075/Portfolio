@@ -1,5 +1,4 @@
 const { test, expect } = require('@playwright/test');
-const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -20,14 +19,6 @@ function metas(html) {
 }
 const values = (list, key) => list.filter(([k]) => k === key).map(([, v]) => v);
 const jsonLd = html => JSON.parse(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/.exec(html)[1]);
-
-// No browser here: run in one project only, so the three projects do not build into .eleventy/ at the same time
-test.skip(({ browserName }) => browserName !== 'chromium', 'no browser needed');
-
-test.beforeAll(() => {
-    // The preview build writes to .eleventy/ and leaves the page sources alone
-    execFileSync('npx', ['@11ty/eleventy'], { cwd: root, env: { ...process.env, ELEVENTY_PREVIEW: '1' }, shell: true, stdio: 'pipe' });
-});
 
 test.describe('title', () => {
     test('home has no page title: site name and author only', () => {

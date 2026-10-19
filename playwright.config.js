@@ -1,5 +1,8 @@
 const { defineConfig, devices } = require('@playwright/test');
 
+// The specs that read the pages of the preview build
+const BUILT = ['**/seo-meta.spec.js', '**/config-links.spec.js'];
+
 module.exports = defineConfig({
     // Only the Playwright tests: tests/jest, tests/cypress and tests/robot belong to the other runners
     testDir: './tests/playwright',
@@ -22,8 +25,15 @@ module.exports = defineConfig({
         video: 'off'
     },
     projects: [
-        { name: 'Chromium', use: { ...devices['Desktop Chrome'] } },
-        { name: 'Firefox', use: { ...devices['Desktop Firefox'] } },
-        { name: 'WebKit', use: { ...devices['Desktop Safari'] } }
+        // The preview build of the site, once, before the specs that read the built pages
+        { name: 'Build', testMatch: '**/build.setup.js' },
+        // The specs that read the built pages of .eleventy/, after the build
+        { name: 'Built', testMatch: BUILT, dependencies: ['Build'] },
+        // The other tests without a browser (scripts, templates rendered alone), run once: every spec but the built and *.browser.spec.js ones
+        { name: 'Node', testIgnore: ['**/*.browser.spec.js', ...BUILT] },
+        // The tests that open a page, named *.browser.spec.js, run in each browser
+        { name: 'Chromium', testMatch: '**/*.browser.spec.js', use: { ...devices['Desktop Chrome'] } },
+        { name: 'Firefox', testMatch: '**/*.browser.spec.js', use: { ...devices['Desktop Firefox'] } },
+        { name: 'WebKit', testMatch: '**/*.browser.spec.js', use: { ...devices['Desktop Safari'] } }
     ]
 });
