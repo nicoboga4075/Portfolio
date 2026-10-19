@@ -13,6 +13,11 @@ updates:
       capacitor:
         patterns:
           - "@capacitor/*"
+      # Jest and its jsdom environment come from the same monorepo and release together: jest-environment-jsdom must stay on the version of jest
+      jest:
+        patterns:
+          - "jest"
+          - "jest-environment-jsdom"
   - package-ecosystem: "github-actions"
     # Keep the actions of .github/workflows up to date (checkout, setup-node, artifacts, scan actions), including the ones pinned to a commit SHA
     directory: "/"
