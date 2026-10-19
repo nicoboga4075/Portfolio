@@ -10,7 +10,7 @@ const arg = name => process.argv.find(a => a.startsWith(`--${name}=`))?.split('=
 const only = arg('only');
 const timeout = Number(arg('timeout') ?? 20000);
 const CONCURRENCY = 8;
-const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).config.site;
+const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).homepage;
 
 // Hosts that are not pages to visit: code samples, font preconnects and the site itself.
 const SKIPPED_HOSTS = [/(^|\.)example\.com$/, /(^|\.)exemple\.com$/, /^fonts\.(googleapis|gstatic)\.com$/, /^localhost$/, /^127\.0\.0\.1$/];

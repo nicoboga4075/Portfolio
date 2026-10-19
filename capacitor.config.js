@@ -5,8 +5,8 @@ const toml = require('toml');
 const pkg = require('./package.json');
 
 const { port } = toml.parse(fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8')).dev;
-// The Android package name, com.<first label of config.site>.app (com.nicoboga.app for nicoboga.netlify.app), every character a Java identifier can't hold turned into _
-const appId = `com.${new URL(pkg.config.site).hostname.split('.')[0].replaceAll(/\W/g, '_')}.app`;
+// The Android package name, com.<first label of the homepage of package.json>.app (com.nicoboga.app for nicoboga.netlify.app), every character a Java identifier can't hold turned into _
+const appId = `com.${new URL(pkg.homepage).hostname.split('.')[0].replaceAll(/\W/g, '_')}.app`;
 
 module.exports = {
     appId,

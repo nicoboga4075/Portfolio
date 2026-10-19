@@ -3,7 +3,7 @@ import handlerEnv from "../../../netlify/functions/env.mjs";
 import pkg from "../../../package.json";
 
 const context = { requestId: "req-1" } as any;
-const SITE = pkg.config.site;
+const SITE = pkg.homepage;
 const RECAPTCHA_TEST_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
 
 // A call of the function from the site, with the given query string

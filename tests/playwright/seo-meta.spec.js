@@ -7,7 +7,7 @@ const root = path.join(__dirname, '..', '..');
 const out = path.join(root, '.eleventy');
 const pkg = require(path.join(root, 'package.json'));
 const resume = require(path.join(root, '_data', 'resume.json'));
-const site = pkg.config.site;
+const site = pkg.homepage;
 
 const read = file => fs.readFileSync(path.join(out, file), 'utf8');
 // &amp; last, so a "&amp;lt;" in the page stays "&lt;" instead of being decoded twice into "<"

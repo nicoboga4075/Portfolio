@@ -5,7 +5,7 @@ import path from "node:path";
 import toml from "toml";
 import pkg from "../../../package.json";
 
-const { site } = pkg.config;
+const site = pkg.homepage;
 // The port of the local site, the one of [dev] in netlify.toml that dev-watch.js opens
 const devPort = toml.parse(fs.readFileSync(path.join(__dirname, "..", "..", "..", "netlify.toml"), "utf8")).dev.port;
 

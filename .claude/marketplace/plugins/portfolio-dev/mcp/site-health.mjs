@@ -39,7 +39,7 @@ function qualityGate(root) {
 }
 
 export async function fullHealth(root) {
-    const { site, locales } = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).config;
+    const { homepage: site, config: { locales } } = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
     const head = git(root, ['rev-parse', 'HEAD']);
     const remote = git(root, ['rev-parse', 'origin/main']);
     const [pages, ci] = await Promise.all([

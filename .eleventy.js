@@ -35,7 +35,9 @@ const passthroughFiles = [
 //   defaultLang - "/" redirect + hreflang x-default
 //   authorLang  - the author's own language (vs. the deployed default)
 // Add a language: add its config.locales entry + create the *_<lang>.html files.
-const { site, locales, defaultLang, authorLang, appRoutes, authorCities, botpress, profile, analyticsId, calendly, socials } = pkg.config;
+// The address of the deployed site, the homepage of package.json
+const site = pkg.homepage;
+const { locales, defaultLang, authorLang, appRoutes, authorCities, botpress, profile, analyticsId, calendly, socials } = pkg.config;
 // The sections, the pages of the root served at /<lang>/<name> from <name>_<lang>.html: the routes of config.appRoutes except the home and the 404 page
 const sections = Object.keys(appRoutes).filter(name => !["index", "error404"].includes(name));
 const langs = Object.keys(locales);

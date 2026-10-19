@@ -1,8 +1,8 @@
 import { Context } from "@netlify/functions";
 import pkg from "../../../package.json" with { type: "json" };
 
-// The origin the site is actually served from, config.site of package.json; anything else is treated as third-party, but the local site under netlify dev (below).
-const siteOrigin = new URL(pkg.config.site).origin;
+// The origin the site is actually served from, the homepage of package.json; anything else is treated as third-party, but the local site under netlify dev (below).
+const siteOrigin = new URL(pkg.homepage).origin;
 
 // Every function is a same-origin XHR target, never a page a visitor navigates to
 // directly. Allow requests coming from the site (or the dev tunnel), plus the
