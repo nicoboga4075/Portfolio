@@ -71,7 +71,8 @@ jobs:
         node-version: 22.x
         cache: 'npm'
     - run: npm ci --ignore-scripts
-    # No browser to install: every spec runs in the Node project of playwright.config.js until a *.browser.spec.js exists
+    # Chromium only, for the contrast checker that check-contrast.spec.js runs (it opens the built site in it); the Firefox and WebKit projects have no spec until a *.browser.spec.js exists
+    - run: npx playwright install --with-deps chromium
     - run: npm run playwright
     - uses: actions/upload-artifact@v7
       if: ${{ !cancelled() }}

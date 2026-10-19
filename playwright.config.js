@@ -1,7 +1,7 @@
 const { defineConfig, devices } = require('@playwright/test');
 
-// The specs that read the pages of the preview build
-const BUILT = ['**/seo-meta.spec.js', '**/config-links.spec.js'];
+// The specs that read the pages of the preview build: the head metas, the links of the config, and the contrast checker and the MCP server, which serve or read .eleventy/
+const BUILT = ['**/seo-meta.spec.js', '**/config-links.spec.js', '**/check-contrast.spec.js', '**/portfolio-mcp.spec.js'];
 
 module.exports = defineConfig({
     // Only the Playwright tests: tests/jest, tests/cypress and tests/robot belong to the other runners
