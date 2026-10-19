@@ -5,7 +5,8 @@ const os = require('node:os');
 const path = require('node:path');
 const { headersFor } = require('../../dev-watch');
 
-const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'dev-watch-headers-'));
+// The temporary folder of the _headers files, made before the tests a worker runs and removed after them: with fullyParallel, a worker can run the tests of this file in several batches, each with its own beforeAll and afterAll
+let dir;
 let files = 0;
 
 // The headers that a _headers file with this content sets on a path.
@@ -18,6 +19,10 @@ function rulesOf(content) {
 test.describe('headersFor', () => {
     // A pure Node test: one browser project is enough.
     test.skip(({ browserName }) => browserName !== 'chromium');
+
+    test.beforeAll(() => {
+        dir = fs.mkdtempSync(path.join(os.tmpdir(), 'dev-watch-headers-'));
+    });
 
     test.afterAll(() => fs.rmSync(dir, { recursive: true, force: true }));
 
