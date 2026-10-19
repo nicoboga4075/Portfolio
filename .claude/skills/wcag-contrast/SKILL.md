@@ -14,7 +14,7 @@ A colour change is not done until the check below passes.
 
 ## Run it
 
-The checker drives Chromium through Playwright: after a Playwright update, run `npx playwright install chromium` once if it reports a missing browser.
+The checker drives Chromium through Playwright: after a Playwright update, run `npm run playwright:install -- chromium` once if it reports a missing browser.
 
 Two runs:
 

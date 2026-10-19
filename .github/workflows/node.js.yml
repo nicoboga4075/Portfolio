@@ -71,9 +71,8 @@ jobs:
         node-version: 22.x
         cache: 'npm'
     - run: npm ci --ignore-scripts
-    # Chromium only, for the contrast checker that check-contrast.spec.js runs (it opens the built site in it); the Firefox and WebKit projects have no spec until a *.browser.spec.js exists
-    - run: npx playwright install --with-deps chromium
-    - run: npm run playwright
+    # Chromium only, for the contrast checker that check-contrast.spec.js runs (it opens the built site in it), installed through an npm script so the playwright binary of package-lock.json runs instead of one npx could fetch (SonarCloud githubactions:S6505, S8543); then the tests, only once Chromium is there
+    - run: npm run playwright:install -- chromium && npm run playwright
     - uses: actions/upload-artifact@v7
       if: ${{ !cancelled() }}
       with:
