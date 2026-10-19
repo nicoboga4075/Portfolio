@@ -150,7 +150,7 @@ async function preview({ url = '/en', theme = 'light', width = 1280, height = 80
     routes();
     if (!fs.existsSync(path.join(OUT, 'index_en.html'))) throw new Error('No build in .eleventy: run translation_gaps with build: true, or npm run build');
     if (!/^\/[\w\-/#]*$/.test(url)) throw new Error('url: a site path such as /en, /fr/blog, /en/blog#mcs or /en/panel_mnt');
-    const { chromium } = createRequire(path.join(ROOT, 'package.json'))('playwright');
+    const { chromium } = createRequire(path.join(ROOT, 'package.json'))('@playwright/test');
     const server = await startServer();
     const browser = await chromium.launch();
     try {
