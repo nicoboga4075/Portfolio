@@ -33,7 +33,8 @@ jobs:
     - run: npm ci --ignore-scripts
     - run: npm run build
 
-  test:
+  # Jest and Playwright in two jobs that run side by side, each failing the run when one of its tests fails and uploading its reports even then
+  jest:
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -48,21 +49,40 @@ jobs:
         node-version: 22.x
         cache: 'npm'
     - run: npm ci --ignore-scripts
-    - name: Seed empty report placeholders
-      run: |
-        mkdir -p reports/jest/coverage reports/playwright
-        echo '<?xml version="1.0" encoding="UTF-8"?><testsuites></testsuites>' > reports/jest/junit.xml
-        echo '<?xml version="1.0" encoding="UTF-8"?><testsuites></testsuites>' > reports/playwright/junit.xml
     - run: npm run jest
-    - run: npm run playwright || true
     - uses: actions/upload-artifact@v7
+      if: ${{ !cancelled() }}
       with:
-        name: reports
-        path: reports/
+        name: reports-jest
+        path: reports/jest/
+
+  playwright:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        fetch-depth: 0
+    - name: Use Node.js 22.x
+      uses: actions/setup-node@v7
+      with:
+        node-version: 22.x
+        cache: 'npm'
+    - run: npm ci --ignore-scripts
+    # No browser to install: every spec runs in the Node project of playwright.config.js until a *.browser.spec.js exists
+    - run: npm run playwright
+    - uses: actions/upload-artifact@v7
+      if: ${{ !cancelled() }}
+      with:
+        name: reports-playwright
+        path: reports/playwright/
 
   sonar:
-    needs: test
-    if: github.actor != 'dependabot[bot]'
+    needs: [jest, playwright]
+    # Also after a failed test, so SonarCloud still gets the coverage and the test reports of the run
+    if: ${{ !cancelled() && github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -73,8 +93,12 @@ jobs:
         fetch-depth: 0
     - uses: actions/download-artifact@v8
       with:
-        name: reports
-        path: reports/
+        name: reports-jest
+        path: reports/jest/
+    - uses: actions/download-artifact@v8
+      with:
+        name: reports-playwright
+        path: reports/playwright/
     # Same version as the GitLab analysis (@sonar/scan reads package.json): a different one resets SonarCloud's "previous version" new code period
     - name: Read the project version
       id: version
