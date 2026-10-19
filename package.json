@@ -125,6 +125,10 @@
     "authorCities": ["Paris", "Lyon", "Dax"],
     "analyticsId": "G-S08CZ1FDQM",
     "calendly": "https://calendly.com/nicolas-bogalheiro/30min",
+    "qrCodes": [
+      { "id": "beacons", "label": "Beacons", "href": "https://beacons.ai/nicoboga4075" },
+      { "id": "linkerz", "label": "Linkerz", "href": "https://linkerz.fr/nicoboga4075" }
+    ],
     "socials": [
       { "href": "https://www.linkedin.com/in/nicolas-bogalheiro-126a7616b", "label": "LinkedIn", "icon": "linkedin" },
       { "href": "https://github.com/nicoboga4075", "label": "GitHub", "icon": "github" },

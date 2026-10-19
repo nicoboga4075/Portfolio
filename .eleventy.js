@@ -37,7 +37,7 @@ const passthroughFiles = [
 // Add a language: add its config.locales entry + create the *_<lang>.html files.
 // The address of the deployed site, the homepage of package.json
 const site = pkg.homepage;
-const { locales, defaultLang, authorLang, appRoutes, authorCities, botpress, profile, analyticsId, calendly, socials } = pkg.config;
+const { locales, defaultLang, authorLang, appRoutes, authorCities, botpress, profile, analyticsId, calendly, socials, qrCodes } = pkg.config;
 // The sections, the pages of the root served at /<lang>/<name> from <name>_<lang>.html: the routes of config.appRoutes except the home and the 404 page
 const sections = Object.keys(appRoutes).filter(name => !["index", "error404"].includes(name));
 const langs = Object.keys(locales);
@@ -381,6 +381,8 @@ module.exports = function configureEleventy(eleventyConfig) {
     eleventyConfig.addGlobalData("calendly", calendly);
     // The social links of config.socials, in the nav, the footer and the sameAs of the JSON-LD
     eleventyConfig.addGlobalData("socials", socials);
+    // The link pages of config.qrCodes, each with its logo and QR code (images/logo-<id>.png, images/qrcode-<id>.png) in the author card of the blog
+    eleventyConfig.addGlobalData("qrCodes", qrCodes);
     // The schema.org JSON-LD of a page (Person + WebSite for home, Blog, BlogPosting for an article, CreativeWork for a project), or "" for the other pages.
     eleventyConfig.addFilter("openGraph", (page, lang, title, description, image) => openGraph({ page, lang, title, description, image, siteName: pkg.name }));
     eleventyConfig.addFilter("jsonLd", (page, lang, title, description, image) => jsonLd({ page, lang, title, description, image, author }));
