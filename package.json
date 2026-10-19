@@ -68,10 +68,18 @@
     "type": "git",
     "url": "https://github.com/nicoboga4075/Portfolio"
   },
+  "bugs": {
+    "url": "https://github.com/nicoboga4075/Portfolio/issues"
+  },
   "author": {
     "name": "Nicolas BOGALHEIRO",
-    "email": "nicolas.bogalheiro@gmail.com"
+    "email": "nicolas.bogalheiro@gmail.com",
+    "url": "https://nicoboga.netlify.app"
   },
+  "contributors": [
+    { "name": "Claude", "email": "noreply@anthropic.com", "url": "https://claude.com/claude-code" },
+    { "name": "Dependabot", "url": "https://github.com/dependabot" }
+  ],
   "main": ".eleventy.js",
   "engines": {
     "node": ">=20",
