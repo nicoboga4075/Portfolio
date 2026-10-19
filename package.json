@@ -240,7 +240,7 @@
   "allowScripts": {
     "@parcel/watcher@2.6.0": true,
     "unrs-resolver@1.12.2": true,
-    "cypress@16.1.1": true,
-    "puppeteer@2.1.1": true
+    "puppeteer@2.1.1": true,
+    "cypress@16.2.0": true
   }
 }
