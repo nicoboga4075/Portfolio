@@ -222,7 +222,7 @@
     "stylelint-config-standard": "^40.0.0",
     "terser": "^5.51.2",
     "toml": "^5.0.1",
-    "ts-jest": "^29.4.14",
+    "ts-jest": "^29.4.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.2"
   },
