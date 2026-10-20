@@ -10,8 +10,8 @@ An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI,
 
 | Area | Tools (major version) |
 |---|---|
-| Runtime | Node.js 20, 22 and 24 (CI matrix, `engines` >= 20), npm 10 |
-| Site | Eleventy 3, Nunjucks 3, vanilla JS and CSS, Terser 5 |
+| Runtime | Node.js 22.23.3 (`.nvmrc`, read by Netlify and the GitHub workflows; CI build matrix `lts/iron` (20), `lts/jod` (22) and `lts/krypton` (24)), npm >= 10 |
+| Site | Eleventy 3, Nunjucks 3, HTML 5, CSS 3, Vanilla JS (ES2022 minimum), Terser 5 |
 | Functions | Netlify Functions 6, TypeScript 6 |
 | Mobile | Capacitor 8 (Android) |
 | Tests | Jest 30, Playwright 1, Cypress 16, Robot Framework (SeleniumLibrary) |
@@ -30,7 +30,8 @@ An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI,
 
 ## Environment and setup
 
-- Node.js 20 or later and npm 10, then `npm ci` (the `postinstall` hides the generated folders).
+- Node.js of `.nvmrc` (22.23.3; 20 or later works) and npm 10 or later, then `npm ci` (the `postinstall` hides the generated folders).
+- Always use an LTS version of Node.js for the builds and the tests (`.nvmrc`, Netlify, the GitHub workflows, the GitLab runner), never a Current (odd) release; Node 20, past its end of life, stays in the CI build matrix as `lts/iron` (its last LTS release, 20.20.2) for backward compatibility only.
 - Netlify CLI installed globally (`npm install -g netlify-cli`), logged in and linked to the site: `dev-watch.js` runs it from next to `node`, and `netlify dev` brings the environment variables and the functions.
 - Environment variables, set in Netlify, never in the repository: `SUPABASE_URL`, `SUPABASE_ANON_KEY` (visit counter), `GITHUB_API_TOKEN` (date of the last CV commit), `ENV_CLIENT_ID` (Google OAuth client of the contact form, Gmail send), `SITE_RECAPTCHA_KEY` (under `netlify dev` the `env` function hands back Google's test key). CI secrets: `SONAR_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN`.
 - Robot Framework: Python with `pip install robotframework robotframework-seleniumlibrary`. Android: Android Studio and `adb` (`npm run adb:reverse` forwards port 8888).

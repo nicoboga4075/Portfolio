@@ -29,6 +29,7 @@ export default defineConfig([
     plugins: { js },
     extends: ["js/recommended"],
     languageOptions: {
+      // No ecmaVersion: ESLint parses the latest syntax, so the JS needs ES2022 at least and may use newer syntax; ecmaVersion: 2022 would cap the syntax (the regex v flag of ES2024 becomes a parsing error) but never the APIs (toSorted, Object.groupBy still pass)
 	  sourceType: "script",
       globals: {
         ...globals.browser,

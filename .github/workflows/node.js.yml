@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x, 22.x, 24.x]
+        node-version: [lts/iron, lts/jod, lts/krypton] # 20.20.2 (2026-03-24, end of life, backward compatibility), 22.23.3 (2026-09-23), 24.22.0 (2026-10-14)
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -43,10 +43,10 @@ jobs:
     - uses: actions/checkout@v7
       with:
         fetch-depth: 0
-    - name: Use Node.js 22.x
+    - name: Use Node.js of .nvmrc
       uses: actions/setup-node@v7
       with:
-        node-version: 22.x
+        node-version-file: .nvmrc
         cache: 'npm'
     - run: npm ci --ignore-scripts
     - run: npm run jest
@@ -65,10 +65,10 @@ jobs:
     - uses: actions/checkout@v7
       with:
         fetch-depth: 0
-    - name: Use Node.js 22.x
+    - name: Use Node.js of .nvmrc
       uses: actions/setup-node@v7
       with:
-        node-version: 22.x
+        node-version-file: .nvmrc
         cache: 'npm'
     - run: npm ci --ignore-scripts
     # Chromium only, for the contrast checker that check-contrast.spec.js runs (it opens the built site in it), installed through an npm script so the playwright binary of package-lock.json runs instead of one npx could fetch (SonarCloud githubactions:S6505, S8543); then the tests, only once Chromium is there

@@ -31,10 +31,10 @@ jobs:
           fetch-depth: 1
 
       # The lint-before-commit hook of .claude/settings.json runs ESLint and stylelint, so Claude can't commit without node_modules
-      - name: Use Node.js 22.x
+      - name: Use Node.js of .nvmrc
         uses: actions/setup-node@v7
         with:
-          node-version: 22.x
+          node-version-file: .nvmrc
           cache: 'npm'
 
       - run: npm ci --ignore-scripts
