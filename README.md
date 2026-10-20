@@ -55,34 +55,32 @@ Generated and not committed: `.eleventy/` (output of `npm run dev`), `api/`, `si
 
 The Robot Framework tests on the built site use one more, a free port that [`serve-build.mjs`](.claude/skills/robot-test/serve-build.mjs) prints at start-up. The Android app ([`capacitor.config.js`](capacitor.config.js)) loads the local site on `port` too, forwarded from the device by `npm run adb:reverse`.
 
-```plantuml
-@startuml
-left to right direction
-actor "Browser" as browser
-actor "Claude Code" as claude
+```mermaid
+flowchart LR
+  browser(("Browser"))
+  claude(("Claude Code"))
 
-node "npm run dev (dev-watch.js)" {
-  component "browser-sync\nport (netlify.toml)" as bs
-  component "netlify dev\nproxy port (free, .netlify/dev-proxy-port)" as nd
-  component "static server\nstaticServerPort (netlify.toml)" as st
-  component "Netlify functions\n/.netlify/functions/*" as fn
-}
-folder ".eleventy" as out
+  subgraph dev ["npm run dev (dev-watch.js)"]
+    bs["browser-sync<br/>port (netlify.toml)"]
+    nd["netlify dev<br/>proxy port (free, .netlify/dev-proxy-port)"]
+    st["static server<br/>staticServerPort (netlify.toml)"]
+    fn["Netlify functions<br/>/.netlify/functions/*"]
+  end
+  out[/".eleventy"/]
 
-node "Claude Code hooks" {
-  component "translation-hook-server.mjs\ntranslation port (.claude/settings.json)" as th
-}
-folder "_data/*.json" as data
+  subgraph hooks ["Claude Code hooks"]
+    th["translation-hook-server.mjs<br/>translation port (.claude/settings.json)"]
+  end
+  data[/"_data/*.json"/]
 
-browser --> bs : the site, on localhost
-bs --> nd : every request but docs/public/*
-bs --> st : docs/public/*
-nd --> st : static files
-nd --> fn : functions
-st --> out
-claude --> th : POST /post-edit after Edit / Write
-th --> data : checks the edited file
-@enduml
+  browser -->|"the site, on localhost"| bs
+  bs -->|"every request but docs/public/*"| nd
+  bs -->|"docs/public/*"| st
+  nd -->|"static files"| st
+  nd -->|"functions"| fn
+  st --> out
+  claude -->|"POST /post-edit after Edit / Write"| th
+  th -->|"checks the edited file"| data
 ```
 
 ### 📦 Vendored Libraries
