@@ -57,15 +57,25 @@ An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI,
 - CSS sizes in px, not rem or em; a heading level is changed with its tag, never with a `.h5`-style class or a CSS font-size.
 - Files in LF (`.gitattributes`). Lint must pass with no error and no warning.
 - Comments: see "Comments" below.
+- A boolean parameter that only picks between two behaviours (flagged by SonarCloud): keep one function, never split it into one function per value. If every caller passes the same value, remove the parameter and the dead branch; if the other variant is used in one place only, write it inline there (e.g. `new Date().toLocaleDateString()`) with a comment in the function naming it; otherwise replace the boolean by a string value (`'date'` or `'datetime'`), since an options object such as `{ complete: true }` is still flagged.
+- A backslash-u escape (backslash then `u003c`) typed in an Edit, Write or Bash input lands decoded (`<`) in the file: when a file must hold one (as the JSON-LD escape of `.eleventy.js`), write it from a script that builds the backslash as `chr(92)`, then check the bytes (`od -c`) before committing.
 
 ## Git workflow
 
-- One branch, `main`. Commit to `main` only when asked, and never push until asked.
+- One branch, `main`. Commit to `main` only when asked, proposing the gitmoji title first, and never push until asked: every push starts the CI, SonarCloud, the GitLab runner and the Claude review.
+- A commit title names what changed ("Refresh the security guidance and the skills"), never a time-relative phrase ("today's changes").
 - `origin` fetches from GitHub and pushes to both GitHub and GitLab; `github` and `gitlab` remotes exist for one side only. Never `git pull gitlab` or merge `gitlab/main`: rebase on it and push to GitHub (see CONTRIBUTING.md).
+- The two mirrors can drift (a push accepted by one host and rejected by the other): before a push, `git fetch github gitlab` and compare both `main` with the local one. To force one, push each single-host remote with a pinned lease (`git push github main --force-with-lease=main:$(git rev-parse github/main)`, same for `gitlab`): `--force-with-lease` on `origin` fails, its two push URLs confuse the lease.
+- Issue labels: `gh label create` always with `--color` and `--description`; every label of the repository has one.
 - The GitHub ruleset "Protect main" blocks force pushes and deletion; GitLab `main` is protected.
 - Each push to `main` runs GitHub Actions (`node.js.yml`: build on Node 20/22/24, Jest, Playwright, SonarCloud) and GitLab CI, and Netlify builds and publishes unless builds are stopped or auto publishing is locked (`netlify-ops` skill).
 - Before each commit the hooks run `npm run lint` (blocking), remind of missing tests, show the site health and sync the skills table.
 - Releases: `npm run release -- [patch|minor|major]` bumps the version, writes CHANGELOG.md and tags.
+
+## Reviews
+
+- A review of a Dependabot pull request says which entries of `overrides` in `package.json` must be added, changed or removed (`npm run check:overrides`, `npm audit`), with their row in SECURITY.md, and whether an `allowScripts` pin still names the old version (`npm approve-scripts <name>`): Dependabot updates neither.
+- Every review (a pull request or a set of changes) ends with the open issues (`gh issue list --state open`) the change closes, those that need an update (a task done, a description that no longer matches) and the new ones it calls for, proposed to the user rather than edited unasked; or says that none has to change.
 
 ## Tests
 
