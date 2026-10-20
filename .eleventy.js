@@ -9,7 +9,7 @@ const outputFolder = ".eleventy";
 const includesFolder = "_includes";
 const allowedDirs = new Set([".", includesFolder, "articles", "projects"]);
 // npm run dev serves the output folder; npm run build compiles html in place (article.mts reads it off disk).
-const isPreview = !!process.env.ELEVENTY_PREVIEW;
+const isPreview = Boolean(process.env.ELEVENTY_PREVIEW);
 const passthroughDirs = ["images", "css", "js", "fonts", "docs/public"];
 const passthroughFiles = [
     "_redirects",
