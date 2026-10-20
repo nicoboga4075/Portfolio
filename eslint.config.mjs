@@ -77,6 +77,9 @@ export default defineConfig([
 	  "no-useless-return": "error",
 	  "no-nested-ternary": "error",
 	  "no-lonely-if": "error",
+	  "dot-notation": "error",
+	  "object-shorthand": "error",
+	  "no-return-assign": "error",
 	  // ES2024 APIs that Node 20 of the CI lacks: ecmaVersion only checks the syntax, not the APIs
 	  "no-restricted-properties": ["error",
 	    { "object": "Object", "property": "groupBy", "message": "ES2024, missing on Node 20: group with reduce." },

@@ -618,7 +618,7 @@ function createCircularChart({
                         boxHeight: 14,
                         padding: 14,
                         usePointStyle: false,
-                        generateLabels: function (chart) {
+                        generateLabels(chart) {
                             const data = chart.data;
                             return data.labels.map((label, i) => {
                                 const value = chart.data.datasets[0].data[i];
@@ -635,7 +635,7 @@ function createCircularChart({
                     }
                 }
             },
-            cutout: cutout,
+            cutout,
             responsive: true,
             animation: {
                 animateRotate: true,
@@ -910,7 +910,7 @@ function initExperienceFilters() {
         { key: 'companySize', selector: '.company-size-badge', label: getMessage('filter-company-size') },
         { key: 'sector', selector: '.sector-tag', label: getMessage('filter-sector') }
     ];
-    groups.forEach(g => g.values = new Set());
+    groups.forEach(g => { g.values = new Set(); });
 
     wraps.forEach(wrap => {
         groups.forEach(g => {
@@ -1446,7 +1446,7 @@ function initBlogPage(langPage) {
                     links.forEach(link => {
                         const href = link.getAttribute('href');
                         if (!href.startsWith('https')) {
-                            link.setAttribute('href', appRoutes['error404']);
+                            link.setAttribute('href', appRoutes.error404);
                         }
                     });
 
@@ -1580,15 +1580,17 @@ function gapiLoaded() {
 function gisLoaded() {
     fetch('/.netlify/functions/env')
         .then(response => response.json())
-        .then(variables => appGoogleToken = google.accounts.oauth2.initTokenClient({
-            client_id: variables.ENV_CLIENT_ID,
-            scope: 'https://www.googleapis.com/auth/gmail.send',
-            callback: (resp) => {
-                if (resp.error !== undefined) {
-                    throw resp;
+        .then(variables => {
+            appGoogleToken = google.accounts.oauth2.initTokenClient({
+                client_id: variables.ENV_CLIENT_ID,
+                scope: 'https://www.googleapis.com/auth/gmail.send',
+                callback: (resp) => {
+                    if (resp.error !== undefined) {
+                        throw resp;
+                    }
                 }
-            }
-        }))
+            });
+        })
         // appGoogleToken stays undefined, so a later form submit fails through handleSendFailure.
         .catch(error => console.error(error));
 }

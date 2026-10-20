@@ -469,7 +469,7 @@ html.dark-mode .card a {
     padding: 5px 20px;
     margin-bottom: 0;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
     color: var(--dark);
     transition: background 0.2s;
 }

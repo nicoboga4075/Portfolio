@@ -99,7 +99,7 @@ function switchLanguage(url, langTarget) {
         throw new Error("Language not recognized in URL");
     } catch (error) {
         console.error(error);
-        return appRoutes['error404'];
+        return appRoutes.error404;
     }
 }
 
@@ -116,7 +116,7 @@ function initTranslator() {
         }
         // Refresh the server-rendered href with the remembered #hash; keep it untouched if the URL can't be parsed (switchLanguage returns /404).
         const target = switchLanguage(window.location.href, link.hreflang);
-        if (target !== appRoutes['error404']) {
+        if (target !== appRoutes.error404) {
             link.href = target;
         }
     });
