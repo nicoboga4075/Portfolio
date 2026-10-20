@@ -1318,3 +1318,6 @@ ios
 
 # Written by hide-folders.js on a Linux desktop: the generated folders the file managers hide
 /.hidden
+
+# Personal Claude Code instructions of each machine - never committed
+CLAUDE.local.md
