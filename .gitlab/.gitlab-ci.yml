@@ -66,6 +66,8 @@ jest-job:
 playwright-job:
   stage: test
   script:
+    # Chromium, Firefox and WebKit for the *.browser.spec.js specs, kept on the runner between jobs (downloaded once per Playwright version)
+    - npm run playwright:install
     - echo "Running Playwright tests..."
     - npm run playwright
   artifacts:
@@ -86,13 +88,14 @@ cypress-job:
         - tests/cypress/**/*.cy.js
         - tests/cypress/**/*.cy.ts
   script:
+    # The Cypress binary, kept on the runner between jobs; tests/cypress.config.js builds and serves the site itself
+    - npm run cypress:install
     - echo "Running Cypress tests..."
     - npm run cypress
   artifacts:
     when: always
     paths:
-      - tests/cypress/screenshots/
-      - tests/cypress/videos/
+      - reports/cypress/
     expire_in: 1 week
 
 robot-job:

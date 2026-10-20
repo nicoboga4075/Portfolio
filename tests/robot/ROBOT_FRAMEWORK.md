@@ -58,7 +58,7 @@ TC_XXXXXX_Nominal_0001 Generate XXXXXX and verify YYYYYY
 
 | Action | Command |
 |---|---|
-| Install | `pip install robotframework robotframework-seleniumlibrary` |
+| Install | `pip install -r tests/robot/requirements.txt` (the versions the CI runs) |
 | Check the syntax only | `robot --dryrun --output NONE --log NONE --report NONE tests/robot` |
 | Run against the built site (no Netlify functions) | `ELEVENTY_PREVIEW=1 npx eleventy`, `node .claude/skills/robot-test/serve-build.mjs` (it serves on a free port and prints its address), then `robot --outputdir reports/robot --variable BASE_URL:<that address> tests/robot` |
 | Run against `npm run dev` (with the Netlify functions) | `robot --outputdir reports/robot tests/robot` |
@@ -95,7 +95,12 @@ Table of Contents
 
 ### 1.1. Nominal Cases
 
+- **TC_HOME_Nominal_0001**: Open the English home page and read the name in the hero
+- **TC_HOME_Nominal_0002**: Switch the English home page to French and back with the language switcher
+
 ### 1.2. Degraded Cases
+
+- **TC_HOME_Degraded_0001**: Open the home page on a phone and unfold the menu with the Menu button
 
 ## 2. About
 
@@ -119,11 +124,16 @@ Table of Contents
 
 ### 5.1. Nominal Cases
 
+- **TC_PROJECTS_Nominal_0001**: Show every project card of the data on the home page, in the same order
+- **TC_PROJECTS_Nominal_0002**: Open a project page from the Explore button of its card
+
 ### 5.2. Degraded Cases
 
 ## 6. Blog
 
 ### 6.1. Nominal Cases
+
+- **TC_BLOG_Nominal_0001**: Show every blog card of the data on the home page, each linking to its article
 
 ### 6.2. Degraded Cases
 

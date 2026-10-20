@@ -133,6 +133,11 @@ export default defineConfig([
     files: ["**/*.test.js"],
     languageOptions: { globals: { ...globals.jest } }
   },
+  // Cypress specs and support file: Mocha's describe and it, Chai's expect, cy and Cypress
+  {
+    files: ["tests/cypress/**/*.js"],
+    languageOptions: { globals: { ...globals.mocha, ...globals.chai, cy: "readonly", Cypress: "readonly" } }
+  },
   // MTS config
   {
     files: ["netlify/functions/**/*.mts"],

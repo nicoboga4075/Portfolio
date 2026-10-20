@@ -129,7 +129,7 @@ Open The Portfolio On
 
 ## Run it
 
-Robot Framework and SeleniumLibrary must be installed (`pip install robotframework robotframework-seleniumlibrary`); Selenium Manager downloads the Chrome driver itself.
+Robot Framework and SeleniumLibrary must be installed (`pip install -r tests/robot/requirements.txt`, the versions the CI runs); Selenium Manager downloads the Chrome driver itself.
 
 1. Check the syntax first: `robot --dryrun --output NONE --log NONE --report NONE tests/robot`
 2. Build and serve the site, then run the suite against it:

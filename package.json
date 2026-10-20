@@ -189,6 +189,7 @@
     "playwright": "playwright test",
     "playwright:install": "playwright install --with-deps",
     "cypress": "npx cypress run --project tests",
+    "cypress:install": "cypress install",
     "robot": "robot --outputdir reports/robot tests/robot",
     "simu:ci": "powershell.exe -Command \"Start-Process powershell.exe -ArgumentList '-NoExit','-Command','Set-Location -LiteralPath \\\"%CD%\\\"; ./.gitlab/simulator_ci.ps1' -Verb RunAs\"",
     "uglify:js": "node uglify-code.js",

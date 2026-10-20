@@ -53,7 +53,7 @@ Generated and not committed: `.eleventy/` (output of `npm run dev`), `api/`, `si
 | `staticServerPort` | 3999 | `[dev]` of `netlify.toml` | the static server of netlify dev | Serves the files of `.eleventy`; `dev-watch.js` reads `docs/public/*` straight from it, since netlify dev answers 403 on Windows for a static file matched by a `_redirects` rule |
 | translation port | 4799 | the url of the `/post-edit` http hook in [`.claude/settings.json`](.claude/settings.json) | [`translation-hook-server.mjs`](.claude/hooks/translation-hook-server.mjs) | Checks every `_data/*.json` file Claude edits (valid JSON, every language with the same shape); started by a SessionStart hook, stops after 2 hours without a request. Not part of the site |
 
-The Robot Framework tests on the built site use one more, a free port that [`serve-build.mjs`](.claude/skills/robot-test/serve-build.mjs) prints at start-up. The Android app ([`capacitor.config.js`](capacitor.config.js)) loads the local site on `port` too, forwarded from the device by `npm run adb:reverse`.
+The tests that open the built site (the `*.browser.spec.js` Playwright specs, Cypress, Robot Framework) use one more, a free port that [`serve-build.mjs`](.claude/skills/robot-test/serve-build.mjs) prints at start-up. The Android app ([`capacitor.config.js`](capacitor.config.js)) loads the local site on `port` too, forwarded from the device by `npm run adb:reverse`.
 
 ```mermaid
 flowchart LR
@@ -111,7 +111,7 @@ The project runs two CI pipelines on every push to `main`: GitHub Actions in the
 
 | Workflow | Trigger | What it does |
 |---|---|---|
-| `node.js.yml` (Node.js CI) | push and pull request on `main` | `build`: `npm ci` and `npm run build` on the LTS releases of Node 20 (`lts/iron`, past its end of life, kept for backward compatibility), 22 (`lts/jod`) and 24 (`lts/krypton`). `jest` and `playwright`: side by side on the Node of [`.nvmrc`](.nvmrc) (22.23.3, also read by Netlify for its build and by the other workflows), each failing the run on a failed test and uploading its reports (`reports-jest`, `reports-playwright`) even then. `sonar`: SonarCloud scan of those reports, also after a failed test, skipped for Dependabot. Every job declares `permissions: contents: read` |
+| `node.js.yml` (Node.js CI) | push and pull request on `main` | `build`: `npm ci` and `npm run build` on the LTS releases of Node 20 (`lts/iron`, past its end of life, kept for backward compatibility), 22 (`lts/jod`) and 24 (`lts/krypton`). `jest`, `playwright` (Chromium, Firefox and WebKit), `cypress` and `robot` (Python 3.13, the pinned versions of [`tests/robot/requirements.txt`](tests/robot/requirements.txt), on the preview build served by `serve-build.mjs`): side by side on the Node of [`.nvmrc`](.nvmrc) (22.23.3, also read by Netlify for its build and by the other workflows), each failing the run on a failed test and uploading its reports (`reports-jest`, `reports-playwright`, `reports-cypress`, `reports-robot`) even then. `sonar`: SonarCloud scan of those reports, also after a failed test, skipped for Dependabot. Every job declares `permissions: contents: read` |
 | `claude-code-review.yml` (Claude Code Review) | pull request opened, pushed or reopened | Claude reviews the pull requests of the repository owner, including the commits Claude pushes on them, and leaves inline comments, then posts one comment with the issues to close, update or open, when there are some. On a Dependabot pull request (which the `code-review` plugin skips as automated), Claude reads the release notes instead and posts one comment: a verdict, the changes that affect this repository, the issues to close, update or open, the overrides of package.json to add, change or remove (from `npm run check:overrides` and `npm audit`, after an `npm ci --ignore-scripts`), and a reminder to run `npm approve-scripts <name>` when an `allowScripts` entry of package.json still pins the old version (Dependabot never updates it, and npm 12 would then skip the install scripts). Skipped on a pull request that changes this workflow itself |
 | `claude.yml` (Claude Code) | an issue or comment that mentions `@claude` | Claude answers, edits the code and pushes a branch with a "Create PR" link. Only people with write access can call it (never a bot, so it can't trigger itself). It can't change `.github/workflows/` (the Claude GitHub App has no `workflows` permission) nor open pull requests itself |
 | `vendor-versions.yml` (Vendor library version check) | every Monday at 06:00 UTC, or by hand | Compares the libraries vendored in `js/` and `css/` (`.github/vendor-versions.json`) with npm, and opens or updates the "Vendor library updates available" issue with the latest release of the current major and the latest release |
@@ -122,9 +122,10 @@ The project runs two CI pipelines on every push to `main`: GitHub Actions in the
 `.github/dependabot.yml` checks:
 
 - the npm dependencies every day at 06:00 Europe/Paris, weekends included (a cron schedule: the `daily` interval only runs on weekdays);
-- the actions of the workflows every week, including the ones pinned to a commit SHA.
+- the actions of the workflows every week, including the ones pinned to a commit SHA;
+- the Python packages of the Robot Framework tests ([`tests/robot/requirements.txt`](tests/robot/requirements.txt)) every week.
 
-Packages that release together come in one pull request: the `capacitor` group (`@capacitor/*`) and the `jest` group (`jest`, `jest-environment-jsdom`). Playwright is only `@playwright/test`, which brings the `playwright` library it shares its engine with, so it needs no group. A Dependabot pull request gets a Claude review of its release notes (see the table above).
+Packages that release together come in one pull request: the `capacitor` group (`@capacitor/*`), the `jest` group (`jest`, `jest-environment-jsdom`) and the `robotframework` group (`robotframework`, `robotframework-seleniumlibrary`). Playwright is only `@playwright/test`, which brings the `playwright` library it shares its engine with, so it needs no group. A Dependabot pull request gets a Claude review of its release notes (see the table above).
 
 Security updates don't wait for the schedule: Dependabot opens them as soon as an advisory is published.
 
@@ -141,7 +142,7 @@ The `sonar` job of GitHub Actions (`sonarqube-scan-action`) analyses every pushe
 
 #### GitLab CI
 
-`.gitlab/.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (one job per framework, one after the other since the runner runs one job at a time: Jest, Playwright, and Cypress and Robot Framework once their tests exist, the latter on the built site served by `serve-build.mjs`), `sonar` (`npx @sonar/scan` only when GitHub Actions doesn't analyse the commit, allowed to fail) and `teardown` (cleans the build folder).
+`.gitlab/.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (one job per framework, one after the other since the runner runs one job at a time: Jest, Playwright, Cypress and Robot Framework, each of the last two only while its tests exist, Robot Framework on the built site served by `serve-build.mjs`), `sonar` (`npx @sonar/scan` only when GitHub Actions doesn't analyse the commit, allowed to fail) and `teardown` (cleans the build folder).
 
 The file is not at the root, where GitLab looks by default: the project setting **Settings → CI/CD → General pipelines → CI/CD configuration file** is set to `.gitlab/.gitlab-ci.yml`.
 

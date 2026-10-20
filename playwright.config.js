@@ -31,9 +31,9 @@ module.exports = defineConfig({
         { name: 'Built', testMatch: BUILT, dependencies: ['Build'] },
         // The other tests without a browser (scripts, templates rendered alone), run once: every spec but the built and *.browser.spec.js ones
         { name: 'Node', testIgnore: ['**/*.browser.spec.js', ...BUILT] },
-        // The tests that open a page, named *.browser.spec.js, run in each browser
-        { name: 'Chromium', testMatch: '**/*.browser.spec.js', use: { ...devices['Desktop Chrome'] } },
-        { name: 'Firefox', testMatch: '**/*.browser.spec.js', use: { ...devices['Desktop Firefox'] } },
-        { name: 'WebKit', testMatch: '**/*.browser.spec.js', use: { ...devices['Desktop Safari'] } }
+        // The tests that open a page of the preview build (served by site.js), named *.browser.spec.js, run in each browser after the build, the service worker blocked so every page comes from the build
+        { name: 'Chromium', testMatch: '**/*.browser.spec.js', dependencies: ['Build'], use: { ...devices['Desktop Chrome'], serviceWorkers: 'block' } },
+        { name: 'Firefox', testMatch: '**/*.browser.spec.js', dependencies: ['Build'], use: { ...devices['Desktop Firefox'], serviceWorkers: 'block' } },
+        { name: 'WebKit', testMatch: '**/*.browser.spec.js', dependencies: ['Build'], use: { ...devices['Desktop Safari'], serviceWorkers: 'block' } }
     ]
 });
