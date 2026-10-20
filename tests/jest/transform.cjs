@@ -1,5 +1,12 @@
 // The Jest transform of the repository, for the two kinds of files Jest cannot run as they are: the Netlify functions (.mts) and their tests (.ts), compiled to CommonJS; the classic browser scripts of js/ (app.js, common.js, standalone.js), given a module.exports of their top-level declarations.
+const crypto = require('node:crypto');
+const path = require('node:path');
 const ts = require('typescript');
+
+// The target of tsconfig.json, so the tests run the functions compiled as the type check sees them
+const tsconfigPath = path.join(__dirname, '..', '..', 'tsconfig.json');
+const tsconfigText = ts.sys.readFile(tsconfigPath);
+const { target } = ts.convertCompilerOptionsFromJson(ts.parseConfigFileTextToJson(tsconfigPath, tsconfigText).config.compilerOptions, path.dirname(tsconfigPath)).options;
 
 // TypeScript always emits ES modules for a .mts file, so it is compiled under a .ts name, to CommonJS, the module system Jest runs
 function compileTypeScript(source, filename) {
@@ -7,7 +14,7 @@ function compileTypeScript(source, filename) {
         fileName: filename.replace(/\.mts$/, '.ts'),
         compilerOptions: {
             module: ts.ModuleKind.CommonJS,
-            target: ts.ScriptTarget.ES2022,
+            target,
             esModuleInterop: true,
             resolveJsonModule: true,
             sourceMap: true,
@@ -30,6 +37,10 @@ function exportBrowserGlobals(source, filename) {
 }
 
 module.exports = {
+    // Jest caches each transformed file: tsconfig.json is part of the key, so a change of its target compiles the functions again
+    getCacheKey(source, filename, { configString }) {
+        return crypto.createHash('sha256').update(source).update(filename).update(configString).update(tsconfigText).digest('hex');
+    },
     process(source, filename) {
         return /\.m?ts$/.test(filename) ? compileTypeScript(source, filename) : exportBrowserGlobals(source, filename);
     }
