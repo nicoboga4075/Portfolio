@@ -641,9 +641,9 @@ describe('the blog page', () => {
         <footer id="ftco-footer"></footer></body></html>`;
 
     // Opens the blog page on a URL and lets the article load; standalone runs the onload of js/standalone.js, as the browser would
-    async function openBlog({ url = '/en/blog', body = blogBody, article = articleHtml, articles, session, before } = {}) {
+    async function openBlog({ url = '/en/blog', body = blogBody, article = articleHtml, articles: blogArticles, session, before } = {}) {
         if (session) sessionStorage.setItem('currentHash', session);
-        const app = loadApp({ body, url, route: 'blog', articles, before: () => {
+        const app = loadApp({ body, url, route: 'blog', articles: blogArticles, before: () => {
             routeFetch({ 'functions/article': article });
             before?.();
         } });

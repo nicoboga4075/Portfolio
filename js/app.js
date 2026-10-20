@@ -618,14 +618,14 @@ function createCircularChart({
                         boxHeight: 14,
                         padding: 14,
                         usePointStyle: false,
-                        generateLabels(chart) {
-                            const data = chart.data;
-                            return data.labels.map((label, i) => {
-                                const value = chart.data.datasets[0].data[i];
+                        generateLabels(legendChart) {
+                            const chartData = legendChart.data;
+                            return chartData.labels.map((label, i) => {
+                                const value = chartData.datasets[0].data[i];
                                 const percentage = ((value / total) * 100).toFixed(0);
                                 return {
                                     text: `${label} (${percentage}%)`,
-                                    fillStyle: chart.data.datasets[0].backgroundColor[i],
+                                    fillStyle: chartData.datasets[0].backgroundColor[i],
                                     // 0, not omitted: Chart.js would default to a 1px #666 stroke.
                                     lineWidth: 0,
                                     fontColor: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim()
@@ -1629,11 +1629,11 @@ async function sendEmail(senderName, subject, message) {
     // Check if token exists, otherwise request it
     const token = JSON.parse(sessionStorage.getItem('tokenAPI'));
 
-    async function sendHelper(token) {
+    async function sendHelper(apiToken) {
         const response = await fetch('https://www.googleapis.com/gmail/v1/users/me/messages/send', {
             method: 'POST',
             headers: {
-                'Authorization': `${token.token_type} ${token.access_token}`,
+                'Authorization': `${apiToken.token_type} ${apiToken.access_token}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -1642,7 +1642,7 @@ async function sendEmail(senderName, subject, message) {
         });
 
         if (response.ok) {
-            sessionStorage.setItem('tokenAPI', JSON.stringify(token));
+            sessionStorage.setItem('tokenAPI', JSON.stringify(apiToken));
             callbackForm.text(successMessage);
             if (window.location.protocol === 'https:') {
                 sessionStorage.clear();
