@@ -78,7 +78,8 @@ function parseDate(text, lang, iso = false, hour12 = false) {
     if (meridiem) {
         hour24 = hour24 % 12 + (meridiem === 'pm' ? 12 : 0);
     }
-    const time = `${String(hour24).padStart(2, '0')}:${minute}${second ? `:${second}` : ''}`;
+    const seconds = second ? `:${second}` : '';
+    const time = `${String(hour24).padStart(2, '0')}:${minute}${seconds}`;
     return iso ? `${date}T${time}` : `${date} ${time}`;
 }
 
