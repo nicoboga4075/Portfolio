@@ -30,6 +30,12 @@
 	"property-no-vendor-prefix": null,
 	"media-feature-range-notation": "prefix",
 	"color-hex-length": "long",
-	"custom-property-empty-line-before": null
+	"custom-property-empty-line-before": null,
+	"unit-disallowed-list": ["rem", "em"],
+	"color-named": "never",
+	"color-function-notation": "modern",
+	"alpha-value-notation": "number",
+	"declaration-property-value-no-unknown": true,
+	"font-family-name-quotes": "always-where-recommended"
   }
 }

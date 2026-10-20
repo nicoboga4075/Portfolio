@@ -15,6 +15,11 @@
         "no-autoplay": "warn",
         "no-implicit-input-type": "warn",
         "prefer-button": "warn",
-        "wcag/h32": "warn"
+        "wcag/h32": "warn",
+        "heading-level": ["error", { "minInitialRank": "any" }],
+        "require-sri": ["error", { "target": "crossorigin" }],
+        "class-pattern": ["error", { "pattern": "kebabcase" }],
+        "no-missing-references": "error",
+        "input-missing-label": "error"
     }
 }

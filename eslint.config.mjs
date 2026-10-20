@@ -55,7 +55,34 @@ export default defineConfig([
 	  "no-debugger": "warn",
 	  "prefer-const": "warn",
 	  "semi": "error",
-	  "no-redeclare": "error"
+	  "no-redeclare": "error",
+	  // Security: no code built from strings, no blocking dialog (it also freezes the browser tests)
+	  "no-eval": "error",
+	  "no-implied-eval": "error",
+	  "no-new-func": "error",
+	  "no-alert": "error",
+	  // Common bugs
+	  "eqeqeq": ["error", "always", { "null": "ignore" }],
+	  "curly": ["error", "multi-line"],
+	  "no-throw-literal": "error",
+	  "prefer-promise-reject-errors": "error",
+	  "array-callback-return": "error",
+	  "no-self-compare": "error",
+	  "no-template-curly-in-string": "error",
+	  "no-unmodified-loop-condition": "error",
+	  "default-param-last": "error",
+	  // Readability, with ES2022 at least
+	  "prefer-object-has-own": "error",
+	  "no-unneeded-ternary": "error",
+	  "no-useless-return": "error",
+	  "no-nested-ternary": "error",
+	  "no-lonely-if": "error",
+	  // ES2024 APIs that Node 20 of the CI lacks: ecmaVersion only checks the syntax, not the APIs
+	  "no-restricted-properties": ["error",
+	    { "object": "Object", "property": "groupBy", "message": "ES2024, missing on Node 20: group with reduce." },
+	    { "object": "Map", "property": "groupBy", "message": "ES2024, missing on Node 20: group with reduce." },
+	    { "object": "Promise", "property": "withResolvers", "message": "ES2024, missing on Node 20: use new Promise." }
+	  ]
 	}
   },
   // js/common.js defines shared helpers that standalone.js and app.js consume at
