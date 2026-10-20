@@ -11,9 +11,11 @@ describe('menu of the home page', () => {
             cy.get('#ftco-nav .nav-link').should('have.length', nav.menus.length).each(link => {
                 const section = link.attr('href');
                 cy.wrap(link).click();
-                // The menu bar is fixed: the section is reached once its top sits near the top of the window
+                // The section is reached once it fills part of the window: images that load while scrolling can still move its top
                 cy.get(section).should(([element]) => {
-                    expect(Math.abs(element.getBoundingClientRect().top)).to.be.lessThan(120);
+                    const { top, bottom } = element.getBoundingClientRect();
+                    expect(top).to.be.lessThan(element.ownerDocument.defaultView.innerHeight);
+                    expect(bottom).to.be.greaterThan(0);
                 });
             });
         });

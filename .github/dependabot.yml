@@ -29,7 +29,7 @@ updates:
     commit-message:
       prefix: "⬆️"
   - package-ecosystem: "pip"
-    # The pinned Robot Framework and SeleniumLibrary of tests/robot/requirements.txt, installed by the robot job of node.js.yml
+    # Robot Framework and SeleniumLibrary of tests/robot/requirements.in, and their lock with hashes requirements.txt (pip-compile), installed by the robot job of node.js.yml
     directory: "/tests/robot"
     schedule:
       interval: "weekly"
