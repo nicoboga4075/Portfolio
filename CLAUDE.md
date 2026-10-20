@@ -1,5 +1,104 @@
 # CLAUDE.md
 
+## Project
+
+Bilingual portfolio (English and French) of Nicolas BOGALHEIRO, software engineer: profile, experiences, projects, certifications and blog articles.
+It is a static site built with Eleventy and Nunjucks and deployed on Netlify, with Netlify functions in TypeScript, a Botpress chatbot and an offline service worker.
+An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI, with SonarCloud for quality and coverage.
+
+## Stack
+
+| Area | Tools (major version) |
+|---|---|
+| Runtime | Node.js 20, 22 and 24 (CI matrix, `engines` >= 20), npm 10 |
+| Site | Eleventy 3, Nunjucks 3, vanilla JS and CSS, Terser 5 |
+| Functions | Netlify Functions 6, TypeScript 6 |
+| Mobile | Capacitor 8 (Android) |
+| Tests | Jest 30, Playwright 1, Cypress 16, Robot Framework (SeleniumLibrary) |
+| Lint | ESLint 10, typescript-eslint 8, Stylelint 17, html-validate 11, Prettier 3 |
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Local site on http://localhost:8888 (`npm run dev:watch` rebuilds on change) |
+| `npm run build` | Netlify build: redirects, Eleventy, minified JS. It writes over the source pages, so for a local preview use `npm run dev` or `ELEVENTY_PREVIEW=1 npx eleventy` (output in `.eleventy/`) |
+| `npm test` | Every test suite: Jest, Cypress, Playwright, Robot Framework |
+| `npm run jest` | Unit tests with coverage (`reports/jest/coverage`) |
+| `npm run playwright` / `npm run cypress` / `npm run robot` | One end-to-end suite |
+| `npm run lint` | html-validate, Stylelint and ESLint (`lint:html`, `lint:css`, `lint:js` one by one) |
+
+## Environment and setup
+
+- Node.js 20 or later and npm 10, then `npm ci` (the `postinstall` hides the generated folders).
+- Netlify CLI installed globally (`npm install -g netlify-cli`), logged in and linked to the site: `dev-watch.js` runs it from next to `node`, and `netlify dev` brings the environment variables and the functions.
+- Environment variables, set in Netlify, never in the repository: `SUPABASE_URL`, `SUPABASE_ANON_KEY` (visit counter), `GITHUB_API_TOKEN` (date of the last CV commit), `ENV_CLIENT_ID` (Google OAuth client of the contact form, Gmail send), `SITE_RECAPTCHA_KEY` (under `netlify dev` the `env` function hands back Google's test key). CI secrets: `SONAR_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN`.
+- Robot Framework: Python with `pip install robotframework robotframework-seleniumlibrary`. Android: Android Studio and `adb` (`npm run adb:reverse` forwards port 8888).
+- Main dev machine on Windows (PowerShell and Git Bash); Netlify builds on Linux; the GitLab runner is a self-hosted Windows runner (`windows-local`), only up while that computer is on.
+- Local ports (8888, 3999, the free proxy port, 4799 for the translation hook): see "Local Ports" in README.md.
+
+## Architecture
+
+- **Pages**: HTML files with a front matter, one per language (`index_en.html`, `index_fr.html`, `blog_*`, `policy_*`, `terms_*`, `404.html`), laid out by `_includes/base.njk` with the partials of `_includes/`. Articles in `articles/<slug>_<lang>.html`, project pages in `projects/<id>_<lang>.html`, each folder with its `*.11tydata.js` and `resolve-*.js`.
+- **Data**: `_data/*.json` holds every text of the site, each value keyed by language (`{ "en": ..., "fr": ... }`), read in templates as `x[lang]`. `package.json` `config` holds the site settings: locales, routes (`appRoutes`), profile figures, Botpress, socials, CV languages.
+- **Build**: `.eleventy.js` compiles the pages in place for Netlify (into `.eleventy/` with `ELEVENTY_PREVIEW`) and writes `sitemap.xml`, `feed_*.xml` and `api/articles.json`, `api/projects.json` (for the chatbot). `gen-redirects.js` writes `_redirects` from `package.json` (pretty URLs `/en`, `/fr/blog`, `/en/<project>`), never edit it by hand. `uglify-code.js` minifies the site scripts.
+- **Front-end**: `js/common.js` (shared helpers) loads before `js/app.js` (home and blog: sections, blog, contact form, chart, translations with i18next) or `js/standalone.js` (light pages: policy, terms, 404, articles, projects). `js/botpress.js` (chatbot), `js/analytics.js` (Google Analytics, production build only), `service-worker.js` (offline, network first). The `*.min.js` files of `js/` and `css/` are vendored, tracked in `.github/vendor-versions.json`, never edited or linted.
+- **Netlify functions** (`netlify/functions/*.mts`, called by the front-end with `fetch('/.netlify/functions/<name>')`): `article?filename=<slug>_<lang>.html` returns a compiled article for the blog, `env` returns the public environment variables (or `env?lang=xx` the date of the last CV commit, from the GitHub API), `visit` increments the visit counter (Supabase RPC `increment_visits`). They share `shared/http.mts`: `isTrustedRequest` (same-origin Referer, localhost under `netlify dev`, Lighthouse), `redirectTo404`, `jsonResponse`, `internalError`; every untrusted or invalid request is redirected to `/404`.
+- **Netlify config**: `netlify.toml` (build, dev ports, production plugins: HTML minify, inline critical CSS, Lighthouse audits of every page), `_headers` (CSP, cache), `_redirects`.
+- **External services**: Netlify (hosting, functions), Supabase (counter), GitHub API, Google (OAuth Gmail, reCAPTCHA, Analytics), Botpress (chatbot), Calendly, SonarCloud.
+- **Tooling for Claude Code**: `.claude/` holds the settings, hooks (lint before commit, test reminder, site health, translation check after each `_data` edit, skills table sync), skills, the `test-writer` agent and the `portfolio-dev` plugin (MCP server: articles, projects, preview, site health, translation gaps).
+
+## Code conventions
+
+- JS of `js/` is classic browser scripts (`sourceType: "script"`, globals shared through `common.js`, declared in `eslint.config.mjs`), with jQuery; semicolons required, `const`/`let` rather than `var`, no `console.log` (only `console.warn` and `console.error`).
+- Netlify functions in TypeScript (`.mts`, ES modules): explicit return types, `type` rather than `interface`, no floating promises, imports of `./shared/http.mjs` (the compiled name).
+- Every user-visible text goes to `_data/*.json` in every language, never hard-coded in one language; a `getMessage('key')` of `js/` must exist in `_data/messages.json`. Adding a page means adding it in every language.
+- CSS sizes in px, not rem; a heading level is changed with its tag, never with a `.h5`-style class or a CSS font-size.
+- Files in LF (`.gitattributes`). Lint must pass with no error and no warning.
+- Comments: see "Comments" below.
+
+## Git workflow
+
+- One branch, `main`. Commit to `main` only when asked, and never push until asked.
+- `origin` fetches from GitHub and pushes to both GitHub and GitLab; `github` and `gitlab` remotes exist for one side only. Never `git pull gitlab` or merge `gitlab/main`: rebase on it and push to GitHub (see CONTRIBUTING.md).
+- The GitHub ruleset "Protect main" blocks force pushes and deletion; GitLab `main` is protected.
+- Each push to `main` runs GitHub Actions (`node.js.yml`: build on Node 20/22/24, Jest, Playwright, SonarCloud) and GitLab CI, and Netlify builds and publishes unless builds are stopped or auto publishing is locked (`netlify-ops` skill).
+- Before each commit the hooks run `npm run lint` (blocking), remind of missing tests, show the site health and sync the skills table.
+- Releases: `npm run release -- [patch|minor|major]` bumps the version, writes CHANGELOG.md and tags.
+
+## Tests
+
+- Jest unit tests of `js/` sit next to their module (`js/app.js` → `js/app.test.js`); those of the Netlify functions go in `tests/jest/netlify/` (`visit.mts` → `visit.test.ts`), since Netlify deploys every file of `netlify/functions/` as a function; those of the build scripts in `tests/jest/`.
+- Coverage is 100 % on the files of `collectCoverageFrom` in `jest.config.js`, which matches `sonar.coverage.exclusions` in `sonar-project.properties`: keep both in step and keep the coverage at 100 % (the SonarCloud quality gate checks the new code).
+- Playwright in `tests/playwright/`: `*.browser.spec.js` open a page and run in Chromium, Firefox and WebKit; the specs of `BUILT` in `playwright.config.js` read the preview build made by `build.setup.js`; the others run once in Node.
+- Cypress in `tests/cypress/` and Robot Framework in `tests/robot/` (follow `tests/robot/ROBOT_FRAMEWORK.md` and the `robot-test` skill), run on the built site.
+- Every new or changed behaviour comes with its test (the `test-writer` agent writes the missing ones). Reports go to `reports/` (git-ignored).
+
+## Sensitive areas
+
+- `docs/private/` and `docs/protected/` hold personal documents (ID, diplomas, lease, certificates, bank details): git-ignored, never commit, read, copy or publish them.
+- `docs/public/` is served publicly: only what is meant for visitors (CVs, certificates, videos); keep each file well under 50 MB (see "File size").
+- Secrets stay in Netlify, GitHub and GitLab settings: never write a key or token in the repository; `env` only returns the variables of its `PUBLIC_ENV_VARS` list.
+- `netlify/functions/shared/http.mts` (`isTrustedRequest`) and the filename and lang checks of the functions guard the public endpoints; `_headers` holds the CSP: any new third-party script or endpoint needs its CSP entry and an update of SECURITY.md (`update-docs` skill).
+- `npm run build` overwrites the source pages: never run it (nor plain `npx eleventy`) locally to preview; if it happens, `git checkout` the pages.
+- The live site: any Netlify change (builds, lock, restore, publish) goes through the `netlify-ops` or `netlify-prod` skill and asks first.
+- Never edit the generated files: `_redirects`, `sitemap.xml`, `feed_*.xml`, `api/`, `.eleventy/`, `reports/`, the vendored `*.min.js`.
+
+## Glossary
+
+| Term | Meaning |
+|---|---|
+| lang, locale | `en` or `fr` (`config.locales` of `package.json`), the `_<lang>` suffix of every page and the key of every text in `_data` |
+| slug | The name of an article, its file name without `_<lang>.html` and its `#hash` on the blog page (`blog#mcs`) |
+| card | A project of `_data/projects.json` or an article of `_data/blog.json`, shown in the Projects or Blog section |
+| explore | The target of a project card's Explore button: an external URL, a project page (`crm_elphicom`) or a blog article (`blog#mcs`) |
+| light page, standalone | A page run by `js/standalone.js` (policy, terms, 404, articles, projects) as opposed to the home and blog run by `js/app.js` |
+| preview build | `ELEVENTY_PREVIEW=1`, the build into `.eleventy/` used by `npm run dev` and the tests, as opposed to the in-place Netlify build |
+| Bien / Pas Bien | The "Good / Not Good" article of good and bad coding practices (SOLID, DRY, KISS, ACID...), one partial `_includes/bien-pasbien-*.html` per principle |
+| hire me | Home page section of the job search status (`config.profile.openToWork`: `listening` or `active`) and its contact button |
+| counter | Home page section of the profile figures of `config.profile` (certifications, projects, experiences, countries) |
+| visit counter | The number of visits shown in `#ftco-visitor`, incremented by the `visit` function (Supabase) on the live site only (https) |
+
 ## Commits
 
 Start every commit message with the emoji from [gitmoji.dev](https://gitmoji.dev) that matches the change, as the character itself (not the `:code:`), followed by a space and the subject line. For example:
