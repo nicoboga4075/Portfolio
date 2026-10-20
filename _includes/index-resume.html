@@ -79,7 +79,7 @@
                 <div id="skills" class="page">
                     <h2 class="heading">{{ resumeLang.skills }}</h2>
                     <div class="chart-container d-flex justify-content-center mb-5">
-                        <canvas id="skillsChart" data-labels="{{ skills.chart[lang].labels | dump }}" data-title="{{ skills.chart[lang].title }}" data-subtitle="{{ skills.chart[lang].subtitleTemplate | replace('{xp}', profile.xp) }}" data-center="{{ skills.chart[lang].centerText }}"></canvas>
+                        <canvas id="skills-chart" data-labels="{{ skills.chart[lang].labels | dump }}" data-title="{{ skills.chart[lang].title }}" data-subtitle="{{ skills.chart[lang].subtitleTemplate | replace('{xp}', profile.xp) }}" data-center="{{ skills.chart[lang].centerText }}"></canvas>
                     </div>
                     {% include "languages.html" %}
                     {%- for row in skills.cards | batch(3) %}

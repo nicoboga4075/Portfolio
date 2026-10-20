@@ -303,7 +303,7 @@ describe('loading scripts', () => {
 });
 
 describe('the skills chart', () => {
-    const canvasBody = `<canvas id="skillsChart" data-labels='["Back-end", "Front-end", "Project management", "Support", "CI/CD"]' data-title="Time" data-subtitle="5 years" data-center="AI"></canvas>`;
+    const canvasBody = `<canvas id="skills-chart" data-labels='["Back-end", "Front-end", "Project management", "Support", "CI/CD"]' data-title="Time" data-subtitle="5 years" data-center="AI"></canvas>`;
 
     test('fitCenterTextToHole shrinks the center text to the hole, down to 8px, and skips a chart without it', () => {
         const app = loadApp();
@@ -325,7 +325,7 @@ describe('the skills chart', () => {
     test('createCircularChart draws a doughnut with the center text, its legend in percentages, and reuses a chart already drawn', () => {
         const app = loadApp({ body: canvasBody });
         installChart();
-        const options = { canvasId: 'skillsChart', data: [45, 25, 15, 10, 5], backgroundColor: ['#1', '#2', '#3', '#4', '#5'], labels: ['A', 'B', 'C', 'D', 'E'], title: 'Time', subtitle: '5 years', centerText: 'AI' };
+        const options = { canvasId: 'skills-chart', data: [45, 25, 15, 10, 5], backgroundColor: ['#1', '#2', '#3', '#4', '#5'], labels: ['A', 'B', 'C', 'D', 'E'], title: 'Time', subtitle: '5 years', centerText: 'AI' };
         const chart = app.createCircularChart(options);
         expect(chart.config.type).toBe('doughnut');
         expect(chart.options.cutout).toBe('50%');
@@ -342,26 +342,26 @@ describe('the skills chart', () => {
     test('createCircularChart leaves the center text out of a chart without a hole or without a text', () => {
         let app = loadApp({ body: canvasBody });
         installChart();
-        let chart = app.createCircularChart({ canvasId: 'skillsChart', type: 'bar', data: [1], backgroundColor: ['#1'], labels: ['A'], centerText: 'AI' });
+        let chart = app.createCircularChart({ canvasId: 'skills-chart', type: 'bar', data: [1], backgroundColor: ['#1'], labels: ['A'], centerText: 'AI' });
         expect(chart.options.plugins.doughnutLabel).toBeUndefined();
         expect(chart.config.plugins).toEqual([]);
         app = loadApp({ body: canvasBody });
         installChart();
-        chart = app.createCircularChart({ canvasId: 'skillsChart', type: 'pie', data: [1], backgroundColor: ['#1'], labels: ['A'] });
+        chart = app.createCircularChart({ canvasId: 'skills-chart', type: 'pie', data: [1], backgroundColor: ['#1'], labels: ['A'] });
         expect(chart.options.plugins.doughnutLabel).toBeUndefined();
     });
 
     test('recolours the chart when the theme changes, center text included when it has one', () => {
         let app = loadApp({ body: canvasBody });
         installChart();
-        let chart = app.createCircularChart({ canvasId: 'skillsChart', data: [1], backgroundColor: ['#1'], labels: ['A'], centerText: 'AI' });
+        let chart = app.createCircularChart({ canvasId: 'skills-chart', data: [1], backgroundColor: ['#1'], labels: ['A'], centerText: 'AI' });
         chart.options.plugins.doughnutLabel.labels[0].color = 'old';
         document.dispatchEvent(new CustomEvent('darkmodechange'));
         expect(chart.update).toHaveBeenCalled();
         expect(chart.options.plugins.doughnutLabel.labels[0].color).toBe('');
         app = loadApp({ body: canvasBody });
         installChart();
-        chart = app.createCircularChart({ canvasId: 'skillsChart', type: 'bar', data: [1], backgroundColor: ['#1'], labels: ['A'] });
+        chart = app.createCircularChart({ canvasId: 'skills-chart', type: 'bar', data: [1], backgroundColor: ['#1'], labels: ['A'] });
         document.dispatchEvent(new CustomEvent('darkmodechange'));
         expect(chart.update).toHaveBeenCalled();
     });
@@ -529,13 +529,13 @@ describe('the home page', () => {
         expect(window.open).toHaveBeenCalledWith('https://calendly.com/me', '_blank', 'noopener');
     });
 
-    const chartBody = `<canvas id="skillsChart" data-labels='["A", "B", "C", "D", "E"]' data-title="Time" data-subtitle="5 years" data-center="AI"></canvas>`;
+    const chartBody = `<canvas id="skills-chart" data-labels='["A", "B", "C", "D", "E"]' data-title="Time" data-subtitle="5 years" data-center="AI"></canvas>`;
 
     test('draws the skills chart once, when it comes into view', async () => {
         const app = loadApp({ body: chartBody });
         const Chart = installChart();
         app.initIndexPage('en');
-        const canvas = document.getElementById('skillsChart');
+        const canvas = document.getElementById('skills-chart');
         const observer = observerOf(canvas);
         observer.callback([{ isIntersecting: false }]);
         await flush();
@@ -557,7 +557,7 @@ describe('the home page', () => {
     test('keeps watching the skills chart when Chart.js cannot be fetched, to retry', async () => {
         const app = loadApp({ body: chartBody });
         app.initIndexPage('en');
-        const observer = observerOf(document.getElementById('skillsChart'));
+        const observer = observerOf(document.getElementById('skills-chart'));
         observer.callback([{ isIntersecting: true }]);
         scriptFor('js/chart.umd.min.js').onerror();
         await flush();
@@ -1066,7 +1066,7 @@ describe('the contact form', () => {
         window.grecaptcha = { render: jest.fn() };
         app.initCaptcha();
         await flush();
-        expect(window.grecaptcha.render).toHaveBeenCalledWith('captchaCheck', { sitekey: 'site-key', callback: app.enableSubmitForm });
+        expect(window.grecaptcha.render).toHaveBeenCalledWith('captcha-check', { sitekey: 'site-key', callback: app.enableSubmitForm });
         const log = jest.spyOn(console, 'error').mockImplementation(() => {});
         app = loadApp({ body, before: () => routeFetch({ 'functions/env': new Error('down') }) });
         app.initCaptcha();

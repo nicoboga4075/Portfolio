@@ -1128,7 +1128,7 @@ function initIndexPage(langPage) {
 
         initExperienceFilters();
 
-        const skillsChartCanvas = document.getElementById('skillsChart');
+        const skillsChartCanvas = document.getElementById('skills-chart');
         if (skillsChartCanvas) {
             let skillsChartRendered = false;
             const skillsChartObserver = new IntersectionObserver((entries) => {
@@ -1144,7 +1144,7 @@ function initIndexPage(langPage) {
                     skillsChartRendered = true;
                     skillsChartObserver.disconnect();
                     createCircularChart({
-                        canvasId: 'skillsChart',
+                        canvasId: 'skills-chart',
                         data: [45, 25, 15, 10, 5],
                         backgroundColor: [cssVar('--blue'), cssVar('--orange'), cssVar('--green'), cssVar('--red'), cssVar('--purple')],
                         labels: JSON.parse(skillsChartCanvas.dataset.labels),
@@ -1702,7 +1702,7 @@ function initCaptcha() {
     fetch('/.netlify/functions/env')
         .then(response => response.json())
         .then(variables => {
-            grecaptcha.render('captchaCheck', {
+            grecaptcha.render('captcha-check', {
                 'sitekey': variables.SITE_RECAPTCHA_KEY,
                 'callback': enableSubmitForm
             });
