@@ -577,12 +577,17 @@ describe('the home page', () => {
 
     const formBody = '<form name="contactForm"><input name="name" value="Nico"><input name="subject" value="Hello"><textarea name="message">Hi</textarea><button type="submit">Send</button></form><p id="callback-form"></p>';
 
-    test('sends the message of the contact form, then submits it to Netlify', async () => {
-        const app = loadApp({ body: formBody, before: () => routeFetch({ 'gmail/v1': { ok: true } }) });
-        sessionStorage.setItem('tokenAPI', JSON.stringify({ token_type: 'Bearer', access_token: 't' }));
+    test('sends the message of the contact form once consent is given, then submits it to Netlify', async () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body: formBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true } }) });
+        window.google = { accounts: { oauth2: { initTokenClient: jest.fn(() => ({ requestAccessToken: jest.fn() })) } } };
+        window.gapi = { client: { getToken: jest.fn(() => ({ token_type: 'Bearer', access_token: 't' })) } };
+        app.gisLoaded();
+        await flush();
         const submit = jest.spyOn($.fn, 'submit');
         app.initPage();
         $('form').trigger('submit');
+        await jest.advanceTimersByTimeAsync(3000);
         await flush(20);
         expect($('#callback-form').text()).toBe(app.getMessage('success-generic'));
         expect(submit).toHaveBeenCalled();
@@ -976,12 +981,15 @@ describe('the contact form', () => {
         expect(log).toHaveBeenCalledWith(new Error('down'));
     });
 
-    test('sends the message with the remembered token, without line breaks in the headers, and forgets everything on https', async () => {
-        const app = loadApp({ body, before: () => routeFetch({ 'gmail/v1': { ok: true } }) });
-        sessionStorage.setItem('tokenAPI', JSON.stringify(token));
+    test('sends the message with the token of the consent, without line breaks in the headers, and forgets everything on https', async () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true } }) });
+        const client = await withConsent(app, 0);
         sessionStorage.setItem('currentHash', 'contact-section');
-        await app.sendEmail('Nico\r\nBcc: x', 'Hello\nthere', 'Hi');
-        const [url, init] = window.fetch.mock.calls[0];
+        const sending = app.sendEmail('Nico\r\nBcc: x', 'Hello\nthere', 'Hi');
+        await jest.advanceTimersByTimeAsync(3000);
+        await sending;
+        const [url, init] = window.fetch.mock.calls.find(call => String(call[0]).includes('gmail'));
         expect(url).toBe('https://www.googleapis.com/gmail/v1/users/me/messages/send');
         expect(init.headers.Authorization).toBe('Bearer t');
         const message = sentMessage();
@@ -991,19 +999,28 @@ describe('the contact form', () => {
         expect(JSON.parse(init.body).raw).not.toMatch(/[=+/]/);
         expect($('#callback-form').text()).toBe(app.getMessage('success-generic'));
         expect(sessionStorage.length).toBe(0);
+        // The next message asks for consent again
+        const next = app.sendEmail('Nico', 'Hello', 'Hi');
+        await jest.advanceTimersByTimeAsync(3000);
+        await next;
+        expect(client.requestAccessToken).toHaveBeenCalledTimes(2);
     });
 
-    test('shows the error and forgets the token when Gmail refuses the message or cannot be reached', async () => {
+    test('shows the error when Gmail refuses the message or cannot be reached', async () => {
+        jest.useFakeTimers();
         const log = jest.spyOn(console, 'error').mockImplementation(() => {});
-        let app = loadApp({ body, before: () => routeFetch({ 'gmail/v1': { ok: false } }) });
-        sessionStorage.setItem('tokenAPI', JSON.stringify(token));
-        await app.sendEmail('Nico', 'Hello', 'Hi');
+        let app = loadApp({ body, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: false } }) });
+        await withConsent(app, 0);
+        let sending = app.sendEmail('Nico', 'Hello', 'Hi');
+        await jest.advanceTimersByTimeAsync(3000);
+        await sending;
         expect($('#callback-form').text()).toBe(app.getMessage('error-generic'));
-        expect(sessionStorage.getItem('tokenAPI')).toBeNull();
         expect(log).not.toHaveBeenCalled();
-        app = loadApp({ body, before: () => routeFetch({ 'gmail/v1': new Error('offline') }) });
-        sessionStorage.setItem('tokenAPI', JSON.stringify(token));
-        await app.sendEmail('Nico', 'Hello', 'Hi');
+        app = loadApp({ body, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': new Error('offline') }) });
+        await withConsent(app, 0);
+        sending = app.sendEmail('Nico', 'Hello', 'Hi');
+        await jest.advanceTimersByTimeAsync(3000);
+        await sending;
         expect(log).toHaveBeenCalledWith(new Error('offline'));
         expect($('#callback-form').text()).toBe(app.getMessage('error-generic'));
     });

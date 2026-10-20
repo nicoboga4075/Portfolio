@@ -298,6 +298,8 @@ function getMessage(key) {
 }
 
 let appGoogleToken;
+// The Gmail token given on consent, kept in memory for the next messages sent from the page, never in a storage (CodeQL js/clear-text-storage-of-sensitive-data)
+let appGmailToken = null;
 const appScrollSections = [];
 let appCheckpointSubSection;
 let originalArticleContent = '';
@@ -1620,14 +1622,11 @@ async function sendEmail(senderName, subject, message) {
             console.error(error);
         }
         callbackForm.text(errorMessage);
-        sessionStorage.removeItem('tokenAPI');
+        appGmailToken = null;
     }
 
     // Base64 encode the email in URL-safe format
     const base64EncodedEmail = removeTrailingEquals(btoa(emailString).replaceAll('+', '-').replaceAll('/', '_'));
-
-    // Check if token exists, otherwise request it
-    const token = JSON.parse(sessionStorage.getItem('tokenAPI'));
 
     async function sendHelper(apiToken) {
         const response = await fetch('https://www.googleapis.com/gmail/v1/users/me/messages/send', {
@@ -1642,10 +1641,13 @@ async function sendEmail(senderName, subject, message) {
         });
 
         if (response.ok) {
-            sessionStorage.setItem('tokenAPI', JSON.stringify(apiToken));
             callbackForm.text(successMessage);
             if (window.location.protocol === 'https:') {
+                // The live site forgets the session once the message is sent: the next message asks for consent again
                 sessionStorage.clear();
+            } else {
+                // The local site keeps the token for the next messages
+                appGmailToken = apiToken;
             }
         } else {
             handleSendFailure();
@@ -1662,8 +1664,13 @@ async function sendEmail(senderName, subject, message) {
                 const tokenConsent = gapi.client.getToken();
                 if (tokenConsent) {
                     clearInterval(checkInterval);
-                    await sendHelper(tokenConsent);
-                    resolve(tokenConsent);
+                    // A send that throws (Gmail unreachable) rejects, so handleSendFailure shows the error instead of the promise never settling
+                    try {
+                        await sendHelper(tokenConsent);
+                        resolve(tokenConsent);
+                    } catch (error) {
+                        reject(error);
+                    }
                 } else if (++attempts >= maxRetries) {
                     clearInterval(checkInterval);
                     reject(new Error("Consent not given within 30 seconds"));
@@ -1672,9 +1679,10 @@ async function sendEmail(senderName, subject, message) {
         });
     }
 
-    if (token) {
+    // A token kept from an earlier message, otherwise a consent to request
+    if (appGmailToken) {
         try {
-            await sendHelper(token);
+            await sendHelper(appGmailToken);
         } catch (error) {
             handleSendFailure(error);
         }

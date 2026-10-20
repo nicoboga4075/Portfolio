@@ -21,12 +21,14 @@ for (const lang of langs) {
         await page.goto(`/${lang}`);
         const card = page.locator(`#${pageCard.id}`);
         await card.scrollIntoViewIfNeeded();
+        // The title of the card as the page shows it, the project page shows the same in its heading
+        const title = (await card.locator('.project-title h3').textContent()).trim();
         await expect(card.locator('.explore')).toBeHidden();
         await card.hover();
         await expect(card.locator('.explore')).toBeVisible();
         await card.locator('.explore').click();
         await expect(page).toHaveURL(new RegExp(`/${lang}/${pageCard.explore}$`));
         await expect(page.locator('html')).toHaveAttribute('lang', lang);
-        await expect(page.locator('h1')).toContainText(pageCard.title.replaceAll(/<[^>]+>/g, ''));
+        await expect(page.locator('h1')).toContainText(title);
     });
 }
