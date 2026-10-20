@@ -54,7 +54,7 @@ An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI,
 - JS of `js/` is classic browser scripts (`sourceType: "script"`, globals shared through `common.js`, declared in `eslint.config.mjs`), with jQuery; semicolons required, `const`/`let` rather than `var`, no `console.log` (only `console.warn` and `console.error`).
 - Netlify functions in TypeScript (`.mts`, ES modules): explicit return types, `type` rather than `interface`, no floating promises, imports of `./shared/http.mjs` (the compiled name).
 - Every user-visible text goes to `_data/*.json` in every language, never hard-coded in one language; a `getMessage('key')` of `js/` must exist in `_data/messages.json`. Adding a page means adding it in every language.
-- CSS sizes in px, not rem or em; a heading level is changed with its tag, never with a `.h5`-style class or a CSS font-size.
+- CSS sizes in px, not rem or em; a heading level is changed with its tag, never with a `.h5`-style class or a CSS font-size, and the `.h1` to `.h6` classes are never used, not even on a non-heading element.
 - Files in LF (`.gitattributes`). Lint must pass with no error and no warning.
 - Comments: see "Comments" below.
 - A boolean parameter that only picks between two behaviours (flagged by SonarCloud): keep one function, never split it into one function per value. If every caller passes the same value, remove the parameter and the dead branch; if the other variant is used in one place only, write it inline there (e.g. `new Date().toLocaleDateString()`) with a comment in the function naming it; otherwise replace the boolean by a string value (`'date'` or `'datetime'`), since an options object such as `{ complete: true }` is still flagged.
