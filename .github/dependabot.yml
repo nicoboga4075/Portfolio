@@ -8,6 +8,9 @@ updates:
       interval: "cron"
       cronjob: "0 6 * * *"
       timezone: "Europe/Paris"
+    # The gitmoji of a dependency upgrade, as every commit of CLAUDE.md: the pull request titles are built from the commit message, so they get it too
+    commit-message:
+      prefix: "⬆️"
     groups:
       # The Capacitor packages (android, cli, core) release together and must stay on the same version
       capacitor:
@@ -23,3 +26,5 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: "⬆️"
