@@ -54,7 +54,7 @@ An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI,
 - JS of `js/` is classic browser scripts (`sourceType: "script"`, globals shared through `common.js`, declared in `eslint.config.mjs`), with jQuery; semicolons required, `const`/`let` rather than `var`, no `console.log` (only `console.warn` and `console.error`).
 - Netlify functions in TypeScript (`.mts`, ES modules): explicit return types, `type` rather than `interface`, no floating promises, imports of `./shared/http.mjs` (the compiled name).
 - Every user-visible text goes to `_data/*.json` in every language, never hard-coded in one language; a `getMessage('key')` of `js/` must exist in `_data/messages.json`. Adding a page means adding it in every language.
-- CSS sizes in px, not rem; a heading level is changed with its tag, never with a `.h5`-style class or a CSS font-size.
+- CSS sizes in px, not rem or em; a heading level is changed with its tag, never with a `.h5`-style class or a CSS font-size.
 - Files in LF (`.gitattributes`). Lint must pass with no error and no warning.
 - Comments: see "Comments" below.
 
@@ -121,6 +121,10 @@ Prefer single-line comments, even long ones, in every language (CSS, JS, HTML, N
 ## File size
 
 **Never commit a file of 100 MB or more, whatever the reason.** GitHub refuses any file over 100 MiB and GitLab any new file of 100 MiB or more, and `origin` pushes to both, so one such file blocks every push. Git warns from 50 MiB: keep each file well under that, and compress or host elsewhere (YouTube, Vimeo) a video that would get close, such as `docs/public/Bien_PasBien.mp4` at 95 MB already.
+
+## Rules
+
+The rules of each area live in `.claude/rules/`, loaded only when Claude works on the matching files (`paths:` of their front matter): `site-js.md` (`js/`, `service-worker.js`), `netlify-functions.md`, `data-translations.md` (`_data/`), `pages-templates.md` (pages, `_includes/`, articles, projects), `css.md`, `tests.md` and `ci.md` (`.github/`, `.gitlab/`, `netlify.toml`, `.nvmrc`).
 
 ## Skills
 
