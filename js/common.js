@@ -14,7 +14,7 @@ const appLanguages = new Set(
 function getCurrentRoute() {
     const path = window.location.pathname;
     return Object.keys(appRoutes).find(key => {
-        const pattern = '^' + appRoutes[key].replace('{lng}', '[a-z]{2}') + '/?$';
+        const pattern = `^${appRoutes[key].replace('{lng}', '[a-z]{2}')}/?$`;
         return new RegExp(pattern).test(path);
     }) || 'error404';
 }
@@ -78,7 +78,7 @@ function parseDate(text, lang, iso = false, hour12 = false) {
     if (meridiem) {
         hour24 = hour24 % 12 + (meridiem === 'pm' ? 12 : 0);
     }
-    const time = `${String(hour24).padStart(2, '0')}:${minute}` + (second ? `:${second}` : '');
+    const time = `${String(hour24).padStart(2, '0')}:${minute}${second ? `:${second}` : ''}`;
     return iso ? `${date}T${time}` : `${date} ${time}`;
 }
 

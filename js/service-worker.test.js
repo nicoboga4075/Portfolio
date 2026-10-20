@@ -131,7 +131,7 @@ describe('service-worker.js', () => {
         });
 
         test('answers the cached copy when the server fails with a 5xx', async () => {
-            const { listeners, cache } = fakeWorker({ cached: { [ORIGIN + '/index_en.html']: new Response('cached') } });
+            const { listeners, cache } = fakeWorker({ cached: { [`${ORIGIN}/index_en.html`]: new Response('cached') } });
             fetch.mockResolvedValue(new Response('down', { status: 503 }));
             const response = await dispatchFetch(listeners, fetchEvent('/index_en.html', { mode: 'navigate' }));
             expect(await response.text()).toBe('cached');
@@ -146,7 +146,7 @@ describe('service-worker.js', () => {
         });
 
         test('answers a 4xx as it is, without caching it or reading the cache', async () => {
-            const { listeners, cache } = fakeWorker({ cached: { [ORIGIN + '/gone.html']: new Response('cached') } });
+            const { listeners, cache } = fakeWorker({ cached: { [`${ORIGIN}/gone.html`]: new Response('cached') } });
             fetch.mockResolvedValue(new Response('not found', { status: 404 }));
             const response = await dispatchFetch(listeners, fetchEvent('/gone.html', { mode: 'navigate' }));
             expect(response.status).toBe(404);
@@ -155,7 +155,7 @@ describe('service-worker.js', () => {
         });
 
         test('answers the cached copy when offline', async () => {
-            const { listeners } = fakeWorker({ cached: { [ORIGIN + '/js/app.js']: new Response('cached') } });
+            const { listeners } = fakeWorker({ cached: { [`${ORIGIN}/js/app.js`]: new Response('cached') } });
             fetch.mockRejectedValue(new TypeError('Failed to fetch'));
             const response = await dispatchFetch(listeners, fetchEvent('/js/app.js'));
             expect(await response.text()).toBe('cached');
@@ -169,7 +169,7 @@ describe('service-worker.js', () => {
         });
 
         test('treats a script with a query string as a script, not as an other asset', async () => {
-            const { listeners } = fakeWorker({ cached: { [ORIGIN + '/js/app.js?v=2']: new Response('old') } });
+            const { listeners } = fakeWorker({ cached: { [`${ORIGIN}/js/app.js?v=2`]: new Response('old') } });
             fetch.mockResolvedValue(new Response('new'));
             const response = await dispatchFetch(listeners, fetchEvent('/js/app.js?v=2'));
             expect(await response.text()).toBe('new');
@@ -190,7 +190,7 @@ describe('service-worker.js', () => {
 
     describe('fetch, stale-while-revalidate (images, fonts and other assets)', () => {
         test('answers the cached copy at once and refreshes it in the background', async () => {
-            const { listeners, store } = fakeWorker({ cached: { [ORIGIN + '/images/me.webp']: new Response('old') } });
+            const { listeners, store } = fakeWorker({ cached: { [`${ORIGIN}/images/me.webp`]: new Response('old') } });
             fetch.mockResolvedValue(new Response('new'));
             const event = fetchEvent('/images/me.webp');
             const response = await dispatchFetch(listeners, event);
@@ -198,11 +198,11 @@ describe('service-worker.js', () => {
             expect(fetch).toHaveBeenCalledWith(event.request, { cache: 'reload' });
             // one waitUntil keeps the worker alive for the refresh, one for the cache write
             expect(event.waitUntil).toHaveBeenCalledTimes(2);
-            expect(await store.get(ORIGIN + '/images/me.webp').text()).toBe('new');
+            expect(await store.get(`${ORIGIN}/images/me.webp`).text()).toBe('new');
         });
 
         test('keeps the cached copy when the background refresh fails', async () => {
-            const { listeners, cache } = fakeWorker({ cached: { [ORIGIN + '/fonts/poppins.woff2']: new Response('cached') } });
+            const { listeners, cache } = fakeWorker({ cached: { [`${ORIGIN}/fonts/poppins.woff2`]: new Response('cached') } });
             fetch.mockRejectedValue(new TypeError('Failed to fetch'));
             const event = fetchEvent('/fonts/poppins.woff2');
             const response = await dispatchFetch(listeners, event);
@@ -217,7 +217,7 @@ describe('service-worker.js', () => {
             const response = await dispatchFetch(listeners, fetchEvent('/images/me.webp'));
             expect(await response.text()).toBe('fresh');
             expect(cache.put).toHaveBeenCalledTimes(1);
-            expect(await store.get(ORIGIN + '/images/me.webp').text()).toBe('fresh');
+            expect(await store.get(`${ORIGIN}/images/me.webp`).text()).toBe('fresh');
         });
 
         test('answers a failed response without caching it', async () => {
@@ -229,7 +229,7 @@ describe('service-worker.js', () => {
         });
 
         test('does not overwrite the cached copy with a failed background refresh', async () => {
-            const { listeners, cache } = fakeWorker({ cached: { [ORIGIN + '/images/me.webp']: new Response('old') } });
+            const { listeners, cache } = fakeWorker({ cached: { [`${ORIGIN}/images/me.webp`]: new Response('old') } });
             fetch.mockResolvedValue(new Response('down', { status: 503 }));
             const response = await dispatchFetch(listeners, fetchEvent('/images/me.webp'));
             expect(await response.text()).toBe('old');

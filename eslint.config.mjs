@@ -83,6 +83,7 @@ export default defineConfig([
 	  "no-implicit-coercion": "error",
 	  // A top-level name of a classic script is a global shared with the other scripts: never reuse it for a local
 	  "no-shadow": "error",
+	  "prefer-template": "error",
 	  // ES2024 APIs that Node 20 of the CI lacks: ecmaVersion only checks the syntax, not the APIs
 	  "no-restricted-properties": ["error",
 	    { "object": "Object", "property": "groupBy", "message": "ES2024, missing on Node 20: group with reduce." },

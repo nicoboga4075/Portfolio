@@ -4,7 +4,7 @@ const path = require('node:path');
 const version = process.argv[2];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const d = new Date();
-const releaseDate = process.argv[3] || String(d.getDate()).padStart(2, '0') + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+const releaseDate = process.argv[3] || `${String(d.getDate()).padStart(2, '0')} ${months[d.getMonth()]} ${d.getFullYear()}`;
 
 if (!version) {
   console.error('Usage: node update-version.js <version> [releaseDate]');

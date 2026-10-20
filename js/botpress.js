@@ -97,7 +97,7 @@ function loadBotpress() {
 const bpFabStub = document.getElementById('bp-fab-stub');
 if (bpFabStub) {
 	const placeStub = function () {
-		bpFabStub.style.top = navbarCenteredTop(bpFabStub.offsetHeight) + 'px';
+		bpFabStub.style.top = `${navbarCenteredTop(bpFabStub.offsetHeight)}px`;
 	};
 	placeStub();
 	const navbar = document.getElementById('ftco-navbar');
