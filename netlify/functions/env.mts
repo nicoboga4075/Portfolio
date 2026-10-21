@@ -33,10 +33,9 @@ type GithubCommit = {
     }
 };
 
-// The languages a docs/public/CV_<lang>.pdf is published for; anything else
-// serves config.cvDefaultLang.
+// The languages a docs/public/CV_<lang>.pdf is published for; anything else serves config.cvDefaultLang.
 const { cvLangs, cvDefaultLang } = pkg.config;
-// The owner/name of the GitHub repository of package.json (nicoboga4075/Portfolio), whose commits date the CV
+// The owner/name of the GitHub repository of package.json, whose commits date the CV
 const repository = new URL(pkg.repository.url).pathname.slice(1);
 
 function getLastCvUpdate(lang: string): Promise<Response> {
