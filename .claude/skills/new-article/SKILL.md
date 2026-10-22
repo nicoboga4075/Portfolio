@@ -1,6 +1,8 @@
 ---
 name: new-article
 description: Adds a blog article to the portfolio in English and French - its two pages in articles/, its entry in _data/articles.json, its card in _data/blog.json (same position), and its images - then checks the wiring with npm run check:content and lints. Use it when the user asks to add, write, publish or create an article, a blog post or a post.
+metadata:
+  category: Code Scaffolding & Templates
 ---
 
 # New article

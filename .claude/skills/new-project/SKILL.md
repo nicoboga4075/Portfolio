@@ -1,6 +1,8 @@
 ---
 name: new-project
 description: Adds a project to the portfolio - its card in _data/projects.json with what its Explore button opens, and for a project with its own page the two pages in projects/, the redirects and the Lighthouse audits - then checks the wiring with npm run check:content and lints. Use it when the user asks to add, create or showcase a project, a realisation or a case study.
+metadata:
+  category: Code Scaffolding & Templates
 ---
 
 # New project

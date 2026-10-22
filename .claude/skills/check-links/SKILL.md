@@ -1,6 +1,8 @@
 ---
 name: check-links
 description: Checks that every external link of the portfolio (pages, _includes, articles, projects, _data/*.json) has no trailing slash, answers 200 after its redirects and that its page is not a soft 404 - a 200 whose title or h1 / h2 says 404, not found, page introuvable, n'existe plus. Use it when the user asks to check, test or audit the external links, the dead links or the 404s, after adding or editing links in an article, a project or a data file, or before a release.
+metadata:
+  category: Product Verification
 ---
 
 # Check links

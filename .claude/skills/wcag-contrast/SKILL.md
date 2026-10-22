@@ -1,6 +1,8 @@
 ---
 name: wcag-contrast
 description: Checks WCAG AA contrast on every page of the portfolio (EN and FR, home, blog, every article and project, policy, terms), in light and dark mode, at phone, tablet, laptop and desktop sizes - text on load, on hover, after interactions (opened cards, menus, windows, panels, carousel slides, search suggestions, tooltips) and under keyboard focus, plus non-text contrast (focus indicators, icon-only controls, field borders) - then fixes what fails. Use it whenever a change touches a colour, before calling the change done or committing it - a colour variable in css/common.css (--primary, --secondary, --accent-color, --background-color, --text-color, the palette or the -light / -dark / -pale shades), any color, background, background-color, border-color, outline, box-shadow, opacity, filter, mix-blend-mode or text-shadow declaration, an overlay or a background image, a hover, focus or dark-mode rule, a font size or weight (they move the threshold), a new interactive component, or a colour set from JS (js/botpress.js, the skills chart). Also use it when asked to audit, check or fix contrast or colour accessibility.
+metadata:
+  category: Product Verification
 ---
 
 # WCAG contrast check

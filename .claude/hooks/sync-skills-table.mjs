@@ -24,15 +24,19 @@ const CATEGORIES = [
     'Infrastructure Operations',
 ];
 
-// Each skill folder with a SKILL.md: the folder name (shown in the table, even when the frontmatter name differs, e.g. i18n-l10n is "translation"), the first clause of its description and its category frontmatter field
+// Each skill folder with a SKILL.md: the folder name (shown in the table, even when the frontmatter name differs, e.g. i18n-l10n is "translation"), the first clause of its description and the category of its metadata
 function skills() {
     return fs.readdirSync(SKILLS, { withFileTypes: true })
         .filter(entry => entry.isDirectory() && fs.existsSync(path.join(SKILLS, entry.name, 'SKILL.md')))
         .map(entry => {
             const text = fs.readFileSync(path.join(SKILLS, entry.name, 'SKILL.md'), 'utf8');
-            const field = key => text.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1].trim().replace(/^["']|["']$/g, '') ?? '';
+            const unquote = value => value?.trim().replace(/^["']|["']$/g, '') ?? '';
+            const field = key => unquote(text.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1]);
             const summary = field('description').split(/ - |\. /)[0].replace(/\.$/, '');
-            return { dir: entry.name, summary, category: field('category') };
+            // The indented lines under metadata:, then their category: key
+            const metadata = text.match(/^metadata:[ \t]*\r?\n((?:[ \t]+.*(?:\r?\n|$))*)/m)?.[1] ?? '';
+            const category = unquote(metadata.match(/^[ \t]+category:[ \t]*(.+)$/m)?.[1]);
+            return { dir: entry.name, summary, category };
         });
 }
 
@@ -43,26 +47,26 @@ function scriptsOf(dir) {
     return names.length ? names.join(', ') : '-';
 }
 
-// The rows already in the table: their order and their hand-written "Category" and "Use it to" texts are kept
+// The rows already in the table: their order and their hand-written "Use it to" text are kept
 function currentRows(table) {
     return table.split(/\r?\n/).filter(line => /^\| `[^`]+` \|/.test(line)).map(line => {
         const cells = line.split('|').slice(1, -1).map(cell => cell.trim());
-        return { name: cells[0].replaceAll('`', ''), category: cells[1], use: cells[2] };
+        return { name: cells[0].replaceAll('`', ''), use: cells.at(-2) };
     });
 }
 
-// A new skill takes the category of its frontmatter; every row must end up with one of CATEGORIES, otherwise the skills at fault are returned as errors
+// The category column always comes from metadata.category of each SKILL.md; a skill without one of CATEGORIES there is returned as an error
 function render(table) {
     const found = skills();
     const known = currentRows(table);
     const kept = known.filter(row => found.some(skill => skill.dir === row.name));
     const added = found.filter(skill => !known.some(row => row.name === skill.dir)).sort((a, b) => a.dir.localeCompare(b.dir));
     const rows = [
-        ...kept.map(row => ({ name: row.name, category: row.category, use: row.use, dir: row.name })),
-        ...added.map(skill => ({ name: skill.dir, category: skill.category, use: skill.summary, dir: skill.dir })),
+        ...kept.map(row => ({ ...found.find(skill => skill.dir === row.name), use: row.use })),
+        ...added.map(skill => ({ ...skill, use: skill.summary })),
     ];
-    const errors = rows.filter(row => !CATEGORIES.includes(row.category)).map(row => `${row.name} (category "${row.category}")`);
-    const lines = ['| Skill | Category | Use it to | Script |', '|---|---|---|---|', ...rows.map(row => `| \`${row.name}\` | ${row.category} | ${row.use} | ${scriptsOf(row.dir)} |`)];
+    const errors = rows.filter(row => !CATEGORIES.includes(row.category)).map(row => `${row.dir} (category "${row.category}")`);
+    const lines = ['| Skill | Category | Use it to | Script |', '|---|---|---|---|', ...rows.map(row => `| \`${row.dir}\` | ${row.category} | ${row.use} | ${scriptsOf(row.dir)} |`)];
     return { table: lines.join('\n'), errors };
 }
 
@@ -86,7 +90,7 @@ const changed = next !== text;
 
 // A skill without a valid category: nothing written, blocking in every mode (exit 2 hands the message back to Claude in the hooks)
 if (errors.length) {
-    console.error(`Skills without a valid category: ${errors.join(', ')}. Add "category: <one of ${CATEGORIES.join(' | ')}>" to the frontmatter of a new SKILL.md, or fix its cell in the skills table of CLAUDE.md.`);
+    console.error(`Skills without a valid category: ${errors.join(', ')}. Add to the frontmatter of their SKILL.md "metadata:" with an indented "category: <one of ${CATEGORIES.join(' | ')}>".`);
     if (mode === '--edit') {
         let input = '';
         for await (const chunk of process.stdin) input += chunk;

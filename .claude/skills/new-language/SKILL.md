@@ -1,6 +1,8 @@
 ---
 name: new-language
 description: Adds a language to the portfolio (Spanish, German, Italian...) next to English and French - its config.locales entry in package.json, its version of every text in _data/*.json, its page for every page (home, blog, policy, terms, every project and article), its entries in the translation check, optionally its CV and Lighthouse audits - then checks everything with npm run check:translation, check:content and lint. Use it when the user asks to add, support or translate the site into a new language or locale, or to remove one.
+metadata:
+  category: Code Scaffolding & Templates
 ---
 
 # New language

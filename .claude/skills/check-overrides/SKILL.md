@@ -1,6 +1,8 @@
 ---
 name: check-overrides
 description: Checks whether each entry of "overrides" in package.json still changes what npm installs - obsolete (no package depends on it any more), redundant (the packages that ask for it would already get a matching version) or still active - with the commit that added it, then removes the ones that are no longer needed and checks nothing breaks. Use it after a dependency update (a Dependabot pull request merged, npm update, npm install of a new package, a change of package-lock.json), when npm audit changes, or when the user asks about the npm overrides, pinned or forced transitive dependencies, even if they don't say "overrides".
+metadata:
+  category: Code Quality & Review
 ---
 
 # Check the npm overrides

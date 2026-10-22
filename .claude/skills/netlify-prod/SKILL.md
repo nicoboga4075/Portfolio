@@ -2,6 +2,8 @@
 name: netlify-prod
 description: Puts the latest commit of main online on Netlify in one go - starts the builds if they are stopped, unlocks auto publishing if it is locked, builds main if no ready production deploy has that commit yet, then makes sure that deploy is the published one. Run only when the user types /netlify-prod.
 disable-model-invocation: true
+metadata:
+  category: CI/CD & Deployment
 ---
 
 # Publish main to production

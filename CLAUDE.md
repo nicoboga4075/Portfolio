@@ -140,7 +140,7 @@ The rules of each area live in `.claude/rules/`, loaded only when Claude works o
 
 ## Skills
 
-The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fits before doing the task by hand. The table is kept in step by `.claude/hooks/sync-skills-table.mjs` (after a SKILL.md is written, and before each commit): edit the "Category" and "Use it to" texts freely (a new skill takes the `category:` of its SKILL.md frontmatter, which must be one of the nine below: the hook blocks the edit and the commit otherwise), the rows and scripts follow the skill folders. Categories: Library & API Reference, Product Verification, Data Fetching & Analysis, Business Process & Team Automation, Code Scaffolding & Templates, Code Quality & Review, CI/CD & Deployment, Runbooks & Troubleshooting, Infrastructure Operations.
+The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fits before doing the task by hand. The table is kept in step by `.claude/hooks/sync-skills-table.mjs` (after a SKILL.md is written, and before each commit): edit the "Use it to" text freely, the rows and scripts follow the skill folders, and the category comes from `metadata.category` of each SKILL.md frontmatter (`metadata:` then an indented `category:`), which must be one of the nine below: the hook blocks the edit of a SKILL.md and the commit otherwise. Categories: Library & API Reference, Product Verification, Data Fetching & Analysis, Business Process & Team Automation, Code Scaffolding & Templates, Code Quality & Review, CI/CD & Deployment, Runbooks & Troubleshooting, Infrastructure Operations.
 
 <!-- skills:start -->
 | Skill | Category | Use it to | Script |

@@ -1,6 +1,8 @@
 ---
 name: run-portfolio
 description: Runs the portfolio locally and drives it in a headless browser - starts npm run dev (Eleventy preview build, netlify dev with the functions, browser-sync on the port of [dev] in netlify.toml), waits for it, then opens pages, takes screenshots, reads the console errors and switches the language with driver.mjs (Playwright Chromium). Use it when asked to run, start, launch, open, screenshot or smoke-test the site, to check a change in the real site rather than in the tests, or when the local site does not answer.
+metadata:
+  category: Product Verification
 ---
 
 # Run the portfolio

@@ -1,6 +1,8 @@
 ---
 name: check-content
 description: Checks that the portfolio's articles and projects are wired everywhere they must be - pages in English and French with the right permalink, _data/articles.json and _data/blog.json in the same order, _data/projects.json cards with what their Explore button opens (explore), card images, Lighthouse audits. Use it after adding, removing, renaming or reordering an article or a project (by hand or with new-article / new-project), after editing those data files, or when a blog card or an Explore button opens the wrong page.
+metadata:
+  category: Product Verification
 ---
 
 # Check content

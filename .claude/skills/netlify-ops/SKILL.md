@@ -1,6 +1,8 @@
 ---
 name: netlify-ops
 description: Operates the live Netlify site of the portfolio - shows its state (builds stopped or running, published deploy locked or not, last deploys), stops or starts the builds, locks or unlocks the published deploy, builds main with or without cache, restores an earlier deploy - through the logged-in Netlify CLI, always showing the state first and asking before any change. Use it whenever the user asks why the site is not deployed or not up to date, to deploy, redeploy, rebuild, clear the cache, stop or start the builds, lock or unlock auto publishing, roll back, or check a deploy, even if they don't say "Netlify".
+metadata:
+  category: Infrastructure Operations
 ---
 
 # Operate the Netlify site

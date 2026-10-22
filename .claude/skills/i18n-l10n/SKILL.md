@@ -1,6 +1,8 @@
 ---
 name: translation
 description: Checks the translation (i18n) and localisation (l10n) of the portfolio in English and French - every text of _data/*.json in every language with the same shape (keys, types, list lengths, none empty on one side only), every page in every language, no template locked to one language ({{ x.en }} instead of x[lang]), every getMessage('key') of js/ in _data/messages.json, then the built pages (html lang, language switcher links, text left in the other language, dates in the other language, undefined / [object Object] / NaN shown to visitors). Use it after adding or editing a text in _data, a page, an include or a translation, after adding a language or a getMessage() call, when a French page shows English (or the reverse), or when asked to check, audit or fix the translations, i18n or l10n.
+metadata:
+  category: Product Verification
 ---
 
 # Translation (i18n / l10n)
