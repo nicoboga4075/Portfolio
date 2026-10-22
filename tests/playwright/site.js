@@ -11,7 +11,7 @@ const data = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 // Starts serve-build.mjs and resolves with its address once it has written the port it got
 function serve() {
     const portFile = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'portfolio-serve-')), 'port');
-    const child = spawn(process.execPath, [path.join(root, '.claude', 'skills', 'robot-test', 'serve-build.mjs'), '--port-file', portFile], { cwd: root, stdio: 'ignore' });
+    const child = spawn(process.execPath, [path.join(root, 'tests', 'serve-build.mjs'), '--port-file', portFile], { cwd: root, stdio: 'ignore' });
     return new Promise((resolve, reject) => {
         const timer = setInterval(() => {
             if (fs.existsSync(portFile) && fs.readFileSync(portFile, 'utf8')) {

@@ -127,7 +127,7 @@ jobs:
     # The built site on a free port in the background, which writes the port it got to reports/robot/port for the tests
     - name: Robot Framework on the built site
       run: |
-        node .claude/skills/robot-test/serve-build.mjs --port-file reports/robot/port &
+        node tests/serve-build.mjs --port-file reports/robot/port &
         for i in $(seq 50); do [ -s reports/robot/port ] && break; sleep 0.2; done
         robot --outputdir reports/robot --xunit junit.xml --variable "BASE_URL:http://localhost:$(cat reports/robot/port)" tests/robot
     - uses: actions/upload-artifact@v7

@@ -20,7 +20,7 @@ For each file, look for an existing test, wherever it is and whenever it was wri
 - Jest unit tests: `js/*.test.js` next to their modules, and `tests/jest/netlify/*.test.ts` for the Netlify functions
 - Playwright tests: `tests/playwright/*.spec.js`
 - Cypress tests: `tests/cypress/**`
-- Robot Framework suites: `tests/robot/**/*.robot` (end-to-end tests written with the robot-test skill, see ROBOT_FRAMEWORK.md)
+- Robot Framework suites: `tests/robot/**/*.robot` (end-to-end tests written following tests/robot/ROBOT_FRAMEWORK.md)
 
 A test covers a file when it imports it, or exercises the page, template, selector or feature the file implements. Leave covered files alone.
 

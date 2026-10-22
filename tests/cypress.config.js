@@ -15,7 +15,7 @@ function build() {
 // Starts serve-build.mjs, stopped with the Cypress process, and resolves with its address once it has written the port it got
 function serve() {
     const portFile = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'portfolio-serve-')), 'port');
-    const child = spawn(process.execPath, [path.join(root, '.claude', 'skills', 'robot-test', 'serve-build.mjs'), '--port-file', portFile], { cwd: root, stdio: 'ignore' });
+    const child = spawn(process.execPath, [path.join(root, 'tests', 'serve-build.mjs'), '--port-file', portFile], { cwd: root, stdio: 'ignore' });
     process.on('exit', () => child.kill());
     return new Promise((resolve, reject) => {
         const timer = setInterval(() => {

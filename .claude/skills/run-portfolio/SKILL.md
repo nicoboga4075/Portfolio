@@ -55,10 +55,10 @@ Screenshots land in `reports/run/` (git-ignored): open them with Read and look a
 
 ## Without netlify dev
 
-When only the pages matter, serve the last preview build with the server of the robot-test skill (no Netlify function) and point the driver at it:
+When only the pages matter, serve the last preview build with `tests/serve-build.mjs` (no Netlify function) and point the driver at it:
 
 ```bash
-node .claude/skills/robot-test/serve-build.mjs --port-file reports/run/port.txt &
+node tests/serve-build.mjs --port-file reports/run/port.txt &
 node .claude/skills/run-portfolio/driver.mjs en fr/blog --base http://localhost:$(cat reports/run/port.txt) --out reports/run/static
 ```
 

@@ -108,7 +108,7 @@ robot-job:
     - $env:ELEVENTY_PREVIEW = "1"; npx eleventy
     # The built site on a free port, in the background for the length of the job, which writes the port it got to reports/robot/port for the tests
     - Remove-Item reports/robot/port -ErrorAction SilentlyContinue
-    - $server = Start-Process -FilePath node -ArgumentList ".claude/skills/robot-test/serve-build.mjs", "--port-file", "reports/robot/port" -PassThru -WindowStyle Hidden
+    - $server = Start-Process -FilePath node -ArgumentList "tests/serve-build.mjs", "--port-file", "reports/robot/port" -PassThru -WindowStyle Hidden
     - for ($i = 0; $i -lt 50 -and -not (Test-Path reports/robot/port); $i++) { Start-Sleep -Milliseconds 200 }
     - $port = Get-Content reports/robot/port
     - echo "Running Robot Framework tests on http://localhost:$port..."

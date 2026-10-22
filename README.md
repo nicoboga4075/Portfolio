@@ -53,7 +53,7 @@ Generated and not committed: `.eleventy/` (output of `npm run dev`), `api/`, `si
 | `staticServerPort` | 3999 | `[dev]` of `netlify.toml` | the static server of netlify dev | Serves the files of `.eleventy`; `dev-watch.js` reads `docs/public/*` straight from it, since netlify dev answers 403 on Windows for a static file matched by a `_redirects` rule |
 | translation port | 4799 | the url of the `/post-edit` http hook in [`.claude/settings.json`](.claude/settings.json) | [`translation-hook-server.mjs`](.claude/hooks/translation-hook-server.mjs) | Checks every `_data/*.json` file Claude edits (valid JSON, every language with the same shape); started by a SessionStart hook, stops after 2 hours without a request. Not part of the site |
 
-The tests that open the built site (the `*.browser.spec.js` Playwright specs, Cypress, Robot Framework) use one more, a free port that [`serve-build.mjs`](.claude/skills/robot-test/serve-build.mjs) prints at start-up. The Android app ([`capacitor.config.js`](capacitor.config.js)) loads the local site on `port` too, forwarded from the device by `npm run adb:reverse`.
+The tests that open the built site (the `*.browser.spec.js` Playwright specs, Cypress, Robot Framework) use one more, a free port that [`serve-build.mjs`](tests/serve-build.mjs) prints at start-up. The Android app ([`capacitor.config.js`](capacitor.config.js)) loads the local site on `port` too, forwarded from the device by `npm run adb:reverse`.
 
 ```mermaid
 flowchart LR

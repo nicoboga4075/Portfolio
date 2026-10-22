@@ -82,7 +82,7 @@ An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI,
 - Jest unit tests of `js/` sit next to their module (`js/app.js` → `js/app.test.js`); those of the Netlify functions go in `tests/jest/netlify/` (`visit.mts` → `visit.test.ts`), since Netlify deploys every file of `netlify/functions/` as a function; those of the build scripts in `tests/jest/`.
 - Coverage is 100 % on the files of `collectCoverageFrom` in `jest.config.js`, which matches `sonar.coverage.exclusions` in `sonar-project.properties`: keep both in step and keep the coverage at 100 % (the SonarCloud quality gate checks the new code).
 - Playwright in `tests/playwright/`: `*.browser.spec.js` open a page of the preview build, served by `tests/playwright/site.js`, and run in Chromium, Firefox and WebKit; the specs of `BUILT` in `playwright.config.js` read the preview build made by `build.setup.js`; the others run once in Node.
-- Cypress in `tests/cypress/` (`tests/cypress.config.js` builds the preview and serves it) and Robot Framework in `tests/robot/` (follow `tests/robot/ROBOT_FRAMEWORK.md` and the `robot-test` skill), run on the built site; the three serve it with `.claude/skills/robot-test/serve-build.mjs`, which has no Netlify function (a Playwright spec answers the `article` function itself).
+- Cypress in `tests/cypress/` (`tests/cypress.config.js` builds the preview and serves it) and Robot Framework in `tests/robot/` (follow `tests/robot/ROBOT_FRAMEWORK.md`), run on the built site; the three serve it with `tests/serve-build.mjs`, which has no Netlify function (a Playwright spec answers the `article` function itself).
 - Every new or changed behaviour comes with its test (the `test-writer` agent writes the missing ones). Reports go to `reports/` (git-ignored).
 
 ## Sensitive areas
@@ -154,7 +154,6 @@ The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fi
 | `wcag-contrast` | Product Verification | Check and fix WCAG AA contrast after a colour or style change, only when asked | `npm run contrast`, `npm run contrast:quick` |
 | `update-docs` | Business Process & Team Automation | Keep README.md and SECURITY.md in step (vendored libraries, held-back versions, overrides, security log and practices) | `npm run check:docs` |
 | `check-overrides` | Code Quality & Review | Tell which npm overrides are still needed after a dependency update | `npm run check:overrides` |
-| `robot-test` | Product Verification | Write and run a Robot Framework test following ROBOT_FRAMEWORK.md | - |
 | `netlify-ops` | Infrastructure Operations | Check and operate the live Netlify site (builds, lock, build without cache, restore), asking before any change | `npm run netlify:ops` |
 | `netlify-prod` | CI/CD & Deployment | Publish the latest commit of main in one go (`/netlify-prod` only): start the builds, unlock auto publishing, build, publish | - |
 | `run-portfolio` | Product Verification | Runs the portfolio locally and drives it in a headless browser | - |

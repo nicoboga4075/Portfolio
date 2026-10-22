@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-// Serves the last build (.eleventy) like Netlify, with the 200 rewrites of _redirects, so the Robot Framework tests can run without netlify dev.
-// Usage: node .claude/skills/robot-test/serve-build.mjs [port] [--port-file <file>] (a free port the system picks by default, printed at start-up and written to the file when given, for a CI job that starts it in the background; build first with ELEVENTY_PREVIEW=1 npx eleventy)
+// Serves the last build (.eleventy) like Netlify, with the 200 rewrites of _redirects, so the Playwright, Cypress and Robot Framework tests and the run-portfolio skill can run without netlify dev.
+// Usage: node tests/serve-build.mjs [port] [--port-file <file>] (a free port the system picks by default, printed at start-up and written to the file when given, for a CI job that starts it in the background; build first with ELEVENTY_PREVIEW=1 npx eleventy)
 import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, '.eleventy');
 const args = process.argv.slice(2);
 const PORT = Number(args.find(arg => /^\d+$/.test(arg)) ?? 0);
