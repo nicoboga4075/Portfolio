@@ -12,8 +12,19 @@ const SKILLS = path.join(ROOT, '.claude', 'skills');
 const START = '<!-- skills:start -->';
 const END = '<!-- skills:end -->';
 const mode = process.argv[2] ?? '';
+const CATEGORIES = [
+    'Library & API Reference',
+    'Product Verification',
+    'Data Fetching & Analysis',
+    'Business Process & Team Automation',
+    'Code Scaffolding & Templates',
+    'Code Quality & Review',
+    'CI/CD & Deployment',
+    'Runbooks & Troubleshooting',
+    'Infrastructure Operations',
+];
 
-// Each skill folder with a SKILL.md: the folder name (shown in the table, even when the frontmatter name differs, e.g. i18n-l10n is "translation") and the first clause of its description
+// Each skill folder with a SKILL.md: the folder name (shown in the table, even when the frontmatter name differs, e.g. i18n-l10n is "translation"), the first clause of its description and its category frontmatter field
 function skills() {
     return fs.readdirSync(SKILLS, { withFileTypes: true })
         .filter(entry => entry.isDirectory() && fs.existsSync(path.join(SKILLS, entry.name, 'SKILL.md')))
@@ -21,7 +32,7 @@ function skills() {
             const text = fs.readFileSync(path.join(SKILLS, entry.name, 'SKILL.md'), 'utf8');
             const field = key => text.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1].trim().replace(/^["']|["']$/g, '') ?? '';
             const summary = field('description').split(/ - |\. /)[0].replace(/\.$/, '');
-            return { dir: entry.name, summary };
+            return { dir: entry.name, summary, category: field('category') };
         });
 }
 
@@ -32,24 +43,27 @@ function scriptsOf(dir) {
     return names.length ? names.join(', ') : '-';
 }
 
-// The rows already in the table: their order and their hand-written "Use it to" text are kept
+// The rows already in the table: their order and their hand-written "Category" and "Use it to" texts are kept
 function currentRows(table) {
     return table.split(/\r?\n/).filter(line => /^\| `[^`]+` \|/.test(line)).map(line => {
         const cells = line.split('|').slice(1, -1).map(cell => cell.trim());
-        return { name: cells[0].replaceAll('`', ''), use: cells[1] };
+        return { name: cells[0].replaceAll('`', ''), category: cells[1], use: cells[2] };
     });
 }
 
+// A new skill takes the category of its frontmatter; every row must end up with one of CATEGORIES, otherwise the skills at fault are returned as errors
 function render(table) {
     const found = skills();
     const known = currentRows(table);
     const kept = known.filter(row => found.some(skill => skill.dir === row.name));
     const added = found.filter(skill => !known.some(row => row.name === skill.dir)).sort((a, b) => a.dir.localeCompare(b.dir));
     const rows = [
-        ...kept.map(row => ({ name: row.name, use: row.use, dir: row.name })),
-        ...added.map(skill => ({ name: skill.dir, use: skill.summary, dir: skill.dir })),
+        ...kept.map(row => ({ name: row.name, category: row.category, use: row.use, dir: row.name })),
+        ...added.map(skill => ({ name: skill.dir, category: skill.category, use: skill.summary, dir: skill.dir })),
     ];
-    return ['| Skill | Use it to | Script |', '|---|---|---|', ...rows.map(row => `| \`${row.name}\` | ${row.use} | ${scriptsOf(row.dir)} |`)].join('\n');
+    const errors = rows.filter(row => !CATEGORIES.includes(row.category)).map(row => `${row.name} (category "${row.category}")`);
+    const lines = ['| Skill | Category | Use it to | Script |', '|---|---|---|---|', ...rows.map(row => `| \`${row.name}\` | ${row.category} | ${row.use} | ${scriptsOf(row.dir)} |`)];
+    return { table: lines.join('\n'), errors };
 }
 
 // The CLAUDE.md text with an up-to-date table, or null when the markers are missing
@@ -57,18 +71,31 @@ function updated() {
     const text = fs.readFileSync(CLAUDE_MD, 'utf8');
     const start = text.indexOf(START);
     const end = text.indexOf(END);
-    if (start === -1 || end < start) return { text, next: null };
-    const table = text.slice(start + START.length, end);
-    const next = `${text.slice(0, start + START.length)}\n${render(table)}\n${text.slice(end)}`;
-    return { text, next };
+    if (start === -1 || end < start) return { text, next: null, errors: [] };
+    const { table, errors } = render(text.slice(start + START.length, end));
+    const next = `${text.slice(0, start + START.length)}\n${table}\n${text.slice(end)}`;
+    return { text, next, errors };
 }
 
-const { text, next } = updated();
+const { text, next, errors } = updated();
 if (next === null) {
     console.error(`CLAUDE.md has no ${START} / ${END} markers around the skills table`);
     process.exit(mode === '--edit' ? 0 : 1);
 }
 const changed = next !== text;
+
+// A skill without a valid category: nothing written, blocking in every mode (exit 2 hands the message back to Claude in the hooks)
+if (errors.length) {
+    console.error(`Skills without a valid category: ${errors.join(', ')}. Add "category: <one of ${CATEGORIES.join(' | ')}>" to the frontmatter of a new SKILL.md, or fix its cell in the skills table of CLAUDE.md.`);
+    if (mode === '--edit') {
+        let input = '';
+        for await (const chunk of process.stdin) input += chunk;
+        const file = (JSON.parse(input || '{}').tool_input?.file_path ?? '').replaceAll('\\', '/');
+        process.exit(/\/\.claude\/skills\/[^/]+\/SKILL\.md$/.test(file) ? 2 : 0);
+    }
+    if (mode === '--before-commit') process.exit(isGitCommit(await hookCommand()) ? 2 : 0);
+    process.exit(1);
+}
 
 // Manual check: nothing written
 if (mode === '--check') {

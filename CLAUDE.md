@@ -140,22 +140,22 @@ The rules of each area live in `.claude/rules/`, loaded only when Claude works o
 
 ## Skills
 
-The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fits before doing the task by hand. The table is kept in step by `.claude/hooks/sync-skills-table.mjs` (after a SKILL.md is written, and before each commit): edit the "Use it to" text freely, the rows and scripts follow the skill folders.
+The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fits before doing the task by hand. The table is kept in step by `.claude/hooks/sync-skills-table.mjs` (after a SKILL.md is written, and before each commit): edit the "Category" and "Use it to" texts freely (a new skill takes the `category:` of its SKILL.md frontmatter, which must be one of the nine below: the hook blocks the edit and the commit otherwise), the rows and scripts follow the skill folders. Categories: Library & API Reference, Product Verification, Data Fetching & Analysis, Business Process & Team Automation, Code Scaffolding & Templates, Code Quality & Review, CI/CD & Deployment, Runbooks & Troubleshooting, Infrastructure Operations.
 
 <!-- skills:start -->
-| Skill | Use it to | Script |
-|---|---|---|
-| `new-article` | Add a blog article in English and French (pages, data, route, images) | - |
-| `new-project` | Add a project (card, Explore target, pages, redirects, audits) | - |
-| `new-language` | Add or remove a language of the site | - |
-| `check-content` | Check that articles and projects are wired everywhere, in the same order | `npm run check:content` |
-| `i18n-l10n` | Check the translations and the built pages in every language | `npm run check:translation` |
-| `check-links` | Check the external links (status, trailing slash, soft 404) | `npm run check:links` |
-| `wcag-contrast` | Check and fix WCAG AA contrast after a colour or style change, only when asked | `npm run contrast`, `npm run contrast:quick` |
-| `update-docs` | Keep README.md and SECURITY.md in step (vendored libraries, held-back versions, overrides, security log and practices) | `npm run check:docs` |
-| `check-overrides` | Tell which npm overrides are still needed after a dependency update | `npm run check:overrides` |
-| `robot-test` | Write and run a Robot Framework test following ROBOT_FRAMEWORK.md | - |
-| `netlify-ops` | Check and operate the live Netlify site (builds, lock, build without cache, restore), asking before any change | `npm run netlify:ops` |
-| `netlify-prod` | Publish the latest commit of main in one go (`/netlify-prod` only): start the builds, unlock auto publishing, build, publish | - |
-| `run-portfolio` | Runs the portfolio locally and drives it in a headless browser | - |
+| Skill | Category | Use it to | Script |
+|---|---|---|---|
+| `new-article` | Code Scaffolding & Templates | Add a blog article in English and French (pages, data, route, images) | - |
+| `new-project` | Code Scaffolding & Templates | Add a project (card, Explore target, pages, redirects, audits) | - |
+| `new-language` | Code Scaffolding & Templates | Add or remove a language of the site | - |
+| `check-content` | Product Verification | Check that articles and projects are wired everywhere, in the same order | `npm run check:content` |
+| `i18n-l10n` | Product Verification | Check the translations and the built pages in every language | `npm run check:translation` |
+| `check-links` | Product Verification | Check the external links (status, trailing slash, soft 404) | `npm run check:links` |
+| `wcag-contrast` | Product Verification | Check and fix WCAG AA contrast after a colour or style change, only when asked | `npm run contrast`, `npm run contrast:quick` |
+| `update-docs` | Business Process & Team Automation | Keep README.md and SECURITY.md in step (vendored libraries, held-back versions, overrides, security log and practices) | `npm run check:docs` |
+| `check-overrides` | Code Quality & Review | Tell which npm overrides are still needed after a dependency update | `npm run check:overrides` |
+| `robot-test` | Product Verification | Write and run a Robot Framework test following ROBOT_FRAMEWORK.md | - |
+| `netlify-ops` | Infrastructure Operations | Check and operate the live Netlify site (builds, lock, build without cache, restore), asking before any change | `npm run netlify:ops` |
+| `netlify-prod` | CI/CD & Deployment | Publish the latest commit of main in one go (`/netlify-prod` only): start the builds, unlock auto publishing, build, publish | - |
+| `run-portfolio` | Product Verification | Runs the portfolio locally and drives it in a headless browser | - |
 <!-- skills:end -->
