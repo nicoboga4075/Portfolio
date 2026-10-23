@@ -30,8 +30,8 @@ function run(command, commandArgs) {
 }
 
 const json = (command, commandArgs) => JSON.parse(run(command, commandArgs));
-// The colours of the test runners, as escape characters (GitLab traces) or as their ^[ text (gh logs)
-const clean = line => line.replace(/(?:\x1b|\^\[)\[[\d;]*m/g, '').replace(/\r$/, '');
+// The colours and line erases of the test runners, as escape characters (GitLab traces) or as their ^[ text (gh logs), and the section markers of GitLab
+const clean = line => line.replace(/(?:\x1b|\^\[)\[[\d;]*[A-Za-z]/g, '').replace(/section_(?:start|end):\d+:\w+/g, '').replace(/\r$/, '');
 
 // The first lines that name an error anywhere in the log, since the end of a log is often a summary table
 function errorsOf(lines) {
@@ -68,7 +68,13 @@ section('GitHub Actions', () => {
             console.log(`    ✖ ${job.name}${steps.length ? `, step: ${steps.join(', ')}` : ''}`);
         }
         // --log-failed prefixes each line with "job<TAB>step<TAB>timestamp": the lines that matter end at the first ##[error] of each job, before the post-job cleanup
-        const log = run('gh', ['run', 'view', String(workflow.databaseId), '--log-failed']).split('\n').map(line => line.split('\t'));
+        let log;
+        try {
+            log = run('gh', ['run', 'view', String(workflow.databaseId), '--log-failed']).split('\n').map(line => line.split('\t'));
+        } catch (error) {
+            console.log(`    ⚠ ${error.message}: run this again in a moment, or open the run page`);
+            continue;
+        }
         for (const name of new Set(log.map(([job]) => job).filter(Boolean))) {
             const lines = log.filter(([job]) => job === name).map(fields => clean(fields.slice(2).join('\t').replace(/^\S+Z /, '')));
             const error = lines.findIndex(line => line.includes('##[error]'));
@@ -97,7 +103,10 @@ section('GitLab', () => {
         console.log(`    ✖ ${job.name} (${job.stage}): ${job.failure_reason}${waited}${job.allow_failure ? ', allowed to fail' : ''}`);
         if (REASONS[job.failure_reason]) console.log(`      → ${REASONS[job.failure_reason]}`);
         if (job.failure_reason !== 'script_failure') continue;
-        const lines = run('glab', ['api', `projects/${project}/jobs/${job.id}/trace`]).split('\n').map(clean);
+        // The trace up to the end of the job script, before the artifact upload and cleanup that follow every failure
+        const trace = run('glab', ['api', `projects/${project}/jobs/${job.id}/trace`]).split(/\r?\n|\r/);
+        const end = trace.findIndex(line => /section_end:\d+:step_script/.test(line));
+        const lines = trace.slice(0, end === -1 ? trace.length : end).map(clean);
         errorsOf(lines);
         console.log(tail(lines.join('\n')));
     }

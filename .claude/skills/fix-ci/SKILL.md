@@ -11,7 +11,7 @@ metadata:
 npm run ci:status -- [commit] [--lines N]
 ```
 
-That is `node .claude/skills/fix-ci/ci-status.mjs` (commit: `HEAD` by default). Read-only, with `gh` and `glab` logged in. For the commit it prints:
+That is `node .claude/skills/fix-ci/ci-status.mjs` (commit: `HEAD` by default); in PowerShell, which drops a bare `--`, call it with node or quote it (`npm run ci:status '--' 7a4cbf3`). Read-only, with `gh` and `glab` logged in. For the commit it prints:
 
 - **GitHub Actions**: each run, the failed jobs with their failed step, then per job the lines that name an error and the end of the log up to its `##[error]`.
 - **GitLab**: the runners and whether one is online, the pipeline, each failed job with its `failure_reason` and how long it waited, and for a `script_failure` the error lines and the end of its trace.
@@ -22,6 +22,8 @@ That is `node .claude/skills/fix-ci/ci-status.mjs` (commit: `HEAD` by default). 
 |---|---|---|
 | GitLab `stuck_pending_no_matching_runners` or `stuck_or_timeout_failure`, waited 90 min or more, `status-job` failed and every other job skipped | `windows-local` was off, asleep or its service stopped: no runner took the job. `status-job` can't restart a runner that isn't running it | Nothing to fix in the code. Start the runner (`Start-Service gitlab-runner` in an elevated PowerShell), then retry the pipeline |
 | GitLab pipeline `canceled` | Replaced by the pipeline of a newer push | Check the pipeline of the next commit instead |
+| GitLab `script_failure` whose log ends on a PowerShell line with no error printed (`Remove-Item ... -ErrorAction SilentlyContinue`) | The runner checks `$?` after each line of the script: a silenced error still fails the job | Test first (`if (Test-Path x) { Remove-Item x }`) instead of silencing the error |
+| GitLab `playwright-job`: Firefox only, `Test timeout of 30000ms exceeded` on a `page.reload` or a navigation, passing on GitHub | Too many workers on `windows-local` starve Firefox (reproduced locally with the default workers, gone with `--workers=3`) | Keep `--workers=3` in the job; lower it if Firefox times out again |
 | GitLab `sonar-job` failed after 20 min | It waits for the `sonar` job of GitHub and takes its verdict | Look at the GitHub `sonar` job: the cause is there |
 | `sonar`: `QUALITY GATE STATUS: FAILED` | New code below the gate: coverage under 100 %, duplications, a new issue or hotspot | Read the gate with the SonarQube MCP (`get_project_quality_gate_status`, then `search_sonar_issues_in_projects` or `search_files_by_coverage`) and fix the code or add the test (`test-writer` agent) |
 | `jest`: a failing test, or coverage under 100 % | A changed behaviour without its test, or a test out of date | `npm run jest` locally, fix, keep the coverage at 100 % (`collectCoverageFrom` of `jest.config.js`) |
