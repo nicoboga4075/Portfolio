@@ -11,11 +11,11 @@ These services are web APIs and hosted scripts, not npm packages: context7 knows
 
 ## Rules for every service
 
-- **CSP**: every origin a service loads a script, style, font, image, frame or request from has its entry in the `Content-Security-Policy` of `_headers`, in the right directive. `tests/playwright/csp.browser.spec.js` opens every page with that policy and fails on a violation: run it after a change (`npx playwright test tests/playwright/csp.browser.spec.js`).
+- **CSP**: every origin a service loads a script, style, font, image, frame or request from has its entry in the `Content-Security-Policy` of `_headers`, in the right directive. `tests/playwright/page-health.browser.spec.js` opens every page with that policy and fails on a violation, a console error or an exception of the site: run it after a change (`npx playwright test tests/playwright/page-health.browser.spec.js`).
 - **SECURITY.md**: a new service, origin or endpoint, or a removed one, goes in SECURITY.md (`update-docs` skill).
 - **Secrets**: a key that must stay secret is read by a Netlify function only, never sent to the browser; `env` hands out only the variables of its `PUBLIC_ENV_VARS`. A new environment variable is set in Netlify and listed in "Environment and setup" of CLAUDE.md.
 - **Loading**: a service the visitor may not use is loaded on demand (the contact scripts when the contact section is reached, Calendly on the first click, Botpress on the first click of its stand-in button), with a fallback when it fails to load.
-- **Tests**: the browser specs and Cypress run offline from the third parties; only CSP violations fail on them, a failed third-party request doesn't.
+- **Tests**: the browser specs and Cypress run offline from the third parties; a CSP violation fails them, a failed third-party request and its console line don't.
 
 ## Contact form: Google API client, Google Identity Services, Gmail API
 
