@@ -158,4 +158,5 @@ The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fi
 | `netlify-prod` | CI/CD & Deployment | Publish the latest commit of main in one go (`/netlify-prod` only): start the builds, unlock auto publishing, build, publish | - |
 | `run-portfolio` | Product Verification | Runs the portfolio locally and drives it in a headless browser | - |
 | `fix-ci` | Runbooks & Troubleshooting | Find why the CI of a commit failed on GitHub Actions or GitLab CI (runner off, failed test, quality gate) and fix the cause | `npm run ci:status` |
+| `new-experience` | Code Scaffolding & Templates | Add a work experience, an education, a certification or a trip (resume, profile figures, CVs) | - |
 <!-- skills:end -->
