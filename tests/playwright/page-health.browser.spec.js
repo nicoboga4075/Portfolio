@@ -21,6 +21,8 @@ for (const lang of langs) {
 
 // A third-party host unreachable offline is not a fault of the site: its failed request, and the console line the browser writes for it, are left out
 const isThirdParty = url => !url.startsWith('http://localhost');
+// A video request the browser drops itself (Chromium net::ERR_ABORTED, WebKit "Load request cancelled") once it has the metadata or when the page goes away is not a fault of the site either
+const isDroppedMedia = request => request.resourceType() === 'media' && /ERR_ABORTED|cancelled/i.test(request.failure()?.errorText ?? '');
 
 for (const url of pages) {
     test(`${url} loads without a CSP violation, a console error or an exception`, async ({ page }) => {
@@ -35,7 +37,7 @@ for (const url of pages) {
         });
         page.on('pageerror', error => errors.push(`exception: ${error.message}`));
         page.on('requestfailed', request => {
-            if (!isThirdParty(request.url())) errors.push(`request: ${request.url()} ${request.failure()?.errorText}`);
+            if (!isThirdParty(request.url()) && !isDroppedMedia(request)) errors.push(`request: ${request.url()} ${request.failure()?.errorText}`);
         });
         await page.addInitScript(() => {
             window.cspViolations = [];
