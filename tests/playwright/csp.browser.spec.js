@@ -38,8 +38,9 @@ for (const url of pages) {
             const response = await route.fetch();
             await route.fulfill({ response, headers: { ...response.headers(), 'content-security-policy': policy } });
         });
-        await page.goto(url, { waitUntil: 'load' });
-        // Third-party hosts may be unreachable offline: a bounded wait, whose timeout is fine
+        // Not "load": an autoplay video (the presentation article) delays it until its first frame, which serve-build.mjs, without range requests, can keep WebKit waiting for
+        await page.goto(url, { waitUntil: 'domcontentloaded' });
+        // The sub-requests the policy judges, then third-party hosts that may be unreachable offline: a bounded wait, whose timeout is fine
         await page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {});
         const inPage = await page.evaluate(() => window.cspViolations);
         expect([...inPage, ...violations]).toEqual([]);
