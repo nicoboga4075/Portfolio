@@ -69,7 +69,8 @@ playwright-job:
     # Chromium, Firefox and WebKit for the *.browser.spec.js specs, kept on the runner between jobs (downloaded once per Playwright version)
     - npm run playwright:install
     - echo "Running Playwright tests..."
-    - npm run playwright
+    # Three workers: the default (half the 12 threads of windows-local) starves Firefox, whose reloads and navigations then time out; the -- is quoted because PowerShell drops a bare one
+    - npm run playwright '--' --workers=3
   artifacts:
     when: always
     reports:
@@ -107,7 +108,8 @@ robot-job:
     - echo "Building and serving the site for the Robot Framework tests..."
     - $env:ELEVENTY_PREVIEW = "1"; npx eleventy
     # The built site on a free port, in the background for the length of the job, which writes the port it got to reports/robot/port for the tests
-    - Remove-Item reports/robot/port -ErrorAction SilentlyContinue
+    # The runner fails the job when $? is false after a line, even for an error silenced by -ErrorAction SilentlyContinue: test the file first
+    - if (Test-Path reports/robot/port) { Remove-Item reports/robot/port }
     - $server = Start-Process -FilePath node -ArgumentList "tests/serve-build.mjs", "--port-file", "reports/robot/port" -PassThru -WindowStyle Hidden
     - for ($i = 0; $i -lt 50 -and -not (Test-Path reports/robot/port); $i++) { Start-Sleep -Milliseconds 200 }
     - $port = Get-Content reports/robot/port

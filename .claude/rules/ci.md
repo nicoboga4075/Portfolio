@@ -12,6 +12,7 @@ paths:
 - Every job declares the least `permissions` it needs (`contents: read` by default).
 - A workflow change is described in the CI/CD section of README.md, and a security setting (permissions, secrets, rulesets) in SECURITY.md: run `npm run check:docs` (`update-docs` skill).
 - `.gitlab/.gitlab-ci.yml` runs in PowerShell on the self-hosted Windows runner `windows-local`; its `sonar-job` only analyses a commit GitHub Actions doesn't, so the two never overwrite each other in SonarCloud.
+- In `.gitlab/.gitlab-ci.yml` the runner fails the job when `$?` is false after a line, even for an error silenced by `-ErrorAction SilentlyContinue`: test the condition first (`if (Test-Path x) { Remove-Item x }`). PowerShell also drops a bare `--`: quote it to pass an option through npm (`npm run playwright '--' --workers=3`).
 - `netlify.toml` holds the build, the dev ports and the production plugins; a page or function visitors see has its Lighthouse audit there. Any change on the live Netlify site goes through the `netlify-ops` or `netlify-prod` skill and asks first.
 - Secrets live in the GitHub, Dependabot, GitLab and Netlify settings, never in a workflow file.
 - The `overrides` of `package.json` only reach a Netlify build plugin installed from `node_modules`: `netlify-plugin-inline-critical-css` is a devDependency for that reason (its `nwsapi` and related overrides). Never judge a fix of a build plugin on a cached deploy: build without cache (`netlify-ops` skill).
