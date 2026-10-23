@@ -159,4 +159,5 @@ The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fi
 | `run-portfolio` | Product Verification | Runs the portfolio locally and drives it in a headless browser | - |
 | `fix-ci` | Runbooks & Troubleshooting | Find why the CI of a commit failed on GitHub Actions or GitLab CI (runner off, failed test, quality gate) and fix the cause | `npm run ci:status` |
 | `new-experience` | Code Scaffolding & Templates | Add a work or personal experience, an education, a certification or a trip (resume, profile figures, CVs) | - |
+| `third-party-apis` | Library & API Reference | Know how each third-party service is used (contact form, captcha, Calendly, Botpress, analytics, GitHub, Supabase), its settings and its CSP origins | - |
 <!-- skills:end -->
