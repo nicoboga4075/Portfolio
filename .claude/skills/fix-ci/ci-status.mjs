@@ -35,7 +35,7 @@ const clean = line => line.replace(/(?:\x1b|\^\[)\[[\d;]*m/g, '').replace(/\r$/,
 
 // The first lines that name an error anywhere in the log, since the end of a log is often a summary table
 function errorsOf(lines) {
-    const errors = lines.filter(line => /\b(?:\w*Error|FAIL(?:ED)?|failing|Timed out|Timeout)\b|[✖✘●]/.test(line) && !line.includes('##[error]')).slice(0, 15);
+    const errors = lines.filter(line => /\b(?:\w*Error|ERROR|FAIL(?:ED)?|failing|Timed out|Timeout)\b|[✖✘●]/.test(line) && !line.includes('##[error]')).slice(0, 15);
     if (errors.length) console.log(`      errors:\n${errors.map(line => `        ${line.trim()}`).join('\n')}\n      end of the log:`);
 }
 const tail = text => text.trimEnd().split('\n').slice(-LINES).map(line => `      ${line}`).join('\n');
@@ -58,9 +58,12 @@ section('GitHub Actions', () => {
     if (!runs.length) console.log('  no run for this commit (not pushed to GitHub, or skipped by the workflow filters)');
     for (const workflow of runs) {
         console.log(`  ${workflow.conclusion || workflow.status} ${workflow.workflowName} ${workflow.url}`);
-        if (workflow.conclusion !== 'failure') continue;
+        // A job with continue-on-error (sonar) fails while its run still ends in success: look at the jobs of every run
+        if (['skipped', 'cancelled'].includes(workflow.conclusion)) continue;
         const { jobs } = json('gh', ['run', 'view', String(workflow.databaseId), '--json', 'jobs']);
-        for (const job of jobs.filter(item => item.conclusion === 'failure')) {
+        const failed = jobs.filter(item => item.conclusion === 'failure');
+        if (!failed.length) continue;
+        for (const job of failed) {
             const steps = job.steps.filter(step => step.conclusion === 'failure').map(step => step.name);
             console.log(`    ✖ ${job.name}${steps.length ? `, step: ${steps.join(', ')}` : ''}`);
         }
