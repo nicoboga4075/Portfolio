@@ -16,12 +16,14 @@ for (const lang of langs) {
     });
 
     test(`/${lang}: a blog card opens its article on the blog page, in ${lang}`, async ({ page }) => {
+        // Two full pages, then the article fetched and injected with its own styles and script: Firefox on the GitLab runner needs more than the default 30 s and 5 s for it
+        test.slow();
         const index = blog.entries.length - 1;
         await page.goto(`/${lang}`);
         const card = page.locator('#blog-section a.article-image').nth(index);
         await card.scrollIntoViewIfNeeded();
         await card.click();
-        await expect(page).toHaveURL(new RegExp(`/${lang}/blog#${articles[index].slug}$`));
-        await expect(page.locator('#article-shape')).toContainText(articles[index].title[lang]);
+        await expect(page).toHaveURL(new RegExp(`/${lang}/blog#${articles[index].slug}$`), { timeout: 15000 });
+        await expect(page.locator('#article-shape')).toContainText(articles[index].title[lang], { timeout: 15000 });
     });
 }
