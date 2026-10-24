@@ -138,7 +138,7 @@ jobs:
         path: reports/robot/
 
   sonar:
-    needs: [jest, playwright]
+    needs: [jest, playwright, cypress, robot]
     # Also after a failed test, so SonarCloud still gets the coverage and the test reports of the run
     if: ${{ !cancelled() && github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
