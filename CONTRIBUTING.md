@@ -32,6 +32,7 @@ This project uses multiple Git remotes to manage code across GitHub and GitLab a
 
 - Netlify is connected to the GitHub repository only.
 - Every push to the `main` branch triggers an automatic build and deployment on Netlify **if build status is not set to Stopped and if "Lock auto-publishing" is not enabled**. Netlify runs `npm run build` and publishes the repository root. If the live site doesn't show the last commits, check *Deploys* in Netlify: no deploy, a failed build or locked auto-publishing.
+- Netlify doesn't wait for the CI of GitHub Actions: while the builds run, a push goes online even if its Node.js CI fails. To publish only a commit whose CI passed, keep the builds stopped and publish with the `netlify-prod` skill of Claude Code (`/netlify-prod`), which checks the Node.js CI of the commit first and stops if it failed.
 - Netlify does not receive code via Git commands directly, but via repository integration.
 - Netlify automatically serves `index.html` when you visit a directory URL ending with a slash (e.g., /fr/ serves /fr/index.html). It also serves .html files when the extension is omitted in the URL, so /toto_fr will serve /toto_fr.html if that file exists. If a requested path does not match any file or redirect rule, Netlify serves the custom `/404.html` page if it is present in the site root. Otherwise, it displays its default 404 error page. Redirect rules in `_redirects` or `netlify.toml` are applied before this fallback behavior.
 - Netlify builds run in a `Linux` (Ubuntu) environment. The shell used is `Bash`.
