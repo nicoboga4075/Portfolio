@@ -193,7 +193,7 @@
     "cypress": "npx cypress run --project tests --browser chrome",
     "cypress:install": "cypress install",
     "robot": "robot --outputdir reports/robot tests/robot",
-    "simu:ci": "powershell.exe -Command \"Start-Process powershell.exe -ArgumentList '-NoExit','-Command','Set-Location -LiteralPath \\\"%CD%\\\"; ./.gitlab/simulator_ci.ps1' -Verb RunAs\"",
+    "simu:ci": "powershell.exe -Command \"Start-Process powershell.exe -ArgumentList '-NoExit','-Command','Set-Location -LiteralPath \\\"%CD%\\\"; ./.gitlab/runner_simulate.ps1' -Verb RunAs\"",
     "uglify:js": "node uglify-code.js",
     "uglify:preview": "node uglify-code.js .eleventy/js",
     "eleventy": "npx eleventy",

@@ -187,5 +187,12 @@ shutdown_timeout = 0
 - The service can be stopped with `.\gitlab-runner.exe stop`.
 - `.\gitlab-runner.exe` can be replaced by `gitlab-runner` in commands, adding `C:\GitLab-Runner` to PATH in system environment variables.
 
+##### Update the GitLab Runner
+
+[`.gitlab/runner_update.ps1`](.gitlab/runner_update.ps1) updates the runner `windows-local` to the version it is given, with no default: run `.\.gitlab\runner_update.ps1 -Version <x.y.z>` with the [latest release](https://gitlab.com/gitlab-org/gitlab-runner/-/releases), between two pipelines, from a PowerShell opened as administrator at the root of the repository.
+- The script downloads the new `gitlab-runner.exe` and checks its SHA-256 before stopping the service, then replaces the binary and starts the service again: `config.toml` and the registration are kept.
+- The old binary stays in `C:\GitLab-Runner` as `gitlab-runner-<old version>.exe`, and the script puts it back by itself when the new version doesn't start.
+- The runner must then show the new version and be online in **Settings → CI/CD → Runners** of the GitLab project.
+
 ### 📄 License
 This project is licensed under [MIT License](LICENSE).
