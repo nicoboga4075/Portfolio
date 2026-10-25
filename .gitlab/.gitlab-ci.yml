@@ -134,9 +134,12 @@ sonar-job:
     - playwright-job
   script:
     - |
+      # The GitHub repository (owner/name) from repository.url of package.json, so the runs URL follows a rename of the repository
+      $repo = (Get-Content package.json -Raw -Encoding UTF8 | ConvertFrom-Json).repository.url -replace '^https://github\.com/', '' -replace '\.git$', ''
+      $runsUrl = "https://api.github.com/repos/$repo/actions/runs"
       # GitHub Actions analyses every pushed commit: run this analysis only when it doesn't, so GitLab never overwrites the main branch of SonarCloud (late analyses, VERSION events)
       try {
-        $runs = @((Invoke-RestMethod "https://api.github.com/repos/nicoboga4075/Portfolio/actions/runs?head_sha=$env:CI_COMMIT_SHA").workflow_runs | Where-Object { $_.name -eq 'Node.js CI' })
+        $runs = @((Invoke-RestMethod "${runsUrl}?head_sha=$env:CI_COMMIT_SHA").workflow_runs | Where-Object { $_.name -eq 'Node.js CI' })
       } catch {
         # GitHub API unreachable or rate limited: analyse here rather than skip blindly
         echo "Could not read the GitHub Actions runs ($($_.Exception.Message)): analysing on GitLab"
@@ -150,7 +153,7 @@ sonar-job:
         $job = $null
         while ((Get-Date) -lt $deadline) {
           try {
-            $job = (Invoke-RestMethod "https://api.github.com/repos/nicoboga4075/Portfolio/actions/runs/$($run.id)/jobs").jobs | Where-Object { $_.name -eq 'sonar' } | Select-Object -First 1
+            $job = (Invoke-RestMethod "$runsUrl/$($run.id)/jobs").jobs | Where-Object { $_.name -eq 'sonar' } | Select-Object -First 1
           } catch {
             echo "Could not read the jobs of run $($run.id) ($($_.Exception.Message)), retrying"
           }
@@ -158,7 +161,7 @@ sonar-job:
           Start-Sleep -Seconds 60
         }
         if (-not $job -or $job.status -ne 'completed') {
-          echo "The GitHub sonar job did not finish within 20 minutes: see https://github.com/nicoboga4075/Portfolio/actions/runs/$($run.id)"
+          echo "The GitHub sonar job did not finish within 20 minutes: see $($run.html_url)"
           exit 1
         }
         echo "GitHub sonar job: $($job.conclusion) ($($job.html_url))"

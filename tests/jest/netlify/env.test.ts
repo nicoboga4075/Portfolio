@@ -63,7 +63,7 @@ test("returns the date of the last commit of the CV in that language, with the G
     const response = await handlerEnv(request("?lang=fr"), context);
     expect(await response.json()).toEqual({ date: "2026-10-01T16:40:00Z" });
     const [url, init] = fetchSpy.mock.calls[0] as [string, RequestInit];
-    expect(url).toBe("https://api.github.com/repos/nicoboga4075/Portfolio/commits?path=docs/public/CV_fr.pdf&per_page=1");
+    expect(url).toBe(`https://api.github.com/repos${new URL(pkg.repository.url).pathname}/commits?path=docs/public/CV_fr.pdf&per_page=1`);
     expect((init.headers as Record<string, string>).Authorization).toBe("Bearer gh-token");
 });
 

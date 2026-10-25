@@ -47,7 +47,7 @@ It can't check prose: read the sections below against the change.
 - Dates as `YYYY-MM-DD`: the date the alert was opened for an advisory.
 - Disclosure Log row: `**CVE-…** (GHSA-…)` or `**CodeQL** *rule-id*`, the package and the path it comes through (`via …`, `dev only` when it's a dev dependency), the criticity of the advisory, then a status that says what was done or why it's not exploitable here, with a link to the tracking issue.
 - Acknowledgement: `:white_check_mark:` once fixed, `:hourglass:` while open or held back.
-- Link issues with their full URL (`https://github.com/nicoboga4075/Portfolio/issues/<n>`), not `#<n>`: SECURITY.md is also read outside GitHub.
+- Link issues with their full URL (`bugs.url` of `package.json` followed by `/<n>`), not `#<n>`: SECURITY.md is also read outside GitHub.
 - Never rename a heading without updating the links to it.
 
 ## Steps
@@ -55,8 +55,8 @@ It can't check prose: read the sections below against the change.
 1. Find what changed: the files the user names, or `git diff --name-only` (uncommitted), or `git diff --name-only HEAD~1` (last commit).
 2. Gather the facts instead of guessing them:
    - Vendored versions: `.github/vendor-versions.json`, and `npm view <package> version` for the latest one.
-   - Dependabot alerts: `gh api "repos/nicoboga4075/Portfolio/dependabot/alerts?per_page=100" --jq '.[] | [.number, .state, .dependency.package.name, .security_advisory.ghsa_id, .security_advisory.cve_id, .security_advisory.severity, .dependency.scope] | @tsv'`
-   - Code scanning alerts: `gh api "repos/nicoboga4075/Portfolio/code-scanning/alerts?state=open"`
+   - Dependabot alerts: `gh api "repos/{owner}/{repo}/dependabot/alerts?per_page=100" --jq '.[] | [.number, .state, .dependency.package.name, .security_advisory.ghsa_id, .security_advisory.cve_id, .security_advisory.severity, .dependency.scope] | @tsv'`
+   - Code scanning alerts: `gh api "repos/{owner}/{repo}/code-scanning/alerts?state=open"`
    - Where a dependency comes from: `npm ls <package>`
    - Whether the vulnerable code runs here: read how the dependency uses the vulnerable function before writing "not exploitable".
 3. Edit README.md and SECURITY.md, following the tables above.

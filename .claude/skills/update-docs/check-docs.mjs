@@ -9,7 +9,8 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const read = file => fs.readFileSync(path.join(ROOT, file), 'utf8');
 const json = file => JSON.parse(read(file));
-const REPO = 'nicoboga4075/Portfolio';
+// The owner/name of the GitHub repository of package.json
+const REPO = new URL(json('package.json').repository.url).pathname.slice(1);
 const offline = process.argv.includes('--offline');
 
 const readme = read('README.md');

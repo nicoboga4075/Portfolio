@@ -18,9 +18,9 @@ function git(root, args) {
     return run.status === 0 ? run.stdout.trimEnd() : null;
 }
 
-async function ciChecks(sha) {
+async function ciChecks(repository, sha) {
     try {
-        const res = await fetch(`https://api.github.com/repos/nicoboga4075/Portfolio/commits/${sha}/check-runs`, { headers: { Accept: 'application/vnd.github+json' }, signal: AbortSignal.timeout(15000) });
+        const res = await fetch(`https://api.github.com/repos/${repository}/commits/${sha}/check-runs`, { headers: { Accept: 'application/vnd.github+json' }, signal: AbortSignal.timeout(15000) });
         if (!res.ok) return { error: `GitHub API ${res.status}` };
         return (await res.json()).check_runs.map(run => ({ name: run.name, status: run.status, conclusion: run.conclusion }));
     } catch (error) {
@@ -39,12 +39,14 @@ function qualityGate(root) {
 }
 
 export async function fullHealth(root) {
-    const { homepage: site, config: { locales } } = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+    const { homepage: site, repository: { url: repositoryUrl }, config: { locales } } = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+    // The owner/name of the GitHub repository of package.json
+    const repository = new URL(repositoryUrl).pathname.slice(1);
     const head = git(root, ['rev-parse', 'HEAD']);
     const remote = git(root, ['rev-parse', 'origin/main']);
     const [pages, ci] = await Promise.all([
         Promise.all(['', ...Object.keys(locales).flatMap(code => [`/${code}`, `/${code}/blog`])].map(p => timed(site + p))),
-        remote ? ciChecks(remote) : Promise.resolve({ error: 'no origin/main' }),
+        remote ? ciChecks(repository, remote) : Promise.resolve({ error: 'no origin/main' }),
     ]);
     return {
         live: pages,
