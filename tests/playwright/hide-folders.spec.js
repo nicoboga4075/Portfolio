@@ -5,7 +5,7 @@ const os = require('node:os');
 const path = require('node:path');
 
 const script = path.join(__dirname, '..', '..', 'hide-folders.js');
-const listed = ['.eleventy', '.netlify', 'api', 'logs', 'node_modules', 'reports'];
+const listed = ['.eleventy', '.netlify', '.playwright-mcp', 'api', 'logs', 'node_modules', 'reports'];
 const created = ['api', 'logs', 'reports'];
 
 // attrib prints an H flag before the path of a hidden item

@@ -33,7 +33,7 @@ Portfolio/
 ├── .eleventy.js                   Eleventy configuration (also writes sitemap.xml, feed_*.xml and api/*.json)
 ├── gen-redirects.js               Writes _redirects from config of package.json
 ├── uglify-code.js                 Minifies the site scripts after the build
-├── hide-folders.js                Hides the generated folders (.eleventy, .netlify, api, logs, node_modules, reports) after each build, each npm install (postinstall) or with npm run hide:folders: hidden attribute on Windows, hidden flag on macOS, .hidden file on Linux
+├── hide-folders.js                Hides the generated folders (.eleventy, .netlify, .playwright-mcp, api, logs, node_modules, reports) after each build, each npm install (postinstall), each Playwright MCP call (hook of .claude/settings.json) or with npm run hide:folders: hidden attribute on Windows, hidden flag on macOS, .hidden file on Linux
 ├── adb-reverse.js                 Forwards the dev port of netlify.toml from the Android device (npm run adb:reverse, adb:unreverse)
 ├── _headers, _redirects           Netlify headers (CSP, cache) and redirects
 ├── netlify.toml                   Netlify build settings and plugins

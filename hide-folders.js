@@ -3,7 +3,7 @@ const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const folders = ['.eleventy', '.netlify', 'api', 'logs', 'node_modules', 'reports'];
+const folders = ['.eleventy', '.netlify', '.playwright-mcp', 'api', 'logs', 'node_modules', 'reports'];
 
 // The system tools by their full path, never looked up in PATH, where a writable folder could hold another one (SonarCloud S4036)
 const attrib = path.join(process.env.SystemRoot ?? String.raw`C:\Windows`, 'System32', 'attrib.exe');
