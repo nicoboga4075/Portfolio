@@ -116,7 +116,7 @@ jobs:
         cache: 'npm'
     - uses: actions/setup-python@v7
       with:
-        python-version: '3.13'
+        python-version: '3.14'
         cache: 'pip'
         cache-dependency-path: tests/robot/requirements.txt
     # The lock of tests/robot/requirements.txt, every package checked against its hash and installed from a wheel, so no setup script runs (SonarCloud githubactions:S8541, S8544); Chrome comes with the runner and Selenium Manager fetches its driver
