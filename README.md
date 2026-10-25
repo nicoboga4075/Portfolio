@@ -179,7 +179,21 @@ shutdown_timeout = 0
   executor = "shell"
   shell = "pwsh"
 ```
-- Change pwsh for shell execution (to powershell for Windows runner or bash for Linux runner).
+
+| Option | Meaning |
+|---|---|
+| `concurrent` | Most jobs run at the same time by all the runners of the file: `1` runs the jobs one after the other, which the stages of `.gitlab/.gitlab-ci.yml` expect |
+| `check_interval` | Seconds between two requests to GitLab for new jobs: `0` keeps the default of 3 seconds |
+| `shutdown_timeout` | Seconds the service waits for the running jobs when it stops, before ending them by force: `0` keeps the default of 30 seconds |
+| `[session_server]` `session_timeout` | Seconds an interactive web terminal stays open after its job ends (default 1800, 30 minutes); unused here, since the session server only starts with a `listen_address` |
+| `name` | Name of the runner shown in GitLab, given at `register` |
+| `url` | GitLab instance the runner takes its jobs from |
+| `id` | ID of the runner in GitLab, written by `register` |
+| `token` | Authentication token of the runner, written by `register`: a secret, never committed or shared |
+| `token_obtained_at` | Date the token was issued |
+| `token_expires_at` | Date the token expires: `0001-01-01T00:00:00Z` means it never does |
+| `executor` | How jobs run: `shell` runs them straight on this computer, with its installed tools (Node.js, Python, browsers), not in a container |
+| `shell` | Shell of the `shell` executor: `pwsh` for PowerShell 7, `powershell` for Windows PowerShell 5.1, `bash` for a Linux runner |
 - Check the runner exists and is valid with 
     - `.\gitlab-runner.exe list`
     - `.\gitlab-runner.exe verify`
