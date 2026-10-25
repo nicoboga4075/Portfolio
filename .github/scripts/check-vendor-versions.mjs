@@ -5,8 +5,11 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
+const MANIFEST_FILE = "vendor-versions.json";
+const REPORT_FILE = "vendor-report.md";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const manifestPath = path.join(__dirname, "..", "vendor-versions.json");
+const manifestPath = path.join(__dirname, "..", MANIFEST_FILE);
 const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
 
 function isNewer(latest, current) {
@@ -93,13 +96,13 @@ if (failed.length) {
   body += "\n";
 }
 body += `_Generated on ${new Date().toISOString().slice(0, 10)}. ` +
-  "Update `.github/vendor-versions.json` after upgrading a library so future checks compare against the new version._\n";
+  `Update \`.github/${MANIFEST_FILE}\` after upgrading a library so future checks compare against the new version._\n`;
 
-writeFileSync(path.join(process.cwd(), "vendor-report.md"), body);
+writeFileSync(path.join(process.cwd(), REPORT_FILE), body);
 
 const hasUpdates = outdated.length > 0;
 if (process.env.GITHUB_OUTPUT) {
-  writeFileSync(process.env.GITHUB_OUTPUT, `has_updates=${hasUpdates}\n`, { flag: "a" });
+  writeFileSync(process.env.GITHUB_OUTPUT, `has_updates=${hasUpdates}\nreport=${REPORT_FILE}\n`, { flag: "a" });
 }
 
 console.log(body);

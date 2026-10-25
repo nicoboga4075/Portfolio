@@ -24,10 +24,11 @@ jobs:
         if: steps.check.outputs.has_updates == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPORT_FILE: ${{ steps.check.outputs.report }}
         run: |
           existing=$(gh issue list --search "Vendor library updates available in:title" --state open --json number --jq '.[0].number')
           if [ -n "$existing" ]; then
-            gh issue edit "$existing" --body-file vendor-report.md
+            gh issue edit "$existing" --body-file "$REPORT_FILE"
           else
-            gh issue create --title "Vendor library updates available" --body-file vendor-report.md --label "dependencies"
+            gh issue create --title "Vendor library updates available" --body-file "$REPORT_FILE" --label "dependencies"
           fi
