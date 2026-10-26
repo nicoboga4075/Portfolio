@@ -23,7 +23,7 @@ This project uses multiple Git remotes to manage code across GitHub and GitLab a
 | Fetch latest changes                | `git fetch <remote>`       | `github`, `gitlab`, `origin` |
 | Pull latest changes (fetch + merge) | `git pull <remote> main`   | `github`, `gitlab`, `origin` |
 | Push changes to GitHub              | `git push github main`     | `github`                     |
-| Push changes to GitLab              | `git push gitlab main`     | `gitlab`                     |
+| Push changes to GitLab              | `npm run mirror-git`       | `gitlab`                     |
 | Push changes to both at once        | `git push origin main`     | `origin`                     |
 | List all remotes                    | `git remote`               | `github`, `gitlab`, `origin` |
 | List all remote actions             | `git remote -v`            | `github`, `gitlab`, `origin` |
@@ -45,7 +45,7 @@ This project uses multiple Git remotes to manage code across GitHub and GitLab a
 Make sure to push changes to the appropriate remote(s) depending on your workflow. 
 - **For most cases, pushing to `origin` will update both GitHub and GitLab simultaneously**. It's possible to use directly `git push` in GitBash.
 - To insure free mirroring between GitHub and GitLab:
-  - If pushing was only on GitHub, use `git push gitlab main` to synchronise the repo on GitLab.
+  - If pushing was only on GitHub, use `npm run mirror-git` (`main` and the `v*` release tags) to synchronise the repo on GitLab.
   - If pushing was only on GitLab, use the following commands to synchronize the repo on GitHub:
     - `git fetch gitlab` (**do not use `git pull gitlab`**)
     - `git checkout main` if not already on main branch
