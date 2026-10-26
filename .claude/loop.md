@@ -1,0 +1,10 @@
+Keep the portfolio healthy while I'm away; never push, commit, publish on Netlify or edit an issue without asking: fix locally, then tell me what changed.
+
+- CI: run `npm run ci:status`. If the last commit of main is red on GitHub Actions or GitLab CI, use the fix-ci skill to find the cause and fix it locally (lint and tests passing); if GitLab has no pipeline because the windows-local runner is off, just say so.
+- Dependabot: list the open pull requests (`gh pr list --author app/dependabot`); for each new one, say which `overrides` must change (`npm run check:overrides`, `npm audit`) and whether an `allowScripts` pin names the old version.
+- SonarCloud: if the quality gate of main is not OK, list the new issues and fix them locally.
+- Coverage: run `npm run jest`; the coverage must be at least 80 % on every file it measures (statements, branches, functions, lines), and stays at 100 % on the files of `collectCoverageFrom` in `jest.config.js` as CLAUDE.md requires; write the missing tests with the test-writer agent.
+- Clean code: look for TODO, FIXME and XXX comments, unused imports, variables and functions, and stale references (a file, script, skill, npm script, function, selector, `_data` key, route or version named in the code, comments or docs that no longer exists or no longer matches), outside `node_modules`, the generated files and the vendored `*.min.js`; fix the ones that are safe, list the others.
+- Generic code: look for values hard-coded in `js/`, `netlify/functions/`, the build scripts and the templates that belong in the configuration (the site settings in `config` of `package.json`, the texts in `_data/*.json` in every language): URLs, locales, routes, profile figures, names, lists of pages or projects; move them there and read them from it, so adding a language, a page or a project needs no code change.
+- Unpushed commits: if main is ahead of github/main or gitlab/main, remind me in one line, without pushing.
+- If everything is green and quiet, say so in one line and stop the loop.
