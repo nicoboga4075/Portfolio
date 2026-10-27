@@ -147,7 +147,7 @@ A Claude Code routine (a scheduled cloud agent, managed at [claude.ai/code/routi
 | Section | Source |
 |---|---|
 | Key figures | a verdict (no action, actions within 30 days, urgent actions) and the counts below |
-| Code quality | SonarCloud: quality gate, ratings, coverage, duplication, lines, bugs, vulnerabilities, code smells, technical debt and last analysed commit, from the public SonarCloud API. Snyk: the **Snyk** rows of the [Vulnerability Disclosure Log](SECURITY.md#vulnerability-disclosure-log), with their criticity and status |
+| Code quality | SonarCloud: quality gate, ratings, coverage, duplication, lines, bugs, vulnerabilities, code smells, technical debt and last analysed commit, from the public SonarCloud API. Snyk: the **Snyk** rows of the [Vulnerability Disclosure Log](SECURITY.md#vulnerability-disclosure-log), with their criticity and status. npm: `npm audit` of `package-lock.json` by severity, each advisory matched with its row of the log (accepted risk, regression or new) |
 | Gmail alerts | the emails of the last 7 days about an expiry, a quota, a pause, a failed payment or a required action of the services of the site (Netlify, Supabase, GitHub, GitLab, Google Cloud, Botpress, Calendly, SonarCloud, Anthropic, Snyk) |
 | Silent token expiries | `GITHUB_API_TOKEN`, `SONAR_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN` and the classic GitHub token of the dev machine (`GITHUB_PERSONAL_ACCESS_TOKEN`, read by the GitHub MCP server of Claude Code), whose expiry dates (never their values) are written in the routine's prompt, since they can expire without any email |
 | All services | the role of each service on the site and its state |
