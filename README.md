@@ -140,6 +140,20 @@ Security updates don't wait for the schedule: Dependabot opens them as soon as a
 
 The `sonar` job of GitHub Actions (`sonarqube-scan-action`) analyses every pushed commit of `main`. The `sonar-job` of GitLab CI first asks the GitHub API whether a Node.js CI run exists for its commit (same SHA on both remotes): if so it skips its analysis, so a late GitLab analysis never overwrites the state of `main` in SonarCloud nor creates a VERSION event that resets the new code, and waits (up to 20 minutes) for the GitHub `sonar` job to finish to take its verdict: it fails when that job failed (the quality gate included), was cancelled or timed out; only when GitHub has no run for the commit (or its API can't be reached) does GitLab analyse with `npx @sonar/scan`. Both send the same project version: `@sonar/scan` reads it from `package.json`, and the GitHub job passes `-Dsonar.projectVersion` read from `package.json` too, so SonarCloud keeps its "previous version" new code period across both.
 
+#### Claude Code routine
+
+A Claude Code routine (a scheduled cloud agent, managed at [claude.ai/code/routines](https://claude.ai/code/routines)) named **Portfolio weekly services report** runs every Monday at 07:00 UTC (`0 7 * * 1`) with the Gmail connector. It clones the GitLab repository and emails the owner one report, in French, signed "Powered by Claude Code":
+
+| Section | Source |
+|---|---|
+| Key figures | a verdict (no action, actions within 30 days, urgent actions) and the counts below |
+| Code quality | SonarCloud: quality gate, ratings, coverage, duplication, lines, bugs, vulnerabilities, code smells, technical debt and last analysed commit, from the public SonarCloud API. Snyk: the **Snyk** rows of the [Vulnerability Disclosure Log](SECURITY.md#vulnerability-disclosure-log), with their criticity and status |
+| Gmail alerts | the emails of the last 7 days about an expiry, a quota, a pause, a failed payment or a required action of the services of the site (Netlify, Supabase, GitHub, GitLab, Google Cloud, Botpress, Calendly, SonarCloud, Anthropic, Snyk) |
+| Silent token expiries | `GITHUB_API_TOKEN`, `SONAR_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN` and the classic GitHub token of the dev machine (`GITHUB_PERSONAL_ACCESS_TOKEN`, read by the GitHub MCP server of Claude Code), whose expiry dates (never their values) are written in the routine's prompt, since they can expire without any email |
+| All services | the role of each service on the site and its state |
+
+The layout is fluid and stacks on a phone. It only reads the repository, Gmail and the SonarCloud API (`sonarcloud.io` is added to the allowed domains of the routine's cloud environment, whose default network access blocks it), and sends one email to the owner's own address; it never edits, commits or pushes. When one of these tokens is renewed, give its new expiry date to Claude Code so it updates the routine; a new Snyk finding shows up once it is logged in SECURITY.md and pushed.
+
 #### GitLab CI
 
 `.gitlab/.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (one job per framework, one after the other since the runner runs one job at a time: Jest, Playwright, Cypress and Robot Framework, each of the last two only while its tests exist, Robot Framework on the built site served by `serve-build.mjs`), `sonar` (`npx @sonar/scan` only when GitHub Actions doesn't analyse the commit, allowed to fail) and `teardown` (cleans the build folder).
