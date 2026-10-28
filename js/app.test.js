@@ -577,32 +577,47 @@ describe('the home page', () => {
 
     const formBody = '<form name="contactForm"><input name="name" value="Nico"><input name="subject" value="Hello"><textarea name="message">Hi</textarea><button type="submit">Send</button></form><p id="callback-form"></p>';
 
-    test('sends the message of the contact form once consent is given, then submits it to Netlify', async () => {
-        jest.useFakeTimers();
-        const app = loadApp({ body: formBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true } }) });
+    // The token client of gisLoaded, whose consent the Google API reports at its first check, then one message sent from the contact form
+    async function submitContactForm(app) {
         window.google = { accounts: { oauth2: { initTokenClient: jest.fn(() => ({ requestAccessToken: jest.fn() })) } } };
         window.gapi = { client: { getToken: jest.fn(() => ({ token_type: 'Bearer', access_token: 't' })) } };
         app.gisLoaded();
         await flush();
-        const submit = jest.spyOn($.fn, 'submit');
         app.initPage();
         $('form').trigger('submit');
         await jest.advanceTimersByTimeAsync(3000);
         await flush(20);
+    }
+
+    test('sends the message of the contact form once consent is given, then posts a copy to Netlify Forms on the home page of the language', async () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body: formBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true }, '/en': { ok: true } }) });
+        await submitContactForm(app);
         expect($('#callback-form').text()).toBe(app.getMessage('success-generic'));
-        expect(submit).toHaveBeenCalled();
+        const [, options] = window.fetch.mock.calls.find(([url]) => url === '/en');
+        expect(options.method).toBe('POST');
+        expect(options.headers['Content-Type']).toBe('application/x-www-form-urlencoded');
+        expect(Object.fromEntries(new URLSearchParams(options.body))).toEqual({ name: 'Nico', subject: 'Hello', message: 'Hi', 'form-name': 'contactForm' });
+    });
+
+    test('logs a copy that Netlify Forms refuses, the e-mail being sent', async () => {
+        jest.useFakeTimers();
+        const log = jest.spyOn(console, 'error').mockImplementation(() => {});
+        const app = loadApp({ body: formBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true }, '/en': { ok: false, status: 404 } }) });
+        await submitContactForm(app);
+        expect($('#callback-form').text()).toBe(app.getMessage('success-generic'));
+        expect(log).toHaveBeenCalledWith(new Error('Netlify Forms answered 404'));
     });
 
     test('logs a message that cannot even be built, without submitting', async () => {
         const log = jest.spyOn(console, 'error').mockImplementation(() => {});
         const app = loadApp({ body: formBody });
         document.querySelector('meta[property="og:site_name"]').remove();
-        const submit = jest.spyOn($.fn, 'submit');
         app.initPage();
         $('form').trigger('submit');
         await flush(20);
         expect(log).toHaveBeenCalledWith(expect.any(TypeError));
-        expect(submit).not.toHaveBeenCalled();
+        expect(window.fetch).not.toHaveBeenCalledWith('/en', expect.anything());
     });
 
     test('runs the bingo: the counter stops on the second click, a win on 2713 and a loss otherwise', () => {

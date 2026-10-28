@@ -37,13 +37,12 @@ test('sends the e-mail of the contact form without submitting it to Netlify, and
     const app = loadApp({ body: formBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true } }) });
     await withConsent(app);
     sessionStorage.setItem('currentHash', 'contact-section');
-    const submit = jest.spyOn($.fn, 'submit');
     app.initPage();
     $('form').trigger('submit');
     await jest.advanceTimersByTimeAsync(3000);
     await flush(20);
     expect($('#callback-form').text()).toBe(app.getMessage('success-generic'));
-    expect(submit).not.toHaveBeenCalled();
+    expect(window.fetch).not.toHaveBeenCalledWith('/en', expect.anything());
     expect(sessionStorage.getItem('currentHash')).toBe('contact-section');
 });
 

@@ -1176,12 +1176,21 @@ function initIndexPage(langPage) {
         }
 
         $('form[name="contactForm"]').on('submit', async (event) => {
-            event.preventDefault(); // Avoid Netlify default submission
+            event.preventDefault(); // Avoid the native submission, which would leave the page for the thank-you page of Netlify
             const formData = new FormData(event.target);
             try {
                 await sendEmail(formData.get('name'), formData.get('subject'), formData.get('message'));
                 if (window.location.protocol === 'https:') {
-                    $(this).submit(); // Submit form after sending the email
+                    // Keeps a copy in Netlify Forms, posted to the home page of the language since / redirects and would lose the POST
+                    formData.set('form-name', event.target.getAttribute('name'));
+                    const response = await fetch(`/${langPage}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(formData).toString()
+                    });
+                    if (!response.ok) {
+                        throw new Error(`Netlify Forms answered ${response.status}`);
+                    }
                 }
             } catch (error) {
                 console.error(error);
