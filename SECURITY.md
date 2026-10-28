@@ -79,6 +79,8 @@ These libraries and tools are intentionally kept below their latest major releas
 | 2026-10-20       | **CodeQL** *js/incomplete-multi-character-sanitization* : the card title of `tests/playwright/project-cards.browser.spec.js` (tests only) | Low | Patched, the spec reads the title the page shows instead of stripping the tags of `_data` with a regex. Not exploitable: it only compared a title in a test | :white_check_mark: |
 | 2026-10-21       | **CVE-2026-111758** (GHSA-gfr2-rv44-r23c) : *markdown-it* (via Eleventy, dev only) | High | Patched, markdown-it 14.3.3 in `package-lock.json`. Not exploitable: markdown-it only renders the repository's own content at build time, never visitor input | :white_check_mark: |
 | 2026-10-21       | **CVE-2026-111766** (GHSA-vfgh-jcmw-g37q) : *markdown-it* (same path) | Low | Patched, markdown-it 14.3.3 in `package-lock.json`. Not exploitable, for the same reason | :white_check_mark: |
+| 2026-10-28       | **GHSA-6pq8-jhm2-2vcw** : *qs* (via `@cypress/request` of Cypress, dev only) | Medium | Patched, qs upgraded to 6.17.0 (`npm audit fix`) | :white_check_mark: |
+| 2026-10-28       | **GHSA-gcqx-w48m-w2h4** : *deepmerge* (via `jest-config` of Jest 30, dev only) | Low | Accepted risk, no patched release (every version up to 4.3.1, the latest, is affected); the `npm audit fix --force` it suggests downgrades Jest to 25 and html-validate to 7, never apply it. Not exploitable: Jest only merges the repository's own `jest.config.js` with its defaults, never untrusted input | :hourglass: |
 
 Dependabot alerts on dev dependencies that a version update fixes are not listed one by one: Dependabot closes them with its pull requests (see the repository's Security tab).
 
