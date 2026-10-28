@@ -83,6 +83,55 @@ flowchart LR
   th -->|"checks the edited file"| data
 ```
 
+### ✉️ Contact Form
+The contact form of the home page ([`_includes/index-contact.html`](_includes/index-contact.html), run by `initIndexPage` and `sendEmail` of [`js/app.js`](js/app.js)) sends each message twice on the live site: as an e-mail from the visitor's Gmail account, then as a copy in [Netlify Forms](https://docs.netlify.com/manage/forms/setup).
+
+1. The Google scripts (Google API client, Google Identity Services, reCAPTCHA) load once the form scrolls into view; the send button stays disabled until the reCAPTCHA is solved.
+2. On submit, the native submission is cancelled and Google asks the visitor for the `gmail.send` scope (OAuth client `ENV_CLIENT_ID`); the page checks for the token every 3 seconds and gives up after 2 minutes, long enough to sign in to Google on a phone.
+3. With the token, the Gmail API sends the message from the visitor's account to the address of `<meta name="email">`; the result shows in `#callback-form`, and on the live site the session storage is cleared, so the next message asks for consent again.
+4. If the send fails (no consent in time, Google refusing the in-app browsers of LinkedIn or Instagram and the Android app, no Google account, Gmail unreachable), `#callback-form` shows the error with a `mailto:` link (`contact-mailto` of `_data/messages.json`) that opens the visitor's mail app with the subject and the message filled in.
+5. On https only, whether the e-mail was sent or not, the form fields, the reCAPTCHA answer and `form-name=contactForm` are then posted with `fetch` to the home page of the language (`/en` or `/fr`, since `/` redirects with a 301 and would lose the POST), so the visitor stays on the page.
+
+```mermaid
+sequenceDiagram
+  actor visitor as Visitor
+  participant page as Home page (js/app.js)
+  participant env as env function
+  participant google as Google (OAuth, reCAPTCHA)
+  participant gmail as Gmail API
+  participant forms as Netlify Forms
+
+  visitor->>page: scrolls to the contact form
+  page->>env: GET /.netlify/functions/env
+  env-->>page: ENV_CLIENT_ID, SITE_RECAPTCHA_KEY
+  page->>google: loads the API client, Identity Services and reCAPTCHA
+  visitor->>google: solves the reCAPTCHA
+  visitor->>page: Send
+  page->>google: requestAccessToken (gmail.send)
+  google-->>visitor: consent window
+  loop every 3 seconds, 2 minutes at most
+    page->>google: gapi.client.getToken()
+  end
+  alt token given
+    page->>gmail: POST users/me/messages/send
+    gmail-->>page: sent or refused
+  end
+  page-->>visitor: success, or the error with the mailto: link
+  opt on https
+    page->>forms: POST /en or /fr (form-name, fields, g-recaptcha-response)
+  end
+```
+
+| Netlify Forms setting | Where | Role |
+|---|---|---|
+| `data-netlify="true"`, `name="contactForm"` | the `<form>` tag | Netlify detects the form at deploy time and stores its submissions under the name `contactForm` |
+| `netlify-honeypot="bot-field"` | the `<form>` tag and a hidden `bot-field` input | A submission with that field filled is dropped as spam |
+| `data-netlify-recaptcha="true"` | the `<form>` tag | Netlify checks the `g-recaptcha-response` field with the custom reCAPTCHA keys `SITE_RECAPTCHA_KEY` and `SITE_RECAPTCHA_SECRET` (Netlify environment variables) |
+
+The submissions are listed in the Netlify UI (Project configuration, Forms) or with `netlify api listSiteForms --data '{"site_id":"<site id>"}'` (`submission_count`, `last_submission_at`). A copy refused by Netlify is logged in the console, the e-mail being sent anyway.
+
+On the local site (http, `npm run dev`) no copy is posted to Netlify Forms, the Gmail token is kept in memory for the next messages, and the `env` function returns Google's test reCAPTCHA key. The Android app loads that local site, so it never posts the copy either; Google also refuses OAuth consent in an embedded web view, so the Gmail step is likely to fail there and the visitor gets the `mailto:` link.
+
 ### 📦 Vendored Libraries
 The third-party libraries in `js/` and `css/` are downloaded manually (not npm dependencies), so [Dependabot](.github/dependabot.yml) can't track them. Their versions are recorded in [`.github/vendor-versions.json`](.github/vendor-versions.json) and checked weekly by the [`vendor-versions`](.github/workflows/vendor-versions.yml) workflow, which opens a GitHub issue when a newer release is available. See also [SECURITY.md](SECURITY.md#utilities).
 
