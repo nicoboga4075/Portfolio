@@ -63,7 +63,8 @@ Show The Details Of The Card
     ...    Returns :
     ...        - None
     [Arguments]    ${id}
-    Scroll Element Into View    id:${id}
+    # Centred in the window rather than at its bottom edge, so the fixed contact and chat buttons of the bottom right corner never cover the Explore button
+    Execute Javascript    document.getElementById('${id}').scrollIntoView({block: 'center'})
     Mouse Over    id:${id}
     Wait Until Element Is Visible    css:#${id} .explore
 
