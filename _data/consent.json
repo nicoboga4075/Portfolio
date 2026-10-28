@@ -1,0 +1,4 @@
+{
+    "en": { "label": "Audience measurement cookies", "text": "With your consent, this site uses Google Analytics to count its visits and see which pages are read. Its cookies are set and data is sent to Google only if you accept; you can change your choice at any time with the Manage cookies link at the bottom of the page.", "policy": "Privacy policy", "accept": "Accept", "refuse": "Refuse", "manage": "Manage cookies" },
+    "fr": { "label": "Cookies de mesure d'audience", "text": "Avec votre accord, ce site utilise Google Analytics pour compter ses visites et savoir quelles pages sont lues. Ses cookies ne sont déposés et des données ne sont envoyées à Google que si vous acceptez ; vous pouvez changer d'avis à tout moment avec le lien Gérer les cookies en bas de page.", "policy": "Politique de confidentialité", "accept": "Accepter", "refuse": "Refuser", "manage": "Gérer les cookies" }
+}

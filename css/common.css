@@ -443,3 +443,77 @@ html.dark-mode .badge {
 #ftco-footer a[aria-current="page"]:hover {
     color: var(--primary-light);
 }
+
+/* The "Manage cookies" button of the footer, drawn like the policy and terms links next to it */
+#ftco-footer .consent-manage {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--white);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#ftco-footer .consent-manage:hover,
+#ftco-footer .consent-manage:focus {
+    color: var(--primary-light);
+}
+
+/* The consent banner of Google Analytics (production build only), fixed at the bottom of the screen in the colours of the footer */
+#ftco-footer .consent-banner {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1100;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px;
+    border-top: 1px solid var(--primary-dark);
+    background-color: var(--black);
+    font-size: 14px;
+    text-align: left;
+}
+
+#ftco-footer .consent-banner[hidden] {
+    display: none;
+}
+
+#ftco-footer .consent-banner p {
+    max-width: 720px;
+    margin: 0;
+    opacity: 1;
+}
+
+#ftco-footer .consent-banner a {
+    text-decoration: underline;
+}
+
+#ftco-footer .consent-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+/* Accept and Refuse look the same, so neither choice is pushed */
+#ftco-footer .consent-button {
+    min-width: 112px;
+    padding: 8px 24px;
+    border: 1px solid var(--primary-dark);
+    border-radius: 24px;
+    background-color: var(--primary-dark);
+    color: var(--white);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#ftco-footer .consent-button:focus-visible,
+#ftco-footer .consent-manage:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 2px;
+}

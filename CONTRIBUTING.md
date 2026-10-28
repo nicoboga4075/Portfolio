@@ -38,7 +38,7 @@ This project uses multiple Git remotes to manage code across GitHub and GitLab a
 - Netlify builds run in a `Linux` (Ubuntu) environment. The shell used is `Bash`.
 - "Pretty URLs" is set in `netlify.toml` (`[build.processing.html] pretty_urls = true`), not in the Netlify UI: the post processing drops `.html` and `index.html` from the internal links. The clean URLs themselves (`/en`, `/fr/blog`) come from `_redirects`. After a deploy that touches it, check the blog articles still load (`/.netlify/functions/article?filename=<slug>_<lang>.html` keeps its `.html`).
 - The build also writes `api/articles.json` and `api/projects.json` (git-ignored, like `sitemap.xml` and the feeds): the articles and projects in every language, for the Botpress chatbot (an API call or its knowledge base, set up in Botpress Studio).
-- Google Analytics (`js/analytics.js`) is only added to the pages by the production build on Netlify (`CONTEXT=production`): `npm run dev`, the preview build, deploy previews and branch deploys don't count visits. Don't add it again as a snippet injection in the Netlify settings, or every visit would count twice.
+- Google Analytics (`js/analytics.js`) is only added to the pages by the production build on Netlify (`CONTEXT=production`): `npm run dev`, the preview build, deploy previews and branch deploys don't count visits. Don't add it again as a snippet injection in the Netlify settings, or every visit would count twice. It loads `gtag.js` only after the visitor accepts in the consent banner of `_includes/footer.html` (texts in `_data/consent.json`): keep it that way, nothing may be sent to Google before consent.
 
 ---
 

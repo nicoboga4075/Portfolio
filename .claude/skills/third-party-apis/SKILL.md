@@ -21,7 +21,7 @@ These services are web APIs and hosted scripts, not npm packages: context7 knows
 
 - **Code**: `loadContactScripts`, `gapiLoaded`, `gisLoaded` and `sendEmail` of `js/app.js`.
 - **How it works**: `gapi` (`https://apis.google.com/js/api.js`) inits the Gmail discovery document; Google Identity Services (`https://accounts.google.com/gsi/client`) makes a token client (`initTokenClient`) with the `ENV_CLIENT_ID` from the `env` function and the scope `https://www.googleapis.com/auth/gmail.send`; on submit, `requestAccessToken({ prompt: 'consent' })` asks the visitor's consent, then a `POST https://www.googleapis.com/gmail/v1/users/me/messages/send` sends the message as `raw`, base64url (`+` to `-`, `/` to `_`, no `=`).
-- **Pitfalls**: the token stays in memory (`appGmailToken`), never in `sessionStorage` or `localStorage` (CodeQL alert fixed in the security log of SECURITY.md); CR and LF are stripped from the header fields (subject, sender name) against header injection; the consent is polled every 3 s for 30 s.
+- **Pitfalls**: the token stays in memory (`appGmailToken`), never in `sessionStorage` or `localStorage` (CodeQL alert fixed in the security log of SECURITY.md); CR and LF are stripped from the header fields (subject, sender name) against header injection; the consent is polled every 3 s for 2 minutes; a failed send offers a `mailto:` link, and on https a copy is posted to Netlify Forms.
 - **CSP**: `script-src` `https://apis.google.com` `https://accounts.google.com`; `connect-src` `https://www.googleapis.com` `https://apis.google.com`; `frame-src` `https://accounts.google.com` `https://content.googleapis.com`.
 - **Docs**: [token model of Google Identity Services](https://developers.google.com/identity/oauth2/web/guides/use-token-model), [Google API client for JavaScript](https://github.com/google/google-api-javascript-client), [users.messages.send](https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send).
 
@@ -51,6 +51,7 @@ These services are web APIs and hosted scripts, not npm packages: context7 knows
 ## Google Analytics
 
 - **Code**: `js/analytics.js`, added by the production build on Netlify only (`analytics` global of `.eleventy.js`: `CONTEXT === "production"`), with `config.analyticsId`; never add it elsewhere, and remove the snippet injection of the Netlify UI if any, or every visit counts twice.
+- **Consent**: the banner and the Manage cookies button of `_includes/footer.html` (texts in `_data/consent.json`, only when `analytics.enabled`); `gtag.js` loads only after Accept, the choice is kept 6 months in `localStorage` (`analytics-consent`), the _ga cookies last 13 months (`cookie_expires`), a refusal sets `ga-disable-<id>` and deletes them. No Consent Mode: it would still send cookieless pings before consent. The privacy policy (`policy_*.html`) lists the cookies and durations: update it with any change.
 - **CSP**: `script-src` and `img-src` `https://www.googletagmanager.com`; `connect-src` `https://region1.google-analytics.com` `https://www.google-analytics.com`.
 - **Docs**: [gtag.js](https://developers.google.com/tag-platform/gtagjs). The GA4 data is read with the analytics MCP server (property of `nicoboga.netlify.app`).
 
