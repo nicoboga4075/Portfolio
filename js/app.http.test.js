@@ -64,7 +64,7 @@ test('forgets the kept token when Gmail refuses a message, and asks for consent 
     await send(app);
     routeFetch({ 'gmail/v1': { ok: false } });
     await app.sendEmail('Nico', 'Hello', 'Hi');
-    expect($('#callback-form').text()).toBe(app.getMessage('error-generic'));
+    expect($('#callback-form').text()).toBe(`${app.getMessage('error-generic')} ${app.getMessage('contact-mailto')}`);
     routeFetch({ 'gmail/v1': { ok: true } });
     await send(app);
     expect(client.requestAccessToken).toHaveBeenCalledTimes(2);
@@ -80,7 +80,7 @@ test('forgets the kept token when Gmail cannot be reached, and logs why', async 
     routeFetch({ 'gmail/v1': new Error('offline') });
     await app.sendEmail('Nico', 'Hello', 'Hi');
     expect(log).toHaveBeenCalledWith(new Error('offline'));
-    expect($('#callback-form').text()).toBe(app.getMessage('error-generic'));
+    expect($('#callback-form').text()).toBe(`${app.getMessage('error-generic')} ${app.getMessage('contact-mailto')}`);
     routeFetch({ 'gmail/v1': { ok: true } });
     await send(app);
     expect(client.requestAccessToken).toHaveBeenCalledTimes(2);

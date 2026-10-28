@@ -1630,7 +1630,12 @@ async function sendEmail(senderName, subject, message) {
         if (error) {
             console.error(error);
         }
-        callbackForm.text(errorMessage);
+        // The visitor's mail app, with the message filled in, for a send Google refused (in-app browsers of LinkedIn or Instagram, Android app, no Google account)
+        const mailtoLink = $('<a>', {
+            href: `mailto:${recipient}?subject=${encodeURIComponent(safeSubject)}&body=${encodeURIComponent(message)}`,
+            text: getMessage('contact-mailto')
+        });
+        callbackForm.text(`${errorMessage} `).append(mailtoLink);
         appGmailToken = null;
     }
 
@@ -1666,7 +1671,9 @@ async function sendEmail(senderName, subject, message) {
     async function checkTokenConsent() {
         return new Promise((resolve, reject) => {
             const interval = 3000;
-            const maxRetries = 30 / (interval / 1000);
+            // Two minutes, long enough to sign in to Google on a phone (password, two-step verification)
+            const timeout = 120;
+            const maxRetries = timeout / (interval / 1000);
             let attempts = 0;
 
             const checkInterval = setInterval(async () => {
@@ -1682,7 +1689,7 @@ async function sendEmail(senderName, subject, message) {
                     }
                 } else if (++attempts >= maxRetries) {
                     clearInterval(checkInterval);
-                    reject(new Error("Consent not given within 30 seconds"));
+                    reject(new Error(`Consent not given within ${timeout} seconds`));
                 }
             }, interval);
         });

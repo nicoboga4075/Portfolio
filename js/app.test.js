@@ -1029,7 +1029,7 @@ describe('the contact form', () => {
         let sending = app.sendEmail('Nico', 'Hello', 'Hi');
         await jest.advanceTimersByTimeAsync(3000);
         await sending;
-        expect($('#callback-form').text()).toBe(app.getMessage('error-generic'));
+        expect($('#callback-form').text()).toBe(`${app.getMessage('error-generic')} ${app.getMessage('contact-mailto')}`);
         expect(log).not.toHaveBeenCalled();
         app = loadApp({ body, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': new Error('offline') }) });
         await withConsent(app, 0);
@@ -1037,7 +1037,17 @@ describe('the contact form', () => {
         await jest.advanceTimersByTimeAsync(3000);
         await sending;
         expect(log).toHaveBeenCalledWith(new Error('offline'));
-        expect($('#callback-form').text()).toBe(app.getMessage('error-generic'));
+        expect($('#callback-form').text()).toBe(`${app.getMessage('error-generic')} ${app.getMessage('contact-mailto')}`);
+    });
+
+    test('offers the mail app, with the subject and the message filled in, when the send fails', async () => {
+        const log = jest.spyOn(console, 'error').mockImplementation(() => {});
+        const app = loadApp({ body });
+        await app.sendEmail('Nico', 'Hello\nthere & you', 'Hi?\nBye');
+        expect(log).toHaveBeenCalled();
+        const link = $('#callback-form a');
+        expect(link.text()).toBe(app.getMessage('contact-mailto'));
+        expect(link.attr('href')).toBe('mailto:me@example.com?subject=Hello%20there%20%26%20you&body=Hi%3F%0ABye');
     });
 
     test('shows the error when there is no token and the token client was never created', async () => {
@@ -1045,7 +1055,7 @@ describe('the contact form', () => {
         const app = loadApp({ body });
         await app.sendEmail('Nico', 'Hello', 'Hi');
         expect(log).toHaveBeenCalledWith(expect.any(TypeError));
-        expect($('#callback-form').text()).toBe(app.getMessage('error-generic'));
+        expect($('#callback-form').text()).toBe(`${app.getMessage('error-generic')} ${app.getMessage('contact-mailto')}`);
     });
 
     // The token client of gisLoaded, then a consent the Google API reports after the given number of checks, or never
@@ -1070,17 +1080,17 @@ describe('the contact form', () => {
         expect($('#callback-form').text()).toBe(app.getMessage('success-generic'));
     });
 
-    test('gives up after 30 seconds without consent', async () => {
+    test('gives up after 2 minutes without consent', async () => {
         jest.useFakeTimers();
         const log = jest.spyOn(console, 'error').mockImplementation(() => {});
         const app = loadApp({ body, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' } }) });
         await withConsent(app, Infinity);
         const sending = app.sendEmail('Nico', 'Hello', 'Hi');
-        await jest.advanceTimersByTimeAsync(30000);
+        await jest.advanceTimersByTimeAsync(120000);
         await sending;
-        expect(window.gapi.client.getToken).toHaveBeenCalledTimes(10);
-        expect(log).toHaveBeenCalledWith(new Error('Consent not given within 30 seconds'));
-        expect($('#callback-form').text()).toBe(app.getMessage('error-generic'));
+        expect(window.gapi.client.getToken).toHaveBeenCalledTimes(40);
+        expect(log).toHaveBeenCalledWith(new Error('Consent not given within 120 seconds'));
+        expect($('#callback-form').text()).toBe(`${app.getMessage('error-generic')} ${app.getMessage('contact-mailto')}`);
     });
 
     test('enables the send button once the reCAPTCHA is solved', () => {
