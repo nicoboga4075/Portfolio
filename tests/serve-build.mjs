@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Serves the last build (.eleventy) like Netlify, with the 200 rewrites of _redirects, so the Playwright, Cypress and Robot Framework tests and the run-portfolio skill can run without netlify dev.
+// Serves the last build (.eleventy) like Netlify, with the 200 rewrites and the exact-path 301 / 302 redirects (the root to /en) of _redirects, so the Playwright, Cypress and Robot Framework tests and the run-portfolio skill can run without netlify dev.
 // Usage: node tests/serve-build.mjs [port] [--port-file <file>] (a free port the system picks by default, printed at start-up and written to the file when given, for a CI job that starts it in the background; build first with ELEVENTY_PREVIEW=1 npx eleventy)
 import fs from 'node:fs';
 import http from 'node:http';
@@ -19,10 +19,18 @@ if (!fs.existsSync(path.join(OUT, 'index_en.html'))) {
     process.exit(1);
 }
 
-const rewrites = new Map(fs.readFileSync(path.join(ROOT, '_redirects'), 'utf8').split(/\r?\n/).map(line => line.trim().split(/\s+/)).filter(([from, to, status]) => from?.startsWith('/') && to && status === '200').map(([from, to]) => [from, to.slice(1)]));
+const rules = fs.readFileSync(path.join(ROOT, '_redirects'), 'utf8').split(/\r?\n/).map(line => line.trim().split(/\s+/)).filter(([from, to]) => from?.startsWith('/') && to);
+const rewrites = new Map(rules.filter(([, , status]) => status === '200').map(([from, to]) => [from, to.slice(1)]));
+// The redirects of one exact path only (no splat), with their status (301! gives 301)
+const redirects = new Map(rules.filter(([from, , status]) => /^30[12]!?$/.test(status ?? '') && !from.includes('*')).map(([from, to, status]) => [from, { to, status: Number.parseInt(status, 10) }]));
 
 const server = http.createServer((req, res) => {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname).replace(/\/$/, '') || '/';
+    const redirect = redirects.get(pathname);
+    if (redirect) {
+        res.writeHead(redirect.status, { Location: redirect.to }).end();
+        return;
+    }
     const file = rewrites.get(pathname) ?? pathname.slice(1);
     const full = path.join(OUT, file);
     // Never serve a file outside the build
