@@ -2033,6 +2033,22 @@ html.dark-mode .owl-dot:focus-visible {
     background-color: var(--white);
 }
 
+.services-subtitle {
+    margin: 32px 0 0;
+    color: var(--secondary);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* The card stays white in dark mode: the dark grey keeps the line readable on it */
+html.dark-mode .services-subtitle {
+    color: var(--secondary-dark);
+}
+
+.services:hover .services-subtitle {
+    color: var(--white);
+}
+
 /* ==== Footer ==== */
 
 .ftco-footer-links li {

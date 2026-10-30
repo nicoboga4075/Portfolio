@@ -10,6 +10,7 @@
                 <h2 class="mb-4">{{ servicesLang.heading }}</h2>
                 <img class="img-fluid" src="images/developer.png" id="developer" alt="{{ servicesLang.devAlt }}" loading="lazy" height="250" width="150">
                 <p class="mt-4">{{ servicesLang.tagline | safe }}</p>
+                <a class="btn btn-primary py-3 px-5" href="/{{ lang }}#contact-section">{{ servicesLang.cvReviewCta }}</a>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -20,7 +21,10 @@
                     <i class="{{ card.icon }}"></i>
                     </span>
                     <div class="desc">
-                        <h3 class="mb-5">{{ card.title[lang] | safe }}</h3>
+                        <h3 class="{{ 'mb-4' if card.subtitle else 'mb-5' }}">{{ card.title[lang] | safe }}</h3>
+                        {%- if card.subtitle %}
+                        <p class="services-subtitle">{{ card.subtitle[lang] }}</p>
+                        {%- endif %}
                     </div>
                 </a>
             </div>
