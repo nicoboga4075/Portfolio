@@ -106,7 +106,7 @@ An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI,
 | light page, standalone | A page run by `js/standalone.js` (policy, terms, 404, articles, projects) as opposed to the home and blog run by `js/app.js` |
 | preview build | `ELEVENTY_PREVIEW=1`, the build into `.eleventy/` used by `npm run dev` and the tests, as opposed to the in-place Netlify build |
 | Bien / Pas Bien | The "Good / Not Good" article of good and bad coding practices (SOLID, DRY, KISS, ACID...), one partial `_includes/bien-pasbien-*.html` per principle |
-| hire me | Home page section of the job search status (`config.profile.openToWork`: `listening` or `active`) and its contact button |
+| hire me | Home page section of the job search status (`config.profile.openToWork`: `2` for an active search, `1` when listening to opportunities, `0` to hide it; also shown as the availability badge of the hero) and its contact button |
 | counter | Home page section of the profile figures of `config.profile` (certifications, projects, experiences, countries) |
 | visit counter | The number of visits shown in `#ftco-visitor`, incremented by the `visit` function (Supabase) on the live site only (https) |
 

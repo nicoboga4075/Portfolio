@@ -2,17 +2,17 @@
     "en": {
         "heading": {
             "listening": "Attentive to opportunities",
-            "active": "Actively looking for a job"
+            "active": "Actively looking for a permanent job"
         },
-        "location": "In Paris area",
-        "cta": "Contact me"
+        "location": "In Paris area · ASAP",
+        "contactCta": "Contact me"
     },
     "fr": {
         "heading": {
             "listening": "À l'écoute d'opportunités",
-            "active": "En recherche active d'emploi"
+            "active": "En recherche active d'un CDI"
         },
-        "location": "En région parisienne",
-        "cta": "Me contacter"
+        "location": "En région parisienne · ASAP",
+        "contactCta": "Me contacter"
     }
 }

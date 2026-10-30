@@ -30,7 +30,7 @@ Ask only for what the arguments don't give, in one message, and don't invent any
 | Certification, test, award | `awards` | `date` per language, `title` (one, or one per language), `score`, `detail` (optional, one or per language), an `icon` or a `svgId`; the certificate itself in `docs/public/` if it is published, named like the others and well under 50 MB |
 | Trip | none | No entry: only the figures (step 3) |
 
-For a new job, also ask whether the previous one is still `current`, whether the job search status changes (`config.profile.openToWork`: `true`, `"listening"` or `false`) and whether its city goes in `config.authorCities` (the cities the article search suggests).
+For a new job, also ask whether the previous one is still `current`, whether the job search status changes (`config.profile.openToWork`: `2` active, `1` listening or `0` hidden) and whether its city goes in `config.authorCities` (the cities the article search suggests).
 
 ## 2. Write the entry
 

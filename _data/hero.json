@@ -4,13 +4,19 @@
         "intro": "I'm a",
         "roles": "[ &quot;Software Engineer.&quot;, &quot;AI-Augmented Developer.&quot;, &quot;Full Stack Developer.&quot;,&quot;Support Engineer.&quot;, &quot;IT Consultant.&quot;, &quot;Back End Developer.&quot; ]",
         "tagline": "The AI copilots, I hold the harness; it judges the line, I umpire the match — as in tennis.",
-        "resumeAria": "Go to Resume Section"
+        "resumeAria": "Go to Resume Section",
+        "trainingLabel": "In training:"
     },
     "fr": {
         "subheading": "Bonjour ! Je m'appelle",
         "intro": "Je suis un",
         "roles": "[ &quot;Ingénieur Logiciel.&quot;, &quot;Développeur IA Augmenté.&quot;, &quot;Développeur Full Stack.&quot;,&quot;Ingénieur Support.&quot;, &quot;Consultant IT.&quot;, &quot;Développeur Back-End.&quot; ]",
         "tagline": "L'IA copilote, je tiens les rênes ; elle juge la ligne, j'arbitre le match — comme au tennis.",
-        "resumeAria": "Aller à la section Résumé"
-    }
+        "resumeAria": "Aller à la section Résumé",
+        "trainingLabel": "En formation :"
+    },
+    "training": [
+        { "label": "Claude Code", "icon": "icon-check", "href": "https://dyma.fr/certification/690e6a598135bb6f5bc0532f/69bab83207d3838b7c973a15" },
+        { "label": "Azure", "icon": "icon-gear" }
+    ]
 }

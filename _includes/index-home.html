@@ -18,6 +18,24 @@
                             data-rotate="{{ heroLang.roles | safe }}"></span>
                     </h2>
                     <p class="hero-tagline mt-3">{{ heroLang.tagline }}</p>
+                    {#- The availability and training badges side by side, wrapping under each other on a narrow screen #}
+                    <div class="hero-badges">
+                    {#- Same status as the hire me section (config.profile.openToWork), opening the LinkedIn profile: the dot pulses faster on an active search #}
+                    {%- if profile.openToWork %}
+                    <a class="hero-availability{{ ' is-active' if profile.openToWork === 2 }}" href="{{ linkedin.url }}" target="_blank" rel="noopener"><span class="availability-dot" aria-hidden="true"></span>{{ hireme[lang].heading.active if profile.openToWork === 2 else hireme[lang].heading.listening }}</a>
+                    {%- endif %}
+                    {#- The trainings of hero.training in a badge like the availability one, the name a link to its certificate when it has one, the icon outside the link #}
+                    {%- if hero.training.length %}
+                    <p class="hero-availability hero-training">
+                        <i class="icon-graduation-cap training-cap" aria-hidden="true"></i>
+                        <span>{{ heroLang.trainingLabel }}</span>
+                        {%- for t in hero.training %}
+                        <span class="training-item">
+                            {%- if t.href %}<a href="{{ t.href }}" target="_blank" rel="noopener">{{ t.label }}</a>{% else %}{{ t.label }}{% endif %} <i class="{{ t.icon }}" aria-hidden="true"></i></span>
+                        {%- endfor %}
+                    </p>
+                    {%- endif %}
+                    </div>
                 </div>
             </div>
         </div>
