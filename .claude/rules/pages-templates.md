@@ -16,4 +16,5 @@ paths:
 - Every page uses `layout: base.njk`; its front matter holds `title`, `description`, `permalink` and the odd override (`assets`). Keep the `{%- -%}` whitespace control of the loops in `base.njk`, or the build leaves blank lines.
 - A new page needs its route in `config.appRoutes` of `package.json` (then `npm run gen:redirects`, never an edit of `_redirects`), its Lighthouse audit in `netlify.toml`, and its page in every language.
 - A new article or project goes through the `new-article` or `new-project` skill, then `npm run check:content`.
+- Articles and projects stay in `.html`, not Markdown: Nunjucks already runs on the `.html` pages, their content needs the site markup (classes, ids, link attributes, `bien-pasbien-*` partials), and the `article` function, `check:content`, the `new-article` skill and html-validate all read `.html`; `.eleventy.js` only compiles `.html` so the repository Markdown docs never become pages.
 - Run `npm run lint:html` after a change; html-validate reads the Nunjucks through `html-validate-nunjucks.js`.
