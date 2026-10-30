@@ -360,6 +360,8 @@ module.exports = function configureEleventy(eleventyConfig) {
     eleventyConfig.addGlobalData("version", pkg.version);
     // The name of the site, the og:site_name of every page, from the name of package.json
     eleventyConfig.addGlobalData("siteName", pkg.name);
+    // The address of the deployed site, the homepage of package.json, for links that need it whole (the Feedly subscription to the Atom feed)
+    eleventyConfig.addGlobalData("siteUrl", site);
     // The cities of the author, config.authorCities of package.json, which the article search suggests, in the author-cities meta of the home and blog pages where js/app.js reads them
     eleventyConfig.addGlobalData("authorCities", authorCities);
     // The client-side routes of package.json (config.appRoutes), in the routes meta of every page where js/common.js reads them
