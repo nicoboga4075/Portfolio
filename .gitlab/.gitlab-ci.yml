@@ -1,6 +1,9 @@
 default:
   tags:
     - windows-local
+  # Windows must not sleep in the middle of a job (timeouts, a test server that stops answering): a background process keeps it awake until the shell of the job exits
+  before_script:
+    - $null = Start-Process -FilePath pwsh -ArgumentList "-NoProfile", "-File", ".gitlab/keep_awake.ps1", "-JobPid", $PID -WindowStyle Hidden
 
 variables:
   GIT_CLEAN_FLAGS: -ffdx --exclude=node_modules/

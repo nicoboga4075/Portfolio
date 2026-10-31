@@ -205,7 +205,7 @@ The layout is fluid and stacks on a phone. It only reads the repository, Gmail a
 
 #### GitLab CI
 
-`.gitlab/.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (one job per framework, one after the other since the runner runs one job at a time: Jest, Playwright, Cypress and Robot Framework, each of the last two only while its tests exist, Robot Framework on the built site served by `serve-build.mjs`), `sonar` (`npx @sonar/scan` only when GitHub Actions doesn't analyse the commit, allowed to fail) and `teardown` (cleans the build folder).
+`.gitlab/.gitlab-ci.yml` runs on the `windows-local` runner in PowerShell, so only while the computer that hosts it is on: `setup` (runner status), `build` (`npm ci`, `npm run build`), `test` (one job per framework, one after the other since the runner runs one job at a time: Jest, Playwright, Cypress and Robot Framework, each of the last two only while its tests exist, Robot Framework on the built site served by `serve-build.mjs`), `sonar` (`npx @sonar/scan` only when GitHub Actions doesn't analyse the commit, allowed to fail) and `teardown` (cleans the build folder). Before each job, `.gitlab/keep_awake.ps1` keeps Windows from sleeping until the job ends (a sleep in the middle of a job made its tests time out or its test server stop answering); it does not wake up a computer already asleep, whose jobs stay pending.
 
 The file is not at the root, where GitLab looks by default: the project setting **Settings → CI/CD → General pipelines → CI/CD configuration file** is set to `.gitlab/.gitlab-ci.yml`.
 
