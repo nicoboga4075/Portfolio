@@ -1,0 +1,8 @@
+{
+  "name": "deepmerge",
+  "version": "4.3.1-fastify",
+  "private": true,
+  "description": "Stand-in for deepmerge 4 (GHSA-gcqx-w48m-w2h4, no patched release) on top of @fastify/deepmerge, put in place of the deepmerge of jest-config by an override of package.json",
+  "main": "index.js",
+  "license": "MIT"
+}
