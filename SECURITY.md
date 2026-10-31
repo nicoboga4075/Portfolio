@@ -52,7 +52,6 @@ These libraries and tools are intentionally kept below their latest major releas
 | `inline-critical > css` | `npm:@adobe/css-tools@^4.5.0` | `critical` → `inline-critical` 8 | `css` is unmaintained and pulled `decode-uri-component` 0.2.2 (4 moderate advisories); only its CLI used it | d9f2468 |
 | `critical > oust` | ^2.0.4 | `critical` 4 | `oust` 2 uses `cheerio` 1, dropping `nth-check` 1 and `lodash.pick` (high advisories); same stylesheets found | 4e6ae6b |
 | `critical > postcss-image-inliner` | ^7.0.1 | `critical` 4 | Version 7 uses `svgo` 3, dropping `nth-check` 1 (high advisory); only loaded, `inlineImages` is off | 4e6ae6b |
-| `@capacitor/cli > xcode > uuid` | ^11.1.1 | `@capacitor/cli` → `xcode` 3 | Medium advisory GHSA-w5hq-g745-h8pq in `uuid` 7 | 1b49b05 |
 | `@sonar/scan > node-forge` | ^1.4.2 | `@sonar/scan` 5 | High advisory GHSA-86w9-cpqp-85rv in `node-forge` 1.4.0, which `@sonar/scan` pins exactly; 1.4.1 and later are out of its range. Remove once `@sonar/scan` asks 1.4.1 or later | 53a18e8 |
 
 ## Vulnerability Disclosure Log
