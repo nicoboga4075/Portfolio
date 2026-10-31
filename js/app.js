@@ -443,6 +443,91 @@ function loadBingo() {
     });
 }
 
+// Lights the stages of the delivery pipeline one after the other, a stage every 1.2s, back to the first after the last, only while the pipeline is on screen; not started when the visitor asked for reduced motion
+function initPipelineLoop() {
+    const pipeline = document.querySelector('.pipeline');
+    // The webhook between the CI and CD boxes is a stage too: its heartbeat runs once the CI has passed
+    const steps = pipeline ? [...pipeline.querySelectorAll('.pipeline-step, .pipeline-link')] : [];
+    if (!steps.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+    // A stage is one step, or all the branches out of the deploy, lit together
+    const stages = [];
+    for (const step of steps) {
+        const branches = step.closest('.pipeline-branches');
+        const last = stages.at(-1);
+        if (branches && last?.branches === branches) {
+            last.steps.push(step);
+        } else {
+            stages.push({ branches, steps: [step] });
+        }
+    }
+    const light = (index, on) => stages[index].steps.forEach(step => step.classList.toggle('is-active', on));
+    // One glowing stretch for the line, run from the lit stage to the next one, so the eye follows it without a break where the line of one step meets the next; the heartbeat and the fork have their own beat along their drawn paths
+    const runner = document.createElement('span');
+    runner.className = 'pipeline-runner';
+    runner.setAttribute('aria-hidden', 'true');
+    pipeline.after(runner);
+    // A box from the frame of the runner
+    const place = element => {
+        const box = element.getBoundingClientRect();
+        const frame = runner.parentElement.getBoundingClientRect();
+        return { left: box.left - frame.left, right: box.right - frame.left, x: box.left + box.width / 2 - frame.left, y: box.top + box.height / 2 - frame.top };
+    };
+    // Where the route enters ('in') or leaves ('out') a stage: the centre of its circle, which hides the stretch; for the webhook the start or the end of its beat, and for the branches the trunk of their fork (47px before their first circle, 56px wide, both scaled down alike), where a beat of their own takes over: there the stretch stops, or starts, with its end on the point, half its width away, so it never runs over the drawn path; level with the line (y)
+    const point = (index, side, y) => {
+        const { branches, steps: [step] } = stages[index];
+        const trace = step.querySelector('.pipeline-ecg-trace');
+        const box = place(trace ?? step.querySelector('.pipeline-icon') ?? step);
+        let { x } = box;
+        const half = runner.offsetWidth / 2;
+        if (branches) {
+            x = box.left - 47 * (box.right - box.left) / 56 - half;
+        } else if (trace) {
+            x = side === 'out' ? box.right + half : box.left - half;
+        }
+        return { x, y: y ?? box.y };
+    };
+    const at = (x, y) => `translate(${x}px, ${y}px)`;
+    // Runs the stretch from a stage to the next one in the time of a stage; none on the branches, whose fork has its own beat, nor after another last stage: the loop starts again from the first circle
+    const run = index => {
+        const { branches, steps: stageSteps } = stages[index];
+        if (branches || index === stages.length - 1) {
+            return;
+        }
+        const from = point(index, 'out');
+        const to = point(index + 1, 'in', from.y);
+        const start = at(from.x, from.y);
+        const end = { transform: at(to.x, to.y), opacity: 1 };
+        // Out of the webhook the stretch waits, unseen, for the beat to cross the trace in the first half of the stage, then takes over at its end
+        const frames = stageSteps[0].querySelector('.pipeline-ecg-trace')
+            ? [{ transform: start, opacity: 0 }, { transform: start, opacity: 0, offset: 0.5 }, { transform: start, opacity: 1, offset: 0.5 }, end]
+            : [{ transform: start, opacity: 1 }, end];
+        runner.animate?.(frames, { duration: 1200, easing: 'linear' });
+    };
+    let current = 0;
+    let timer = null;
+    light(current, true);
+    new IntersectionObserver(([entry]) => {
+        // Off screen: the loop stops where it is and goes on from there when the pipeline comes back
+        if (!entry.isIntersecting) {
+            clearInterval(timer);
+            timer = null;
+            return;
+        }
+        if (timer) {
+            return;
+        }
+        run(current);
+        timer = setInterval(() => {
+            light(current, false);
+            current = (current + 1) % stages.length;
+            light(current, true);
+            run(current);
+        }, 1200);
+    }).observe(pipeline);
+}
+
 function loadContactScripts() {
     if (loadContactScripts.loaded) {
         return;
@@ -1129,6 +1214,8 @@ function initIndexPage(langPage) {
         lastCvUpdate(langPage);
 
         initExperienceFilters();
+
+        initPipelineLoop();
 
         const skillsChartCanvas = document.getElementById('skills-chart');
         if (skillsChartCanvas) {

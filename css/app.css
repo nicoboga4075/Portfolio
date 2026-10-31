@@ -2056,6 +2056,562 @@ html.dark-mode .services-subtitle {
     color: var(--white);
 }
 
+/* Delivery pipeline under the services cards: a row of steps, hidden on a screen too narrow for it; each step as wide as its tools need, a line joining the circles; js/app.js lights the steps one after the other in a loop (.is-active), a light running along the line to the next one */
+.pipeline,
+.pipeline-substeps {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pipeline {
+    margin-top: 184px;
+}
+
+.pipeline-step {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+/* The line, in one blue that shows on the page and in the boxes alike, runs from the circle across the step and the gap after it, from the middle of the first step to the middle of the last one */
+.pipeline-step::after {
+    position: absolute;
+    top: 27px;
+    left: 0;
+    width: calc(100% + 8px);
+    height: 2px;
+    content: '';
+    background-color: var(--primary-light);
+}
+
+.pipeline > .pipeline-step:first-child::after {
+    left: 50%;
+    width: calc(50% + 8px);
+}
+
+/* The frame of the runner: the column of the diagram, which is not scaled down with it, so that js/app.js places the runner in plain screen pixels */
+.pipeline-frame {
+    position: relative;
+}
+
+/* The glowing stretch of the strong blue that js/app.js runs along the line from one lit stage to the next, its soft halo above and below the 2px line, centred on the point it is at; seen only while it runs, under the circles */
+.pipeline-runner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 40px;
+    height: 8px;
+    margin: -4px 0 0 -20px;
+    border-radius: 4px;
+    background: linear-gradient(transparent, var(--primary-pale) 30%, var(--primary-light) 40%, var(--primary-dark) 42%, var(--primary-dark) 58%, var(--primary-light) 60%, var(--primary-pale) 70%, transparent);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Between the CI and CD boxes, the Git webhook: its pill above the line, an electrocardiogram trace on the line, what calls it written under it; the risen block keeps the trace level with the circles; when the loop reaches it, once the CI has passed, a beat runs along the trace */
+.pipeline-link {
+    position: relative;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 100px;
+    margin-top: -16px;
+}
+
+/* The line across the webhook and the gap to the CD box, before and after the heartbeat only: the block as wide as the trace (100px), the beat drawn from 31.7px to 71.7px of it */
+.pipeline-link::after {
+    position: absolute;
+    top: 43px;
+    left: 0;
+    width: calc(100% + 8px);
+    height: 2px;
+    content: '';
+    background: linear-gradient(90deg, var(--primary-light) 31.7px, transparent 31.7px, transparent 71.7px, var(--primary-light) 71.7px);
+}
+
+.pipeline-link-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 10px;
+    border: 1px solid var(--primary);
+    border-radius: 999px;
+    background-color: var(--background-color);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.pipeline-ecg {
+    display: block;
+    width: 100px;
+    height: 32px;
+    overflow: visible;
+    fill: none;
+    stroke-width: 2px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.pipeline-ecg-trace {
+    stroke: var(--primary-light);
+}
+
+/* A beat along a drawn path (the heartbeat of the webhook, the fork of the branches): a stretch of the strong blue on a wider light halo, like the stretch js/app.js runs on the line, running once from the start of the path to its end (a gap longer than the path, so no second stretch follows it) */
+.pipeline-beat,
+.pipeline-beat-halo {
+    fill: none;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-dasharray: 30 200;
+    stroke-dashoffset: 30;
+    opacity: 0;
+}
+
+.pipeline-beat {
+    stroke: var(--primary-dark);
+    stroke-width: 2px;
+}
+
+.pipeline-beat-halo {
+    stroke: var(--primary-light);
+    stroke-width: 6px;
+}
+
+/* The heartbeat in the first half of the stage of the webhook, where the stretch on the line takes over */
+.pipeline-link.is-active .pipeline-beat,
+.pipeline-link.is-active .pipeline-beat-halo {
+    animation: pipeline-beat 0.6s linear forwards;
+}
+
+.pipeline-link.is-active .pipeline-beat-halo {
+    opacity: 0.4;
+}
+
+.pipeline-link.is-active .pipeline-beat {
+    opacity: 1;
+}
+
+.pipeline-link-caption {
+    color: var(--text-color);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+@keyframes pipeline-beat {
+    to {
+        stroke-dashoffset: -100;
+    }
+}
+
+/* What the deploy gives out (the PWA and the Atom feed): the steps one under the other, each its circle with its name and tools beside it; the line from CD forks on a trunk at their left into one arrow per step, the branches of one fixed height so that the line meets the trunk halfway between their circles (the block rises by half a branch and a gap) */
+.pipeline-outputs {
+    --branch-height: 96px;
+
+    position: relative;
+    flex: 0 0 auto;
+    margin-top: calc((var(--branch-height) + 16px) / -2);
+    padding-left: 56px;
+}
+
+/* The line of CD arriving on the trunk */
+.pipeline-outputs::before {
+    position: absolute;
+    top: calc((var(--branch-height) + 16px) / 2 + 27px);
+    left: 0;
+    width: 9px;
+    height: 2px;
+    content: '';
+    background-color: var(--primary-light);
+}
+
+/* The trunk, from the circle of the first branch to that of the last */
+.pipeline-outputs::after {
+    position: absolute;
+    top: 27px;
+    left: 8px;
+    width: 2px;
+    height: calc(var(--branch-height) + 16px + 2px);
+    content: '';
+    background-color: var(--primary-light);
+}
+
+.pipeline-branches {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pipeline-branches .pipeline-step {
+    height: var(--branch-height);
+    display: grid;
+    grid-template-columns: 56px auto;
+    column-gap: 12px;
+    align-content: start;
+    align-items: start;
+    text-align: left;
+}
+
+.pipeline-branches .pipeline-icon {
+    grid-row: span 2;
+}
+
+/* The paths of the beat over the trunk and the arrows, above their lines; once the line has reached the trunk, the stretch splits and runs along each of them to its circle while the branches are lit */
+.pipeline-fork {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow: visible;
+    pointer-events: none;
+}
+
+/* Square ends, so that the halo stops at the base of the arrowhead instead of rounding past it */
+.pipeline-fork path {
+    stroke-linecap: butt;
+}
+
+.pipeline-outputs:has(.is-active) .pipeline-beat,
+.pipeline-outputs:has(.is-active) .pipeline-beat-halo {
+    animation: pipeline-beat 1.2s linear forwards;
+}
+
+.pipeline-outputs:has(.is-active) .pipeline-beat-halo {
+    opacity: 0.4;
+}
+
+.pipeline-outputs:has(.is-active) .pipeline-beat {
+    opacity: 1;
+}
+
+/* The trunk is drawn by the block: no line of their own after the branches */
+.pipeline-branches .pipeline-step::after {
+    content: none;
+}
+
+/* From the trunk to each circle, ending in an arrow */
+.pipeline-branches .pipeline-step::before {
+    position: absolute;
+    top: 27px;
+    left: -46px;
+    width: 36px;
+    height: 2px;
+    content: '';
+    background-color: var(--primary-light);
+}
+
+.pipeline-branches .pipeline-icon::before {
+    position: absolute;
+    top: 20px;
+    left: -14px;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 10px solid var(--primary);
+    content: '';
+}
+
+.pipeline-icon {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    background-color: var(--background-color);
+    color: var(--primary);
+    font-size: 24px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+/* An icon with a colour of its own elsewhere (.icon-shield is red) follows the step: blue, white when lit */
+.pipeline-icon i {
+    color: inherit;
+}
+
+.pipeline-step.is-active .pipeline-icon {
+    background-color: var(--primary);
+    color: var(--white);
+    transform: scale(1.12);
+}
+
+.pipeline-title {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.pipeline-detail {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* The badge above the circle of a step (Code: AI-Augmented with Claude Code), its logo before the words */
+.pipeline-badge {
+    position: absolute;
+    top: -36px;
+    left: 50%;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 10px;
+    border: 1px solid var(--primary);
+    border-radius: 999px;
+    background-color: var(--background-color);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    transform: translateX(-50%);
+}
+
+/* Tools of a step sorted into kinds, each kind under its small label, left-aligned like the lists, a dashed rule between the kinds */
+.pipeline-tool-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.pipeline-tool-group + .pipeline-tool-group {
+    padding-top: 6px;
+    border-top: 1px dashed var(--primary-light);
+}
+
+.pipeline-tool-group-label {
+    display: block;
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Within a kind, the tools two by two, so that a step with several kinds stays about as tall as the others */
+.pipeline-tool-group .pipeline-tools {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 12px;
+}
+
+/* Several tools of a step: a list, one per line, each after its logo instead of a bullet, left-aligned under the centred title */
+.pipeline-tools {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+.pipeline-tool {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.pipeline-tool-logo {
+    flex-shrink: 0;
+    width: 14px;
+    margin-top: 2px;
+    margin-right: 6px;
+    color: var(--primary);
+    font-size: 14px;
+    text-align: center;
+}
+
+.pipeline-tool .pipeline-tool-logo {
+    margin-right: 0;
+}
+
+/* Some logos are black: on a dark page they sit on a small white tile */
+html.dark-mode img.pipeline-tool-logo {
+    padding: 1px;
+    border-radius: 3px;
+    background-color: var(--white);
+}
+
+/* Every name on one line, whatever the width: where the row would not fit, it is scaled down or hidden instead */
+.pipeline-title,
+.pipeline-detail,
+.pipeline-tool-group-label {
+    white-space: nowrap;
+}
+
+/* A group (CI, CD): a tinted box around the steps it runs, its label on top, tall enough to put the circles halfway down the box so that the line runs through the middle of the diagram; the box rises above the row by exactly its label so that its circles and its line stay level with the others, with no border to shift them (its dark-mode edge is an inset shadow) */
+.pipeline-group {
+    position: relative;
+    flex: 1 1 auto;
+    margin-top: -168px;
+    padding: 0 8px 12px;
+    border-radius: 16px;
+    background-color: var(--primary-pale);
+}
+
+/* The grey of the tools is too light on the tinted box: a darker grey there */
+.pipeline-group .pipeline-detail {
+    color: var(--secondary-dark);
+}
+
+/* On a black page the box is dark grey with a blue edge, its tools back in the light grey of dark mode */
+html.dark-mode .pipeline-group {
+    background-color: var(--gray-dark);
+    box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+html.dark-mode .pipeline-group .pipeline-detail {
+    color: var(--secondary);
+}
+
+html.dark-mode .pipeline-group-label {
+    color: var(--text-color);
+}
+
+/* In a box the steps draw the line too, so that it sits at exactly the same height as outside: the first one from the edge of the box, across its padding, the last one on to the next item, across its padding and the gap */
+.pipeline-substeps > .pipeline-step:first-child::after {
+    left: -8px;
+    width: calc(100% + 16px);
+}
+
+.pipeline-substeps > .pipeline-step:last-child::after {
+    width: calc(100% + 16px);
+}
+
+/* The label takes the width of the group without widening it */
+.pipeline-group-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    width: 0;
+    min-width: 100%;
+    height: 168px;
+    color: var(--primary-dark);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* Under the steps of a box, past a dashed line, what it stands on (the machines of the CI with their systems, the configuration files of the CD), each item set apart by a dashed rule */
+.pipeline-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--primary-light);
+    color: var(--primary-dark);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+html.dark-mode .pipeline-footer {
+    color: var(--text-color);
+}
+
+.pipeline-footer-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+    white-space: nowrap;
+}
+
+.pipeline-footer-item + .pipeline-footer-item {
+    border-left: 1px dashed var(--primary-light);
+}
+
+.pipeline-footer-icon {
+    font-size: 16px;
+}
+
+/* The chips of a group: plain labels shaped like buttons, not clickable */
+.pipeline-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.pipeline-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    border: 1px solid var(--primary);
+    border-radius: 999px;
+    background-color: var(--background-color);
+    color: var(--primary);
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: default;
+}
+
+/* An icon of the icon font (the GitHub mark) in the colour of the text, light or dark */
+.pipeline-chip i {
+    color: var(--text-color);
+}
+
+
+/* The diagram only reads in a row, about 1600px wide with every name on one line: below 1720px of screen it is scaled down, every 50px, just enough to fit the column (the screen less about 116px of margins), and below 1400px, where it would get too small to read, the whole block, its title included, is hidden */
+@media (max-width: 1719.98px) {
+    .pipeline {
+        zoom: 0.97;
+    }
+}
+
+@media (max-width: 1669.98px) {
+    .pipeline {
+        zoom: 0.94;
+    }
+}
+
+@media (max-width: 1619.98px) {
+    .pipeline {
+        zoom: 0.91;
+    }
+}
+
+@media (max-width: 1569.98px) {
+    .pipeline {
+        zoom: 0.87;
+    }
+}
+
+@media (max-width: 1519.98px) {
+    .pipeline {
+        zoom: 0.84;
+    }
+}
+
+@media (max-width: 1469.98px) {
+    .pipeline {
+        zoom: 0.81;
+    }
+}
+
+@media (max-width: 1419.98px) {
+    .pipeline {
+        zoom: 0.8;
+    }
+}
+
+@media (max-width: 1399.98px) {
+    .pipeline-section {
+        display: none;
+    }
+}
+
 /* The badges of the hero, side by side, wrapping under each other on a narrow screen */
 .hero-badges {
     display: flex;

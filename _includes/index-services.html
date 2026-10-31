@@ -10,7 +10,9 @@
                 <h2 class="mb-4">{{ servicesLang.heading }}</h2>
                 <img class="img-fluid" src="images/developer.png" id="developer" alt="{{ servicesLang.devAlt }}" loading="lazy" height="250" width="150">
                 <p class="mt-4">{{ servicesLang.tagline | safe }}</p>
+                {%- if servicesLang.cvReviewCta %}
                 <a class="btn btn-primary py-3 px-5" href="/{{ lang }}#contact-section">{{ servicesLang.cvReviewCta }}</a>
+                {%- endif %}
             </div>
         </div>
         <div class="row justify-content-center">
@@ -29,6 +31,112 @@
                 </a>
             </div>
             {%- endfor %}
+        </div>
+        {#- The delivery pipeline, hidden on a screen too narrow for its row #}
+        <div class="row justify-content-center mt-5 pipeline-section">
+            <div class="col-12 text-center ftco-animate pipeline-frame">
+                <h3 class="mb-3">{{ servicesLang.pipelineHeading }}</h3>
+                {#- The logo of a tool, from services.toolLogos: an image of images/, or else an icon of the icon font #}
+                {%- macro toolLogo(name) %}
+                    {%- set logo = services.toolLogos[name] %}
+                    {%- if logo.startsWith('images/') %}<img class="pipeline-tool-logo" src="{{ logo }}" alt="" width="14" height="14" loading="lazy">{% else %}<i class="{{ logo }} pipeline-tool-logo" aria-hidden="true"></i>{% endif %}
+                {%- endmacro %}
+                {#- The tools of a step, each after its logo: one on its own, several in a list, a reader to subscribe with as a link that subscribes it to the Atom feed of the page language #}
+                {%- macro toolList(tools) %}
+                    {%- if tools.length > 1 %}
+                    <ul class="pipeline-detail pipeline-tools">
+                        {%- for tool in tools %}
+                        <li class="pipeline-tool">{{ toolLogo(tool) }}{{ tool }}</li>
+                        {%- endfor %}
+                    </ul>
+                    {%- elif tools[0].subscribe %}
+                    <a class="pipeline-detail" href="{{ tools[0].subscribe }}{{ ('feed/' + siteUrl + '/feed_' + lang + '.xml') | urlencode }}" target="_blank" rel="noopener">{{ toolLogo(tools[0].name) }}{{ tools[0].name }}</a>
+                    {%- else %}
+                    <span class="pipeline-detail">{{ toolLogo(tools[0]) }}{{ tools[0] }}</span>
+                    {%- endif %}
+                {%- endmacro %}
+                <ol class="pipeline">
+                    {#- A step: its circle, its name and its tools, and above the circle the badge of a step that has one (Programming: AI-Augmented with Claude Code) #}
+                    {%- macro pipelineStep(step) %}
+                        <li class="pipeline-step{{ ' has-badge' if step.badge }}">
+                            {%- if step.badge %}
+                            <span class="pipeline-badge"><img src="{{ step.badge.logo }}" alt="" width="14" height="14" loading="lazy">{{ step.badge.label[lang] }}</span>
+                            {%- endif %}
+                            <span class="pipeline-icon" aria-hidden="true"><i class="{{ step.icon }}"></i></span>
+                            <span class="pipeline-title">{{ step.title[lang] }}</span>
+                            {%- if step.groups %}
+                            {#- Tools sorted into kinds (Configuration: Data and Feed; Programming: languages and Templating), each under its label #}
+                            <div class="pipeline-detail pipeline-tool-groups">
+                                {%- for group in step.groups %}
+                                <div class="pipeline-tool-group"><span class="pipeline-tool-group-label">{{ group.label[lang] }}</span>{{ toolList(group.detail[lang]) }}</div>
+                                {%- endfor %}
+                            </div>
+                            {%- else %}
+                            {{- toolList(step.detail[lang]) }}
+                            {%- endif %}
+                        </li>
+                    {%- endmacro %}
+                    {%- for item in services.pipeline %}
+                    {%- if item.steps %}
+                    {#- A group (CI, CD): its name and its chips (platforms, files, review, each with its logo image or icon), plain labels that are not links, above the steps it runs #}
+                    <li class="pipeline-group">
+                        <span class="pipeline-group-label">
+                            <strong>{{ item.title[lang] }}</strong>
+                            <span class="pipeline-chips">
+                                {%- for chip in item.chips %}
+                                <span class="pipeline-chip">
+                                    {%- if chip.logo %}<img src="{{ chip.logo }}" alt="" width="12" height="12" loading="lazy">{% elif chip.icon %}<i class="{{ chip.icon }}" aria-hidden="true"></i>{% endif %}{{ chip.label[lang] -}}
+                                </span>
+                                {%- endfor %}
+                            </span>
+                        </span>
+                        <ol class="pipeline-substeps">
+                            {%- for step in item.steps %}
+                            {{- pipelineStep(step) }}
+                            {%- endfor %}
+                        </ol>
+                        {#- Under the steps, what the group stands on, item by item: the machines of the CI (a GitHub server on Linux, the GitLab runner on a Windows PC), the configuration files of the CD #}
+                        {%- if item.footer %}
+                        <span class="pipeline-footer">
+                            {%- for entry in item.footer %}
+                            <span class="pipeline-footer-item"><i class="{{ entry.icon }} pipeline-footer-icon" aria-hidden="true"></i>{{ entry.label[lang] }}{% if entry.os %} · <i class="{{ entry.os.icon }}" aria-hidden="true"></i>{{ entry.os.name }}{% endif %}</span>
+                            {%- endfor %}
+                        </span>
+                        {%- endif %}
+                    </li>
+                    {%- elif item.link %}
+                    {#- Between the CI and CD boxes, what hands over from one to the other: a Git commit calls the webhook that starts the deploy #}
+                    <li class="pipeline-link">
+                        <span class="pipeline-link-pill"><i class="{{ item.link.icon }}" aria-hidden="true"></i>{{ item.link.label[lang] }}</span>
+                        {#- One heartbeat between the two ends of the line: the faint trace, and the beat that runs along it, a halo under its core #}
+                        {%- set heartbeat = "M31.7 16 L35 12 L38.3 16 H43.3 L45.8 20 L49.2 1.3 L52.5 30.7 L55 16 H61.7 L66.7 10.7 L71.7 16" %}
+                        <svg class="pipeline-ecg" viewBox="0 0 100 32" aria-hidden="true"><path class="pipeline-ecg-trace" d="{{ heartbeat }}" pathLength="100"/><path class="pipeline-beat-halo" d="{{ heartbeat }}" pathLength="100"/><path class="pipeline-beat" d="{{ heartbeat }}" pathLength="100"/></svg>
+                        <span class="pipeline-link-caption">{{ item.link.caption[lang] }}</span>
+                    </li>
+                    {%- elif item.branches %}
+                    {#- What the deploy gives out side by side (the PWA and the Atom feed): one arrow from CD to each #}
+                    <li class="pipeline-outputs">
+                        {#- The path of the beat on the fork, one per branch: from where the line meets the trunk (9px in), along the trunk to the height of its circle, then along its arrow to the base of its arrowhead (42px), so its halo never goes past the point; branches 96px high, 16px apart, their circles 28px down #}
+                        {%- set forkHeight = item.branches.length * 112 - 16 %}
+                        {%- set junction = 28 + (item.branches.length - 1) * 56 %}
+                        <svg class="pipeline-fork" viewBox="0 0 56 {{ forkHeight }}" width="56" height="{{ forkHeight }}" aria-hidden="true">
+                            {%- for step in item.branches %}
+                            {%- set fork = "M9 " + junction + " V" + (28 + loop.index0 * 112) + " H42" %}
+                            <path class="pipeline-beat-halo" d="{{ fork }}" pathLength="100"/><path class="pipeline-beat" d="{{ fork }}" pathLength="100"/>
+                            {%- endfor %}
+                        </svg>
+                        <ol class="pipeline-branches">
+                            {%- for step in item.branches %}
+                            {{- pipelineStep(step) }}
+                            {%- endfor %}
+                        </ol>
+                    </li>
+                    {%- else %}
+                    {{- pipelineStep(item) }}
+                    {%- endif %}
+                    {%- endfor %}
+                </ol>
+            </div>
         </div>
     </div>
 </section>

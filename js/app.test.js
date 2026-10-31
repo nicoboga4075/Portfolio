@@ -620,6 +620,94 @@ describe('the home page', () => {
         expect(window.fetch).not.toHaveBeenCalledWith('/en', expect.anything());
     });
 
+    test('lights the pipeline steps one after the other while on screen, loops back to the first and pauses off screen', () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body: '<ol class="pipeline"><li class="pipeline-step"></li><li class="pipeline-step"></li><li class="pipeline-step"></li></ol>' });
+        app.initPipelineLoop();
+        const pipeline = document.querySelector('.pipeline');
+        const observer = observerOf(pipeline);
+        const lit = () => [...document.querySelectorAll('.pipeline-step')].map(step => step.classList.contains('is-active'));
+        expect(lit()).toEqual([true, false, false]);
+        // Not moving until it comes into view
+        jest.advanceTimersByTime(2400);
+        expect(lit()).toEqual([true, false, false]);
+        observer.callback([{ isIntersecting: true, target: pipeline }]);
+        jest.advanceTimersByTime(1200);
+        expect(lit()).toEqual([false, true, false]);
+        // A second report of being on screen doesn't start a second loop
+        observer.callback([{ isIntersecting: true, target: pipeline }]);
+        jest.advanceTimersByTime(2400);
+        expect(lit()).toEqual([true, false, false]);
+        observer.callback([{ isIntersecting: false, target: pipeline }]);
+        jest.advanceTimersByTime(3600);
+        expect(lit()).toEqual([true, false, false]);
+        observer.callback([{ isIntersecting: true, target: pipeline }]);
+        jest.advanceTimersByTime(1200);
+        expect(lit()).toEqual([false, true, false]);
+    });
+
+    test('lights the branches out of the deploy together, as one stage', () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body: '<ol class="pipeline"><li class="pipeline-step"></li><li class="pipeline-outputs"><ol class="pipeline-branches"><li class="pipeline-step"></li><li class="pipeline-step"></li></ol></li></ol>' });
+        app.initPipelineLoop();
+        const pipeline = document.querySelector('.pipeline');
+        observerOf(pipeline).callback([{ isIntersecting: true, target: pipeline }]);
+        const lit = () => [...document.querySelectorAll('.pipeline-step')].map(step => step.classList.contains('is-active'));
+        expect(lit()).toEqual([true, false, false]);
+        jest.advanceTimersByTime(1200);
+        expect(lit()).toEqual([false, true, true]);
+        jest.advanceTimersByTime(1200);
+        expect(lit()).toEqual([true, false, false]);
+    });
+
+    test('lights the webhook between the CI and CD boxes as a stage of its own', () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body: '<ol class="pipeline"><li class="pipeline-step"></li><li class="pipeline-link"></li><li class="pipeline-step"></li></ol>' });
+        app.initPipelineLoop();
+        const pipeline = document.querySelector('.pipeline');
+        observerOf(pipeline).callback([{ isIntersecting: true, target: pipeline }]);
+        jest.advanceTimersByTime(1200);
+        expect(document.querySelector('.pipeline-link').classList.contains('is-active')).toBe(true);
+        expect(document.querySelectorAll('.is-active')).toHaveLength(1);
+    });
+
+    test('runs one stretch along the line from each lit stage to the next, up to the fork of the branches, which has its own beat', () => {
+        jest.useFakeTimers();
+        const animate = jest.fn();
+        const app = loadApp({ body: '<div class="pipeline-frame"><ol class="pipeline"><li class="pipeline-step"><span class="pipeline-icon"></span></li><li class="pipeline-link"><svg class="pipeline-ecg"><path class="pipeline-ecg-trace"></path></svg></li><li class="pipeline-outputs"><ol class="pipeline-branches"><li class="pipeline-step"><span class="pipeline-icon"></span></li><li class="pipeline-step"></li></ol></li></ol></div>', before: () => { Element.prototype.animate = animate; } });
+        app.initPipelineLoop();
+        const runners = document.querySelectorAll('.pipeline-frame > .pipeline-runner');
+        expect(runners).toHaveLength(1);
+        expect(runners[0].getAttribute('aria-hidden')).toBe('true');
+        const pipeline = document.querySelector('.pipeline');
+        observerOf(pipeline).callback([{ isIntersecting: true, target: pipeline }]);
+        // From the circle of the first step to the trace of the webhook, then from the webhook to the fork, then nothing on the branches
+        expect(animate).toHaveBeenCalledTimes(1);
+        expect(animate.mock.calls[0][0][0].transform).toBe('translate(0px, 0px)');
+        expect(animate.mock.calls[0][1]).toEqual({ duration: 1200, easing: 'linear' });
+        jest.advanceTimersByTime(1200);
+        expect(animate).toHaveBeenCalledTimes(2);
+        // Out of the webhook, hidden for the first half while the beat crosses the trace, then seen
+        expect(animate.mock.calls[1][0].map(frame => frame.opacity)).toEqual([0, 0, 1, 1]);
+        jest.advanceTimersByTime(1200);
+        expect(animate).toHaveBeenCalledTimes(2);
+        // Seen again from the first stage once the loop comes back to it
+        jest.advanceTimersByTime(1200);
+        expect(animate).toHaveBeenCalledTimes(3);
+        // Back on screen while already running: no second loop and no second stretch
+        observerOf(pipeline).callback([{ isIntersecting: true, target: pipeline }]);
+        expect(animate).toHaveBeenCalledTimes(3);
+        delete Element.prototype.animate;
+    });
+
+    test('leaves the pipeline unlit without steps or under reduced motion', () => {
+        let app = loadApp();
+        expect(() => app.initPipelineLoop()).not.toThrow();
+        app = loadApp({ body: '<ol class="pipeline"><li class="pipeline-step"></li></ol>', before: () => { window.matchMedia = jest.fn(() => ({ matches: true })); } });
+        app.initPipelineLoop();
+        expect(document.querySelector('.is-active')).toBeNull();
+    });
+
     test('runs the bingo: the counter stops on the second click, a win on 2713 and a loss otherwise', () => {
         jest.useFakeTimers();
         const app = loadApp({ body: '<button id="bingo-btn" data-stop="Stop">Play</button><span id="bingo-timer"></span>' });
