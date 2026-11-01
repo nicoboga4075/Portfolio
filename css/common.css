@@ -47,6 +47,9 @@
 
     /* The site font, read by the skills chart too. To change it, also edit the Google Fonts link in _includes/base.njk; the Fallback faces below are metric-matched to Poppins, retune them for another font. */
     --font-family: 'Poppins', 'Fallback Windows', 'Fallback Mac/iOS', 'Fallback Linux', 'Fallback Android', sans-serif;
+
+    /* The size of the round buttons in the corners: the contact button, the chat stand-in, and the Botpress bubble, whose shadow root reads it too (js/botpress.js) */
+    --fab-size: 60px;
 }
 
 html.dark-mode {

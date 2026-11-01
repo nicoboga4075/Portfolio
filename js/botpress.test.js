@@ -48,12 +48,15 @@ function fakePage({ stub: withStub = true, navbarHeight = 100 } = {}) {
         }
     };
     global.window = global;
+    // --fab-size of css/common.css, the size the Botpress bubble gets, set on <html> only: read on any other element, it is missing
+    global.getComputedStyle = element => ({ getPropertyValue: name => (name === '--fab-size' && element === global.document.documentElement ? ' 60px' : '') });
     global.ResizeObserver = observer('resize');
     global.MutationObserver = observer('mutation');
     global.document = {
         createElement: jest.fn(tag => ({ tagName: tag })),
         head: { appendChild: jest.fn(script => appended.push(script)) },
         body: { tagName: 'body' },
+        documentElement: {},
         querySelector: jest.fn(selector => (selector === 'meta[name="botpress"]' ? { content: JSON.stringify(scripts) } : null)),
         getElementById: jest.fn(id => ({ 'bp-fab-stub': withStub ? stub : null, 'ftco-navbar': navbar, 'fab-root': page.fabRoot })[id] ?? null)
     };
@@ -76,7 +79,7 @@ function clickAndLoad(page) {
 const overrideStyle = shadowRoot => shadowRoot.getElementById('bp-fab-position-override');
 
 afterEach(() => {
-    for (const name of ['window', 'document', 'ResizeObserver', 'MutationObserver', 'botpress']) delete global[name];
+    for (const name of ['window', 'document', 'getComputedStyle', 'ResizeObserver', 'MutationObserver', 'botpress']) delete global[name];
 });
 
 describe('config.botpress of package.json', () => {
@@ -188,7 +191,7 @@ describe('the real bubble', () => {
         expect(overrideStyle(shadowRoot)).not.toBeNull();
     });
 
-    test('falls back on the 60px bubble height while Botpress has not drawn it', () => {
+    test('falls back on the --fab-size height while Botpress has not drawn its bubble', () => {
         const page = fakePage({ navbarHeight: 100 });
         const shadowRoot = fakeShadowRoot(undefined);
         page.fabRoot = { shadowRoot };

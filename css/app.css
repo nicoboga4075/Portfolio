@@ -1368,8 +1368,8 @@ html.dark-mode .tagcloud a:hover {
     bottom: 20px;
     right: 20px;
     align-items: center;
-    width: 60px;
-    height: 60px;
+    width: var(--fab-size);
+    height: var(--fab-size);
     background-color: var(--primary);
     border-radius: 50%;
     cursor: pointer;
@@ -1377,14 +1377,14 @@ html.dark-mode .tagcloud a:hover {
     z-index: 1000;
 }
 
-/* Stand-in for the Botpress bubble (same spot, colours and size as botpress.js gives it: the 60px circle of #contact-icon) until a click loads the 300 KB widget */
+/* Stand-in for the Botpress bubble (same spot, colours and size as botpress.js gives it: the --fab-size circle of #contact-icon) until a click loads the 300 KB widget */
 #bp-fab-stub {
     display: none;
     position: fixed;
     top: 10px;
     right: 20px;
-    width: 60px;
-    height: 60px;
+    width: var(--fab-size);
+    height: var(--fab-size);
     padding: 0;
     border: 0;
     border-radius: 50%;
