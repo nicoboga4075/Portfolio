@@ -142,13 +142,13 @@
                     "Project teams, internal and client-side",
                     "Team tennis: US Dax (FFT), ESILV (FFSU)",
                     "PING and PI2 team projects at ESILV",
-                    "Involvement in associations"
+                    "Involvement in associations during my studies"
                 ],
                 "fr": [
                     "Équipes projet, en interne comme chez le client",
                     "Tennis en équipe : US Dax (FFT), ESILV (FFSU)",
                     "Projets d'équipe PING et PI2 à l'ESILV",
-                    "Engagement associatif"
+                    "Engagement associatif pendant mes études"
                 ]
             }
         },
@@ -179,13 +179,13 @@
                 "en": [
                     "Software training and technical support",
                     "Customer care at Galadrim and Soft Concept",
-                    "Elevator pitches",
+                    "Elevator pitches and trade marketing",
                     "Private lessons and tennis refereeing"
                 ],
                 "fr": [
                     "Formations logicielles et support technique",
                     "Relation client chez Galadrim et Soft Concept",
-                    "Elevator pitchs",
+                    "Elevator pitchs et marketing commercial",
                     "Cours particuliers et arbitrage de tennis"
                 ]
             }
@@ -196,16 +196,16 @@
             "fr": "Adaptabilité",
             "proof": {
                 "en": [
-                    "Companies of different sizes and sectors",
-                    "Agile and V model alike",
+                    "Companies of different sizes and sectors, Agile and V model alike",
+                    "Meetings in English (offshore) and stays in England",
                     "French and Canadian teaching (ESILV, UQAC)",
-                    "Travelling, language stays in England and living in different cities"
+                    "Travelling and living in different cities"
                 ],
                 "fr": [
-                    "Entreprises de différentes tailles et différents secteurs",
-                    "Agile comme cycle en V",
+                    "Entreprises de différentes tailles et secteurs, en Agile comme en cycle en V",
+                    "Réunions en anglais (offshore) et séjours en Angleterre",
                     "Pédagogies française et canadienne (ESILV, UQAC)",
-                    "Voyages, séjours linguistiques en Angleterre et vie dans différentes villes"
+                    "Voyages et vie dans différentes villes"
                 ]
             }
         },
@@ -217,13 +217,13 @@
                 "en": [
                     "MPSI/MP preparatory classes at Janson de Sailly",
                     "Chess in different game modes",
-                    "Full stack engineering",
+                    "Full stack engineering and data viz",
                     "Software maintenance and incident response (Soft Concept)"
                 ],
                 "fr": [
                     "Prépa MPSI/MP au lycée Janson de Sailly",
                     "Échecs dans différents modes de jeu",
-                    "Ingénierie full stack",
+                    "Ingénierie full stack et data viz",
                     "Maintenance applicative et réponse à incident (Soft Concept)"
                 ]
             }
@@ -253,15 +253,15 @@
             "fr": "Proactivité",
             "proof": {
                 "en": [
-                    "Tech watch (AI, cyber...)",
-                    "AI in my dev workflow: Claude Code, ChatGPT (ChapsVision)",
+                    "Tech watch and AI in my dev workflow: Claude Code, ChatGPT",
                     "Code audits and pentests (Bassetti)",
+                    "Active part in DevOps (CI/CD, GitLab)",
                     "Double degree in Canada (UQAC)"
                 ],
                 "fr": [
-                    "Veille technologique (IA, cyber...)",
-                    "L'IA dans mon quotidien de dev : Claude Code, ChatGPT (ChapsVision)",
+                    "Veille technologique et IA au quotidien : Claude Code, ChatGPT",
                     "Audits de code et pentests (Bassetti)",
+                    "Participation active au DevOps (CI/CD, GitLab)",
                     "Double diplôme au Canada (UQAC)"
                 ]
             }
@@ -274,11 +274,13 @@
                 "en": [
                     "Training on my own: Google Cybersecurity, EBIOS RM, Cyberini, Claude Code",
                     "Astek consultant on assignment at a client (Alstom)",
+                    "Independent internship at Cyberprotect: alpha version",
                     "Competitive tennis for several years"
                 ],
                 "fr": [
                     "Formations suivies seul : Google Cybersecurity, EBIOS RM, Cyberini, Claude Code",
                     "Consultant Astek en mission chez le client (Alstom)",
+                    "Stage en autonomie chez Cyberprotect : version alpha",
                     "Tennis en compétition pendant plusieurs années"
                 ]
             }
@@ -310,13 +312,13 @@
                 "en": [
                     "UI-UX designer assistant at Galadrim",
                     "Chess strategies, maths and tennis exercises",
-                    "Writing articles",
+                    "Writing articles on IT",
                     "Designing an MSC application (Cyberprotect)"
                 ],
                 "fr": [
                     "Assistant UI-UX designer chez Galadrim",
                     "Stratégies aux échecs, exercices de maths et de tennis",
-                    "Rédaction d'articles",
+                    "Rédaction d'articles sur l'informatique",
                     "Conception d'une application MCS (Cyberprotect)"
                 ]
             }
