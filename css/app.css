@@ -363,6 +363,21 @@ html:not(.dark-mode) .slider-text .hero-tagline {
     margin-right: 8px;
 }
 
+/* The interests, one emoji each, out of the label column the first span of each line gets */
+#about-section ul.about-info li .about-interests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#about-section ul.about-info li .about-interests .about-interest {
+    width: auto;
+    margin: 0;
+    font-size: 20px;
+    line-height: 1;
+    cursor: default;
+}
+
 #about-section .counter-wrap .text p {
     font-size: 20px;
 }

@@ -5,6 +5,15 @@
         "name": "Name:",
         "age": "Age:",
         "schoolYear": "School Year:",
+        "interests": "Interests:",
+        "interestList": [
+            {"emoji": "🎾", "label": "Tennis"},
+            {"emoji": "♟️", "label": "Chess"},
+            {"emoji": "✈️", "label": "Travel"},
+            {"emoji": "🎵", "label": "Music"},
+            {"emoji": "👨‍🏫", "label": "Maths"},
+            {"emoji": "💻", "label": "Programming"}
+        ],
         "esilvHref": "https://www.esilv.fr/en",
         "experience": "Years of experience",
         "cvHref": "docs/public/CV_en.pdf",
@@ -17,6 +26,15 @@
         "name": "Nom :",
         "age": "Âge :",
         "schoolYear": "Promotion :",
+        "interests": "Centres d'intérêt :",
+        "interestList": [
+            {"emoji": "🎾", "label": "Tennis"},
+            {"emoji": "♟️", "label": "Échecs"},
+            {"emoji": "✈️", "label": "Voyages"},
+            {"emoji": "🎵", "label": "Musique"},
+            {"emoji": "👨‍🏫", "label": "Maths"},
+            {"emoji": "💻", "label": "Programmation"}
+        ],
         "esilvHref": "https://www.esilv.fr",
         "experience": "Années d'expérience",
         "cvHref": "docs/public/CV_fr.pdf",
