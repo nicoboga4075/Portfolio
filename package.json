@@ -223,7 +223,7 @@
     "auto-changelog": "^2.7.0",
     "axe-core": "^4.14.0",
     "browser-sync": "^3.0.4",
-    "cypress": "^16.2.0",
+    "cypress": "^16.2.1",
     "deepmerge": "file:tests/deepmerge",
     "eslint": "^10.13.0",
     "globals": "^17.13.0",
