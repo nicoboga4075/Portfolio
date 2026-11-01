@@ -2104,9 +2104,12 @@ html.dark-mode .owl-dot:focus-visible {
     backface-visibility: hidden;
 }
 
-/* Room for two lines on every card: a label that wraps on a narrow screen ("Esprit d'équipe") keeps the images and the other labels of the row on the same line */
+/* Room for three lines on every card: a label that wraps on a narrow screen ("Esprit d'équipe", "Project manage-ment") keeps the images and the other labels of the row on the same line; a word longer than the card ("management") is hyphenated rather than spilling over its border */
 .soft-card-label {
-    min-height: 48px;
+    min-height: 72px;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 /* Square from its width, not half the height of a card now stretched to the tallest one */
