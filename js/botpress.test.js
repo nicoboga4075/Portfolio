@@ -188,13 +188,13 @@ describe('the real bubble', () => {
         expect(overrideStyle(shadowRoot)).not.toBeNull();
     });
 
-    test('falls back on the 64px bubble height while Botpress has not drawn it', () => {
+    test('falls back on the 60px bubble height while Botpress has not drawn it', () => {
         const page = fakePage({ navbarHeight: 100 });
         const shadowRoot = fakeShadowRoot(undefined);
         page.fabRoot = { shadowRoot };
         runScript();
         clickAndLoad(page);
-        expect(overrideStyle(shadowRoot).textContent).toContain(`top: ${Math.round((100 - 64) / 2)}px !important`);
+        expect(overrideStyle(shadowRoot).textContent).toContain(`top: ${Math.round((100 - 60) / 2)}px !important`);
     });
 
     test('puts the override back after Botpress rebuilds its shadow root, and follows the navbar height', () => {

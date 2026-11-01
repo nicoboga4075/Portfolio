@@ -11,9 +11,9 @@
 // the two states - on every re-apply and on navbar resize.
 // The same style also recolors the button (--primary) and its icon (--white) with
 // the site's colors, which custom properties carry into the shadow root
-// (page-level CSS can't reach it).
+// (page-level CSS can't reach it), and gives it the size and shadow of #contact-icon: a 60px circle, without the second, bigger shadow Botpress adds on hover.
 const BP_FAB_OVERRIDE_ID = 'bp-fab-position-override';
-const BP_FAB_OVERRIDE_CSS = top => `.bpFabWrapper { bottom: auto !important; top: ${top}px !important; right: 20px !important; } .bpFabContainer { background-color: var(--primary) !important; } .bpFabIcon { background-color: var(--white) !important; }`;
+const BP_FAB_OVERRIDE_CSS = top => `.bpFabWrapper { bottom: auto !important; top: ${top}px !important; right: 20px !important; width: 60px !important; height: 60px !important; } .bpFabContainer { width: 60px !important; height: 60px !important; background-color: var(--primary) !important; box-shadow: 0 4px 6px var(--shadow-lg) !important; } .bpFabIcon { width: 100% !important; height: 100% !important; background-color: var(--white) !important; } .bpFab, .bpFab:hover { width: 60px !important; height: 60px !important; box-shadow: none !important; }`;
 
 // Top offset that vertically centers a button of the given height on the navbar.
 function navbarCenteredTop(height) {
@@ -27,7 +27,7 @@ function watchBotpressFab(shadowRoot) {
 	document.getElementById('bp-fab-stub')?.remove();
 	function applyOverride() {
 		const fab = shadowRoot.querySelector('.bpFabWrapper');
-		const fabHeight = fab ? fab.getBoundingClientRect().height : 64;
+		const fabHeight = fab ? fab.getBoundingClientRect().height : 60;
 		const top = navbarCenteredTop(fabHeight);
 		const css = BP_FAB_OVERRIDE_CSS(top);
 		const existing = shadowRoot.getElementById(BP_FAB_OVERRIDE_ID);
