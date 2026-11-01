@@ -160,4 +160,5 @@ The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fi
 | `fix-ci` | Runbooks & Troubleshooting | Find why the CI of a commit failed on GitHub Actions or GitLab CI (runner off, failed test, quality gate) and fix the cause | `npm run ci:status` |
 | `new-experience` | Code Scaffolding & Templates | Add a work or personal experience, an education, a certification or a trip (resume, profile figures, CVs) | - |
 | `third-party-apis` | Library & API Reference | Know how each third-party service is used (contact form, captcha, Calendly, Botpress, analytics, GitHub, Supabase), its settings and its CSP origins | - |
+| `new-skill` | Code Scaffolding & Templates | Add a hard, soft or mad skill or a skill card (image, texts in every language, the experiences behind a soft skill) | - |
 <!-- skills:end -->
