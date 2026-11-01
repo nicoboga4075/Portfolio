@@ -22,7 +22,7 @@ test.describe('services delivery pipeline', () => {
         test(`lists every step in order on the ${lang} page`, () => {
             const html = render(`index_${lang}`);
             const escape = text => text.replaceAll('&', '&amp;').replaceAll("'", '&#39;');
-            expect(html).toContain(`<h3 class="mb-3">${escape(services[lang].pipelineHeading)}</h3>`);
+            expect(html).toContain(`<p class="mb-3">${escape(services[lang].pipelineHeading)}</p>`);
             const titles = [...html.matchAll(/<span class="pipeline-title">([^<]*)<\/span>/g)].map(match => match[1]);
             expect(titles).toEqual(steps.map(step => escape(step.title[lang])));
             for (const step of steps) expect(html).toContain(`<i class="${step.icon}"></i>`);

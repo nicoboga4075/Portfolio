@@ -35,7 +35,7 @@
         {#- The delivery pipeline, hidden on a screen too narrow for its row #}
         <div class="row justify-content-center mt-5 pipeline-section">
             <div class="col-12 text-center ftco-animate pipeline-frame">
-                <h3 class="mb-3">{{ servicesLang.pipelineHeading }}</h3>
+                <p class="mb-3">{{ servicesLang.pipelineHeading }}</p>
                 {#- The logo of a tool, from services.toolLogos: an image of images/, or else an icon of the icon font #}
                 {%- macro toolLogo(name) %}
                     {%- set logo = services.toolLogos[name] %}
