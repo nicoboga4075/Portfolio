@@ -11,5 +11,7 @@
             {%- endfor %}
         </ul>
     </div>
+    {#- The CV, always at hand in the navbar, which stays on screen while scrolling: the path starts at the root so it also works from the blog route #}
+    <a id="nav-cv" class="btn btn-primary" href="/{{ about[lang].cvHref }}" target="_blank" rel="noopener" aria-label="{{ navLang.downloadCv }}"><span class="icon-download" aria-hidden="true"></span>{{ navLang.cv }}</a>
     {% include "language-switcher.html" %}
 </div>

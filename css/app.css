@@ -1030,6 +1030,18 @@ html.dark-mode .ftco-navbar-light .navbar-toggler:focus-visible {
     outline-color: var(--primary-dark);
 }
 
+/* The CV button of the navbar, as compact as the language pill next to it */
+#nav-cv {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 6px;
+    margin-right: 12px;
+    padding: 4px 14px;
+    border-radius: 50px;
+    font-size: 14px;
+}
+
 /* Centre the pill on the navbar's wrapped mobile row (a flex item there, so still block-level and needs auto margins to centre within that row). In .page-controls (policy / terms) and .read-title (projects) it's one part of a flex row that's already centred (or space-between, for .read-title) as a whole, so no auto margins there. */
 .navbar #language-switcher {
     margin-inline: auto;

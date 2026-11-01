@@ -6,7 +6,9 @@
             "dark": "Theme: dark"
         },
         "navigation": "Toggle navigation",
-        "language": "Language"
+        "language": "Language",
+        "cv": "CV",
+        "downloadCv": "Download my CV (PDF)"
     },
     "fr": {
         "theme": {
@@ -15,7 +17,9 @@
             "dark": "Thème : sombre"
         },
         "navigation": "Basculer la navigation",
-        "language": "Langue"
+        "language": "Langue",
+        "cv": "CV",
+        "downloadCv": "Télécharger mon CV (PDF)"
     },
     "menus": [
         {
