@@ -218,13 +218,32 @@
                     "MPSI/MP preparatory classes at Janson de Sailly",
                     "Chess in different game modes",
                     "Full stack engineering",
-                    "Software maintenance at Soft Concept"
+                    "Software maintenance and incident response (Soft Concept)"
                 ],
                 "fr": [
                     "Prépa MPSI/MP au lycée Janson de Sailly",
                     "Échecs dans différents modes de jeu",
                     "Ingénierie full stack",
-                    "Maintenance applicative chez Soft Concept"
+                    "Maintenance applicative et réponse à incident (Soft Concept)"
+                ]
+            }
+        },
+        {
+            "key": "stress-management",
+            "en": "Stress management",
+            "fr": "Gestion du stress",
+            "proof": {
+                "en": [
+                    "MPSI/MP preparatory classes and entrance exams",
+                    "Competitive tennis: a clear head on tight points",
+                    "Support and projects in parallel: prioritising, stepping back",
+                    "Demanding, even safety-critical, software sectors"
+                ],
+                "fr": [
+                    "Prépa MPSI/MP et concours d'ingénieurs",
+                    "Tennis en compétition : lucide sur les points serrés",
+                    "Support et projets en parallèle : prioriser, prendre du recul",
+                    "Secteurs logiciels exigeants et parfois critiques"
                 ]
             }
         },
