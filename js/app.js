@@ -443,6 +443,19 @@ function loadBingo() {
     });
 }
 
+// Turns a soft skill card over when its padlock is clicked (Enter and Space click a button too) to unlock the experiences behind the skill, and back to lock it again; while a card is unlocked the carousel stops sliding, so the experiences stay on screen
+function initSoftSkillCards() {
+    const carousel = $('#soft-skills');
+    carousel.on('click', '.soft-card-toggle', function () {
+        const card = $(this).closest('.soft-card');
+        const unlocked = !card.hasClass('is-unlocked');
+        card.toggleClass('is-unlocked', unlocked);
+        $(this).attr('aria-expanded', String(unlocked)).find('i').toggleClass('icon-lock', !unlocked).toggleClass('icon-unlock', unlocked);
+        card.find('.soft-card-back').attr('aria-hidden', String(!unlocked));
+        carousel.trigger(carousel.find('.soft-card.is-unlocked').length ? 'stop.owl.autoplay' : 'play.owl.autoplay');
+    });
+}
+
 // Lights the stages of the delivery pipeline one after the other, a stage every 1.2s, back to the first after the last, only while the pipeline is on screen; not started when the visitor asked for reduced motion
 function initPipelineLoop() {
     const pipeline = document.querySelector('.pipeline');
@@ -1216,6 +1229,8 @@ function initIndexPage(langPage) {
         initExperienceFilters();
 
         initPipelineLoop();
+
+        initSoftSkillCards();
 
         const skillsChartCanvas = document.getElementById('skills-chart');
         if (skillsChartCanvas) {

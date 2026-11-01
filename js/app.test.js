@@ -620,6 +620,26 @@ describe('the home page', () => {
         expect(window.fetch).not.toHaveBeenCalledWith('/en', expect.anything());
     });
 
+    test('unlocks a soft skill card only from its padlock to show its experiences, stops the carousel while one is open, and locks it again', () => {
+        const card = () => '<div class="soft-card"><button class="soft-card-toggle" aria-expanded="false"><i class="icon-lock"></i></button><div class="soft-card-back" aria-hidden="true"></div></div>';
+        const app = loadApp({ body: `<div id="soft-skills">${card()}${card()}</div>` });
+        app.initSoftSkillCards();
+        const autoplay = [];
+        $('#soft-skills').on('stop.owl.autoplay play.owl.autoplay', event => autoplay.push(event.type));
+        const [team, empathy] = $('.soft-card').toArray().map(element => $(element));
+        const state = skill => [skill.hasClass('is-unlocked'), skill.find('.soft-card-toggle').attr('aria-expanded'), skill.find('i').attr('class'), skill.find('.soft-card-back').attr('aria-hidden')];
+        team.trigger('click');
+        expect(state(team)).toEqual([false, 'false', 'icon-lock', 'true']);
+        team.find('.soft-card-toggle').trigger('click');
+        expect(state(team)).toEqual([true, 'true', 'icon-unlock', 'false']);
+        expect(state(empathy)).toEqual([false, 'false', 'icon-lock', 'true']);
+        empathy.find('.soft-card-toggle').trigger('click');
+        team.find('.soft-card-toggle').trigger('click');
+        expect(state(team)).toEqual([false, 'false', 'icon-lock', 'true']);
+        empathy.find('.soft-card-toggle').trigger('click');
+        expect(autoplay).toEqual(['stop', 'stop', 'stop', 'play']);
+    });
+
     test('lights the pipeline steps one after the other while on screen, loops back to the first and pauses off screen', () => {
         jest.useFakeTimers();
         const app = loadApp({ body: '<ol class="pipeline"><li class="pipeline-step"></li><li class="pipeline-step"></li><li class="pipeline-step"></li></ol>' });

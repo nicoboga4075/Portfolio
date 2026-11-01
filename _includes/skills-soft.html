@@ -1,6 +1,13 @@
 {%- set lang = page.fileSlug.slice(-2) -%}
 <div id="soft-skills" class="owl-carousel owl-theme d-none">
     {%- for s in skills.soft %}
-    <div class="d-flex flex-column align-items-center"><img src="images/{{ s.key }}.png" class="img-fluid" alt="{{ s[lang] | safe }}" loading="lazy" height="75" width="75"><span>{{ s[lang] | safe }}</span></div>
+    {#- A card locked on its skill: only its padlock, in the top right corner, turns it over and unlocks the experiences that prove it, one per line as on the CV #}
+    <div class="soft-card">
+        <button type="button" class="soft-card-toggle" aria-expanded="false" aria-label="{{ skills.carousel[lang].softUnlock }} {{ s[lang] }}"><i class="icon-lock" aria-hidden="true"></i></button>
+        <div class="soft-card-inner">
+            <div class="soft-card-face soft-card-front"><img src="images/{{ s.key }}.png" class="img-fluid" alt="" loading="lazy" height="75" width="75"><span class="soft-card-label">{{ s[lang] | safe }}</span></div>
+            <div class="soft-card-face soft-card-back" aria-hidden="true"><ul class="soft-card-proofs">{%- for proof in s.proof[lang] %}<li class="soft-card-proof">{{ proof }}</li>{%- endfor %}</ul></div>
+        </div>
+    </div>
     {%- endfor %}
 </div>
