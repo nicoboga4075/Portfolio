@@ -172,6 +172,25 @@
             }
         },
         {
+            "key": "project-management",
+            "en": "Project management",
+            "fr": "Gestion de projet",
+            "proof": {
+                "en": [
+                    "Managing client engagements (Soft Concept)",
+                    "Client projects from 3 months to 2 years, some in parallel",
+                    "Tracking with Jira and Confluence",
+                    "Agile in a 10-person squad (ChapsVision), V model as a consultant for Alstom"
+                ],
+                "fr": [
+                    "Gestion des prestations client (Soft Concept)",
+                    "Projets clients de 3 mois à 2 ans, parfois en parallèle",
+                    "Suivi avec Jira et Confluence",
+                    "Agile en squad de 10 (ChapsVision), cycle en V comme consultant chez Alstom"
+                ]
+            }
+        },
+        {
             "key": "communication",
             "en": "Communication",
             "fr": "Communication",
@@ -301,6 +320,25 @@
                     "Cours de tennis pour enfants",
                     "Easy Student Housing, projet solidaire (concours étudiant CGI)",
                     "Support client chez Soft Concept"
+                ]
+            }
+        },
+        {
+            "key": "curiosity",
+            "en": "Curiosity",
+            "fr": "Curiosité",
+            "proof": {
+                "en": [
+                    "From surveys to cybersecurity, cryptography and AI",
+                    "Applied maths, programming and chess",
+                    "New technologies and tools explored: Claude Code, MCP, n8n, Playwright",
+                    "Discovering other cultures while travelling"
+                ],
+                "fr": [
+                    "Des enquêtes à la cybersécurité, la cryptographie et l'IA",
+                    "Mathématiques appliquées, programmation et échecs",
+                    "Nouvelles technologies et outils explorés : Claude Code, MCP, n8n, Playwright",
+                    "Découverte d'autres cultures en voyage"
                 ]
             }
         },
