@@ -1,13 +1,18 @@
+{%- set lang = page.fileSlug.slice(-2) -%}
+{#- A label is the name of the tool, one string, or one text per language for a method ("Cycle en V") #}
 {%- set skills = [
     { key: "python",     label: "Python" },
     { key: "csharp",     label: "C#" },
+    { key: "dotnet",     label: ".NET" },
     { key: "vscode",     label: "VS Code" },
     { key: "vsstudio",   label: "Visual Studio" },
     { key: "github",     label: "GitHub" },
     { key: "gitlab",     label: "GitLab" },
+    { key: "netlify",    label: "Netlify" },
     { key: "html",       label: "HTML" },
     { key: "css",        label: "CSS" },
-    { key: "javascript", label: "JS" },
+    { key: "javascript", label: "JavaScript" },
+    { key: "typescript", label: "TypeScript" },
     { key: "jquery",     label: "jQuery" },
     { key: "bootstrap",  label: "Bootstrap" },
     { key: "sql",        label: "SQL" },
@@ -15,7 +20,12 @@
     { key: "postman",    label: "Postman" },
     { key: "docker",     label: "Docker" },
     { key: "robot",      label: "Robot Framework" },
+    { key: "playwright", label: "Playwright" },
+    { key: "xunit",      label: "xUnit" },
     { key: "sonarqube",  label: "SonarQube" },
+    { key: "snyk",       label: "Snyk" },
+    { key: "agile",      label: "Agile" },
+    { key: "v-model",    label: { en: "V model", fr: "Cycle en V" } },
     { key: "office",     label: "Office" },
     { key: "netsurvey",  label: "Net-Survey" },
     { key: "ethnos",     label: "Ethnos" },
@@ -27,6 +37,7 @@
 ] -%}
 <div id="hard-skills" class="owl-carousel owl-theme">
     {%- for s in skills %}
-    <div class="d-flex flex-column align-items-center"><img src="images/{{ s.key }}.png" class="img-fluid" alt="{{ s.label }}" loading="lazy" height="75" width="75"><span>{{ s.label }}</span></div>
+    {%- set label = s.label[lang] or s.label %}
+    <div class="d-flex flex-column align-items-center"><img src="images/{{ s.key }}.png" class="img-fluid" alt="{{ label }}" loading="lazy" height="75" width="75"><span>{{ label }}</span></div>
     {%- endfor %}
 </div>
