@@ -8,7 +8,7 @@
         "navigation": "Toggle navigation",
         "language": "Language",
         "cv": "CV",
-        "downloadCv": "Download my CV (PDF)"
+        "downloadCv": "(PDF, opens in a new tab)"
     },
     "fr": {
         "theme": {
@@ -19,7 +19,7 @@
         "navigation": "Basculer la navigation",
         "language": "Langue",
         "cv": "CV",
-        "downloadCv": "Télécharger mon CV (PDF)"
+        "downloadCv": "(PDF, s'ouvre dans un nouvel onglet)"
     },
     "menus": [
         {

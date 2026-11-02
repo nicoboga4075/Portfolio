@@ -18,7 +18,7 @@
                         <div class="soft-card-face soft-card-back" aria-hidden="true" inert>
                             <ul class="counter-list">
                                 {%- for certif in counter.certifList %}
-                                <li><a href="{{ certif.href }}" target="_blank" rel="noopener">{{ certif.name[lang] }}</a> <span class="counter-by">[{{ certif.by }}]</span> <span class="counter-details">{% if certif.score %}{{ certif.score }} · {% endif %}{% if certif.level %}<span class="counter-level" tabindex="0" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="{{ certif.levelTip[lang] }}">{{ certif.level[lang] }}</span> · {% endif %}{{ certif.date }}</span></li>
+                                <li><a href="{{ certif.href }}" target="_blank" rel="noopener">{{ certif.name[lang] }}</a> <span class="counter-by">[{{ certif.by }}]</span> <span class="counter-details">{% if certif.score %}{{ certif.score }} · {% endif %}{% if certif.level %}<button type="button" class="counter-level" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="{{ certif.levelTip[lang] }}">{{ certif.level[lang] }}</button> · {% endif %}{{ certif.date }}</span></li>
                                 {%- endfor %}
                             </ul>
                         </div>

@@ -537,6 +537,11 @@ html:not(.dark-mode) .slider-text .hero-tagline {
 
 /* A level that explains itself on hover or keyboard focus */
 #counter-section .counter-list .counter-level {
+    padding: 0;
+    border: none;
+    color: inherit;
+    background-color: transparent;
+    font: inherit;
     text-decoration: underline dotted;
     cursor: help;
 }

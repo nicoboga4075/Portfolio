@@ -49,7 +49,7 @@ test.describe('counters that turn over', () => {
             expect(html).toContain(`<button type="button" class="soft-card-toggle" aria-expanded="false" aria-label="${escapeHtml(counter[lang].certifsToggle)}" data-icons="icon-question-circle icon-close"><i class="icon-question-circle" aria-hidden="true"></i></button>`);
             expect(html).toContain(`<strong id="certifs-count" class="number" data-number="${profile.certifsCount}">0</strong>`);
             // The spaces between the name, its issuer and its details are gone with the whitespace render() collapses between tags
-            const level = certif => (certif.level ? `<span class="counter-level" tabindex="0" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="${escapeHtml(certif.levelTip[lang])}">${certif.level[lang]}</span> · ` : '');
+            const level = certif => (certif.level ? `<button type="button" class="counter-level" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="${escapeHtml(certif.levelTip[lang])}">${certif.level[lang]}</button> · ` : '');
             const items = counter.certifList.map(certif => `<li><a href="${certif.href}" target="_blank" rel="noopener">${certif.name[lang]}</a><span class="counter-by">[${certif.by}]</span><span class="counter-details">${certif.score ? `${certif.score} · ` : ''}${level(certif)}${certif.date}</span></li>`).join('');
             expect(html).toContain(`<div class="soft-card-face soft-card-back" aria-hidden="true" inert><ul class="counter-list">${items}</ul></div>`);
         });
