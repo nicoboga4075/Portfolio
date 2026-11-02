@@ -889,8 +889,16 @@ html.dark-mode #counter-section .counter-list a {
     transform: translateX(-50%);
 }
 
+/* One bullet per line, so a long list (English) reads line by line; a single line goes without */
 .progress-wrap .language-tip-line {
+    display: list-item;
+    margin-left: 16px;
+    list-style: disc outside;
+}
+
+.progress-wrap .language-tip-line:only-child {
     display: block;
+    margin-left: 0;
 }
 
 .progress-wrap .language-tip-box a {
@@ -2045,6 +2053,10 @@ html.dark-mode .project .explore:focus-visible {
     border-radius: 4px;
 }
 
+.standard-tag {
+    font-weight: 600;
+}
+
 .company-type-badge,
 .company-size-badge {
     display: inline-block;
@@ -2053,10 +2065,6 @@ html.dark-mode .project .explore:focus-visible {
     padding: 2px 8px;
     font-size: 12px;
     color: var(--white);
-.standard-tag {
-    font-weight: 600;
-}
-
     border-radius: 0;
 }
 
