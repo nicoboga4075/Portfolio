@@ -1038,7 +1038,8 @@ function initExperienceFilters() {
         { key: 'type', selector: '.badge', label: getMessage('filter-contract') },
         { key: 'companyType', selector: '.company-type-badge', label: getMessage('filter-company-type') },
         { key: 'companySize', selector: '.company-size-badge', label: getMessage('filter-company-size') },
-        { key: 'sector', selector: '.sector-tag', label: getMessage('filter-sector') }
+        { key: 'sector', selector: '.sector-tag', label: getMessage('filter-sector') },
+        { key: 'standard', selector: '.standard-tag', label: getMessage('filter-standard') }
     ];
     groups.forEach(g => { g.values = new Set(); });
 
@@ -1081,7 +1082,7 @@ function initExperienceFilters() {
         updateToggleLabel();
         let visibleCount = 0;
         wraps.forEach(wrap => {
-            const texts = new Set([...wrap.querySelectorAll('.badge, .company-type-badge, .company-size-badge, .sector-tag')]
+            const texts = new Set([...wrap.querySelectorAll(groups.map(g => g.selector).join(', '))]
                 .map(el => el.textContent.trim()));
             const visible = active.size === 0 || [...active].every(f => texts.has(f));
             wrap.classList.toggle('filtered-out', !visible);

@@ -374,7 +374,7 @@ describe('the skills chart', () => {
 
 describe('the experience filters', () => {
     const experiences = `<div id="experiences"><h2 class="heading">Experiences</h2>
-        <div class="resume-wrap"><span class="badge">CDI</span><span class="company-type-badge">Startup</span><span class="sector-tag">Health</span></div>
+        <div class="resume-wrap"><span class="badge">CDI</span><span class="company-type-badge">Startup</span><span class="sector-tag">Health</span><span class="standard-tag">ISO 27001</span></div>
         <div class="resume-wrap ftco-animated"><span class="badge">Internship</span><span class="sector-tag">Health</span></div>
     </div>`;
 
@@ -395,8 +395,8 @@ describe('the experience filters', () => {
         expect(toggle.nextElementSibling).toBe(toolbar);
         expect(document.querySelector('#experiences h2').nextElementSibling).toBe(toggle);
         expect(toolbar.hidden).toBe(true);
-        expect([...toolbar.querySelectorAll('.filter-group-label')].map(label => label.textContent)).toEqual(['Contract', 'Company type', 'Sector']);
-        expect([...toolbar.querySelectorAll('.filter-chip')].map(chip => chip.textContent)).toEqual(['CDI', 'Internship', 'Startup', 'Health']);
+        expect([...toolbar.querySelectorAll('.filter-group-label')].map(label => label.textContent)).toEqual(['Contract', 'Company type', 'Sector', 'Standards']);
+        expect([...toolbar.querySelectorAll('.filter-chip')].map(chip => chip.textContent)).toEqual(['CDI', 'Internship', 'Startup', 'Health', 'ISO 27001']);
         toggle.click();
         expect(toolbar.hidden).toBe(false);
         expect(toggle.getAttribute('aria-expanded')).toBe('true');
@@ -427,6 +427,9 @@ describe('the experience filters', () => {
         expect(second.classList.contains('filtered-out')).toBe(false);
         expect(second.classList.contains('fadeInUp')).toBe(false);
         expect(toggleLabel.textContent).not.toMatch(/\(/);
+        chip('ISO 27001').click();
+        expect(first.classList.contains('filtered-out')).toBe(false);
+        expect(second.classList.contains('filtered-out')).toBe(true);
     });
 });
 

@@ -76,6 +76,9 @@
                             {%- for tag in e.sector %}
                             <span class="sector-tag">{{ tag[lang] if tag[lang] else tag }}</span>
                             {%- endfor %}
+                            {%- for standard in e.standards %}
+                            <span class="standard-tag">{{ standard }}</span>
+                            {%- endfor %}
                             {#- The missions of an experience that has "details", folded until the visitor opens them: a native details element, so it works with the keyboard and without JavaScript #}
                             {%- if e.details %}
                             <details class="resume-details">
