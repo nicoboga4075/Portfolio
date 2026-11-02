@@ -161,7 +161,11 @@
             },
             "href": "https://www.uqac.ca",
             "school": "UQAC",
-            "place": "(Chicoutimi, CAN)"
+            "place": "(Chicoutimi, CAN)",
+            "tip": {
+                "en": "Double degree in partnership with the ESILV (remote because of COVID)",
+                "fr": "Double diplôme en partenariat avec l'ESILV (en distanciel en raison du COVID)"
+            }
         },
         {
             "id": "ESILV",
@@ -175,7 +179,11 @@
                 "fr": "https://www.esilv.fr"
             },
             "school": "ESILV",
-            "place": "(Paris La Défense, FRA)"
+            "place": "(Paris La Défense, FRA)",
+            "tip": {
+                "en": "Major in Computer Science, Big Data & Connected Objects, minor in Cybersecurity & Project Management",
+                "fr": "Majeure Informatique, Big Data & Objets Connectés, Mineure Cybersécurité & Gestion de Projet"
+            }
         },
         {
             "id": "js",
@@ -186,7 +194,11 @@
             },
             "href": "https://www.janson-de-sailly.fr",
             "school": "Janson de Sailly",
-            "place": "(Paris 16e, FRA)"
+            "place": "(Paris 16e, FRA)",
+            "tip": {
+                "en": "Preparatory classes for the engineering grandes écoles: Mathematics (Analysis, Algebra), Physics-Chemistry, Computer Science (Python, SQL)",
+                "fr": "Classes préparatoires aux grandes écoles d'ingénieurs : Mathématiques (Analyse, Algèbre), Physique-Chimie, Informatique (Python, SQL)"
+            }
         },
         {
             "id": "sjdc",
@@ -197,7 +209,11 @@
             },
             "href": "https://sjdc-dax.fr",
             "school": "Saint Jacques de Compostelle",
-            "place": "(Dax, FRA)"
+            "place": "(Dax, FRA)",
+            "tip": {
+                "en": "General track, science stream (Life and Earth Sciences major, Mathematics specialty)",
+                "fr": "Filière générale, parcours scientifique (Majeure Sciences de la Vie et de la Terre, Spécialité Mathématiques)"
+            }
         }
     ],
     "experiences": [
@@ -225,6 +241,7 @@
                 },
                 "Data Intelligence"
             ],
+            "standards": ["IGI 1300", "ISO 42001"],
             "companyType": "software-publisher",
             "companySize": "Scale-up"
         },
@@ -237,7 +254,6 @@
             "title": {
                 "en": "Consultant Engineer",
                 "fr": "Ingénieur Consultant"
-            "standards": ["IGI 1300", "ISO 42001"],
             },
             "href": {
                 "en": "https://astek.net/?lang=en",
@@ -256,6 +272,7 @@
                     "fr": "Cryptographie"
                 }
             ],
+            "standards": ["EN 50128"],
             "companyType": "it-consulting-firm",
             "companySize": {
                 "en": "Large group",
@@ -268,7 +285,6 @@
             "missionCompany": "Alstom",
             "missionHref": {
                 "en": "https://www.alstom.com",
-            "standards": ["EN 50128"],
                 "fr": "https://www.alstom.com/fr"
             }
         },
@@ -297,6 +313,10 @@
                 {
                     "en": "Quality",
                     "fr": "Qualité"
+                },
+                {
+                    "en": "Cybersecurity",
+                    "fr": "Cybersécurité"
                 }
             ],
             "standards": ["ISO 9001", "ISO 27001"],
@@ -316,10 +336,6 @@
                 "en": "Software Engineer",
                 "fr": "Ingénieur Logiciel"
             },
-                },
-                {
-                    "en": "Cybersecurity",
-                    "fr": "Cybersécurité"
             "href": {
                 "en": "https://www.soft-concept.com/en",
                 "fr": "https://www.soft-concept.com"
