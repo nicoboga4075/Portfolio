@@ -621,23 +621,33 @@ describe('the home page', () => {
     });
 
     test('unlocks a soft skill card only from its padlock to show its experiences, stops the carousel while one is open, and locks it again', () => {
-        const card = () => '<div class="soft-card"><button class="soft-card-toggle" aria-expanded="false"><i class="icon-lock"></i></button><div class="soft-card-back" aria-hidden="true"></div></div>';
-        const app = loadApp({ body: `<div id="soft-skills">${card()}${card()}</div>` });
-        app.initSoftSkillCards();
+        const card = () => '<div class="soft-card"><button class="soft-card-toggle" aria-expanded="false"><i class="icon-lock"></i></button><div class="soft-card-back" aria-hidden="true" inert></div></div>';
+        const app = loadApp({ body: `<div id="soft-skills" class="owl-carousel">${card()}${card()}</div>` });
+        app.initFlipCards();
         const autoplay = [];
         $('#soft-skills').on('stop.owl.autoplay play.owl.autoplay', event => autoplay.push(event.type));
         const [team, empathy] = $('.soft-card').toArray().map(element => $(element));
-        const state = skill => [skill.hasClass('is-unlocked'), skill.find('.soft-card-toggle').attr('aria-expanded'), skill.find('i').attr('class'), skill.find('.soft-card-back').attr('aria-hidden')];
+        const state = skill => [skill.hasClass('is-unlocked'), skill.find('.soft-card-toggle').attr('aria-expanded'), skill.find('i').attr('class'), skill.find('.soft-card-back').attr('aria-hidden'), skill.find('.soft-card-back').is('[inert]')];
         team.trigger('click');
-        expect(state(team)).toEqual([false, 'false', 'icon-lock', 'true']);
+        expect(state(team)).toEqual([false, 'false', 'icon-lock', 'true', true]);
         team.find('.soft-card-toggle').trigger('click');
-        expect(state(team)).toEqual([true, 'true', 'icon-unlock', 'false']);
-        expect(state(empathy)).toEqual([false, 'false', 'icon-lock', 'true']);
+        expect(state(team)).toEqual([true, 'true', 'icon-unlock', 'false', false]);
+        expect(state(empathy)).toEqual([false, 'false', 'icon-lock', 'true', true]);
         empathy.find('.soft-card-toggle').trigger('click');
         team.find('.soft-card-toggle').trigger('click');
-        expect(state(team)).toEqual([false, 'false', 'icon-lock', 'true']);
+        expect(state(team)).toEqual([false, 'false', 'icon-lock', 'true', true]);
         empathy.find('.soft-card-toggle').trigger('click');
         expect(autoplay).toEqual(['stop', 'stop', 'stop', 'play']);
+    });
+
+    test('turns the certifications card over from its question mark, with the two icons its button names, outside any carousel', () => {
+        const app = loadApp({ body: '<div class="stat-card soft-card"><button class="soft-card-toggle" aria-expanded="false" data-icons="icon-question-circle icon-close"><i class="icon-question-circle"></i></button><div class="soft-card-back" aria-hidden="true" inert><a href="/docs/public/TOEIC.pdf">TOEIC</a></div></div>' });
+        app.initFlipCards();
+        const toggle = $('.soft-card-toggle');
+        toggle.trigger('click');
+        expect([$('.soft-card').hasClass('is-unlocked'), toggle.find('i').attr('class'), $('.soft-card-back').is('[inert]')]).toEqual([true, 'icon-close', false]);
+        toggle.trigger('click');
+        expect([$('.soft-card').hasClass('is-unlocked'), toggle.find('i').attr('class'), $('.soft-card-back').is('[inert]')]).toEqual([false, 'icon-question-circle', true]);
     });
 
     test('lights the pipeline steps one after the other while on screen, loops back to the first and pauses off screen', () => {

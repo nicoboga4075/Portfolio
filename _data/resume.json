@@ -299,7 +299,7 @@
             },
             "company": "Soft Concept",
             "city": "Lyon",
-            "type": "permanent",
+            "type": ["internship", "permanent"],
             "sector": [
                 {
                     "en": "Surveys",

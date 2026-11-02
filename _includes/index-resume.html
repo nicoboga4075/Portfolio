@@ -46,7 +46,10 @@
                         {%- endif %}
                         <div class="text pl-3">
                             <span class="date">{{ e.date[lang] }}</span>
-                            <span class="badge">{{ resumeLang.types[e.type] }}</span>
+                            {#- A type, or a list of types for a job that was an internship then a permanent one: one badge each, so the contract filter finds it under both #}
+                            {%- for type in ([e.type] if e.type is string else e.type) %}
+                            <span class="badge">{{ resumeLang.types[type] }}</span>
+                            {%- endfor %}
                             {%- if e.companyType %}
                             <span class="company-type-badge">{{ resumeLang.companyTypes[e.companyType] }}</span>
                             {%- endif %}

@@ -479,6 +479,79 @@ html:not(.dark-mode) .slider-text .hero-tagline {
     }
 }
 
+/* The certifications card: a soft skill card without its inner frames, the white card itself turning over; its question mark in the top right corner like the padlock */
+#counter-section .stat-card.soft-card {
+    position: relative;
+    height: auto;
+}
+
+#counter-section .soft-card-face {
+    gap: 0;
+    padding: 0;
+    border: none;
+}
+
+/* The back lies over the front instead of sharing its grid cell, so the card keeps the height of the other counters; a list too long for it scrolls */
+#counter-section .soft-card-inner {
+    position: relative;
+}
+
+#counter-section .soft-card-back {
+    position: absolute;
+    inset: -30px -20px;
+    justify-content: flex-start;
+    padding: 8px 12px;
+    overflow-y: auto;
+    background-color: var(--white);
+}
+
+#counter-section .soft-card-toggle {
+    color: var(--primary);
+}
+
+/* Centred while it fits, from its top when it scrolls (a centred flex item would lose its first lines) */
+#counter-section .counter-list {
+    margin: auto 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+#counter-section .counter-list li {
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+/* The first line leaves room for the question mark above its end */
+#counter-section .counter-list li:first-child {
+    padding-right: 24px;
+}
+
+#counter-section .counter-list li + li {
+    margin-top: 2px;
+}
+
+#counter-section .counter-list a {
+    font-weight: 600;
+}
+
+/* A level that explains itself on hover or keyboard focus */
+#counter-section .counter-list .counter-level {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* The card stays white in dark mode, where --primary turns light: the darker blue keeps the links readable */
+html.dark-mode #counter-section .counter-list a {
+    color: var(--primary-dark);
+}
+
+#counter-section .counter-list .counter-by,
+#counter-section .counter-list .counter-details {
+    display: inline;
+    color: var(--secondary-dark);
+}
+
 /* ==== Hire Me ==== */
 
 #hireme-section {

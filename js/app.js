@@ -443,15 +443,16 @@ function loadBingo() {
     });
 }
 
-// Turns a soft skill card over when its padlock is clicked (Enter and Space click a button too) to unlock the experiences behind the skill, and back to lock it again; while a card is unlocked the carousel stops sliding, so the experiences stay on screen
-function initSoftSkillCards() {
-    const carousel = $('#soft-skills');
-    carousel.on('click', '.soft-card-toggle', function () {
+// Turns a card over when its toggle is clicked (Enter and Space click a button too), and back again: the soft skill cards (a padlock) and the certifications counter (a question mark, data-icons of the button naming its two icons); the hidden back is inert, so its links can't be tabbed to; while a card of a carousel is open the carousel stops sliding, so its back stays on screen
+function initFlipCards() {
+    $(document).on('click', '.soft-card-toggle', function () {
         const card = $(this).closest('.soft-card');
         const unlocked = !card.hasClass('is-unlocked');
+        const [closedIcon, openIcon] = ($(this).data('icons') || 'icon-lock icon-unlock').split(' ');
         card.toggleClass('is-unlocked', unlocked);
-        $(this).attr('aria-expanded', String(unlocked)).find('i').toggleClass('icon-lock', !unlocked).toggleClass('icon-unlock', unlocked);
-        card.find('.soft-card-back').attr('aria-hidden', String(!unlocked));
+        $(this).attr('aria-expanded', String(unlocked)).find('i').toggleClass(closedIcon, !unlocked).toggleClass(openIcon, unlocked);
+        card.find('.soft-card-back').attr({ 'aria-hidden': String(!unlocked), inert: unlocked ? null : '' });
+        const carousel = card.closest('.owl-carousel');
         carousel.trigger(carousel.find('.soft-card.is-unlocked').length ? 'stop.owl.autoplay' : 'play.owl.autoplay');
     });
 }
@@ -1230,7 +1231,7 @@ function initIndexPage(langPage) {
 
         initPipelineLoop();
 
-        initSoftSkillCards();
+        initFlipCards();
 
         const skillsChartCanvas = document.getElementById('skills-chart');
         if (skillsChartCanvas) {

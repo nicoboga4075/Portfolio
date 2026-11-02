@@ -6,7 +6,7 @@
         <button type="button" class="soft-card-toggle" aria-expanded="false" aria-label="{{ skills.carousel[lang].softUnlock }} {{ s[lang] }}"><i class="icon-lock" aria-hidden="true"></i></button>
         <div class="soft-card-inner">
             <div class="soft-card-face soft-card-front"><img src="images/{{ s.key }}.png" class="img-fluid" alt="" loading="lazy" height="75" width="75"><span class="soft-card-label">{{ s[lang] | safe }}</span></div>
-            <div class="soft-card-face soft-card-back" aria-hidden="true"><ul class="soft-card-proofs">{%- for proof in s.proof[lang] %}<li class="soft-card-proof">{{ proof }}</li>{%- endfor %}</ul></div>
+            <div class="soft-card-face soft-card-back" aria-hidden="true" inert><ul class="soft-card-proofs">{%- for proof in s.proof[lang] %}<li class="soft-card-proof">{{ proof }}</li>{%- endfor %}</ul></div>
         </div>
     </div>
     {%- endfor %}

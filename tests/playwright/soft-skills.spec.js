@@ -24,7 +24,7 @@ test.describe('soft skills cards', () => {
                 expect(skill.proof[lang].length).toBeGreaterThan(1);
                 expect(html).toContain(`<button type="button" class="soft-card-toggle" aria-expanded="false" aria-label="${escapeHtml(`${skills.carousel[lang].softUnlock} ${skill[lang]}`)}"><i class="icon-lock" aria-hidden="true"></i></button>`);
                 expect(html).toContain(`<div class="soft-card-face soft-card-front"><img src="images/${skill.key}.png" class="img-fluid" alt="" loading="lazy" height="75" width="75"><span class="soft-card-label">${skill[lang]}</span></div>`);
-                expect(html).toContain(`<div class="soft-card-face soft-card-back" aria-hidden="true"><ul class="soft-card-proofs">${skill.proof[lang].map(proof => `<li class="soft-card-proof">${escapeHtml(proof)}</li>`).join('')}</ul></div>`);
+                expect(html).toContain(`<div class="soft-card-face soft-card-back" aria-hidden="true" inert><ul class="soft-card-proofs">${skill.proof[lang].map(proof => `<li class="soft-card-proof">${escapeHtml(proof)}</li>`).join('')}</ul></div>`);
             }
         });
     }
