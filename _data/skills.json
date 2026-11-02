@@ -100,14 +100,16 @@
             "hardTip": "Practical or technical abilities learned through training or experience",
             "softTip": "Personal attributes or interpersonal abilities that enhance how you work and interact with others: unlock a card to see the experiences behind it",
             "softUnlock": "Unlock the experiences of",
-            "madTip": "Atypical abilities or unique talents, often developed through personal passions"
+            "madTip": "Atypical abilities or unique talents, often developed through personal passions",
+            "docLinkLabel": "Certificate (PDF)"
         },
         "fr": {
             "heading": "Découvrez mes compétences",
             "hardTip": "Compétences techniques ou pratiques, acquises par la formation ou l'expérience",
             "softTip": "Compétences personnelles ou interpersonnelles, améliorant la manière de travailler et d’interagir avec les autres : déverrouillez une carte pour voir les expériences qui la prouvent",
             "softUnlock": "Déverrouiller les expériences de la compétence",
-            "madTip": "Compétences atypiques ou talents uniques, souvent développées à travers des passions personnelles"
+            "madTip": "Compétences atypiques ou talents uniques, souvent développées à travers des passions personnelles",
+            "docLinkLabel": "Attestation (PDF)"
         }
     },
     "mad": [

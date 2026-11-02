@@ -2192,6 +2192,38 @@ html.dark-mode .owl-dot:focus-visible {
     background-color: var(--primary) !important;
 }
 
+/* A hard skill with a certificate: a PDF icon in its top right corner, like the padlock of a soft skill card, links to it; the name and the logo are no link */
+.hard-skill {
+    position: relative;
+}
+
+.hard-skill-certificate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: var(--primary-light);
+    font-size: 18px;
+}
+
+.hard-skill-certificate:hover,
+.hard-skill-certificate:focus {
+    color: var(--white);
+}
+
+.hard-skill-certificate:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.hard-skill-certificate:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
+}
+
 /* The soft skill slides stretched to the tallest card, so every card has the same size */
 #soft-skills .owl-stage {
     display: flex;

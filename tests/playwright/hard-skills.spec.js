@@ -5,11 +5,12 @@ const nunjucks = require('nunjucks');
 
 const root = path.join(__dirname, '..', '..');
 const template = fs.readFileSync(path.join(root, '_includes', 'skills-hard.html'), 'utf8');
+const skillsData = require(path.join(root, '_data', 'skills.json'));
 
 // Renders the hard skills include alone, the way Eleventy gives it its page
 function render(lang) {
     const env = new nunjucks.Environment(null, { autoescape: true });
-    return env.renderString(template, { page: { fileSlug: `index_${lang}` } });
+    return env.renderString(template, { page: { fileSlug: `index_${lang}` }, skills: skillsData });
 }
 
 // Reads the image and the label of each skill of the carousel
@@ -38,6 +39,16 @@ test.describe('hard skills carousel', () => {
             expect(labels).not.toContain('JS');
         }
     });
+
+    for (const lang of ['en', 'fr']) {
+        test(`links Figma to its certificate from a PDF icon only, named for screen readers, on the ${lang} page`, () => {
+            const colon = lang === 'fr' ? ' :' : ':';
+            const html = render(lang);
+            // The name and the logo stay plain, the PDF icon in the corner is the only link
+            expect(html).toContain(`<div class="d-flex flex-column align-items-center hard-skill"><img src="images/figma.png" class="img-fluid" alt="Figma" loading="lazy" height="75" width="75"><span>Figma</span><a class="hard-skill-certificate" href="/docs/public/Certificat%20FIGMA.pdf" target="_blank" rel="noopener" aria-label="Figma${colon} ${skillsData.carousel[lang].docLinkLabel}"><i class="icon-file-pdf-o" aria-hidden="true"></i></a></div>`);
+            expect(fs.existsSync(path.join(root, 'docs', 'public', 'Certificat FIGMA.pdf'))).toBe(true);
+        });
+    }
 
     test('spells the V model in the language of the page', () => {
         const label = lang => items(render(lang)).find(skill => skill.key === 'v-model').label;

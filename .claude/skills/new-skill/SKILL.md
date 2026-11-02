@@ -24,7 +24,7 @@ Ask only for what the arguments don't give, in one message, and don't invent any
 
 | Kind | Where | Fields |
 |---|---|---|
-| Hard skill | the `skills` list at the top of `_includes/skills-hard.html` | `key` (its image is `images/<key>.png`), `label` (one string, the name of the tool or language) |
+| Hard skill | the `hardSkills` list at the top of `_includes/skills-hard.html` | `key` (its image is `images/<key>.png`), `label` (one string, the name of the tool or language, or `{ en, fr }` for a method such as the V model), optionally `certificate`: the path of its certificate in `docs/public/`, spaces written `%20` (`/docs/public/Certificat%20FIGMA.pdf`) |
 | Soft skill | `soft` of `_data/skills.json` | `key` (kebab-case, its image is `images/<key>.png`), the name per language (`en`, `fr`), `proof`: the experiences that prove it, a list per language, one short line each (`"Customer support at Soft Concept"` / `"Support client chez Soft Concept"`) |
 | Mad skill | `mad` of `_data/skills.json` | `key` (its image is `images/<key>.png`), the name per language |
 | Skill card | `cards` of `_data/skills.json` | `id` (its image is `images/<id>.avif`), `title` (one, or one per language), `href` (a page that explains the subject, one or per language), `item1` and `item2` (the two tools shown under it, one string or one per language) |
@@ -38,6 +38,10 @@ Take the experiences of a soft skill from the CVs (`docs/public/CV_en.pdf` and `
 - The image:
   - hard, soft and mad skills: `images/<key>.png`, square, transparent background, in the flat colourful style of the others (512 × 512 is enough). No image fits: draw an SVG with the colours of `:root` in `css/common.css` (`--blue`, `--orange`, `--yellow`...), render it to PNG (Playwright `screenshot` with `omitBackground: true`), look at it, then add it;
   - skill card: `images/<id>.avif`, like the other cards (`loadImages('.blog-img', 'avif')` of `js/app.js` loads it).
+- The controls sit in the top right corner, never on the name: no skill has its label or logo as a link.
+  - hard skill: it may have a corner icon, only when it has a `certificate`: a PDF icon in the top right corner of its slide is then its only link, to the certificate in a new tab, named "<label> : Attestation (PDF)" for screen readers (`carousel.docLinkLabel`); check the PDF exists and is meant to be public before linking it;
+  - soft skill: it always has both, a card (its front: image and name; its back: the experiences of `proof`) and a padlock in the top right corner of the card, its only control (`_includes/skills-soft.html`, `initFlipCards` of `js/app.js`), which turns the card over and back; the label and the image stay plain text;
+  - mad skill: never a corner icon (a hard skill may have one, a soft skill always does), no card and no link: its image and its name only.
 - A new text of the carousel (a tab, a tooltip) goes in `carousel` of `_data/skills.json`, in both languages.
 - The skill cards come in rows of three (`batch(3)`): a tenth card starts a row of one, so say so and ask whether to add two more or drop one.
 
