@@ -106,7 +106,10 @@
                 "fr": "Permis de conduire"
             },
             "score": "24",
-            "detail": "B"
+            "detail": {
+                "en": "B: Adour Permis (Dax)",
+                "fr": "B : Adour Permis (Dax)"
+            }
         },
         {
             "icon": "icon-certificate",
