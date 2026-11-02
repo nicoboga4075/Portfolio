@@ -6,6 +6,7 @@
         "skills": "Skills",
         "languagesNav": "Languages",
         "awards": "Awards",
+        "detailsToggle": "Missions",
         "types": {
             "permanent": "Permanent",
             "internship": "Internship",
@@ -24,6 +25,7 @@
         "skills": "Compétences",
         "languagesNav": "Langues",
         "awards": "Récompenses",
+        "detailsToggle": "Missions",
         "types": {
             "permanent": "CDI",
             "internship": "Stage",

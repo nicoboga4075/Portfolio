@@ -548,6 +548,79 @@ html:not(.dark-mode) .slider-text .hero-tagline {
     border-radius: 50%;
 }
 
+/* The timeline of the experiences: a line from each icon down to the next one, and under the last down to the end of its card; each card as much space under its content as above it (30px) */
+#experiences .resume-wrap {
+    position: relative;
+    padding-bottom: 30px;
+}
+
+#experiences .resume-wrap::before {
+    position: absolute;
+    top: 50px;
+    bottom: -30px;
+    left: 24px;
+    width: 2px;
+    background-color: var(--primary-pale);
+    content: "";
+}
+
+#experiences .resume-wrap:last-child::before {
+    bottom: 0;
+}
+
+/* Above the first experience, the same separator as under each one closes the frame, 30px above the icon like the margin between two experiences, and the line rises to it behind the icon */
+#experiences .resume-wrap.is-first {
+    padding-top: 30px;
+    border-top: 1px solid var(--shadow-sm);
+}
+
+#experiences .resume-wrap.is-first::before {
+    top: 0;
+}
+
+#experiences .resume-wrap .icon {
+    position: relative;
+    z-index: 1;
+}
+
+/* The icon of the job held today pulses, like the availability badge of the hero */
+#experiences .resume-wrap.is-current .icon {
+    animation: current-job-pulse 1.6s ease-out infinite;
+}
+
+@keyframes current-job-pulse {
+    0% {
+        box-shadow: 0 0 0 0 var(--primary);
+    }
+
+    100% {
+        box-shadow: 0 0 0 10px transparent;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #experiences .resume-wrap.is-current .icon {
+        animation: none;
+    }
+}
+
+/* The folded missions of an experience */
+.resume-details {
+    margin-top: 8px;
+}
+
+.resume-details summary {
+    width: fit-content;
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.resume-details ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+}
+
 .resume-wrap .icon span {
     color: var(--white);
     font-size: 28px;

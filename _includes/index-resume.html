@@ -35,7 +35,8 @@
                 <div id="experiences" class="page">
                     <h2 class="heading">{{ resumeLang.experiences }}</h2>
                     {%- for e in resume.experiences %}
-                    <div class="resume-wrap d-flex ftco-animate">
+                    {#- The experiences make a timeline: a line joins their icons inside a frame closed above the first one, and the icon of the job held today ("current": true) pulses #}
+                    <div class="resume-wrap d-flex ftco-animate{{ ' is-first' if loop.first }}{{ ' is-current' if e.current }}">
                         {%- if e.svgId %}
                         <div id="{{ e.svgId }}" class="icon svg d-flex align-items-center justify-content-center"></div>
                         {%- else %}
@@ -72,6 +73,17 @@
                             {%- for tag in e.sector %}
                             <span class="sector-tag">{{ tag[lang] if tag[lang] else tag }}</span>
                             {%- endfor %}
+                            {#- The missions of an experience that has "details", folded until the visitor opens them: a native details element, so it works with the keyboard and without JavaScript #}
+                            {%- if e.details %}
+                            <details class="resume-details">
+                                <summary>{{ resumeLang.detailsToggle }}</summary>
+                                <ul>
+                                    {%- for detail in e.details[lang] %}
+                                    <li>{{ detail }}</li>
+                                    {%- endfor %}
+                                </ul>
+                            </details>
+                            {%- endif %}
                         </div>
                     </div>
                     {%- endfor %}
