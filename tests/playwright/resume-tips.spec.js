@@ -34,12 +34,17 @@ test.describe('resume tips', () => {
             for (const award of resume.awards.filter(other => !other.scoreTip)) expect(html).toContain(`<span class="position">${text(award.score, lang)}</span>`);
         });
 
-        test(`gives an education with a tip a question mark after its title with its tooltip, and the others none, on the ${lang} page`, () => {
-            const html = section(render(lang), 'education', 'experiences');
+        test(`gives an education with a tip a question mark after its title, its tooltip holding the tip and the link of tipHref, and the others none, on the ${lang} page`, () => {
+            const html = section(render(lang).replaceAll(/>\s+</g, '><'), 'education', 'experiences');
             const tipped = resume.education.filter(education => education.tip);
-            expect(tipped.length).toBeGreaterThan(0);
-            for (const education of tipped) expect(html).toContain(`<h2>${escapeHtml(education.title[lang])} ${button(escapeHtml(education.title[lang]), escapeHtml(education.tip[lang]), lang)}</h2>`);
-            expect(html.match(/class="resume-tip"/g)).toHaveLength(tipped.length);
+            expect(tipped.some(education => education.tipHref)).toBe(true);
+            for (const education of tipped) {
+                const title = escapeHtml(education.title[lang]);
+                const profile = escapeHtml(resume[lang].jobProfile);
+                const link = education.tipHref ? ` <a href="${education.tipHref}" target="_blank" rel="noopener" title="${profile}" aria-label="${profile}"><i class="icon-briefcase" aria-hidden="true"></i></a>` : '';
+                expect(html).toContain(`<h2>${title} <span class="info-tip-wrap"><button type="button" class="info-tip" aria-label="${title}${colonOf(lang)} ${resume[lang].educationDetails}"><i class="icon-question-circle" aria-hidden="true"></i></button><span class="info-tip-box"><span class="info-tip-line">${escapeHtml(education.tip[lang])}${link}</span></span></span></h2>`);
+            }
+            expect(html.match(/class="info-tip"/g)).toHaveLength(tipped.length);
             for (const education of resume.education.filter(other => !other.tip)) expect(html).toContain(`<h2>${escapeHtml(education.title[lang])}</h2>`);
         });
     }

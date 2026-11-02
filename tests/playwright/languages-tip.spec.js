@@ -25,11 +25,11 @@ test.describe('spoken languages', () => {
             const detailed = languages.filter(language => language.details);
             expect(detailed.length).toBeGreaterThan(0);
             for (const language of detailed) {
-                const lines = language.details.map(detail => `<span class="language-tip-line">${detail.doc ? `<a href="/docs/public/${encodeURIComponent(detail.doc)}" target="_blank" rel="noopener">${escapeHtml(detail.name[lang])}</a>` : ''}${detail.text[lang]}</span>`).join('');
-                expect(html).toContain(`${language.name[lang]} (${language.level[lang]}) <span class="language-tip-wrap"><button type="button" class="language-tip" aria-label="${language.name[lang]}${colon} ${resume[lang].languageDetails}"><i class="icon-question-circle" aria-hidden="true"></i></button><span class="language-tip-box">${lines}</span></span></h3>`);
+                const lines = language.details.map(detail => `<span class="info-tip-line">${detail.doc ? `<a href="/docs/public/${encodeURIComponent(detail.doc)}" target="_blank" rel="noopener">${escapeHtml(detail.name[lang])}</a>` : ''}${detail.text[lang]}</span>`).join('');
+                expect(html).toContain(`${language.name[lang]} (${language.level[lang]}) <span class="info-tip-wrap"><button type="button" class="info-tip" aria-label="${language.name[lang]}${colon} ${resume[lang].languageDetails}"><i class="icon-question-circle" aria-hidden="true"></i></button><span class="info-tip-box">${lines}</span></span></h3>`);
                 for (const { doc } of language.details.filter(detail => detail.doc)) expect(fs.existsSync(path.join(root, 'docs', 'public', doc))).toBe(true);
             }
-            expect(html.match(/class="language-tip"/g)).toHaveLength(detailed.length);
+            expect(html.slice(html.indexOf('id="skills"'), html.indexOf('id="awards"')).match(/class="info-tip"/g)).toHaveLength(detailed.length);
             for (const language of languages.filter(other => !other.details)) expect(html).toContain(`${language.name[lang]} (${language.level[lang]})</h3>`);
         });
     }

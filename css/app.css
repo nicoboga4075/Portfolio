@@ -852,13 +852,13 @@ html.dark-mode #counter-section .counter-list a {
     margin-bottom: 30px;
 }
 
-/* The details of a spoken language: a tooltip of its own over its question mark, shown on hover or keyboard focus and kept while the pointer is on it, so its links can be clicked; hidden the way .sr-only is, so screen readers still read it */
-.progress-wrap .language-tip-wrap {
+/* The details of a spoken language or an education: a tooltip of its own over its question mark, shown on hover or keyboard focus and kept while the pointer is on it, so its links can be clicked; hidden the way .sr-only is, so screen readers still read it */
+.info-tip-wrap {
     position: relative;
     display: inline-block;
 }
 
-.progress-wrap .language-tip-box {
+.info-tip-box {
     position: absolute;
     bottom: 100%;
     left: 50%;
@@ -870,8 +870,8 @@ html.dark-mode #counter-section .counter-list a {
     white-space: nowrap;
 }
 
-.progress-wrap .language-tip-wrap:hover .language-tip-box,
-.progress-wrap .language-tip-wrap:focus-within .language-tip-box {
+.info-tip-wrap:hover .info-tip-box,
+.info-tip-wrap:focus-within .info-tip-box {
     width: max-content;
     max-width: 300px;
     height: auto;
@@ -890,24 +890,24 @@ html.dark-mode #counter-section .counter-list a {
 }
 
 /* One bullet per line, so a long list (English) reads line by line; a single line goes without */
-.progress-wrap .language-tip-line {
+.info-tip-line {
     display: list-item;
     margin-left: 16px;
     list-style: disc outside;
 }
 
-.progress-wrap .language-tip-line:only-child {
+.info-tip-line:only-child {
     display: block;
     margin-left: 0;
 }
 
-.progress-wrap .language-tip-box a {
+.info-tip-box a {
     color: var(--white);
     text-decoration: underline;
 }
 
-/* The question mark of a spoken language: a plain icon, not a button look */
-.progress-wrap .language-tip {
+/* The question mark of a spoken language or an education: a plain icon, not a button look */
+.info-tip {
     padding: 0;
     border: none;
     color: var(--primary);
@@ -917,11 +917,11 @@ html.dark-mode #counter-section .counter-list a {
     cursor: help;
 }
 
-.progress-wrap .language-tip:focus:not(:focus-visible) {
+.info-tip:focus:not(:focus-visible) {
     outline: none;
 }
 
-.progress-wrap .language-tip:focus-visible {
+.info-tip:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
 }

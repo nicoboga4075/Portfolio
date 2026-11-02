@@ -6,6 +6,8 @@
         "skills": "Skills",
         "languagesNav": "Languages",
         "languageDetails": "details and certificates",
+        "educationDetails": "details",
+        "jobProfile": "Job profile (APEC)",
         "awards": "Awards",
         "detailsToggle": "Missions",
         "types": {
@@ -26,6 +28,8 @@
         "skills": "Compétences",
         "languagesNav": "Langues",
         "languageDetails": "détails et attestations",
+        "educationDetails": "détails",
+        "jobProfile": "Fiche métier (APEC)",
         "awards": "Récompenses",
         "detailsToggle": "Missions",
         "types": {
@@ -171,9 +175,10 @@
             "id": "ESILV",
             "date": "2018 - 2021",
             "title": {
-                "en": "Engineering Diploma in Informatics",
-                "fr": "Diplôme d'ingénieurs en Informatique"
+                "en": "Engineering degree in computer science",
+                "fr": "Diplôme d'ingénieur en informatique"
             },
+            "tipHref": "https://www.apec.fr/tous-nos-metiers/informatique/ingenieur-en-etudes-et-developpement-informatiques.html",
             "href": {
                 "en": "https://www.esilv.fr/en",
                 "fr": "https://www.esilv.fr"
