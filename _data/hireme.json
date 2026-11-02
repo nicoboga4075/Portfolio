@@ -4,7 +4,11 @@
             "listening": "Attentive to opportunities",
             "active": "Actively looking for a permanent job"
         },
-        "location": "In Paris area · ASAP · No car",
+        "facts": [
+            { "icon": "icon-map-marker", "text": "In Paris area" },
+            { "icon": "icon-clock-o", "text": "ASAP" },
+            { "icon": "icon-car", "text": "B driving licence, no car" }
+        ],
         "contactCta": "Contact me"
     },
     "fr": {
@@ -12,7 +16,11 @@
             "listening": "À l'écoute d'opportunités",
             "active": "En recherche active d'un CDI"
         },
-        "location": "En région parisienne · ASAP · Non véhiculé",
+        "facts": [
+            { "icon": "icon-map-marker", "text": "En région parisienne" },
+            { "icon": "icon-clock-o", "text": "ASAP" },
+            { "icon": "icon-car", "text": "Permis B, non véhiculé" }
+        ],
         "contactCta": "Me contacter"
     }
 }
