@@ -9,6 +9,7 @@
             { "icon": "icon-clock-o", "text": "ASAP" },
             { "icon": "icon-car", "text": "B driving licence, no car" }
         ],
+        "roles": "Software Engineer, Full Stack Developer",
         "contactCta": "Contact me"
     },
     "fr": {
@@ -21,6 +22,7 @@
             { "icon": "icon-clock-o", "text": "ASAP" },
             { "icon": "icon-car", "text": "Permis B, non véhiculé" }
         ],
+        "roles": "Software Engineer, Full Stack Developer",
         "contactCta": "Me contacter"
     }
 }

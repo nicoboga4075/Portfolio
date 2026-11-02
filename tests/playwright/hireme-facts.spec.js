@@ -18,5 +18,12 @@ test.describe('hire me facts', () => {
             expect(render(lang)).toContain(`<p>${facts}</p>`);
             expect(hireme[lang].facts.map(fact => fact.icon)).toEqual(['icon-map-marker', 'icon-clock-o', 'icon-car']);
         });
+
+        test(`shows the roles sought behind a search icon, above the contact button, on the ${lang} page`, () => {
+            const html = render(lang);
+            const roles = `<p><span class="icon-search" aria-hidden="true"></span> ${hireme[lang].roles}</p>`;
+            expect(html).toContain(roles);
+            expect(html.indexOf(roles)).toBeLessThan(html.indexOf(hireme[lang].contactCta));
+        });
     }
 });

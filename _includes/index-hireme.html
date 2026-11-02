@@ -13,6 +13,9 @@
                 <h2 class="text-white">{{ hiremeLang.heading.active if profile.openToWork === 2 else hiremeLang.heading.listening }}</h2>
                 {#- Where, when and how to get there: each fact behind its icon, separated by a dot #}
                 <p>{% for fact in hiremeLang.facts %}{% if not loop.first %} · {% endif %}<span class="{{ fact.icon }}" aria-hidden="true"></span> {{ fact.text }}{% endfor %}</p>
+                {%- if hiremeLang.roles %}
+                <p><span class="icon-search" aria-hidden="true"></span> {{ hiremeLang.roles }}</p>
+                {%- endif %}
                 {%- if hiremeLang.contactCta %}
                 <p class="mb-0"><a target="_blank" rel="noopener" href="{{ linkedin.messaging }}" class="btn btn-primary py-3 px-5">{{ hiremeLang.contactCta }}</a></p>
                 {%- endif %}
