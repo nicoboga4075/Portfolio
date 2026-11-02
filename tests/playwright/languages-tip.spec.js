@@ -32,5 +32,16 @@ test.describe('spoken languages', () => {
             expect(html.slice(html.indexOf('id="skills"'), html.indexOf('id="awards"')).match(/class="info-tip"/g)).toHaveLength(detailed.length);
             for (const language of languages.filter(other => !other.details)) expect(html).toContain(`${language.name[lang]} (${language.level[lang]})</h3>`);
         });
+
+        test(`shows the two flags of a language spoken in two countries in turn, and one flag for the others, on the ${lang} page`, () => {
+            const html = render(lang);
+            const swapped = languages.filter(language => language.flag2);
+            expect(swapped.map(language => language.name.en)).toEqual(['English']);
+            for (const language of swapped) {
+                expect(html).toContain(`<h3><span class="flag-swap mr-2"><img src="images/${language.flag}" alt="${language.countryAlt[lang]}" width="27" height="18"><img src="images/${language.flag2.src}" alt="${language.flag2.alt[lang]}" width="27" height="18" class="flag-swap-second"></span>${language.name[lang]} (`);
+                expect(fs.existsSync(path.join(root, 'images', language.flag2.src))).toBe(true);
+            }
+            for (const language of languages.filter(other => !other.flag2)) expect(html).toContain(`<h3><img src="images/${language.flag}" alt="${language.countryAlt[lang]}" width="27" height="18" class="mr-2 align-middle">${language.name[lang]} (`);
+        });
     }
 });

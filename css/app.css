@@ -926,6 +926,47 @@ html.dark-mode #counter-section .counter-list a {
     outline-offset: 2px;
 }
 
+/* A language spoken in two countries shows both flags in turn: the second fades in over the first, stays 3.5s, then fades out, an 8s round slow enough to read each one; without motion the first stays */
+.flag-swap {
+    position: relative;
+    display: inline-block;
+    width: 27px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+.flag-swap img {
+    position: absolute;
+    inset: 0;
+}
+
+.flag-swap .flag-swap-second {
+    opacity: 0;
+    animation: flag-swap 8s ease-in-out infinite;
+}
+
+@keyframes flag-swap {
+    0%,
+    44% {
+        opacity: 0;
+    }
+
+    50%,
+    94% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flag-swap .flag-swap-second {
+        animation: none;
+    }
+}
+
 .progress-wrap h3 {
     font-size: 16px;
     margin-bottom: 10px;
