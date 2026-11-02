@@ -4,7 +4,7 @@
             "listening": "Attentive to opportunities",
             "active": "Actively looking for a permanent job"
         },
-        "location": "In Paris area · ASAP",
+        "location": "In Paris area · ASAP · No car",
         "contactCta": "Contact me"
     },
     "fr": {
@@ -12,7 +12,7 @@
             "listening": "À l'écoute d'opportunités",
             "active": "En recherche active d'un CDI"
         },
-        "location": "En région parisienne · ASAP",
+        "location": "En région parisienne · ASAP · Non véhiculé",
         "contactCta": "Me contacter"
     }
 }
