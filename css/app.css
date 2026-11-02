@@ -468,6 +468,11 @@ html:not(.dark-mode) .slider-text .hero-tagline {
     display: block;
 }
 
+/* The delivered projects are a floor, not a count: a plus sign before the number, out of the text the count animates */
+#counter-section #projects-count::before {
+    content: "+ ";
+}
+
 #counter-section .text span {
     display: block;
     color: var(--black);
