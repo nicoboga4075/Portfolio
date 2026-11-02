@@ -25,6 +25,13 @@ test.describe('resume timeline', () => {
         expect(section.indexOf(' is-first')).toBe(section.indexOf('class="resume-wrap') + 'class="resume-wrap d-flex ftco-animate'.length);
     });
 
+    test('marks the first education, the one whose frame is closed above it', () => {
+        const html = render('en');
+        const section = html.slice(html.indexOf('id="education"'), html.indexOf('id="experiences"'));
+        expect(section.match(/ is-first/g)).toHaveLength(1);
+        expect(section.indexOf(' is-first')).toBe(section.indexOf('class="resume-wrap') + 'class="resume-wrap d-flex ftco-animate'.length);
+    });
+
     for (const lang of ['en', 'fr']) {
         test(`marks only the job held today as current on the ${lang} page`, () => {
             expect(experiences(render(lang))).toEqual(resume.experiences.map(experience => Boolean(experience.current)));

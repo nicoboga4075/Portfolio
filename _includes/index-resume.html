@@ -21,7 +21,7 @@
                 <div id="education" class="page">
                     <h2 class="heading">{{ resumeLang.education }}</h2>
                     {%- for e in resume.education %}
-                    <div class="resume-wrap d-flex ftco-animate">
+                    <div class="resume-wrap d-flex ftco-animate{{ ' is-first' if loop.first }}">
                         <div id="{{ e.id }}" class="icon logo-school d-flex align-items-center justify-content-center"></div>
                         <div class="text pl-3">
                             <span class="date">{{ e.date }}</span>

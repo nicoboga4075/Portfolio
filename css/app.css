@@ -646,8 +646,8 @@ html.dark-mode #counter-section .counter-list a {
     bottom: 0;
 }
 
-/* Above the first experience, the same separator as under each one closes the frame, 30px above the icon like the margin between two experiences, and the line rises to it behind the icon */
-#experiences .resume-wrap.is-first {
+/* Above the first education and the first experience, the same separator as under each one closes the frame, 30px above the icon like the margin between two cards; in the experiences the line rises to it behind the icon */
+.resume-wrap.is-first {
     padding-top: 30px;
     border-top: 1px solid var(--shadow-sm);
 }
