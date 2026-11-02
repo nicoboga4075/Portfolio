@@ -1728,8 +1728,13 @@ textarea.form-control {
 
 .project:hover::after,
 .project:focus-within::after {
-    border-color: var(--white);
     box-shadow: inset 0 0 24px var(--primary-pale);
+}
+
+/* The white edge only on the dark page: on the light one it would merge with the white around the card, which then looks smaller than the others */
+html.dark-mode .project:hover::after,
+html.dark-mode .project:focus-within::after {
+    border-color: var(--white);
 }
 
 @media (prefers-reduced-motion: reduce) {
