@@ -140,13 +140,13 @@
             "proof": {
                 "en": [
                     "Project teams, internal and client-side",
-                    "Team tennis: US Dax (FFT), ESILV (FFSU)",
+                    "Team tennis (US Dax, ESILV) and occasional team sports",
                     "PING and PI2 team projects at ESILV",
                     "Involvement in associations during my studies"
                 ],
                 "fr": [
                     "Équipes projet, en interne comme chez le client",
-                    "Tennis en équipe : US Dax (FFT), ESILV (FFSU)",
+                    "Tennis en équipe (US Dax, ESILV) et sports collectifs occasionnels",
                     "Projets d'équipe PING et PI2 à l'ESILV",
                     "Engagement associatif pendant mes études"
                 ]
@@ -196,16 +196,35 @@
             "fr": "Communication",
             "proof": {
                 "en": [
-                    "Software training and technical support",
-                    "Customer care at Galadrim and Soft Concept",
-                    "Elevator pitches and trade marketing",
-                    "Private lessons and tennis refereeing"
+                    "Software training and technical support (video calls, email, phone)",
+                    "Customer care, elevator pitches and trade marketing (Galadrim, Soft Concept)",
+                    "Private lessons and tennis refereeing",
+                    "Voltaire certificate in written French (spelling 841/1000, writing 6/9)"
                 ],
                 "fr": [
-                    "Formations logicielles et support technique",
-                    "Relation client chez Galadrim et Soft Concept",
-                    "Elevator pitchs et marketing commercial",
-                    "Cours particuliers et arbitrage de tennis"
+                    "Formations logicielles et support technique (visio, mail, téléphone)",
+                    "Relation client, elevator pitchs et marketing commercial (Galadrim, Soft Concept)",
+                    "Cours particuliers et arbitrage de tennis",
+                    "Certificat Voltaire en expression écrite (orthographe 841/1000, rédactionnel 6/9)"
+                ]
+            }
+        },
+        {
+            "key": "pedagogy",
+            "en": "Teaching",
+            "fr": "Pédagogie",
+            "proof": {
+                "en": [
+                    "Client training, support and demos (Soft Concept)",
+                    "Explaining tech in plain words (E-Marketing trade show with Soft Concept, blog)",
+                    "High school maths lessons (Kelprof, Yoopies) and tennis lessons for children",
+                    "Supervising interns (Soft Concept)"
+                ],
+                "fr": [
+                    "Formations, support et démos clients (Soft Concept)",
+                    "Vulgarisation technique (salon E-Marketing avec Soft Concept, blog)",
+                    "Cours de maths niveau lycée (Kelprof, Yoopies) et de tennis pour enfants",
+                    "Encadrement de stagiaires (Soft Concept)"
                 ]
             }
         },
