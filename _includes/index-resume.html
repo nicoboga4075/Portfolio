@@ -152,7 +152,9 @@
                         <div class="text pl-3">
                             <span class="date">{{ a.date[lang] if a.date[lang] else a.date }}</span>
                             <h2>{{ a.title[lang] if a.title[lang] else a.title }}</h2>
-                            <span class="position">{{ a.score[lang] if a.score[lang] else a.score }}</span>
+                            {#- An award with a scoreTip gets a question mark after its score, the details in a Bootstrap tooltip #}
+                            <span class="position">{{ a.score[lang] if a.score[lang] else a.score }}
+                                {%- if a.scoreTip %} <button type="button" class="award-tip" data-bs-toggle="tooltip" data-container="body" title="{{ a.scoreTip[lang] }}" aria-label="{{ a.score[lang] if a.score[lang] else a.score }}{{ ' :' if lang == 'fr' else ':' }} {{ a.scoreTip[lang] }}"><i class="icon-question-circle" aria-hidden="true"></i></button>{% endif %}</span>
                             <p>{{ a.detail[lang] if a.detail[lang] else a.detail }}</p>
                         </div>
                     </div>

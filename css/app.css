@@ -723,6 +723,26 @@ html.dark-mode #counter-section .counter-list a {
     color: var(--black);
 }
 
+/* The question mark after the score of an award: a plain icon, not a button look */
+.resume-wrap .award-tip {
+    padding: 0;
+    border: none;
+    color: var(--primary);
+    background-color: transparent;
+    font-size: 16px;
+    vertical-align: middle;
+    cursor: help;
+}
+
+.resume-wrap .award-tip:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.resume-wrap .award-tip:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
 .about-author {
     border-radius: 5px;
     margin-top: 20px;

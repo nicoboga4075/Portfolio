@@ -125,6 +125,10 @@
                 "en": "Very Good",
                 "fr": "TB"
             },
+            "scoreTip": {
+                "en": "Scientific Baccalaureate with highest honours (17.15/20) [Life and Earth Sciences], Maths specialty, European English option + Tennis",
+                "fr": "Bac S Mention Très Bien (17,15/20) [SVT] Spé Maths, Option Anglais Européen + Tennis"
+            },
             "detail": {
                 "en": "Scientific: St Jacques de Compostelle (Dax)",
                 "fr": "Scientifique : St Jacques de Compostelle (Dax)"
