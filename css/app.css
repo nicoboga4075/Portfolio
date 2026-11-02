@@ -2470,6 +2470,29 @@ html.dark-mode .owl-dot:focus-visible {
     outline-offset: 2px;
 }
 
+/* Pointing at the padlock of a soft skill makes its picture pulse, as an invitation to unlock it */
+#soft-skills .soft-card:has(.soft-card-toggle:hover, .soft-card-toggle:focus-visible) .soft-card-front img {
+    animation: soft-skill-pulse 0.9s ease-in-out infinite alternate;
+}
+
+/* and its card lights up, lifted by a shadow and ringed with a glow */
+#soft-skills .soft-card:has(.soft-card-toggle:hover, .soft-card-toggle:focus-visible) .soft-card-front {
+    box-shadow: 0 12px 24px var(--shadow-lg), 0 0 24px var(--primary-light);
+    transition: box-shadow 0.3s ease;
+}
+
+@keyframes soft-skill-pulse {
+    from {
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 0 0 transparent);
+    }
+
+    to {
+        transform: translateY(-2px) scale(1.08);
+        filter: drop-shadow(0 0 10px var(--primary-light));
+    }
+}
+
 @keyframes soft-card-shake {
     25% {
         transform: rotate(-15deg);
@@ -2485,7 +2508,8 @@ html.dark-mode .owl-dot:focus-visible {
         transition: none;
     }
 
-    .soft-card-toggle:hover i {
+    .soft-card-toggle:hover i,
+    #soft-skills .soft-card:has(.soft-card-toggle:hover, .soft-card-toggle:focus-visible) .soft-card-front img {
         animation: none;
     }
 }
