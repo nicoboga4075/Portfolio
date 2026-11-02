@@ -2263,12 +2263,13 @@ html.dark-mode .owl-dot:focus-visible {
     background-color: var(--primary) !important;
 }
 
-/* A hard skill with a doc: a PDF icon in its top right corner, like the padlock of a soft skill card, links to it; the name and the logo are no link */
+/* A hard skill with a doc or a tip: a PDF icon linking to its certificate, or a question mark showing its tooltip, in its top right corner like the padlock of a soft skill card; the name and the logo are no link */
 .hard-skill {
     position: relative;
 }
 
-.hard-skill-doc {
+.hard-skill-doc,
+.hard-skill-tip {
     position: absolute;
     top: 0;
     right: 0;
@@ -2277,22 +2278,38 @@ html.dark-mode .owl-dot:focus-visible {
     justify-content: center;
     width: 32px;
     height: 32px;
+    padding: 0;
+    border: none;
     color: var(--primary-light);
+    background-color: transparent;
     font-size: 18px;
 }
 
 .hard-skill-doc:hover,
-.hard-skill-doc:focus {
+.hard-skill-doc:focus,
+.hard-skill-tip:hover,
+.hard-skill-tip:focus {
     color: var(--white);
 }
 
-.hard-skill-doc:focus:not(:focus-visible) {
+.hard-skill-doc:focus:not(:focus-visible),
+.hard-skill-tip:focus:not(:focus-visible) {
     outline: none;
 }
 
-.hard-skill-doc:focus-visible {
+.hard-skill-doc:focus-visible,
+.hard-skill-tip:focus-visible {
     outline: 2px solid var(--primary-light);
     outline-offset: 2px;
+}
+
+/* The list of certificates of a hard skill, in its popover: one per line, its name linked, the popover wide enough for a line */
+.popover:has(.hard-skill-docs-line) {
+    max-width: 360px;
+}
+
+.popover .hard-skill-docs-line {
+    display: block;
 }
 
 /* The soft skill slides stretched to the tallest card, so every card has the same size */

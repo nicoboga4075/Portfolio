@@ -49,7 +49,34 @@ test.describe('hard skills carousel', () => {
             expect(fs.existsSync(path.join(root, 'docs', 'public', 'Certificat FIGMA.pdf'))).toBe(true);
             // Every doc a hard skill links to is a public file
             for (const [, href] of html.matchAll(/class="hard-skill-doc" href="([^"]+)"/g)) expect(fs.existsSync(path.join(root, decodeURIComponent(href)))).toBe(true);
-            expect(html.match(/class="hard-skill-doc"/g)).toHaveLength(3);
+            expect(html.match(/class="hard-skill-doc"/g)).toHaveLength(7);
+        });
+    }
+
+    for (const lang of ['en', 'fr']) {
+        test(`shows the tip of a hard skill in a tooltip from a question mark in its corner on the ${lang} page`, () => {
+            const colon = lang === 'fr' ? ' :' : ':';
+            const html = render(lang).replaceAll(/>\s+</g, '><');
+            const tips = Object.entries(skillsData.hardTips);
+            expect(tips.length).toBeGreaterThan(0);
+            for (const [key, tip] of tips) {
+                const label = items(render(lang)).find(skill => skill.key === key).label;
+                expect(html).toContain(`<button type="button" class="hard-skill-tip" data-bs-toggle="tooltip" data-container="body" title="${tip[lang]}" aria-label="${label}${colon} ${tip[lang]}"><i class="icon-question-circle" aria-hidden="true"></i></button>`);
+            }
+            expect(html.match(/class="hard-skill-tip"/g)).toHaveLength(tips.length);
+        });
+    }
+
+    for (const lang of ['en', 'fr']) {
+        test(`lists the certificates of a hard skill with several, from a PDF icon, each name linked on the ${lang} page`, () => {
+            const colon = lang === 'fr' ? ' :' : ':';
+            const html = render(lang).replaceAll(/>\s+</g, '><');
+            for (const [key, docs] of Object.entries(skillsData.hardDocs)) {
+                const label = items(render(lang)).find(skill => skill.key === key).label;
+                const lines = docs.map(d => `<span class="hard-skill-docs-line"><a href="/docs/public/${encodeURIComponent(d.doc)}" target="_blank" rel="noopener">${d.name}</a>${d.text[lang].replaceAll("'", '&#39;')}</span>`).join('');
+                expect(html).toContain(`<button type="button" class="hard-skill-doc hard-skill-docs" aria-label="${label}${colon} ${skillsData.carousel[lang].docsLinkLabel}"><i class="icon-file-pdf-o" aria-hidden="true"></i></button><span class="hard-skill-docs-list" hidden>${lines}</span>`);
+                for (const { doc } of docs) expect(fs.existsSync(path.join(root, 'docs', 'public', doc))).toBe(true);
+            }
         });
     }
 

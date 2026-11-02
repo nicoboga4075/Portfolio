@@ -457,6 +457,35 @@ function initFlipCards() {
     });
 }
 
+// Opens the certificates of a hard skill in a popover from its PDF icon, since a tooltip can't hold links the pointer can reach: drawn in the body, where the carousel can't clip it, toggled by a click, closed by a click elsewhere or Escape (which gives the focus back to the icon); once open, the focus moves to its first link, so the keyboard reaches them too; the instance is kept as docsPopover, since an element's popover property is the HTML popover attribute
+function initDocPopovers() {
+    const buttons = $('.hard-skill-docs').each(function () {
+        this.docsPopover = new bootstrap.Popover(this, { html: true, container: 'body', boundary: 'window', placement: 'top', trigger: 'manual', content: $(this).next('.hard-skill-docs-list').html() });
+    });
+    buttons.on('click', function () {
+        this.docsPopover.toggle();
+    });
+    buttons.on('shown.bs.popover', function () {
+        this.docsPopover.getTipElement().querySelector('a')?.focus();
+    });
+    $(document).on('click', event => {
+        buttons.each(function () {
+            if (!this.contains(event.target) && !$(event.target).closest('.popover').length) {
+                this.docsPopover.hide();
+            }
+        });
+    });
+    $(document).on('keydown', event => {
+        if (event.key !== 'Escape') return;
+        buttons.each(function () {
+            if (this.docsPopover.getTipElement().isConnected) {
+                this.docsPopover.hide();
+                this.focus();
+            }
+        });
+    });
+}
+
 // Lights the stages of the delivery pipeline one after the other, a stage every 1.2s, back to the first after the last, only while the pipeline is on screen; not started when the visitor asked for reduced motion
 function initPipelineLoop() {
     const pipeline = document.querySelector('.pipeline');
@@ -1232,6 +1261,8 @@ function initIndexPage(langPage) {
         initPipelineLoop();
 
         initFlipCards();
+
+        initDocPopovers();
 
         const skillsChartCanvas = document.getElementById('skills-chart');
         if (skillsChartCanvas) {

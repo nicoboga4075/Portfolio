@@ -650,6 +650,41 @@ describe('the home page', () => {
         expect([$('.soft-card').hasClass('is-unlocked'), toggle.find('i').attr('class'), $('.soft-card-back').is('[inert]')]).toEqual([false, 'icon-question-circle', true]);
     });
 
+    test('opens the certificates of a hard skill in a popover from its PDF icon, focuses its first link, and closes it from outside or with Escape', () => {
+        const tip = document.createElement('div');
+        tip.innerHTML = '<a href="/docs/public/a.pdf">A</a>';
+        const popover = { toggle: jest.fn(), hide: jest.fn(), getTipElement: () => tip };
+        const app = loadApp({ body: '<div><button class="hard-skill-docs"></button><span class="hard-skill-docs-list" hidden><a href="/docs/public/a.pdf">A</a></span></div><p id="elsewhere"></p>' });
+        window.bootstrap.Popover.mockImplementation(() => popover);
+        app.initDocPopovers();
+        const button = document.querySelector('.hard-skill-docs');
+        expect(window.bootstrap.Popover).toHaveBeenCalledWith(button, expect.objectContaining({ html: true, container: 'body', boundary: 'window', trigger: 'manual', content: '<a href="/docs/public/a.pdf">A</a>' }));
+        $(button).trigger('click');
+        expect(popover.toggle).toHaveBeenCalledTimes(1);
+        document.body.appendChild(tip);
+        $(button).trigger('shown.bs.popover');
+        expect(document.activeElement).toBe(tip.querySelector('a'));
+        // A click inside the popover keeps it, a click elsewhere closes it
+        $(tip.querySelector('a')).wrap('<div class="popover"></div>').trigger('click');
+        expect(popover.hide).not.toHaveBeenCalled();
+        $('#elsewhere').trigger('click');
+        expect(popover.hide).toHaveBeenCalledTimes(1);
+        // Another key does nothing, Escape closes the open popover and gives the focus back to the icon
+        $(document).trigger($.Event('keydown', { key: 'a' }));
+        expect(popover.hide).toHaveBeenCalledTimes(1);
+        $(document).trigger($.Event('keydown', { key: 'Escape' }));
+        expect(popover.hide).toHaveBeenCalledTimes(2);
+        expect(document.activeElement).toBe(button);
+        // Closed, Escape leaves the focus where it is
+        tip.remove();
+        $('#elsewhere').attr('tabindex', '-1').trigger('focus');
+        $(document).trigger($.Event('keydown', { key: 'Escape' }));
+        expect(popover.hide).toHaveBeenCalledTimes(2);
+        // An empty popover has no link to focus
+        tip.innerHTML = '';
+        $(button).trigger('shown.bs.popover');
+    });
+
     test('lights the pipeline steps one after the other while on screen, loops back to the first and pauses off screen', () => {
         jest.useFakeTimers();
         const app = loadApp({ body: '<ol class="pipeline"><li class="pipeline-step"></li><li class="pipeline-step"></li><li class="pipeline-step"></li></ol>' });

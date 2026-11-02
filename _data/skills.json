@@ -101,7 +101,8 @@
             "softTip": "Personal attributes or interpersonal abilities that enhance how you work and interact with others: unlock a card to see the experiences behind it",
             "softUnlock": "Unlock the experiences of",
             "madTip": "Atypical abilities or unique talents, often developed through personal passions",
-            "docLinkLabel": "Certificate (PDF)"
+            "docLinkLabel": "Certificate (PDF)",
+            "docsLinkLabel": "certificates"
         },
         "fr": {
             "heading": "Découvrez mes compétences",
@@ -109,7 +110,8 @@
             "softTip": "Compétences personnelles ou interpersonnelles, améliorant la manière de travailler et d’interagir avec les autres : déverrouillez une carte pour voir les expériences qui la prouvent",
             "softUnlock": "Déverrouiller les expériences de la compétence",
             "madTip": "Compétences atypiques ou talents uniques, souvent développées à travers des passions personnelles",
-            "docLinkLabel": "Attestation (PDF)"
+            "docLinkLabel": "Attestation (PDF)",
+            "docsLinkLabel": "attestations"
         }
     },
     "mad": [
@@ -134,6 +136,20 @@
             "fr": "Écriture"
         }
     ],
+    "hardDocs": {
+        "cybersecurity": [
+            { "name": "Cyberini", "text": { "en": " (MOOC and CTF, 05/2026)", "fr": " (MOOC et CTF, 05/2026)" }, "doc": "MOOC Cyberini.pdf" },
+            { "name": "Google Cybersecurity", "text": { "en": " (Coursera, 11/2025)", "fr": " (Coursera, 11/2025)" }, "doc": "Google Cybersecurity Certificate.pdf" },
+            { "name": "EBIOS Risk Manager", "text": { "en": " (Club EBIOS © ANSSI, 11/2025)", "fr": " (Club EBIOS © ANSSI, 11/2025)" }, "doc": "Certificat EBIOS Risk Manager.pdf" },
+            { "name": "SecNumacadémie", "text": { "en": " (ANSSI, 07/2021)", "fr": " (ANSSI, 07/2021)" }, "doc": "Attestation SecNumacademie.pdf" },
+            { "name": "Mastering CVSS v3.1", "text": { "en": " (FIRST, 01/2021)", "fr": " (FIRST, 01/2021)" }, "doc": "FIRST Certificate.png" }
+        ]
+    },
+    "hardTips": {
+        "netsurvey": { "en": "Group training for the MNT", "fr": "Formation en groupe pour la MNT" },
+        "ethnos": { "en": "Integrating data viz charts (amCharts) into the software", "fr": "Intégration de graphiques de data viz (amCharts) dans le logiciel" },
+        "webreports": { "en": "One-to-one training for a La Poste employee", "fr": "Formation individuelle pour un collaborateur de La Poste" }
+    },
     "soft": [
         {
             "key": "team",

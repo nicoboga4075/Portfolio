@@ -75,7 +75,7 @@ function installGlobals() {
     window.open = jest.fn();
     window.HTMLElement.prototype.scrollIntoView = jest.fn();
     window.requestAnimationFrame = jest.fn();
-    window.bootstrap = { Tooltip: jest.fn() };
+    window.bootstrap = { Tooltip: jest.fn(), Popover: jest.fn() };
     window.i18next = {
         init(options) {
             this.options = options;
