@@ -2199,8 +2199,12 @@ html.dark-mode .owl-dot:focus-visible {
     margin-bottom: 30px;
 }
 
+/* A block 60px high whatever its icon font: a Flaticon icon would otherwise take the 1.5 line-height of the page and push its title lower than the Icomoon ones */
 .services .icon i {
+    display: block;
+    height: 60px;
     font-size: 60px;
+    line-height: 1;
     color: var(--primary);
 }
 
