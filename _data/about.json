@@ -5,7 +5,7 @@
         "name": "Name:",
         "age": "Age:",
         "schoolYear": "School Year:",
-        "interests": "Interests:",
+        "interests": "Hobbies:",
         "interestList": [
             {"emoji": "🎾", "label": "Tennis"},
             {"emoji": "♟️", "label": "Chess"},
@@ -26,7 +26,7 @@
         "name": "Nom :",
         "age": "Âge :",
         "schoolYear": "Promotion :",
-        "interests": "Centres d'intérêt :",
+        "interests": "Hobbies :",
         "interestList": [
             {"emoji": "🎾", "label": "Tennis"},
             {"emoji": "♟️", "label": "Échecs"},
