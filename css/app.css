@@ -832,6 +832,72 @@ html.dark-mode #counter-section .counter-list a {
     margin-bottom: 30px;
 }
 
+/* The details of a spoken language: a tooltip of its own over its question mark, shown on hover or keyboard focus and kept while the pointer is on it, so its links can be clicked; hidden the way .sr-only is, so screen readers still read it */
+.progress-wrap .language-tip-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.progress-wrap .language-tip-box {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    z-index: 10;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.progress-wrap .language-tip-wrap:hover .language-tip-box,
+.progress-wrap .language-tip-wrap:focus-within .language-tip-box {
+    width: max-content;
+    max-width: 300px;
+    height: auto;
+    padding: 8px 12px;
+    overflow: visible;
+    clip-path: none;
+    border-radius: 4px;
+    color: var(--white);
+    background-color: var(--dark);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    white-space: normal;
+    transform: translateX(-50%);
+}
+
+.progress-wrap .language-tip-line {
+    display: block;
+}
+
+.progress-wrap .language-tip-box a {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+/* The question mark of a spoken language: a plain icon, not a button look */
+.progress-wrap .language-tip {
+    padding: 0;
+    border: none;
+    color: var(--primary);
+    background-color: transparent;
+    font-size: 16px;
+    vertical-align: middle;
+    cursor: help;
+}
+
+.progress-wrap .language-tip:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.progress-wrap .language-tip:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
 .progress-wrap h3 {
     font-size: 16px;
     margin-bottom: 10px;

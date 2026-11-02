@@ -5,6 +5,7 @@
         "experiences": "Experiences",
         "skills": "Skills",
         "languagesNav": "Languages",
+        "languageDetails": "details and certificates",
         "awards": "Awards",
         "detailsToggle": "Missions",
         "types": {
@@ -24,6 +25,7 @@
         "experiences": "Expériences",
         "skills": "Compétences",
         "languagesNav": "Langues",
+        "languageDetails": "détails et attestations",
         "awards": "Récompenses",
         "detailsToggle": "Missions",
         "types": {

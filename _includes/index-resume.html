@@ -127,7 +127,11 @@
                         {%- for l in languages %}
                         <div class="col-md-12 animate-box">
                             <div class="progress-wrap ftco-animate">
-                                <h3><img src="images/{{ l.flag }}" alt="{{ l.countryAlt[lang] }}" width="27" height="18" class="mr-2 align-middle">{{ l.name[lang] }} ({{ l.level[lang] }})</h3>
+                                {#- A language with details gets a question mark after its level, its details in a tooltip of its own (CSS only, shown on hover or keyboard focus, so the pointer can reach its links): exams and scores, the name of each linked to its certificate in docs/public when it has one, its score and year as plain text (a text may hold a <strong>, written in _data); hidden, it stays readable by screen readers #}
+                                <h3><img src="images/{{ l.flag }}" alt="{{ l.countryAlt[lang] }}" width="27" height="18" class="mr-2 align-middle">{{ l.name[lang] }} ({{ l.level[lang] }})
+                                    {%- if l.details %} <span class="language-tip-wrap"><button type="button" class="language-tip" aria-label="{{ l.name[lang] }}{{ ' :' if lang == 'fr' else ':' }} {{ resumeLang.languageDetails }}"><i class="icon-question-circle" aria-hidden="true"></i></button><span class="language-tip-box">
+                                        {%- for detail in l.details %}<span class="language-tip-line">{% if detail.doc %}<a href="/docs/public/{{ detail.doc | urlencode }}" target="_blank" rel="noopener">{{ detail.name[lang] }}</a>{% endif %}{{ detail.text[lang] | safe }}</span>{% endfor -%}
+                                    </span></span>{% endif %}</h3>
                                 <progress value="{{ l.value }}" max="100" aria-valuetext="{{ l.value }}%"></progress>
                             </div>
                         </div>
