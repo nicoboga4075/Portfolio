@@ -41,12 +41,15 @@ test.describe('hard skills carousel', () => {
     });
 
     for (const lang of ['en', 'fr']) {
-        test(`links Figma to its certificate from a PDF icon only, named for screen readers, on the ${lang} page`, () => {
+        test(`links Figma to its doc from a PDF icon only, named for screen readers, on the ${lang} page`, () => {
             const colon = lang === 'fr' ? ' :' : ':';
             const html = render(lang);
             // The name and the logo stay plain, the PDF icon in the corner is the only link
-            expect(html).toContain(`<div class="d-flex flex-column align-items-center hard-skill"><img src="images/figma.png" class="img-fluid" alt="Figma" loading="lazy" height="75" width="75"><span>Figma</span><a class="hard-skill-certificate" href="/docs/public/Certificat%20FIGMA.pdf" target="_blank" rel="noopener" aria-label="Figma${colon} ${skillsData.carousel[lang].docLinkLabel}"><i class="icon-file-pdf-o" aria-hidden="true"></i></a></div>`);
+            expect(html).toContain(`<div class="d-flex flex-column align-items-center hard-skill"><img src="images/figma.png" class="img-fluid" alt="Figma" loading="lazy" height="75" width="75"><span>Figma</span><a class="hard-skill-doc" href="/docs/public/Certificat%20FIGMA.pdf" target="_blank" rel="noopener" aria-label="Figma${colon} ${skillsData.carousel[lang].docLinkLabel}"><i class="icon-file-pdf-o" aria-hidden="true"></i></a></div>`);
             expect(fs.existsSync(path.join(root, 'docs', 'public', 'Certificat FIGMA.pdf'))).toBe(true);
+            // Every doc a hard skill links to is a public file
+            for (const [, href] of html.matchAll(/class="hard-skill-doc" href="([^"]+)"/g)) expect(fs.existsSync(path.join(root, decodeURIComponent(href)))).toBe(true);
+            expect(html.match(/class="hard-skill-doc"/g)).toHaveLength(3);
         });
     }
 

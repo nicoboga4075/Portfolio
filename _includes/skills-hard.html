@@ -1,5 +1,5 @@
 {%- set lang = page.fileSlug.slice(-2) -%}
-{#- A label is the name of the tool, one string, or one text per language for a method ("Cycle en V"); a tool with a certificate gets a PDF icon in its top right corner, the only link, to its certificate; the list is not named skills, which would hide the skills data and its texts #}
+{#- A label is the name of the tool, one string, or one text per language for a method ("Cycle en V"); a tool with a doc (the file name of its certificate in docs/public/) gets a PDF icon in its top right corner, the only link, to that file; the list is not named skills, which would hide the skills data and its texts #}
 {%- set hardSkills = [
     { key: "python",     label: "Python" },
     { key: "csharp",     label: "C#" },
@@ -7,7 +7,7 @@
     { key: "vscode",     label: "VS Code" },
     { key: "vsstudio",   label: "Visual Studio" },
     { key: "github",     label: "GitHub" },
-    { key: "gitlab",     label: "GitLab" },
+    { key: "gitlab",     label: "GitLab", doc: "Certificat GIT-GITLAB.pdf" },
     { key: "netlify",    label: "Netlify" },
     { key: "html",       label: "HTML" },
     { key: "css",        label: "CSS" },
@@ -15,12 +15,12 @@
     { key: "typescript", label: "TypeScript" },
     { key: "jquery",     label: "jQuery" },
     { key: "bootstrap",  label: "Bootstrap" },
-    { key: "figma",      label: "Figma", certificate: "/docs/public/Certificat%20FIGMA.pdf" },
+    { key: "figma",      label: "Figma", doc: "Certificat FIGMA.pdf" },
     { key: "sql",        label: "SQL" },
     { key: "powershell", label: "PowerShell" },
     { key: "postman",    label: "Postman" },
     { key: "docker",     label: "Docker" },
-    { key: "robot",      label: "Robot Framework" },
+    { key: "robot",      label: "Robot Framework", doc: "Certificat ROBOT FRAMEWORK.pdf" },
     { key: "playwright", label: "Playwright" },
     { key: "xunit",      label: "xUnit" },
     { key: "sonarqube",  label: "SonarQube" },
@@ -39,8 +39,8 @@
 <div id="hard-skills" class="owl-carousel owl-theme">
     {%- for s in hardSkills %}
     {%- set label = s.label[lang] or s.label %}
-    <div class="d-flex flex-column align-items-center{{ ' hard-skill' if s.certificate }}"><img src="images/{{ s.key }}.png" class="img-fluid" alt="{{ label }}" loading="lazy" height="75" width="75"><span>{{ label }}</span>
-        {%- if s.certificate %}<a class="hard-skill-certificate" href="{{ s.certificate }}" target="_blank" rel="noopener" aria-label="{{ label }}{{ ' :' if lang == 'fr' else ':' }} {{ skills.carousel[lang].docLinkLabel }}"><i class="icon-file-pdf-o" aria-hidden="true"></i></a>{% endif -%}
+    <div class="d-flex flex-column align-items-center{{ ' hard-skill' if s.doc }}"><img src="images/{{ s.key }}.png" class="img-fluid" alt="{{ label }}" loading="lazy" height="75" width="75"><span>{{ label }}</span>
+        {%- if s.doc %}<a class="hard-skill-doc" href="/docs/public/{{ s.doc | urlencode }}" target="_blank" rel="noopener" aria-label="{{ label }}{{ ' :' if lang == 'fr' else ':' }} {{ skills.carousel[lang].docLinkLabel }}"><i class="icon-file-pdf-o" aria-hidden="true"></i></a>{% endif -%}
     </div>
     {%- endfor %}
 </div>
