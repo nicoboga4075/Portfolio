@@ -10,6 +10,7 @@
         "jobProfile": "Job profile (APEC)",
         "awards": "Awards",
         "detailsToggle": "Missions",
+        "projectsToggle": "Projects",
         "types": {
             "permanent": "Permanent",
             "internship": "Internship",
@@ -32,6 +33,7 @@
         "jobProfile": "Fiche métier (APEC)",
         "awards": "Récompenses",
         "detailsToggle": "Missions",
+        "projectsToggle": "Projets",
         "types": {
             "permanent": "CDI",
             "internship": "Stage",

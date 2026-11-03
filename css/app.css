@@ -624,7 +624,9 @@ html.dark-mode #counter-section .counter-list a {
     padding-bottom: 10px;
 }
 
+/* The icon or logo of a card keeps its round 50px however long the text beside it grows (opened projects or missions): a flex item would otherwise shrink it into an oval */
 .resume-wrap .icon {
+    flex-shrink: 0;
     width: 50px;
     height: 50px;
     background-color: var(--primary);
@@ -702,6 +704,22 @@ html.dark-mode #counter-section .counter-list a {
 .resume-details ul {
     margin: 8px 0 0;
     padding-left: 20px;
+}
+
+/* The school projects of an education: one framed card each, its name linked to its repository when it is published */
+.school-project {
+    margin-top: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--primary-light);
+    border-radius: 8px;
+}
+
+.school-project p {
+    margin: 6px 0 0;
+}
+
+.school-project-title {
+    font-weight: 700;
 }
 
 .resume-wrap .icon span {
@@ -2086,9 +2104,10 @@ html.dark-mode .project .explore:focus-visible {
     font-size: 13.6px;
 }
 
-/* A sector, and a standard the job followed (ISO 27001...): one tag each, both filters of the experiences */
+/* A sector, and a standard the job followed (ISO 27001...): one tag each, both filters of the experiences; the tools of a school project look the same */
 .sector-tag,
-.standard-tag {
+.standard-tag,
+.school-project-tech {
     display: inline-block;
     margin-top: 6px;
     margin-right: 6px;

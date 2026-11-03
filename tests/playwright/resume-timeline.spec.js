@@ -8,10 +8,10 @@ const skills = require(path.join(root, '_data', 'skills.json'));
 const tools = require(path.join(root, '_data', 'tools.json'));
 const languages = require(path.join(root, '_data', 'languages.json'));
 
-// Renders the resume include, its own includes read from _includes, with the experiences given
-function render(lang, experiences = resume.experiences) {
+// Renders the resume include, its own includes read from _includes, with the experiences and the education given
+function render(lang, experiences = resume.experiences, education = resume.education) {
     const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(path.join(root, '_includes')), { autoescape: true });
-    return env.render('index-resume.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, resume: { ...resume, experiences }, skills, tools, languages, profile: { xp: 5 } });
+    return env.render('index-resume.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, resume: { ...resume, experiences, education }, skills, tools, languages, profile: { xp: 5 } });
 }
 
 // The experiences only, the education above them sharing their markup
@@ -43,7 +43,25 @@ test.describe('resume timeline', () => {
             const details = { en: ['First mission', 'Second mission'], fr: ['Première mission', 'Deuxième mission'] };
             const html = render(lang, [{ ...resume.experiences[0], details }, resume.experiences[1]]).replaceAll(/>\s+</g, '><');
             expect(html).toContain(`<details class="resume-details"><summary>${resume[lang].detailsToggle}</summary><ul>${details[lang].map(detail => `<li>${detail}</li>`).join('')}</ul></details>`);
-            expect(html.match(/class="resume-details"/g)).toHaveLength(1);
+            expect(html.slice(html.indexOf('id="experiences"')).match(/class="resume-details"/g)).toHaveLength(1);
+        });
+
+        test(`folds the school projects of an education that has some, each with its repository when it has one, its problem and its tools, and shows no toggle for the others, on the ${lang} page`, () => {
+            const projects = [
+                { name: 'Linked', href: 'https://github.com/example/linked', problem: { en: 'Why?', fr: "Pourquoi l'école ?" }, desc: { en: 'Because.', fr: 'Parce que.' }, techs: ['Python'] },
+                { name: 'Unlinked', problem: { en: 'How?', fr: 'Comment ?' }, desc: { en: 'Like this.', fr: 'Ainsi.' }, techs: ['Java', 'SQL'] }
+            ];
+            const withFixture = resume.education.map((item, index) => (index === 0 ? { ...item, projects } : item));
+            const html = render(lang, resume.experiences, withFixture).replaceAll(/>\s+</g, '><');
+            const section = html.slice(html.indexOf('id="education"'), html.indexOf('id="experiences"'));
+            const withProjects = withFixture.filter(item => item.projects);
+            expect(withProjects).toHaveLength(1);
+            expect(render(lang).match(/<summary>[^<]*<\/summary><div class="school-projects">/g)).toBeNull();
+            for (const education of withProjects) {
+                const cards = education.projects.map(project => `<article class="school-project">${project.href ? `<a class="school-project-title" href="${project.href}" target="_blank" rel="noopener">${project.name} <i class="icon-github" aria-hidden="true"></i></a>` : `<span class="school-project-title">${project.name}</span>`}<p><em>${project.problem[lang].replaceAll("'", '&#39;')}</em> ${project.desc[lang].replaceAll("'", '&#39;')}</p>${project.techs.map(tech => `<span class="school-project-tech">${tech}</span>`).join('')}</article>`).join('');
+                expect(section).toContain(`<details class="resume-details"><summary>${resume[lang].projectsToggle}</summary><div class="school-projects">${cards}</div></details>`);
+            }
+            expect(section.match(/class="resume-details"/g)).toHaveLength(withProjects.length);
         });
     }
 });

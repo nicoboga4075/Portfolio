@@ -30,6 +30,23 @@
                                     {%- if e.tipHref %} <a href="{{ e.tipHref }}" target="_blank" rel="noopener" title="{{ resumeLang.jobProfile }}" aria-label="{{ resumeLang.jobProfile }}"><i class="icon-briefcase" aria-hidden="true"></i></a>{% endif -%}
                                 </span></span></span>{% endif %}</h2>
                             <span class="position"><a target="_blank" rel="noopener" href="{{ e.href[lang] if e.href[lang] else e.href }}">{{ e.school }}</a> {{ e.place }}</span>
+                            {#- The school projects of an education, folded like the missions of an experience: each with its repository when it is published, the problem it answers and its tools #}
+                            {%- if e.projects %}
+                            <details class="resume-details">
+                                <summary>{{ resumeLang.projectsToggle }}</summary>
+                                <div class="school-projects">
+                                    {%- for p in e.projects %}
+                                    <article class="school-project">
+                                        {% if p.href %}<a class="school-project-title" href="{{ p.href }}" target="_blank" rel="noopener">{{ p.name }} <i class="icon-github" aria-hidden="true"></i></a>{% else %}<span class="school-project-title">{{ p.name }}</span>{% endif %}
+                                        <p><em>{{ p.problem[lang] }}</em> {{ p.desc[lang] }}</p>
+                                        {%- for tech in p.techs %}
+                                        <span class="school-project-tech">{{ tech }}</span>
+                                        {%- endfor %}
+                                    </article>
+                                    {%- endfor %}
+                                </div>
+                            </details>
+                            {%- endif %}
                             <p></p>
                         </div>
                     </div>
