@@ -42,7 +42,7 @@ test.describe('resume tips', () => {
                 const title = escapeHtml(education.title[lang]);
                 const profile = escapeHtml(resume[lang].jobProfile);
                 const link = education.tipHref ? ` <a href="${education.tipHref}" target="_blank" rel="noopener" title="${profile}" aria-label="${profile}"><i class="icon-briefcase" aria-hidden="true"></i></a>` : '';
-                expect(html).toContain(`<h2>${title} <span class="info-tip-wrap"><button type="button" class="info-tip" aria-label="${title}${colonOf(lang)} ${resume[lang].educationDetails}"><i class="icon-question-circle" aria-hidden="true"></i></button><span class="info-tip-box"><span class="info-tip-line">${escapeHtml(education.tip[lang])}${link}</span></span></span></h2>`);
+                expect(html).toContain(`<h2>${title} <span class="info-tip-wrap"><button type="button" class="info-tip" aria-label="${title}${colonOf(lang)} ${resume[lang].educationDetails}"><i class="icon-question-circle" aria-hidden="true"></i></button><span class="info-tip-box"><span class="info-tip-line">${escapeHtml(education.tip[lang])}${link}</span>${education.tipResults ? `<span class="info-tip-line">${escapeHtml(education.tipResults[lang])}</span>` : ''}</span></span></h2>`);
             }
             expect(html.match(/class="info-tip"/g)).toHaveLength(tipped.length);
             for (const education of resume.education.filter(other => !other.tip)) expect(html).toContain(`<h2>${escapeHtml(education.title[lang])}</h2>`);

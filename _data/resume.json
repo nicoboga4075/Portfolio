@@ -205,6 +205,10 @@
             "tip": {
                 "en": "Preparatory classes for the engineering grandes écoles: Mathematics (Analysis, Algebra), Physics-Chemistry, Computer Science (Python, SQL)",
                 "fr": "Classes préparatoires aux grandes écoles d'ingénieurs : Mathématiques (Analyse, Algèbre), Physique-Chimie, Informatique (Python, SQL)"
+            },
+            "tipResults": {
+                "en": "Key entrance exam results: admitted to ENSEA (Centrale-Supélec), shortlisted for ENSAI (CCP), admitted without oral to ESILV (E3A)",
+                "fr": "Résultats notables aux concours : admis à l'ENSEA (Centrale-Supélec), admissible à l'ENSAI (CCP), grand admissible à l'ESILV (E3A)"
             }
         },
         {
