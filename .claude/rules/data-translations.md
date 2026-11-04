@@ -14,4 +14,4 @@ paths:
   - mad skills: `mad` of `_data/skills.json`, `{ key, en, fr }`;
   - the tooltips of the three tabs: `carousel` of `_data/skills.json` (`hardTip`, `softTip`, `madTip`).
 - The profile figures, routes, locales, socials and service URLs live in `config` of `package.json`, not in `_data`.
-- A text with HTML (`<i>`, `<a>`) is rendered with `| safe`: keep it free of anything that comes from visitors.
+- No HTML in `_data`: a text is plain text, and what it needs in bold, in italics, as a link or as an icon goes in the structure the template marks up (a mission line `{ label, href, text }` of `resume.json`, the `parts` of a detail line of `languages.json`: `{ text }`, `{ highlight }` (bold), `{ term }` (italics), `{ icon, label }`, named by what they mean, never by an HTML tag), never in the text; the template escapes it, without `| safe`. A few older texts still hold HTML (`<i>` in `projects.json`) and are rendered with `| safe` until they are converted the same way.

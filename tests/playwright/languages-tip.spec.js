@@ -17,6 +17,15 @@ function render(lang) {
 
 const escapeHtml = text => text.replaceAll("'", '&#39;');
 
+// The text of a detail line: plain, or its parts marked up by the template (bold, italics, an icon with its label for screen readers)
+const partHtml = part => {
+    if (part.highlight) return `<strong>${escapeHtml(part.highlight)}</strong>`;
+    if (part.term) return `<em>${escapeHtml(part.term)}</em>`;
+    if (part.icon) return `<i class="${part.icon}" title="${escapeHtml(part.label)}" aria-hidden="true"></i><span class="sr-only"> (${escapeHtml(part.label)})</span>`;
+    return escapeHtml(part.text);
+};
+const textHtml = (detail, lang) => (detail.parts ? detail.parts[lang].map(partHtml).join('') : escapeHtml(detail.text[lang]));
+
 test.describe('spoken languages', () => {
     for (const lang of ['en', 'fr']) {
         test(`gives a language with details a question mark and their tooltip, each certificate linked, and the others none, on the ${lang} page`, () => {
@@ -25,7 +34,7 @@ test.describe('spoken languages', () => {
             const detailed = languages.filter(language => language.details);
             expect(detailed.length).toBeGreaterThan(0);
             for (const language of detailed) {
-                const lines = language.details.map(detail => `<span class="info-tip-line">${detail.doc ? `<a href="/docs/public/${encodeURIComponent(detail.doc)}" target="_blank" rel="noopener">${escapeHtml(detail.name[lang])}</a>` : ''}${detail.text[lang]}</span>`).join('');
+                const lines = language.details.map(detail => `<span class="info-tip-line">${detail.doc ? `<a href="/docs/public/${encodeURIComponent(detail.doc)}" target="_blank" rel="noopener">${escapeHtml(detail.name[lang])}</a>` : ''}${textHtml(detail, lang)}</span>`).join('');
                 expect(html).toContain(`${language.name[lang]} (${language.level[lang]}) <span class="info-tip-wrap"><button type="button" class="info-tip" aria-label="${language.name[lang]}${colon} ${resume[lang].languageDetails}"><i class="icon-question-circle" aria-hidden="true"></i></button><span class="info-tip-box">${lines}</span></span></h3>`);
                 for (const { doc } of language.details.filter(detail => detail.doc)) expect(fs.existsSync(path.join(root, 'docs', 'public', doc))).toBe(true);
             }
