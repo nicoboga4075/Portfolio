@@ -374,7 +374,7 @@ describe('the skills chart', () => {
 
 describe('the experience filters', () => {
     const experiences = `<div id="experiences"><h2 class="heading">Experiences</h2>
-        <div class="resume-wrap"><span class="badge">CDI</span><span class="company-type-badge">Startup</span><span class="sector-tag">Health</span><span class="standard-tag">ISO 27001</span></div>
+        <div class="resume-wrap"><span class="badge">CDI</span><span class="company-type-badge">Startup</span><span class="sector-tag">Health</span><span class="standard-tag">IGI 1300</span><span class="standard-tag">ISO 42001</span><span class="standard-tag">EN 50128</span><span class="standard-tag">ISO 27001</span><span class="standard-tag">ISO 9001</span></div>
         <div class="resume-wrap ftco-animated"><span class="badge">Internship</span><span class="sector-tag">Health</span></div>
     </div>`;
 
@@ -396,7 +396,7 @@ describe('the experience filters', () => {
         expect(document.querySelector('#experiences h2').nextElementSibling).toBe(toggle);
         expect(toolbar.hidden).toBe(true);
         expect([...toolbar.querySelectorAll('.filter-group-label')].map(label => label.textContent)).toEqual(['Contract', 'Company type', 'Sector', 'Standards']);
-        expect([...toolbar.querySelectorAll('.filter-chip')].map(chip => chip.textContent)).toEqual(['CDI', 'Internship', 'Startup', 'Health', 'ISO 27001']);
+        expect([...toolbar.querySelectorAll('.filter-chip')].map(chip => chip.textContent)).toEqual(['CDI', 'Internship', 'Startup', 'Health', 'ISO 9001', 'ISO 27001', 'ISO 42001', 'IGI 1300', 'EN 50128']);
         toggle.click();
         expect(toolbar.hidden).toBe(false);
         expect(toggle.getAttribute('aria-expanded')).toBe('true');
@@ -686,6 +686,50 @@ describe('the home page', () => {
         // An empty popover has no link to focus
         tip.innerHTML = '';
         $(button).trigger('shown.bs.popover');
+    });
+
+    test('scrolls a mission link to its project card and focuses its Explore button so the card opens, and leaves the other links alone', () => {
+        const app = loadApp({ body: '<details class="resume-details"><a id="to-card" href="#esh">ESH</a><a id="to-section" href="#blog-section">Blog</a><a id="to-nothing" href="#nowhere">Nowhere</a></details><div id="esh" class="project ftco-animate"><a class="explore" href="https://example.com">Explore</a></div><section id="blog-section"></section>' });
+        const animate = jest.spyOn($.fn, 'animate').mockImplementation(function (props, duration, done) {
+            done();
+            return this;
+        });
+        app.initProjectLinks();
+        const click = id => {
+            const event = $.Event('click');
+            $(document.getElementById(id)).trigger(event);
+            return event.isDefaultPrevented();
+        };
+        const pinned = () => document.body.classList.contains('projects-pinned');
+        const move = (movementX, movementY) => $(document).trigger($.Event('pointermove', { originalEvent: { movementX, movementY } }));
+        expect(click('to-card')).toBe(true);
+        expect(animate).toHaveBeenCalledWith({ scrollTop: expect.any(Number) }, 500, expect.any(Function));
+        expect(document.activeElement).toBe(document.querySelector('.explore'));
+        // The card, still hidden by the scroll reveal, was revealed first so its button could take the focus
+        expect(document.getElementById('esh').classList.contains('ftco-animated')).toBe(true);
+        // The other cards ignore the pointer left still over them, until it really moves
+        expect(pinned()).toBe(true);
+        move(0, 0);
+        $(document).trigger('pointermove');
+        expect(pinned()).toBe(true);
+        move(0, 3);
+        expect(pinned()).toBe(false);
+        // or until the focus leaves the card
+        click('to-card');
+        move(2, 0);
+        expect(pinned()).toBe(false);
+        click('to-card');
+        $('.explore').trigger('focusout');
+        expect(pinned()).toBe(false);
+        // A card without an Explore button is still scrolled to
+        document.querySelector('.explore').remove();
+        expect(click('to-card')).toBe(true);
+        expect(animate).toHaveBeenCalledTimes(4);
+        // A link to a section or to a missing id keeps its default
+        expect(click('to-section')).toBe(false);
+        expect(click('to-nothing')).toBe(false);
+        expect(animate).toHaveBeenCalledTimes(4);
+        animate.mockRestore();
     });
 
     test('lights the pipeline steps one after the other while on screen, loops back to the first and pauses off screen', () => {

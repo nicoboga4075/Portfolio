@@ -457,6 +457,33 @@ function initFlipCards() {
     });
 }
 
+// A link of the missions to a project card (#esh) scrolls to the card and opens it as on hover: the focus goes to its Explore button, so :focus-within shows its overlay and the keyboard lands on it too; a link to anything else keeps its default
+function initProjectLinks() {
+    // The pointer stays where the click was, now over another card: that card ignores it (projects-pinned) until the pointer really moves or the focus leaves, so only the linked card is open
+    const unpin = () => document.body.classList.remove('projects-pinned');
+    $(document).on('pointermove', event => {
+        if (event.originalEvent?.movementX || event.originalEvent?.movementY) {
+            unpin();
+        }
+    });
+    $(document).on('click', '.resume-details a[href^="#"]', function (event) {
+        const card = $($.attr(this, 'href')).filter('.project');
+        if (!card.length) {
+            return;
+        }
+        event.preventDefault();
+        document.body.classList.add('projects-pinned');
+        // A card not scrolled into view yet is still hidden (visibility: hidden of .ftco-animate), and a hidden button can't take the focus: reveal it first, as the scroll reveal would
+        if (!card.hasClass('ftco-animated')) {
+            card.addClass('fadeInUp ftco-animated');
+        }
+        card.one('focusout', unpin);
+        $('html, body').animate({ scrollTop: card.offset().top - 70 }, 500, () => {
+            card.find('.explore')[0]?.focus({ preventScroll: true });
+        });
+    });
+}
+
 // Opens the certificates of a hard skill in a popover from its PDF icon, since a tooltip can't hold links the pointer can reach: drawn in the body, where the carousel can't clip it, toggled by a click, closed by a click elsewhere or Escape (which gives the focus back to the icon); once open, the focus moves to its first link, so the keyboard reaches them too; the instance is kept as docsPopover, since an element's popover property is the HTML popover attribute
 function initDocPopovers() {
     const buttons = $('.hard-skill-docs').each(function () {
@@ -1027,6 +1054,15 @@ function initCarousel(target) {
 // Badge/tag text is already localized server-side (separate _en/_fr builds),
 // so filters are built straight from the rendered DOM instead of duplicating
 // the experience data in JS.
+// The number of an ISO standard (ISO 27001 gives 27001), Infinity for any other
+const isoNumber = name => Number(/^ISO (\d+)/.exec(name)?.[1] ?? Infinity);
+
+// The ISO standards first, by number, then the others in the order they came (a stable sort keeps two non-ISO ones as they were)
+const sortStandards = values => [...values].sort((a, b) => {
+    const [x, y] = [isoNumber(a), isoNumber(b)];
+    return x === y ? 0 : x - y;
+});
+
 function initExperienceFilters() {
     const container = document.getElementById('experiences');
     const wraps = container ? [...container.querySelectorAll('.resume-wrap')] : [];
@@ -1039,7 +1075,7 @@ function initExperienceFilters() {
         { key: 'companyType', selector: '.company-type-badge', label: getMessage('filter-company-type') },
         { key: 'companySize', selector: '.company-size-badge', label: getMessage('filter-company-size') },
         { key: 'sector', selector: '.sector-tag', label: getMessage('filter-sector') },
-        { key: 'standard', selector: '.standard-tag', label: getMessage('filter-standard') }
+        { key: 'standard', selector: '.standard-tag', label: getMessage('filter-standard'), order: sortStandards }
     ];
     groups.forEach(g => { g.values = new Set(); });
 
@@ -1109,7 +1145,7 @@ function initExperienceFilters() {
         label.className = 'filter-group-label';
         label.textContent = g.label;
         group.appendChild(label);
-        g.values.forEach(value => {
+        (g.order ? g.order(g.values) : g.values).forEach(value => {
             const chip = document.createElement('button');
             chip.type = 'button';
             chip.className = 'filter-chip';
@@ -1264,6 +1300,8 @@ function initIndexPage(langPage) {
         initFlipCards();
 
         initDocPopovers();
+
+        initProjectLinks();
 
         const skillsChartCanvas = document.getElementById('skills-chart');
         if (skillsChartCanvas) {
