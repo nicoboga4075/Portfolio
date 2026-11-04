@@ -701,9 +701,71 @@ html.dark-mode #counter-section .counter-list a {
     cursor: pointer;
 }
 
+/* The Learn more toggle only shows when its card is hovered or holds the keyboard focus, or once it is open; still there for the keyboard and on a touch screen, which has no hover */
+@media (hover: hover) {
+    .resume-wrap .resume-details:not([open]) summary {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    .resume-wrap:hover .resume-details summary,
+    .resume-wrap:focus-within .resume-details summary {
+        opacity: 1;
+    }
+}
+
 .resume-details ul {
     margin: 8px 0 0;
     padding-left: 20px;
+}
+
+/* The label of each section of the missions (Mission, Key responsibilities...), above its paragraph or its list */
+.resume-details .resume-details-label {
+    margin: 10px 0 0;
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.resume-details .resume-details-label + p {
+    margin: 4px 0 0;
+}
+
+/* A linked label of the missions (a project card) keeps the grey of the text, underlined so it still reads as a link */
+.resume-details strong a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+/* The skills of an experience under its summary: one chip each, its icon before its name */
+.resume-details .skill-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0;
+    list-style: none;
+}
+
+.resume-details .skill-icons li {
+    padding: 2px 10px;
+    border: 1px solid var(--primary-light);
+    border-radius: 15px;
+    font-size: 13px;
+}
+
+.resume-details .skill-icons span {
+    color: var(--primary);
+}
+
+.resume-details .skill-icons img {
+    vertical-align: -2px;
+}
+
+/* The Robot Framework and GitHub logos are white, drawn for the dark skills carousel: turned black on the light theme so they show on the light card */
+html:not(.dark-mode) .resume-details .skill-icons img[src$="/robot.png"],
+html:not(.dark-mode) .resume-details .skill-icons img[src$="/github.png"] {
+    filter: invert(1);
 }
 
 /* The school projects of an education: one framed card each, its name linked to its repository when it is published */
@@ -2022,6 +2084,11 @@ html.dark-mode .project .overlay {
     font-size: 12px;
     text-transform: inherit;
     letter-spacing: inherit;
+}
+
+/* Right after a mission link opened a card, the other cards ignore the pointer left over them (initProjectLinks of js/app.js), so they don't open on hover too */
+.projects-pinned .project:not(:focus-within) {
+    pointer-events: none;
 }
 
 .project:hover .overlay,

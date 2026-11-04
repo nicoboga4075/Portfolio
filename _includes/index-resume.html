@@ -3,6 +3,10 @@
 {%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
 {%- set resumeLang = resume[lang] -%}
+{#- A line of the missions: a plain text, or its label in bold (linked when it has an href, in a new tab when it leaves the site) then its text #}
+{%- macro detailLine(line, lang) -%}
+{% if line is string %}{{ line }}{% else %}<strong>{% if line.href %}<a href="{{ line.href }}"{% if line.href.startsWith('https://') %} target="_blank" rel="noopener"{% endif %}>{{ line.label }}</a>{% else %}{{ line.label }}{% endif %}</strong>{% if line.text %}{{ ' : ' if lang == 'fr' else ': ' }}{{ line.text }}{% endif %}{% endif %}
+{%- endmacro -%}
 <section id="resume-section" class="ftco-section ftco-no-pb">
     <div class="container">
         <div class="row">
@@ -35,7 +39,7 @@
                             {#- The school projects of an education, folded like the missions of an experience: each with its repository when it is published, the problem it answers and its tools #}
                             {%- if e.projects %}
                             <details class="resume-details">
-                                <summary>{{ resumeLang.projectsToggle }}</summary>
+                                <summary><i class="icon-search" aria-hidden="true"></i> {{ resumeLang.moreToggle }}</summary>
                                 <div class="school-projects">
                                     {%- for p in e.projects %}
                                     <article class="school-project">
@@ -101,15 +105,37 @@
                             {%- for standard in e.standards %}
                             <span class="standard-tag">{{ standard }}</span>
                             {%- endfor %}
-                            {#- The missions of an experience that has "details", folded until the visitor opens them: a native details element, so it works with the keyboard and without JavaScript #}
+                            {#- The missions of an experience that has "details", folded until the visitor opens them: a native details element, so it works with the keyboard and without JavaScript. Its sections come in a fixed order, each under its label: a summary (mission, or field experience) as a paragraph, the others as lists whose lines are a { label, text } in bold before their text (the label linked when it has an href) or a plain text #}
                             {%- if e.details %}
                             <details class="resume-details">
-                                <summary>{{ resumeLang.detailsToggle }}</summary>
-                                <ul>
-                                    {%- for detail in e.details[lang] %}
-                                    <li>{{ detail }}</li>
+                                <summary><i class="icon-search" aria-hidden="true"></i> {{ resumeLang.moreToggle }}</summary>
+                                {%- for key in ['mission', 'field', 'responsibilities', 'skills', 'duties', 'projects', 'articles', 'training', 'stack', 'results'] %}
+                                {%- set section = e.details[lang][key] %}
+                                {%- if section %}
+                                <p class="resume-details-label">{{ resumeLang.detailSections[key + 'Alone'] if ((section is string or section.length == 1) and resumeLang.detailSections[key + 'Alone']) else resumeLang.detailSections[key] }}</p>
+                                {%- if section is string %}
+                                <p>{{ section }}</p>
+                                {#- The skills of an experience that has "skillIcons", each behind its icon, the logo of a technology (images/<image>.png) or an emoji when no icon fits, under its summary #}
+                                {%- if e.skillIcons and key in ['mission', 'field'] %}
+                                <ul class="skill-icons">
+                                    {%- for skill in e.skillIcons %}
+                                    <li>{% if skill.image %}<img src="images/{{ skill.image }}.png" alt="" width="14" height="14" loading="lazy">{% elif skill.emoji %}<span class="skill-emoji" aria-hidden="true">{{ skill.emoji }}</span>{% else %}<span class="{{ skill.icon }}" aria-hidden="true"></span>{% endif %} {{ skill.label[lang] }}</li>
                                     {%- endfor %}
                                 </ul>
+                                {%- endif %}
+                                {#- A section of one line is a paragraph, of several a bulleted list #}
+                                {%- elif section.length == 1 %}
+                                {%- set line = section[0] %}
+                                <p>{{ detailLine(line, lang) }}</p>
+                                {%- else %}
+                                <ul>
+                                    {%- for line in section %}
+                                    <li>{{ detailLine(line, lang) }}</li>
+                                    {%- endfor %}
+                                </ul>
+                                {%- endif %}
+                                {%- endif %}
+                                {%- endfor %}
                             </details>
                             {%- endif %}
                         </div>

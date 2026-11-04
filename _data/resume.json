@@ -9,8 +9,23 @@
         "educationDetails": "details",
         "jobProfile": "Job profile (APEC)",
         "awards": "Awards",
-        "detailsToggle": "Missions",
-        "projectsToggle": "Projects",
+        "moreToggle": "Learn more",
+        "detailSections": {
+            "mission": "Missions",
+            "missionAlone": "Mission",
+            "field": "Field experience",
+            "responsibilities": "Key responsibilities",
+            "skills": "Responsibilities & skills developed",
+            "projects": "Projects",
+            "projectsAlone": "Project",
+            "training": "Training",
+            "duties": "Responsibilities",
+            "results": "Results",
+            "resultsAlone": "Result",
+            "stack": "Tech stack",
+            "articles": "Articles",
+            "articlesAlone": "Article"
+        },
         "types": {
             "permanent": "Permanent",
             "internship": "Internship",
@@ -32,8 +47,23 @@
         "educationDetails": "détails",
         "jobProfile": "Fiche métier (APEC)",
         "awards": "Récompenses",
-        "detailsToggle": "Missions",
-        "projectsToggle": "Projets",
+        "moreToggle": "En savoir plus",
+        "detailSections": {
+            "mission": "Missions",
+            "missionAlone": "Mission",
+            "field": "Expérience terrain",
+            "responsibilities": "Responsabilités clés",
+            "skills": "Responsabilités & compétences développées",
+            "projects": "Projets",
+            "projectsAlone": "Projet",
+            "training": "Formations",
+            "duties": "Responsabilités",
+            "results": "Résultats",
+            "resultsAlone": "Résultat",
+            "stack": "Environnement technique",
+            "articles": "Articles",
+            "articlesAlone": "Article"
+        },
         "types": {
             "permanent": "CDI",
             "internship": "Stage",
@@ -254,7 +284,50 @@
             ],
             "standards": ["IGI 1300", "ISO 42001"],
             "companyType": "software-publisher",
-            "companySize": "Scale-up"
+            "companySize": "Scale-up",
+            "details": {
+                "en": {
+                    "mission": "MVP of the rewrite of a critical data intelligence and sovereign security application (GRC): 20 years of legacy C++ into a modular platform the client configures",
+                    "responsibilities": [
+                        { "label": "Back-end development", "text": "C# .NET 9 and Entity Framework, AI-augmented (Claude Code), in Agile (Jira, Confluence) within a team of 10 across Paris, Tours and Casablanca" },
+                        { "label": "Tests", "text": "unit and integration (xUnit, Vitest), end-to-end (Playwright)" },
+                        { "label": "Quality and teamwork", "text": "code reviews and technical decisions under IGI 1300 and ISO 42001, with the front-end (React, TypeScript) and Design & Product (Figma) teams" },
+                        { "label": "DevSecOps", "text": "GitLab CI/CD, Trivy, Docker, PowerShell scripts" },
+                        { "label": "Scalability and traceability", "text": "internationalisation of the application (i18n), setting up the logging/audit system and the error/exception handling" },
+                        { "label": "Encryption", "text": "setting up the KMS (Key Management System) to secure the storage of the imported documents" }
+                    ],
+                    "projects": [
+                        { "label": "Thom'AS", "text": "IAM platform managing clearances and need-to-know" }
+                    ]
+                },
+                "fr": {
+                    "mission": "MVP de refonte d'une application critique de data intelligence et de sécurité souveraine (GRC) : 20 ans de legacy C++ vers une plateforme modulaire et configurable par le client",
+                    "responsibilities": [
+                        { "label": "Développement back-end", "text": "C# .NET 9 et Entity Framework, augmenté par l'IA (Claude Code), en Agile (Jira, Confluence) dans une équipe de 10 entre Paris, Tours et Casablanca" },
+                        { "label": "Tests", "text": "unitaires et d'intégration (xUnit, Vitest), E2E (Playwright)" },
+                        { "label": "Qualité et collaboration", "text": "revues de code et décisions techniques dans le respect des normes IGI 1300 et ISO 42001, avec les équipes Front-end (React, TypeScript) et Design & Product (Figma)" },
+                        { "label": "DevSecOps", "text": "CI/CD GitLab, Trivy, Docker, scripts PowerShell" },
+                        { "label": "Scalabilité et traçabilité", "text": "internationalisation de l'application (i18n), mise en place du système de logging/audit et gestion des erreurs/exceptions" },
+                        { "label": "Chiffrement", "text": "configuration du KMS (Key Management System) pour sécuriser le stockage des documents importés" }
+                    ],
+                    "projects": [
+                        { "label": "Thom'AS", "text": "plateforme IAM de gestion des habilitations et du besoin d'en connaître" }
+                    ]
+                }
+            },
+            "skillIcons": [
+                { "icon": "icon-server", "label": { "en": "Back-end", "fr": "Back-end" } },
+                { "image": "csharp", "label": { "en": "C# .NET", "fr": "C# .NET" } },
+                { "image": "claude", "label": { "en": "Claude Code", "fr": "Claude Code" } },
+                { "image": "gitlab", "label": { "en": "GitLab", "fr": "GitLab" } },
+                { "image": "docker", "label": { "en": "Docker", "fr": "Docker" } },
+                { "image": "agile", "label": { "en": "Agile", "fr": "Agile" } },
+                { "icon": "icon-diamond", "label": { "en": "Clean Code", "fr": "Clean Code" } },
+                { "icon": "icon-check-square-o", "label": { "en": "Testing", "fr": "Tests" } },
+                { "icon": "icon-shield", "label": { "en": "Security", "fr": "Sécurité" } },
+                { "icon": "icon-magic", "label": { "en": "AI-augmented development", "fr": "Développement augmenté par l'IA" } },
+                { "icon": "icon-users", "label": { "en": "Teamwork", "fr": "Travail d'équipe" } }
+            ]
         },
         {
             "icon": "icon-briefcase",
@@ -297,7 +370,52 @@
             "missionHref": {
                 "en": "https://www.alstom.com",
                 "fr": "https://www.alstom.com/fr"
-            }
+            },
+            "details": {
+                "en": {
+                    "field": "Software Designer on assignment at Alstom (Epsilon site, Villeurbanne), in a V-model cycle with daily stand-ups and design reviews in English",
+                    "responsibilities": [
+                        { "label": "Full stack development", "text": "C#, JavaScript, SQL Server, in a team of 5 (3 on site, 2 in Bangalore) led by a Tech Lead" },
+                        { "label": "Automated tests", "text": "Robot Framework, Python, PowerShell" },
+                        { "label": "Specifications and traceability", "text": "ClearQuest, RTC, Reqtify, with the system and validation teams (EN 50128)" },
+                        { "label": "CI/CD", "text": "sources and pipelines on GitLab" }
+                    ],
+                    "projects": [
+                        { "label": "KMS", "text": "a website using cryptography to protect the data and the communications of railway entities (Key Management System)" }
+                    ],
+                    "training": [
+                        { "label": "Udemy", "text": "Git-GitLab, Figma, Robot Framework" },
+                        { "label": "Astek Academy", "text": "secure development, preparation for the PSM1 and PSPO1 certifications" }
+                    ]
+                },
+                "fr": {
+                    "field": "Software Designer en mission chez Alstom (site Epsilon, Villeurbanne), en cycle en V avec daily stand-ups et design reviews en anglais",
+                    "responsibilities": [
+                        { "label": "Développement full stack", "text": "C#, JavaScript, SQL Server, dans une équipe de 5 (3 sur site, 2 à Bangalore) encadrée par un Tech Lead" },
+                        { "label": "Tests automatisés", "text": "Robot Framework, Python, PowerShell" },
+                        { "label": "Spécifications et traçabilité", "text": "ClearQuest, RTC, Reqtify, avec les équipes système et validation (EN 50128)" },
+                        { "label": "CI/CD", "text": "sources et pipelines sur GitLab" }
+                    ],
+                    "projects": [
+                        { "label": "KMS", "text": "site web utilisant la cryptographie pour protéger les données et les communications des entités ferroviaires (Key Management System)" }
+                    ],
+                    "training": [
+                        { "label": "Udemy", "text": "Git-GitLab, Figma, Robot Framework" },
+                        { "label": "Astek Academy", "text": "développement sécurisé, préparation aux certifications PSM1 et PSPO1" }
+                    ]
+                }
+            },
+            "skillIcons": [
+                { "icon": "icon-code", "label": { "en": "Full stack", "fr": "Full stack" } },
+                { "image": "csharp", "label": { "en": "C# .NET", "fr": "C# .NET" } },
+                { "image": "javascript", "label": { "en": "JavaScript", "fr": "JavaScript" } },
+                { "image": "robot", "label": { "en": "Robot Framework", "fr": "Robot Framework" } },
+                { "image": "gitlab", "label": { "en": "GitLab", "fr": "GitLab" } },
+                { "icon": "icon-check-square-o", "label": { "en": "Test automation", "fr": "Automatisation des tests" } },
+                { "icon": "icon-sitemap", "label": { "en": "V-model", "fr": "Cycle en V" } },
+                { "icon": "icon-language", "label": { "en": "English", "fr": "Anglais" } },
+                { "icon": "icon-users", "label": { "en": "Teamwork", "fr": "Travail d'équipe" } }
+            ]
         },
         {
             "icon": "icon-security",
@@ -335,7 +453,40 @@
             "companySize": {
                 "en": "ISE",
                 "fr": "ETI"
-            }
+            },
+            "details": {
+                "en": {
+                    "mission": "Audit and securing of the BI module of Teexma (TxBI)",
+                    "responsibilities": [
+                        { "label": "Development", "text": "C# .NET to secure the software (ISO 9001, ISO 27001)" },
+                        { "label": "Audit and pentests", "text": "code audit and penetration tests with Postman (SQL injection, XSS)" },
+                        { "label": "Automation", "text": "PowerShell scripts" }
+                    ],
+                    "projects": [
+                        { "label": "Hindex TxBI", "text": "an R&D project to better search and exploit the data of Teexma" }
+                    ]
+                },
+                "fr": {
+                    "mission": "Audit et sécurisation du module de BI de Teexma (TxBI)",
+                    "responsibilities": [
+                        { "label": "Développement", "text": "C# .NET pour sécuriser le logiciel (ISO 9001, ISO 27001)" },
+                        { "label": "Audit et pentests", "text": "audit de code et tests d'intrusion avec Postman (injections SQL, XSS)" },
+                        { "label": "Automatisation", "text": "scripts PowerShell" }
+                    ],
+                    "projects": [
+                        { "label": "Hindex TxBI", "text": "projet R&D pour mieux rechercher et exploiter les données de Teexma" }
+                    ]
+                }
+            },
+            "skillIcons": [
+                { "icon": "icon-server", "label": { "en": "Back-end", "fr": "Back-end" } },
+                { "image": "csharp", "label": { "en": "C# .NET", "fr": "C# .NET" } },
+                { "image": "github", "label": { "en": "GitHub", "fr": "GitHub" } },
+                { "icon": "icon-diamond", "label": { "en": "Clean Code", "fr": "Clean Code" } },
+                { "icon": "icon-shield", "label": { "en": "Security", "fr": "Sécurité" } },
+                { "icon": "icon-search", "label": { "en": "Code audit", "fr": "Audit de code" } },
+                { "icon": "icon-bug", "label": { "en": "Pentests", "fr": "Pentests" } }
+            ]
         },
         {
             "icon": "icon-poll",
@@ -344,8 +495,8 @@
                 "fr": "Juillet 2021 - Mai 2024"
             },
             "title": {
-                "en": "Software Engineer",
-                "fr": "Ingénieur Logiciel"
+                "en": "Software & Support Engineer",
+                "fr": "Ingénieur Logiciel & Support"
             },
             "href": {
                 "en": "https://www.soft-concept.com/en",
@@ -365,7 +516,81 @@
             "companySize": {
                 "en": "SME",
                 "fr": "PME"
-            }
+            },
+            "details": {
+                "en": {
+                    "mission": "Study engineer at a publisher and host of web (the historic trio Ethnos, Net-Survey, Web-Reports), mobile (Mobi-Survey), phone (Cati-Web) and paper (OMR Manager) survey software: in-house development, client services, support, advice and training",
+                    "responsibilities": [
+                        { "label": "In-house development", "text": "HTML/CSS/JS charts (Bootstrap, jQuery) built into Ethnos" },
+                        { "label": "Client services", "text": "survey applications (customer satisfaction, social barometer, quality of work life, HSE…), business workflows and real-time reporting of the KPIs (NPS, CSAT, CES, response rate…) in data viz and web reporting, built with C# .NET and JavaScript" },
+                        { "label": "Support before, during and after the surveys", "text": "questionnaire design and data collection (EthnoForms, Net-Survey, Survey Manager), panel management (Panel Manager), processing and analysis of the results (Ethnos, EthnosAI), data reporting and hosting (Web-Reports)" },
+                        { "label": "Project management and follow-up", "text": "analysis of the needs, settings, tests and quality and compliance assurance" },
+                        { "label": "Support and operations", "text": "technical assistance and troubleshooting, maintenance of the applications hosted on Windows (IIS) and traffic optimisation" },
+                        { "label": "Training", "text": "remote or on site, in a group for the MNT or one-to-one for a La Poste employee" },
+                        { "label": "Product presentation", "text": "client demos and exhibitor at the E-Marketing trade fair 2022 at Porte de Versailles (Paris)" }
+                    ],
+                    "projects": [
+                        { "label": "CRM Elphicom", "href": "#crm", "text": "customer management software (CRM) for the client Elphicom" },
+                        { "label": "EBati Carto Amiante", "href": "#building", "text": "real estate management software" },
+                        { "label": "JCA Sushi Robots", "href": "#sushi", "text": "e-learning platform for cooking" },
+                        { "label": "Enquêtes internes Pragma", "href": "#pragma", "text": "an internal survey platform, with the provider Pragma" },
+                        { "label": "REF230 AFNOR", "href": "#smiley", "text": "an audit management application for the certification of opticians, with the provider Vitalis and the AFNOR" },
+                        { "label": "Panel Terriscope MNT", "href": "#satisfaction", "text": "a panel reached through surveys and the panellist website of the MNT" },
+                        { "label": "OPALE SNITEM", "href": "#health", "text": "a tool to steer the steps towards the MDR certification of medical devices, with the provider Nexialist" },
+                        { "label": "Satisfaction 360 CERA", "text": "measuring customer satisfaction through phone follow-ups" },
+                        { "label": "Observatoire Teractem", "text": "a data viz application for the Haute-Savoie region" },
+                        { "label": "Sondages Élection présidentielle 2022", "text": "a real-time data viz application for the 2022 presidential election, with the polls over time (Ifop, Ipsos, OpinionWay, Harris Interactive…) and an RSS feed of the news" },
+                        { "label": "Club Med OBEA", "text": "a web reporting application for a satisfaction survey within the Club Med, for the HR institute OBEA" },
+                        { "label": "QVT ANFH", "text": "a social barometer of the quality of work life of hospital staff, for the ANFH, the association that funds their training" },
+                        { "label": "Panel LVMH", "text": "a consumer panel to test products on the skin" },
+                        "A showcase website for the Covéa group and other clients supported (L'Occitane, Orphée, Keolis, JTI, Evocime, CFDT, SNCF, Orange, Burger King…)"
+                    ],
+                    "results": "Hired on a permanent contract after the end-of-studies internship, then about ten projects put into production and maintained"
+                },
+                "fr": {
+                    "mission": "Ingénieur d'études chez un éditeur et hébergeur de logiciels d'enquête web (triade historique Ethnos, Net-Survey, Web-Reports), mobile (Mobi-Survey), téléphone (Cati-Web) et papier (OMR Manager) : développement interne, prestations clients, support, conseil et formation",
+                    "responsibilities": [
+                        { "label": "Développement interne", "text": "graphes HTML/CSS/JS (Bootstrap, jQuery) intégrés à Ethnos" },
+                        { "label": "Prestations clients", "text": "applications d'enquête (satisfaction client, baromètre social, QVT, HSE…), workflows métier et restitution en temps réel des KPI (NPS, CSAT, CES, taux de réponse…) en data viz et web reporting, développées avec C# .NET et JavaScript" },
+                        { "label": "Accompagnement en amont, pendant et en aval des enquêtes", "text": "conception du questionnaire et collecte des données (EthnoForms, Net-Survey, Survey Manager), gestion des panels (Panel Manager), traitement et analyse des résultats (Ethnos, EthnosAI), restitution de données et hébergement (Web-Reports)" },
+                        { "label": "Gestion et suivi des projets", "text": "analyse du besoin, paramétrage, tests et assurance de la qualité et de la conformité" },
+                        { "label": "Support et exploitation", "text": "assistance technique et dépannage, maintenance des applications hébergées sous Windows (IIS) et optimisation du trafic" },
+                        { "label": "Formation", "text": "en visio ou en présentiel, en groupe pour la MNT ou individuelle pour un collaborateur de La Poste" },
+                        { "label": "Présentation des produits", "text": "démonstrations clients et exposant au Salon E-Marketing 2022 à Porte de Versailles (Paris)" }
+                    ],
+                    "projects": [
+                        { "label": "CRM Elphicom", "href": "#crm", "text": "logiciel de gestion de la clientèle (CRM) du client Elphicom" },
+                        { "label": "EBati Carto Amiante", "href": "#building", "text": "logiciel de gestion de biens immobiliers" },
+                        { "label": "JCA Sushi Robots", "href": "#sushi", "text": "plateforme d'e-learning culinaire" },
+                        { "label": "Enquêtes internes Pragma", "href": "#pragma", "text": "plateforme d'enquêtes internes, avec le prestataire Pragma" },
+                        { "label": "REF230 AFNOR", "href": "#smiley", "text": "application de gestion d'audits pour la certification des opticiens, avec le prestataire Vitalis et l'AFNOR" },
+                        { "label": "Panel Terriscope MNT", "href": "#satisfaction", "text": "constitution d'un panel sollicité par enquêtes et conception du site panéliste de la MNT" },
+                        { "label": "OPALE SNITEM", "href": "#health", "text": "outil de pilotage des étapes de la certification RDM des dispositifs médicaux, avec le prestataire Nexialist" },
+                        { "label": "Satisfaction 360 CERA", "text": "mesure de la satisfaction client par suivi téléphonique" },
+                        { "label": "Observatoire Teractem", "text": "application de restitution de données pour la Haute-Savoie" },
+                        { "label": "Sondages Élection présidentielle 2022", "text": "application de data viz en temps réel pour l'élection présidentielle de 2022, avec l'évolution des sondages (Ifop, Ipsos, OpinionWay, Harris Interactive…) et un flux RSS de l'actualité" },
+                        { "label": "Club Med OBEA", "text": "application de web reporting pour une enquête de satisfaction au sein du Club Med, pour l'institut RH OBEA" },
+                        { "label": "QVT ANFH", "text": "baromètre social de la qualité de vie au travail du personnel hospitalier, pour l'ANFH, l'association qui finance sa formation" },
+                        { "label": "Panel LVMH", "text": "panel de consommateurs pour tester des produits sur la peau" },
+                        "Un site vitrine pour le groupe Covéa et d'autres clients accompagnés (L'Occitane, Orphée, Keolis, JTI, Evocime, CFDT, SNCF, Orange, Burger King…)"
+                    ],
+                    "results": "Embauche en CDI à l'issue du stage de fin d'études, puis une dizaine de projets mis en production et maintenus"
+                }
+            },
+            "skillIcons": [
+                { "icon": "icon-code", "label": { "en": "Full stack", "fr": "Full stack" } },
+                { "image": "csharp", "label": { "en": "C# .NET", "fr": "C# .NET" } },
+                { "image": "javascript", "label": { "en": "JavaScript", "fr": "JavaScript" } },
+                { "image": "github", "label": { "en": "GitHub", "fr": "GitHub" } },
+                { "icon": "icon-handshake-o", "label": { "en": "Customer relations", "fr": "Relation client" } },
+                { "icon": "icon-graduation-cap", "label": { "en": "Teaching", "fr": "Pédagogie" } },
+                { "icon": "icon-line-chart", "label": { "en": "Data viz", "fr": "Data viz" } },
+                { "icon": "icon-life-ring", "label": { "en": "Support", "fr": "Support" } },
+                { "icon": "icon-wrench", "label": { "en": "Maintenance", "fr": "Maintenance" } },
+                { "icon": "icon-bullhorn", "label": { "en": "Product presentation", "fr": "Présentation des produits" } },
+                { "icon": "icon-comments", "label": { "en": "Communication", "fr": "Communication" } },
+                { "icon": "icon-tasks", "label": { "en": "Project management", "fr": "Gestion de projet" } }
+            ]
         },
         {
             "icon": "icon-clipboard",
@@ -391,7 +616,35 @@
             "companySize": {
                 "en": "SME",
                 "fr": "PME"
-            }
+            },
+            "details": {
+                "en": {
+                    "mission": "Full stack development of an application that helps maintain systems in a secure state (MCS)",
+                    "projects": [
+                        { "label": "CPMCS", "href": "#cpmcs", "text": "the MCS application of the internship, its concept explained on the blog" }
+                    ],
+                    "stack": "Python, Flask, Angular, PostgreSQL, Docker, Postman, Elasticsearch, Kibana, Gitea",
+                    "results": "An alpha version deployed at the end of the internship"
+                },
+                "fr": {
+                    "mission": "Développement full stack d'une application d'aide au maintien en condition de sécurité (MCS)",
+                    "projects": [
+                        { "label": "CPMCS", "href": "#cpmcs", "text": "l'application de MCS du stage avec son concept expliqué dans le blog" }
+                    ],
+                    "stack": "Python, Flask, Angular, PostgreSQL, Docker, Postman, Elasticsearch, Kibana, Gitea",
+                    "results": "Déploiement d'une version alpha à l'issue du stage"
+                }
+            },
+            "skillIcons": [
+                { "icon": "icon-code", "label": { "en": "Full stack", "fr": "Full stack" } },
+                { "image": "python", "label": { "en": "Python", "fr": "Python" } },
+                { "image": "angular", "label": { "en": "Angular", "fr": "Angular" } },
+                { "image": "docker", "label": { "en": "Docker", "fr": "Docker" } },
+                { "image": "gitea", "label": { "en": "Gitea", "fr": "Gitea" } },
+                { "icon": "icon-database", "label": { "en": "Databases", "fr": "Bases de données" } },
+                { "icon": "icon-shield", "label": { "en": "Security", "fr": "Sécurité" } },
+                { "icon": "icon-rocket", "label": { "en": "Autonomy", "fr": "Autonomie" } }
+            ]
         },
         {
             "icon": "icon-build",
@@ -417,7 +670,40 @@
                 }
             ],
             "companyType": "digital-agency",
-            "companySize": "Start-up"
+            "companySize": "Start-up",
+            "details": {
+                "en": {
+                    "field": "Versatile internship in a web development start-up: design, marketing and training in code (HTML, CSS, JavaScript)",
+                    "responsibilities": [
+                        { "label": "Design", "text": "UI/UX designer assistant (Gimp)" },
+                        { "label": "Marketing", "text": "lead outreach, article writing" },
+                        { "label": "Recruiting support", "text": "Welcome Kit, Malt" }
+                    ],
+                    "articles": [
+                        { "label": "5 tips for the perfect brand name", "href": "/en/blog#5-conseils-pour-un-nom-de-marque-parfait" },
+                        { "label": "How to choose a web agency?", "href": "/en/blog#sur-quels-criteres-choisir-une-agence-web" }
+                    ]
+                },
+                "fr": {
+                    "field": "Stage polyvalent dans une start-up de développement web : design, marketing et formation au code (HTML, CSS, JavaScript)",
+                    "responsibilities": [
+                        { "label": "Design", "text": "assistant UI/UX designer (Gimp)" },
+                        { "label": "Marketing", "text": "contact de leads, rédaction d'articles" },
+                        { "label": "Aide au recrutement", "text": "Welcome Kit, Malt" }
+                    ],
+                    "articles": [
+                        { "label": "5 conseils pour un nom de marque parfait", "href": "/fr/blog#5-conseils-pour-un-nom-de-marque-parfait" },
+                        { "label": "Sur quels critères choisir une agence web ?", "href": "/fr/blog#sur-quels-criteres-choisir-une-agence-web" }
+                    ]
+                }
+            },
+            "skillIcons": [
+                { "icon": "icon-code", "label": { "en": "Web development", "fr": "Développement web" } },
+                { "icon": "icon-paint-brush", "label": { "en": "UI/UX design", "fr": "Design UI/UX" } },
+                { "icon": "icon-pencil", "label": { "en": "Writing", "fr": "Rédaction" } },
+                { "icon": "icon-bullhorn", "label": { "en": "Marketing", "fr": "Marketing" } },
+                { "icon": "icon-comments", "label": { "en": "Communication", "fr": "Communication" } }
+            ]
         },
         {
             "icon": "icon-book",
@@ -441,6 +727,28 @@
                     "en": "Mathematics",
                     "fr": "Mathématiques"
                 }
+            ],
+            "details": {
+                "en": {
+                    "field": "Private maths lessons, 2 hours a week",
+                    "responsibilities": [
+                        { "label": "Kelprof (2018-2019)", "text": "coaching a final-year humanities student in maths for the ACCES entrance exam, 2 hours a week" },
+                        { "label": "Yoopies (2019-2020)", "text": "supporting a first-year student in the maths specialty of the new reform, 2 hours a week, remotely" }
+                    ]
+                },
+                "fr": {
+                    "field": "Cours particuliers de mathématiques, 2 h par semaine",
+                    "responsibilities": [
+                        { "label": "Kelprof (2018-2019)", "text": "accompagnement d'un élève de Terminale L en mathématiques pour le concours ACCES, 2 h par semaine" },
+                        { "label": "Yoopies (2019-2020)", "text": "soutien d'une élève de Première en spécialité mathématiques (nouvelle réforme), 2 h par semaine, à distance" }
+                    ]
+                }
+            },
+            "skillIcons": [
+                { "icon": "icon-graduation-cap", "label": { "en": "Teaching", "fr": "Pédagogie" } },
+                { "icon": "icon-calculator", "label": { "en": "Mathematics", "fr": "Mathématiques" } },
+                { "icon": "icon-comments", "label": { "en": "Communication", "fr": "Communication" } },
+                { "icon": "icon-flag", "label": { "en": "Leadership", "fr": "Leadership" } }
             ]
         },
         {
@@ -467,7 +775,39 @@
             "companySize": {
                 "en": "Large group",
                 "fr": "Grand Groupe"
-            }
+            },
+            "details": {
+                "en": {
+                    "mission": "Project manager for the CGI 2019 Citizen Challenges, with a team of four ESILV students",
+                    "responsibilities": [
+                        { "label": "Coordination", "text": "leading the team for 7 months, from the idea to the showroom" },
+                        { "label": "Organisation", "text": "splitting the tasks and following the deadlines" },
+                        { "label": "Pitch", "text": "presenting the project, building the business model, video editing" }
+                    ],
+                    "projects": [
+                        { "label": "Easy Student Housing", "href": "#esh", "text": "prototype of a student housing app (PING project)" }
+                    ],
+                    "results": "Finalist in the Solidarity category"
+                },
+                "fr": {
+                    "mission": "Chef de projet pour les Challenges Citoyens CGI 2019, avec une équipe de quatre étudiants de l'ESILV",
+                    "responsibilities": [
+                        { "label": "Coordination", "text": "pilotage de l'équipe pendant 7 mois, de l'idée au showroom" },
+                        { "label": "Organisation", "text": "répartition des tâches et suivi des échéances" },
+                        { "label": "Pitch", "text": "présentation du projet, élaboration du business model, montage vidéo" }
+                    ],
+                    "projects": [
+                        { "label": "Easy Student Housing", "href": "#esh", "text": "prototype d'application de logement étudiant (projet PING)" }
+                    ],
+                    "results": "Finaliste dans la catégorie Solidarité"
+                }
+            },
+            "skillIcons": [
+                { "icon": "icon-flag", "label": { "en": "Leadership", "fr": "Leadership" } },
+                { "icon": "icon-tasks", "label": { "en": "Project management", "fr": "Gestion de projet" } },
+                { "icon": "icon-users", "label": { "en": "Teamwork", "fr": "Travail d'équipe" } },
+                { "icon": "icon-lightbulb-o", "label": { "en": "Creativity", "fr": "Créativité" } }
+            ]
         },
         {
             "svgId": "fft",
@@ -493,6 +833,32 @@
                     "en": "Education",
                     "fr": "Éducation"
                 }
+            ],
+            "details": {
+                "en": {
+                    "field": "Commitment to the Dax tennis club alongside high school, as a referee, assistant coach and player (ranked 15 and A2 referee in 2015)",
+                    "duties": [
+                        { "label": "Refereeing", "text": "chair umpire or line judge at official singles and doubles competitions, locally (Nouvelle-Aquitaine) and nationally (TNJA at Roland Garros in 2012)" },
+                        { "label": "Assistant coach", "text": "mini-tennis (ages 5 to 8) or a group of 11 to 13 year-olds, 1 to 2 hours on Saturdays" }
+                    ],
+                    "results": "Finalist representing the CBBL at the TNJA"
+                },
+                "fr": {
+                    "field": "Engagement au club de tennis de Dax en parallèle du lycée, comme arbitre, assistant professeur et joueur (classé 15 et arbitre A2 en 2015)",
+                    "duties": [
+                        { "label": "Arbitrage", "text": "arbitre de chaise ou juge de ligne pendant des compétitions officielles en simple et en double, au niveau local (Nouvelle-Aquitaine) et national (TNJA à Roland Garros en 2012)" },
+                        { "label": "Assistant professeur", "text": "mini-tennis (5 à 8 ans) ou groupe de 11-13 ans, 1 à 2 h le samedi" }
+                    ],
+                    "results": "Finaliste en tant que représentant de la CBBL au TNJA"
+                }
+            },
+            "skillIcons": [
+                { "icon": "icon-gavel", "label": { "en": "Refereeing", "fr": "Arbitrage" } },
+                { "icon": "icon-flag", "label": { "en": "Leadership", "fr": "Leadership" } },
+                { "icon": "icon-graduation-cap", "label": { "en": "Teaching", "fr": "Pédagogie" } },
+                { "icon": "icon-bullhorn", "label": { "en": "Public speaking", "fr": "Prise de parole" } },
+                { "icon": "icon-users", "label": { "en": "Team spirit", "fr": "Esprit d'équipe" } },
+                { "emoji": "🥊", "label": { "en": "Perseverance", "fr": "Persévérance" } }
             ]
         }
     ]
