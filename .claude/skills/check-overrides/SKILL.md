@@ -20,7 +20,7 @@ That is `node .claude/skills/check-overrides/check-overrides.mjs`. For each over
 | `✖ obsolete` | No installed package (or no package of the parent, for a nested override such as `critical > oust`) depends on it any more: the parent dropped it or was removed | Remove the entry |
 | `✖ redundant` | Every package that asks for it would already get a version matching the override: the parents raised their own range (e.g. `auto-changelog` now asks `handlebars ^4.7.9`) | Remove the entry, then check the version and `npm audit` do not move |
 | `✔ active` | At least one package (`→` line) would get another version without it | Keep it: it becomes redundant once that package raises its range |
-| `✔ active: replaces ... with ...` | An `npm:` alias swaps the package for another one | Keep it while the parent depends on the replaced package |
+| `✔ active: replaces ... with ...` | An `npm:` alias swaps the package for another one, or a local package (`file:`, `link:`, also through a `$name` reference to a root dependency such as `$deepmerge`) stands in for it | Keep it while the parent depends on the replaced package |
 | `⚠ holds ... below the version npm would pick` | The override pins an older version than npm would choose (e.g. `nwsapi` 2.2.27 while 2.2.28 exists) | Find why it was pinned (below) before touching it |
 
 ## Removing an override
