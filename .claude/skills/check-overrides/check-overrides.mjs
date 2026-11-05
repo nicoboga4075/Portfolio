@@ -11,7 +11,10 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.
 const json = file => JSON.parse(fs.readFileSync(path.join(ROOT, file), 'utf8'));
 const semver = createRequire(path.join(ROOT, 'package.json'))('semver');
 
-const overrides = json('package.json').overrides ?? {};
+const pkg = json('package.json');
+const overrides = pkg.overrides ?? {};
+// "$deepmerge" points to the root dependency of that name, as npm resolves it
+const resolveSpec = spec => (spec.startsWith('$') ? (pkg.dependencies?.[spec.slice(1)] ?? pkg.devDependencies?.[spec.slice(1)] ?? spec) : spec);
 const lock = json('package-lock.json').packages;
 
 // "js-yaml@^3" -> { name: "js-yaml", range: "^3" }; "@scope/pkg" -> { name: "@scope/pkg", range: null }
@@ -61,11 +64,12 @@ function entries(tree, parent = null, prefix = '') {
 
 let problems = 0;
 for (const entry of entries(overrides)) {
-    const { spec } = entry;
-    const alias = spec.startsWith('npm:');
+    const spec = resolveSpec(entry.spec);
+    // An npm: alias or a local package (file:, link:) replaces the dependency instead of picking one of its versions
+    const alias = /^(npm|file|link):/.test(spec);
     const asked = requesters(entry.dep, entry.parent);
-    const origin = addedBy(entry.key, spec);
-    console.log(`\n${entry.label}: ${spec}`);
+    const origin = addedBy(entry.key, entry.spec);
+    console.log(`\n${entry.label}: ${entry.spec}`);
     console.log(`  added by ${origin}`);
 
     if (!asked.length) {
@@ -78,7 +82,7 @@ for (const entry of entries(overrides)) {
     }
     if (alias) {
         const users = asked.map(r => `${r.name}@${r.version} (asks ${r.range})`).join(', ');
-        console.log(`  ✔ active: replaces ${entry.dep} with ${spec.slice(4)} for ${users}`);
+        console.log(`  ✔ active: replaces ${entry.dep} with ${spec.replace(/^npm:/, '')} for ${users}`);
         continue;
     }
 
@@ -103,7 +107,7 @@ for (const entry of entries(overrides)) {
         problems++;
     }
     if (older.length) console.log(`  ⚠ holds ${entry.dep} below the version npm would pick (${older.join(', ')}): check that the reason in the commit above still applies`);
-    const now = installed(entry.dep).map(i => i.version);
+    const now = installed(entry.dep).map(i => i.version).filter(Boolean);
     if (now.length) console.log(`  installed: ${[...new Set(now)].join(', ')}`);
 }
 
