@@ -99,7 +99,7 @@ cypress-job:
   artifacts:
     when: always
     paths:
-      - reports/cypress/
+      - reports/cypress/screenshots/
     expire_in: 1 week
 
 robot-job:

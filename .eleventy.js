@@ -5,11 +5,12 @@ const { hideFolders } = require("./hide-folders");
 const toml = require("toml");
 const prettier = require("prettier");
 const pkg = require("./package.json");
-const outputFolder = ".eleventy";
 const includesFolder = "_includes";
 const allowedDirs = new Set([".", includesFolder, "articles", "projects"]);
 // npm run dev serves the output folder; npm run build compiles html in place (article.mts reads it off disk).
 const isPreview = Boolean(process.env.ELEVENTY_PREVIEW);
+// ELEVENTY_OUTPUT moves a preview build to a folder of reports/ (the Cypress build, away from the .eleventy/ that npm run dev:watch rewrites); any other value is ignored, since every build starts by deleting its output folder
+const outputFolder = isPreview && /^reports\/[\w/-]+$/.test(process.env.ELEVENTY_OUTPUT ?? "") ? process.env.ELEVENTY_OUTPUT : ".eleventy";
 const passthroughDirs = ["images", "css", "js", "fonts", "docs/public"];
 const passthroughFiles = [
     "_redirects",

@@ -7,7 +7,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const OUT = path.join(ROOT, '.eleventy');
+// The folder of a preview build moved by ELEVENTY_OUTPUT (a folder of reports/, as .eleventy.js accepts it), .eleventy otherwise
+const FOLDER = /^reports\/[\w/-]+$/.test(process.env.ELEVENTY_OUTPUT ?? '') ? process.env.ELEVENTY_OUTPUT : '.eleventy';
+const OUT = path.join(ROOT, FOLDER);
 const args = process.argv.slice(2);
 const PORT = Number(args.find(arg => /^\d+$/.test(arg)) ?? 0);
 // Where to write the port it got, the argument after --port-file
@@ -15,7 +17,7 @@ const portFile = args.includes('--port-file') ? args[args.indexOf('--port-file')
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.xml': 'application/xml', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.avif': 'image/avif', '.ico': 'image/x-icon', '.woff': 'font/woff', '.woff2': 'font/woff2', '.mp4': 'video/mp4', '.vtt': 'text/vtt', '.pdf': 'application/pdf' };
 
 if (!fs.existsSync(path.join(OUT, 'index_en.html'))) {
-    console.error('No build in .eleventy: run ELEVENTY_PREVIEW=1 npx eleventy first');
+    console.error(`No build in ${FOLDER}: run ELEVENTY_PREVIEW=1 npx eleventy first`);
     process.exit(1);
 }
 
@@ -48,5 +50,5 @@ const server = http.createServer((req, res) => {
         fs.mkdirSync(path.dirname(path.resolve(portFile)), { recursive: true });
         fs.writeFileSync(portFile, String(port));
     }
-    console.log(`Serving .eleventy on http://localhost:${port} (the Netlify functions are not served: use npm run dev for the pages that need them)`);
+    console.log(`Serving ${FOLDER} on http://localhost:${port} (the Netlify functions are not served: use npm run dev for the pages that need them)`);
 });

@@ -107,7 +107,7 @@ jobs:
       if: ${{ !cancelled() }}
       with:
         name: reports-cypress
-        path: reports/cypress/
+        path: reports/cypress/screenshots/
         if-no-files-found: ignore
 
   robot:
