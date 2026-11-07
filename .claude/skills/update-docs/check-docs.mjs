@@ -71,6 +71,8 @@ if (!heldRows) {
         if (vendor) actual = vendor.version;
         else if (name === 'TypeScript') actual = installed('typescript');
         else if (name === 'Node.js') actual = process.version.slice(1);
+        // Any other row names an npm package (Stylelint): the version installed in node_modules
+        else actual = installed(name.toLowerCase());
         if (!actual) warnings.push(`SECURITY.md: can't tell which version of ${name} the repository uses, check the "Pinned" cell by hand`);
         else if (actual !== pinned && name !== 'Node.js') errors.push(`SECURITY.md: ${name} is pinned at ${pinned} in the table but the repository uses ${actual}`);
         else if (actual !== pinned) warnings.push(`SECURITY.md: Node.js is ${pinned} in the table and ${actual} on this machine (the CI may differ)`);

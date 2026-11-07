@@ -21,6 +21,17 @@ updates:
         patterns:
           - "jest"
           - "jest-environment-jsdom"
+      # stylelint-config-standard follows the major versions of stylelint (a peer dependency): one pull request for both
+      stylelint:
+        patterns:
+          - "stylelint"
+          - "stylelint-config-*"
+    ignore:
+      # Stylelint 18 and stylelint-config-standard 41 need Node 22.22.2 or later, while the CI build still runs on Node 20 (lts/iron): held back, see SECURITY.md
+      - dependency-name: "stylelint"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "stylelint-config-standard"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: "github-actions"
     # Keep the actions of .github/workflows up to date (checkout, setup-node, artifacts, scan actions), including the ones pinned to a commit SHA
     directory: "/"
