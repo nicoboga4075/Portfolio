@@ -520,3 +520,45 @@ html.dark-mode .badge {
     outline: 2px solid var(--white);
     outline-offset: 2px;
 }
+
+/* The back-to-top button of every page (initBackToTop of js/common.js): a circle at the bottom right, lifted above the contact button where there is one */
+#back-to-top {
+    position: fixed;
+    right: 28px;
+    bottom: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    color: var(--white);
+    background-color: var(--primary);
+    box-shadow: 0 4px 6px var(--shadow-lg);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#back-to-top[hidden] {
+    display: none;
+}
+
+#contact-icon ~ #back-to-top {
+    bottom: calc(30px + var(--fab-size));
+}
+
+html.dark-mode #back-to-top {
+    background-color: var(--primary-dark);
+}
+
+#back-to-top:focus:not(:focus-visible) {
+    outline: none;
+}
+
+#back-to-top:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}

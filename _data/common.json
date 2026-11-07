@@ -24,5 +24,9 @@
     "chatLabel": {
         "en": "Chat with NicoBot",
         "fr": "Discuter avec NicoBot"
+    },
+    "backToTop": {
+        "en": "Back to top",
+        "fr": "Retour en haut"
     }
 }

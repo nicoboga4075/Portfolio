@@ -58,9 +58,13 @@ function fakePage({ url = 'https://nicoboga.netlify.app/en', lang = 'en', langua
     const media = { matches: prefersDark, listeners: {}, addEventListener: (type, listener) => { media.listeners[type] = listener; } };
     const events = [];
     const classes = new Set();
+    const windowListeners = {};
     global.window = {
         location: { pathname: location.pathname, href: location.href, origin: location.origin },
-        matchMedia: jest.fn(() => media)
+        matchMedia: jest.fn(() => media),
+        scrollY: 0,
+        scrollTo: jest.fn(),
+        addEventListener: jest.fn((type, listener) => { windowListeners[type] = listener; })
     };
     global.localStorage = fakeStorage(theme ? { theme } : {});
     global.sessionStorage = fakeStorage();
@@ -77,7 +81,7 @@ function fakePage({ url = 'https://nicoboga.netlify.app/en', lang = 'en', langua
         getElementById: jest.fn(id => elements[id] ?? null),
         dispatchEvent: event => events.push(event.type)
     };
-    return { links, media, events, classes, elements };
+    return { links, media, events, classes, elements, windowListeners };
 }
 
 // Loads common.js on the current fake page, as the deferred script tag does, and returns its helpers
@@ -406,5 +410,38 @@ describe('on load', () => {
         load();
         expect(loader.classList.contains('show')).toBe(false);
         expect(year.textContent).toBe(new Date().getFullYear());
+    });
+});
+
+describe('the back-to-top button', () => {
+    // A button as base.njk renders it, its click listener kept
+    const fakeButton = () => {
+        const button = { hidden: true, listeners: {} };
+        button.addEventListener = (type, listener) => { button.listeners[type] = listener; };
+        return button;
+    };
+
+    test('shows once the page is scrolled past the first screen, and brings it back to the top, smoothly unless less motion is asked', () => {
+        const button = fakeButton();
+        const page = fakePage({ elements: { 'back-to-top': button } });
+        load();
+        expect(button.hidden).toBe(true);
+        window.scrollY = 800;
+        page.windowListeners.scroll();
+        expect(button.hidden).toBe(false);
+        button.listeners.click();
+        expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 0, behavior: 'smooth' });
+        page.media.matches = true;
+        button.listeners.click();
+        expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 0, behavior: 'auto' });
+        window.scrollY = 100;
+        page.windowListeners.scroll();
+        expect(button.hidden).toBe(true);
+    });
+
+    test('does nothing on a page without the button', () => {
+        const page = fakePage();
+        load();
+        expect(page.windowListeners.scroll).toBeUndefined();
     });
 });

@@ -237,6 +237,23 @@ function setCopyrightYear() {
     }
 }
 
+// The back-to-top button of every page (base.njk): shown once the page is scrolled past the first screen, it brings the page back to the top, smoothly unless the visitor asks for less motion
+function initBackToTop() {
+    const button = document.getElementById('back-to-top');
+    if (!button) {
+        return;
+    }
+    const update = () => {
+        button.hidden = window.scrollY < 600;
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    button.addEventListener('click', () => {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+}
+
 // Run on every page as soon as this (deferred) script loads.
 registerServiceWorker();
 toggleDarkMode();
@@ -247,4 +264,5 @@ darkSchemeQuery.addEventListener('change', function () {
 });
 hideLoader();
 setCopyrightYear();
+initBackToTop();
 Object.keys(appRoutes).forEach(addRedirectById);
