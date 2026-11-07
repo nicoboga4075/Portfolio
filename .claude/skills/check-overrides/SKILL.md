@@ -17,7 +17,8 @@ That is `node .claude/skills/check-overrides/check-overrides.mjs`. For each over
 
 | Result | Meaning | What to do |
 |---|---|---|
-| `✖ obsolete` | No installed package (or no package of the parent, for a nested override such as `critical > oust`) depends on it any more: the parent dropped it or was removed | Remove the entry |
+| `✖ obsolete` | No installed package (or no package of the parent, for a nested override such as `critical > oust`) depends on it any more: the parent dropped it or was removed; for an override limited to a range (`glob@>=10 <14`), no package would get a version in that range any more | Remove the entry |
+| `-` line | That package gets a version outside the range of the override key (`rimraf` asks glob 7, `glob@>=10 <14` leaves it alone): it doesn't count towards keeping the override | Nothing: only the `→` lines keep it active |
 | `✖ redundant` | Every package that asks for it would already get a version matching the override: the parents raised their own range (e.g. `auto-changelog` now asks `handlebars ^4.7.9`) | Remove the entry, then check the version and `npm audit` do not move |
 | `✔ active` | At least one package (`→` line) would get another version without it | Keep it: it becomes redundant once that package raises its range |
 | `✔ active: replaces ... with ...` | An `npm:` alias swaps the package for another one, or a local package (`file:`, `link:`, also through a `$name` reference to a root dependency such as `$deepmerge`) stands in for it | Keep it while the parent depends on the replaced package |

@@ -57,8 +57,9 @@ function addedBy(key, spec) {
 function entries(tree, parent = null, prefix = '') {
     return Object.entries(tree).flatMap(([key, value]) => {
         if (typeof value === 'object') return entries(value, parseKey(key), `${prefix}${key} > `);
-        const { name } = parseKey(key);
-        return [{ label: `${prefix}${key}`, key, dep: name, parent, spec: value }];
+        // depRange: the versions the override applies to ("glob@>=10 <14"), null for every version
+        const { name, range } = parseKey(key);
+        return [{ label: `${prefix}${key}`, key, dep: name, depRange: range, parent, spec: value }];
     });
 }
 
@@ -89,9 +90,16 @@ for (const entry of entries(overrides)) {
     const versions = versionsOf(entry.dep);
     const needed = [];
     const older = [];
+    let inRange = 0;
     for (const r of asked) {
         // The version npm would install for this package without the override
         const natural = versions ? semver.maxSatisfying(versions.filter(v => !semver.prerelease(v)), r.range) : null;
+        // npm only overrides a version inside the range of the key: glob 7 is left alone by "glob@>=10 <14"
+        if (entry.depRange && natural && !semver.satisfies(natural, entry.depRange)) {
+            console.log(`  - ${r.name}@${r.version} asks ${entry.dep} ${r.range}: npm installs ${natural}, outside ${entry.depRange}, so the override doesn't apply`);
+            continue;
+        }
+        inRange++;
         const ok = natural && semver.satisfies(natural, spec);
         const marker = ok ? '·' : '→';
         const matches = ok ? `, which already matches ${spec}` : '';
@@ -101,7 +109,10 @@ for (const entry of entries(overrides)) {
         if (!ok && natural && semver.gt(natural, semver.maxSatisfying(versions, spec) ?? '0.0.0')) older.push(`${r.name} would get ${natural}`);
     }
     if (!versions) console.log(`  ? could not read the published versions of ${entry.dep}: check by hand`);
-    else if (needed.length) console.log(`  ✔ active: still needed for ${[...new Set(needed.map(r => r.name))].join(', ')}`);
+    else if (!inRange) {
+        console.log(`  ✖ obsolete: no installed package would get a version of ${entry.dep} in ${entry.depRange} any more`);
+        problems++;
+    } else if (needed.length) console.log(`  ✔ active: still needed for ${[...new Set(needed.map(r => r.name))].join(', ')}`);
     else {
         console.log(`  ✖ redundant: every package that asks for ${entry.dep} would already get a version matching ${spec}`);
         problems++;
