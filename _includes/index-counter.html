@@ -18,7 +18,7 @@
                         <div class="soft-card-face soft-card-back" aria-hidden="true" inert>
                             <ul class="counter-list">
                                 {%- for certif in counter.certifList %}
-                                <li><a href="{{ certif.href }}" target="_blank" rel="noopener">{{ certif.name[lang] }}</a> <span class="counter-by">[{{ certif.by }}]</span> <span class="counter-details">{% if certif.score %}{{ certif.score }} · {% endif %}{% if certif.level %}<button type="button" class="counter-level" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="{{ certif.levelTip[lang] }}">{{ certif.level[lang] }}</button> · {% endif %}{{ certif.date }}</span></li>
+                                <li>{% if certif.logo %}<img src="images/certifs/{{ certif.logo }}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo"> {% endif %}<a href="{{ certif.href }}" target="_blank" rel="noopener">{{ certif.name[lang] }}</a> <span class="counter-by">[{{ certif.by }}]</span> <span class="counter-details">{% if certif.score %}{{ certif.score }} · {% endif %}{% if certif.level %}<button type="button" class="counter-level" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="{{ certif.levelTip[lang] }}">{{ certif.level[lang] }}</button> · {% endif %}{{ certif.date }}</span></li>
                                 {%- endfor %}
                             </ul>
                         </div>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-                {#- The work experiences count turns over like the certifications one: the back lists the permanent jobs and internships of resume.json (not the other experiences), newest first, each company linked to its site, with its contracts (a type, or a list of types for a job that was an internship then a permanent one) and its years #}
+                {#- The work experiences count turns over like the certifications one: the back lists the permanent jobs and internships of resume.json (not the other experiences), newest first, each company linked to its site, with its contracts (a type, or a list of types for a job that was an internship then a permanent one) and its years, after its logo (images/companies/<logo>.png) #}
                 <div class="stat-card shadow soft-card">
                     <button type="button" class="soft-card-toggle" aria-expanded="false" aria-label="{{ counterLang.experiencesToggle }}" data-icons="icon-question-circle icon-close"><i class="icon-question-circle" aria-hidden="true"></i></button>
                     <div class="soft-card-inner">
@@ -49,7 +49,7 @@
                                 {%- if e.type != "other" %}
                                 {#- The years of its dates ("Juin 2024 - Septembre 2024"), one when it starts and ends the same year #}
                                 {%- set years = (e.date[lang] | replace(r/[^\d\s-]+\s/g, "")).split(" - ") %}
-                                <li><a href="{{ e.href[lang] if e.href[lang] else e.href }}" target="_blank" rel="noopener">{{ e.company }}</a> <span class="counter-by">[{% for type in types %}{{ resume[lang].types[type] }}{{ ", " if not loop.last }}{% endfor %}]</span> <span class="counter-details">{{ years[0] if years[0] == years[1] else years | join("–") }}</span></li>
+                                <li>{% if e.logo %}<img src="images/companies/{{ e.logo }}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo"> {% endif %}<a href="{{ e.href[lang] if e.href[lang] else e.href }}" target="_blank" rel="noopener">{{ e.company }}</a> <span class="counter-by">[{% for type in types %}{{ resume[lang].types[type] }}{{ ", " if not loop.last }}{% endfor %}]</span> <span class="counter-details">{{ years[0] if years[0] == years[1] else years | join("–") }}</span></li>
                                 {%- endif %}
                                 {%- endfor %}
                             </ul>

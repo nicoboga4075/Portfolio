@@ -273,6 +273,7 @@
                 "fr": "https://www.chapsvision.com/fr"
             },
             "company": "ChapsVision",
+            "logo": "chapsvision",
             "city": "Paris",
             "type": "permanent",
             "sector": [
@@ -344,6 +345,7 @@
                 "fr": "https://astek.net/?lang=fr"
             },
             "company": "Astek",
+            "logo": "astek",
             "city": "Lyon",
             "type": "permanent",
             "sector": [
@@ -432,6 +434,7 @@
                 "fr": "https://www.bassetti-group.com"
             },
             "company": "Bassetti Group",
+            "logo": "bassetti",
             "city": "Lyon",
             "type": "permanent",
             "sector": [
@@ -503,6 +506,7 @@
                 "fr": "https://www.soft-concept.com"
             },
             "company": "Soft Concept",
+            "logo": "softconcept",
             "city": "Lyon",
             "type": ["internship", "permanent"],
             "sector": [
@@ -604,6 +608,7 @@
             },
             "href": "https://cyberprotect.one",
             "company": "Cyberprotect",
+            "logo": "cyberprotect",
             "city": "Bron",
             "type": "internship",
             "sector": [
@@ -661,6 +666,7 @@
                 "fr": "https://galadrim.fr"
             },
             "company": "Galadrim",
+            "logo": "galadrim",
             "city": "Paris",
             "type": "internship",
             "sector": [

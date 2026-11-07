@@ -540,6 +540,13 @@ html:not(.dark-mode) .slider-text .hero-tagline {
     font-weight: 600;
 }
 
+/* The logo of a company, or of the body or exam behind a certification, before its name, on the middle of its line */
+#counter-section .counter-list .counter-logo {
+    margin-right: 2px;
+    border-radius: 3px;
+    vertical-align: -3px;
+}
+
 /* A level that explains itself on hover or keyboard focus */
 #counter-section .counter-list .counter-level {
     padding: 0;
