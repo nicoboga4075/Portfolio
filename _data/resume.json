@@ -456,7 +456,7 @@
             },
             "details": {
                 "en": {
-                    "mission": "Audit and securing of the BI module of Teexma (TxBI)",
+                    "mission": "Audit and securing of the BI module (TxBI) of Teexma, technical data management software",
                     "responsibilities": [
                         { "label": "Development", "text": "C# .NET to secure the software (ISO 9001, ISO 27001)" },
                         { "label": "Audit and pentests", "text": "code audit and penetration tests with Postman (SQL injection, XSS)" },
@@ -467,7 +467,7 @@
                     ]
                 },
                 "fr": {
-                    "mission": "Audit et sécurisation du module de BI de Teexma (TxBI)",
+                    "mission": "Audit et sécurisation du module de BI (TxBI) de Teexma, logiciel de management de données techniques",
                     "responsibilities": [
                         { "label": "Développement", "text": "C# .NET pour sécuriser le logiciel (ISO 9001, ISO 27001)" },
                         { "label": "Audit et pentests", "text": "audit de code et tests d'intrusion avec Postman (injections SQL, XSS)" },
