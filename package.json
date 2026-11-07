@@ -230,7 +230,7 @@
     "html-validate": "^11.18.0",
     "jest": "^30.5.2",
     "jest-environment-jsdom": "^30.5.2",
-    "jest-html-reporter": "^4.4.2",
+    "jest-html-reporter": "^4.4.3",
     "jest-junit": "^17.0.0",
     "netlify-plugin-inline-critical-css": "2.0.0",
     "nunjucks": "^3.2.4",
