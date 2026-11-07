@@ -938,7 +938,7 @@ function createCircularChart({
     };
     contentWayPoint();
 
-    // The scroll-down arrow's own href (#resume-section) is its target; preventDefault keeps the animated scroll and leaves the URL hash alone.
+    // The scroll-down arrow's own href (#projects-section) is its target; preventDefault keeps the animated scroll and leaves the URL hash alone.
     $('.mouse-icon').on('click', function (event) {
         event.preventDefault();
         const target = $(this.hash);

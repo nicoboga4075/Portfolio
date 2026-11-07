@@ -205,12 +205,12 @@ describe('on load', () => {
     });
 
     test('scrolls the arrow of the hero to its target, and does nothing without it', () => {
-        loadApp({ body: '<a class="mouse-icon" href="#resume-section">Down</a><section id="resume-section"></section>' });
+        loadApp({ body: '<a class="mouse-icon" href="#projects-section">Down</a><section id="projects-section"></section>' });
         const animate = jest.spyOn($.fn, 'animate');
         $('.mouse-icon').trigger('click');
         expect(animate).toHaveBeenCalledWith({ scrollTop: 0 }, 500, 'easeInOutExpo');
         animate.mockClear();
-        $('#resume-section').remove();
+        $('#projects-section').remove();
         $('.mouse-icon').trigger('click');
         expect(animate).not.toHaveBeenCalled();
     });
@@ -436,7 +436,7 @@ describe('the experience filters', () => {
 describe('the home page', () => {
     // The menu: links 0 to 6 in the navbar, link 7 (education) in the resume submenu, and the scroll-down arrow left out of the sequence
     const navLinks = ['Home', 'About', 'Resume', 'Services', 'Projects', 'Blog', 'Contact'].map(label => `<a class="nav-link">${label}</a>`).join('');
-    const homeBody = `<nav id="ftco-navbar">${navLinks}<a class="nav-link mouse-icon" href="#resume-section">Down</a></nav>
+    const homeBody = `<nav id="ftco-navbar">${navLinks}<a class="nav-link mouse-icon" href="#projects-section">Down</a></nav>
         <div id="navi"><a class="nav-link">Education</a></div>
         <section id="home-section"></section><section id="about-section"></section><section id="education"></section>
         <span id="ftco-visitor"></span><span id="last-update-date"></span>`;
@@ -447,7 +447,7 @@ describe('the home page', () => {
         await flush();
         expect($('#ftco-visitor').text()).toBe('42');
         expect([...document.querySelectorAll('#ftco-navbar .nav-link:not(.mouse-icon)')].map(link => link.getAttribute('href'))).toEqual(['#home-section', '#about-section', '#resume-section', '#services-section', '#projects-section', '#blog-section', '#contact-section']);
-        expect($('.mouse-icon').attr('href')).toBe('#resume-section');
+        expect($('.mouse-icon').attr('href')).toBe('#projects-section');
         expect(sessionStorage.getItem('currentHash')).toBe('about-section');
         expect(window.location.hash).toBe('');
         expect(window.loadImages.mock.calls.map(call => call[0])).toEqual(['.logo-school', '.blog-img', '.project.img', '.article-image']);
