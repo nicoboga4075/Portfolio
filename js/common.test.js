@@ -413,30 +413,33 @@ describe('on load', () => {
     });
 });
 
-describe('the back-to-top button', () => {
-    // A button as base.njk renders it, its click listener kept
+describe('the scroll button', () => {
+    // A button as base.njk renders it: its two names, its icon, its name and its click listener kept
     const fakeButton = () => {
-        const button = { hidden: true, listeners: {} };
+        const icon = { className: 'icon-arrow-down' };
+        const button = { listeners: {}, attributes: {}, dataset: { labelDown: 'Go to the bottom', labelUp: 'Back to top' } };
+        button.querySelector = () => icon;
+        button.setAttribute = (name, value) => { button.attributes[name] = value; };
         button.addEventListener = (type, listener) => { button.listeners[type] = listener; };
-        return button;
+        return { button, icon };
     };
 
-    test('shows once the page is scrolled past the first screen, and brings it back to the top, smoothly unless less motion is asked', () => {
-        const button = fakeButton();
+    test('goes down to the bottom from the first screen and back to the top past it, its icon and name following, smoothly unless less motion is asked', () => {
+        const { button, icon } = fakeButton();
         const page = fakePage({ elements: { 'back-to-top': button } });
+        document.documentElement.scrollHeight = 5000;
         load();
-        expect(button.hidden).toBe(true);
+        expect([icon.className, button.attributes['aria-label']]).toEqual(['icon-arrow-down', 'Go to the bottom']);
+        button.listeners.click();
+        expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 5000, behavior: 'smooth' });
         window.scrollY = 800;
         page.windowListeners.scroll();
-        expect(button.hidden).toBe(false);
+        expect([icon.className, button.attributes['aria-label']]).toEqual(['icon-arrow-up', 'Back to top']);
         button.listeners.click();
         expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 0, behavior: 'smooth' });
         page.media.matches = true;
         button.listeners.click();
         expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 0, behavior: 'auto' });
-        window.scrollY = 100;
-        page.windowListeners.scroll();
-        expect(button.hidden).toBe(true);
     });
 
     test('does nothing on a page without the button', () => {

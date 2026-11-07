@@ -108,8 +108,8 @@ bodyClass: ""
             </div>
         </div>
         {%- endif %}
-        {#- Back to the top of the page, hidden until the page is scrolled (initBackToTop of js/common.js); after the contact button so CSS can lift it above that button #}
-        <button id="back-to-top" type="button" aria-label="{{ common.backToTop[lang] }}" hidden><span class="icon-arrow-up" aria-hidden="true"></span></button>
+        {#- Down to the bottom of the page from its first screen, back to the top past it (initBackToTop of js/common.js); after the contact button so CSS can lift it above that button #}
+        <button id="back-to-top" type="button" aria-label="{{ common.toBottom[lang] }}" data-label-down="{{ common.toBottom[lang] }}" data-label-up="{{ common.backToTop[lang] }}"><span class="icon-arrow-down" aria-hidden="true"></span></button>
         {%- if showNav %}
         <nav id="ftco-navbar" class="navbar navbar-expand-lg navbar-dark ftco-navbar-light" aria-label="{{ landmarkLang.nav }}">
             {% include "nav.html" %}

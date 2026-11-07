@@ -25,6 +25,10 @@
         "en": "Chat with NicoBot",
         "fr": "Discuter avec NicoBot"
     },
+    "toBottom": {
+        "en": "Go to the bottom",
+        "fr": "Aller en bas"
+    },
     "backToTop": {
         "en": "Back to top",
         "fr": "Retour en haut"

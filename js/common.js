@@ -237,20 +237,24 @@ function setCopyrightYear() {
     }
 }
 
-// The back-to-top button of every page (base.njk): shown once the page is scrolled past the first screen, it brings the page back to the top, smoothly unless the visitor asks for less motion
+// The scroll button of every page (base.njk): on the first screen it goes down to the bottom of the page (arrow down), past it it brings the page back to the top (arrow up), its icon and its name (data-label-down, data-label-up) following; smoothly unless the visitor asks for less motion
 function initBackToTop() {
     const button = document.getElementById('back-to-top');
     if (!button) {
         return;
     }
+    const icon = button.querySelector('span');
+    const isDown = () => window.scrollY < 600;
     const update = () => {
-        button.hidden = window.scrollY < 600;
+        const down = isDown();
+        icon.className = down ? 'icon-arrow-down' : 'icon-arrow-up';
+        button.setAttribute('aria-label', down ? button.dataset.labelDown : button.dataset.labelUp);
     };
     window.addEventListener('scroll', update, { passive: true });
     update();
     button.addEventListener('click', () => {
         const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        window.scrollTo({ top: isDown() ? document.documentElement.scrollHeight : 0, behavior: reduce ? 'auto' : 'smooth' });
     });
 }
 
