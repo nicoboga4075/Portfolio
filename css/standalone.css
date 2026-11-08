@@ -506,6 +506,14 @@ html.dark-mode .card a {
     position: relative;
 }
 
+/* The emoji of the light pages sits on the text baseline, about 2px below the middle of the button and of the language pill next to it: a flex box centres it */
+#dark-icon[data-icon-mode="emoji"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
 #dark-icon:not([data-original-title]):is(:hover, :focus-visible) .sr-only {
     top: 100%;
     left: 50%;
