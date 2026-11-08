@@ -1454,3 +1454,88 @@ describe('the sparks following the mouse', () => {
         expect(layer()).toBeNull();
     });
 });
+
+describe('the modes a link turns on', () => {
+    const { messages } = require('../tests/jest/fixture.cjs');
+    const banner = () => document.getElementById('mode-banner');
+
+    test('turns on the mode of a link with mode=<name>, takes the marker out of the address and shows its banner until it is closed, or until a new link with the marker', () => {
+        const app = loadApp({ url: '/en/blog?mode=first&x=1#mcs' });
+        app.initMode();
+        expect(window.location.pathname + window.location.search + window.location.hash).toBe('/en/blog?x=1#mcs');
+        expect(document.body.classList.contains('first-mode')).toBe(true);
+        expect(banner().dataset.mode).toBe('first');
+        expect(banner().getAttribute('role')).toBe('status');
+        expect(banner().querySelector('span').textContent).toBe(messages['welcome-banner'].en);
+        expect(banner().querySelector('button').getAttribute('aria-label')).toBe(messages['mode-banner-close'].en);
+        banner().querySelector('button').click();
+        expect(banner()).toBeNull();
+        expect(localStorage.getItem('modeBanner')).toBe('closed');
+        // The next page keeps the mode but not the closed banner
+        const next = loadApp({ url: '/en' });
+        next.initMode();
+        expect(document.body.classList.contains('first-mode')).toBe(true);
+        expect(banner()).toBeNull();
+        // A new link with the marker brings the banner back, and an address with the marker alone ends clean
+        const again = loadApp({ url: '/en?mode=first' });
+        again.initMode();
+        expect(window.location.search).toBe('');
+        expect(localStorage.getItem('modeBanner')).toBeNull();
+        expect(banner().querySelector('span').textContent).toBe(messages['welcome-banner'].en);
+    });
+
+    test('turns on the default mode, first, for a marker without a name', () => {
+        for (const url of ['/en?mode', '/en?mode=']) {
+            localStorage.clear();
+            const app = loadApp({ url });
+            app.initMode();
+            expect(window.location.search).toBe('');
+            expect(localStorage.getItem('mode')).toBe('first');
+            expect(document.body.classList.contains('first-mode')).toBe(true);
+        }
+    });
+
+    test('ignores a name that is no mode, and a mode kept that the site no longer has, taking the marker out all the same', () => {
+        let app = loadApp({ url: '/en?mode=unknown&x=1' });
+        app.initMode();
+        expect(window.location.search).toBe('?x=1');
+        expect(localStorage.getItem('mode')).toBeNull();
+        expect(document.body.className).toBe('');
+        expect(banner()).toBeNull();
+        // A known mode kept stays when the next link names an unknown one
+        localStorage.setItem('mode', 'first');
+        app = loadApp({ url: '/en?mode=unknown' });
+        app.initMode();
+        expect(localStorage.getItem('mode')).toBe('first');
+        expect(document.body.classList.contains('first-mode')).toBe(true);
+        localStorage.setItem('mode', 'retired');
+        app = loadApp({ url: '/en' });
+        app.initMode();
+        expect(document.body.className).toBe('');
+        expect(banner()).toBeNull();
+    });
+
+    test('stays off for the other visitors, and when the storage is blocked', () => {
+        let app = loadApp({ url: '/en' });
+        app.initMode();
+        expect(document.body.classList.contains('first-mode')).toBe(false);
+        expect(banner()).toBeNull();
+        app = loadApp({ url: '/en?mode=first' });
+        jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+            throw new Error('blocked');
+        });
+        app.initMode();
+        expect(document.body.classList.contains('first-mode')).toBe(false);
+    });
+
+    test('still closes the banner when the storage refuses to remember it', () => {
+        localStorage.setItem('mode', 'first');
+        const app = loadApp({ url: '/fr' });
+        app.initMode();
+        jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+            throw new Error('blocked');
+        });
+        banner().querySelector('button').click();
+        expect(banner()).toBeNull();
+    });
+});

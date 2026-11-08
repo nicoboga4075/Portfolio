@@ -11,6 +11,8 @@
     "filter-company-size": { "en": "Company size", "fr": "Taille d'entreprise" },
     "filter-sector": { "en": "Sector", "fr": "Secteur" },
     "filter-standard": { "en": "Standards", "fr": "Normes" },
+    "welcome-banner": { "en": "Welcome!", "fr": "Bienvenue !" },
+    "mode-banner-close": { "en": "Close the banner", "fr": "Fermer le bandeau" },
     "filter-toggle": { "en": "Filter", "fr": "Filtrer" },
     "filter-reset": { "en": "Reset filters", "fr": "Réinitialiser" },
     "filter-no-results": { "en": "No experience matches these filters.", "fr": "Aucune expérience ne correspond à ces filtres." }

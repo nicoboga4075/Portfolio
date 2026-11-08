@@ -297,6 +297,61 @@ function getMessage(key) {
     return i18next.t(key);
 }
 
+// The modes a link turns on with ?mode=<name>, each with the message of its banner in _data/messages.json; a ?mode without a name turns on the default one, first (a link shared to someone opening the site for the first time)
+const appModes = { first: 'welcome-banner' };
+const appDefaultMode = 'first';
+
+// A visitor whose address holds ?mode=<name> gets that mode: remembered in localStorage (sessionStorage is cleared by the navigation links), a new link replacing the mode kept and bringing back a banner closed earlier; the marker taken out of the address, even for a name that is no mode; a <name>-mode class on the body and the banner of the mode until its close button is clicked; storage may be blocked (private mode), and the page then works without the mode
+function initMode() {
+    const params = new URLSearchParams(window.location.search);
+    let mode;
+    let closed;
+    try {
+        if (params.has('mode')) {
+            const asked = params.get('mode') || appDefaultMode;
+            if (Object.hasOwn(appModes, asked)) {
+                localStorage.setItem('mode', asked);
+                localStorage.removeItem('modeBanner');
+            }
+            params.delete('mode');
+            const query = params.toString();
+            history.replaceState(null, '', `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`);
+        }
+        mode = localStorage.getItem('mode');
+        // No mode, or one a later version of the site no longer has
+        if (!Object.hasOwn(appModes, mode ?? '')) {
+            return;
+        }
+        closed = localStorage.getItem('modeBanner') === 'closed';
+    } catch {
+        return;
+    }
+    document.body.classList.add(`${mode}-mode`);
+    if (closed) {
+        return;
+    }
+    const banner = document.createElement('div');
+    banner.id = 'mode-banner';
+    banner.dataset.mode = mode;
+    banner.setAttribute('role', 'status');
+    const text = document.createElement('span');
+    text.textContent = getMessage(appModes[mode]);
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.setAttribute('aria-label', getMessage('mode-banner-close'));
+    close.textContent = '×';
+    close.addEventListener('click', () => {
+        banner.remove();
+        try {
+            localStorage.setItem('modeBanner', 'closed');
+        } catch {
+            // Storage blocked: the banner comes back on the next page
+        }
+    });
+    banner.append(text, close);
+    document.body.prepend(banner);
+}
+
 let appGoogleToken;
 // The Gmail token given on consent, kept in memory for the next messages sent from the page, never in a storage (CodeQL js/clear-text-storage-of-sensitive-data)
 let appGmailToken = null;
@@ -1818,6 +1873,8 @@ function initPage() {
     loadImages('.icon.svg', 'svg');
 
     initTranslator();
+
+    initMode();
 
     $('#cv-download').click(function () {
         const $btn = $(this).addClass('loading');

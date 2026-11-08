@@ -1800,6 +1800,39 @@ html.dark-mode .tagcloud a:hover {
     opacity: 0.7 !important;
 }
 
+/* The banner of the mode a link turned on (initMode of js/app.js), fixed at the bottom left, away from the contact button, under the consent banner */
+#mode-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: calc(100% - 120px);
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: var(--white);
+    background-color: var(--dark);
+    box-shadow: 0 4px 10px var(--shadow-md);
+    font-size: 14px;
+}
+
+#mode-banner button {
+    padding: 0 4px;
+    border: none;
+    color: var(--white);
+    background-color: transparent;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#mode-banner button:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 2px;
+}
+
 /* ==== Contact Popup ==== */
 
 #contact-icon {
