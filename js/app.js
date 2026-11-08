@@ -518,9 +518,9 @@ function initCounterTilt() {
         return;
     }
     let frame = 0;
-    $(document).on('mousemove', '#counter-section .stat-card', function (event) {
-        const card = this;
-        const { clientX, clientY } = event;
+    // event.currentTarget is the card the delegated handler matched
+    $(document).on('mousemove', '#counter-section .stat-card', event => {
+        const { currentTarget: card, clientX, clientY } = event;
         cancelAnimationFrame(frame);
         frame = requestAnimationFrame(() => {
             const box = card.getBoundingClientRect();
@@ -530,10 +530,10 @@ function initCounterTilt() {
             card.style.setProperty('--tilt-y', `${(x * 16).toFixed(1)}deg`);
         });
     });
-    $(document).on('mouseleave', '#counter-section .stat-card', function () {
+    $(document).on('mouseleave', '#counter-section .stat-card', event => {
         cancelAnimationFrame(frame);
-        this.style.removeProperty('--tilt-x');
-        this.style.removeProperty('--tilt-y');
+        event.currentTarget.style.removeProperty('--tilt-x');
+        event.currentTarget.style.removeProperty('--tilt-y');
     });
 }
 
