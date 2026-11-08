@@ -1316,3 +1316,101 @@ describe('the contact form', () => {
         expect(log).toHaveBeenCalledWith(new Error('down'));
     });
 });
+
+describe('the counters following the mouse', () => {
+    const card = () => document.querySelector('.stat-card');
+    const body = '<section id="counter-section"><div class="stat-card"></div></section>';
+
+    test('lean towards the pointer once a frame, and straighten when it leaves', () => {
+        const app = loadApp({ body, before: () => { window.matchMedia = jest.fn(() => ({ matches: true })); } });
+        window.requestAnimationFrame = jest.fn(callback => { callback(); return 7; });
+        window.cancelAnimationFrame = jest.fn();
+        app.initCounterTilt();
+        jest.spyOn(card(), 'getBoundingClientRect').mockReturnValue({ left: 100, top: 50, width: 200, height: 100 });
+        $(card()).trigger($.Event('mousemove', { clientX: 300, clientY: 50 }));
+        expect(card().style.getPropertyValue('--tilt-x')).toBe('8.0deg');
+        expect(card().style.getPropertyValue('--tilt-y')).toBe('8.0deg');
+        $(card()).trigger($.Event('mousemove', { clientX: 200, clientY: 150 }));
+        expect(window.cancelAnimationFrame).toHaveBeenLastCalledWith(7);
+        expect(card().style.getPropertyValue('--tilt-x')).toBe('-8.0deg');
+        expect(card().style.getPropertyValue('--tilt-y')).toBe('0.0deg');
+        $(card()).trigger('mouseleave');
+        expect(card().style.getPropertyValue('--tilt-x')).toBe('');
+        expect(card().style.getPropertyValue('--tilt-y')).toBe('');
+    });
+
+    test('stay still on touch screens and for visitors who ask for less motion', () => {
+        const app = loadApp({ body });
+        app.initCounterTilt();
+        $(card()).trigger($.Event('mousemove', { clientX: 300, clientY: 50 }));
+        expect(window.requestAnimationFrame).not.toHaveBeenCalled();
+        expect(card().style.getPropertyValue('--tilt-x')).toBe('');
+    });
+});
+
+describe('the sparks following the mouse', () => {
+    const layer = () => document.getElementById('cursor-sparks');
+    // A 2D context that records the strokes it is asked for, since jsdom draws nothing
+    const fakeContext = () => ({ setTransform: jest.fn(), clearRect: jest.fn(), beginPath: jest.fn(), moveTo: jest.fn(), lineTo: jest.fn(), stroke: jest.fn() });
+
+    test('moves a halo with the pointer and drops a sharp spark every 50px it travels, that drifts and fades out frame by frame, and fades out when the pointer leaves the window', () => {
+        const context = fakeContext();
+        const app = loadApp({ before: () => { window.matchMedia = jest.fn(() => ({ matches: true })); } });
+        jest.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(context);
+        document.documentElement.style.setProperty('--yellow', ' #ffc107');
+        document.documentElement.style.setProperty('--orange', '#fd7e14');
+        window.devicePixelRatio = 2;
+        // Each frame runs when the test calls frame(), like the browser between two paints
+        let pending = null;
+        window.requestAnimationFrame = jest.fn(callback => { pending = callback; return 5; });
+        const frame = () => { const callback = pending; pending = null; callback(); };
+        app.initCursorSparks();
+        const canvas = layer().querySelector('canvas');
+        expect(layer().getAttribute('aria-hidden')).toBe('true');
+        expect([...layer().children].map(child => child.className || child.tagName)).toEqual(['cursor-halo', 'CANVAS']);
+        expect([canvas.width, canvas.height]).toEqual([window.innerWidth * 2, window.innerHeight * 2]);
+        expect(context.setTransform).toHaveBeenLastCalledWith(2, 0, 0, 2, 0, 0);
+        window.devicePixelRatio = undefined;
+        $(window).trigger('resize');
+        expect(context.setTransform).toHaveBeenLastCalledWith(1, 0, 0, 1, 0, 0);
+        $(document).trigger($.Event('mousemove', { clientX: 120, clientY: 80 }));
+        expect(layer().style.getPropertyValue('--x')).toBe('120px');
+        expect(layer().style.getPropertyValue('--y')).toBe('80px');
+        expect(layer().classList.contains('is-visible')).toBe(true);
+        // A move of less than 50px moves the halo but drops no spark; a longer one drops the next, and asks for no other frame while one is waiting
+        $(document).trigger($.Event('mousemove', { clientX: 130, clientY: 90 }));
+        expect(layer().style.getPropertyValue('--x')).toBe('130px');
+        $(document).trigger($.Event('mousemove', { clientX: 180, clientY: 80 }));
+        expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1);
+        frame();
+        expect(context.stroke).toHaveBeenCalledTimes(2);
+        expect(context.lineWidth).toBe(1.5);
+        expect(context.strokeStyle).toBe('#fd7e14');
+        expect(context.globalAlpha).toBeCloseTo(0.768);
+        // The first spark leaves the tip of the pointer to the right, at the slowest speed
+        expect(context.moveTo).toHaveBeenNthCalledWith(1, 120.6, 80);
+        // Every spark is gone after 24 frames, and the frames stop
+        for (let frames = 0; frames < 40; frames++) if (pending) frame();
+        expect(pending).toBeNull();
+        expect(context.stroke).toHaveBeenCalledTimes(2 * 24);
+        // The oldest sparks are dropped past 8
+        for (let moves = 1; moves <= 12; moves++) $(document).trigger($.Event('mousemove', { clientX: moves * 60, clientY: 10 }));
+        context.stroke.mockClear();
+        frame();
+        expect(context.stroke).toHaveBeenCalledTimes(8);
+        $(document).trigger($.Event('mouseout', { relatedTarget: document.body }));
+        expect(layer().classList.contains('is-visible')).toBe(true);
+        $(document).trigger($.Event('mouseout', { relatedTarget: null }));
+        expect(layer().classList.contains('is-visible')).toBe(false);
+    });
+
+    test('is left out on touch screens, for visitors who ask for less motion and without a 2D canvas', () => {
+        let app = loadApp();
+        app.initCursorSparks();
+        expect(layer()).toBeNull();
+        app = loadApp({ before: () => { window.matchMedia = jest.fn(() => ({ matches: true })); } });
+        jest.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);
+        app.initCursorSparks();
+        expect(layer()).toBeNull();
+    });
+});

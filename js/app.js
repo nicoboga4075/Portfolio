@@ -457,6 +457,106 @@ function initFlipCards() {
     });
 }
 
+// Hovered with a mouse, a counter of #counter-section leans towards the pointer as it moves (at most 8 degrees each way, through the --tilt-x and --tilt-y properties its CSS transform reads, one update per frame), and straightens when the pointer leaves; nothing on touch screens or for visitors who ask for less motion
+function initCounterTilt() {
+    if (!window.matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
+        return;
+    }
+    let frame = 0;
+    $(document).on('mousemove', '#counter-section .stat-card', function (event) {
+        const card = this;
+        const { clientX, clientY } = event;
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+            const box = card.getBoundingClientRect();
+            const x = (clientX - box.left) / box.width - 0.5;
+            const y = (clientY - box.top) / box.height - 0.5;
+            card.style.setProperty('--tilt-x', `${(-y * 16).toFixed(1)}deg`);
+            card.style.setProperty('--tilt-y', `${(x * 16).toFixed(1)}deg`);
+        });
+    });
+    $(document).on('mouseleave', '#counter-section .stat-card', function () {
+        cancelAnimationFrame(frame);
+        this.style.removeProperty('--tilt-x');
+        this.style.removeProperty('--tilt-y');
+    });
+}
+
+// A faint blue halo follows the mouse over the whole page (its place in --x and --y, read by its CSS transform) and the mouse drops a lightning spark every 50px it travels, kept calm for the eyes: small zigzags drawn on a canvas the size of the window, at the pixel ratio of the screen so they stay sharp, each drifting slowly off at its own angle (the golden angle from one to the next, no random numbers) and fading out within half a second, at most 8 at a time; the frames run only while a spark is alive, and everything fades out when the pointer leaves the window; nothing on touch screens, for visitors who ask for less motion or without a 2D canvas
+function initCursorSparks() {
+    if (!window.matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
+        return;
+    }
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    if (!context) {
+        return;
+    }
+    const layer = document.createElement('div');
+    layer.id = 'cursor-sparks';
+    layer.setAttribute('aria-hidden', 'true');
+    const halo = document.createElement('div');
+    halo.className = 'cursor-halo';
+    layer.append(halo, canvas);
+    document.body.append(layer);
+    const root = getComputedStyle(document.documentElement);
+    const colours = ['--yellow', '--orange'].map(name => root.getPropertyValue(name).trim());
+    const resize = () => {
+        const ratio = window.devicePixelRatio || 1;
+        canvas.width = Math.round(window.innerWidth * ratio);
+        canvas.height = Math.round(window.innerHeight * ratio);
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    };
+    resize();
+    $(window).on('resize', resize);
+    let sparks = [];
+    let count = 0;
+    let frame = 0;
+    // Where the last spark was dropped, the first move dropping one
+    let last = { x: -Infinity, y: -Infinity };
+    const draw = () => {
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        sparks = sparks.filter(spark => (spark.life -= 0.04) > 0);
+        context.lineWidth = 1.5;
+        for (const spark of sparks) {
+            spark.x += spark.dx;
+            spark.y += spark.dy;
+            // A zigzag of two strokes along its way, bent to one side then the other
+            context.globalAlpha = spark.life * 0.8;
+            context.strokeStyle = spark.colour;
+            context.beginPath();
+            context.moveTo(spark.x, spark.y);
+            context.lineTo(spark.x + spark.dx * 2 + spark.dy, spark.y + spark.dy * 2 - spark.dx);
+            context.lineTo(spark.x + spark.dx * 3 - spark.dy, spark.y + spark.dy * 3 + spark.dx);
+            context.stroke();
+        }
+        frame = sparks.length ? requestAnimationFrame(draw) : 0;
+    };
+    $(document).on('mousemove', event => {
+        const { clientX, clientY } = event;
+        layer.style.setProperty('--x', `${clientX}px`);
+        layer.style.setProperty('--y', `${clientY}px`);
+        layer.classList.add('is-visible');
+        if (Math.hypot(clientX - last.x, clientY - last.y) < 50) {
+            return;
+        }
+        last = { x: clientX, y: clientY };
+        // One spark from the tip of the pointer, the oldest dropped past 8
+        const angle = count * 2.4;
+        const speed = 0.6 + (count % 3) * 0.3;
+        sparks.push({ x: clientX, y: clientY, dx: Math.cos(angle) * speed, dy: Math.sin(angle) * speed, colour: colours[count % 2], life: 1 });
+        count++;
+        sparks = sparks.slice(-8);
+        frame ||= requestAnimationFrame(draw);
+    });
+    // Leaving the window, the pointer goes out to no element
+    $(document).on('mouseout', event => {
+        if (!event.relatedTarget) {
+            layer.classList.remove('is-visible');
+        }
+    });
+}
+
 // A link of the missions to a project card (#esh) scrolls to the card and opens it as on hover: the focus goes to its Explore button, so :focus-within shows its overlay and the keyboard lands on it too; a link to anything else keeps its default
 function initProjectLinks() {
     // The pointer stays where the click was, now over another card: that card ignores it (projects-pinned) until the pointer really moves or the focus leaves, so only the linked card is open
@@ -1298,6 +1398,10 @@ function initIndexPage(langPage) {
         initPipelineLoop();
 
         initFlipCards();
+
+        initCounterTilt();
+
+        initCursorSparks();
 
         initDocPopovers();
 
