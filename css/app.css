@@ -1493,12 +1493,11 @@ html.dark-mode .ftco-navbar-light .navbar-toggler:focus-visible {
     margin-inline: auto;
 }
 
-/* Below the navbar's expand breakpoint the switcher wraps onto its own row
-   inside .container; without this it butts against the toggler row above and
-   the page content below. */
+/* Below the navbar's expand breakpoint: the vertical margins keep the switcher off the toggler row above and the page content below, and unset drops its auto side margins, which otherwise take the free space of the row and leave the Menu toggler stuck to the CV button. */
 @media (max-width: 991.98px) {
     .navbar #language-switcher {
         margin-block: 10px;
+        margin-inline: unset;
     }
 }
 
