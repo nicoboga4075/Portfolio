@@ -5,7 +5,7 @@
     {% include "dark-mode.html" %}
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="{{ navLang.navigation }}"><span class="icon-menu"></span> Menu</button>
     <div id="ftco-nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav nav ml-auto">
+        <ul class="navbar-nav nav mx-auto">
             {%- for item in nav.menus %}
             <li class="nav-item"><a class="nav-link"><span>{{ item[lang] }}</span></a></li>
             {%- endfor %}
