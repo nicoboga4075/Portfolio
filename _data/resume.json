@@ -29,6 +29,8 @@
         "types": {
             "permanent": "Permanent",
             "internship": "Internship",
+            "fixedTerm": "Fixed-term",
+            "freelance": "Freelance",
             "other": "Other"
         },
         "companyTypes": {
@@ -67,6 +69,8 @@
         "types": {
             "permanent": "CDI",
             "internship": "Stage",
+            "fixedTerm": "CDD",
+            "freelance": "Freelance",
             "other": "Autre"
         },
         "companyTypes": {

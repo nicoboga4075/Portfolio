@@ -431,6 +431,16 @@ describe('the experience filters', () => {
         expect(first.classList.contains('filtered-out')).toBe(false);
         expect(second.classList.contains('filtered-out')).toBe(true);
     });
+
+    test('offer every contract of the site as a chip in the order of resume.json, even one without an experience', () => {
+        const app = loadApp({ body: experiences.replace('<div id="experiences">', `<div id="experiences" data-contracts='["CDI","Internship","CDD","Freelance","Other"]'>`) });
+        app.initExperienceFilters();
+        expect([...document.querySelectorAll('#experience-filters .filter-group')][0].querySelectorAll('.filter-chip').length).toBe(5);
+        expect([...document.querySelectorAll('#experience-filters .filter-group')][0].textContent).toBe('ContractCDIInternshipCDDFreelanceOther');
+        // A contract no experience has leaves none
+        [...document.querySelectorAll('.filter-chip')].find(chip => chip.textContent === 'Freelance').click();
+        expect(document.querySelectorAll('.resume-wrap.filtered-out')).toHaveLength(2);
+    });
 });
 
 describe('the home page', () => {
@@ -651,6 +661,21 @@ describe('the home page', () => {
         expect([$('.soft-card').hasClass('is-unlocked'), toggle.find('i').attr('class'), $('.soft-card-back').is('[inert]')]).toEqual([true, 'icon-close', false]);
         toggle.trigger('click');
         expect([$('.soft-card').hasClass('is-unlocked'), toggle.find('i').attr('class'), $('.soft-card-back').is('[inert]')]).toEqual([false, 'icon-question-circle', true]);
+    });
+
+    test('keeps only the items of the group pressed on the back of a counter, and all of them again from its first button, leaving the other cards alone', () => {
+        const app = loadApp({ body: '<div class="soft-card-back"><div class="counter-filter"><button data-filter="" aria-pressed="true"></button><button data-filter="europe" aria-pressed="false"></button><button data-filter="africa" aria-pressed="false"></button></div><ul class="counter-flags"><li data-filter="europe"></li><li data-filter="africa"></li><li data-filter="europe africa"></li></ul></div><div class="soft-card-back" id="other"><ul class="counter-list"><li data-filter="cyber"></li></ul></div>' });
+        app.initCounterFilters();
+        const buttons = $('.counter-filter button');
+        const state = () => [buttons.toArray().map(button => button.getAttribute('aria-pressed')), $('.counter-flags li').toArray().map(flag => flag.hidden)];
+        buttons.eq(2).trigger('click');
+        // An item of two groups shows under both
+        expect(state()).toEqual([['false', 'false', 'true'], [true, false, false]]);
+        buttons.eq(1).trigger('click');
+        expect(state()).toEqual([['false', 'true', 'false'], [false, true, false]]);
+        buttons.eq(0).trigger('click');
+        expect(state()).toEqual([['true', 'false', 'false'], [false, false, false]]);
+        expect($('#other li').prop('hidden')).toBe(false);
     });
 
     test('opens the certificates of a hard skill in a popover from its PDF icon, focuses its first link, and closes it from outside or with Escape', () => {

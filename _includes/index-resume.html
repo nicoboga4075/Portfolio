@@ -31,7 +31,7 @@
                             <span class="date">{{ e.date }}</span>
                             <h2>{{ e.title[lang] }}
                                 {%- if e.tip %} <span class="info-tip-wrap"><button type="button" class="info-tip" aria-label="{{ e.title[lang] }}{{ ' :' if lang == 'fr' else ':' }} {{ resumeLang.educationDetails }}"><i class="icon-question-circle" aria-hidden="true"></i></button><span class="info-tip-box"><span class="info-tip-line">{{ e.tip[lang] }}
-                                    {%- if e.tipHref %} <a href="{{ e.tipHref }}" target="_blank" rel="noopener" title="{{ resumeLang.jobProfile }}" aria-label="{{ resumeLang.jobProfile }}"><i class="icon-briefcase" aria-hidden="true"></i></a>{% endif -%}
+                                    {%- if e.tipHref %} <a href="{{ e.tipHref }}" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-container="body" title="{{ resumeLang.jobProfile }}" aria-label="{{ resumeLang.jobProfile }}"><i class="icon-briefcase" aria-hidden="true"></i></a>{% endif -%}
                                 </span>
                                 {%- if e.tipResults %}<span class="info-tip-line">{{ e.tipResults[lang] }}</span>{% endif -%}
                                 </span></span>{% endif %}</h2>
@@ -58,7 +58,9 @@
                     </div>
                     {%- endfor %}
                 </div>
-                <div id="experiences" class="page">
+                {#- data-contracts: every contract of the site in the order of resume.json, each a chip of the contract filter even without an experience (initExperienceFilters of js/app.js) #}
+                {%- set contracts = [] %}{% for key, label in resumeLang.types %}{% set _ = contracts.push(label) %}{% endfor %}
+                <div id="experiences" class="page" data-contracts="{{ contracts | dump }}">
                     <h2 class="heading">{{ resumeLang.experiences }}</h2>
                     {%- for e in resume.experiences %}
                     {#- The experiences make a timeline: a line joins their icons inside a frame closed above the first one, and the icon of the job held today ("current": true) pulses #}
@@ -183,7 +185,7 @@
                                     {%- if l.flag2 %}<span class="flag-swap mr-2"><img src="images/{{ l.flag }}" alt="{{ l.countryAlt[lang] }}" width="27" height="18"><img src="images/{{ l.flag2.src }}" alt="{{ l.flag2.alt[lang] }}" width="27" height="18" class="flag-swap-second"></span>
                                     {%- else %}<img src="images/{{ l.flag }}" alt="{{ l.countryAlt[lang] }}" width="27" height="18" class="mr-2 align-middle">{% endif %}{{ l.name[lang] }} ({{ l.level[lang] }})
                                     {%- if l.details %} <span class="info-tip-wrap"><button type="button" class="info-tip" aria-label="{{ l.name[lang] }}{{ ' :' if lang == 'fr' else ':' }} {{ resumeLang.languageDetails }}"><i class="icon-question-circle" aria-hidden="true"></i></button><span class="info-tip-box">
-                                        {%- for detail in l.details %}<span class="info-tip-line">{% if detail.doc %}<a href="/docs/public/{{ detail.doc | urlencode }}" target="_blank" rel="noopener">{{ detail.name[lang] }}</a>{% endif %}{% if detail.parts %}{% for part in detail.parts[lang] %}{% if part.highlight %}<strong>{{ part.highlight }}</strong>{% elif part.term %}<em>{{ part.term }}</em>{% elif part.icon %}<i class="{{ part.icon }}" title="{{ part.label }}" aria-hidden="true"></i><span class="sr-only"> ({{ part.label }})</span>{% else %}{{ part.text }}{% endif %}{% endfor %}{% else %}{{ detail.text[lang] }}{% endif %}</span>{% endfor -%}
+                                        {%- for detail in l.details %}<span class="info-tip-line">{% if detail.doc %}<a href="/docs/public/{{ detail.doc | urlencode }}" target="_blank" rel="noopener">{{ detail.name[lang] }}</a>{% endif %}{% if detail.parts %}{% for part in detail.parts[lang] %}{% if part.highlight %}<strong>{{ part.highlight }}</strong>{% elif part.term %}<em>{{ part.term }}</em>{% elif part.icon %}<i class="{{ part.icon }}" data-bs-toggle="tooltip" data-container="body" title="{{ part.label }}" aria-hidden="true"></i><span class="sr-only"> ({{ part.label }})</span>{% else %}{{ part.text }}{% endif %}{% endfor %}{% else %}{{ detail.text[lang] }}{% endif %}</span>{% endfor -%}
                                     </span></span>{% endif %}</h3>
                                 <progress value="{{ l.value }}" max="100" aria-valuetext="{{ l.value }}%"></progress>
                             </div>

@@ -424,6 +424,8 @@ module.exports = function configureEleventy(eleventyConfig) {
     });
     // Resolves each article's bilingual title/tags to `lang` (falling back to `defaultLang`), leaving already single-language tags untouched; in articles/resolve-articles.js, which the tests of js/app.js use too
     eleventyConfig.addFilter("resolveArticles", require("./articles/resolve-articles"));
+    // The years of a job on the back of the work experiences counter (work-years.js)
+    eleventyConfig.addFilter("workYears", require("./work-years"));
     for (const dir of passthroughDirs) {
         if (fs.existsSync(dir)) {
             eleventyConfig.addPassthroughCopy(dir);

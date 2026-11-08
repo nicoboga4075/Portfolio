@@ -22,7 +22,7 @@ test.describe('about interests', () => {
             const interests = about[lang].interestList;
             expect(interests.length).toBeGreaterThan(1);
             expect(html).toContain(`<span>${escapeHtml(about[lang].interests)}</span> <span class="about-interests">`);
-            const emojis = [...html.matchAll(/<span class="about-interest" title="([^"]*)"><span aria-hidden="true">([^<]*)<\/span><span class="sr-only">([^<]*)<\/span><\/span>/g)].map(match => [match[1], match[3], match[2]]);
+            const emojis = [...html.matchAll(/<span class="about-interest" data-bs-toggle="tooltip" data-container="body" title="([^"]*)"><span aria-hidden="true">([^<]*)<\/span><span class="sr-only">([^<]*)<\/span><\/span>/g)].map(match => [match[1], match[3], match[2]]);
             expect(emojis).toEqual(interests.map(interest => [escapeHtml(interest.label), escapeHtml(interest.label), interest.emoji]));
         });
     }

@@ -10,7 +10,8 @@ module.exports = {
     "netlify/**/*.mts",
     "articles/resolve-articles.js",
     "projects/resolve-projects.js",
-    "adb-reverse.js"
+    "adb-reverse.js",
+    "work-years.js"
   ],
   // tests/jest/transform.cjs compiles the Netlify functions (.mts) and their tests (.ts) to CommonJS, the module system Jest runs, and exports the top-level declarations of the classic browser scripts js/app.js, js/common.js and js/standalone.js to their tests
   moduleFileExtensions: ["js", "mjs", "cjs", "json", "ts", "mts"],

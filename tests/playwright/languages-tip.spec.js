@@ -21,7 +21,7 @@ const escapeHtml = text => text.replaceAll("'", '&#39;');
 const partHtml = part => {
     if (part.highlight) return `<strong>${escapeHtml(part.highlight)}</strong>`;
     if (part.term) return `<em>${escapeHtml(part.term)}</em>`;
-    if (part.icon) return `<i class="${part.icon}" title="${escapeHtml(part.label)}" aria-hidden="true"></i><span class="sr-only"> (${escapeHtml(part.label)})</span>`;
+    if (part.icon) return `<i class="${part.icon}" data-bs-toggle="tooltip" data-container="body" title="${escapeHtml(part.label)}" aria-hidden="true"></i><span class="sr-only"> (${escapeHtml(part.label)})</span>`;
     return escapeHtml(part.text);
 };
 const textHtml = (detail, lang) => (detail.parts ? detail.parts[lang].map(partHtml).join('') : escapeHtml(detail.text[lang]));

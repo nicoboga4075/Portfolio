@@ -631,6 +631,63 @@ html.dark-mode #counter-section .counter-list a {
     color: var(--secondary-dark);
 }
 
+/* The filter of the back of a counter (the subjects of the certifications, the continents of the flags): one small pill per group above the list, clear of the question mark, the one pressed filled; the card stays white in dark mode, so the darker blue in both themes */
+#counter-section .counter-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    justify-content: center;
+    margin-bottom: 4px;
+    padding: 0 20px;
+}
+
+/* The continents in rows of three: their numbers of countries make one row too wide for the card */
+#counter-section .counter-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    margin-bottom: 0;
+    padding: 0 8px;
+}
+
+#counter-section .counter-filter button {
+    padding: 0 4px;
+    border: 1px solid var(--primary-dark);
+    border-radius: 10px;
+    color: var(--primary-dark);
+    background-color: transparent;
+    font-size: 10px;
+    line-height: 16px;
+    white-space: nowrap;
+}
+
+#counter-section .counter-filter button[aria-pressed="true"] {
+    color: var(--white);
+    background-color: var(--primary-dark);
+}
+
+/* The flags of the visited countries, in rows centred under the filter, clear of the question mark on both sides */
+#counter-section .counter-flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+    justify-content: center;
+    margin: auto 0;
+    padding: 0 24px;
+    list-style: none;
+}
+
+#counter-section .counter-list li[hidden],
+#counter-section .counter-flags li[hidden] {
+    display: none;
+}
+
+/* A thin grey edge keeps the white of a flag apart from the white card, in both themes */
+#counter-section .counter-flags img {
+    display: block;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--gray-light);
+}
+
 /* ==== Hire Me ==== */
 
 #hireme-section {
@@ -1005,7 +1062,7 @@ html:not(.dark-mode) .resume-details .skill-icons img[src$="/github.png"] {
     margin-bottom: 30px;
 }
 
-/* The details of a spoken language or an education: a tooltip of its own over its question mark, shown on hover or keyboard focus and kept while the pointer is on it, so its links can be clicked; hidden the way .sr-only is, so screen readers still read it */
+/* The details of a spoken language or an education: a tooltip of its own over its question mark, shown on hover or keyboard focus and kept while the pointer is on it, so its links can be clicked; hidden the way .sr-only is, so screen readers still read it; it looks like the Bootstrap tooltips of the site (colours, font, padding, corners), only wider and left-aligned for its lines */
 .info-tip-wrap {
     position: relative;
     display: inline-block;
@@ -1028,13 +1085,13 @@ html:not(.dark-mode) .resume-details .skill-icons img[src$="/github.png"] {
     width: max-content;
     max-width: 300px;
     height: auto;
-    padding: 8px 12px;
+    padding: 4px 8px;
     overflow: visible;
     clip-path: none;
     border-radius: 4px;
     color: var(--white);
-    background-color: var(--dark);
-    font-size: 13px;
+    background-color: var(--black);
+    font-size: 14px;
     font-weight: 400;
     line-height: 1.5;
     text-align: left;

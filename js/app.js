@@ -512,6 +512,19 @@ function initFlipCards() {
     });
 }
 
+// A filter button on the back of a counter (a subject of the certifications, a continent of the flags) keeps only the items of its group (data-filter of each item), the one without a group shows them all; the pressed button says so with aria-pressed
+function initCounterFilters() {
+    $(document).on('click', '.counter-filter button', event => {
+        const button = event.currentTarget;
+        const { filter } = button.dataset;
+        $(button).attr('aria-pressed', 'true').siblings().attr('aria-pressed', 'false');
+        // An item may belong to several groups (a job that was an internship then a permanent one), listed in its data-filter
+        for (const item of $(button).closest('.soft-card-back').find('li[data-filter]')) {
+            item.hidden = Boolean(filter) && !item.dataset.filter.split(' ').includes(filter);
+        }
+    });
+}
+
 // Hovered with a mouse, a counter of #counter-section leans towards the pointer as it moves (at most 8 degrees each way, through the --tilt-x and --tilt-y properties its CSS transform reads, one update per frame), and straightens when the pointer leaves; nothing on touch screens or for visitors who ask for less motion
 function initCounterTilt() {
     if (!window.matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
@@ -1259,6 +1272,8 @@ function initExperienceFilters() {
         { key: 'standard', selector: '.standard-tag', label: getMessage('filter-standard'), order: sortStandards }
     ];
     groups.forEach(g => { g.values = new Set(); });
+    // Every contract of the site is a chip, in the order of resume.json, even one no experience has yet (data-contracts of #experiences)
+    JSON.parse(container.dataset.contracts || '[]').forEach(contract => groups[0].values.add(contract));
 
     wraps.forEach(wrap => {
         groups.forEach(g => {
@@ -1479,6 +1494,7 @@ function initIndexPage(langPage) {
         initPipelineLoop();
 
         initFlipCards();
+        initCounterFilters();
 
         initCounterTilt();
 
