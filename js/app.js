@@ -1116,6 +1116,29 @@ function labelCarouselControls(target) {
     });
 }
 
+// The black band shows a spinner instead of empty cards: is-loading on the carousel while the pictures of the cards it shows are still on their way (lazy, they only start once the carousel is shown, or once autoplay slides to them), and for at least minimum ms when given (a tab the visitor clicks shows it even with every picture in the cache); checked again at each picture that loads or fails (a failed picture counts as complete) and once the minimum is over, against the latest end any call set (data loading-until), so two calls at once never end it early
+function showCarouselLoading(target, minimum = 0) {
+    const missing = () => [...$(target).find('.owl-item.active img')].filter(img => !img.complete);
+    const pending = missing();
+    if (!pending.length && !minimum) {
+        return;
+    }
+    const until = Math.max(Date.now() + minimum, $(target).data('loading-until') || 0);
+    $(target).addClass('is-loading').data('loading-until', until);
+    const done = () => {
+        if (Date.now() >= $(target).data('loading-until') && !missing().length) {
+            $(target).removeClass('is-loading');
+        }
+    };
+    if (minimum) {
+        setTimeout(done, minimum);
+    }
+    for (const img of pending) {
+        img.addEventListener('load', done, { once: true });
+        img.addEventListener('error', done, { once: true });
+    }
+}
+
 function initCarousel(target) {
     const itemCount = $(target).children().length;
     $(target).owlCarousel({
@@ -1149,6 +1172,9 @@ function initCarousel(target) {
     labelCarouselControls(target);
     $(`.owl-menu[data-target="${target}"]`).addClass("active").siblings('.owl-menu').removeClass('active');
     $(target).addClass('active');
+    showCarouselLoading(target);
+    // Autoplay or the arrows bring new cards in: the spinner again while their pictures are missing
+    $(target).on('translated.owl.carousel', () => showCarouselLoading(target));
 }
 
 // Badge/tag text is already localized server-side (separate _en/_fr builds),
@@ -1831,6 +1857,9 @@ function initPage() {
         // To avoid glitch switching to other carousel
         $(target).removeClass('d-none').trigger('refresh.owl.carousel');
         labelCarouselControls(target);
+        // Asked for by the visitor: every picture of the carousel loads now, not only those shown, so the next slides are ready when autoplay brings them
+        $(target).find('img').attr('loading', 'eager');
+        showCarouselLoading(target, 400);
     });
 
     if (idPage === 'index') {

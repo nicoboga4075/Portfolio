@@ -1136,6 +1136,46 @@ describe('initPage', () => {
         expect($('.owl-menu').eq(1).hasClass('active')).toBe(false);
     });
 
+    test('shows a spinner on a skills carousel for 400ms at least once asked for, and until the pictures of its shown cards have loaded or failed, loading all its pictures', () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body: pageBody, route: 'policy' });
+        app.initPage();
+        // The cards owl shows: two pictures on their way, one already there, one card out of sight
+        $('#soft-skills').html('<div class="owl-item active"><img id="first" loading="lazy"></div><div class="owl-item active"><img id="second" loading="lazy"></div><div class="owl-item active"><img id="ready"></div><div class="owl-item"><img id="hidden" loading="lazy"></div>');
+        const loaded = (id, complete) => Object.defineProperty(document.getElementById(id), 'complete', { value: complete, configurable: true });
+        const arrives = (id, type) => { loaded(id, true); document.getElementById(id).dispatchEvent(new Event(type)); };
+        for (const id of ['first', 'second', 'hidden']) loaded(id, false);
+        loaded('ready', true);
+        $('.owl-menu').eq(1).trigger('click');
+        expect($('#soft-skills').hasClass('is-loading')).toBe(true);
+        expect($('#soft-skills img').toArray().every(img => img.getAttribute('loading') === 'eager')).toBe(true);
+        // Started twice (the first start of the carousel, then its showing), the spinner still waits for the last picture
+        arrives('first', 'load');
+        expect($('#soft-skills').hasClass('is-loading')).toBe(true);
+        arrives('second', 'error');
+        // Every picture is there before the 400ms, the spinner stays until they are over
+        expect($('#soft-skills').hasClass('is-loading')).toBe(true);
+        jest.advanceTimersByTime(400);
+        expect($('#soft-skills').hasClass('is-loading')).toBe(false);
+        // Shown again with every picture in the cache, the spinner still shows for 400ms
+        $('.owl-menu').eq(0).trigger('click');
+        jest.advanceTimersByTime(400);
+        $('.owl-menu').eq(1).trigger('click');
+        expect($('#soft-skills').hasClass('is-loading')).toBe(true);
+        jest.advanceTimersByTime(399);
+        expect($('#soft-skills').hasClass('is-loading')).toBe(true);
+        jest.advanceTimersByTime(1);
+        expect($('#soft-skills').hasClass('is-loading')).toBe(false);
+        // A slide with every picture there shows no spinner; one bringing in a card whose picture is missing shows it until it arrives
+        $('#soft-skills').trigger('translated.owl.carousel');
+        expect($('#soft-skills').hasClass('is-loading')).toBe(false);
+        $('#soft-skills .owl-item').removeClass('active').last().addClass('active');
+        $('#soft-skills').trigger('translated.owl.carousel');
+        expect($('#soft-skills').hasClass('is-loading')).toBe(true);
+        arrives('hidden', 'load');
+        expect($('#soft-skills').hasClass('is-loading')).toBe(false);
+    });
+
     test('keeps the empty links in place, and turns Ctrl+F or Cmd+F into the article search', () => {
         jest.useFakeTimers();
         const app = loadApp({ body: pageBody, route: 'policy' });

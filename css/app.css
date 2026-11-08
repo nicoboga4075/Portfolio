@@ -2714,6 +2714,28 @@ html.dark-mode .owl-dot:focus-visible {
     }
 }
 
+/* A skills carousel whose pictures are still loading (showCarouselLoading of js/app.js): its cards hidden and the spinner of the page loader in their place */
+.owl-carousel.is-loading {
+    position: relative;
+}
+
+.owl-carousel.is-loading .owl-stage-outer {
+    visibility: hidden;
+}
+
+.owl-carousel.is-loading::after {
+    position: absolute;
+    top: calc(50% - 24px);
+    left: calc(50% - 24px);
+    width: 48px;
+    height: 48px;
+    content: '';
+    border: 4px solid var(--primary-pale);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spinner-rotate 1s linear infinite;
+}
+
 /* ==== Services Section ==== */
 
 .services {
