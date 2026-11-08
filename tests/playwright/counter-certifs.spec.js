@@ -39,11 +39,12 @@ test.describe('counters that turn over', () => {
             const html = render(lang);
             expect(html).toContain(`aria-label="${escapeHtml(counter[lang].experiencesToggle)}" data-icons="icon-question-circle icon-close">`);
             const [, list] = [...html.matchAll(/<ul class="counter-list">(.*?)<\/ul>/g)].map(match => match[1]);
-            const items = [...list.matchAll(/<li data-filter="[^"]+"><img src="images\/companies\/([^"]+)\.png" alt="" width="16" height="16" loading="lazy" class="counter-logo"><a href="([^"]+)"[^>]*>([^<]+)<\/a><span class="counter-by">\[([^\]]+)\]<\/span><span class="counter-details">([^<]+)<\/span><\/li>/g)].map(match => match.slice(1));
+            const items = [...list.matchAll(/<li data-filter="[^"]+"><img src="images\/companies\/([^"]+)\.png" alt="" width="16" height="16" loading="lazy" class="counter-logo"><a href="([^"]+)"[^>]*>([^<]+)<\/a> · <span class="counter-by">([^<]+)<\/span> · <span class="counter-details">([^<]+)<\/span><\/li>/g)].map(match => match.slice(1));
             const shown = resume.experiences.filter(experience => experience.type !== 'other');
             expect(items.map(([logo]) => logo)).toEqual(shown.map(experience => experience.logo));
             expect(items.map(([, , company]) => company)).toEqual(shown.map(experience => experience.company));
-            expect(items.find(([, , company]) => company === 'Soft Concept')[3]).toBe(['internship', 'permanent'].map(type => resume[lang].types[type]).join(', '));
+            // Each company, then its role and its years after a middle dot each, its contracts left to the filter
+            expect(items.map(([, , , role]) => role)).toEqual(shown.map(experience => experience.title[lang].replaceAll('&', '&amp;')));
             for (const [, , , , years] of items) expect(years).toMatch(/^\d{4}(–\d{4})?$/);
             // A job started in December counts from the next year: ChapsVision (December 2025 - August 2026) and Astek (December 2024 - August 2025)
             expect(items.find(([, , company]) => company === 'ChapsVision')[4]).toBe('2026');
