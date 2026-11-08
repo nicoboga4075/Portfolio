@@ -539,3 +539,22 @@ html.dark-mode .card a {
     border-style: solid;
     border-width: 0 6px 6px;
 }
+
+/* The light pages load no icon font: the arrow of the scroll button (icon-arrow-down or icon-arrow-up, set by initBackToTop of js/common.js) drawn as a chevron instead; not on the blog, which loads this file with an article but keeps its icon font */
+body:not(.blog-page) #back-to-top .icon-arrow-down::before,
+body:not(.blog-page) #back-to-top .icon-arrow-up::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid currentcolor;
+    border-left: 2px solid currentcolor;
+}
+
+body:not(.blog-page) #back-to-top .icon-arrow-up::before {
+    transform: translateY(2px) rotate(45deg);
+}
+
+body:not(.blog-page) #back-to-top .icon-arrow-down::before {
+    transform: translateY(-2px) rotate(225deg);
+}

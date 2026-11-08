@@ -63,6 +63,7 @@ function fakePage({ url = 'https://nicoboga.netlify.app/en', lang = 'en', langua
         location: { pathname: location.pathname, href: location.href, origin: location.origin },
         matchMedia: jest.fn(() => media),
         scrollY: 0,
+        innerHeight: 800,
         scrollTo: jest.fn(),
         addEventListener: jest.fn((type, listener) => { windowListeners[type] = listener; })
     };
@@ -440,6 +441,20 @@ describe('the scroll button', () => {
         page.media.matches = true;
         button.listeners.click();
         expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 0, behavior: 'auto' });
+    });
+
+    test('on a page that scrolls less than twice 600px, turns up past half its scroll, so its bottom gets the arrow up', () => {
+        const { button, icon } = fakeButton();
+        const page = fakePage({ elements: { 'back-to-top': button } });
+        // 1400px of page in an 800px window: 600px of scroll, the arrow turning past 300px
+        document.documentElement.scrollHeight = 1400;
+        load();
+        window.scrollY = 299;
+        page.windowListeners.scroll();
+        expect(icon.className).toBe('icon-arrow-down');
+        window.scrollY = 600;
+        page.windowListeners.scroll();
+        expect([icon.className, button.attributes['aria-label']]).toEqual(['icon-arrow-up', 'Back to top']);
     });
 
     test('does nothing on a page without the button', () => {

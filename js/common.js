@@ -237,14 +237,14 @@ function setCopyrightYear() {
     }
 }
 
-// The scroll button of every page (base.njk): on the first screen it goes down to the bottom of the page (arrow down), past it it brings the page back to the top (arrow up), its icon and its name (data-label-down, data-label-up) following; smoothly unless the visitor asks for less motion
+// The scroll button of every page (base.njk): on the first screen it goes down to the bottom of the page (arrow down), past it it brings the page back to the top (arrow up), the first screen being 600px or half the scroll of a shorter page (policy, terms), whose bottom is then reached past it, its icon and its name (data-label-down, data-label-up) following; smoothly unless the visitor asks for less motion
 function initBackToTop() {
     const button = document.getElementById('back-to-top');
     if (!button) {
         return;
     }
     const icon = button.querySelector('span');
-    const isDown = () => window.scrollY < 600;
+    const isDown = () => window.scrollY < Math.min(600, (document.documentElement.scrollHeight - window.innerHeight) / 2);
     const update = () => {
         const down = isDown();
         icon.className = down ? 'icon-arrow-down' : 'icon-arrow-up';
