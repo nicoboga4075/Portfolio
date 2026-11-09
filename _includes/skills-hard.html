@@ -3,48 +3,60 @@
 {%- macro filterIcon(icon) -%}
 {%- if icon.startsWith("icon-") %}<i class="{{ icon }}" aria-hidden="true"></i>{% else %}<span class="filter-emoji" aria-hidden="true">{{ icon }}</span>{% endif -%}
 {%- endmacro -%}
-{#- A label is the name of the tool, one string, or one text per language for a method ("Cycle en V"); a tool with a doc (the file name of its certificate in docs/public/) gets a PDF icon in its top right corner, the only link, to that file; a tool with several, in hardDocs of skills.json, a PDF icon opening their list in a popover (initDocPopovers of js/app.js); a tool with a line in hardTips a question mark, its tooltip, left of its PDF icon when it has one; categories: the filters of skills.carousel hardCategories a tool shows under (frontend, backend, devops, tests, ide, cyber, methodology, tools, git, automation); their order in this list is their order in each filter, none for a tool shown under All only; the list is not named skills, which would hide the skills data and its texts #}
+{#- A label is the name of the tool, one string, or one text per language for a method ("Cycle en V"); a tool with a doc (the file name of its certificate in docs/public/) gets a PDF icon in its top right corner, the only link, to that file; a tool with several, in hardDocs of skills.json, a PDF icon opening their list in a popover (initDocPopovers of js/app.js); a tool with a line in hardTips a question mark, its tooltip, above its PDF icon when it has one; categories: the filters of skills.carousel hardCategories a tool shows under (frontend, backend, devops, tests, ide, cyber, methodology, tools, git, automation, ai, business: the software of an employer it was used at, languages: the programming languages, os, spoken: a spoken language, its flag as image, images/lang-<code>.png drawn large enough to stay sharp); their order in this list is their order in each filter, none for a tool shown under All only; the list is not named skills, which would hide the skills data and its texts #}
 {%- set hardSkills = [
-    { key: "python",     label: "Python", doc: "Certification Python3.pdf", categories: ["backend"] },
-    { key: "csharp",     label: "C#", doc: "Certification Csharp.pdf", categories: ["backend"] },
+    { key: "python",     label: "Python", doc: "Certification Python3.pdf", categories: ["backend", "automation", "languages"] },
+    { key: "csharp",     label: "C#", doc: "Certification Csharp.pdf", categories: ["backend", "languages"] },
     { key: "dotnet",     label: ".NET", categories: ["backend"] },
     { key: "vscode",     label: "VS Code", categories: ["ide"] },
     { key: "vsstudio",   label: "Visual Studio", categories: ["ide"] },
+    { key: "pycharm",    label: "PyCharm", categories: ["ide"] },
+    { key: "windows",    label: "Windows", categories: ["os"] },
+    { key: "linux",      label: "Linux", categories: ["os"] },
     { key: "github",     label: "GitHub", categories: ["devops", "git"] },
     { key: "gitlab",     label: "GitLab", doc: "Certificat GIT-GITLAB.pdf", categories: ["devops", "git"] },
     { key: "gitea",      label: "Gitea", categories: ["git"] },
     { key: "netlify",    label: "Netlify", categories: ["devops"] },
     { key: "html",       label: "HTML", categories: ["frontend"] },
     { key: "css",        label: "CSS", categories: ["frontend"] },
-    { key: "javascript", label: "JavaScript", doc: "Certification Javascript.pdf", categories: ["frontend", "backend"] },
-    { key: "typescript", label: "TypeScript", categories: ["frontend", "backend"] },
+    { key: "javascript", label: "JavaScript", doc: "Certification Javascript.pdf", categories: ["frontend", "backend", "languages"] },
+    { key: "typescript", label: "TypeScript", categories: ["frontend", "backend", "languages"] },
     { key: "jquery",     label: "jQuery", categories: ["frontend"] },
     { key: "bootstrap",  label: "Bootstrap", categories: ["frontend"] },
-    { key: "figma",      label: "Figma", doc: "Certificat FIGMA.pdf", categories: ["frontend"] },
-    { key: "sql",        label: "SQL" },
+    { key: "sql",        label: "SQL", categories: ["languages"] },
     { key: "xunit",      label: "xUnit", categories: ["tests"] },
     { key: "playwright", label: "Playwright", categories: ["tests", "automation"] },
     { key: "robot",      label: "Robot Framework", doc: "Certificat ROBOT FRAMEWORK.pdf", categories: ["tests", "automation"] },
     { key: "office",     label: "Office", categories: ["tools"] },
-    { key: "chatgpt",    label: "ChatGPT", categories: ["tools"] },
-    { key: "claude",     label: "Claude", doc: "Attestation Claude Code.pdf", categories: ["tools"] },
-    { key: "gemini",     label: "Gemini", categories: ["tools"] },
-    { key: "postman",    label: "Postman", categories: ["tests", "tools"] },
-    { key: "powershell", label: "PowerShell", categories: ["tests", "tools", "automation"] },
-    { key: "docker",     label: "Docker", categories: ["devops"] },
+    { key: "chatgpt",    label: "ChatGPT", categories: ["tools", "ai"] },
+    { key: "claude",     label: "Claude", doc: "Attestation Claude Code.pdf", categories: ["tools", "ai"] },
+    { key: "gemini",     label: "Gemini", categories: ["tools", "ai"] },
+    { key: "figma",      label: "Figma", doc: "Certificat FIGMA.pdf", categories: ["frontend", "tools"] },
+    { key: "postman",    label: "Postman", categories: ["tests", "tools", "automation"] },
+    { key: "powershell", label: "PowerShell", categories: ["tests", "tools", "automation", "languages"] },
+    { key: "bash",       label: "Bash", categories: ["languages"] },
+    { key: "githubdesktop", label: "GitHub Desktop", categories: ["tools", "git"] },
+    { key: "sourcetree", label: "Sourcetree", categories: ["tools", "git"] },
+    { key: "docker",     label: "Docker", categories: ["devops", "tools"] },
     { key: "sonarqube",  label: "SonarQube", categories: ["devops", "tools"] },
-    { key: "snyk",       label: "Snyk", categories: ["devops", "cyber", "tools"] },
     { key: "cybersecurity", label: { en: "Cybersecurity", fr: "Cybersécurité" }, categories: ["cyber"] },
+    { key: "snyk",       label: "Snyk", categories: ["devops", "cyber", "tools"] },
+    { key: "trivy",      label: "Trivy", categories: ["devops", "cyber", "tools"] },
+    { key: "vault",      label: "HashiCorp Vault", categories: ["cyber", "tools"] },
+    { key: "maths",      label: { en: "Mathematics", fr: "Mathématiques" } },
     { key: "agile",      label: "Agile", categories: ["methodology"] },
     { key: "v-model",    label: { en: "V model", fr: "Cycle en V" }, categories: ["methodology"] },
-    { key: "netsurvey",  label: "Net-Survey", categories: ["tools"] },
-    { key: "ethnos",     label: "Ethnos", categories: ["tools"] },
-    { key: "webreports", label: "Web-Reports", categories: ["tools"] },
-    { key: "teexma",     label: "Teexma", categories: ["tools"] },
-    { key: "n8n",        label: "n8n", categories: ["tools", "automation"] }
+    { key: "netsurvey",  label: "Net-Survey", categories: ["business", "tools"] },
+    { key: "ethnos",     label: "Ethnos", categories: ["business", "tools"] },
+    { key: "webreports", label: "Web-Reports", categories: ["business", "tools"] },
+    { key: "teexma",     label: "Teexma", categories: ["business", "tools"] },
+    { key: "n8n",        label: "n8n", categories: ["tools", "automation", "ai"] },
+    { key: "lang-fr",    label: { en: "French", fr: "Français" }, categories: ["spoken"] },
+    { key: "lang-en",    label: { en: "English", fr: "Anglais" }, categories: ["spoken"] },
+    { key: "lang-es",    label: { en: "Spanish", fr: "Espagnol" }, categories: ["spoken"] }
 ] -%}
 {#- Above the carousel, one button per category that keeps only its tools, and one that shows them all, each with its number in brackets; shown with the hard skills only (initSkillFilter of js/app.js) #}
-<div id="hard-skills-filter" class="skill-filter" role="group" aria-label="{{ skills.carousel[lang].hardFilterLabel }}">
+<div id="hard-skills-filter" class="skill-filter" data-target="#hard-skills" role="group" aria-label="{{ skills.carousel[lang].hardFilterLabel }}">
     <button type="button" data-filter="" aria-pressed="true">{{ filterIcon(skills.hardFilterIcons.all) }}{{ skills.carousel[lang].hardFilterAll }} ({{ hardSkills | length }})</button>
     {#- The categories from the most tools to the fewest, a tie in the order of hardCategories #}
     {%- set categories = [] %}

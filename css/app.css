@@ -602,6 +602,15 @@ html:not(.dark-mode) .slider-text .hero-tagline {
     font-weight: 600;
 }
 
+/* An icon in place of a logo (the school and personal projects), at the size of the logos */
+#counter-section .counter-list .counter-logo-icon {
+    display: inline-block;
+    width: 16px;
+    margin-right: 2px;
+    color: var(--primary-dark);
+    text-align: center;
+}
+
 /* The logo of a company, or of the body or exam behind a certification, before its name, on the middle of its line */
 #counter-section .counter-list .counter-logo {
     margin-right: 2px;
@@ -713,7 +722,7 @@ html.dark-mode #counter-section .counter-list a {
     cursor: help;
 }
 
-/* The filter of the back of a counter (the subjects of the certifications, the continents of the flags): one small pill per group above the list, clear of the question mark, the one pressed filled; the card stays white in dark mode, so the darker blue in both themes */
+/* The filter of the back of a counter (the subjects of the certifications, the continents of the flags): one small pill per group above the list, all of the same height whether their icon is a font icon or an emoji, clear of the question mark, the one pressed filled; the card stays white in dark mode, so the darker blue in both themes */
 #counter-section .counter-filter {
     display: flex;
     flex-wrap: wrap;
@@ -737,6 +746,25 @@ html.dark-mode #counter-section .counter-list a {
     }
 }
 
+/* From 1280px, the continents in two rows of three: the back reaches 15px further into the gaps around the card, as the work experiences one does, and the filter starts under the question mark, across the whole back */
+@media (min-width: 1280px) {
+    #counter-section .soft-card-back:has(.counter-filter-grid) {
+        right: -35px;
+        left: -35px;
+        padding-right: 4px;
+        padding-left: 4px;
+    }
+
+    #counter-section .counter-filter-grid {
+        display: flex;
+        padding: 24px 4px 0;
+    }
+
+    #counter-section .counter-filter-grid button {
+        padding: 0 3px;
+    }
+}
+
 /* Narrower pills, clear of the question mark on the right */
 #counter-section .counter-filter-grid button {
     padding: 0 3px;
@@ -744,6 +772,7 @@ html.dark-mode #counter-section .counter-list a {
 
 #counter-section .counter-filter button {
     display: inline-flex;
+    height: 18px;
     gap: 3px;
     align-items: center;
     padding: 0 4px;
@@ -2737,9 +2766,9 @@ html.dark-mode .owl-dot:focus-visible {
     font-size: 18px;
 }
 
-/* A tool with both: the question mark left of the PDF icon */
-.hard-skill-doc ~ .hard-skill-tip {
-    right: 32px;
+/* A tool with both: the question mark in the corner, the PDF icon under it, clear of the logo */
+.hard-skill:has(.hard-skill-tip) .hard-skill-doc {
+    top: 32px;
 }
 
 .hard-skill-doc:hover,

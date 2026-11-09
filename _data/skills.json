@@ -95,7 +95,8 @@
         }
     ],
     "tabIcons": { "hard": "icon-wrench", "soft": "icon-handshake-o", "mad": "icon-heart" },
-    "hardFilterIcons": { "all": "icon-th-large", "frontend": "icon-desktop", "backend": "icon-server", "devops": "icon-cogs", "tests": "icon-flask", "ide": "icon-code", "cyber": "icon-shield", "methodology": "icon-map-signs", "tools": "icon-suitcase", "git": "icon-code-fork", "automation": "icon-bolt" },
+    "softFilterIcons": { "all": "icon-th-large", "relational": "icon-users", "cognitive": "icon-lightbulb-o", "adaptation": "icon-refresh", "emotional": "icon-heart" },
+    "hardFilterIcons": { "all": "icon-th-large", "frontend": "icon-desktop", "backend": "icon-server", "devops": "icon-cogs", "tests": "icon-flask", "ide": "icon-code", "cyber": "icon-shield", "methodology": "icon-map-signs", "tools": "icon-suitcase", "git": "icon-code-fork", "automation": "icon-bolt", "ai": "icon-magic", "business": "icon-building-o", "languages": "icon-terminal", "os": "icon-windows", "spoken": "icon-language" },
     "carousel": {
         "en": {
             "heading": "Discover my skills",
@@ -106,8 +107,10 @@
             "docLinkLabel": "Certificate (PDF)",
             "docsLinkLabel": "certificates",
             "hardFilterLabel": "Filter the hard skills",
+            "softFilterLabel": "Filter the soft skills",
+            "softCategories": { "relational": "Interpersonal", "cognitive": "Cognitive", "adaptation": "Adaptability", "emotional": "Emotional" },
             "hardFilterAll": "All",
-            "hardCategories": { "frontend": "Frontend", "backend": "Backend", "devops": "DevOps", "tests": "Tests", "ide": "IDE", "cyber": "Cyber", "methodology": "Methodology", "tools": "Tools & Software", "git": "Git", "automation": "Automation" }
+            "hardCategories": { "frontend": "Frontend", "backend": "Backend", "devops": "DevOps", "tests": "Tests", "ide": "IDE", "cyber": "Cyber", "methodology": "Methodology", "tools": "Tools / Software", "git": "Git", "automation": "Automation", "ai": "AI", "business": "Business software", "languages": "Programming languages", "os": "OS", "spoken": "Spoken languages" }
         },
         "fr": {
             "heading": "Découvrez mes compétences",
@@ -118,8 +121,10 @@
             "docLinkLabel": "Attestation (PDF)",
             "docsLinkLabel": "attestations",
             "hardFilterLabel": "Filtrer les hard skills",
+            "softFilterLabel": "Filtrer les soft skills",
+            "softCategories": { "relational": "Relationnelles", "cognitive": "Cognitives", "adaptation": "Adaptation", "emotional": "Émotionnelles" },
             "hardFilterAll": "Tous",
-            "hardCategories": { "frontend": "Frontend", "backend": "Backend", "devops": "DevOps", "tests": "Tests", "ide": "IDE", "cyber": "Cyber", "methodology": "Méthodologie", "tools": "Outils & logiciels", "git": "Git", "automation": "Automatisation" }
+            "hardCategories": { "frontend": "Frontend", "backend": "Backend", "devops": "DevOps", "tests": "Tests", "ide": "IDE", "cyber": "Cyber", "methodology": "Méthodologie", "tools": "Outils / Logiciels", "git": "Git", "automation": "Automatisation", "ai": "IA", "business": "Logiciels métier", "languages": "Langages de programmation", "os": "OS", "spoken": "Langues" }
         }
     },
     "mad": [
@@ -142,6 +147,11 @@
             "key": "writing",
             "en": "Writing",
             "fr": "Écriture"
+        },
+        {
+            "key": "science-art",
+            "en": "Science & Art",
+            "fr": "Sciences & Art"
         }
     ],
     "hardDocs": {
@@ -154,17 +164,30 @@
         ]
     },
     "hardTips": {
-        "netsurvey": { "en": "Group training for the MNT", "fr": "Formation en groupe pour la MNT" },
-        "ethnos": { "en": "Integrating data viz charts (amCharts) into the software", "fr": "Intégration de graphiques de data viz (amCharts) dans le logiciel" },
-        "webreports": { "en": "One-to-one training for a La Poste employee", "fr": "Formation individuelle pour un collaborateur de La Poste" },
-        "github": { "en": "At Soft Concept and Bassetti Group, and for this portfolio (GitHub Actions)", "fr": "Chez Soft Concept et Bassetti Group, et pour ce portfolio (GitHub Actions)" },
+        "office": { "en": "PowerPoint, Excel, Word, OneNote", "fr": "PowerPoint, Excel, Word, OneNote" },
+        "netsurvey": { "en": "Questionnaire creation software developed by Soft Concept — group training for the MNT", "fr": "Logiciel de création de questionnaires développé par Soft Concept — formation en groupe pour la MNT" },
+        "ethnos": { "en": "Survey data analysis software developed by Soft Concept — data viz charts (amCharts) integrated into it", "fr": "Logiciel d'analyse de données d'enquête développé par Soft Concept — intégration de graphiques de data viz (amCharts)" },
+        "webreports": { "en": "Application development and deployment software developed by Soft Concept — one-to-one training for a La Poste employee", "fr": "Logiciel de développement et de déploiement d'applications développé par Soft Concept — formation individuelle pour un collaborateur de La Poste" },
+        "github": { "en": "Sources & GitHub Actions at Soft Concept and Bassetti Group, and for this portfolio", "fr": "Sources & GitHub Actions chez Soft Concept et Bassetti Group, et pour ce portfolio" },
         "gitlab": { "en": "Sources and CI/CD pipelines at Astek and ChapsVision, and the mirror of this portfolio", "fr": "Sources et pipelines CI/CD chez Astek et ChapsVision, et le miroir de ce portfolio" },
         "gitea": { "en": "Sources of the internship project at Cyberprotect", "fr": "Sources du projet de stage chez Cyberprotect" },
-        "teexma": { "en": "Audit and securing of its BI module (TxBI)", "fr": "Audit et sécurisation de son module de BI (TxBI)" }
+        "sql": { "en": "SQL Server / PostgreSQL / SQLite / MySQL / Elasticsearch", "fr": "SQL Server / PostgreSQL / SQLite / MySQL / Elasticsearch" },
+        "cybersecurity": { "en": "Code audit for Bassetti Group under ISO 27001 and ISO 9001, cryptography (KMS) with Alstom and ChapsVision, an MCS application (keeping systems in a secure state) in Python at Cyberprotect", "fr": "Audit de code pour Bassetti Group selon les normes ISO 27001 et ISO 9001, cryptographie (KMS) avec Alstom et ChapsVision, application de MCS (maintien en condition de sécurité) en Python chez Cyberprotect" },
+        "maths": { "en": "MPSI/MP preparatory classes (analysis, algebra), maths specialty of the scientific baccalaureate, private maths tutoring", "fr": "Prépa MPSI/MP (analyse, algèbre), spécialité maths du Bac S, cours particuliers de maths" },
+        "agile": { "en": "Short iterations, delivered and adjusted with the team and the client — notably in a squad of 10 at ChapsVision (Jira, Confluence)", "fr": "Itérations courtes, livrées et ajustées avec l'équipe et le client — notamment en squad de 10 chez ChapsVision (Jira, Confluence)" },
+        "v-model": { "en": "Sequential cycle, each design stage matched by its test stage — notably as a consultant for Alstom, with daily stand-ups and design reviews in English", "fr": "Cycle séquentiel, chaque étape de conception face à son étape de test — notamment comme consultant pour Alstom, avec daily stand-ups et design reviews en anglais" },
+        "windows": { "en": "PC, work and development environment", "fr": "PC, environnement de travail et de développement" },
+        "linux": { "en": "Cybersecurity and portability", "fr": "Cybersécurité et portabilité" },
+        "lang-fr": { "en": "Native", "fr": "Maternelle" },
+        "lang-en": { "en": "Professional (TOEIC 810, TOEFL 550)", "fr": "Professionnel (TOEIC 810, TOEFL 550)" },
+        "lang-es": { "en": "Conversational", "fr": "Conversationnel" },
+        "claude": { "en": "Claude Code (notably at ChapsVision) and Claude Cowork", "fr": "Claude Code (notamment chez ChapsVision) et Claude Cowork" },
+        "netlify": { "en": "Hosting, functions and deploys of this portfolio", "fr": "Hébergement, fonctions et déploiements de ce portfolio" },
+        "teexma": { "en": "Technical data management software developed by Bassetti Group — audit and securing of its BI module (TxBI)", "fr": "Logiciel de management de données techniques développé par Bassetti Group — audit et sécurisation de son module de BI (TxBI)" }
     },
     "soft": [
         {
-            "key": "team",
+            "key": "team", "categories": ["relational"],
             "en": "Team spirit",
             "fr": "Esprit d'équipe",
             "proof": {
@@ -183,7 +206,7 @@
             }
         },
         {
-            "key": "leadership",
+            "key": "leadership", "categories": ["relational"],
             "en": "Leadership",
             "fr": "Leadership",
             "proof": {
@@ -202,7 +225,7 @@
             }
         },
         {
-            "key": "project-management",
+            "key": "project-management", "categories": ["cognitive"],
             "en": "Project management",
             "fr": "Gestion de projet",
             "proof": {
@@ -221,7 +244,7 @@
             }
         },
         {
-            "key": "communication",
+            "key": "communication", "categories": ["relational"],
             "en": "Communication",
             "fr": "Communication",
             "proof": {
@@ -240,7 +263,7 @@
             }
         },
         {
-            "key": "pedagogy",
+            "key": "pedagogy", "categories": ["relational"],
             "en": "Teaching",
             "fr": "Pédagogie",
             "proof": {
@@ -259,7 +282,7 @@
             }
         },
         {
-            "key": "adaptability",
+            "key": "adaptability", "categories": ["adaptation"],
             "en": "Adaptability",
             "fr": "Adaptabilité",
             "proof": {
@@ -278,7 +301,7 @@
             }
         },
         {
-            "key": "problem-solving",
+            "key": "problem-solving", "categories": ["cognitive"],
             "en": "Problem solving",
             "fr": "Résolution de problèmes",
             "proof": {
@@ -297,7 +320,7 @@
             }
         },
         {
-            "key": "stress-management",
+            "key": "stress-management", "categories": ["adaptation", "emotional"],
             "en": "Stress management",
             "fr": "Gestion du stress",
             "proof": {
@@ -316,7 +339,7 @@
             }
         },
         {
-            "key": "proactivity",
+            "key": "proactivity", "categories": ["adaptation"],
             "en": "Proactivity",
             "fr": "Proactivité",
             "proof": {
@@ -335,7 +358,7 @@
             }
         },
         {
-            "key": "independence",
+            "key": "independence", "categories": ["adaptation"],
             "en": "Independence",
             "fr": "Autonomie",
             "proof": {
@@ -354,7 +377,7 @@
             }
         },
         {
-            "key": "empathy",
+            "key": "empathy", "categories": ["relational", "emotional"],
             "en": "Empathy",
             "fr": "Empathie",
             "proof": {
@@ -373,7 +396,7 @@
             }
         },
         {
-            "key": "curiosity",
+            "key": "curiosity", "categories": ["cognitive"],
             "en": "Curiosity",
             "fr": "Curiosité",
             "proof": {
@@ -392,7 +415,7 @@
             }
         },
         {
-            "key": "creativity",
+            "key": "creativity", "categories": ["cognitive"],
             "en": "Creativity",
             "fr": "Créativité",
             "proof": {

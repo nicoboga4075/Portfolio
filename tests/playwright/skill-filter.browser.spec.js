@@ -32,4 +32,33 @@ for (const lang of langs) {
         await page.locator('.owl-menu[data-target="#hard-skills"]').click();
         await expect(filter).toBeVisible();
     });
+
+    test(`/${lang}: the soft skills filter keeps the cards of each family, and only shows with the soft skills`, async ({ page }) => {
+        test.setTimeout(90_000);
+        await page.setViewportSize({ width: 1280, height: 900 });
+        await page.goto(`/${lang}`);
+        await page.locator('#carousel-section').scrollIntoViewIfNeeded();
+        const filter = page.locator('.skill-filter[data-target="#soft-skills"]');
+        await expect(filter).toBeHidden();
+        await page.locator('.owl-menu[data-target="#soft-skills"]').click();
+        await expect(filter).toBeVisible();
+        const buttons = filter.locator('button');
+        const cards = page.locator('#soft-skills .owl-item > .soft-card');
+        const total = await cards.count();
+        for (let button = 1; button < await buttons.count(); button++) {
+            await buttons.nth(button).click();
+            await expect(buttons.nth(button)).toHaveAttribute('aria-pressed', 'true');
+            const family = await buttons.nth(button).getAttribute('data-filter');
+            const number = Number(/\((\d+)\)/.exec(await buttons.nth(button).textContent())[1]);
+            await expect(cards).toHaveCount(number);
+            for (const list of await cards.evaluateAll(all => all.map(card => card.dataset.filter.split(' ')))) expect(list).toContain(family);
+        }
+        // The padlock of a kept card still turns it over
+        await cards.first().locator('.soft-card-toggle').evaluate(button => button.click());
+        await expect(cards.first()).toHaveClass(/is-unlocked/);
+        await buttons.first().click();
+        await expect(cards).toHaveCount(total);
+        await page.locator('.owl-menu[data-target="#hard-skills"]').click();
+        await expect(filter).toBeHidden();
+    });
 }

@@ -45,7 +45,7 @@ test.describe('hard skills carousel', () => {
             const colon = lang === 'fr' ? ' :' : ':';
             const html = render(lang);
             // The name and the logo stay plain, the PDF icon in the corner is the only link
-            expect(html).toContain(`<div class="d-flex flex-column align-items-center hard-skill" data-filter="frontend"><img src="images/figma.png" class="img-fluid" alt="Figma" loading="lazy" height="75" width="75"><span>Figma</span><a class="hard-skill-doc" href="/docs/public/Certificat%20FIGMA.pdf" target="_blank" rel="noopener" aria-label="Figma${colon} ${skillsData.carousel[lang].docLinkLabel}"><i class="icon-file-pdf-o" aria-hidden="true"></i></a></div>`);
+            expect(html).toContain(`<div class="d-flex flex-column align-items-center hard-skill" data-filter="frontend tools"><img src="images/figma.png" class="img-fluid" alt="Figma" loading="lazy" height="75" width="75"><span>Figma</span><a class="hard-skill-doc" href="/docs/public/Certificat%20FIGMA.pdf" target="_blank" rel="noopener" aria-label="Figma${colon} ${skillsData.carousel[lang].docLinkLabel}"><i class="icon-file-pdf-o" aria-hidden="true"></i></a></div>`);
             expect(fs.existsSync(path.join(root, 'docs', 'public', 'Certificat FIGMA.pdf'))).toBe(true);
             // Every doc a hard skill links to is a public file
             for (const [, href] of html.matchAll(/class="hard-skill-doc" href="([^"]+)"/g)) expect(fs.existsSync(path.join(root, decodeURIComponent(href)))).toBe(true);
@@ -61,7 +61,9 @@ test.describe('hard skills carousel', () => {
             expect(tips.length).toBeGreaterThan(0);
             for (const [key, tip] of tips) {
                 const label = items(render(lang)).find(skill => skill.key === key).label;
-                expect(html).toContain(`<button type="button" class="hard-skill-tip" data-bs-toggle="tooltip" data-container="body" title="${tip[lang]}" aria-label="${label}${colon} ${tip[lang]}"><i class="icon-question-circle" aria-hidden="true"></i></button>`);
+                // Escaped as Nunjucks does (an apostrophe of the French texts)
+                const text = tip[lang].replaceAll('&', '&amp;').replaceAll("'", '&#39;');
+                expect(html).toContain(`<button type="button" class="hard-skill-tip" data-bs-toggle="tooltip" data-container="body" title="${text}" aria-label="${label}${colon} ${text}"><i class="icon-question-circle" aria-hidden="true"></i></button>`);
             }
             expect(html.match(/class="hard-skill-tip"/g)).toHaveLength(tips.length);
         });
@@ -93,7 +95,7 @@ test.describe('hard skills carousel', () => {
             expect(categories).toHaveLength(items(html).length);
             // From the most tools to the fewest, a tie in the order of hardCategories (a stable sort)
             const buttons = Object.entries(carousel.hardCategories).map(([key, name]) => [key, name, categories.filter(list => list.includes(key)).length]).toSorted((a, b) => b[2] - a[2]).map(([key, name, number]) => `<button type="button" data-filter="${key}" aria-pressed="false"><i class="${skillsData.hardFilterIcons[key]}" aria-hidden="true"></i>${name.replaceAll('&', '&amp;')} (${number})</button>`).join('');
-            expect(html).toContain(`<div id="hard-skills-filter" class="skill-filter" role="group" aria-label="${carousel.hardFilterLabel}"><button type="button" data-filter="" aria-pressed="true"><i class="${skillsData.hardFilterIcons.all}" aria-hidden="true"></i>${carousel.hardFilterAll} (${categories.length})</button>${buttons}</div><div id="hard-skills"`);
+            expect(html).toContain(`<div id="hard-skills-filter" class="skill-filter" data-target="#hard-skills" role="group" aria-label="${carousel.hardFilterLabel}"><button type="button" data-filter="" aria-pressed="true"><i class="${skillsData.hardFilterIcons.all}" aria-hidden="true"></i>${carousel.hardFilterAll} (${categories.length})</button>${buttons}</div><div id="hard-skills"`);
             // Every category has tools, and a tool belongs to known categories only
             for (const key of Object.keys(carousel.hardCategories)) expect(categories.some(list => list.includes(key))).toBe(true);
             for (const list of categories) for (const key of list) expect(Object.keys(carousel.hardCategories)).toContain(key);

@@ -42,10 +42,21 @@
                 </div>
             </div>
             <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-                <div class="stat-card shadow">
-                    <div class="text">
-                        <strong id="projects-count" class="number" data-number="{{ profile.projectsCount }}">0</strong>
-                        <span>{{ counterLang.projects }}</span>
+                {#- The delivered projects count turns over too: the back says where they were delivered (projectList of counter.json), one line each after the logo of the company (images/companies/<logo>.png) or an icon, decorative #}
+                <div class="stat-card shadow soft-card">
+                    <button type="button" class="soft-card-toggle" aria-expanded="false" aria-label="{{ counterLang.projectsToggle }}" data-icons="icon-question-circle icon-close"><i class="icon-question-circle" aria-hidden="true"></i></button>
+                    <div class="soft-card-inner">
+                        <div class="soft-card-face soft-card-front text">
+                            <strong id="projects-count" class="number" data-number="{{ profile.projectsCount }}">0</strong>
+                            <span>{{ counterLang.projects }}</span>
+                        </div>
+                        <div class="soft-card-face soft-card-back" aria-hidden="true" inert>
+                            <ul class="counter-list">
+                                {%- for item in counter.projectList %}
+                                <li>{% if item.logo %}<img src="images/companies/{{ item.logo }}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo">{% else %}<i class="{{ item.icon }} counter-logo-icon" aria-hidden="true"></i>{% endif %} {{ item.label[lang] }}</li>
+                                {%- endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

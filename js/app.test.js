@@ -123,6 +123,47 @@ describe('on load', () => {
         expect(animate).toHaveBeenCalledWith({ scrollTop: -70 }, 500);
     });
 
+    test('keeps a section in place after scrolling to it while the page grows above it, for 3 seconds or until the visitor scrolls', async () => {
+        const app = loadApp({ body: '<section id="projects-section"></section>' });
+        document.body.dataset.spy = 'scroll';
+        $.fn.scrollspy = jest.fn();
+        let resized;
+        const observer = { observe: jest.fn(), disconnect: jest.fn() };
+        window.ResizeObserver = jest.fn(callback => {
+            resized = callback;
+            return observer;
+        });
+        window.scrollTo = jest.fn();
+        let sectionTop = 1000;
+        jest.spyOn($.fn, 'offset').mockImplementation(() => ({ top: sectionTop, left: 0 }));
+        const scrollTop = jest.spyOn($.fn, 'scrollTop').mockReturnValue(930);
+        const animate = jest.spyOn($.fn, 'animate');
+        jest.useFakeTimers();
+        app.scrollToSection($('#projects-section'), 70);
+        // jQuery runs the callbacks of a promise in a timeout
+        jest.advanceTimersByTime(1);
+        expect(animate).toHaveBeenCalledWith({ scrollTop: 930 }, 500);
+        // Already in place: no scroll, the menu measured again, the page watched
+        expect(window.scrollTo).not.toHaveBeenCalled();
+        expect($.fn.scrollspy).toHaveBeenCalledWith('refresh');
+        expect(observer.observe).toHaveBeenCalledWith(document.body);
+        // The page grows above the section: put back in place
+        sectionTop = 1300;
+        resized();
+        expect(window.scrollTo).toHaveBeenCalledWith(0, 1230);
+        // 3 seconds later the watch ends
+        jest.advanceTimersByTime(3000);
+        expect(observer.disconnect).toHaveBeenCalledTimes(1);
+        // The visitor scrolling ends it at once
+        observer.disconnect.mockClear();
+        scrollTop.mockReturnValue(1230);
+        app.scrollToSection($('#projects-section'), 70);
+        jest.advanceTimersByTime(1);
+        window.dispatchEvent(new Event('wheel'));
+        expect(observer.disconnect).toHaveBeenCalledTimes(1);
+        jest.useRealTimers();
+    });
+
     test('starts the hard skills carousel with labelled controls, and marks its menu active', () => {
         loadApp({ body: '<div id="hard-skills"><div class="owl-prev" role="presentation"></div><div class="owl-next" role="presentation"></div><div class="owl-dot"></div><div class="owl-dot"></div></div><span class="owl-menu" data-target="#hard-skills"></span><span class="owl-menu active" data-target="#soft-skills"></span>' });
         expect($.fn.owlCarousel).toHaveBeenCalledWith(expect.objectContaining({ rewind: true, responsive: expect.objectContaining({ 0: { items: 2 }, 1200: { items: 5 } }) }));
@@ -208,7 +249,7 @@ describe('on load', () => {
         loadApp({ body: '<a class="mouse-icon" href="#projects-section">Down</a><section id="projects-section"></section>' });
         const animate = jest.spyOn($.fn, 'animate');
         $('.mouse-icon').trigger('click');
-        expect(animate).toHaveBeenCalledWith({ scrollTop: 0 }, 500, 'easeInOutExpo');
+        expect(animate).toHaveBeenCalledWith({ scrollTop: 0 }, 500);
         animate.mockClear();
         $('#projects-section').remove();
         $('.mouse-icon').trigger('click');
@@ -654,10 +695,12 @@ describe('the home page', () => {
     });
 
     test('turns the certifications card over from its question mark, with the two icons its button names, outside any carousel', () => {
-        const app = loadApp({ body: '<div class="stat-card soft-card"><button class="soft-card-toggle" aria-expanded="false" data-icons="icon-question-circle icon-close"><i class="icon-question-circle"></i></button><div class="soft-card-back" aria-hidden="true" inert><a href="/docs/public/TOEIC.pdf">TOEIC</a></div></div>' });
+        const app = loadApp({ body: '<div class="stat-card soft-card"><button class="soft-card-toggle" aria-expanded="false" data-icons="icon-question-circle icon-close"><i class="icon-question-circle"></i></button><div class="soft-card-back" aria-hidden="true" inert><img loading="lazy"><a href="/docs/public/TOEIC.pdf">TOEIC</a></div></div>' });
         app.initFlipCards();
         const toggle = $('.soft-card-toggle');
         toggle.trigger('click');
+        // Its lazy pictures load as it turns over
+        expect($('.soft-card-back img').attr('loading')).toBe('eager');
         expect([$('.soft-card').hasClass('is-unlocked'), toggle.find('i').attr('class'), $('.soft-card-back').is('[inert]')]).toEqual([true, 'icon-close', false]);
         toggle.trigger('click');
         expect([$('.soft-card').hasClass('is-unlocked'), toggle.find('i').attr('class'), $('.soft-card-back').is('[inert]')]).toEqual([false, 'icon-question-circle', true]);
@@ -679,7 +722,7 @@ describe('the home page', () => {
     });
 
     test('keeps only the hard skills of the category pressed, the same elements, in a carousel started again, and all of them from the first button', () => {
-        const app = loadApp({ body: '<div id="hard-skills-filter"><button data-filter="" aria-pressed="true"></button><button data-filter="frontend" aria-pressed="false"></button><button data-filter="backend" aria-pressed="false"></button></div><div id="hard-skills" class="owl-carousel owl-loaded"><div id="html" data-filter="frontend"><img loading="lazy"></div><div id="ts" data-filter="frontend backend"></div><div id="sql" data-filter="backend"></div><div id="agile" data-filter=""></div></div>' });
+        const app = loadApp({ body: '<div id="hard-skills-filter" class="skill-filter" data-target="#hard-skills"><button data-filter="" aria-pressed="true"></button><button data-filter="frontend" aria-pressed="false"></button><button data-filter="backend" aria-pressed="false"></button></div><div id="hard-skills" class="owl-carousel owl-loaded"><div id="html" data-filter="frontend"><img loading="lazy"></div><div id="ts" data-filter="frontend backend"></div><div id="sql" data-filter="backend"></div><div id="agile" data-filter=""></div></div>' });
         app.initSkillFilter();
         const html = document.getElementById('html');
         const destroy = jest.fn();
@@ -1115,7 +1158,7 @@ describe('initPage', () => {
         <span class="open-mfp" data-target="#contact-window" aria-expanded="false"></span>
         <div id="contact-window" class="mfp" hidden><span class="mfp-close"></span></div>
         <span class="other-control" aria-controls="contact-window"></span>
-        <span class="owl-menu" data-target="#hard-skills"></span><span class="owl-menu" data-target="#soft-skills"></span><div id="hard-skills-filter"></div>
+        <span class="owl-menu" data-target="#hard-skills"></span><span class="owl-menu" data-target="#soft-skills"></span><div id="hard-skills-filter" class="skill-filter" data-target="#hard-skills"></div><div id="soft-filter" class="skill-filter d-none" data-target="#soft-skills"></div>
         <div id="hard-skills" class="owl-carousel"></div><div id="soft-skills" class="owl-carousel d-none"></div><div id="mad-skills" class="owl-carousel"></div>
         <a href="#" id="empty-link">x</a><input name="search-input">`;
 
@@ -1177,6 +1220,7 @@ describe('initPage', () => {
         expect($('#mad-skills').hasClass('d-none')).toBe(true);
         // The filter of the hard skills hides with them and comes back with them
         expect($('#hard-skills-filter').hasClass('d-none')).toBe(true);
+        expect($('#soft-filter').hasClass('d-none')).toBe(false);
         $('.owl-menu').eq(0).trigger('click');
         expect($('#hard-skills-filter').hasClass('d-none')).toBe(false);
         expect($.fn.owlCarousel).toHaveBeenCalledTimes(1);

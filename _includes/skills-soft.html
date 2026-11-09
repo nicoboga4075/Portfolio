@@ -1,8 +1,25 @@
 {%- set lang = page.fileSlug.slice(-2) -%}
+{#- The icon before the label of a filter button, decorative: a class of the icon font (icon-...), or an emoji #}
+{%- macro filterIcon(icon) -%}
+{%- if icon.startsWith("icon-") %}<i class="{{ icon }}" aria-hidden="true"></i>{% else %}<span class="filter-emoji" aria-hidden="true">{{ icon }}</span>{% endif -%}
+{%- endmacro -%}
+{#- Above the carousel, one button per family of skills (categories of each skill, skills.carousel softCategories) that keeps only its cards, and one that shows them all, each with its number in brackets, from the most cards to the fewest; shown with the soft skills only (initSkillFilter of js/app.js) #}
+<div class="skill-filter d-none" data-target="#soft-skills" role="group" aria-label="{{ skills.carousel[lang].softFilterLabel }}">
+    <button type="button" data-filter="" aria-pressed="true">{{ filterIcon(skills.softFilterIcons.all) }}{{ skills.carousel[lang].hardFilterAll }} ({{ skills.soft | length }})</button>
+    {%- set families = [] %}
+    {%- for key, name in skills.carousel[lang].softCategories %}
+    {%- set inFamily = [] %}
+    {%- for s in skills.soft %}{% if key in s.categories %}{% set _ = inFamily.push(s) %}{% endif %}{% endfor %}
+    {%- set _ = families.push({ key: key, name: name, count: inFamily | length }) %}
+    {%- endfor %}
+    {%- for f in families | sort(true, false, "count") %}
+    <button type="button" data-filter="{{ f.key }}" aria-pressed="false">{{ filterIcon(skills.softFilterIcons[f.key]) }}{{ f.name }} ({{ f.count }})</button>
+    {%- endfor %}
+</div>
 <div id="soft-skills" class="owl-carousel owl-theme d-none">
     {%- for s in skills.soft %}
     {#- A card locked on its skill: only its padlock, in the top right corner, turns it over and unlocks the experiences that prove it, one per line as on the CV #}
-    <div class="soft-card">
+    <div class="soft-card" data-filter="{{ s.categories | join(' ') }}">
         <button type="button" class="soft-card-toggle" aria-expanded="false" aria-label="{{ skills.carousel[lang].softUnlock }} {{ s[lang] }}"><i class="icon-lock" aria-hidden="true"></i></button>
         <div class="soft-card-inner">
             <div class="soft-card-face soft-card-front"><img src="images/{{ s.key }}.png" class="img-fluid" alt="" loading="lazy" height="75" width="75"><span class="soft-card-label">{{ s[lang] | safe }}</span></div>

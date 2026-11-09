@@ -21,7 +21,7 @@ for (const lang of langs) {
     test(`/${lang}: the work experiences sit two by row, one line each, from 1280px, and one per line below`, async ({ page }) => {
         await page.setViewportSize({ width: 1280, height: 900 });
         await page.goto(`/${lang}`);
-        const card = await openCard(page, 1);
+        const card = await openCard(page, 2);
         let { tops, lines, cut } = await layout(card);
         expect(tops).toHaveLength(6);
         // Two by row: each pair shares its top, the next row lower
@@ -42,8 +42,8 @@ for (const lang of langs) {
         // Three cards and a dozen filters: more time than the default for Firefox, slow to draw the home page in software
         test.setTimeout(90_000);
         await page.goto(`/${lang}`);
-        // The certifications (subject), the work experiences (contract, a job of two contracts under both) and the countries (continent)
-        for (const index of [0, 1, 2]) {
+        // The certifications (subject), the work experiences (contract, a job of two contracts under both) and the countries (continent); the projects card (index 1) has a list, no filter
+        for (const index of [0, 2, 3]) {
             const card = await openCard(page, index);
             const buttons = card.locator('.counter-filter button');
             const total = await card.locator('li[data-filter]').count();

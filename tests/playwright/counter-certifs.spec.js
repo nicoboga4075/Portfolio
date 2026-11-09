@@ -43,7 +43,7 @@ test.describe('counters that turn over', () => {
         test(`turns the work experiences count over to each company, its contracts and its years on the ${lang} page`, () => {
             const html = render(lang);
             expect(html).toContain(`aria-label="${escapeHtml(counter[lang].experiencesToggle)}" data-icons="icon-question-circle icon-close">`);
-            const [, list] = [...html.matchAll(/<ul class="counter-list[^"]*">(.*?)<\/ul>/g)].map(match => match[1]);
+            const [, list] = html.match(/<ul class="counter-list counter-list-grid">(.*?)<\/ul>/);
             const items = [...list.matchAll(/<li data-filter="[^"]+"><span class="counter-company"><img src="images\/companies\/([^"]+)\.png" alt="" width="16" height="16" loading="lazy" class="counter-logo"><a href="([^"]+)"[^>]*>([^<]+)<\/a><\/span><span class="counter-details">· <i class="[^"]+ counter-role" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="[^"]+" aria-hidden="true"><\/i><span class="sr-only">([^<]+)<\/span> · ([^<]+)<\/span><\/li>/g)].map(match => match.slice(1));
             const shown = resume.experiences.filter(experience => experience.type !== 'other');
             expect(items.map(([logo]) => logo)).toEqual(shown.map(experience => experience.logo));
@@ -93,6 +93,16 @@ test.describe('counters that turn over', () => {
             const flags = counter.countryList.map(country => `<li data-filter="${country.continent}"><img src="images/flags/${country.flag}.svg" alt="${escapeHtml(country.name[lang])}" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="${escapeHtml(country.name[lang])}" width="24" height="16" loading="lazy"></li>`).join('');
             expect(html).toContain(`aria-label="${escapeHtml(counter[lang].countriesToggle)}" data-icons="icon-question-circle icon-close">`);
             expect(html).toContain(`<div class="soft-card-face soft-card-back" aria-hidden="true" inert>${filter}<ul class="counter-flags">${flags}</ul></div>`);
+        });
+    }
+
+    for (const lang of ['en', 'fr']) {
+        test(`turns the delivered projects count over to where they were delivered, one line each after a logo or an icon, on the ${lang} page`, () => {
+            const html = render(lang);
+            const items = counter.projectList.map(item => `<li>${item.logo ? `<img src="images/companies/${item.logo}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo">` : `<i class="${item.icon} counter-logo-icon" aria-hidden="true"></i>`} ${escapeHtml(item.label[lang])}</li>`).join('');
+            expect(html).toContain(`aria-label="${escapeHtml(counter[lang].projectsToggle)}" data-icons="icon-question-circle icon-close">`);
+            expect(html).toContain(`<div class="soft-card-face soft-card-back" aria-hidden="true" inert><ul class="counter-list">${items}</ul></div>`);
+            for (const item of counter.projectList) if (item.logo) expect(fs.existsSync(path.join(root, 'images', 'companies', `${item.logo}.png`))).toBe(true);
         });
     }
 });

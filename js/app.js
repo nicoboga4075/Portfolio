@@ -430,6 +430,33 @@ function saveHashToSession(hash) {
     initTranslator();
 }
 
+// Scrolls to a section, gap px under its top, then keeps it there while the pictures and blocks of the sections above load or grow (a first visit has nothing in its cache): landing short of it left the previous section under the navbar and the menu highlighting it
+function scrollToSection(target, gap) {
+    const top = () => target.offset().top - gap;
+    $('html, body').stop(true).animate({ scrollTop: top() }, 500).promise().then(() => keepSectionInPlace(top));
+}
+
+// For 3 seconds after the scroll, each time the page changes height the section is put back in place and Bootstrap's scrollspy measures the sections again, so the menu highlights the section the page is on; the visitor scrolling with the wheel, a finger or the keyboard ends it at once
+function keepSectionInPlace(top) {
+    const realign = () => {
+        if (Math.abs($(window).scrollTop() - top()) > 2) {
+            window.scrollTo(0, top());
+        }
+        $('[data-spy="scroll"]').each((index, element) => $(element).scrollspy('refresh'));
+        $(window).trigger('scroll');
+    };
+    const observer = new ResizeObserver(realign);
+    const events = ['wheel', 'touchstart', 'keydown'];
+    const stop = () => {
+        observer.disconnect();
+        events.forEach(name => window.removeEventListener(name, stop));
+    };
+    realign();
+    observer.observe(document.body);
+    events.forEach(name => window.addEventListener(name, stop, { passive: true }));
+    setTimeout(stop, 3000);
+}
+
 function clearUrlPath() {
     history.replaceState(null, null, window.location.pathname);
 }
@@ -507,6 +534,10 @@ function initFlipCards() {
         card.toggleClass('is-unlocked', unlocked);
         $(this).attr('aria-expanded', String(unlocked)).find('i').toggleClass(closedIcon, !unlocked).toggleClass(openIcon, unlocked);
         card.find('.soft-card-back').attr({ 'aria-hidden': String(!unlocked), inert: unlocked ? null : '' });
+        // The lazy pictures of the back (logos, flags) never start while it is turned away: they load as it turns over
+        if (unlocked) {
+            card.find('.soft-card-back img[loading="lazy"]').attr('loading', 'eager');
+        }
         const carousel = card.closest('.owl-carousel');
         carousel.trigger(carousel.find('.soft-card.is-unlocked').length ? 'stop.owl.autoplay' : 'play.owl.autoplay');
     });
@@ -1020,9 +1051,7 @@ function createCircularChart({
             if (!target.length) {
                 return;
             }
-            $('html, body').animate({
-                scrollTop: target.offset().top - 70
-            }, 500);
+            scrollToSection(target, 70);
         });
     };
     onePageClick();
@@ -1113,9 +1142,7 @@ function createCircularChart({
         if (!target.length) {
             return;
         }
-        $('html,body').animate({
-            scrollTop: target.offset().top
-        }, 500, 'easeInOutExpo');
+        scrollToSection(target, 0);
     });
 
     const TxtRotate = function (el, toRotate, period) {
@@ -1245,18 +1272,18 @@ function initCarousel(target) {
     $(target).off('translated.owl.carousel').on('translated.owl.carousel', () => showCarouselLoading(target));
 }
 
-// A filter button above the hard skills keeps only the tools of its category (data-filter of each tool, several categories apart with spaces), the one without a category shows them all: the carousel is taken apart, given the matching tools of the full list (kept in data all-items, the same elements, so their tooltips and popovers stay) and started again
+// A filter button above a skills carousel (data-target of its filter: the hard skills, the soft skills) keeps only the cards of its category (data-filter of each card, several categories apart with spaces), the one without a category shows them all: the carousel is taken apart, given the matching cards of the full list (kept in data all-items, the same elements, so their tooltips, popovers and padlocks stay) and started again
 function initSkillFilter() {
-    $(document).on('click', '#hard-skills-filter button', event => {
+    $(document).on('click', '.skill-filter button', event => {
         const button = event.currentTarget;
         const { filter } = button.dataset;
-        const target = '#hard-skills';
+        const { target } = $(button).closest('.skill-filter')[0].dataset;
         $(button).attr('aria-pressed', 'true').siblings().attr('aria-pressed', 'false');
         $(target).trigger('destroy.owl.carousel').removeClass('owl-loaded');
         const all = $(target).data('all-items') || $(target).children().toArray();
         $(target).data('all-items', all).children().detach();
         $(target).append(all.filter(item => !filter || item.dataset.filter.split(' ').includes(filter)));
-        // Asked for by the visitor, as a tab: the pictures of the kept tools load now, so the next slides are ready
+        // Asked for by the visitor, as a tab: the pictures of the kept cards load now, so the next slides are ready
         $(target).find('img').attr('loading', 'eager');
         initCarousel(target);
     });
@@ -1442,9 +1469,7 @@ function initIndexPage(langPage) {
                 // Check if the link is in subsections
                 const subSectionTarget = $($(this).attr('href'));
                 if ($(this).closest('#navi').length && subSectionTarget.length) {
-                    $('html, body').animate({
-                        scrollTop: subSectionTarget.offset().top - 180
-                    }, 500);
+                    scrollToSection(subSectionTarget, 180);
                 }
                 saveHashToSession(appAllSections[index]);
             });
@@ -1945,8 +1970,8 @@ function initPage() {
         } else {
             initCarousel(target);
         }
-        // The filter of the hard skills only shows with them
-        $('#hard-skills-filter').toggleClass('d-none', target !== '#hard-skills');
+        // The filter of a carousel only shows with it
+        $('.skill-filter').each((index, filter) => $(filter).toggleClass('d-none', filter.dataset.target !== target));
         // To avoid glitch switching to other carousel
         $(target).removeClass('d-none').trigger('refresh.owl.carousel');
         labelCarouselControls(target);
