@@ -690,17 +690,20 @@ html.dark-mode #counter-section .counter-list a {
         padding: 0 3px;
     }
 
+    /* The second column shrinks only when the two do not fit: with a wider fallback font (Poppins not loaded), its long lines end with an ellipsis instead of spilling out */
     #counter-section .counter-list-grid {
         display: grid;
-        grid-template-columns: auto auto;
-        gap: 3px 6px;
+        grid-template-columns: max-content minmax(0, max-content);
+        gap: 3px;
         justify-content: center;
     }
 
     #counter-section .counter-list-grid li {
         display: block;
+        overflow: hidden;
         font-size: 10px;
         letter-spacing: -0.25px;
+        text-overflow: ellipsis;
         white-space: nowrap;
     }
 
