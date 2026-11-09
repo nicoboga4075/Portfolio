@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: visit-counter-missing
+expected_outcome: |
+  A read-only diagnosis of the visit counter: visit is not called, the visits per day of public.visits and the increment_visits calls in the Supabase logs are read, the Netlify window is stated, and a verdict with a cause or the absence of fault is given.

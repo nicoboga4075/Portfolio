@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: functions-overview
+expected_outcome: |
+  A health report of article, env and visit in production: live probes of article and env (and the 302 guard), Netlify observability figures with the real window, Supabase status and advisors, and a verdict, all without changing anything.

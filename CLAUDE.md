@@ -161,4 +161,6 @@ The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fi
 | `new-experience` | Code Scaffolding & Templates | Add a work or personal experience, an education, a certification, a spoken language or a trip (resume, languages, profile figures, CVs) | - |
 | `third-party-apis` | Library & API Reference | Know how each third-party service is used (contact form, captcha, Calendly, Botpress, analytics, GitHub, Supabase), its settings and its CSP origins | - |
 | `new-skill` | Code Scaffolding & Templates | Add a hard, soft or mad skill or a skill card (image, texts in every language, the experiences behind a soft skill) | - |
+| `server-health` | Data Fetching & Analysis | Check, read-only, that the Netlify functions and Supabase work in production (live probes, logs, visits per day, advisors) and say what to fix | - |
+| `client-health` | Product Verification | Check, read-only, that the live pages work in a browser (CSP, console errors, failed requests, Web Vitals, contact form, booking, chatbot, analytics consent) and say what to fix | - |
 <!-- skills:end -->

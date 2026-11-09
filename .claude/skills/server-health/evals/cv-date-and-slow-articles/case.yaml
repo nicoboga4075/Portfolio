@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: cv-date-and-slow-articles
+expected_outcome: |
+  env?lang and article are probed and their latency read (cold start told apart from a slow dependency), the CV date returned is reported, the Netlify logs are read with their real window, and a verdict with the likely cause is given, read-only.
