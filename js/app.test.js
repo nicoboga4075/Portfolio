@@ -1480,6 +1480,46 @@ describe('the counters following the mouse', () => {
     });
 });
 
+describe('the menu with an alt label', () => {
+    const body = '<div id="ftco-nav"><ul class="navbar-nav"><li class="nav-item"><a class="nav-link has-alt"><span>Projects</span><span class="nav-alt" aria-hidden="true">Skills</span></a></li></ul></div>';
+    const menu = () => $('#ftco-nav');
+
+    test('swaps its labels every 3 seconds, and waits while the pointer or the keyboard is on the menu', () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body, before: () => { window.matchMedia = jest.fn(() => ({ matches: true })); } });
+        app.initNavAlt();
+        expect(menu().hasClass('show-alt')).toBe(false);
+        jest.advanceTimersByTime(3000);
+        expect(menu().hasClass('show-alt')).toBe(true);
+        jest.advanceTimersByTime(3000);
+        expect(menu().hasClass('show-alt')).toBe(false);
+        menu().trigger('mouseenter');
+        jest.advanceTimersByTime(6000);
+        expect(menu().hasClass('show-alt')).toBe(false);
+        menu().trigger('mouseleave');
+        jest.advanceTimersByTime(3000);
+        expect(menu().hasClass('show-alt')).toBe(true);
+        menu().trigger('focusin');
+        jest.advanceTimersByTime(3000);
+        expect(menu().hasClass('show-alt')).toBe(true);
+        menu().trigger('focusout');
+        jest.advanceTimersByTime(3000);
+        expect(menu().hasClass('show-alt')).toBe(false);
+    });
+
+    test('keeps its own label for visitors who ask for less motion, and does nothing without an alt label', () => {
+        jest.useFakeTimers();
+        let app = loadApp({ body });
+        app.initNavAlt();
+        jest.advanceTimersByTime(6000);
+        expect(menu().hasClass('show-alt')).toBe(false);
+        cleanUp();
+        app = loadApp({ body: '<div id="ftco-nav"></div>', before: () => { window.matchMedia = jest.fn(() => ({ matches: true })); } });
+        app.initNavAlt();
+        expect(window.matchMedia).not.toHaveBeenCalledWith('(prefers-reduced-motion: no-preference)');
+    });
+});
+
 describe('the sparks following the mouse', () => {
     const layer = () => document.getElementById('cursor-sparks');
     // A 2D context that records the strokes it is asked for, since jsdom draws nothing

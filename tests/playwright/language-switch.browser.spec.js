@@ -21,7 +21,7 @@ for (const from of langs) {
 
     test(`the home page in ${from} shows its menu and sections in ${from}`, async ({ page }) => {
         await page.goto(`/${from}`);
-        await expect(page.locator('#ftco-nav .nav-link')).toHaveText(nav.menus.map(menu => menu[from]));
+        await expect(page.locator('#ftco-nav .nav-link > span:first-child')).toHaveText(nav.menus.map(menu => menu[from]));
         await expect(page.locator('#projects-section h2')).toHaveText(projects[from].heading);
     });
 }

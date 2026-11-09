@@ -581,6 +581,21 @@ function initCounterTilt() {
     });
 }
 
+// A menu with an alt label (has-alt, the Projects menu also naming the Skills) turns over like a card every 3 seconds, the class show-alt of the menu bringing the alt face up; the swap waits while the pointer or the keyboard is on the menu, and never starts for visitors who ask for less motion
+function initNavAlt() {
+    const menu = $('#ftco-nav');
+    if (!menu.find('.has-alt').length || !window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+        return;
+    }
+    let held = false;
+    menu.on('mouseenter focusin', () => { held = true; }).on('mouseleave focusout', () => { held = false; });
+    setInterval(() => {
+        if (!held) {
+            menu.toggleClass('show-alt');
+        }
+    }, 3000);
+}
+
 // A faint blue halo follows the mouse over the whole page (its place in --x and --y, read by its CSS transform) and the mouse drops a lightning spark every 50px it travels, kept calm for the eyes: small zigzags drawn on a canvas the size of the window, at the pixel ratio of the screen so they stay sharp, each drifting slowly off at its own angle (the golden angle from one to the next, no random numbers) and fading out within half a second, at most 8 at a time; the frames run only while a spark is alive, and everything fades out when the pointer leaves the window; nothing on touch screens, for visitors who ask for less motion or without a 2D canvas
 function initCursorSparks() {
     if (!window.matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
@@ -1540,6 +1555,8 @@ function initIndexPage(langPage) {
         initSkillFilter();
 
         initCounterTilt();
+
+        initNavAlt();
 
         initCursorSparks();
 

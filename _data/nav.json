@@ -40,7 +40,11 @@
         },
         {
             "en": "Projects",
-            "fr": "Projets"
+            "fr": "Projets",
+            "alt": {
+                "en": "Skills",
+                "fr": "Compétences"
+            }
         },
         {
             "en": "Blog",

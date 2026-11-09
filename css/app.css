@@ -1623,6 +1623,37 @@ html.dark-mode .btn-outline-primary:active {
     }
 }
 
+/* A menu with two labels stacks them in one cell as wide as the longer, so the menu does not move when they swap: the two faces of a card, its own label in front and the alt one behind, turned over every few seconds as the flip cards turn (initNavAlt of js/app.js) */
+.ftco-navbar-light .navbar-nav>.nav-item>.nav-link.has-alt {
+    display: grid;
+    justify-items: center;
+    perspective: 600px;
+}
+
+.ftco-navbar-light .navbar-nav>.nav-item>.nav-link.has-alt span {
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease;
+}
+
+.ftco-navbar-light .navbar-nav>.nav-item>.nav-link.has-alt .nav-alt {
+    transform: rotateY(-180deg);
+}
+
+#ftco-nav.show-alt .navbar-nav>.nav-item>.nav-link.has-alt span:first-child {
+    transform: rotateY(180deg);
+}
+
+#ftco-nav.show-alt .navbar-nav>.nav-item>.nav-link.has-alt .nav-alt {
+    transform: rotateY(0deg);
+}
+
+@media (max-width: 991.98px) {
+    .ftco-navbar-light .navbar-nav>.nav-item>.nav-link.has-alt {
+        justify-items: start;
+    }
+}
+
 .ftco-navbar-light .navbar-nav>.nav-item .nav-link.active {
     background-color: transparent;
     color: var(--primary);

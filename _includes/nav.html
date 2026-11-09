@@ -6,8 +6,9 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="{{ navLang.navigation }}"><span class="icon-menu"></span> Menu</button>
     <div id="ftco-nav" class="collapse navbar-collapse">
         <ul class="navbar-nav nav mx-auto">
+            {#- A menu with an alt label (Projects, Skills) shows it in turn with its own, the alt one hidden from screen readers so the link keeps its name (initNavAlt of js/app.js) #}
             {%- for item in nav.menus %}
-            <li class="nav-item"><a class="nav-link"><span>{{ item[lang] }}</span></a></li>
+            <li class="nav-item"><a class="nav-link{% if item.alt %} has-alt{% endif %}"><span>{{ item[lang] }}</span>{% if item.alt %}<span class="nav-alt" aria-hidden="true">{{ item.alt[lang] }}</span>{% endif %}</a></li>
             {%- endfor %}
         </ul>
     </div>
