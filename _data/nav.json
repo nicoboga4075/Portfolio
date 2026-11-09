@@ -41,9 +41,10 @@
         {
             "en": "Projects",
             "fr": "Projets",
+            "altTarget": "carousel-section",
             "alt": {
                 "en": "Skills",
-                "fr": "Compétences"
+                "fr": "Skills"
             }
         },
         {

@@ -581,6 +581,15 @@ function initCounterTilt() {
     });
 }
 
+// The section a menu link scrolls to: while its alt label shows, the section of that label (data-alt-target, the skills carousel for the Projects menu) if it is on screen at this size (the carousel is not on phones), its own href otherwise
+function menuTarget(link) {
+    const alt = $(link.dataset.altTarget || []);
+    if ($('#ftco-nav').hasClass('show-alt') && alt.length && alt.css('display') !== 'none') {
+        return alt;
+    }
+    return $($.attr(link, 'href'));
+}
+
 // A menu with an alt label (has-alt, the Projects menu also naming the Skills) turns over like a card every 3 seconds, the class show-alt of the menu bringing the alt face up; the swap waits while the pointer or the keyboard is on the menu, and never starts for visitors who ask for less motion
 function initNavAlt() {
     const menu = $('#ftco-nav');
@@ -1062,7 +1071,7 @@ function createCircularChart({
             event.preventDefault();
             // The navbar is on every page but its section targets are not, so
             // bail when the href points to an id absent from the current page.
-            const target = $($.attr(this, 'href'));
+            const target = menuTarget(this);
             if (!target.length) {
                 return;
             }

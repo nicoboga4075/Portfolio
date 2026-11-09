@@ -123,6 +123,24 @@ describe('on load', () => {
         expect(animate).toHaveBeenCalledWith({ scrollTop: -70 }, 500);
     });
 
+    test('scrolls to the section of the alt label while it shows, to its own section otherwise and while that section is hidden (the carousel on phones)', () => {
+        loadApp({ body: '<div id="ftco-nav"><a href="#projects-section" data-alt-target="#carousel-section">Projects</a><a href="#about-section">About</a></div><section id="projects-section"></section><section id="carousel-section" style="display: none"></section><section id="about-section"></section>' });
+        const scrolled = () => $.fn.animate.mock.lastCall[0].scrollTop;
+        jest.spyOn($.fn, 'animate');
+        jest.spyOn($.fn, 'offset').mockImplementation(function () { return { top: { 'carousel-section': 2000, 'about-section': 500 }[this[0].id] ?? 1000 }; });
+        const link = $('#ftco-nav a').first();
+        link.trigger('click');
+        expect(scrolled()).toBe(930);
+        $('#ftco-nav').addClass('show-alt');
+        link.trigger('click');
+        expect(scrolled()).toBe(930);
+        $('#carousel-section').css('display', '');
+        link.trigger('click');
+        expect(scrolled()).toBe(1930);
+        $('#ftco-nav a').last().trigger('click');
+        expect(scrolled()).toBe(430);
+    });
+
     test('keeps a section in place after scrolling to it while the page grows above it, for 3 seconds or until the visitor scrolls', async () => {
         const app = loadApp({ body: '<section id="projects-section"></section>' });
         document.body.dataset.spy = 'scroll';
