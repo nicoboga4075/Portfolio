@@ -108,7 +108,7 @@
             "docsLinkLabel": "certificates",
             "hardFilterLabel": "Filter the hard skills",
             "softFilterLabel": "Filter the soft skills",
-            "softCategories": { "relational": "Interpersonal", "cognitive": "Cognitive", "adaptation": "Adaptability", "emotional": "Emotional" },
+            "softCategories": { "relational": "Interpersonal", "cognitive": "Cognitive", "adaptation": "Adaptation", "emotional": "Emotional" },
             "hardFilterAll": "All",
             "hardCategories": { "frontend": "Frontend", "backend": "Backend", "devops": "DevOps", "tests": "Tests", "ide": "IDE", "cyber": "Cyber", "methodology": "Methodology", "tools": "Tools / Software", "git": "Git", "automation": "Automation", "ai": "AI", "business": "Business software", "languages": "Programming languages", "os": "OS", "spoken": "Spoken languages" }
         },
