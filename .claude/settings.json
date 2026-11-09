@@ -93,6 +93,12 @@
             "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/site-health-at-start.mjs\"",
             "timeout": 90,
             "statusMessage": "Checking the health of the site at the start of the session..."
+          },
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/token-expiry.mjs\"",
+            "timeout": 60,
+            "statusMessage": "Reading the expiry dates of the tokens..."
           }
         ]
       }
