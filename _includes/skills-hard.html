@@ -1,51 +1,71 @@
 {%- set lang = page.fileSlug.slice(-2) -%}
-{#- A label is the name of the tool, one string, or one text per language for a method ("Cycle en V"); a tool with a doc (the file name of its certificate in docs/public/) gets a PDF icon in its top right corner, the only link, to that file; a tool with several, in hardDocs of skills.json, a PDF icon opening their list in a popover (initDocPopovers of js/app.js); a tool with a line in hardTips a question mark, its tooltip; the list is not named skills, which would hide the skills data and its texts #}
+{#- The icon before the label of a filter button, decorative: a class of the icon font (icon-...), or an emoji #}
+{%- macro filterIcon(icon) -%}
+{%- if icon.startsWith("icon-") %}<i class="{{ icon }}" aria-hidden="true"></i>{% else %}<span class="filter-emoji" aria-hidden="true">{{ icon }}</span>{% endif -%}
+{%- endmacro -%}
+{#- A label is the name of the tool, one string, or one text per language for a method ("Cycle en V"); a tool with a doc (the file name of its certificate in docs/public/) gets a PDF icon in its top right corner, the only link, to that file; a tool with several, in hardDocs of skills.json, a PDF icon opening their list in a popover (initDocPopovers of js/app.js); a tool with a line in hardTips a question mark, its tooltip, left of its PDF icon when it has one; categories: the filters of skills.carousel hardCategories a tool shows under (frontend, backend, devops, tests, ide, cyber, methodology, tools, git, automation); their order in this list is their order in each filter, none for a tool shown under All only; the list is not named skills, which would hide the skills data and its texts #}
 {%- set hardSkills = [
-    { key: "python",     label: "Python", doc: "Certification Python3.pdf" },
-    { key: "csharp",     label: "C#", doc: "Certification Csharp.pdf" },
-    { key: "dotnet",     label: ".NET" },
-    { key: "vscode",     label: "VS Code" },
-    { key: "vsstudio",   label: "Visual Studio" },
-    { key: "github",     label: "GitHub" },
-    { key: "gitlab",     label: "GitLab", doc: "Certificat GIT-GITLAB.pdf" },
-    { key: "netlify",    label: "Netlify" },
-    { key: "html",       label: "HTML" },
-    { key: "css",        label: "CSS" },
-    { key: "javascript", label: "JavaScript", doc: "Certification Javascript.pdf" },
-    { key: "typescript", label: "TypeScript" },
-    { key: "jquery",     label: "jQuery" },
-    { key: "bootstrap",  label: "Bootstrap" },
-    { key: "figma",      label: "Figma", doc: "Certificat FIGMA.pdf" },
+    { key: "python",     label: "Python", doc: "Certification Python3.pdf", categories: ["backend"] },
+    { key: "csharp",     label: "C#", doc: "Certification Csharp.pdf", categories: ["backend"] },
+    { key: "dotnet",     label: ".NET", categories: ["backend"] },
+    { key: "vscode",     label: "VS Code", categories: ["ide"] },
+    { key: "vsstudio",   label: "Visual Studio", categories: ["ide"] },
+    { key: "github",     label: "GitHub", categories: ["devops", "git"] },
+    { key: "gitlab",     label: "GitLab", doc: "Certificat GIT-GITLAB.pdf", categories: ["devops", "git"] },
+    { key: "gitea",      label: "Gitea", categories: ["git"] },
+    { key: "netlify",    label: "Netlify", categories: ["devops"] },
+    { key: "html",       label: "HTML", categories: ["frontend"] },
+    { key: "css",        label: "CSS", categories: ["frontend"] },
+    { key: "javascript", label: "JavaScript", doc: "Certification Javascript.pdf", categories: ["frontend", "backend"] },
+    { key: "typescript", label: "TypeScript", categories: ["frontend", "backend"] },
+    { key: "jquery",     label: "jQuery", categories: ["frontend"] },
+    { key: "bootstrap",  label: "Bootstrap", categories: ["frontend"] },
+    { key: "figma",      label: "Figma", doc: "Certificat FIGMA.pdf", categories: ["frontend"] },
     { key: "sql",        label: "SQL" },
-    { key: "powershell", label: "PowerShell" },
-    { key: "postman",    label: "Postman" },
-    { key: "docker",     label: "Docker" },
-    { key: "robot",      label: "Robot Framework", doc: "Certificat ROBOT FRAMEWORK.pdf" },
-    { key: "playwright", label: "Playwright" },
-    { key: "xunit",      label: "xUnit" },
-    { key: "sonarqube",  label: "SonarQube" },
-    { key: "snyk",       label: "Snyk" },
-    { key: "cybersecurity", label: { en: "Cybersecurity", fr: "Cybersécurité" } },
-    { key: "agile",      label: "Agile" },
-    { key: "v-model",    label: { en: "V model", fr: "Cycle en V" } },
-    { key: "office",     label: "Office" },
-    { key: "netsurvey",  label: "Net-Survey" },
-    { key: "ethnos",     label: "Ethnos" },
-    { key: "webreports", label: "Web-Reports" },
-    { key: "chatgpt",    label: "ChatGPT" },
-    { key: "claude",     label: "Claude", doc: "Attestation Claude Code.pdf" },
-    { key: "gemini",     label: "Gemini" },
-    { key: "n8n",        label: "n8n" }
+    { key: "xunit",      label: "xUnit", categories: ["tests"] },
+    { key: "playwright", label: "Playwright", categories: ["tests", "automation"] },
+    { key: "robot",      label: "Robot Framework", doc: "Certificat ROBOT FRAMEWORK.pdf", categories: ["tests", "automation"] },
+    { key: "office",     label: "Office", categories: ["tools"] },
+    { key: "chatgpt",    label: "ChatGPT", categories: ["tools"] },
+    { key: "claude",     label: "Claude", doc: "Attestation Claude Code.pdf", categories: ["tools"] },
+    { key: "gemini",     label: "Gemini", categories: ["tools"] },
+    { key: "postman",    label: "Postman", categories: ["tests", "tools"] },
+    { key: "powershell", label: "PowerShell", categories: ["tests", "tools", "automation"] },
+    { key: "docker",     label: "Docker", categories: ["devops"] },
+    { key: "sonarqube",  label: "SonarQube", categories: ["devops", "tools"] },
+    { key: "snyk",       label: "Snyk", categories: ["devops", "cyber", "tools"] },
+    { key: "cybersecurity", label: { en: "Cybersecurity", fr: "Cybersécurité" }, categories: ["cyber"] },
+    { key: "agile",      label: "Agile", categories: ["methodology"] },
+    { key: "v-model",    label: { en: "V model", fr: "Cycle en V" }, categories: ["methodology"] },
+    { key: "netsurvey",  label: "Net-Survey", categories: ["tools"] },
+    { key: "ethnos",     label: "Ethnos", categories: ["tools"] },
+    { key: "webreports", label: "Web-Reports", categories: ["tools"] },
+    { key: "teexma",     label: "Teexma", categories: ["tools"] },
+    { key: "n8n",        label: "n8n", categories: ["tools", "automation"] }
 ] -%}
+{#- Above the carousel, one button per category that keeps only its tools, and one that shows them all, each with its number in brackets; shown with the hard skills only (initSkillFilter of js/app.js) #}
+<div id="hard-skills-filter" class="skill-filter" role="group" aria-label="{{ skills.carousel[lang].hardFilterLabel }}">
+    <button type="button" data-filter="" aria-pressed="true">{{ filterIcon(skills.hardFilterIcons.all) }}{{ skills.carousel[lang].hardFilterAll }} ({{ hardSkills | length }})</button>
+    {#- The categories from the most tools to the fewest, a tie in the order of hardCategories #}
+    {%- set categories = [] %}
+    {%- for key, name in skills.carousel[lang].hardCategories %}
+    {%- set inCategory = [] %}
+    {%- for s in hardSkills %}{% if s.categories and key in s.categories %}{% set _ = inCategory.push(s) %}{% endif %}{% endfor %}
+    {%- set _ = categories.push({ key: key, name: name, count: inCategory | length }) %}
+    {%- endfor %}
+    {%- for c in categories | sort(true, false, "count") %}
+    <button type="button" data-filter="{{ c.key }}" aria-pressed="false">{{ filterIcon(skills.hardFilterIcons[c.key]) }}{{ c.name }} ({{ c.count }})</button>
+    {%- endfor %}
+</div>
 <div id="hard-skills" class="owl-carousel owl-theme">
     {%- for s in hardSkills %}
     {%- set label = s.label[lang] or s.label %}
     {%- set tip = skills.hardTips[s.key][lang] if skills.hardTips[s.key] %}
     {%- set docs = skills.hardDocs[s.key] %}
-    <div class="d-flex flex-column align-items-center{{ ' hard-skill' if s.doc or docs or tip }}"><img src="images/{{ s.key }}.png" class="img-fluid" alt="{{ label }}" loading="lazy" height="75" width="75"><span>{{ label }}</span>
+    <div class="d-flex flex-column align-items-center{{ ' hard-skill' if s.doc or docs or tip }}" data-filter="{{ s.categories | join(' ') if s.categories }}"><img src="images/{{ s.key }}.png" class="img-fluid" alt="{{ label }}" loading="lazy" height="75" width="75"><span>{{ label }}</span>
         {%- if s.doc %}<a class="hard-skill-doc" href="/docs/public/{{ s.doc | urlencode }}" target="_blank" rel="noopener" aria-label="{{ label }}{{ ' :' if lang == 'fr' else ':' }} {{ skills.carousel[lang].docLinkLabel }}"><i class="icon-file-pdf-o" aria-hidden="true"></i></a>
         {%- elif docs %}<button type="button" class="hard-skill-doc hard-skill-docs" aria-label="{{ label }}{{ ' :' if lang == 'fr' else ':' }} {{ skills.carousel[lang].docsLinkLabel }}"><i class="icon-file-pdf-o" aria-hidden="true"></i></button><span class="hard-skill-docs-list" hidden>{% for d in docs %}<span class="hard-skill-docs-line"><a href="/docs/public/{{ d.doc | urlencode }}" target="_blank" rel="noopener">{{ d.name }}</a>{{ d.text[lang] }}</span>{% endfor %}</span>
-        {%- elif tip %}<button type="button" class="hard-skill-tip" data-bs-toggle="tooltip" data-container="body" title="{{ tip }}" aria-label="{{ label }}{{ ' :' if lang == 'fr' else ':' }} {{ tip }}"><i class="icon-question-circle" aria-hidden="true"></i></button>{% endif -%}
+        {%- endif %}{% if tip %}<button type="button" class="hard-skill-tip" data-bs-toggle="tooltip" data-container="body" title="{{ tip }}" aria-label="{{ label }}{{ ' :' if lang == 'fr' else ':' }} {{ tip }}"><i class="icon-question-circle" aria-hidden="true"></i></button>{% endif -%}
     </div>
     {%- endfor %}
 </div>

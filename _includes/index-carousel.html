@@ -7,10 +7,11 @@
 <section id="carousel-section" class="ftco-section img d-none d-sm-flex">
     <div class="container-fluid px-md-5 pb-3 pt-3 bg-black text-white text-center">
         <h2 class="text-white">{{ carouselLang.heading }}</h2>
+        {#- Each tab after its icon (tabIcons of skills.json), decorative #}
         <div class="owl-menus d-flex justify-content-center">
-            <span class="owl-menu" data-target="#hard-skills">Hard skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carouselLang.hardTip }}"></i></span>
-            <span class="owl-menu" data-target="#soft-skills">Soft skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carouselLang.softTip }}"></i></span>
-            <span class="owl-menu" data-target="#mad-skills">Mad skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carouselLang.madTip }}"></i></span>
+            <span class="owl-menu" data-target="#hard-skills"><i class="{{ skills.tabIcons.hard }}" aria-hidden="true"></i>Hard skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carouselLang.hardTip }}"></i></span>
+            <span class="owl-menu" data-target="#soft-skills"><i class="{{ skills.tabIcons.soft }}" aria-hidden="true"></i>Soft skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carouselLang.softTip }}"></i></span>
+            <span class="owl-menu" data-target="#mad-skills"><i class="{{ skills.tabIcons.mad }}" aria-hidden="true"></i>Mad skills &nbsp; <i class="icon-question-circle" data-bs-toggle="tooltip" title="{{ carouselLang.madTip }}"></i></span>
         </div>
         {% include "skills-hard.html" %}
         {% include "skills-soft.html" %}

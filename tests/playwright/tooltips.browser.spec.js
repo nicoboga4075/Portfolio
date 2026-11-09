@@ -48,12 +48,16 @@ for (const theme of ['light', 'dark']) {
         const details = page.locator('#resume-section .info-tip-wrap').first();
         await details.scrollIntoViewIfNeeded();
         await expect(details).toBeVisible();
-        // Polled: the box takes its look once the browser has applied the hover
-        await details.hover();
-        await expect.poll(() => styleOf(details.locator('.info-tip-box'), looks)).toEqual(reference);
+        // Polled, hovered again at each try: the box takes its look once the browser has applied the hover, which a busy WebKit can miss
+        await expect.poll(async () => {
+            await details.hover();
+            return styleOf(details.locator('.info-tip-box'), looks);
+        }, { timeout: 15_000 }).toEqual(reference);
 
         await page.goto('/en/policy', { waitUntil: 'domcontentloaded' });
-        await page.locator('#dark-icon').hover();
-        await expect.poll(() => styleOf(page.locator('#dark-icon .sr-only'), looks)).toEqual(reference);
+        await expect.poll(async () => {
+            await page.locator('#dark-icon').hover();
+            return styleOf(page.locator('#dark-icon .sr-only'), looks);
+        }, { timeout: 15_000 }).toEqual(reference);
     });
 }

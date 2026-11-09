@@ -1207,8 +1207,8 @@ function showCarouselLoading(target, minimum = 0) {
     }
 }
 
+// The number of cards per slide stays the same whatever the number of cards: a filter keeping two hard skills shows them at the size of the others, centred (css/app.css), not stretched over the slide
 function initCarousel(target) {
-    const itemCount = $(target).children().length;
     $(target).owlCarousel({
         // rewind instead of loop: loop clones items at both ends (+100 extra DOM nodes for hard skills alone)
         loop: false,
@@ -1224,16 +1224,16 @@ function initCarousel(target) {
         navText: ['<span class="icon-chevron-circle-left"></span>', '<span class="icon-chevron-circle-right"></span>'],
         responsive: {
             0: {
-                items: Math.min(2, itemCount)
+                items: 2
             },
             576: {
-                items: Math.min(3, itemCount)
+                items: 3
             },
             992: {
-                items: Math.min(4, itemCount)
+                items: 4
             },
             1200: {
-                items: Math.min(5, itemCount)
+                items: 5
             }
         }
     });
@@ -1241,8 +1241,25 @@ function initCarousel(target) {
     $(`.owl-menu[data-target="${target}"]`).addClass("active").siblings('.owl-menu').removeClass('active');
     $(target).addClass('active');
     showCarouselLoading(target);
-    // Autoplay or the arrows bring new cards in: the spinner again while their pictures are missing
-    $(target).on('translated.owl.carousel', () => showCarouselLoading(target));
+    // Autoplay or the arrows bring new cards in: the spinner again while their pictures are missing; bound once, a carousel started again (initSkillFilter) keeps one handler
+    $(target).off('translated.owl.carousel').on('translated.owl.carousel', () => showCarouselLoading(target));
+}
+
+// A filter button above the hard skills keeps only the tools of its category (data-filter of each tool, several categories apart with spaces), the one without a category shows them all: the carousel is taken apart, given the matching tools of the full list (kept in data all-items, the same elements, so their tooltips and popovers stay) and started again
+function initSkillFilter() {
+    $(document).on('click', '#hard-skills-filter button', event => {
+        const button = event.currentTarget;
+        const { filter } = button.dataset;
+        const target = '#hard-skills';
+        $(button).attr('aria-pressed', 'true').siblings().attr('aria-pressed', 'false');
+        $(target).trigger('destroy.owl.carousel').removeClass('owl-loaded');
+        const all = $(target).data('all-items') || $(target).children().toArray();
+        $(target).data('all-items', all).children().detach();
+        $(target).append(all.filter(item => !filter || item.dataset.filter.split(' ').includes(filter)));
+        // Asked for by the visitor, as a tab: the pictures of the kept tools load now, so the next slides are ready
+        $(target).find('img').attr('loading', 'eager');
+        initCarousel(target);
+    });
 }
 
 // Badge/tag text is already localized server-side (separate _en/_fr builds),
@@ -1495,6 +1512,7 @@ function initIndexPage(langPage) {
 
         initFlipCards();
         initCounterFilters();
+        initSkillFilter();
 
         initCounterTilt();
 
@@ -1927,6 +1945,8 @@ function initPage() {
         } else {
             initCarousel(target);
         }
+        // The filter of the hard skills only shows with them
+        $('#hard-skills-filter').toggleClass('d-none', target !== '#hard-skills');
         // To avoid glitch switching to other carousel
         $(target).removeClass('d-none').trigger('refresh.owl.carousel');
         labelCarouselControls(target);

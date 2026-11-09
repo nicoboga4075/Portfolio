@@ -125,7 +125,7 @@ describe('on load', () => {
 
     test('starts the hard skills carousel with labelled controls, and marks its menu active', () => {
         loadApp({ body: '<div id="hard-skills"><div class="owl-prev" role="presentation"></div><div class="owl-next" role="presentation"></div><div class="owl-dot"></div><div class="owl-dot"></div></div><span class="owl-menu" data-target="#hard-skills"></span><span class="owl-menu active" data-target="#soft-skills"></span>' });
-        expect($.fn.owlCarousel).toHaveBeenCalledWith(expect.objectContaining({ rewind: true, responsive: expect.objectContaining({ 0: { items: 2 }, 1200: { items: 4 } }) }));
+        expect($.fn.owlCarousel).toHaveBeenCalledWith(expect.objectContaining({ rewind: true, responsive: expect.objectContaining({ 0: { items: 2 }, 1200: { items: 5 } }) }));
         expect($('.owl-prev').attr('role')).toBeUndefined();
         expect($('.owl-prev').attr('aria-label')).toBe('Previous');
         expect($('.owl-next').attr('aria-label')).toBe('Next');
@@ -678,6 +678,26 @@ describe('the home page', () => {
         expect($('#other li').prop('hidden')).toBe(false);
     });
 
+    test('keeps only the hard skills of the category pressed, the same elements, in a carousel started again, and all of them from the first button', () => {
+        const app = loadApp({ body: '<div id="hard-skills-filter"><button data-filter="" aria-pressed="true"></button><button data-filter="frontend" aria-pressed="false"></button><button data-filter="backend" aria-pressed="false"></button></div><div id="hard-skills" class="owl-carousel owl-loaded"><div id="html" data-filter="frontend"><img loading="lazy"></div><div id="ts" data-filter="frontend backend"></div><div id="sql" data-filter="backend"></div><div id="agile" data-filter=""></div></div>' });
+        app.initSkillFilter();
+        const html = document.getElementById('html');
+        const destroy = jest.fn();
+        $('#hard-skills').on('destroy.owl.carousel', destroy);
+        const shown = () => $('#hard-skills').children().toArray().map(item => item.id);
+        $('#hard-skills-filter button').eq(2).trigger('click');
+        expect(destroy).toHaveBeenCalledTimes(1);
+        expect(shown()).toEqual(['ts', 'sql']);
+        expect($('#hard-skills-filter button').toArray().map(button => button.getAttribute('aria-pressed'))).toEqual(['false', 'false', 'true']);
+        expect($.fn.owlCarousel).toHaveBeenCalled();
+        $('#hard-skills-filter button').eq(1).trigger('click');
+        expect(shown()).toEqual(['html', 'ts']);
+        expect($('#html img').attr('loading')).toBe('eager');
+        expect(document.getElementById('html')).toBe(html);
+        $('#hard-skills-filter button').eq(0).trigger('click');
+        expect(shown()).toEqual(['html', 'ts', 'sql', 'agile']);
+    });
+
     test('opens the certificates of a hard skill in a popover from its PDF icon, focuses its first link, and closes it from outside or with Escape', () => {
         const tip = document.createElement('div');
         tip.innerHTML = '<a href="/docs/public/a.pdf">A</a>';
@@ -1095,7 +1115,7 @@ describe('initPage', () => {
         <span class="open-mfp" data-target="#contact-window" aria-expanded="false"></span>
         <div id="contact-window" class="mfp" hidden><span class="mfp-close"></span></div>
         <span class="other-control" aria-controls="contact-window"></span>
-        <span class="owl-menu" data-target="#hard-skills"></span><span class="owl-menu" data-target="#soft-skills"></span>
+        <span class="owl-menu" data-target="#hard-skills"></span><span class="owl-menu" data-target="#soft-skills"></span><div id="hard-skills-filter"></div>
         <div id="hard-skills" class="owl-carousel"></div><div id="soft-skills" class="owl-carousel d-none"></div><div id="mad-skills" class="owl-carousel"></div>
         <a href="#" id="empty-link">x</a><input name="search-input">`;
 
@@ -1155,7 +1175,10 @@ describe('initPage', () => {
         expect($('#hard-skills').hasClass('d-none')).toBe(true);
         expect($('#hard-skills').hasClass('active')).toBe(false);
         expect($('#mad-skills').hasClass('d-none')).toBe(true);
+        // The filter of the hard skills hides with them and comes back with them
+        expect($('#hard-skills-filter').hasClass('d-none')).toBe(true);
         $('.owl-menu').eq(0).trigger('click');
+        expect($('#hard-skills-filter').hasClass('d-none')).toBe(false);
         expect($.fn.owlCarousel).toHaveBeenCalledTimes(1);
         expect($('.owl-menu').eq(0).hasClass('active')).toBe(true);
         expect($('.owl-menu').eq(1).hasClass('active')).toBe(false);

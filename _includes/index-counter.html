@@ -3,6 +3,10 @@
 {%- set lang = suffix if suffix.length == 2 else siteLanguages.default -%}
 
 {%- set counterLang = counter[lang] -%}
+{#- The icon before the label of a filter button, decorative: a class of the icon font (icon-...), or an emoji #}
+{%- macro filterIcon(icon) -%}
+{%- if icon.startsWith("icon-") %}<i class="{{ icon }}" aria-hidden="true"></i>{% else %}<span class="filter-emoji" aria-hidden="true">{{ icon }}</span>{% endif -%}
+{%- endmacro -%}
 {% if viewport == "desktop" %}
 <section id="counter-section" class="ftco-section">
     <div class="container-fluid px-md-5">
@@ -18,10 +22,14 @@
                         <div class="soft-card-face soft-card-back" aria-hidden="true" inert>
                             {#- Above the list, one button per subject (counterLang.certifCategories) that keeps only its certifications, and one that shows them all, each with its number in brackets (initCounterFilters of js/app.js) #}
                             <div class="counter-filter" role="group" aria-label="{{ counterLang.certifsFilterLabel }}">
-                                <button type="button" data-filter="" aria-pressed="true">{{ counterLang.filterAll }} ({{ counter.certifList | length }})</button>
+                                {#- Each button of a filter after its icon (certifFilterIcons, experienceFilterIcons, continentFilterIcons of counter.json) #}
+                                <button type="button" data-filter="" aria-pressed="true">{{ filterIcon(counter.certifFilterIcons.all) }}{{ counterLang.filterAll }} ({{ counter.certifList | length }})</button>
                                 {%- set byCategory = counter.certifList | groupby("category") %}
-                                {%- for key, label in counterLang.certifCategories %}
-                                <button type="button" data-filter="{{ key }}" aria-pressed="false">{{ label }} ({{ byCategory[key] | length }})</button>
+                                {#- Every filter lists its groups from the most items to the fewest, a tie in the order of the data #}
+                                {%- set groups = [] %}
+                                {%- for key, label in counterLang.certifCategories %}{% set _ = groups.push({ key: key, label: label, count: byCategory[key] | length }) %}{% endfor %}
+                                {%- for g in groups | sort(true, false, "count") %}
+                                <button type="button" data-filter="{{ g.key }}" aria-pressed="false">{{ filterIcon(counter.certifFilterIcons[g.key]) }}{{ g.label }} ({{ g.count }})</button>
                                 {%- endfor %}
                             </div>
                             <ul class="counter-list">
@@ -42,7 +50,7 @@
                 </div>
             </div>
             <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-                {#- The work experiences count turns over like the certifications one: the back lists the permanent jobs and internships of resume.json (not the other experiences), newest first, each company linked to its site, then its role and its years after a middle dot each, after its logo (images/companies/<logo>.png); its contracts (a type, or a list of types for a job that was an internship then a permanent one) only feed the filter #}
+                {#- The work experiences count turns over like the certifications one: the back lists the permanent jobs and internships of resume.json (not the other experiences), newest first, one line each, two side by side from 1280px (css/app.css): the company linked to its site after its logo (images/companies/<logo>.png) on the left, then after a middle dot its role as the icon of the experience in the resume (named by a Bootstrap tooltip, and by a hidden text for screen readers) and its years; its contracts (a type, or a list of types for a job that was an internship then a permanent one) only feed the filter #}
                 <div class="stat-card shadow soft-card">
                     <button type="button" class="soft-card-toggle" aria-expanded="false" aria-label="{{ counterLang.experiencesToggle }}" data-icons="icon-question-circle icon-close"><i class="icon-question-circle" aria-hidden="true"></i></button>
                     <div class="soft-card-inner">
@@ -55,18 +63,22 @@
                             {%- set shownExperiences = [] %}
                             {%- for e in resume.experiences %}{% if e.type != "other" %}{% set _ = shownExperiences.push(e) %}{% endif %}{% endfor %}
                             <div class="counter-filter" role="group" aria-label="{{ counterLang.experiencesFilterLabel }}">
-                                <button type="button" data-filter="" aria-pressed="true">{{ counterLang.filterAll }} ({{ shownExperiences | length }})</button>
+                                <button type="button" data-filter="" aria-pressed="true">{{ filterIcon(counter.experienceFilterIcons.all) }}{{ counterLang.filterAll }} ({{ shownExperiences | length }})</button>
+                                {%- set groups = [] %}
                                 {%- for key in counterLang.experiencesFilter %}
                                 {%- set withContract = [] %}
                                 {%- for e in shownExperiences %}{% if key in ([e.type] if e.type is string else e.type) %}{% set _ = withContract.push(e) %}{% endif %}{% endfor %}
-                                <button type="button" data-filter="{{ key }}" aria-pressed="false">{{ resume[lang].types[key] }} ({{ withContract | length }})</button>
+                                {%- set _ = groups.push({ key: key, label: resume[lang].types[key], count: withContract | length }) %}
+                                {%- endfor %}
+                                {%- for g in groups | sort(true, false, "count") %}
+                                <button type="button" data-filter="{{ g.key }}" aria-pressed="false">{{ filterIcon(counter.experienceFilterIcons[g.key]) }}{{ g.label }} ({{ g.count }})</button>
                                 {%- endfor %}
                             </div>
-                            <ul class="counter-list">
+                            <ul class="counter-list counter-list-grid">
                                 {%- for e in resume.experiences %}
                                 {%- set types = [e.type] if e.type is string else e.type %}
                                 {%- if e.type != "other" %}
-                                <li data-filter="{{ types | join(' ') }}">{% if e.logo %}<img src="images/companies/{{ e.logo }}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo"> {% endif %}<a href="{{ e.href[lang] if e.href[lang] else e.href }}" target="_blank" rel="noopener">{{ e.company }}</a> · <span class="counter-by">{{ e.title[lang] }}</span> · <span class="counter-details">{{ e.date[lang] | workYears(lang) }}</span></li>
+                                <li data-filter="{{ types | join(' ') }}"><span class="counter-company">{% if e.logo %}<img src="images/companies/{{ e.logo }}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo"> {% endif %}<a href="{{ e.href[lang] if e.href[lang] else e.href }}" target="_blank" rel="noopener">{{ e.company }}</a></span> <span class="counter-details">· <i class="{{ e.icon }} counter-role" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="{{ e.title[lang] }}" aria-hidden="true"></i><span class="sr-only">{{ e.title[lang] }}</span> · {{ e.date[lang] | workYears(lang) }}</span></li>
                                 {%- endif %}
                                 {%- endfor %}
                             </ul>
@@ -85,15 +97,17 @@
                         </div>
                         <div class="soft-card-face soft-card-back" aria-hidden="true" inert>
                             <div class="counter-filter counter-filter-grid" role="group" aria-label="{{ counterLang.continentsLabel }}">
-                                <button type="button" data-filter="" aria-pressed="true">{{ counterLang.filterAll }} ({{ counter.countryList | length }})</button>
+                                <button type="button" data-filter="" aria-pressed="true">{{ filterIcon(counter.continentFilterIcons.all) }}{{ counterLang.filterAll }} ({{ counter.countryList | length }})</button>
                                 {%- set byContinent = counter.countryList | groupby("continent") %}
-                                {%- for key, label in counterLang.continents %}
-                                <button type="button" data-filter="{{ key }}" aria-pressed="false">{{ label }} ({{ byContinent[key] | length }})</button>
+                                {%- set groups = [] %}
+                                {%- for key, label in counterLang.continents %}{% set _ = groups.push({ key: key, label: label, count: byContinent[key] | length }) %}{% endfor %}
+                                {%- for g in groups | sort(true, false, "count") %}
+                                <button type="button" data-filter="{{ g.key }}" aria-pressed="false">{{ filterIcon(counter.continentFilterIcons[g.key]) }}{{ g.label }} ({{ g.count }})</button>
                                 {%- endfor %}
                             </div>
                             <ul class="counter-flags">
                                 {%- for country in counter.countryList %}
-                                <li data-filter="{{ country.continent }}"><img src="images/flags/{{ country.flag }}.svg" alt="{{ country.name[lang] }}" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="{{ country.name[lang] }}" width="30" height="20" loading="lazy"></li>
+                                <li data-filter="{{ country.continent }}"><img src="images/flags/{{ country.flag }}.svg" alt="{{ country.name[lang] }}" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="{{ country.name[lang] }}" width="24" height="16" loading="lazy"></li>
                                 {%- endfor %}
                             </ul>
                         </div>

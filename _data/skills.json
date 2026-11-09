@@ -94,6 +94,8 @@
             "item2": "MCP"
         }
     ],
+    "tabIcons": { "hard": "icon-wrench", "soft": "icon-handshake-o", "mad": "icon-heart" },
+    "hardFilterIcons": { "all": "icon-th-large", "frontend": "icon-desktop", "backend": "icon-server", "devops": "icon-cogs", "tests": "icon-flask", "ide": "icon-code", "cyber": "icon-shield", "methodology": "icon-map-signs", "tools": "icon-suitcase", "git": "icon-code-fork", "automation": "icon-bolt" },
     "carousel": {
         "en": {
             "heading": "Discover my skills",
@@ -102,7 +104,10 @@
             "softUnlock": "Unlock the experiences of",
             "madTip": "Atypical abilities or unique talents, often developed through personal passions",
             "docLinkLabel": "Certificate (PDF)",
-            "docsLinkLabel": "certificates"
+            "docsLinkLabel": "certificates",
+            "hardFilterLabel": "Filter the hard skills",
+            "hardFilterAll": "All",
+            "hardCategories": { "frontend": "Frontend", "backend": "Backend", "devops": "DevOps", "tests": "Tests", "ide": "IDE", "cyber": "Cyber", "methodology": "Methodology", "tools": "Tools & Software", "git": "Git", "automation": "Automation" }
         },
         "fr": {
             "heading": "Découvrez mes compétences",
@@ -111,7 +116,10 @@
             "softUnlock": "Déverrouiller les expériences de la compétence",
             "madTip": "Compétences atypiques ou talents uniques, souvent développées à travers des passions personnelles",
             "docLinkLabel": "Attestation (PDF)",
-            "docsLinkLabel": "attestations"
+            "docsLinkLabel": "attestations",
+            "hardFilterLabel": "Filtrer les hard skills",
+            "hardFilterAll": "Tous",
+            "hardCategories": { "frontend": "Frontend", "backend": "Backend", "devops": "DevOps", "tests": "Tests", "ide": "IDE", "cyber": "Cyber", "methodology": "Méthodologie", "tools": "Outils & logiciels", "git": "Git", "automation": "Automatisation" }
         }
     },
     "mad": [
@@ -148,7 +156,11 @@
     "hardTips": {
         "netsurvey": { "en": "Group training for the MNT", "fr": "Formation en groupe pour la MNT" },
         "ethnos": { "en": "Integrating data viz charts (amCharts) into the software", "fr": "Intégration de graphiques de data viz (amCharts) dans le logiciel" },
-        "webreports": { "en": "One-to-one training for a La Poste employee", "fr": "Formation individuelle pour un collaborateur de La Poste" }
+        "webreports": { "en": "One-to-one training for a La Poste employee", "fr": "Formation individuelle pour un collaborateur de La Poste" },
+        "github": { "en": "At Soft Concept and Bassetti Group, and for this portfolio (GitHub Actions)", "fr": "Chez Soft Concept et Bassetti Group, et pour ce portfolio (GitHub Actions)" },
+        "gitlab": { "en": "Sources and CI/CD pipelines at Astek and ChapsVision, and the mirror of this portfolio", "fr": "Sources et pipelines CI/CD chez Astek et ChapsVision, et le miroir de ce portfolio" },
+        "gitea": { "en": "Sources of the internship project at Cyberprotect", "fr": "Sources du projet de stage chez Cyberprotect" },
+        "teexma": { "en": "Audit and securing of its BI module (TxBI)", "fr": "Audit et sécurisation de son module de BI (TxBI)" }
     },
     "soft": [
         {

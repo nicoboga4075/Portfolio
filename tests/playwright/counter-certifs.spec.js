@@ -18,6 +18,11 @@ function render(lang) {
 
 const escapeHtml = text => text.replaceAll("'", '&#39;');
 
+// The buttons of a filter, [key, label, number] each, from the most items to the fewest, a tie in the order of the data (a stable sort)
+// The icon of a filter button: a class of the icon font, or an emoji
+const iconOf = icon => (icon.startsWith('icon-') ? `<i class="${icon}" aria-hidden="true"></i>` : `<span class="filter-emoji" aria-hidden="true">${icon}</span>`);
+const byCount = (groups, icons) => groups.toSorted((a, b) => b[2] - a[2]).map(([key, label, number]) => `<button type="button" data-filter="${key}" aria-pressed="false">${iconOf(icons[key])}${label} (${number})</button>`).join('');
+
 test.describe('counters that turn over', () => {
     test('lists as many certifications as the count shows, each certificate a public file and each logo an image', () => {
         expect(counter.certifList).toHaveLength(profile.certifsCount);
@@ -38,12 +43,12 @@ test.describe('counters that turn over', () => {
         test(`turns the work experiences count over to each company, its contracts and its years on the ${lang} page`, () => {
             const html = render(lang);
             expect(html).toContain(`aria-label="${escapeHtml(counter[lang].experiencesToggle)}" data-icons="icon-question-circle icon-close">`);
-            const [, list] = [...html.matchAll(/<ul class="counter-list">(.*?)<\/ul>/g)].map(match => match[1]);
-            const items = [...list.matchAll(/<li data-filter="[^"]+"><img src="images\/companies\/([^"]+)\.png" alt="" width="16" height="16" loading="lazy" class="counter-logo"><a href="([^"]+)"[^>]*>([^<]+)<\/a> · <span class="counter-by">([^<]+)<\/span> · <span class="counter-details">([^<]+)<\/span><\/li>/g)].map(match => match.slice(1));
+            const [, list] = [...html.matchAll(/<ul class="counter-list[^"]*">(.*?)<\/ul>/g)].map(match => match[1]);
+            const items = [...list.matchAll(/<li data-filter="[^"]+"><span class="counter-company"><img src="images\/companies\/([^"]+)\.png" alt="" width="16" height="16" loading="lazy" class="counter-logo"><a href="([^"]+)"[^>]*>([^<]+)<\/a><\/span><span class="counter-details">· <i class="[^"]+ counter-role" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="[^"]+" aria-hidden="true"><\/i><span class="sr-only">([^<]+)<\/span> · ([^<]+)<\/span><\/li>/g)].map(match => match.slice(1));
             const shown = resume.experiences.filter(experience => experience.type !== 'other');
             expect(items.map(([logo]) => logo)).toEqual(shown.map(experience => experience.logo));
             expect(items.map(([, , company]) => company)).toEqual(shown.map(experience => experience.company));
-            // Each company, then its role and its years after a middle dot each, its contracts left to the filter
+            // Each company, then its role (the icon of the experience, named for screen readers) and its years, its contracts left to the filter
             expect(items.map(([, , , role]) => role)).toEqual(shown.map(experience => experience.title[lang].replaceAll('&', '&amp;')));
             for (const [, , , , years] of items) expect(years).toMatch(/^\d{4}(–\d{4})?$/);
             // A job started in December counts from the next year: ChapsVision (December 2025 - August 2026) and Astek (December 2024 - August 2025)
@@ -51,8 +56,9 @@ test.describe('counters that turn over', () => {
             expect(items.find(([, , company]) => company === 'Astek')[4]).toBe('2025');
             // Above the list, the filter of the contracts with the number of experiences of each, a job of two contracts in both; each item names its contracts
             const types = experience => [experience.type].flat();
-            const filter = `<div class="counter-filter" role="group" aria-label="${escapeHtml(counter[lang].experiencesFilterLabel)}"><button type="button" data-filter="" aria-pressed="true">${counter[lang].filterAll} (${shown.length})</button>${counter[lang].experiencesFilter.map(key => `<button type="button" data-filter="${key}" aria-pressed="false">${resume[lang].types[key]} (${shown.filter(experience => types(experience).includes(key)).length})</button>`).join('')}</div>`;
-            expect(html).toContain(`${filter}<ul class="counter-list">`);
+            const filter = `<div class="counter-filter" role="group" aria-label="${escapeHtml(counter[lang].experiencesFilterLabel)}"><button type="button" data-filter="" aria-pressed="true">${iconOf(counter.experienceFilterIcons.all)}${counter[lang].filterAll} (${shown.length})</button>${byCount(counter[lang].experiencesFilter.map(key => [key, resume[lang].types[key], shown.filter(experience => types(experience).includes(key)).length]), counter.experienceFilterIcons)}</div>`;
+            expect(html).toContain(`${filter}<ul class="counter-list counter-list-grid">`);
+            for (const experience of shown) expect(html).toContain(`<i class="${experience.icon} counter-role" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="${experience.title[lang].replaceAll('&', '&amp;')}" aria-hidden="true"></i>`);
             expect([...list.matchAll(/<li data-filter="([^"]+)">/g)].map(match => match[1])).toEqual(shown.map(experience => types(experience).join(' ')));
         });
     }
@@ -66,7 +72,7 @@ test.describe('counters that turn over', () => {
             const level = certif => (certif.level ? `<button type="button" class="counter-level" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="${escapeHtml(certif.levelTip[lang])}">${certif.level[lang]}</button> · ` : '');
             const items = counter.certifList.map(certif => `<li data-filter="${certif.category}"><img src="images/certifs/${certif.logo}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo"><a href="${certif.href}" target="_blank" rel="noopener">${certif.name[lang]}</a><span class="counter-by">[${certif.by}]</span><span class="counter-details">${certif.score ? `${certif.score} · ` : ''}${level(certif)}${certif.date}</span></li>`).join('');
             // Above the list, a filter of the subjects with the number of certifications of each
-            const filter = `<div class="counter-filter" role="group" aria-label="${escapeHtml(counter[lang].certifsFilterLabel)}"><button type="button" data-filter="" aria-pressed="true">${counter[lang].filterAll} (${counter.certifList.length})</button>${Object.entries(counter[lang].certifCategories).map(([key, label]) => `<button type="button" data-filter="${key}" aria-pressed="false">${label} (${counter.certifList.filter(certif => certif.category === key).length})</button>`).join('')}</div>`;
+            const filter = `<div class="counter-filter" role="group" aria-label="${escapeHtml(counter[lang].certifsFilterLabel)}"><button type="button" data-filter="" aria-pressed="true">${iconOf(counter.certifFilterIcons.all)}${counter[lang].filterAll} (${counter.certifList.length})</button>${byCount(Object.entries(counter[lang].certifCategories).map(([key, label]) => [key, label, counter.certifList.filter(certif => certif.category === key).length]), counter.certifFilterIcons)}</div>`;
             expect(html).toContain(`<div class="soft-card-face soft-card-back" aria-hidden="true" inert>${filter}<ul class="counter-list">${items}</ul></div>`);
             for (const certif of counter.certifList) expect(counter[lang].certifCategories[certif.category]).toBeTruthy();
         });
@@ -83,8 +89,8 @@ test.describe('counters that turn over', () => {
     for (const lang of ['en', 'fr']) {
         test(`turns the visited countries count over to the flags only, under a filter of their continents, on the ${lang} page`, () => {
             const html = render(lang);
-            const filter = `<div class="counter-filter counter-filter-grid" role="group" aria-label="${escapeHtml(counter[lang].continentsLabel)}"><button type="button" data-filter="" aria-pressed="true">${counter[lang].filterAll} (${counter.countryList.length})</button>${Object.entries(counter[lang].continents).map(([key, label]) => `<button type="button" data-filter="${key}" aria-pressed="false">${label} (${counter.countryList.filter(country => country.continent === key).length})</button>`).join('')}</div>`;
-            const flags = counter.countryList.map(country => `<li data-filter="${country.continent}"><img src="images/flags/${country.flag}.svg" alt="${escapeHtml(country.name[lang])}" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="${escapeHtml(country.name[lang])}" width="30" height="20" loading="lazy"></li>`).join('');
+            const filter = `<div class="counter-filter counter-filter-grid" role="group" aria-label="${escapeHtml(counter[lang].continentsLabel)}"><button type="button" data-filter="" aria-pressed="true">${iconOf(counter.continentFilterIcons.all)}${counter[lang].filterAll} (${counter.countryList.length})</button>${byCount(Object.entries(counter[lang].continents).map(([key, label]) => [key, label, counter.countryList.filter(country => country.continent === key).length]), counter.continentFilterIcons)}</div>`;
+            const flags = counter.countryList.map(country => `<li data-filter="${country.continent}"><img src="images/flags/${country.flag}.svg" alt="${escapeHtml(country.name[lang])}" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="${escapeHtml(country.name[lang])}" width="24" height="16" loading="lazy"></li>`).join('');
             expect(html).toContain(`aria-label="${escapeHtml(counter[lang].countriesToggle)}" data-icons="icon-question-circle icon-close">`);
             expect(html).toContain(`<div class="soft-card-face soft-card-back" aria-hidden="true" inert>${filter}<ul class="counter-flags">${flags}</ul></div>`);
         });
