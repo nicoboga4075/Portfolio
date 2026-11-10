@@ -269,6 +269,34 @@ html.dark-mode sup:hover {
     border: 0;
 }
 
+/* The skip link (base.njk): out of sight above the page until it gets the keyboard focus, then in the top left corner over everything, the navbar and the loader included */
+#skip-link {
+    position: fixed;
+    top: -100px;
+    left: 16px;
+    z-index: 2000;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: var(--primary);
+    color: var(--white);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#skip-link:focus {
+    top: 16px;
+}
+
+/* White on --primary passes in light mode only (4.70:1), as the other filled controls */
+html.dark-mode #skip-link {
+    background-color: var(--primary-dark);
+}
+
+/* The content takes the focus from the skip link without a ring around the whole page */
+#ftco-main:focus {
+    outline: none;
+}
+
 /* ==== Dark Mode Toggle ==== */
 
 #dark-icon {

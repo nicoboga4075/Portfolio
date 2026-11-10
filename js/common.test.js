@@ -414,6 +414,28 @@ describe('on load', () => {
     });
 });
 
+describe('the skip link', () => {
+    test('moves the focus to the content instead of following its #hash', () => {
+        const link = { listeners: {}, addEventListener: (type, listener) => { link.listeners[type] = listener; } };
+        const main = { focus: jest.fn() };
+        fakePage({ elements: { 'skip-link': link, 'ftco-main': main } });
+        load();
+        const event = { preventDefault: jest.fn() };
+        link.listeners.click(event);
+        expect(event.preventDefault).toHaveBeenCalled();
+        expect(main.focus).toHaveBeenCalled();
+    });
+
+    test('does nothing on a page without the link or without the content', () => {
+        const link = { addEventListener: jest.fn() };
+        fakePage({ elements: { 'skip-link': link } });
+        load();
+        fakePage({ elements: { 'ftco-main': {} } });
+        load();
+        expect(link.addEventListener).not.toHaveBeenCalled();
+    });
+});
+
 describe('the scroll button', () => {
     // A button as base.njk renders it: its two names, its icon, its name and its click listener kept
     const fakeButton = () => {

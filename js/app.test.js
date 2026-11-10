@@ -955,15 +955,15 @@ describe('the blog page', () => {
         <div class="sidebar" data-diploma-alt="My diploma"></div>
         <div id="article-shape"><div class="kept">kept</div></div>
         <div class="about-author d-none"></div>`;
-    // A whole article page, as the article function serves it: its own navbar, loader, counter and footer, and markup the sanitizer must strip
+    // A whole article page, as the article function serves it: its own skip link, navbar, loader, counter, scroll button, main and footer, and markup the sanitizer must strip
     const articleHtml = `<html><head><meta charset="utf-8"><link rel="stylesheet" href="x.css"><style>p {}</style></head><body>
-        <nav id="ftco-navbar"></nav><div id="ftco-loader" class="show"></div><span id="ftco-visitor">9</span>
-        <article class="article-container"><!-- a comment the search skips --><p>I write HTML and CSS. html!</p>
+        <a id="skip-link" href="#ftco-main">Skip</a><nav id="ftco-navbar"></nav><div id="ftco-loader" class="show"></div><span id="ftco-visitor">9</span><button id="back-to-top"></button>
+        <main id="ftco-main" tabindex="-1"><article class="article-container"><!-- a comment the search skips --><p>I write HTML and CSS. html!</p>
             <div class="card"><input type="checkbox"><p>More HTML here</p></div>
             <a href="http://evil.example">bad</a><a href="https://ok.example">ok</a><a article-link="mcs">next</a>
             <img id="bad-img" src="java script:alert(1)" onclick="x()"><img id="good-img" src="images/a.png" srcdoc="x">
             <script>window.injected = true;</script><iframe src="x"></iframe><object></object><embed>
-        </article>
+        </article></main>
         <footer id="ftco-footer"></footer></body></html>`;
 
     // Opens the blog page on a URL and lets the article load; standalone runs the onload of js/standalone.js, as the browser would
@@ -988,7 +988,7 @@ describe('the blog page', () => {
         expect(window.location.hash).toBe('');
         expect(document.querySelectorAll('link[href="css/standalone.css"]')).toHaveLength(1);
         const shape = $('#article-shape');
-        for (const selector of ['#ftco-navbar', '#ftco-footer', '#ftco-loader', '#ftco-visitor', 'script', 'iframe', 'object', 'embed', 'style', 'link', 'meta']) {
+        for (const selector of ['#ftco-navbar', '#ftco-footer', '#ftco-loader', '#ftco-visitor', '#skip-link', '#back-to-top', 'main', 'script', 'iframe', 'object', 'embed', 'style', 'link', 'meta']) {
             expect(shape.find(selector)).toHaveLength(0);
         }
         expect($('#bad-img').attr('src')).toBeUndefined();
@@ -996,6 +996,8 @@ describe('the blog page', () => {
         expect($('#good-img').attr('src')).toBe('images/a.png');
         expect($('#good-img').attr('srcdoc')).toBeUndefined();
         expect(shape.find('a').map((index, link) => link.getAttribute('href')).get()).toEqual(['/404', 'https://ok.example', '/en/blog#mcs']);
+        // The <main> of the article page became a plain div, its article kept
+        expect(shape.children('.article-main').children('.article-container')).toHaveLength(1);
         expect(shape.children().last().hasClass('kept')).toBe(true);
         expect(window.injected).toBeUndefined();
         expect(window.initArticle).toHaveBeenCalledWith(false);

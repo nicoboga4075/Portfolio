@@ -77,6 +77,8 @@ bodyClass: ""
         </script>
     </head>
     <body class="{{ bodyClass }}"{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}">
+        {#- First stop of the keyboard, shown only once focused: straight to the content past the menu (initSkipLink of js/common.js moves the focus, since <base> would turn its #hash into another page) #}
+        <a id="skip-link" href="#ftco-main">{{ common.skipLink[lang] }}</a>
         <div id="ftco-loader" class="show" role="status" aria-live="polite" aria-atomic="true" aria-label="{{ common.loading[lang] }}">
             <div class="spinner" aria-hidden="true"></div>
             <span class="sr-only">{{ common.loading[lang] }}</span>
@@ -115,7 +117,7 @@ bodyClass: ""
             {% include "nav.html" %}
         </nav>
         {%- endif %}
-        <main id="ftco-main" aria-label="{{ landmarkLang.main }}">
+        <main id="ftco-main" tabindex="-1" aria-label="{{ landmarkLang.main }}">
             {{ content | safe }}
         </main>
         <footer id="ftco-footer"{% if standalone %} class="standalone"{% endif %} aria-label="{{ landmarkLang.footer }}">

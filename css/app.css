@@ -15,6 +15,14 @@ body.blog-page #ftco-main {
     flex: 1;
 }
 
+/* The <main> of the injected article page, turned into a div by initBlogPage (js/app.js): the margin of main (common.css) and the layout of #ftco-main it had */
+#article-shape > .article-main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 10px;
+}
+
 /* Toggled on <body> alongside .error-message (js/app.js) so the message
    sits centered in whatever space #ftco-main has, instead of pinned to the
    top-left of the (now sidebar-less) article column. */

@@ -1878,6 +1878,18 @@ function initBlogPage(langPage) {
                     const injectedVisitor = doc.querySelector('#ftco-visitor');
                     if (injectedVisitor) injectedVisitor.remove();
 
+                    // Its skip link and scroll button too: the blog page has its own, and a second #back-to-top would sit fixed over the first without any listener
+                    doc.querySelectorAll('#skip-link, #back-to-top').forEach(el => el.remove());
+
+                    // Its <main> turned into a plain .article-main (css/app.css keeps its layout): inside the main of the blog page, it made a second #ftco-main and a nested main landmark
+                    const injectedMain = doc.querySelector('#ftco-main');
+                    if (injectedMain) {
+                        const wrapper = doc.createElement('div');
+                        wrapper.className = 'article-main';
+                        wrapper.append(...injectedMain.childNodes);
+                        injectedMain.replaceWith(wrapper);
+                    }
+
                     // Strip elements and attributes that could execute script.
                     // Article HTML is first-party - the function validates the
                     // filename against a strict allowlist - so this is defense in depth.

@@ -258,6 +258,19 @@ function initBackToTop() {
     });
 }
 
+// The skip link of every page (base.njk): moves the focus to the content (focusable through its tabindex="-1"), which scrolls to it, without following its #ftco-main, which the <base> of the page would resolve to another page
+function initSkipLink() {
+    const link = document.getElementById('skip-link');
+    const main = document.getElementById('ftco-main');
+    if (!link || !main) {
+        return;
+    }
+    link.addEventListener('click', event => {
+        event.preventDefault();
+        main.focus();
+    });
+}
+
 // Run on every page as soon as this (deferred) script loads.
 registerServiceWorker();
 toggleDarkMode();
@@ -269,4 +282,5 @@ darkSchemeQuery.addEventListener('change', function () {
 hideLoader();
 setCopyrightYear();
 initBackToTop();
+initSkipLink();
 Object.keys(appRoutes).forEach(addRedirectById);

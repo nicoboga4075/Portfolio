@@ -32,5 +32,9 @@
     "backToTop": {
         "en": "Back to top",
         "fr": "Retour en haut"
+    },
+    "skipLink": {
+        "en": "Skip to main content",
+        "fr": "Aller au contenu principal"
     }
 }
