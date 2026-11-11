@@ -58,7 +58,8 @@ jobs:
 
   playwright:
     needs: build
-    runs-on: ubuntu-latest
+    # Ubuntu 24.04, not ubuntu-latest: on Ubuntu 26.04 (ubuntu-latest since November 2026) the WebKit of Playwright 1.65 does not start, it needs libicudata.so.74 and the system ships ICU 78; back to ubuntu-latest once a Playwright release supports it
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
       contents: read
@@ -72,14 +73,16 @@ jobs:
         node-version-file: .nvmrc
         cache: 'npm'
     - run: npm ci --ignore-scripts
-    # Version of the installed Playwright, the key of the browser cache, so a Playwright update downloads its own browsers
+    # Version of the installed Playwright and image of the runner (ImageOS, ubuntu24), the key of the browser cache, so a Playwright update or a new Ubuntu downloads its own browsers instead of restoring ones built for other system libraries
     - id: playwright-version
-      run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
-    # Browsers downloaded by an earlier run of the same Playwright version, so a run only installs their system libraries
+      run: |
+        echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+        echo "image=$ImageOS" >> "$GITHUB_OUTPUT"
+    # Browsers downloaded by an earlier run of the same Playwright version on the same image, so a run only installs their system libraries
     - uses: actions/cache@v6
       with:
         path: ~/.cache/ms-playwright
-        key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+        key: playwright-${{ steps.playwright-version.outputs.image }}-${{ steps.playwright-version.outputs.version }}
     # Chromium, Firefox and WebKit with their system libraries, for the *.browser.spec.js specs and the contrast checker, installed through an npm script so the playwright binary of package-lock.json runs instead of one npx could fetch (SonarCloud githubactions:S6505, S8543); a stalled install (a slow apt mirror) is stopped after 5 minutes and tried once more, then the tests, only once the browsers are there
     - run: (timeout 300 npm run playwright:install || timeout 300 npm run playwright:install) && npm run playwright
     - uses: actions/upload-artifact@v7
