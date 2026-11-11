@@ -67,6 +67,10 @@ Show The Details Of The Card
     Execute Javascript    document.getElementById('${id}').scrollIntoView({block: 'center'})
     Mouse Over    id:${id}
     Wait Until Element Is Visible    css:#${id} .explore
+    # Clicked only once the details have faded in (0.3s) and stopped moving: the card loses its title while hovered, and a slow runner clicked the Explore button while it still moved, hitting the text block around it
+    Wait For Condition    return getComputedStyle(document.querySelector('#${id} .text')).opacity === '1'
+    Execute Javascript    document.querySelector('#${id} .explore').scrollIntoView({block: 'center'})
+    Mouse Over    css:#${id} .explore
 
 Click The Explore Button Of The Card
     [Documentation]
