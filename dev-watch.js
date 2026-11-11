@@ -136,8 +136,11 @@ function serveThrough(netlifyPort) {
     }));
 }
 
+// The preview build of .eleventy/, its pages formatted with Prettier to stay readable (ELEVENTY_DEV), where the preview builds of the tests minify them as production does (htmlMode of .eleventy.js)
+const previewEnv = { ELEVENTY_PREVIEW: '1', ELEVENTY_DEV: '1' };
+
 async function buildOnce() {
-    await runStep(eleventyCli, [], { ELEVENTY_PREVIEW: '1' });
+    await runStep(eleventyCli, [], previewEnv);
     await runStep(uglifyScript, ['.eleventy/js'], {});
     startServing();
 }
@@ -145,7 +148,7 @@ async function buildOnce() {
 function watch() {
     let servingStarted = false;
     // --incremental keeps a rebuild to ~0.3s for a css/js edit and ~2-3s for an include, layout or _data edit (each of those rebuilt the pages that use it in a test), against a full rebuild of all 36 pages plus a re-copy of every static file otherwise. Not tested: edits to .eleventy.js or package.json (the source of the routes/linkedin/siteLanguages globals) - restart this script after those if a page looks stale.
-    const eleventy = run(eleventyCli, ['--watch', '--incremental'], { ELEVENTY_PREVIEW: '1' }, 'pipe');
+    const eleventy = run(eleventyCli, ['--watch', '--incremental'], previewEnv, 'pipe');
     eleventy.stdout.on('data', chunk => {
         process.stdout.write(chunk);
         const output = chunk.toString();

@@ -341,6 +341,33 @@ function apiData() {
     };
 }
 
+// How the Eleventy transform writes each page: minified on the Netlify production build (CONTEXT) and on the preview builds of the tests, so they read the HTML visitors get; formatted with Prettier, readable, under npm run dev (ELEVENTY_DEV of dev-watch.js) and on the in-place build of the CI, whose Node 20 job cannot load html-minifier-next
+function htmlMode(env) {
+    const production = env.CONTEXT === "production" && !env.ELEVENTY_PREVIEW;
+    const tests = Boolean(env.ELEVENTY_PREVIEW) && !env.ELEVENTY_DEV;
+    return production || tests ? "minify" : "prettify";
+}
+
+// The Eleventy transform of every rendered page, never of the Nunjucks partials of _includes/ (a {% if %} between two attributes is not HTML): another file goes through untouched, and a page the formatter cannot parse is kept as rendered with a warning
+async function formatHtml(content, outputPath, mode) {
+    // Eleventy passes false for a template with permalink: false
+    if (typeof outputPath !== "string" || !outputPath.endsWith(".html")) return content;
+    try {
+        // Comments dropped and whitespace kept, as the netlify-plugin-minify-html settings this replaces (its collapseInlineTagWhitespace did nothing without collapseWhitespace); imported here since html-minifier-next is an ES module only (no require) for Node 22.13 or later, which the Node 20 build of the CI never reaches
+        if (mode === "minify") return await (await import("html-minifier-next")).minify(content, { removeComments: true, collapseWhitespace: false, minifyCSS: false, minifyJS: false });
+        return await prettier.format(content, {
+            parser: "html",
+            tabWidth: 4,
+            useTabs: false,
+            printWidth: 1000,
+            htmlWhitespaceSensitivity: "strict",
+        });
+    } catch (e) {
+        console.warn(`${mode === "minify" ? "Minify" : "Prettier"} failed on ${outputPath}: ${e.message}`);
+        return content;
+    }
+}
+
 module.exports = function configureEleventy(eleventyConfig) {
     // -> repo root (the publish dir); passthrough-copied for the preview server.
     fs.writeFileSync(path.join(__dirname, "sitemap.xml"), sitemapXml(buildSitemap()));
@@ -436,23 +463,7 @@ module.exports = function configureEleventy(eleventyConfig) {
             eleventyConfig.addPassthroughCopy(file);
         }
     }
-    eleventyConfig.addTransform("prettify", async function (content, outputPath) {
-        if (outputPath?.endsWith(".html")) {
-            try {
-                return await prettier.format(content, {
-                    parser: "html",
-                    tabWidth: 4,
-                    useTabs: false,
-                    printWidth: 1000,
-                    htmlWhitespaceSensitivity: "strict",
-                });
-            } catch (e) {
-                console.warn(`Prettier failed on ${outputPath}: ${e.message}`);
-                return content;
-            }
-        }
-        return content;
-    });
+    eleventyConfig.addTransform("prettify", (content, outputPath) => formatHtml(content, outputPath, htmlMode(process.env)));
     let cleaned = false;
     eleventyConfig.on("eleventy.before", ({ runMode }) => {
         // Always start from a clean output folder so a stale preview build
@@ -495,3 +506,6 @@ module.exports = function configureEleventy(eleventyConfig) {
         htmlTemplateEngine: "njk"
     };
 };
+// The HTML transform, for its tests (tests/playwright/eleventy-html.spec.js)
+module.exports.htmlMode = htmlMode;
+module.exports.formatHtml = formatHtml;

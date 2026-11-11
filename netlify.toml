@@ -14,13 +14,7 @@
   publish = ".eleventy"
   staticServerPort = 3999
 
-[[context.production.plugins]]
-  package = "netlify-plugin-minify-html"
-
-  [context.production.plugins.inputs.minifierOptions]
-    removeComments = true
-    collapseInlineTagWhitespace = true
-
+# The HTML is minified by the Eleventy transform of .eleventy.js on the production build (CONTEXT), on the rendered pages only: netlify-plugin-minify-html minified every *.html of the publish folder, the Nunjucks partials of _includes/ included
 [[context.production.plugins]]
   package = "netlify-plugin-inline-critical-css"
 
