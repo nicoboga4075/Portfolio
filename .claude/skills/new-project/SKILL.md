@@ -19,7 +19,7 @@ The card says itself what its Explore button opens, in its `explore`: the explor
 
 Ask for what is missing, in one message:
 
-- the **title** (HTML allowed: the client's name in `<i>`), a short **badge** (main technology: `C#`, `HTML/CSS/JS`), the **technologies**, one chip each: `{ "key", "label", "detail" }`, `key` the image of its hard skill (`images/<key>.png`) or, without one, an `icon` of the icon font instead, `detail` a framework or a version shown between brackets (`.NET Core`);
+- the **title** (HTML allowed: the client's name in `<i>`), a short **badge** (main technology: `C#`, `HTML/CSS/JS`), the **technologies**, one chip each: `{ "key", "label", "detail" }`, `key` its official logo (`images/<key>.png`: the image of its hard skill, or one added from Wikimedia Commons or the vendor, credited with its licence on the terms pages), or, without one, an `icon` of the icon font instead, `detail` a framework or a version shown between brackets (`.NET Core`);
 - the **type**, the kind of project shown in the bubble of the top right corner with its icon (`typeIcons` of `_includes/index-projects.html`): `school`, `internship` or `permanent`, named in `types` of each language;
 - the **date**, the period of the project (development and maintenance) in English and in French, as on LinkedIn, shown between brackets after the duration that ends the context: `"November 2022 - May 2024"` / `"novembre 2022 - mai 2024"` (French months in lower case);
 - the **context** in English and in French, in the existing shape: `"<Contract> at <i>Company</i> | <how> | <duration>"` / `"<Contrat> chez <i>Entreprise</i> | <comment> | <durée>"`;

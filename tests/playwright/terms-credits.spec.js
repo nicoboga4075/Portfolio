@@ -1,4 +1,4 @@
-// The terms pages credit the TEEXMA logo (Wikimedia Commons, CC BY-SA 4.0) and the Tux logo of Linux (Larry Ewing and The GIMP) of the skills in English and French, with safe external links.
+// The terms pages credit the TEEXMA logo (Wikimedia Commons, CC BY-SA 4.0) and the Tux logo of Linux (Larry Ewing and The GIMP) of the skills, and the PostgreSQL, Elasticsearch, PowerPoint, Excel and Word logos of the project cards, in English and French, with safe external links.
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -15,8 +15,15 @@ test.describe('terms pages credits', () => {
             expect(html).toContain('https://creativecommons.org/licenses/by-sa/4.0/');
             expect(html).toContain('Larry Ewing');
             expect(html).toContain('https://commons.wikimedia.org/wiki/File:Tux.svg');
+            // The logos of the stack of the project cards, with their licence and their trademark owners
+            expect(html).toContain('https://commons.wikimedia.org/wiki/File:Postgresql_elephant.svg');
+            expect(html).toContain('https://commons.wikimedia.org/wiki/File:Elasticsearch_logo.svg');
+            expect(html).toContain('Apache 2.0');
+            expect(html).toContain('Microsoft');
+            // The logos fetched from Logo.dev, credited with a safe link to it
+            expect(html).toContain(`<a href="https://logo.dev" target="_blank" rel="noopener">Logo.dev</a>`);
             const links = html.match(/<a href="https:\/\/(?:commons\.wikimedia\.org|creativecommons\.org)[^>]*>/g) || [];
-            expect(links).toHaveLength(3);
+            expect(links).toHaveLength(5);
             for (const link of links) {
                 expect(link).toContain('target="_blank"');
                 expect(link).toContain('rel="noopener"');
@@ -27,5 +34,6 @@ test.describe('terms pages credits', () => {
     test('ships the TEEXMA and Tux images the credits speak about', () => {
         expect(fs.existsSync(path.join(root, 'images', 'teexma.png'))).toBe(true);
         expect(fs.existsSync(path.join(root, 'images', 'linux.png'))).toBe(true);
+        for (const logo of ['postgresql', 'elasticsearch', 'powerpoint', 'excel', 'word']) expect(fs.existsSync(path.join(root, 'images', `${logo}.png`)), logo).toBe(true);
     });
 });
