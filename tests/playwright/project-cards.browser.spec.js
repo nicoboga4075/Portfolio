@@ -1,4 +1,6 @@
 // The project cards of the home page: one per card of _data/projects.json, in order, their details shown on hover, and the Explore button of a card with its own page opening that page in the same language.
+const fs = require('node:fs');
+const path = require('node:path');
 const { test, expect, data, langs } = require('./site');
 
 const projects = data('_data/projects.json');
@@ -58,6 +60,25 @@ for (const lang of langs) {
         }
     });
 
+    test(`/${lang} shows the stack of each project as chips, each after the logo of its hard skill or an icon, with no label before them`, async ({ page }) => {
+        await page.goto(`/${lang}`);
+        for (const card of projects.cards) {
+            const chips = page.locator(`#${card.id} .tech-chips .tech-chip`);
+            await expect(page.locator(`#${card.id} .details`)).not.toContainText('Technologies');
+            await expect(chips).toHaveText(card.technologies.map(t => (t.detail ? `${t.label} (${t.detail})` : t.label)));
+            for (const [index, t] of card.technologies.entries()) {
+                const chip = chips.nth(index);
+                if (t.key) {
+                    expect(fs.existsSync(path.join(__dirname, '..', '..', 'images', `${t.key}.png`)), t.key).toBe(true);
+                    await expect(chip.locator('img')).toHaveAttribute('src', `images/${t.key}.png`);
+                    await expect(chip.locator('img')).toHaveAttribute('alt', '');
+                } else {
+                    await expect(chip.locator(`i.${t.icon}`)).toHaveAttribute('aria-hidden', 'true');
+                }
+            }
+        }
+    });
+
     test(`/${lang} ends the context of each card with its duration, then its period in ${lang} between brackets when it has one`, async ({ page }) => {
         await page.goto(`/${lang}`);
         const colon = lang === 'fr' ? ' :' : ':';
@@ -65,6 +86,13 @@ for (const lang of langs) {
             const context = card.context[lang].replace(/<[^>]+>/g, '');
             const period = card.date ? ` (${card.date[lang]})` : '';
             await expect(page.locator(`#${card.id} .details p:not(.project-sectors)`).first()).toHaveText(`${projects[lang].context}${colon} ${context}${period}`);
+            // An icon instead of the visible labels of the context and the description, which screen readers still read
+            const lines = page.locator(`#${card.id} .project-line`);
+            await expect(lines.nth(0).locator('i.icon-info-circle')).toHaveAttribute('aria-hidden', 'true');
+            await expect(lines.nth(0).locator('.sr-only')).toHaveText(`${projects[lang].context}${colon} `);
+            await expect(lines.nth(1).locator('i.icon-file-text-o')).toHaveAttribute('aria-hidden', 'true');
+            await expect(lines.nth(1).locator('.sr-only')).toHaveText(`${projects[lang].description}${colon} `);
+            await expect(lines.nth(0).locator('u')).toHaveCount(0);
         }
     });
 

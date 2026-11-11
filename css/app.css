@@ -2577,6 +2577,44 @@ html.dark-mode .project .project-type {
     margin: 0;
 }
 
+/* The context and the description of a project card after their icon, which stands for their label */
+.project-line i {
+    margin-right: 6px;
+}
+
+/* The stack of a project card: one white chip per technology after its logo, square apart from the round sector pills */
+.tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+}
+
+.tech-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background-color: var(--white);
+    color: var(--secondary-dark);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.tech-chip img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+.tech-chip i {
+    color: var(--primary-dark);
+}
+
 .company-type-badge,
 .company-size-badge {
     display: inline-block;

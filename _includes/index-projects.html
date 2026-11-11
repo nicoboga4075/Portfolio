@@ -33,10 +33,15 @@
                             <p class="project-sectors">{% for tag in p.sector %}<span class="sector-tag"><i class="{{ resume.sectorIcons[tag[siteLanguages.default] if tag[siteLanguages.default] else tag] }}" aria-hidden="true"></i>{{ tag[lang] if tag[lang] else tag }}</span>{% endfor %}</p>
                             {%- endif %}
                             {#- The period of the project, as on LinkedIn, between brackets after its duration (development and maintenance), which ends the context; nothing for a card without a date #}
-                            <p><u>{{ projectsLang.context }}</u>{{ colon }} {{ p.context[lang] | safe }}{% if p.date %} ({{ p.date[lang] }}){% endif %}</p>
-                            <p><u>Description</u>{{ colon }} {{ p.description[lang] | safe }}
-                                <br><u>Technologies</u>{{ colon }} {{ p.technologies | safe }}
-                            </p>
+                            {#- The context and the description after an icon instead of their label, the label kept for screen readers #}
+                            <p class="project-line"><i class="icon-info-circle" aria-hidden="true"></i><span class="sr-only">{{ projectsLang.context }}{{ colon }} </span>{{ p.context[lang] | safe }}{% if p.date %} ({{ p.date[lang] }}){% endif %}</p>
+                            <p class="project-line"><i class="icon-file-text-o" aria-hidden="true"></i><span class="sr-only">{{ projectsLang.description }}{{ colon }} </span>{{ p.description[lang] | safe }}</p>
+                            {#- The stack of the project, one chip per technology after its logo (images/<key>.png, the image of its hard skill) or an icon, a framework or a version between brackets #}
+                            <ul class="tech-chips">
+                                {%- for t in p.technologies %}
+                                <li class="tech-chip">{% if t.key %}<img src="images/{{ t.key }}.png" alt="" width="14" height="14" loading="lazy">{% else %}<i class="{{ t.icon }}" aria-hidden="true"></i>{% endif %}{{ t.label }}{% if t.detail %} ({{ t.detail }}){% endif %}</li>
+                                {%- endfor %}
+                            </ul>
                             {%- if p.note %}
                             <p>{{ p.note[lang] }}</p>
                             {%- endif %}

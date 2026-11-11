@@ -64,7 +64,8 @@ function listProjects({ lang } = {}) {
             title: plain(inLang(card.title, pick)),
             description: plain(inLang(card.description, pick) ?? ''),
             context: plain(inLang(card.context, pick) ?? ''),
-            technologies: inLang(card.technologies, pick),
+            // The stack as one line, the framework or version of a technology between brackets
+            technologies: (card.technologies ?? []).map(t => (t.detail ? `${t.label} (${t.detail})` : t.label)).join(', '),
             explore: target,
             url: page ? `/${pick}/${target}` : target,
             pages: page ? Object.keys(locales).map(code => `projects/${target}_${code}.html`).filter(exists) : [],

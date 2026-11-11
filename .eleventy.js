@@ -336,7 +336,8 @@ function apiData() {
         // Its period, or null for a card without a date
         date: card.date ? both(card.date) : null,
         description: both(card.description),
-        technologies: plainText(inLang(card.technologies, defaultLang) ?? ""),
+        // The stack as one line, the framework or version of a technology between brackets: C# (.NET Core), HTML, CSS
+        technologies: (card.technologies ?? []).map(t => (t.detail ? `${t.label} (${t.detail})` : t.label)).join(", "),
         hasPage: projects.includes(card.explore),
         url: Object.fromEntries(langs.map(lang => [lang, targetUrl(card.explore, lang)]))
     }));
