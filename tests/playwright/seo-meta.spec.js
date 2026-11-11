@@ -21,9 +21,9 @@ const values = (list, key) => list.filter(([k]) => k === key).map(([, v]) => v);
 const jsonLd = html => JSON.parse(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/.exec(html)[1]);
 
 test.describe('title', () => {
-    test('home has no page title: site name and author only', () => {
-        const html = read('index_en.html');
-        expect(html).toContain(`<title>${pkg.name} - ${pkg.author.name}</title>`);
+    test('home: site name, the job in the language of the page, author', () => {
+        expect(read('index_en.html')).toContain(`<title>${pkg.name} - Software Engineer - ${pkg.author.name}</title>`);
+        expect(read('index_fr.html')).toContain(`<title>${pkg.name} - Ingénieur Logiciel - ${pkg.author.name}</title>`);
     });
 
     test('inner page: site name, page title, author', () => {
@@ -43,14 +43,14 @@ test.describe('head metas', () => {
     test('home Open Graph tags', () => {
         const list = metas(read('index_en.html'));
         expect(values(list, 'og:site_name')).toEqual([pkg.name]);
-        expect(values(list, 'og:title')).toEqual([pkg.name]);
+        expect(values(list, 'og:title')).toEqual(['Software Engineer']);
         expect(values(list, 'og:image')).toEqual([`${site}/images/view.png`]);
         expect(values(list, 'og:type')).toEqual(['website']);
         expect(values(list, 'og:url')).toEqual([`${site}/en`]);
         expect(values(list, 'og:description')[0]).toBeTruthy();
         expect(values(list, 'og:locale')).toEqual([pkg.config.locales.en.replace('-', '_')]);
         expect(values(list, 'og:locale:alternate')).toEqual([pkg.config.locales.fr.replace('-', '_')]);
-        expect(values(list, 'og:image:alt')).toEqual([pkg.name]);
+        expect(values(list, 'og:image:alt')).toEqual(['Software Engineer']);
         expect(values(list, 'og:image:type')).toEqual(['image/png']);
         expect(Number(values(list, 'og:image:width')[0])).toBeGreaterThan(0);
         expect(Number(values(list, 'og:image:height')[0])).toBeGreaterThan(0);

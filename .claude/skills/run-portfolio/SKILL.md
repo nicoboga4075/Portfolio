@@ -44,7 +44,7 @@ node .claude/skills/run-portfolio/driver.mjs
 It reads the site port from `netlify.toml`, opens `en` and `en/blog`, then clicks FR in the language switcher of the English home page and checks that `html lang` is `fr`. One line per page, exit code 1 on an HTTP error, a console error or a failed switch:
 
 ```
-/en -> http://localhost:<port>/en [200] title="Portfolio - Nicolas BOGALHEIRO" h1="Nicolas BOGALHEIRO" errors=0 screenshot=reports\run\en.png
+/en -> http://localhost:<port>/en [200] title="Portfolio - Software Engineer - Nicolas BOGALHEIRO" h1="Nicolas BOGALHEIRO" errors=0 screenshot=reports\run\en.png
 ```
 
 Other pages, another server, another screenshot folder:
