@@ -104,8 +104,8 @@ test.describe('services delivery pipeline', () => {
             // The tools of a step, or of each kind of a step that sorts them
             for (const tools of steps.flatMap(step => step.groups ? step.groups.map(group => group.detail[lang]) : [step.detail[lang]])) {
                 // A single reader to subscribe with is a link to its subscription to the feed of the page language
-                const single = tools[0].subscribe
-                    ? `<a class="pipeline-detail" href="${tools[0].subscribe}${encodeURIComponent(`feed/https://example.com/feed_${lang}.xml`)}" target="_blank" rel="noopener">${logo(tools[0].name)}${tools[0].name}</a>`
+                const single = tools[0].subscribePrefix
+                    ? `<a class="pipeline-detail" href="${tools[0].subscribePrefix}${encodeURIComponent(`feed/https://example.com/feed_${lang}.xml`)}" target="_blank" rel="noopener">${logo(tools[0].name)}${tools[0].name}</a>`
                     : `<span class="pipeline-detail">${logo(tools[0])}${tools[0]}</span>`;
                 const markup = tools.length > 1 ? tools.map(tool => `<li class="pipeline-tool">${logo(tool)}${tool}</li>`).join('') : single;
                 expect(html).toContain(markup);

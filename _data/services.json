@@ -19,7 +19,7 @@
         ] },
         { "branches": [
                 { "icon": "icon-globe", "title": { "en": "PWA", "fr": "PWA" }, "detail": { "en": ["Service Worker", "Web App Manifest", "Google Analytics"], "fr": ["Service Worker", "Web App Manifest", "Google Analytics"] } },
-                { "icon": "icon-rss", "title": { "en": "Atom RSS", "fr": "Atom RSS" }, "detail": { "en": [{ "name": "Feedly", "subscribe": "https://feedly.com/i/subscription/content/" }], "fr": [{ "name": "Feedly", "subscribe": "https://feedly.com/i/subscription/content/" }] } }
+                { "icon": "icon-rss", "title": { "en": "Atom RSS", "fr": "Atom RSS" }, "detail": { "en": [{ "name": "Feedly", "subscribePrefix": "https://feedly.com/i/subscription/content/" }], "fr": [{ "name": "Feedly", "subscribePrefix": "https://feedly.com/i/subscription/content/" }] } }
         ] }
     ],
     "cards": [

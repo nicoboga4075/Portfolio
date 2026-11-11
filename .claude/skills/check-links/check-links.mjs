@@ -55,9 +55,10 @@ function toLink(raw) {
     return url;
 }
 
-// Only a whole link (an href or a JSON value) counts: a template prefix such as urlPrefix = "https://.../" is completed later.
+// Only a whole link (an href or a JSON value) counts: a template prefix such as urlPrefix = "https://.../", or the JSON value of a key ending in Prefix ("subscribePrefix": "https://.../"), is completed later.
 function isWholeLink(text, index) {
     const before = text.slice(Math.max(0, index - 12), index);
+    if (/Prefix"\s*:\s*"$/.test(text.slice(Math.max(0, index - 40), index))) return false;
     return before.endsWith('href="') || (before.endsWith('"') && before.slice(0, -1).trimEnd().endsWith('":'));
 }
 

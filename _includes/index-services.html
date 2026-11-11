@@ -49,8 +49,8 @@
                         <li class="pipeline-tool">{{ toolLogo(tool) }}{{ tool }}</li>
                         {%- endfor %}
                     </ul>
-                    {%- elif tools[0].subscribe %}
-                    <a class="pipeline-detail" href="{{ tools[0].subscribe }}{{ ('feed/' + siteUrl + '/feed_' + lang + '.xml') | urlencode }}" target="_blank" rel="noopener">{{ toolLogo(tools[0].name) }}{{ tools[0].name }}</a>
+                    {%- elif tools[0].subscribePrefix %}
+                    <a class="pipeline-detail" href="{{ tools[0].subscribePrefix }}{{ ('feed/' + siteUrl + '/feed_' + lang + '.xml') | urlencode }}" target="_blank" rel="noopener">{{ toolLogo(tools[0].name) }}{{ tools[0].name }}</a>
                     {%- else %}
                     <span class="pipeline-detail">{{ toolLogo(tools[0]) }}{{ tools[0] }}</span>
                     {%- endif %}
