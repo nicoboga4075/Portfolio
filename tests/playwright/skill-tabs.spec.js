@@ -3,6 +3,7 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
 const nunjucks = require('nunjucks');
+const { italicNames } = require('../../.eleventy');
 
 const root = path.join(__dirname, '..', '..');
 const skills = require(path.join(root, '_data', 'skills.json'));
@@ -11,6 +12,8 @@ const css = fs.readFileSync(path.join(root, 'css', 'app.css'), 'utf8');
 // Renders the carousel partial with its includes, the way Eleventy gives it its data on the desktop build
 function render(lang) {
     const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(path.join(root, '_includes')), { autoescape: true });
+    // The filter of .eleventy.js that puts the companies and schools in italics
+    env.addFilter('italicNames', text => italicNames(text));
     return env.render('index-carousel.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, viewport: 'desktop', skills }).replaceAll(/>\s+</g, '><');
 }
 

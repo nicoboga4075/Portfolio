@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
 const nunjucks = require('nunjucks');
+const { italicNames } = require('../../.eleventy');
 
 const root = path.join(__dirname, '..', '..');
 const template = fs.readFileSync(path.join(root, '_includes', 'skills-mad.html'), 'utf8');
@@ -10,6 +11,8 @@ const skills = require(path.join(root, '_data', 'skills.json'));
 // Renders the mad skills include alone, the way Eleventy gives it its data
 function render(lang, data = skills) {
     const env = new nunjucks.Environment(null, { autoescape: true });
+    // The filter of .eleventy.js that puts the companies and schools in italics
+    env.addFilter('italicNames', text => italicNames(text));
     return env.renderString(template, { page: { fileSlug: `index_${lang}` }, skills: data });
 }
 
@@ -40,7 +43,9 @@ test.describe('mad skills carousel', () => {
             for (const skill of withTip) {
                 const name = skill[lang].replaceAll('&', '&amp;');
                 const tip = skill.tip[lang].replaceAll('&', '&amp;');
-                expect(html).toContain(`<span>${name}</span><button type="button" class="hard-skill-tip" data-bs-toggle="tooltip" data-container="body" title="${tip}" aria-label="${name}${colon} ${tip}"><i class="icon-question-circle" aria-hidden="true"></i></button>`);
+                // The tooltip renders its HTML (escaped twice in the title), the name read by screen readers stays plain text
+                const title = italicNames(skill.tip[lang]).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+                expect(html).toContain(`<span>${name}</span><button type="button" class="hard-skill-tip" data-bs-toggle="tooltip" data-container="body" data-html="true" title="${title}" aria-label="${name}${colon} ${tip}"><i class="icon-question-circle" aria-hidden="true"></i></button>`);
             }
             expect(html.match(/class="hard-skill-tip"/g)).toHaveLength(withTip.length);
         });

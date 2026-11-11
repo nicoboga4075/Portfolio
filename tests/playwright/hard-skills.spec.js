@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
 const nunjucks = require('nunjucks');
+const { italicNames } = require('../../.eleventy');
 
 const root = path.join(__dirname, '..', '..');
 const template = fs.readFileSync(path.join(root, '_includes', 'skills-hard.html'), 'utf8');
@@ -10,6 +11,8 @@ const skillsData = require(path.join(root, '_data', 'skills.json'));
 // Renders the hard skills include alone, the way Eleventy gives it its page
 function render(lang) {
     const env = new nunjucks.Environment(null, { autoescape: true });
+    // The filter of .eleventy.js that puts the companies and schools in italics
+    env.addFilter('italicNames', text => italicNames(text));
     return env.renderString(template, { page: { fileSlug: `index_${lang}` }, skills: skillsData });
 }
 
@@ -62,8 +65,9 @@ test.describe('hard skills carousel', () => {
             for (const [key, tip] of tips) {
                 const label = items(render(lang)).find(skill => skill.key === key).label;
                 // Escaped as Nunjucks does (an apostrophe of the French texts)
-                const text = tip[lang].replaceAll('&', '&amp;').replaceAll("'", '&#39;');
-                expect(html).toContain(`<button type="button" class="hard-skill-tip" data-bs-toggle="tooltip" data-container="body" title="${text}" aria-label="${label}${colon} ${text}"><i class="icon-question-circle" aria-hidden="true"></i></button>`);
+                const escape = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+                // The tooltip renders its HTML, the companies in italics; the name read by screen readers stays plain text
+                expect(html).toContain(`<button type="button" class="hard-skill-tip" data-bs-toggle="tooltip" data-container="body" data-html="true" title="${escape(italicNames(tip[lang]))}" aria-label="${label}${colon} ${escape(tip[lang])}"><i class="icon-question-circle" aria-hidden="true"></i></button>`);
             }
             expect(html.match(/class="hard-skill-tip"/g)).toHaveLength(tips.length);
         });
@@ -75,7 +79,7 @@ test.describe('hard skills carousel', () => {
             const html = render(lang).replaceAll(/>\s+</g, '><');
             for (const [key, docs] of Object.entries(skillsData.hardDocs)) {
                 const label = items(render(lang)).find(skill => skill.key === key).label;
-                const lines = docs.map(d => `<span class="hard-skill-docs-line"><a href="/docs/public/${encodeURIComponent(d.doc)}" target="_blank" rel="noopener">${d.name}</a>${d.text[lang].replaceAll("'", '&#39;')}</span>`).join('');
+                const lines = docs.map(d => `<span class="hard-skill-docs-line"><a href="/docs/public/${encodeURIComponent(d.doc)}" target="_blank" rel="noopener">${d.name}</a>${italicNames(d.text[lang])}</span>`).join('');
                 expect(html).toContain(`<button type="button" class="hard-skill-doc hard-skill-docs" aria-label="${label}${colon} ${skillsData.carousel[lang].docsLinkLabel}"><i class="icon-file-pdf-o" aria-hidden="true"></i></button><span class="hard-skill-docs-list" hidden>${lines}</span>`);
                 for (const { doc } of docs) expect(fs.existsSync(path.join(root, 'docs', 'public', doc))).toBe(true);
             }

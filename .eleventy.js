@@ -346,6 +346,13 @@ function apiData() {
     };
 }
 
+// The names of the companies, schools and other organizations of config.companies, config.schools and config.organizations in italics in a plain text of _data (skills tooltips and experiences), escaped first: the longest name first, so Bassetti Group is not cut into Bassetti; a name inside a word (CGI in CGIs) is left alone
+function italicNames(text, names = [...pkg.config.companies, ...pkg.config.schools, ...pkg.config.organizations]) {
+    const escaped = String(text ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    const pattern = [...names].sort((a, b) => b.length - a.length).map(name => name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    return escaped.replace(new RegExp(String.raw`(?<![\p{L}\p{N}])(${pattern.join("|")})(?![\p{L}\p{N}])`, "gu"), "<i>$1</i>");
+}
+
 // How the Eleventy transform writes each page: minified on the Netlify production build (CONTEXT) and on the preview builds of the tests, so they read the HTML visitors get; formatted with Prettier, readable, under npm run dev (ELEVENTY_DEV of dev-watch.js) and on the in-place build of the CI, whose Node 20 job cannot load html-minifier-next
 function htmlMode(env) {
     const production = env.CONTEXT === "production" && !env.ELEVENTY_PREVIEW;
@@ -458,6 +465,7 @@ module.exports = function configureEleventy(eleventyConfig) {
     eleventyConfig.addFilter("resolveArticles", require("./articles/resolve-articles"));
     // The years of a job on the back of the work experiences counter (work-years.js)
     eleventyConfig.addFilter("workYears", require("./work-years"));
+    eleventyConfig.addFilter("italicNames", text => italicNames(text));
     for (const dir of passthroughDirs) {
         if (fs.existsSync(dir)) {
             eleventyConfig.addPassthroughCopy(dir);
@@ -512,5 +520,6 @@ module.exports = function configureEleventy(eleventyConfig) {
     };
 };
 // The HTML transform, for its tests (tests/playwright/eleventy-html.spec.js)
+module.exports.italicNames = italicNames;
 module.exports.htmlMode = htmlMode;
 module.exports.formatHtml = formatHtml;

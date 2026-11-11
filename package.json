@@ -151,6 +151,9 @@
         "href": "https://linkerz.fr/nicoboga4075"
       }
     ],
+    "companies": ["Soft Concept", "Cyberprotect", "Galadrim", "CGI", "Astek", "Alstom", "ChapsVision", "Bassetti Group", "Bassetti", "Kelprof", "Yoopies", "MNT", "La Poste", "AFNOR", "SNITEM", "Pragma", "Nexialist", "Vitalis", "Elphicom", "Sushi Robots", "Teractem", "CERA", "Palantir"],
+    "schools": ["ESILV", "UQAC", "Janson de Sailly", "Saint Jacques de Compostelle"],
+    "organizations": ["FFSU", "US Dax", "ANSSI", "Coursera", "FIRST", "Club EBIOS"],
     "socials": [
       {
         "href": "https://www.linkedin.com/in/nicolas-bogalheiro-126a7616b",

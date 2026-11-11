@@ -3,7 +3,7 @@
     {#- A passion with a tip (tip of its entry in skills.json, in every language) gets the question mark of the hard skills in its corner, its tooltip #}
     {%- for s in skills.mad %}
     <div class="d-flex flex-column align-items-center{{ ' hard-skill' if s.tip }}"><img src="images/{{ s.key }}.png" class="img-fluid" alt="{{ s[lang] }}" loading="lazy" height="75" width="75"><span>{{ s[lang] }}</span>
-        {%- if s.tip %}<button type="button" class="hard-skill-tip" data-bs-toggle="tooltip" data-container="body" title="{{ s.tip[lang] }}" aria-label="{{ s[lang] }}{{ ' :' if lang == 'fr' else ':' }} {{ s.tip[lang] }}"><i class="icon-question-circle" aria-hidden="true"></i></button>{% endif -%}
+        {%- if s.tip %}<button type="button" class="hard-skill-tip" data-bs-toggle="tooltip" data-container="body" data-html="true" title="{{ s.tip[lang] | italicNames }}" aria-label="{{ s[lang] }}{{ ' :' if lang == 'fr' else ':' }} {{ s.tip[lang] }}"><i class="icon-question-circle" aria-hidden="true"></i></button>{% endif -%}
     </div>
     {%- endfor %}
 </div>
