@@ -165,6 +165,7 @@
     },
     "hardTips": {
         "office": { "en": "PowerPoint, Excel, Word, OneNote", "fr": "PowerPoint, Excel, Word, OneNote" },
+        "dotnet": { "en": ".NET 6 at Soft Concept, .NET 8 at Bassetti Group, .NET Framework 4.6.2 at Alstom (Astek), .NET 9 at ChapsVision", "fr": ".NET 6 chez Soft Concept, .NET 8 chez Bassetti Group, .NET Framework 4.6.2 chez Alstom (Astek), .NET 9 chez ChapsVision" },
         "netsurvey": { "en": "Questionnaire creation software developed by Soft Concept — group training for the MNT", "fr": "Logiciel de création de questionnaires développé par Soft Concept — formation en groupe pour la MNT" },
         "ethnos": { "en": "Survey data analysis software developed by Soft Concept — data viz charts (amCharts) integrated into it", "fr": "Logiciel d'analyse de données d'enquête développé par Soft Concept — intégration de graphiques de data viz (amCharts)" },
         "webreports": { "en": "Application development and deployment software developed by Soft Concept — one-to-one training for a La Poste employee", "fr": "Logiciel de développement et de déploiement d'applications développé par Soft Concept — formation individuelle pour un collaborateur de La Poste" },
