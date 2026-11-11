@@ -71,7 +71,7 @@ description: "<the one-line description of the card in that language, without HT
 ```
 
 - French page: `permalink: "projects/<slug>_fr.html"`, headings `📝 Présentation`, `🛠️ Technologies utilisées`, `🗂️ Structure de l’application`, `📈 Utilisation`, and `<a id="index">Retour à l'accueil</a>`.
-- A video goes right after the title block, as in `projects/ebatisoft_en.html`: `<div class="video-wrapper"><video controls>` with its `<source>` in `docs/public/` and one `<track>` per language.
+- A video goes right after the title block, as in `projects/ebatisoft_en.html`: `<div class="video-wrapper"><video controls preload="none" poster="images/posters/<page>.webp">` with its `<source>` in `docs/public/` and one `<track>` per language. The poster is the first frame of the video, 1280px wide (`ffmpeg -i docs/public/<video>.mp4 -frames:v 1 -vf scale=1280:-2 -c:v libwebp -quality 80 images/posters/<page>.webp`): the page shows it at once and loads the video only on play, instead of fetching the MP4 for its first frame (the LCP of the page).
 - A client's copyright line ends the article: `<hr>` then `<p>©Company 2024</p>`.
 
 ## 4. Routes, redirects, audits
