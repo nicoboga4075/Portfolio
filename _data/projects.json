@@ -19,9 +19,13 @@
             "explore": "https://www.esilv.fr/challenges-citoyens-cgi-2019-deux-premiers-prix-esilv-categories-environnement-et-handicap",
             "title": "Easy Student Housing",
             "badge": "Microsoft Office",
+            "date": {
+                "en": "October 2018 - April 2019",
+                "fr": "octobre 2018 - avril 2019"
+            },
             "context": {
-                "en": "<i>CGI</i> Student Contest | Monitored, in quartet (ESILV) | 6 months",
-                "fr": "Concours étudiant <i>CGI</i> | Supervisé, en quatuor (ESILV) | 6 mois"
+                "en": "<i>CGI</i> Student Contest | Monitored, in quartet (ESILV) | 7 months",
+                "fr": "Concours étudiant <i>CGI</i> | Supervisé, en quatuor (ESILV) | 7 mois"
             },
             "description": {
                 "en": "Student housing app (prototype)",
@@ -34,6 +38,10 @@
             "explore": "blog#mcs",
             "title": "CPMCS",
             "badge": "Python/Angular",
+            "date": {
+                "en": "March 2020 - August 2020",
+                "fr": "mars 2020 - août 2020"
+            },
             "context": {
                 "en": "Internship at <i>Cyberprotect</i> | Monitored, lonely | 6 months",
                 "fr": "Stage chez <i>Cyberprotect</i> | Supervisé, en autonomie | 6 mois"
@@ -53,9 +61,13 @@
             "explore": "crm_elphicom",
             "title": "CRM <i>Elphicom</i>",
             "badge": "HTML/CSS/JS",
+            "date": {
+                "en": "September 2021 - December 2021",
+                "fr": "septembre 2021 - décembre 2021"
+            },
             "context": {
-                "en": "Internship at <i>Soft Concept</i> | Monitored, lonely | 3 months",
-                "fr": "Stage chez <i>Soft Concept</i> | Supervisé, en autonomie | 3 mois"
+                "en": "Internship at <i>Soft Concept</i> | Monitored, lonely | 4 months",
+                "fr": "Stage chez <i>Soft Concept</i> | Supervisé, en autonomie | 4 mois"
             },
             "description": {
                 "en": "Customer management software (CRM)",
@@ -68,6 +80,10 @@
             "explore": "ebatisoft",
             "title": "EBati <i>Carto Amiante</i>",
             "badge": "C#",
+            "date": {
+                "en": "January 2022 - January 2023",
+                "fr": "janvier 2022 - janvier 2023"
+            },
             "context": {
                 "en": "Permanent contract at <i>Soft Concept</i> | In pairs | 1 year",
                 "fr": "CDI chez <i>Soft Concept</i> | En binôme | 1 an"
@@ -83,9 +99,13 @@
             "explore": "jca_sushirobots",
             "title": "JCA <i>Sushi Robots</i>",
             "badge": "C#",
+            "date": {
+                "en": "April 2023 - October 2023",
+                "fr": "avril 2023 - octobre 2023"
+            },
             "context": {
-                "en": "Permanent contract at <i>Soft Concept</i> | Lonely | 6 months",
-                "fr": "CDI chez <i>Soft Concept</i> | En autonomie | 6 mois"
+                "en": "Permanent contract at <i>Soft Concept</i> | Lonely | 7 months",
+                "fr": "CDI chez <i>Soft Concept</i> | En autonomie | 7 mois"
             },
             "description": {
                 "en": "E-learning platform for cooking",
@@ -102,6 +122,10 @@
                 "en": "<i>Pragma</i> Internal Surveys",
                 "fr": "Enquêtes Internes <i>Pragma</i>"
             },
+            "date": {
+                "en": "June 2022 - December 2023",
+                "fr": "juin 2022 - décembre 2023"
+            },
             "context": {
                 "en": "Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 1 year and a half",
                 "fr": "CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 1 an et demi"
@@ -117,6 +141,10 @@
             "explore": "ref230_afnor",
             "title": "REF230 <i>AFNOR</i>",
             "badge": "C#",
+            "date": {
+                "en": "March 2022 - May 2024",
+                "fr": "mars 2022 - mai 2024"
+            },
             "context": {
                 "en": "Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 2 years",
                 "fr": "CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 2 ans"
@@ -132,9 +160,13 @@
             "explore": "panel_mnt",
             "title": "Panel Terriscope <i>MNT</i>",
             "badge": "HTML/CSS/JS",
+            "date": {
+                "en": "October 2023 - May 2024",
+                "fr": "octobre 2023 - mai 2024"
+            },
             "context": {
-                "en": "Permanent contract at <i>Soft Concept</i> | Lonely | 3 months",
-                "fr": "CDI chez <i>Soft Concept</i> | En autonomie | 3 mois"
+                "en": "Permanent contract at <i>Soft Concept</i> | Lonely | 8 months",
+                "fr": "CDI chez <i>Soft Concept</i> | En autonomie | 8 mois"
             },
             "description": {
                 "en": "Panelist site for the mutual",
@@ -147,8 +179,12 @@
             "explore": "opale_snitem",
             "title": "OPALE <i>SNITEM</i>",
             "badge": "C#",
+            "date": {
+                "en": "November 2022 - May 2024",
+                "fr": "novembre 2022 - mai 2024"
+            },
             "context": {
-                "en": "Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 1 year",
+                "en": "Permanent contract at <i>Soft Concept</i> | In team, external collaboration | 1 year and a half",
                 "fr": "CDI chez <i>Soft Concept</i> | En équipe, collaboration externe | 1 an et demi"
             },
             "description": {

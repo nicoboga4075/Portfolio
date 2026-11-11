@@ -330,6 +330,8 @@ function apiData() {
         title: plainText(inLang(card.title, defaultLang)),
         badge: plainText(card.badge ?? ""),
         context: both(card.context),
+        // Its period, or null for a card without a date
+        date: card.date ? both(card.date) : null,
         description: both(card.description),
         technologies: plainText(inLang(card.technologies, defaultLang) ?? ""),
         hasPage: projects.includes(card.explore),

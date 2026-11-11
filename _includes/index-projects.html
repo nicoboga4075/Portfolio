@@ -24,7 +24,8 @@
                     <div class="text text-center p-4">
                         <h3>{{ (p.heading[lang] if p.heading else p.title) | safe }}</h3>
                         <div class="details">
-                            <p><u>{{ projectsLang.context }}</u>{{ colon }} {{ p.context[lang] | safe }}</p>
+                            {#- The period of the project, as on LinkedIn, between brackets after its duration (development and maintenance), which ends the context; nothing for a card without a date #}
+                            <p><u>{{ projectsLang.context }}</u>{{ colon }} {{ p.context[lang] | safe }}{% if p.date %} ({{ p.date[lang] }}){% endif %}</p>
                             <p><u>Description</u>{{ colon }} {{ p.description[lang] | safe }}
                                 <br><u>Technologies</u>{{ colon }} {{ p.technologies | safe }}
                             </p>

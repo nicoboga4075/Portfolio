@@ -20,6 +20,7 @@ The card says itself what its Explore button opens, in its `explore`: the explor
 Ask for what is missing, in one message:
 
 - the **title** (HTML allowed: the client's name in `<i>`), a short **badge** (main technology: `C#`, `HTML/CSS/JS`), the **technologies** (main ones in `<b>`);
+- the **date**, the period of the project (development and maintenance) in English and in French, as on LinkedIn, shown between brackets after the duration that ends the context: `"November 2022 - May 2024"` / `"novembre 2022 - mai 2024"` (French months in lower case);
 - the **context** in English and in French, in the existing shape: `"<Contract> at <i>Company</i> | <how> | <duration>"` / `"<Contrat> chez <i>Entreprise</i> | <comment> | <durée>"`;
 - a one-line **description** in both languages, and optionally a **note** (shown under it);
 - where Explore goes (own page, article or URL), and for an own page: the **slug** (lowercase, `_` or `-`, no accent) and its **content** in both languages;
@@ -30,7 +31,7 @@ Don't invent the project's content: write only what the user gave or asked for.
 
 ## 2. The card and its target
 
-- `_data/projects.json` `cards`: `{ "id": "<card image name>", "explore": "<target>", "title": "...", "badge": "...", "context": { "en", "fr" }, "description": { "en", "fr" }, "technologies": "..." }`, plus `"heading": { "en", "fr" }` when the title differs per language, `"note": { "en", "fr" }` if any.
+- `_data/projects.json` `cards`: `{ "id": "<card image name>", "explore": "<target>", "title": "...", "badge": "...", "context": { "en", "fr" }, "date": { "en", "fr" }, "description": { "en", "fr" }, "technologies": "..." }`, plus `"heading": { "en", "fr" }` when the title differs per language, `"note": { "en", "fr" }` if any.
 - `explore`, the target: `<slug>` (its own page, `/<lang>/<slug>`), `blog#<article-slug>` or `https://...` (an `http://` one goes to the 404 page).
 
 Keep each file's formatting: edit, don't rewrite the file.

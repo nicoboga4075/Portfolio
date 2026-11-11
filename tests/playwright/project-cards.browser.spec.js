@@ -17,6 +17,16 @@ for (const lang of langs) {
         }
     });
 
+    test(`/${lang} ends the context of each card with its duration, then its period in ${lang} between brackets when it has one`, async ({ page }) => {
+        await page.goto(`/${lang}`);
+        const colon = lang === 'fr' ? ' :' : ':';
+        for (const card of projects.cards) {
+            const context = card.context[lang].replace(/<[^>]+>/g, '');
+            const period = card.date ? ` (${card.date[lang]})` : '';
+            await expect(page.locator(`#${card.id} .details p`).first()).toHaveText(`${projects[lang].context}${colon} ${context}${period}`);
+        }
+    });
+
     test(`/${lang}: hovering a card shows its details, and its Explore button opens the project page in ${lang}`, async ({ page }) => {
         await page.goto(`/${lang}`);
         const card = page.locator(`#${pageCard.id}`);
