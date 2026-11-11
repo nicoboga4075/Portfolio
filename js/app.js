@@ -38,6 +38,12 @@ const appSkills = [
     "mad-skills"
 ];
 
+// The cards per slide of each carousel by screen width (the carousels show from 576px): a soft skill card holds its experiences on its back, so it gets fewer cards per slide, each wider, than a hard or mad skill with its picture and name
+const carouselItems = {
+    default: { 0: { items: 2 }, 576: { items: 3 }, 992: { items: 4 }, 1200: { items: 5 } },
+    '#soft-skills': { 0: { items: 1 }, 576: { items: 2 }, 992: { items: 3 }, 1200: { items: 4 } }
+};
+
 const appArticles = JSON.parse($('meta[name="articles"]').attr('content'));
 
 const appKeywords = [
@@ -1273,20 +1279,7 @@ function initCarousel(target) {
         autoplayHoverPause: false,
         items: 4,
         navText: ['<span class="icon-chevron-circle-left"></span>', '<span class="icon-chevron-circle-right"></span>'],
-        responsive: {
-            0: {
-                items: 2
-            },
-            576: {
-                items: 3
-            },
-            992: {
-                items: 4
-            },
-            1200: {
-                items: 5
-            }
-        }
+        responsive: carouselItems[target] ?? carouselItems.default
     });
     labelCarouselControls(target);
     $(`.owl-menu[data-target="${target}"]`).addClass("active").siblings('.owl-menu').removeClass('active');

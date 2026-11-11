@@ -194,6 +194,13 @@ describe('on load', () => {
         expect($('#hard-skills').hasClass('active')).toBe(true);
     });
 
+    test('gives the soft skills carousel fewer, wider cards per slide than the others', () => {
+        const app = loadApp({ body: '<div id="soft-skills"></div><span class="owl-menu" data-target="#soft-skills"></span>' });
+        $.fn.owlCarousel.mockClear();
+        app.initCarousel('#soft-skills');
+        expect($.fn.owlCarousel).toHaveBeenCalledWith(expect.objectContaining({ responsive: { 0: { items: 1 }, 576: { items: 2 }, 992: { items: 3 }, 1200: { items: 4 } } }));
+    });
+
     test('makes the navbar opaque past 150px, awake past 350px, and asleep only on the way back up', () => {
         loadApp({ body: '<nav id="ftco-navbar"></nav>' });
         const scrollTo = top => {

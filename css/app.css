@@ -2865,8 +2865,10 @@ html.dark-mode .owl-dot:focus-visible {
     display: flex;
 }
 
+/* 10px around a soft skill card instead of the 30px of a hard skill, which left a 100px card on a tablet */
 #soft-skills .owl-item {
     display: flex;
+    padding: 10px;
 }
 
 /* A soft skill card: its two faces stacked in one grid cell, so the card is as tall as the longer one, and the back turned away until the card is unlocked */
