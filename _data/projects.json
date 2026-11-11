@@ -50,7 +50,7 @@
                 "en": "Application of maintenance in security condition (MSC)",
                 "fr": "Application de maintien en condition de sécurité (MCS)"
             },
-            "technologies": "<b>Python</b> (Flask), Angular, PostgreSQL, Elasticsearch",
+            "technologies": "<b>Python</b> (Flask), <b>Angular</b>, PostgreSQL, Elasticsearch",
             "note": {
                 "en": "For the sake of privacy, I just do a presentation of the concept.",
                 "fr": "Par soucis de confidentialité, je me limite à une présentation du concept."
