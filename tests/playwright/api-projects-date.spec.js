@@ -6,10 +6,11 @@ const path = require('node:path');
 const root = path.join(__dirname, '..', '..');
 const projectsData = JSON.parse(fs.readFileSync(path.join(root, '_data', 'projects.json'), 'utf8'));
 const cards = projectsData.cards;
-const api = JSON.parse(fs.readFileSync(path.join(root, 'api', 'projects.json'), 'utf8'));
 
 test.describe('api/projects.json period', () => {
-    test('hands the period of each card in every language, or null for a card without a date', () => {
+    test('hands the kind and the period of each card in every language, or null for a card without a date', () => {
+        // Read in the test, not when the spec is loaded: Playwright loads every spec before build.setup.js writes the file
+        const api = JSON.parse(fs.readFileSync(path.join(root, 'api', 'projects.json'), 'utf8'));
         expect(api.projects.map(project => project.id)).toEqual(cards.map(card => card.id));
         for (const card of cards) {
             const project = api.projects.find(entry => entry.id === card.id);
