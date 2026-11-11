@@ -25,6 +25,22 @@ function chipMark(skill) {
 }
 
 test.describe('resume timeline', () => {
+    test('shows each sector of an experience after its own icon, apart from its standards', () => {
+        for (const lang of ['en', 'fr']) {
+            const html = render(lang);
+            const sectors = resume.experiences.flatMap(e => e.sector ?? []);
+            expect(sectors.length).toBeGreaterThan(0);
+            for (const sector of sectors) {
+                // Its icon from sectorIcons, by its English name
+                const icon = resume.sectorIcons[sector.en ?? sector];
+                expect(icon).toMatch(/^icon-/);
+                const text = (sector[lang] ?? sector).replaceAll('&', '&amp;').replaceAll("'", '&#39;');
+                expect(html).toContain(`<span class="sector-tag"><i class="${icon}" aria-hidden="true"></i>${text}</span>`);
+            }
+            expect(html).not.toMatch(/<span class="standard-tag"><i /);
+        }
+    });
+
     test('marks the first experience, the one whose frame is closed above it', () => {
         const html = render('en');
         const section = html.slice(html.indexOf('id="experiences"'), html.indexOf('id="skills"'));

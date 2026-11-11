@@ -29,6 +29,7 @@
             "explore": "https://www.esilv.fr/challenges-citoyens-cgi-2019-deux-premiers-prix-esilv-categories-environnement-et-handicap",
             "title": "Easy Student Housing",
             "type": "school",
+            "sector": [{ "en": "Housing", "fr": "Logement" }],
             "badge": "Microsoft Office",
             "date": {
                 "en": "October 2018 - April 2019",
@@ -49,6 +50,7 @@
             "explore": "blog#mcs",
             "title": "CPMCS",
             "type": "internship",
+            "sector": [{ "en": "Cybersecurity", "fr": "Cybersécurité" }],
             "badge": "Python/Angular",
             "date": {
                 "en": "March 2020 - August 2020",
@@ -73,6 +75,7 @@
             "explore": "crm_elphicom",
             "title": "CRM <i>Elphicom</i>",
             "type": "internship",
+            "sector": [{ "en": "Customer Relations", "fr": "Relation Client" }],
             "badge": "HTML/CSS/JS",
             "date": {
                 "en": "September 2021 - December 2021",
@@ -93,6 +96,7 @@
             "explore": "ebatisoft",
             "title": "EBati <i>Carto Amiante</i>",
             "type": "permanent",
+            "sector": [{ "en": "Real Estate", "fr": "Immobilier" }],
             "badge": "C#",
             "date": {
                 "en": "January 2022 - January 2023",
@@ -113,6 +117,7 @@
             "explore": "jca_sushirobots",
             "title": "JCA <i>Sushi Robots</i>",
             "type": "permanent",
+            "sector": [{ "en": "Education", "fr": "Éducation" }, { "en": "Food", "fr": "Restauration" }],
             "badge": "C#",
             "date": {
                 "en": "April 2023 - October 2023",
@@ -133,6 +138,7 @@
             "explore": "pragma_surveys",
             "title": "Enquêtes Internes <i>Pragma</i>",
             "type": "permanent",
+            "sector": [{ "en": "Surveys", "fr": "Enquêtes" }, { "en": "Human Resources", "fr": "Ressources Humaines" }],
             "badge": "C#",
             "heading": {
                 "en": "<i>Pragma</i> Internal Surveys",
@@ -157,6 +163,7 @@
             "explore": "ref230_afnor",
             "title": "REF230 <i>AFNOR</i>",
             "type": "permanent",
+            "sector": ["Certification", { "en": "Optics", "fr": "Optique" }],
             "badge": "C#",
             "date": {
                 "en": "March 2022 - May 2024",
@@ -177,6 +184,7 @@
             "explore": "panel_mnt",
             "title": "Panel Terriscope <i>MNT</i>",
             "type": "permanent",
+            "sector": [{ "en": "Surveys", "fr": "Enquêtes" }, { "en": "Insurance", "fr": "Assurance" }],
             "badge": "HTML/CSS/JS",
             "date": {
                 "en": "October 2023 - May 2024",
@@ -197,6 +205,7 @@
             "explore": "opale_snitem",
             "title": "OPALE <i>SNITEM</i>",
             "type": "permanent",
+            "sector": [{ "en": "Health", "fr": "Santé" }, "Certification"],
             "badge": "C#",
             "date": {
                 "en": "November 2022 - May 2024",

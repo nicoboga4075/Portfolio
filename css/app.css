@@ -2548,6 +2548,35 @@ html.dark-mode .project .project-type {
     font-weight: 600;
 }
 
+/* A sector apart from the technologies and the standards, boxed and square: a filled pill after the icon of the sector (sectorIcons of resume.json), on the experiences and the project cards, its text darker than the grey of the other tags to keep its contrast on the lavender (the same in dark mode, where the fill stays light) */
+.sector-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-color: var(--primary-pale);
+    padding: 5px 12px;
+    border-width: 1px;
+    border-radius: 20px;
+    background-color: var(--primary-pale);
+    color: var(--secondary-dark);
+}
+
+.sector-tag i {
+    color: var(--primary-dark);
+}
+
+/* The sectors of a project card, centred above its context, on one line or more */
+.project-sectors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.project-sectors .sector-tag {
+    margin: 0;
+}
+
 .company-type-badge,
 .company-size-badge {
     display: inline-block;

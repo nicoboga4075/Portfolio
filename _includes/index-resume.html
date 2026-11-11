@@ -101,8 +101,9 @@
                                 {%- endif %}</span>
                             {%- endif %}
                             <p>{{ e.city }}</p>
+                            {#- A sector after its icon (sectorIcons of resume.json, by its name in the default language), the same pill as on the project cards #}
                             {%- for tag in e.sector %}
-                            <span class="sector-tag">{{ tag[lang] if tag[lang] else tag }}</span>
+                            <span class="sector-tag"><i class="{{ resume.sectorIcons[tag[siteLanguages.default] if tag[siteLanguages.default] else tag] }}" aria-hidden="true"></i>{{ tag[lang] if tag[lang] else tag }}</span>
                             {%- endfor %}
                             {%- for standard in e.standards %}
                             <span class="standard-tag">{{ standard }}</span>

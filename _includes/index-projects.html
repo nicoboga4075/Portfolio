@@ -28,6 +28,10 @@
                     <div class="text text-center p-4">
                         <h3>{{ (p.heading[lang] if p.heading else p.title) | safe }}</h3>
                         <div class="details">
+                            {#- The sectors of the project, the pills of the experiences of the resume with their icon (sectorIcons of resume.json) #}
+                            {%- if p.sector %}
+                            <p class="project-sectors">{% for tag in p.sector %}<span class="sector-tag"><i class="{{ resume.sectorIcons[tag[siteLanguages.default] if tag[siteLanguages.default] else tag] }}" aria-hidden="true"></i>{{ tag[lang] if tag[lang] else tag }}</span>{% endfor %}</p>
+                            {%- endif %}
                             {#- The period of the project, as on LinkedIn, between brackets after its duration (development and maintenance), which ends the context; nothing for a card without a date #}
                             <p><u>{{ projectsLang.context }}</u>{{ colon }} {{ p.context[lang] | safe }}{% if p.date %} ({{ p.date[lang] }}){% endif %}</p>
                             <p><u>Description</u>{{ colon }} {{ p.description[lang] | safe }}

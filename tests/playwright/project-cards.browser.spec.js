@@ -44,13 +44,27 @@ for (const lang of langs) {
         expect(color).not.toBe(background);
     });
 
+    test(`/${lang} shows the sectors of each project in ${lang}, each after its icon, as on the experiences of the resume`, async ({ page }) => {
+        await page.goto(`/${lang}`);
+        const resume = data('_data/resume.json');
+        for (const card of projects.cards) {
+            const tags = page.locator(`#${card.id} .project-sectors .sector-tag`);
+            await expect(tags).toHaveText(card.sector.map(tag => tag[lang] ?? tag));
+            for (const [index, tag] of card.sector.entries()) {
+                const icon = resume.sectorIcons[tag.en ?? tag];
+                expect(icon).toMatch(/^icon-/);
+                await expect(tags.nth(index).locator(`i.${icon}`)).toHaveAttribute('aria-hidden', 'true');
+            }
+        }
+    });
+
     test(`/${lang} ends the context of each card with its duration, then its period in ${lang} between brackets when it has one`, async ({ page }) => {
         await page.goto(`/${lang}`);
         const colon = lang === 'fr' ? ' :' : ':';
         for (const card of projects.cards) {
             const context = card.context[lang].replace(/<[^>]+>/g, '');
             const period = card.date ? ` (${card.date[lang]})` : '';
-            await expect(page.locator(`#${card.id} .details p`).first()).toHaveText(`${projects[lang].context}${colon} ${context}${period}`);
+            await expect(page.locator(`#${card.id} .details p:not(.project-sectors)`).first()).toHaveText(`${projects[lang].context}${colon} ${context}${period}`);
         }
     });
 

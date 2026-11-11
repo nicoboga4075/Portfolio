@@ -79,6 +79,7 @@
             "digital-agency": "Agence digitale"
         }
     },
+    "sectorIcons": {"AI": "icon-magic", "Data Intelligence": "icon-database", "Industry": "icon-industry", "Cryptography": "icon-key", "Quality": "icon-check-circle", "Cybersecurity": "icon-shield", "Surveys": "icon-clipboard", "Data Viz": "icon-bar-chart", "Software Engineering": "icon-code", "Education": "icon-graduation-cap", "Mathematics": "icon-calculator", "Digital Transformation": "icon-exchange", "Sport": "icon-trophy", "Tennis": "icon-futbol-o", "Refereeing": "icon-gavel", "Housing": "icon-home", "Customer Relations": "icon-address-book", "Real Estate": "icon-building", "Food": "icon-cutlery", "Human Resources": "icon-users", "Certification": "icon-certificate", "Optics": "icon-eye", "Insurance": "icon-umbrella", "Health": "icon-heartbeat"},
     "awards": [
         {
             "icon": "icon-language",
