@@ -257,7 +257,7 @@
     "@fastify/deepmerge": "^3.2.4",
     "@netlify/functions": "^6.1.1",
     "@playwright/test": "^1.65.0",
-    "@sonar/scan": "^5.0.2",
+    "@sonar/scan": "^5.1.0",
     "@types/jest": "^30.0.0",
     "auto-changelog": "^2.7.0",
     "axe-core": "^4.14.0",
@@ -294,9 +294,6 @@
     "critical": {
       "oust": "^2.0.4",
       "postcss-image-inliner": "^7.0.1"
-    },
-    "@sonar/scan": {
-      "node-forge": "^1.4.2"
     },
     "glob@>=10 <14": "^14.0.3",
     "minimatch@>=9 <11": "^11.0.3",
