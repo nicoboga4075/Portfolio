@@ -6,24 +6,40 @@ description: "Privacy policy"
 bodyClass: "legal text-center"
 ---
 <h1>Privacy policy</h1>
-<i>Updated on October 28, 2026</i>
+<i>Updated on November 11, 2026</i>
 <div class="page-controls">
     {% include "dark-mode.html" %}
     {% include "language-switcher.html" %}
 </div>
 <div>
+    <h2>Who is responsible for your data?</h2>
+    <p>Nicolas BOGALHEIRO, the publisher of this site, is responsible for the processing of the personal data described on this page. For any question or to exercise your rights: {{ profile.email }}, or the contact form.</p>
     <h2>What data is collected?</h2>
-    <p>The personal data used is that which the user explicitly provides in the contact form: sender's name, subject of the email and message content. This information is included in an email sent via the Gmail API and is not stored on the application server. When logging in via OAuth (manual authentication), your email address is retrieved from your Google account. No other personal or sensitive data is collected or used.</p>
+    <p>The contact form uses the data you give it: your name, the subject and the content of your message. This information is included in an email sent via the Gmail API, and when logging in via OAuth (manual authentication), your email address is retrieved from your Google account. The booking button, the chatbot and the audience measurement only receive data if you use them or accept them (see the third-party services below). The visit counter only counts visits: it records no personal data. No sensitive data is collected.</p>
     <h2>How is data used?</h2>
-    <p>The information collected (notably your email address) is used exclusively for sending the message via the contact form. No other use is made of this data, except for technical purposes related to the sending of the email.</p>
+    <p>The information collected (notably your email address) is used exclusively to answer your message or your booking. No other use is made of this data, and it is never used for advertising or profiling.</p>
     <h2>How is data stored and secured?</h2>
-    <p>The email address is stored securely, in compliance with security standards, as an access token required to interact with the Gmail API, kept in the memory of the page only, never in your browser storage. This token is only available to authorized people or systems to send the message. The transfer of data between your device and the application is done by secure connection (HTTPS).</p>
+    <p>The email address is stored securely, in compliance with security standards, as an access token required to interact with the Gmail API, kept in the memory of the page only, never in your browser storage. This token is only available to authorized people or systems to send the message. The transfer of data between your device and the site is done by secure connection (HTTPS).</p>
+    <h2>Third-party services</h2>
+    <p>The site relies on the following services, each one receiving only what it needs:</p>
+    <ul>
+        <li>Netlify (host): serves the pages and keeps a copy of each message sent with the form (name, subject, message) in Netlify Forms, so that no message is lost, after Netlify has it checked by the Akismet anti-spam filter (Automattic); like any web server, it receives your IP address.</li>
+        <li>Google: the Gmail API and Google sign-in (OAuth) to send your message, reCAPTCHA to tell a person from a robot when the contact form is shown, Google Fonts for the font of the pages (which receives your IP address), and Google Analytics with your consent only.</li>
+        <li>Calendly: loaded only when you click the booking button; it receives what you enter to book a meeting.</li>
+        <li>Botpress: the chatbot, loaded only when you click its bubble; it receives the messages you write in it.</li>
+        <li>Supabase: stores the visit counter, a number of visits without any personal data.</li>
+    </ul>
     <h2>Cookies and audience measurement</h2>
     <p>With your consent only, the site uses Google Analytics to count its visits and see which pages are read. Nothing is sent to Google and no cookie is set before you click Accept in the banner. If you accept, Google Analytics sets the cookies _ga and _ga_&lt;id&gt;, which last 13 months at most. Your choice is kept for 6 months in your browser, then the banner asks again; you can change it at any time with the Manage cookies link at the bottom of every page, and refusing deletes these cookies.</p>
+    <p>Without any tracking, your browser also keeps a few settings of the site: the theme you chose (light or dark), your cookie choice and the display mode of the site, and, for your visit only, the section you were reading; the service worker keeps a copy of the pages so that they open offline. You can delete them by clearing the data of the site in your browser.</p>
     <h2>Data sharing</h2>
-    <p>The information collected (notably your email address) will not be shared, sold or used for commercial purposes.</p>
+    <p>The information collected (notably your email address) will not be shared, sold or used for commercial purposes: only the services above receive it, for what they are used for.</p>
+    <h2>Transfers outside the European Union</h2>
+    <p>Netlify, Google, Calendly, Supabase and Automattic (Akismet) are American companies and Botpress a Canadian one: your data can be processed outside the European Union, under the safeguards these companies provide (standard contractual clauses or the EU-US Data Privacy Framework).</p>
     <h2>Data retention and deletion</h2>
-    <p>We will retain your personal information for the length of time needed to fulfill the purposes outlined in this privacy policy unless a longer retention period is required or permitted by law. The access token required for authentication through the Gmail API is securely retained and is automatically deleted in the event of an error or obsolete after prolonged inactivity. You can delete this data manually by deleting data from your browser. By default, the access token expires after 1 hour, according to Google's rules. Once the message is sent, only a copy of it (name, subject, message) is kept by Netlify Forms, the form service of the host, so that no message is lost. If you experience repeated errors sending the message, I suggest you refresh the page or open a new tab.</p>
+    <p>The messages received (Netlify Forms and my mailbox) are kept for the time needed to answer your request, then deleted at the latest 3 years after our last exchange. The access token of the Gmail API expires after 1 hour, according to Google's rules, and is deleted at once in the event of an error; you can also delete it by reloading the page. The Google Analytics cookies last 13 months at most and your cookie choice 6 months. If you experience repeated errors sending the message, I suggest you refresh the page or open a new tab.</p>
+    <h2>Your rights</h2>
+    <p>Under the GDPR (EU Regulation 2016/679) and the French Data Protection Act, you have the right to access, rectify and erase your data, to restrict or object to its processing, and to withdraw your consent at any time. To exercise them, write to {{ profile.email }}. You can also lodge a complaint with the CNIL (<a href="https://www.cnil.fr/en" target="_blank" rel="noopener">cnil.fr</a>).</p>
     <i>If you have any questions about your personal data, you can contact me via the form.</i>
 </div>
 <a id="index">Go back to the homepage</a>

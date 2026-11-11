@@ -6,24 +6,40 @@ description: "Politique de confidentialité"
 bodyClass: "legal text-center"
 ---
 <h1>Politique de confidentialité</h1>
-<i>Mis à jour le 28 octobre 2026</i>
+<i>Mis à jour le 11 novembre 2026</i>
 <div class="page-controls">
     {% include "dark-mode.html" %}
     {% include "language-switcher.html" %}
 </div>
 <div>
+    <h2>Qui est responsable de vos données ?</h2>
+    <p>Nicolas BOGALHEIRO, éditeur de ce site, est responsable du traitement des données personnelles décrites sur cette page. Pour toute question ou pour exercer vos droits : {{ profile.email }}, ou le formulaire de contact.</p>
     <h2>Quelles données sont collectées ?</h2>
-    <p>Les données personnelles utilisées sont celles que l'utilisateur fournit explicitement dans le formulaire de contact : nom de l'expéditeur, objet du mail et contenu du message. Ces informations sont intégrées dans un email envoyé via l'API Gmail et ne sont pas conservées sur le serveur de l'application. Lors de la connexion via OAuth (authentification manuelle), votre adresse email est récupérée depuis votre compte Google. Aucune autre donnée personnelle ou sensible n'est collectée ou utilisée.</p>
+    <p>Le formulaire de contact utilise les données que vous lui donnez : votre nom, l'objet et le contenu de votre message. Ces informations sont intégrées dans un email envoyé via l'API Gmail, et lors de la connexion via OAuth (authentification manuelle), votre adresse email est récupérée depuis votre compte Google. Le bouton de prise de rendez-vous, le chatbot et la mesure d'audience ne reçoivent des données que si vous les utilisez ou les acceptez (voir les services tiers ci-dessous). Le compteur de visites compte seulement les visites : il n'enregistre aucune donnée personnelle. Aucune donnée sensible n'est collectée.</p>
     <h2>Comment les données sont utilisées ?</h2>
-    <p>Les informations collectées (notamment votre adresse e-mail) sont utilisées exclusivement pour l'envoi du message via le formulaire de contact. Aucune autre utilisation n'est faite de ces données, sauf pour des fins techniques liées à l'envoi de l'email.</p>
+    <p>Les informations collectées (notamment votre adresse e-mail) sont utilisées exclusivement pour répondre à votre message ou à votre prise de rendez-vous. Aucune autre utilisation n'est faite de ces données, et elles ne servent jamais à la publicité ni au profilage.</p>
     <h2>Comment les données sont stockées et sécurisées ?</h2>
-    <p>L'adresse email est stockée de manière sécurisée, en conformité avec les normes de sécurité en vigueur, sous forme d'un token d'accès nécessaire pour interagir avec l'API Gmail, gardé dans la mémoire de la page uniquement, jamais dans le stockage de votre navigateur. Ce token n'est accessible qu'aux personnes ou systèmes autorisés dans le cadre de l'envoi du message. Le transfert des données entre votre appareil et l'application se fait par connexion sécurisée (HTTPS).</p>
+    <p>L'adresse email est stockée de manière sécurisée, en conformité avec les normes de sécurité en vigueur, sous forme d'un token d'accès nécessaire pour interagir avec l'API Gmail, gardé dans la mémoire de la page uniquement, jamais dans le stockage de votre navigateur. Ce token n'est accessible qu'aux personnes ou systèmes autorisés dans le cadre de l'envoi du message. Le transfert des données entre votre appareil et le site se fait par connexion sécurisée (HTTPS).</p>
+    <h2>Services tiers</h2>
+    <p>Le site s'appuie sur les services suivants, chacun ne recevant que ce dont il a besoin :</p>
+    <ul>
+        <li>Netlify (hébergeur) : sert les pages et conserve une copie de chaque message envoyé avec le formulaire (nom, objet, message) dans Netlify Forms, pour qu'aucun message ne soit perdu, après l'avoir fait vérifier par l'anti-spam Akismet (Automattic) ; comme tout serveur web, il reçoit votre adresse IP.</li>
+        <li>Google : l'API Gmail et la connexion Google (OAuth) pour envoyer votre message, reCAPTCHA pour distinguer une personne d'un robot quand le formulaire de contact s'affiche, Google Fonts pour la police des pages (qui reçoit votre adresse IP), et Google Analytics avec votre accord uniquement.</li>
+        <li>Calendly : chargé uniquement quand vous cliquez sur le bouton de prise de rendez-vous ; il reçoit ce que vous saisissez pour réserver un rendez-vous.</li>
+        <li>Botpress : le chatbot, chargé uniquement quand vous cliquez sur sa bulle ; il reçoit les messages que vous y écrivez.</li>
+        <li>Supabase : conserve le compteur de visites, un nombre de visites sans aucune donnée personnelle.</li>
+    </ul>
     <h2>Cookies et mesure d'audience</h2>
     <p>Avec votre accord uniquement, le site utilise Google Analytics pour compter ses visites et savoir quelles pages sont lues. Rien n'est envoyé à Google et aucun cookie n'est déposé avant que vous cliquiez sur Accepter dans le bandeau. Si vous acceptez, Google Analytics dépose les cookies _ga et _ga_&lt;id&gt;, qui durent 13 mois au plus. Votre choix est conservé 6 mois dans votre navigateur, puis le bandeau vous le redemande ; vous pouvez le changer à tout moment avec le lien Gérer les cookies en bas de chaque page, et un refus supprime ces cookies.</p>
+    <p>Sans aucun traçage, votre navigateur garde aussi quelques réglages du site : le thème choisi (clair ou sombre), votre choix sur les cookies et le mode d'affichage du site, et, le temps de votre visite seulement, la section que vous lisiez ; le service worker garde une copie des pages pour qu'elles s'ouvrent hors connexion. Vous pouvez les supprimer en effaçant les données du site dans votre navigateur.</p>
     <h2>Partage des données</h2>
-    <p>Les informations collectées (notamment votre adresse e-mail) ne seront pas partagées, vendues ou utilisées à des fins commerciales.</p>
+    <p>Les informations collectées (notamment votre adresse e-mail) ne seront pas partagées, vendues ou utilisées à des fins commerciales : seuls les services ci-dessus les reçoivent, pour ce à quoi ils servent.</p>
+    <h2>Transferts hors de l'Union européenne</h2>
+    <p>Netlify, Google, Calendly, Supabase et Automattic (Akismet) sont des sociétés américaines et Botpress une société canadienne : vos données peuvent être traitées hors de l'Union européenne, avec les garanties que ces sociétés prévoient (clauses contractuelles types ou Data Privacy Framework UE-États-Unis).</p>
     <h2>Conservation et suppression des données</h2>
-    <p>Nous conserverons vos renseignements personnels pendant la durée nécessaire pour atteindre les objectifs énoncés dans la présente politique de confidentialité, à moins qu'une période de conservation plus longue ne soit requise ou permise par la loi. Le token d'accès nécessaire à l'authentification via l'API Gmail est conservé de manière sécurisée et est automatiquement supprimé en cas d'erreur ou obsolète après une inactivité prolongée. Vous avez la possibilité de supprimer ces données manuellement en effaçant les cookies ou les données de votre navigateur. Par défaut, le token d'accès expire après 1 heure, conformément aux règles de Google. Une fois le message envoyé, seule une copie (nom, objet, message) est conservée par Netlify Forms, le service de formulaires de l'hébergeur, pour qu'aucun message ne soit perdu. Si vous rencontrez des erreurs répétées pour l'envoi du message, je vous suggère de rafraîchir la page ou d'ouvrir un nouvel onglet.</p>
+    <p>Les messages reçus (Netlify Forms et ma boîte mail) sont conservés le temps de traiter votre demande, puis supprimés au plus tard 3 ans après notre dernier échange. Le token d'accès de l'API Gmail expire après 1 heure, conformément aux règles de Google, et est supprimé aussitôt en cas d'erreur ; vous pouvez aussi le supprimer en rechargeant la page. Les cookies de Google Analytics durent 13 mois au plus et votre choix sur les cookies 6 mois. Si vous rencontrez des erreurs répétées pour l'envoi du message, je vous suggère de rafraîchir la page ou d'ouvrir un nouvel onglet.</p>
+    <h2>Vos droits</h2>
+    <p>Conformément au RGPD (règlement UE 2016/679) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et d'effacement de vos données, d'un droit à la limitation et d'opposition à leur traitement, et du droit de retirer votre consentement à tout moment. Pour les exercer, écrivez à {{ profile.email }}. Vous pouvez aussi introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).</p>
     <i>Pour toute question relative à vos données personnelles, vous pouvez me contacter via le formulaire.</i>
 </div>
 <a id="index">Retour à l'accueil</a>
