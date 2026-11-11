@@ -2490,6 +2490,26 @@ html.dark-mode .project .explore:focus-visible {
     transition: background-color 0.3s ease;
 }
 
+/* The kind of project (school project, internship, permanent contract) in the top right corner, facing the technology badge: white with a blue outline and text, so it never reads as a second technology */
+.project .project-type,
+.project:hover .project-type {
+    left: auto;
+    right: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--primary);
+    background-color: var(--white);
+    color: var(--primary);
+}
+
+/* Still white in dark mode, over the filled badge rule of common.css, with --primary-dark text, since --primary turns lighter there (3.67:1 only on white) */
+html.dark-mode .project .project-type {
+    border-color: var(--primary-dark);
+    background-color: var(--white);
+    color: var(--primary-dark);
+}
+
 /* .badge is positioned absolute for the project-card overlay; reset it to
    flow inline next to the experience date instead. */
 .resume-wrap .badge {

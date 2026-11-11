@@ -17,6 +17,33 @@ for (const lang of langs) {
         }
     });
 
+    test(`/${lang} shows the kind of each project in its top right bubble, its icon before its name in ${lang}`, async ({ page }) => {
+        await page.goto(`/${lang}`);
+        const icons = { school: 'icon-graduation-cap', internship: 'icon-briefcase', permanent: 'icon-briefcase' };
+        for (const card of projects.cards) {
+            const bubble = page.locator(`#${card.id} .project-type`);
+            await expect(bubble).toHaveText(projects[lang].types[card.type]);
+            await expect(bubble.locator(`.${icons[card.type]}`)).toHaveAttribute('aria-hidden', 'true');
+            // In the top right corner, facing the technology badge in the top left one
+            const [cardBox, bubbleBox] = [await page.locator(`#${card.id}`).boundingBox(), await bubble.boundingBox()];
+            expect(cardBox.x + cardBox.width - (bubbleBox.x + bubbleBox.width)).toBeCloseTo(10, 0);
+            expect(bubbleBox.y - cardBox.y).toBeCloseTo(10, 0);
+            // Not styled as the technology badge: white with a blue outline, where the badge is filled
+            const colors = await page.locator(`#${card.id}`).evaluate(el => [el.querySelector('.project-type'), el.querySelector('.badge:not(.project-type)')].map(badge => getComputedStyle(badge).backgroundColor));
+            expect(colors[0]).toBe('rgb(255, 255, 255)');
+            expect(colors[1]).not.toBe(colors[0]);
+        }
+    });
+
+    test(`/${lang} in dark mode keeps the kind bubble white with its text readable`, async ({ page }) => {
+        await page.emulateMedia({ colorScheme: 'dark' });
+        await page.goto(`/${lang}`);
+        await expect(page.locator('html')).toHaveClass(/dark-mode/);
+        const [background, color] = await page.locator(`#${projects.cards[0].id} .project-type`).evaluate(el => [getComputedStyle(el).backgroundColor, getComputedStyle(el).color]);
+        expect(background).toBe('rgb(255, 255, 255)');
+        expect(color).not.toBe(background);
+    });
+
     test(`/${lang} ends the context of each card with its duration, then its period in ${lang} between brackets when it has one`, async ({ page }) => {
         await page.goto(`/${lang}`);
         const colon = lang === 'fr' ? ' :' : ':';

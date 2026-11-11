@@ -4,20 +4,31 @@
         "p1": "Welcome to my portfolio! Below is a selection of projects I led as a software engineer, and for the curious, my articles are waiting on the blog.",
         "p2": "They cover a wide variety of technologies, sectors and work environments. Each of them highlights my hard skills and my ability to adapt to different contexts.",
         "context": "Context",
-        "explore": "Explore"
+        "explore": "Explore",
+        "types": {
+            "school": "Academic",
+            "internship": "Internship",
+            "permanent": "Permanent"
+        }
     },
     "fr": {
         "heading": "Projets",
         "p1": "Bienvenue sur mon portfolio ! Ci-dessous, une sélection de projets menés en tant qu'ingénieur logiciel, et pour les curieux, mes articles vous attendent sur le blog.",
         "p2": "Ils couvrent une grande variété de technologies, de secteurs et d'environnements de travail. Chacun d'entre eux met en avant mes compétences techniques et ma capacité à m'adapter à des contextes divers.",
         "context": "Contexte",
-        "explore": "Explorer"
+        "explore": "Explorer",
+        "types": {
+            "school": "Scolaire",
+            "internship": "Stage",
+            "permanent": "CDI"
+        }
     },
     "cards": [
         {
             "id": "esh",
             "explore": "https://www.esilv.fr/challenges-citoyens-cgi-2019-deux-premiers-prix-esilv-categories-environnement-et-handicap",
             "title": "Easy Student Housing",
+            "type": "school",
             "badge": "Microsoft Office",
             "date": {
                 "en": "October 2018 - April 2019",
@@ -37,6 +48,7 @@
             "id": "cpmcs",
             "explore": "blog#mcs",
             "title": "CPMCS",
+            "type": "internship",
             "badge": "Python/Angular",
             "date": {
                 "en": "March 2020 - August 2020",
@@ -60,6 +72,7 @@
             "id": "crm",
             "explore": "crm_elphicom",
             "title": "CRM <i>Elphicom</i>",
+            "type": "internship",
             "badge": "HTML/CSS/JS",
             "date": {
                 "en": "September 2021 - December 2021",
@@ -79,6 +92,7 @@
             "id": "building",
             "explore": "ebatisoft",
             "title": "EBati <i>Carto Amiante</i>",
+            "type": "permanent",
             "badge": "C#",
             "date": {
                 "en": "January 2022 - January 2023",
@@ -98,6 +112,7 @@
             "id": "sushi",
             "explore": "jca_sushirobots",
             "title": "JCA <i>Sushi Robots</i>",
+            "type": "permanent",
             "badge": "C#",
             "date": {
                 "en": "April 2023 - October 2023",
@@ -117,6 +132,7 @@
             "id": "pragma",
             "explore": "pragma_surveys",
             "title": "Enquêtes Internes <i>Pragma</i>",
+            "type": "permanent",
             "badge": "C#",
             "heading": {
                 "en": "<i>Pragma</i> Internal Surveys",
@@ -140,6 +156,7 @@
             "id": "smiley",
             "explore": "ref230_afnor",
             "title": "REF230 <i>AFNOR</i>",
+            "type": "permanent",
             "badge": "C#",
             "date": {
                 "en": "March 2022 - May 2024",
@@ -159,6 +176,7 @@
             "id": "satisfaction",
             "explore": "panel_mnt",
             "title": "Panel Terriscope <i>MNT</i>",
+            "type": "permanent",
             "badge": "HTML/CSS/JS",
             "date": {
                 "en": "October 2023 - May 2024",
@@ -178,6 +196,7 @@
             "id": "health",
             "explore": "opale_snitem",
             "title": "OPALE <i>SNITEM</i>",
+            "type": "permanent",
             "badge": "C#",
             "date": {
                 "en": "November 2022 - May 2024",

@@ -325,10 +325,13 @@ function apiData() {
         // A project page or an article of the blog
         return `${site}/${lang}/${target}`;
     };
-    const projectList = readData("projects").cards.map(card => ({
+    const projectData = readData("projects");
+    const projectList = projectData.cards.map(card => ({
         id: card.id,
         title: plainText(inLang(card.title, defaultLang)),
         badge: plainText(card.badge ?? ""),
+        // The kind of project in every language: school project, internship or permanent contract
+        type: Object.fromEntries(langs.map(lang => [lang, projectData[lang].types[card.type] ?? null])),
         context: both(card.context),
         // Its period, or null for a card without a date
         date: card.date ? both(card.date) : null,
