@@ -14,6 +14,7 @@ function render(lang) {
     const env = new nunjucks.Environment(null, { autoescape: true });
     // The filter .eleventy.js gives the counter partial for the years of the work experiences
     env.addFilter('workYears', require('../../work-years'));
+    env.addFilter('italicNames', text => require('../../.eleventy').italicNames(text));
     return env.renderString(template, { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, viewport: 'desktop', counter, resume, profile }).replaceAll(/>\s+</g, '><');
 }
 

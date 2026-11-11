@@ -52,8 +52,9 @@
                         </div>
                         <div class="soft-card-face soft-card-back" aria-hidden="true" inert>
                             <ul class="counter-list">
+                                {#- Where the projects were delivered, the companies and schools in italics (italicNames of .eleventy.js) #}
                                 {%- for item in counter.projectList %}
-                                <li>{% if item.logo %}<img src="images/companies/{{ item.logo }}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo">{% else %}<i class="{{ item.icon }} counter-logo-icon" aria-hidden="true"></i>{% endif %} {{ item.label[lang] }}</li>
+                                <li>{% if item.logo %}<img src="images/companies/{{ item.logo }}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo">{% else %}<i class="{{ item.icon }} counter-logo-icon" aria-hidden="true"></i>{% endif %} {{ item.label[lang] | italicNames | safe }}</li>
                                 {%- endfor %}
                             </ul>
                         </div>

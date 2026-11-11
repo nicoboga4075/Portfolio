@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
 const nunjucks = require('nunjucks');
+const { italicNames } = require('../../.eleventy');
 
 const root = path.join(__dirname, '..', '..');
 const template = fs.readFileSync(path.join(root, '_includes', 'index-counter.html'), 'utf8');
@@ -12,6 +13,8 @@ const { profile } = require(path.join(root, 'package.json')).config;
 // Renders the counter include alone, the way Eleventy gives it its data on the desktop build
 function render(lang) {
     const env = new nunjucks.Environment(null, { autoescape: true });
+    // The filter of .eleventy.js that puts the companies and schools in italics (the delivered projects card)
+    env.addFilter('italicNames', text => italicNames(text));
     env.addFilter('workYears', require('../../work-years'));
     return env.renderString(template, { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, viewport: 'desktop', counter, resume, profile }).replaceAll(/>\s+</g, '><');
 }
@@ -99,7 +102,7 @@ test.describe('counters that turn over', () => {
     for (const lang of ['en', 'fr']) {
         test(`turns the delivered projects count over to where they were delivered, one line each after a logo or an icon, on the ${lang} page`, () => {
             const html = render(lang);
-            const items = counter.projectList.map(item => `<li>${item.logo ? `<img src="images/companies/${item.logo}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo">` : `<i class="${item.icon} counter-logo-icon" aria-hidden="true"></i>`} ${escapeHtml(item.label[lang])}</li>`).join('');
+            const items = counter.projectList.map(item => `<li>${item.logo ? `<img src="images/companies/${item.logo}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo">` : `<i class="${item.icon} counter-logo-icon" aria-hidden="true"></i>`} ${italicNames(item.label[lang])}</li>`).join('');
             expect(html).toContain(`aria-label="${escapeHtml(counter[lang].projectsToggle)}" data-icons="icon-question-circle icon-close">`);
             expect(html).toContain(`<div class="soft-card-face soft-card-back" aria-hidden="true" inert><ul class="counter-list">${items}</ul></div>`);
             for (const item of counter.projectList) if (item.logo) expect(fs.existsSync(path.join(root, 'images', 'companies', `${item.logo}.png`))).toBe(true);

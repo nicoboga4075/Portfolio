@@ -8,7 +8,7 @@
         {"logo": "bassetti", "label": {"en": "1 project at Bassetti Group", "fr": "1 projet chez Bassetti Group"}},
         {"logo": "cyberprotect", "label": {"en": "1 project at Cyberprotect", "fr": "1 projet chez Cyberprotect"}},
         {"logo": "softconcept", "label": {"en": "+10 projects at Soft Concept", "fr": "+10 projets chez Soft Concept"}},
-        {"icon": "icon-graduation-cap", "label": {"en": "Other school (ESILV, UQAC) and personal projects", "fr": "D'autres projets scolaires (ESILV, UQAC) ou personnels"}}
+        {"icon": "icon-graduation-cap", "label": {"en": "School (ESILV, UQAC) and personal projects", "fr": "Projets scolaires (ESILV, UQAC) ou personnels"}}
     ],
     "experienceFilterIcons": { "all": "icon-th-large", "internship": "icon-graduation-cap", "permanent": "icon-briefcase", "fixedTerm": "icon-hourglass-half", "freelance": "icon-rocket" },
     "continentFilterIcons": { "all": "icon-th-large", "europe": "🏰", "america": "🗽", "africa": "🦁", "asia": "🏯", "oceania": "🦘" },
