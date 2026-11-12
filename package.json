@@ -270,7 +270,7 @@
     "eslint": "^10.13.0",
     "globals": "^17.14.0",
     "html-minifier-next": "^9.1.2",
-    "html-validate": "^11.19.0",
+    "html-validate": "^11.21.0",
     "jest": "^30.5.2",
     "jest-environment-jsdom": "^30.5.2",
     "jest-html-reporter": "^4.4.3",
