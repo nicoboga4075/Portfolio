@@ -515,14 +515,47 @@ html.dark-mode .badge {
     display: none;
 }
 
-#ftco-footer .consent-banner p {
+#ftco-footer .consent-text {
     max-width: 720px;
+}
+
+#ftco-footer .consent-banner p {
     margin: 0;
     opacity: 1;
 }
 
-#ftco-footer .consent-banner a {
+/* The privacy policy under the text, a link of its own in the colour of the current footer links, its arrow moving on hover */
+#ftco-footer .consent-policy {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    color: var(--primary-light);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#ftco-footer .consent-policy::after {
+    content: "\2192" / "";
+    transition: transform 0.3s ease;
+}
+
+#ftco-footer .consent-policy:hover,
+#ftco-footer .consent-policy:focus-visible {
+    color: var(--primary-light);
     text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+#ftco-footer .consent-policy:hover::after,
+#ftco-footer .consent-policy:focus-visible::after {
+    transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #ftco-footer .consent-policy::after {
+        transition: none;
+    }
 }
 
 #ftco-footer .consent-buttons {
