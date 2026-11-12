@@ -55,10 +55,10 @@ These services are web APIs and hosted scripts, not npm packages: context7 knows
 - **CSP**: `script-src` and `img-src` `https://www.googletagmanager.com`; `connect-src` `https://region1.google-analytics.com` `https://www.google-analytics.com`.
 - **Docs**: [gtag.js](https://developers.google.com/tag-platform/gtagjs). The GA4 data is read with the analytics MCP server (property of `nicoboga.netlify.app`).
 
-## Google Fonts and SVG Repo
+## Google Fonts
 
-- **Code**: the Poppins stylesheet in `_includes/base.njk`; SVG Repo is referenced by the vendored `css/icomoon.css` only.
-- **CSP**: `style-src` `https://fonts.googleapis.com` `https://www.svgrepo.com`; `font-src` `https://fonts.gstatic.com`; `img-src` `https://www.svgrepo.com`. The fonts are listed in SECURITY.md ("Fonts").
+- **Code**: the Poppins stylesheet in `_includes/base.njk`.
+- **CSP**: `style-src` `https://fonts.googleapis.com`; `font-src` `https://fonts.gstatic.com`. The fonts are listed in SECURITY.md ("Fonts").
 - **Docs**: [Google Fonts CSS API](https://developers.google.com/fonts/docs/css2).
 
 ## Server side: GitHub API and Supabase

@@ -3948,6 +3948,18 @@ html.dark-mode a.hero-availability:focus-visible {
     color: var(--white);
 }
 
+/* Chess.com pawn of config.socials (Logo.dev): the image used as a mask, painted in the text colour, white in the footer and dark in the contact window (15px there from #contact-link i); the pawn fills only the middle of its image, so the mask is scaled up inside the box to look the size of the glyphs around it */
+.icon-chess {
+    display: inline-block;
+    height: 26px;
+    width: 26px;
+    background-color: currentcolor;
+    mask-image: url("/images/logo-chesscom.png");
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 125%;
+}
+
 #bingo-timer {
     font-size: 40px;
 }

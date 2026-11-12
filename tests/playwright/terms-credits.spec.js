@@ -1,4 +1,4 @@
-// The terms pages credit the TEEXMA logo (Wikimedia Commons, CC BY-SA 4.0) and the Tux logo of Linux (Larry Ewing and The GIMP) of the skills, and the PostgreSQL, Elasticsearch, PowerPoint, Excel and Word logos of the project cards, in English and French, with safe external links.
+// The terms pages credit the TEEXMA logo (Wikimedia Commons, CC BY-SA 4.0) and the Tux logo of Linux (Larry Ewing and The GIMP) of the skills, the PostgreSQL, Elasticsearch, PowerPoint, Excel and Word logos of the project cards, and the Chess.com logo of the socials from Logo.dev, in English and French, with safe external links.
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -22,6 +22,7 @@ test.describe('terms pages credits', () => {
             expect(html).toContain('Microsoft');
             // The logos fetched from Logo.dev, credited with a safe link to it
             expect(html).toContain(`<a href="https://logo.dev" target="_blank" rel="noopener">Logo.dev</a>`);
+            expect(html).toContain('Chess.com');
             const links = html.match(/<a href="https:\/\/(?:commons\.wikimedia\.org|creativecommons\.org)[^>]*>/g) || [];
             expect(links).toHaveLength(5);
             for (const link of links) {

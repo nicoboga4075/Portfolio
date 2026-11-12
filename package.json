@@ -173,8 +173,7 @@
       {
         "href": "https://www.chess.com/member/nicoboga4075knight",
         "label": "Chess",
-        "icon": "king-outlined",
-        "modalIcon": "chessboard"
+        "icon": "chess"
       }
     ]
   },
