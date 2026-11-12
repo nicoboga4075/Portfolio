@@ -17,7 +17,7 @@ test.describe('Chess.com icon of the socials', () => {
 
     test('is the footer and contact window icon of the Chess.com link', () => {
         const { socials } = JSON.parse(read('package.json')).config;
-        const chess = socials.find(s => s.href.includes('chess.com'));
+        const chess = socials.find(s => new URL(s.href).hostname === 'www.chess.com');
         expect(chess.icon).toBe('chess');
         expect(chess.modalIcon).toBeUndefined();
     });

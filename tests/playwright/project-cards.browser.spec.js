@@ -83,7 +83,8 @@ for (const lang of langs) {
         await page.goto(`/${lang}`);
         const colon = lang === 'fr' ? ' :' : ':';
         for (const card of projects.cards) {
-            const context = card.context[lang].replace(/<[^>]+>/g, '');
+            // The text of the context of _data (its <i> around the company names) as the browser reads it, rather than stripping its tags with a pattern
+            const context = await page.evaluate(html => new DOMParser().parseFromString(html, 'text/html').body.textContent, card.context[lang]);
             const period = card.date ? ` (${card.date[lang]})` : '';
             await expect(page.locator(`#${card.id} .details p:not(.project-sectors)`).first()).toHaveText(`${projects[lang].context}${colon} ${context}${period}`);
             // An icon instead of the visible labels of the context and the description, which screen readers still read
