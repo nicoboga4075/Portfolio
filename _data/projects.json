@@ -6,6 +6,7 @@
         "context": "Context",
         "description": "Description",
         "explore": "Explore",
+        "moreProjects": "See more projects",
         "types": {
             "school": "Academic",
             "internship": "Internship",
@@ -19,6 +20,7 @@
         "context": "Contexte",
         "description": "Description",
         "explore": "Explorer",
+        "moreProjects": "Voir plus de projets",
         "types": {
             "school": "Scolaire",
             "internship": "Stage",

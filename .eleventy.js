@@ -417,9 +417,9 @@ module.exports = function configureEleventy(eleventyConfig) {
     eleventyConfig.addGlobalData("profile", { ...facts, email, age });
     // Google Analytics only on the Netlify production build: not in npm run dev, the preview build, deploy previews or branch deploys
     eleventyConfig.addGlobalData("analytics", { id: analyticsId, enabled: process.env.CONTEXT === "production" && !isPreview });
-    // The LinkedIn profile of config.socials, linked from the tools section, and its new message page, the Hire me button
+    // The LinkedIn profile of config.socials, linked from the tools section, its new message page, the Hire me button, and its projects page, the See more projects button
     const linkedinUrl = socials.find(s => s.icon === "linkedin").href;
-    eleventyConfig.addGlobalData("linkedin", { url: linkedinUrl, messaging: new URL("/messaging/thread/new", linkedinUrl).href });
+    eleventyConfig.addGlobalData("linkedin", { url: linkedinUrl, messaging: new URL("/messaging/thread/new", linkedinUrl).href, projects: `${linkedinUrl}/details/projects` });
     // The Calendly booking page of config.calendly, opened by the contact section
     eleventyConfig.addGlobalData("calendly", calendly);
     // The social links of config.socials, in the nav, the footer and the sameAs of the JSON-LD
