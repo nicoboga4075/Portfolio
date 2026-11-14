@@ -151,9 +151,45 @@
         "href": "https://linkerz.fr/nicoboga4075"
       }
     ],
-    "companies": ["Soft Concept", "Cyberprotect", "Galadrim", "CGI", "Astek", "Alstom", "ChapsVision", "Bassetti Group", "Bassetti", "Kelprof", "Yoopies", "MNT", "La Poste", "AFNOR", "SNITEM", "Pragma", "Nexialist", "Vitalis", "Elphicom", "Sushi Robots", "Teractem", "CERA", "Palantir"],
-    "schools": ["ESILV", "UQAC", "Janson de Sailly", "Saint Jacques de Compostelle"],
-    "organizations": ["FFSU", "US Dax", "ANSSI", "Coursera", "FIRST", "Club EBIOS"],
+    "companies": [
+      "Soft Concept",
+      "Cyberprotect",
+      "Galadrim",
+      "CGI",
+      "Astek",
+      "Alstom",
+      "ChapsVision",
+      "Bassetti Group",
+      "Bassetti",
+      "Kelprof",
+      "Yoopies",
+      "MNT",
+      "La Poste",
+      "AFNOR",
+      "SNITEM",
+      "Pragma",
+      "Nexialist",
+      "Vitalis",
+      "Elphicom",
+      "Sushi Robots",
+      "Teractem",
+      "CERA",
+      "Palantir"
+    ],
+    "schools": [
+      "ESILV",
+      "UQAC",
+      "Janson de Sailly",
+      "Saint Jacques de Compostelle"
+    ],
+    "organizations": [
+      "FFSU",
+      "US Dax",
+      "ANSSI",
+      "Coursera",
+      "FIRST",
+      "Club EBIOS"
+    ],
     "socials": [
       {
         "href": "https://www.linkedin.com/in/nicolas-bogalheiro-126a7616b",
@@ -307,6 +343,6 @@
     "@parcel/watcher@2.6.0": true,
     "unrs-resolver@1.12.2": true,
     "puppeteer@2.1.1": true,
-    "cypress@16.2.1": true
+    "cypress@16.3.0": true
   }
 }
