@@ -8,6 +8,8 @@ const vendorJs = [
   "js/bootstrap.min.js",
   "js/chart.umd.min.js",
   "js/chartjs-plugin-doughnutlabel.min.js",
+  "js/d3-array.min.js",
+  "js/d3-geo.min.js",
   "js/i18next.min.js",
   "js/jquery-migrate.min.js",
   "js/jquery.easing.min.js",
@@ -16,7 +18,8 @@ const vendorJs = [
   "js/jquery.waypoints.min.js",
   "js/owl.carousel.min.js",
   "js/popper.min.js",
-  "js/scrollax.min.js"
+  "js/scrollax.min.js",
+  "js/topojson-client.min.js"
 ];
 
 export default defineConfig([
@@ -41,7 +44,10 @@ export default defineConfig([
 		bootstrap: "readonly",
 		google: "readonly",
 		gapi: "readonly",
-		Chart: "readonly"
+		Chart: "readonly",
+		// The globe of the visited countries, from the vendored d3-geo (with d3-array) and topojson-client loaded by initGlobe
+		d3: "readonly",
+		topojson: "readonly"
       },
     },
 	rules : {

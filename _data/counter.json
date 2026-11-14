@@ -1,6 +1,6 @@
 {
-    "en": { "certifs": "Certifications", "certifsToggle": "See my certifications and their certificates", "experiencesToggle": "See my work experiences", "experiencesFilterLabel": "Filter the work experiences by contract", "experiencesFilter": ["internship", "permanent", "fixedTerm", "freelance"], "countriesToggle": "See the countries I visited", "certifsFilterLabel": "Filter the certifications by subject", "certifCategories": { "cyber": "Cyber", "languages": "Languages" }, "continentsLabel": "Filter the flags by continent", "filterAll": "All", "continents": { "europe": "Europe", "america": "America", "africa": "Africa", "asia": "Asia", "oceania": "Oceania" }, "projects": "Delivered projects", "projectsToggle": "See my delivered projects", "experiences": "Work experiences", "countries": "Visited countries" },
-    "fr": { "certifs": "Certifications", "certifsToggle": "Voir mes certifications et leurs attestations", "experiencesToggle": "Voir mes expériences pros", "experiencesFilterLabel": "Filtrer les expériences pros par contrat", "experiencesFilter": ["internship", "permanent", "fixedTerm", "freelance"], "countriesToggle": "Voir les pays que j'ai visités", "certifsFilterLabel": "Filtrer les certifications par thème", "certifCategories": { "cyber": "Cyber", "languages": "Langues" }, "continentsLabel": "Filtrer les drapeaux par continent", "filterAll": "Tous", "continents": { "europe": "Europe", "america": "Amérique", "africa": "Afrique", "asia": "Asie", "oceania": "Océanie" }, "projects": "Projets livrés", "projectsToggle": "Voir mes projets livrés", "experiences": "Expériences pros", "countries": "Pays visités" },
+    "en": { "certifs": "Certifications", "certifsToggle": "See my certifications and their certificates", "experiencesToggle": "See my work experiences", "experiencesFilterLabel": "Filter the work experiences by contract", "experiencesFilter": ["internship", "permanent", "fixedTerm", "freelance"], "countriesToggle": "See the countries I visited", "certifsFilterLabel": "Filter the certifications by subject", "certifCategories": { "cyber": "Cyber", "languages": "Languages" }, "continentsLabel": "Filter the flags by continent", "filterAll": "All", "continents": { "europe": "Europe", "america": "America", "africa": "Africa", "asia": "Asia", "oceania": "Oceania" }, "projects": "Delivered projects", "projectsToggle": "See my delivered projects", "experiences": "Work experiences", "countries": "Visited countries", "globeLabel": "Globe of the countries I visited:", "globeHint": "Drag the globe to turn it" },
+    "fr": { "certifs": "Certifications", "certifsToggle": "Voir mes certifications et leurs attestations", "experiencesToggle": "Voir mes expériences pros", "experiencesFilterLabel": "Filtrer les expériences pros par contrat", "experiencesFilter": ["internship", "permanent", "fixedTerm", "freelance"], "countriesToggle": "Voir les pays que j'ai visités", "certifsFilterLabel": "Filtrer les certifications par thème", "certifCategories": { "cyber": "Cyber", "languages": "Langues" }, "continentsLabel": "Filtrer les drapeaux par continent", "filterAll": "Tous", "continents": { "europe": "Europe", "america": "Amérique", "africa": "Afrique", "asia": "Asie", "oceania": "Océanie" }, "projects": "Projets livrés", "projectsToggle": "Voir mes projets livrés", "experiences": "Expériences pros", "countries": "Pays visités", "globeLabel": "Globe des pays que j'ai visités :", "globeHint": "Faites glisser le globe pour le tourner" },
     "certifFilterIcons": { "all": "icon-th-large", "cyber": "icon-shield", "languages": "icon-language" },
     "projectList": [
         {"logo": "chapsvision", "label": {"en": "1 project at ChapsVision", "fr": "1 projet chez ChapsVision"}},
@@ -20,20 +20,20 @@
         {"name": {"en": "TOEFL", "fr": "TOEFL"}, "logo": "ets", "category": "languages", "by": "ESILV", "score": "550/677", "level": {"en": "B2", "fr": "B2"}, "levelTip": {"en": "CEFR B2 (A1 to C2 scale): independent user, works in English. TOEFL ITP: 543 to 626/677", "fr": "B2 du CECRL (échelle A1 à C2) : utilisateur autonome, travaille en anglais. TOEFL ITP : 543 à 626/677"}, "date": "01/2019", "href": "/docs/public/TOEFL.pdf"}
     ],
     "countryList": [
-        {"flag": "fr", "continent": "europe", "name": {"en": "France", "fr": "France"}},
-        {"flag": "gb-eng", "continent": "europe", "name": {"en": "England", "fr": "Angleterre"}},
-        {"flag": "it", "continent": "europe", "name": {"en": "Italy", "fr": "Italie"}},
-        {"flag": "us", "continent": "america", "name": {"en": "United States", "fr": "États-Unis"}},
-        {"flag": "cz", "continent": "europe", "name": {"en": "Czech Republic", "fr": "République tchèque"}},
-        {"flag": "es", "continent": "europe", "name": {"en": "Spain", "fr": "Espagne"}},
-        {"flag": "hu", "continent": "europe", "name": {"en": "Hungary", "fr": "Hongrie"}},
-        {"flag": "be", "continent": "europe", "name": {"en": "Belgium", "fr": "Belgique"}},
-        {"flag": "nl", "continent": "europe", "name": {"en": "Netherlands", "fr": "Pays-Bas"}},
-        {"flag": "sk", "continent": "europe", "name": {"en": "Slovakia", "fr": "Slovaquie"}},
-        {"flag": "at", "continent": "europe", "name": {"en": "Austria", "fr": "Autriche"}},
-        {"flag": "de", "continent": "europe", "name": {"en": "Germany", "fr": "Allemagne"}},
-        {"flag": "ma", "continent": "africa", "name": {"en": "Morocco", "fr": "Maroc"}},
-        {"flag": "tn", "continent": "africa", "name": {"en": "Tunisia", "fr": "Tunisie"}},
-        {"flag": "va", "continent": "europe", "name": {"en": "Vatican City", "fr": "Vatican"}}
+        {"flag": "fr", "iso": "250", "coords": [2.2, 46.6], "continent": "europe", "name": {"en": "France", "fr": "France"}},
+        {"flag": "gb-eng", "iso": "826", "coords": [-1.5, 52.6], "continent": "europe", "name": {"en": "England", "fr": "Angleterre"}},
+        {"flag": "it", "iso": "380", "coords": [12.6, 42.8], "continent": "europe", "name": {"en": "Italy", "fr": "Italie"}},
+        {"flag": "us", "iso": "840", "coords": [-98.6, 39.8], "continent": "america", "name": {"en": "United States", "fr": "États-Unis"}},
+        {"flag": "cz", "iso": "203", "coords": [15.5, 49.8], "continent": "europe", "name": {"en": "Czech Republic", "fr": "République tchèque"}},
+        {"flag": "es", "iso": "724", "coords": [-3.7, 40.4], "continent": "europe", "name": {"en": "Spain", "fr": "Espagne"}},
+        {"flag": "hu", "iso": "348", "coords": [19.5, 47.2], "continent": "europe", "name": {"en": "Hungary", "fr": "Hongrie"}},
+        {"flag": "be", "iso": "056", "coords": [4.5, 50.5], "continent": "europe", "name": {"en": "Belgium", "fr": "Belgique"}},
+        {"flag": "nl", "iso": "528", "coords": [5.3, 52.1], "continent": "europe", "name": {"en": "Netherlands", "fr": "Pays-Bas"}},
+        {"flag": "sk", "iso": "703", "coords": [19.7, 48.7], "continent": "europe", "name": {"en": "Slovakia", "fr": "Slovaquie"}},
+        {"flag": "at", "iso": "040", "coords": [14.6, 47.6], "continent": "europe", "name": {"en": "Austria", "fr": "Autriche"}},
+        {"flag": "de", "iso": "276", "coords": [10.4, 51.2], "continent": "europe", "name": {"en": "Germany", "fr": "Allemagne"}},
+        {"flag": "ma", "iso": "504", "coords": [-7.1, 31.8], "continent": "africa", "name": {"en": "Morocco", "fr": "Maroc"}},
+        {"flag": "tn", "iso": "788", "coords": [9.5, 34.0], "continent": "africa", "name": {"en": "Tunisia", "fr": "Tunisie"}},
+        {"flag": "va", "iso": "336", "coords": [12.45, 41.9], "continent": "europe", "name": {"en": "Vatican City", "fr": "Vatican"}}
     ]
 }

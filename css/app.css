@@ -4118,3 +4118,485 @@ html.dark-mode input[name="search-input"]:focus-visible {
 .tooltip {
     font-family: var(--font-family);
 }
+
+/* The book of my path in the About section (initBook of js/app.js): two pages side by side, each leaf turning on the spine in 3D; closed, the cover alone sits in the middle, and at the end the back cover */
+.book-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.book {
+    --page-width: min(340px, 44vw);
+    --page-height: calc(var(--page-width) * 1.32);
+
+    position: relative;
+    width: calc(var(--page-width) * 2);
+    height: var(--page-height);
+    perspective: 2200px;
+    transition: transform 0.6s ease;
+}
+
+/* Shifted by whole pixels: a fraction of a pixel (the vw page width of phones) blurs the text and the emojis of the 3D pages */
+.book[data-state="closed"] {
+    transform: translateX(round(calc(var(--page-width) / -2), 1px));
+}
+
+.book[data-state="end"] {
+    transform: translateX(round(calc(var(--page-width) / 2), 1px));
+}
+
+.book-leaf {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: var(--page-width);
+    height: 100%;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.book-leaf.turned {
+    transform: rotateY(-180deg);
+}
+
+/* A page: paper in the theme colours, a shadow along the spine, its text scrolling when it is longer than the page */
+.book-face {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    padding: 28px 24px 40px;
+    border: 1px solid var(--shadow-sm);
+    background-color: var(--light);
+    color: var(--black);
+    font-size: 14px;
+    backface-visibility: hidden;
+    cursor: pointer;
+}
+
+html.dark-mode .book-face:not(.book-cover) {
+    background-color: var(--gray-dark);
+    color: var(--white);
+}
+
+.book-front {
+    border-radius: 0 8px 8px 0;
+    background-image: linear-gradient(to right, var(--shadow-sm), transparent 28px);
+    box-shadow: 4px 6px 16px var(--shadow-sm);
+}
+
+.book-back {
+    border-radius: 8px 0 0 8px;
+    background-image: linear-gradient(to left, var(--shadow-sm), transparent 28px);
+    box-shadow: -4px 6px 16px var(--shadow-sm);
+    transform: rotateY(180deg);
+}
+
+/* The cover and the back cover, in a light lavender blue, their text in the dark primary blue; centred, but from its top when it is taller than its page (phones) rather than cut above the scroll */
+.book-cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: safe center;
+    gap: 8px;
+    background-color: var(--primary-pale);
+    background-image: none;
+    color: var(--primary-dark);
+    text-align: center;
+}
+
+/* The icon of the cover (a signpost) and of the back cover (a handshake), in a white seal ringed in blue */
+.book-seal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 96px;
+    margin-bottom: 8px;
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    background-color: var(--white);
+    color: var(--primary);
+    font-size: 44px;
+    box-shadow: 0 4px 12px var(--shadow-sm);
+}
+
+/* The icon before a line of the cover (the job, the years of experience), not the one of its seal */
+.book-cover p i {
+    margin-right: 8px;
+}
+
+.book-cover p {
+    margin: 0;
+}
+
+.book-name {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* The field under my name on the cover, in italics between two waves like the ornaments of old books: an SVG wave used as a mask on each side, in the colour of the cover text */
+.book-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.book-field::before,
+.book-field::after {
+    content: "";
+    width: 56px;
+    height: 12px;
+    background-color: currentcolor;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 12'%3E%3Cpath d='M2 6 Q9 0 16 6 T30 6 T44 6 T58 6' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+}
+
+.book-tagline {
+    max-width: 260px;
+    font-size: 14px;
+}
+
+.book-open {
+    margin-top: 12px;
+}
+
+.book-title {
+    margin-bottom: 16px;
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.book-items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.book-items li {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+/* The emoji of a line, drawn at a size the emoji fonts render sharp (their bitmaps blur at the 14px of the text) and set on the line of its date */
+.book-icon {
+    flex: none;
+    width: 24px;
+    font-size: 20px;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.book-when {
+    display: block;
+    color: var(--primary);
+    font-size: 13px;
+}
+
+/* The icon of a page title */
+.book-title i {
+    margin-right: 8px;
+}
+
+/* The font icons of the pages take the colour of their text, the red of .icon-shield and .icon-heart elsewhere included */
+.book-face [class^="icon-"] {
+    color: inherit;
+}
+
+/* A job: the company in bold, then its city and its sector as two pills of their own colours, each after its icon */
+.book-company {
+    display: block;
+    font-weight: 700;
+}
+
+.book-company i,
+.book-city i,
+.book-sector i {
+    margin-right: 4px;
+}
+
+.book-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.book-city,
+.book-sector {
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.book-city {
+    background-color: var(--shadow-sm);
+}
+
+.book-sector {
+    background-color: var(--primary-pale);
+    color: var(--primary-dark);
+}
+
+/* The hobbies as four square tiles, two by two: the emoji above its word */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.book-grid li {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 0;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    background-color: var(--primary-pale);
+    color: var(--primary-dark);
+    font-weight: 600;
+    text-align: center;
+}
+
+.book-grid .book-icon {
+    width: auto;
+    font-size: 36px;
+}
+
+/* A tile with a title and a subtitle (the fields): the title in bold, the subtitle smaller under it */
+.book-grid li > span:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 6px;
+}
+
+.book-tile-subtitle {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+/* The years of experience on the cover, a pill under the job */
+.book-xp {
+    padding: 2px 12px;
+    border-radius: 12px;
+    background-color: var(--primary-dark);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* A page of one diploma, centred like a seal under its title: the icon, the year, the schools as pills and the degree */
+.book-diploma {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 70%;
+    text-align: center;
+}
+
+.book-diploma p {
+    margin: 0;
+}
+
+.book-diploma-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    height: 88px;
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    background-color: var(--primary-pale);
+    font-size: 44px;
+}
+
+.book-diploma-year {
+    color: var(--primary);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.book-diploma-schools {
+    display: flex;
+    gap: 8px;
+}
+
+.book-pill {
+    padding: 4px 14px;
+    border-radius: 16px;
+    background-color: var(--primary-dark);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.book-diploma-text {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.book-number {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    width: 100%;
+    color: var(--secondary);
+    font-size: 12px;
+    text-align: center;
+}
+
+.book-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.book-controls button {
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background-color: var(--primary-dark);
+    color: var(--white);
+    cursor: pointer;
+}
+
+.book-controls button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.book-status {
+    min-width: 200px;
+    margin: 0;
+    text-align: center;
+}
+
+/* Phones: taller pages, smaller text, so a page holds its lines */
+@media (max-width: 575.98px) {
+    .book {
+        --page-width: round(44vw, 1px);
+        --page-height: calc(var(--page-width) * 2.1);
+    }
+
+    .book-face {
+        padding: 16px 12px;
+        font-size: 12px;
+    }
+
+    .book-name {
+        font-size: 16px;
+    }
+
+    .book-cover {
+        gap: 4px;
+    }
+
+    .book-cover .book-open {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+
+    .book-seal {
+        width: 56px;
+        height: 56px;
+        font-size: 26px;
+    }
+
+    .book-title {
+        font-size: 16px;
+    }
+
+    .book-icon {
+        width: 18px;
+        font-size: 15px;
+    }
+
+    .book-grid {
+        gap: 8px;
+    }
+
+    /* A page longer than the phone page scrolls: no number over its last lines, the status under the book already gives it */
+    .book-number {
+        display: none;
+    }
+
+    .book-grid .book-icon {
+        font-size: 24px;
+    }
+
+    .book-diploma-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 28px;
+    }
+
+    .book-diploma-year {
+        font-size: 22px;
+    }
+
+    .book-diploma-text {
+        font-size: 14px;
+    }
+
+    .book-controls {
+        gap: 8px;
+    }
+
+    .book-status {
+        min-width: 0;
+        font-size: 13px;
+    }
+}
+
+/* The globe of the visited countries in the counter section (initGlobe of js/app.js): dragged to turn, the page still scrolling up and down over it on a touch screen; its sea, read by globeColors, pale in the light theme and dark grey in the dark one */
+:root {
+    --globe-sea: var(--primary-pale);
+}
+
+html.dark-mode {
+    --globe-sea: var(--gray-dark);
+}
+
+.globe {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    aspect-ratio: 1;
+    cursor: grab;
+    touch-action: pan-y;
+}
+
+.globe.dragging {
+    cursor: grabbing;
+}
+
+.globe-hint {
+    margin: 8px 0 0;
+    color: var(--secondary);
+    font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .book,
+    .book-leaf {
+        transition: none;
+    }
+}

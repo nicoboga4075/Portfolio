@@ -150,6 +150,10 @@ The third-party libraries in `js/` and `css/` are downloaded manually (not npm d
 | Animate.css | 3.7.2 | [npm](https://www.npmjs.com/package/animate.css) | CSS animation classes applied on scroll-in |
 | i18next | 26.4.3 | [npm](https://www.npmjs.com/package/i18next) | Client-side translations for the multi-language pages |
 | chartjs-plugin-doughnutlabel-v3 | 1.2.0 | [npm](https://www.npmjs.com/package/chartjs-plugin-doughnutlabel-v3) | Draws the centered label inside Chart.js doughnut charts |
+| d3-array | 3.2.5 | [npm](https://www.npmjs.com/package/d3-array) | Array helpers d3-geo needs, loaded before it with the globe |
+| d3-geo | 3.1.2 | [npm](https://www.npmjs.com/package/d3-geo) | Draws the globe of the visited countries (orthographic projection on a canvas), loaded once the globe comes into view |
+| TopoJSON Client | 3.1.0 | [npm](https://www.npmjs.com/package/topojson-client) | Turns the world map into the country shapes and borders of the globe |
+| World Atlas (Natural Earth 1:110m) | 2.0.2 | [npm](https://www.npmjs.com/package/world-atlas) | The world map of the globe (`js/countries-110m.json`, Natural Earth data in the public domain) |
 
 jQuery, jQuery Migrate, Bootstrap and Animate.css are intentionally kept below their latest major release - see [SECURITY.md](SECURITY.md#major-versions-held-back-on-purpose) for why each one is pinned.
 

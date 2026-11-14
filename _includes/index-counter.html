@@ -127,6 +127,13 @@
                 </div>
             </div>
         </div>
+        {#- The globe of the visited countries (initGlobe of js/app.js): drawn with d3-geo once in view, each country of the flags above filled and marked by a dot, the canvas named by their list for screen readers #}
+        <div class="row justify-content-center pt-5">
+            <div class="col-12 text-center ftco-animate">
+                <canvas id="globe" class="globe" width="420" height="420" role="img" aria-label="{{ counterLang.globeLabel }} {% for country in counter.countryList %}{{ country.name[lang] }}{{ ", " if not loop.last }}{% endfor %}" data-countries="{{ counter.countryList | dump }}"></canvas>
+                <p class="globe-hint">{{ counterLang.globeHint }}</p>
+            </div>
+        </div>
     </div>
 </section>
 {% endif %}

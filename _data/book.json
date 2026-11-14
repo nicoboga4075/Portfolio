@@ -1,0 +1,110 @@
+{
+    "en": {
+        "label": "My path, a book to leaf through",
+        "prev": "Previous page",
+        "next": "Next page",
+        "first": "Back to the cover",
+        "cover": "Cover",
+        "backCover": "Back cover",
+        "pages": "Pages {from} and {to} of {total}",
+        "front": { "title": "Nicolas BOGALHEIRO", "field": "IT", "tagline": "Software engineer", "xp": "XP: {years} years", "open": "Open the book" },
+        "back": { "title": "Thanks for reading", "text": "The details of each experience are in the resume below." },
+        "sheets": [
+            { "title": "Education", "icon": "icon-graduation-cap", "placeIcon": "icon-university", "tagIcon": "icon-book", "items": [
+                { "icon": "🎓", "when": "2012–2015", "text": "Saint Jacques de Compostelle", "city": "Dax", "sector": "High school" },
+                { "icon": "🎓", "when": "2015–2018", "text": "Janson de Sailly", "city": "Paris", "sector": "MP preparatory class" },
+                { "icon": "🎓", "when": "2018–2021", "text": "ESILV", "city": "La Défense", "sector": "Engineering degree" },
+                { "icon": "🎓", "when": "2020–2021", "text": "UQAC", "city": "Remote", "sector": "Master's degree" }
+            ] },
+            { "title": "Double degree", "icon": "icon-trophy", "items": [], "diploma": { "icon": "🎓", "year": "2021", "schools": ["ESILV", "UQAC"], "text": "Software engineer" } },
+            { "title": "Certifications", "icon": "icon-certificate", "placeIcon": "icon-check-circle", "cityIcon": "icon-building-o", "tagIcon": "icon-tag", "items": [
+                { "icon": "🛡️", "when": "2021", "text": "SecNumacadémie", "city": "ANSSI", "sector": "Cybersecurity" },
+                { "icon": "🛡️", "when": "2025", "text": "Google Cybersecurity", "city": "Google · Coursera", "sector": "Cybersecurity" },
+                { "icon": "🛡️", "when": "2025", "text": "EBIOS Risk Manager", "city": "Club EBIOS", "sector": "Risk analysis" },
+                { "icon": "🛡️", "when": "2026", "text": "Cyberini", "city": "Cyberini", "sector": "MOOC & CTF" }
+            ] },
+            { "title": "Languages", "icon": "icon-language", "placeIcon": "icon-certificate", "cityIcon": "icon-trophy", "tagIcon": "icon-comments", "items": [
+                { "icon": "💬", "when": "2019", "text": "TOEFL", "city": "550/677", "sector": "English" },
+                { "icon": "💬", "when": "2020", "text": "TOEIC", "city": "810/990", "sector": "English" },
+                { "icon": "💬", "when": "2025", "text": "Voltaire", "city": "841/1000", "sector": "French" }
+            ] },
+            { "title": "Before the degree", "icon": "icon-history", "items": [
+                { "icon": "💼", "when": "Mar → Aug 2020", "text": "Cyberprotect", "city": "Lyon", "sector": "Cybersecurity" },
+                { "icon": "💼", "when": "Jun → Aug 2019", "text": "Galadrim", "city": "Paris", "sector": "Software engineering" },
+                { "icon": "💼", "when": "Oct 2018 → Apr 2019", "text": "CGI", "city": "Paris", "sector": "Digital transformation" }
+            ] },
+            { "title": "After the degree", "icon": "icon-rocket", "items": [
+                { "icon": "💼", "when": "Dec 2025 → Aug 2026", "text": "ChapsVision", "city": "Paris", "sector": "AI & data intelligence" },
+                { "icon": "💼", "when": "Dec 2024 → Aug 2025", "text": "Astek/Alstom", "city": "Lyon", "sector": "Railway" },
+                { "icon": "💼", "when": "Jun → Sep 2024", "text": "Bassetti", "city": "Lyon", "sector": "Industry & quality" },
+                { "icon": "💼", "when": "Jul 2021 → May 2024", "text": "Soft Concept", "city": "Lyon", "sector": "Surveys & data viz" }
+            ] },
+            { "title": "Areas of expertise", "icon": "icon-lightbulb-o", "grid": true, "items": [
+                { "icon": "💻", "when": "", "text": "Computing & science", "subtitle": "Programming, cyber, data, AI" },
+                { "icon": "🧑‍🏫", "when": "", "text": "Support & teaching", "subtitle": "Support, demos, lessons" },
+                { "icon": "🎾", "when": "", "text": "Tennis", "subtitle": "Player, umpire, assistant coach" },
+                { "icon": "📐", "when": "", "text": "Mathematics", "subtitle": "Private tutor" }
+            ] },
+            { "title": "Hobbies", "icon": "icon-heart", "grid": true, "items": [
+                { "icon": "🎾", "when": "", "text": "Tennis" },
+                { "icon": "♟️", "when": "", "text": "Chess" },
+                { "icon": "✈️", "when": "", "text": "Travel" },
+                { "icon": "🎵", "when": "", "text": "Music" }
+            ] }
+        ]
+    },
+    "fr": {
+        "label": "Mon parcours, un livre à feuilleter",
+        "prev": "Page précédente",
+        "next": "Page suivante",
+        "first": "Revenir à la couverture",
+        "cover": "Couverture",
+        "backCover": "Quatrième de couverture",
+        "pages": "Pages {from} et {to} sur {total}",
+        "front": { "title": "Nicolas BOGALHEIRO", "field": "IT", "tagline": "Ingénieur logiciel", "xp": "XP : {years} ans", "open": "Ouvrir le livre" },
+        "back": { "title": "Merci de votre lecture", "text": "Le détail de chaque expérience se trouve dans le résumé plus bas." },
+        "sheets": [
+            { "title": "Formation", "icon": "icon-graduation-cap", "placeIcon": "icon-university", "tagIcon": "icon-book", "items": [
+                { "icon": "🎓", "when": "2012–2015", "text": "Saint Jacques de Compostelle", "city": "Dax", "sector": "Lycée" },
+                { "icon": "🎓", "when": "2015–2018", "text": "Janson de Sailly", "city": "Paris", "sector": "Prépa MP" },
+                { "icon": "🎓", "when": "2018–2021", "text": "ESILV", "city": "La Défense", "sector": "Cycle ingénieur" },
+                { "icon": "🎓", "when": "2020–2021", "text": "UQAC", "city": "À distance", "sector": "Maîtrise" }
+            ] },
+            { "title": "Double diplôme", "icon": "icon-trophy", "items": [], "diploma": { "icon": "🎓", "year": "2021", "schools": ["ESILV", "UQAC"], "text": "Ingénieur logiciel" } },
+            { "title": "Certifications", "icon": "icon-certificate", "placeIcon": "icon-check-circle", "cityIcon": "icon-building-o", "tagIcon": "icon-tag", "items": [
+                { "icon": "🛡️", "when": "2021", "text": "SecNumacadémie", "city": "ANSSI", "sector": "Cybersécurité" },
+                { "icon": "🛡️", "when": "2025", "text": "Google Cybersecurity", "city": "Google · Coursera", "sector": "Cybersécurité" },
+                { "icon": "🛡️", "when": "2025", "text": "EBIOS Risk Manager", "city": "Club EBIOS", "sector": "Analyse de risques" },
+                { "icon": "🛡️", "when": "2026", "text": "Cyberini", "city": "Cyberini", "sector": "MOOC & CTF" }
+            ] },
+            { "title": "Langues", "icon": "icon-language", "placeIcon": "icon-certificate", "cityIcon": "icon-trophy", "tagIcon": "icon-comments", "items": [
+                { "icon": "💬", "when": "2019", "text": "TOEFL", "city": "550/677", "sector": "Anglais" },
+                { "icon": "💬", "when": "2020", "text": "TOEIC", "city": "810/990", "sector": "Anglais" },
+                { "icon": "💬", "when": "2025", "text": "Voltaire", "city": "841/1000", "sector": "Français" }
+            ] },
+            { "title": "Avant le diplôme", "icon": "icon-history", "items": [
+                { "icon": "💼", "when": "mars → août 2020", "text": "Cyberprotect", "city": "Lyon", "sector": "Cybersécurité" },
+                { "icon": "💼", "when": "juin → août 2019", "text": "Galadrim", "city": "Paris", "sector": "Génie logiciel" },
+                { "icon": "💼", "when": "oct. 2018 → avr. 2019", "text": "CGI", "city": "Paris", "sector": "Transformation digitale" }
+            ] },
+            { "title": "Après le diplôme", "icon": "icon-rocket", "items": [
+                { "icon": "💼", "when": "déc. 2025 → août 2026", "text": "ChapsVision", "city": "Paris", "sector": "IA & Data intelligence" },
+                { "icon": "💼", "when": "déc. 2024 → août 2025", "text": "Astek/Alstom", "city": "Lyon", "sector": "Ferroviaire" },
+                { "icon": "💼", "when": "juin → sept. 2024", "text": "Bassetti", "city": "Lyon", "sector": "Industrie & Qualité" },
+                { "icon": "💼", "when": "juil. 2021 → mai 2024", "text": "Soft Concept", "city": "Lyon", "sector": "Enquêtes & Data Viz" }
+            ] },
+            { "title": "Domaines d'expertise", "icon": "icon-lightbulb-o", "grid": true, "items": [
+                { "icon": "💻", "when": "", "text": "Informatique & sciences", "subtitle": "Programmation, cyber, data, IA" },
+                { "icon": "🧑‍🏫", "when": "", "text": "Support & pédagogie", "subtitle": "Support, démos, cours" },
+                { "icon": "🎾", "when": "", "text": "Tennis", "subtitle": "Joueur, arbitre, prof assistant" },
+                { "icon": "📐", "when": "", "text": "Mathématiques", "subtitle": "Cours particuliers" }
+            ] },
+            { "title": "Hobbies", "icon": "icon-heart", "grid": true, "items": [
+                { "icon": "🎾", "when": "", "text": "Tennis" },
+                { "icon": "♟️", "when": "", "text": "Échecs" },
+                { "icon": "✈️", "when": "", "text": "Voyages" },
+                { "icon": "🎵", "when": "", "text": "Musique" }
+            ] }
+        ]
+    }
+}

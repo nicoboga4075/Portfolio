@@ -1698,3 +1698,302 @@ describe('the modes a link turns on', () => {
         expect(banner()).toBeNull();
     });
 });
+
+describe('the book of my path', () => {
+    // A cover, four pages and a back cover on three leaves, as _includes/index-about.html renders them
+    const face = (side, content) => `<div class="book-face book-${side}">${content}</div>`;
+    const bookBody = `<section class="book-wrap">
+        <div id="book" class="book" data-state="closed">
+            <div class="book-leaf">${face('front', '<button type="button" class="book-open">Open</button>')}${face('back', '<p>Page 1</p>')}</div>
+            <div class="book-leaf">${face('front', '<p>Page 2</p>')}${face('back', '<p>Page 3</p>')}</div>
+            <div class="book-leaf">${face('front', '<p>Page 4</p>')}${face('back', '<p>The end</p>')}</div>
+        </div>
+        <div class="book-controls">
+            <button type="button" class="book-first">First</button>
+            <button type="button" class="book-prev">Previous</button>
+            <p class="book-status" data-cover="Cover" data-back="Back cover" data-pages="Pages {from} and {to} of {total}" data-total="4"></p>
+            <button type="button" class="book-next">Next</button>
+        </div>
+    </section>`;
+    const book = () => document.getElementById('book');
+    const leaves = () => [...document.querySelectorAll('.book-leaf')];
+    const status = () => document.querySelector('.book-status').textContent;
+    const shown = () => [...document.querySelectorAll('.book-face')].filter(element => !element.inert).map(element => element.textContent);
+    const key = name => document.querySelector('.book-wrap').dispatchEvent(new KeyboardEvent('keydown', { key: name, bubbles: true }));
+
+    test('does nothing on a page without the book', () => {
+        const app = loadApp();
+        expect(() => app.initBook()).not.toThrow();
+    });
+
+    test('starts closed on the cover, the other faces hidden from screen readers and the keyboard', () => {
+        const app = loadApp({ body: bookBody });
+        app.initBook();
+        expect(book().dataset.state).toBe('closed');
+        expect(status()).toBe('Cover');
+        expect(shown()).toEqual(['Open']);
+        expect(document.querySelector('.book-back').getAttribute('aria-hidden')).toBe('true');
+        expect(document.querySelector('.book-front').getAttribute('aria-hidden')).toBe('false');
+        expect(document.querySelector('.book-first').disabled).toBe(true);
+        expect(document.querySelector('.book-prev').disabled).toBe(true);
+        expect(document.querySelector('.book-next').disabled).toBe(false);
+        expect(leaves().map(leaf => leaf.style.zIndex)).toEqual(['3', '2', '1']);
+    });
+
+    test('opens on the first two pages, the cover leaf turned on top of the left pile, and the focus on the next button', () => {
+        const app = loadApp({ body: bookBody });
+        app.initBook();
+        document.querySelector('.book-open').click();
+        expect(book().dataset.state).toBe('open');
+        expect(status()).toBe('Pages 1 and 2 of 4');
+        expect(shown()).toEqual(['Page 1', 'Page 2']);
+        expect(leaves().map(leaf => leaf.classList.contains('turned'))).toEqual([true, false, false]);
+        expect(leaves().map(leaf => leaf.style.zIndex)).toEqual(['1', '2', '1']);
+        expect(document.activeElement).toBe(document.querySelector('.book-next'));
+        expect(document.querySelector('.book-prev').disabled).toBe(false);
+    });
+
+    test('turns with the buttons and the arrow keys up to the back cover and back, never past either end', () => {
+        const app = loadApp({ body: bookBody });
+        app.initBook();
+        document.querySelector('.book-next').click();
+        document.querySelector('.book-next').click();
+        expect(status()).toBe('Pages 3 and 4 of 4');
+        key('ArrowRight');
+        expect(book().dataset.state).toBe('end');
+        expect(status()).toBe('Back cover');
+        expect(shown()).toEqual(['The end']);
+        expect(document.querySelector('.book-next').disabled).toBe(true);
+        key('ArrowRight');
+        expect(status()).toBe('Back cover');
+        key('ArrowLeft');
+        expect(status()).toBe('Pages 3 and 4 of 4');
+        key('Enter');
+        expect(status()).toBe('Pages 3 and 4 of 4');
+        document.querySelector('.book-prev').click();
+        key('ArrowLeft');
+        key('ArrowLeft');
+        expect(status()).toBe('Cover');
+    });
+
+    test('goes back to the cover from any page with its button or the Home key, the focus moving to the next button', () => {
+        const app = loadApp({ body: bookBody });
+        app.initBook();
+        document.querySelector('.book-next').click();
+        document.querySelector('.book-next').click();
+        expect(document.querySelector('.book-first').disabled).toBe(false);
+        document.querySelector('.book-first').click();
+        expect(status()).toBe('Cover');
+        expect(book().dataset.state).toBe('closed');
+        expect(document.querySelector('.book-first').disabled).toBe(true);
+        expect(document.activeElement).toBe(document.querySelector('.book-next'));
+        key('ArrowRight');
+        key('ArrowRight');
+        key('Home');
+        expect(status()).toBe('Cover');
+    });
+
+    test('turns a page clicked on: the right one forward, the left one back, but not on a click of a button or outside the pages', () => {
+        const app = loadApp({ body: bookBody });
+        app.initBook();
+        document.querySelector('.book-open').click();
+        leaves()[1].querySelector('.book-front p').click();
+        expect(status()).toBe('Pages 3 and 4 of 4');
+        leaves()[1].querySelector('.book-back p').click();
+        expect(status()).toBe('Pages 1 and 2 of 4');
+        book().click();
+        expect(status()).toBe('Pages 1 and 2 of 4');
+        document.querySelector('.book-open').click();
+        expect(status()).toBe('Pages 1 and 2 of 4');
+    });
+});
+
+describe('the globe of the visited countries', () => {
+    const globeBody = `<div class="col-12"><canvas id="globe" width="420" height="420" data-countries='[{"iso":"250","coords":[2,46]},{"iso":"840","coords":[-98,39]}]'></canvas><p class="globe-hint">Drag</p></div>`;
+    const canvas = () => document.getElementById('globe');
+    const scripts = ['js/d3-array.min.js', 'js/d3-geo.min.js', 'js/topojson-client.min.js'];
+    const world = { objects: { countries: 'countries' } };
+    let context;
+    let rotation;
+    let projection;
+    let path;
+
+    // A 2D context that records the drawing, and the cssVarToHex probe reads #102030 from it
+    const fakeContext = () => ({
+        canvas: {}, scale: jest.fn(), clearRect: jest.fn(), beginPath: jest.fn(), fill: jest.fn(), stroke: jest.fn(), arc: jest.fn(), fillRect: jest.fn(),
+        getImageData: () => ({ data: [16, 32, 48, 255] })
+    });
+
+    // d3-geo and topojson-client as createGlobe and drawGlobe use them: the projection keeps its rotation, a point faces the viewer when its longitude is east of -50
+    function installD3() {
+        rotation = [-10, -40];
+        projection = jest.fn(point => [point[0] + 200, point[1] + 200]);
+        for (const name of ['scale', 'translate', 'clipAngle']) projection[name] = jest.fn(() => projection);
+        projection.rotate = jest.fn(value => {
+            if (value) {
+                rotation = value;
+                return projection;
+            }
+            return rotation;
+        });
+        path = jest.fn();
+        window.d3 = {
+            geoOrthographic: () => projection,
+            geoPath: jest.fn(() => path),
+            geoGraticule10: () => 'graticule',
+            geoDistance: jest.fn(point => (point[0] > -50 ? 0.5 : 2))
+        };
+        window.topojson = {
+            feature: jest.fn(() => ({ features: [{ id: '250' }, { id: '840' }, { id: '392' }] })),
+            mesh: jest.fn((topology, object, filter) => ({ borders: filter('a', 'b') && !filter('a', 'a') }))
+        };
+    }
+
+    // Loads app.js on the globe, brings it into view and answers the map and the three scripts; frame() runs the pending animation frames
+    async function startGlobe({ ratio = 2, still = false, map = world } = {}) {
+        context = fakeContext();
+        const app = loadApp({
+            body: globeBody,
+            before: () => {
+                window.matchMedia = jest.fn(() => ({ matches: still }));
+            }
+        });
+        jest.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(context);
+        installD3();
+        window.devicePixelRatio = ratio;
+        routeFetch({ 'countries-110m.json': map });
+        let frames = [];
+        window.requestAnimationFrame = jest.fn(callback => { frames.push(callback); return frames.length; });
+        app.initGlobe();
+        observerOf(canvas()).callback([{ isIntersecting: true }]);
+        for (const src of scripts) {
+            await flush();
+            scriptFor(src)?.onload();
+        }
+        await flush();
+        const frame = () => { const pending = frames; frames = []; pending.forEach(callback => callback()); };
+        return { app, frame, frames: () => frames };
+    }
+
+    afterEach(() => {
+        delete window.d3;
+        delete window.topojson;
+        window.devicePixelRatio = undefined;
+    });
+
+    test('does nothing on a page without the globe, nor spins one not drawn', () => {
+        const app = loadApp();
+        app.initGlobe();
+        expect(observers).toHaveLength(0);
+        expect(() => app.spinGlobe()).not.toThrow();
+    });
+
+    test('loads nothing until the globe comes near the screen, then the map and the three scripts in order, once', async () => {
+        const app = loadApp({ body: globeBody });
+        routeFetch({});
+        app.initGlobe();
+        const observer = observerOf(canvas());
+        expect(observer.options).toEqual({ rootMargin: '200px' });
+        observer.callback([{ isIntersecting: false }]);
+        expect(window.fetch).not.toHaveBeenCalled();
+        observer.callback([{ isIntersecting: true }]);
+        observer.callback([{ isIntersecting: true }]);
+        expect(window.fetch).toHaveBeenCalledTimes(1);
+        expect(window.fetch).toHaveBeenCalledWith('js/countries-110m.json');
+        await flush();
+        expect(scriptFor('js/d3-array.min.js')).toBeDefined();
+        expect(scriptFor('js/d3-geo.min.js')).toBeUndefined();
+    });
+
+    test('draws the sea, the grid, the land, the visited countries, the borders, a dot on each visited country facing the viewer and the outline, at the density of the screen', async () => {
+        await startGlobe();
+        expect([canvas().width, canvas().height]).toEqual([840, 840]);
+        expect(context.scale).toHaveBeenCalledWith(2, 2);
+        expect(projection.scale).toHaveBeenCalledWith(208);
+        expect(projection.translate).toHaveBeenCalledWith([210, 210]);
+        expect(projection.clipAngle).toHaveBeenCalledWith(90);
+        expect(window.d3.geoPath).toHaveBeenCalledWith(projection, context);
+        expect(context.clearRect).toHaveBeenCalledWith(0, 0, 420, 420);
+        const shapes = path.mock.calls.map(([shape]) => shape);
+        expect(shapes[0]).toEqual({ type: 'Sphere' });
+        expect(shapes[1]).toBe('graticule');
+        expect(shapes[2].features.map(feature => feature.id)).toEqual(['250', '840', '392']);
+        expect(shapes[3].features.map(feature => feature.id)).toEqual(['250', '840']);
+        expect(shapes[4]).toEqual({ borders: true });
+        expect(shapes[5]).toEqual({ type: 'Sphere' });
+        expect(window.d3.geoDistance).toHaveBeenCalledWith([2, 46], [10, 40]);
+        expect(context.arc).toHaveBeenCalledTimes(1);
+        expect(context.arc).toHaveBeenCalledWith(202, 246, 3, 0, 2 * Math.PI);
+        expect(context.fillStyle).toBe('#102030');
+    });
+
+    test('draws at one pixel per point on a screen that gives no density', async () => {
+        await startGlobe({ ratio: 0 });
+        expect(canvas().width).toBe(420);
+        expect(context.scale).toHaveBeenCalledWith(1, 1);
+    });
+
+    test('turns a little each frame while on screen, stops off screen and starts again once back, without a second loop', async () => {
+        const { frame, frames } = await startGlobe();
+        expect(frames()).toHaveLength(1);
+        frame();
+        expect(rotation[0]).toBeCloseTo(-9.88);
+        expect(frames()).toHaveLength(1);
+        observerOf(canvas()).callback([{ isIntersecting: true }]);
+        expect(frames()).toHaveLength(1);
+        observerOf(canvas()).callback([{ isIntersecting: false }]);
+        frame();
+        expect(frames()).toHaveLength(0);
+        observerOf(canvas()).callback([{ isIntersecting: true }]);
+        expect(frames()).toHaveLength(1);
+    });
+
+    test('does not turn by itself for a visitor who asks for less motion', async () => {
+        const { frames } = await startGlobe({ still: true });
+        expect(window.matchMedia).toHaveBeenCalledWith('(prefers-reduced-motion: reduce)');
+        expect(frames()).toHaveLength(0);
+        expect(context.clearRect).toHaveBeenCalled();
+    });
+
+    test('turns with the pointer dragged, up and down within the poles, then spins again once let go', async () => {
+        const { frame, frames } = await startGlobe();
+        const pointer = (type, x, y) => canvas().dispatchEvent(Object.assign(new MouseEvent(type, { clientX: x, clientY: y }), { pointerId: 1 }));
+        canvas().setPointerCapture = jest.fn();
+        pointer('pointermove', 50, 50);
+        expect(rotation).toEqual([-10, -40]);
+        pointer('pointerup', 50, 50);
+        pointer('pointerdown', 100, 100);
+        expect(canvas().classList.contains('dragging')).toBe(true);
+        expect(canvas().setPointerCapture).toHaveBeenCalledWith(1);
+        frame();
+        expect(frames()).toHaveLength(0);
+        pointer('pointermove', 110, 90);
+        expect(rotation).toEqual([-6, -36]);
+        pointer('pointermove', 110, -1000);
+        expect(rotation).toEqual([-6, 90]);
+        pointer('pointermove', 110, 2000);
+        expect(rotation).toEqual([-6, -90]);
+        pointer('pointerup', 110, 2000);
+        expect(canvas().classList.contains('dragging')).toBe(false);
+        expect(frames()).toHaveLength(1);
+        delete canvas().setPointerCapture;
+        pointer('pointerdown', 0, 0);
+        pointer('pointercancel', 0, 0);
+        expect(canvas().classList.contains('dragging')).toBe(false);
+    });
+
+    test('takes the colours of the new theme', async () => {
+        await startGlobe();
+        context.clearRect.mockClear();
+        document.dispatchEvent(new CustomEvent('darkmodechange'));
+        expect(context.clearRect).toHaveBeenCalledTimes(1);
+    });
+
+    test('hides itself and its hint when the map does not load', async () => {
+        const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        await startGlobe({ map: { ok: false, status: 404 } });
+        expect(warn).toHaveBeenCalledWith('Globe not drawn:', expect.objectContaining({ message: 'js/countries-110m.json: HTTP 404' }));
+        expect(canvas().closest('.col-12').hidden).toBe(true);
+        expect(canvas().dataset.loading).toBeUndefined();
+    });
+});

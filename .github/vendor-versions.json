@@ -11,5 +11,9 @@
   { "name": "Scrollax", "file": "js/scrollax.min.js", "source": "npm", "npm": "scrollax", "version": "1.0.0" },
   { "name": "Animate.css", "file": "css/animate.min.css", "source": "npm", "npm": "animate.css", "version": "3.7.2" },
   { "name": "i18next", "file": "js/i18next.min.js", "source": "npm", "npm": "i18next", "version": "26.4.3" },
-  { "name": "chartjs-plugin-doughnutlabel-v3", "file": "js/chartjs-plugin-doughnutlabel.min.js", "source": "npm", "npm": "chartjs-plugin-doughnutlabel-v3", "version": "1.2.0" }
+  { "name": "chartjs-plugin-doughnutlabel-v3", "file": "js/chartjs-plugin-doughnutlabel.min.js", "source": "npm", "npm": "chartjs-plugin-doughnutlabel-v3", "version": "1.2.0" },
+  { "name": "d3-array", "file": "js/d3-array.min.js", "source": "npm", "npm": "d3-array", "version": "3.2.5" },
+  { "name": "d3-geo", "file": "js/d3-geo.min.js", "source": "npm", "npm": "d3-geo", "version": "3.1.2" },
+  { "name": "TopoJSON Client", "file": "js/topojson-client.min.js", "source": "npm", "npm": "topojson-client", "version": "3.1.0" },
+  { "name": "World Atlas (Natural Earth 1:110m)", "file": "js/countries-110m.json", "source": "npm", "npm": "world-atlas", "version": "2.0.2" }
 ]

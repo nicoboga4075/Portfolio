@@ -1558,6 +1558,9 @@ function initIndexPage(langPage) {
 
         initCounterTilt();
 
+        initBook();
+        initGlobe();
+
         initNavAlt();
 
         initCursorSparks();
@@ -1956,6 +1959,283 @@ function initBlogPage(langPage) {
         }
 }
 
+/* Book of my path */
+
+// The book of the About section (_includes/index-about.html): its leaves turn on the spine, the visible faces being the front of the leaf after the turned ones (right page) and the back of the last turned one (left page); closed shows the cover, end the back cover
+function initBook() {
+    const book = document.getElementById('book');
+    if (!book) {
+        return;
+    }
+    const leaves = [...book.querySelectorAll('.book-leaf')];
+    const wrap = book.closest('.book-wrap');
+    const first = wrap.querySelector('.book-first');
+    const prev = wrap.querySelector('.book-prev');
+    const next = wrap.querySelector('.book-next');
+    const status = wrap.querySelector('.book-status');
+    let turned = 0;
+
+    function show(count) {
+        turned = Math.max(0, Math.min(leaves.length, count));
+        leaves.forEach((leaf, index) => {
+            const isTurned = index < turned;
+            leaf.classList.toggle('turned', isTurned);
+            // The turned leaves pile up on the left in turning order, the others on the right in reading order
+            leaf.style.zIndex = isTurned ? index + 1 : leaves.length - index;
+            setFaceVisible(leaf.querySelector('.book-front'), index === turned);
+            setFaceVisible(leaf.querySelector('.book-back'), index === turned - 1);
+        });
+        book.dataset.state = bookState(turned, leaves.length);
+        first.disabled = prev.disabled = turned === 0;
+        next.disabled = turned === leaves.length;
+        status.textContent = bookStatus(status.dataset, turned, leaves.length);
+    }
+
+    // Back to the cover from any page, the focus kept on the controls since this button gets disabled
+    first.addEventListener('click', () => {
+        show(0);
+        next.focus();
+    });
+    prev.addEventListener('click', () => show(turned - 1));
+    next.addEventListener('click', () => show(turned + 1));
+    book.querySelector('.book-open').addEventListener('click', () => {
+        show(1);
+        next.focus();
+    });
+    // A click on a page turns it: the right one forward, the left one back
+    book.addEventListener('click', event => {
+        if (event.target.closest('button, a')) {
+            return;
+        }
+        const face = event.target.closest('.book-face');
+        if (face?.classList.contains('book-front')) {
+            show(turned + 1);
+        } else if (face) {
+            show(turned - 1);
+        }
+    });
+    // The arrow keys turn the pages while the focus is in the book or on its buttons, Home goes back to the cover
+    wrap.addEventListener('keydown', event => {
+        if (event.key === 'ArrowRight') {
+            show(turned + 1);
+        } else if (event.key === 'ArrowLeft') {
+            show(turned - 1);
+        } else if (event.key === 'Home') {
+            show(0);
+        }
+    });
+    show(0);
+}
+
+// A face out of sight is hidden from screen readers and from the keyboard
+function setFaceVisible(face, visible) {
+    face.inert = !visible;
+    face.setAttribute('aria-hidden', String(!visible));
+}
+
+// closed on the cover, end on the back cover, open in between: the CSS centres the book on the one visible page of the first two
+function bookState(turned, leafCount) {
+    if (turned === 0) {
+        return 'closed';
+    }
+    return turned === leafCount ? 'end' : 'open';
+}
+
+// The text under the book, read by screen readers on each turn: the cover, the back cover or the two pages shown
+function bookStatus({ cover, back, pages, total }, turned, leafCount) {
+    if (turned === 0) {
+        return cover;
+    }
+    if (turned === leafCount) {
+        return back;
+    }
+    return pages.replace('{from}', 2 * turned - 1).replace('{to}', 2 * turned).replace('{total}', total);
+}
+
+/* Globe of the visited countries */
+
+// d3-geo needs d3-array before it, topojson-client turns the world map (Natural Earth 1:110m of world-atlas) into shapes: all four load once the globe comes near the screen
+const GLOBE_SCRIPTS = ['js/d3-array.min.js', 'js/d3-geo.min.js', 'js/topojson-client.min.js'];
+const GLOBE_MAP = 'js/countries-110m.json';
+// Degrees turned per frame while nobody drags it, and per pixel dragged
+const GLOBE_SPIN = 0.12;
+const GLOBE_DRAG = 0.4;
+let globe = null;
+
+function initGlobe() {
+    const canvas = document.getElementById('globe');
+    if (!canvas) {
+        return;
+    }
+    const observer = new IntersectionObserver(entries => {
+        const visible = entries.some(entry => entry.isIntersecting);
+        if (globe) {
+            globe.visible = visible;
+            if (visible) {
+                spinGlobe();
+            }
+        } else if (visible) {
+            startGlobe(canvas);
+        }
+    }, { rootMargin: '200px' });
+    observer.observe(canvas);
+}
+
+async function startGlobe(canvas) {
+    if (canvas.dataset.loading) {
+        return;
+    }
+    canvas.dataset.loading = 'true';
+    try {
+        const [world] = await Promise.all([
+            fetch(GLOBE_MAP).then(response => {
+                if (!response.ok) {
+                    throw new Error(`${GLOBE_MAP}: HTTP ${response.status}`);
+                }
+                return response.json();
+            }),
+            GLOBE_SCRIPTS.reduce((chain, src) => chain.then(() => loadScriptOnce(src)), Promise.resolve())
+        ]);
+        globe = createGlobe(canvas, world);
+        bindGlobeDrag(canvas);
+        drawGlobe();
+        spinGlobe();
+    } catch (error) {
+        // Offline or a blocked script: the hint goes too, the countries stay listed on the back of their card
+        console.warn('Globe not drawn:', error);
+        canvas.closest('.col-12').hidden = true;
+    } finally {
+        delete canvas.dataset.loading;
+    }
+}
+
+// The projection, centred on Europe, the shapes of the countries and the visited ones, drawn on a canvas sized for the screen density
+function createGlobe(canvas, world) {
+    const size = canvas.width;
+    const ratio = window.devicePixelRatio || 1;
+    canvas.width = canvas.height = size * ratio;
+    const context = canvas.getContext('2d');
+    context.scale(ratio, ratio);
+    const visits = JSON.parse(canvas.dataset.countries);
+    const ids = new Set(visits.map(country => country.iso));
+    const countries = topojson.feature(world, world.objects.countries).features;
+    const projection = d3.geoOrthographic().scale(size / 2 - 2).translate([size / 2, size / 2]).rotate([-10, -40]).clipAngle(90);
+    return {
+        canvas,
+        context,
+        size,
+        projection,
+        path: d3.geoPath(projection, context),
+        land: { type: 'FeatureCollection', features: countries },
+        visited: { type: 'FeatureCollection', features: countries.filter(country => ids.has(country.id)) },
+        borders: topojson.mesh(world, world.objects.countries, (a, b) => a !== b),
+        graticule: d3.geoGraticule10(),
+        points: visits.map(country => country.coords),
+        colors: globeColors(),
+        dragging: false,
+        visible: true,
+        frame: 0,
+        // No turning by itself for a visitor who asks for less motion: the globe still turns when dragged
+        still: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    };
+}
+
+// The colours of the theme, as hex since a canvas can't read oklch() from a variable: a pale sea, grey land, the visited countries and their dots in the site colours, the lines in the page background
+function globeColors() {
+    return {
+        sea: `#${cssVarToHex('--globe-sea')}`,
+        land: `#${cssVarToHex('--gray-light')}`,
+        visited: `#${cssVarToHex('--primary')}`,
+        dot: `#${cssVarToHex('--accent-color')}`,
+        line: `#${cssVarToHex('--background-color')}`
+    };
+}
+
+function drawGlobe() {
+    const { context, path, projection, size, colors } = globe;
+    context.clearRect(0, 0, size, size);
+    const fill = (shape, color) => {
+        context.beginPath();
+        path(shape);
+        context.fillStyle = color;
+        context.fill();
+    };
+    const stroke = (shape, color, width) => {
+        context.beginPath();
+        path(shape);
+        context.strokeStyle = color;
+        context.lineWidth = width;
+        context.stroke();
+    };
+    fill({ type: 'Sphere' }, colors.sea);
+    stroke(globe.graticule, colors.line, 0.4);
+    fill(globe.land, colors.land);
+    fill(globe.visited, colors.visited);
+    stroke(globe.borders, colors.line, 0.5);
+    // A dot on each visited country facing the viewer, so the smallest ones (Vatican City) show too
+    const [lambda, phi] = projection.rotate();
+    const centre = [-lambda, -phi];
+    context.fillStyle = colors.dot;
+    globe.points.filter(point => d3.geoDistance(point, centre) < Math.PI / 2).forEach(point => {
+        const [x, y] = projection(point);
+        context.beginPath();
+        context.arc(x, y, 3, 0, 2 * Math.PI);
+        context.fill();
+    });
+    stroke({ type: 'Sphere' }, colors.visited, 1);
+}
+
+// Turns the globe a little each frame while it is on screen, not dragged and motion is welcome
+function spinGlobe() {
+    if (!globe || globe.still || globe.frame) {
+        return;
+    }
+    const step = () => {
+        if (!globe.visible || globe.dragging) {
+            globe.frame = 0;
+            return;
+        }
+        const [lambda, phi] = globe.projection.rotate();
+        globe.projection.rotate([lambda + GLOBE_SPIN, phi]);
+        drawGlobe();
+        globe.frame = requestAnimationFrame(step);
+    };
+    globe.frame = requestAnimationFrame(step);
+}
+
+// Dragging with a mouse, a pen or a finger turns the globe, up and down within the poles
+function bindGlobeDrag(canvas) {
+    let last = null;
+    canvas.addEventListener('pointerdown', event => {
+        last = [event.clientX, event.clientY];
+        globe.dragging = true;
+        canvas.classList.add('dragging');
+        canvas.setPointerCapture?.(event.pointerId);
+    });
+    canvas.addEventListener('pointermove', event => {
+        if (!last) {
+            return;
+        }
+        const [lambda, phi] = globe.projection.rotate();
+        const dx = event.clientX - last[0];
+        const dy = event.clientY - last[1];
+        last = [event.clientX, event.clientY];
+        globe.projection.rotate([lambda + dx * GLOBE_DRAG, Math.max(-90, Math.min(90, phi - dy * GLOBE_DRAG))]);
+        drawGlobe();
+    });
+    const release = () => {
+        if (!last) {
+            return;
+        }
+        last = null;
+        globe.dragging = false;
+        canvas.classList.remove('dragging');
+        spinGlobe();
+    };
+    canvas.addEventListener('pointerup', release);
+    canvas.addEventListener('pointercancel', release);
+}
+
 function initPage() {
     const idPage = getCurrentRoute();
     const langPage = getCurrentLanguage();
@@ -2200,6 +2480,11 @@ function initCaptcha() {
 // color into the options, unlike our previous custom plugin which read
 // --text-color fresh on every draw).
 document.addEventListener('darkmodechange', function () {
+    // The globe takes the sea, land and line colours of the new theme
+    if (globe) {
+        globe.colors = globeColors();
+        drawGlobe();
+    }
     if (chart) {
         const rootStyle = getComputedStyle(document.documentElement);
         const textColor = rootStyle.getPropertyValue('--text-color').trim();

@@ -48,5 +48,69 @@
                 </div>
             </div>
         </div>
+        {#- The book of my path (initBook of js/app.js): a cover, the pages of _data/book.json two by two and a back cover, each leaf turning on the spine with a page on each side #}
+        {%- set bookLang = book[lang] %}
+        {%- set sheets = bookLang.sheets %}
+        <div class="row justify-content-center py-5">
+            <div class="col-12 ftco-animate">
+                <section class="book-wrap" aria-label="{{ bookLang.label }}">
+                    <div id="book" class="book" data-state="closed">
+                        {%- for leaf in range(0, sheets.length / 2 + 1) %}
+                        <div class="book-leaf">
+                            {%- for side in ["front", "back"] %}
+                            {#- The face of the leaf: the cover first, then the pages in order, the back cover last #}
+                            {%- set index = 2 * leaf - 1 if side == "front" else 2 * leaf %}
+                            {%- set cover = index == -1 or index == sheets.length %}
+                            <div class="book-face book-{{ side }}{{ " book-cover" if cover }}">
+                                {%- if index == -1 %}
+                                {#- The signpost of a path in a round seal, decorative since my name follows #}
+                                <span class="book-seal" aria-hidden="true"><i class="icon-map-signs"></i></span>
+                                <p class="book-name">{{ bookLang.front.title }}</p>
+                                {#- The field between two waves, like the ornaments of old books #}
+                                <p class="book-field">{{ bookLang.front.field }}</p>
+                                <p class="book-tagline"><i class="icon-laptop" aria-hidden="true"></i>{{ bookLang.front.tagline }}</p>
+                                {#- The years of experience of config.profile, the figure of the About section #}
+                                <p class="book-xp"><i class="icon-star" aria-hidden="true"></i>{{ bookLang.front.xp | replace("{years}", profile.xp) }}</p>
+                                <button type="button" class="book-open btn btn-primary">{{ bookLang.front.open }}</button>
+                                {%- elif index == sheets.length %}
+                                {#- A handshake in a round seal, decorative since the thanks follow #}
+                                <span class="book-seal" aria-hidden="true"><i class="icon-handshake-o"></i></span>
+                                <p class="book-name">{{ bookLang.back.title }}</p>
+                                <p class="book-tagline">{{ bookLang.back.text }}</p>
+                                {%- else %}
+                                {%- set sheet = sheets[index] %}
+                                <h3 class="book-title">{% if sheet.icon %}<i class="{{ sheet.icon }}" aria-hidden="true"></i>{% endif %}{{ sheet.title }}</h3>
+                                {%- if sheet.diploma %}
+                                {#- A page of one diploma, laid out as a seal: its icon, its year, its schools as pills and its title #}
+                                <div class="book-diploma">
+                                    <span class="book-diploma-icon" aria-hidden="true">{{ sheet.diploma.icon }}</span>
+                                    <p class="book-diploma-year">{{ sheet.diploma.year }}</p>
+                                    <p class="book-diploma-schools">{% for school in sheet.diploma.schools %}<span class="book-pill">{{ school }}</span>{% endfor %}</p>
+                                    <p class="book-diploma-text">{{ sheet.diploma.text }}</p>
+                                </div>
+                                {%- else %}
+                                {#- A page of short lines (the hobbies) shows them as square tiles, two by two; a line of a job, a school, a certification, a test or a field sets its name, its grey pill (city, issuer, score: city) and its lavender pills (sector, programme, language: sector, or tags) apart, each after the icon of the page (placeIcon, cityIcon, tagIcon: a building, a map marker and a tag by default) #}
+                                <ul class="book-items{{ " book-grid" if sheet.grid }}">
+                                    {%- for item in sheet.items %}
+                                    <li><span class="book-icon" aria-hidden="true">{{ item.icon }}</span><span>{% if item.when %}<strong class="book-when">{{ item.when }}</strong> {% endif %}{% if item.city or item.tags %}<span class="book-company"><i class="{{ sheet.placeIcon or "icon-building" }}" aria-hidden="true"></i>{{ item.text }}</span> <span class="book-tags">{% if item.city %}<span class="book-city"><i class="{{ sheet.cityIcon or "icon-map-marker" }}" aria-hidden="true"></i>{{ item.city }}</span> {% endif %}{% for tag in ([item.sector] if item.sector else item.tags) %}<span class="book-sector"><i class="{{ sheet.tagIcon or "icon-tag" }}" aria-hidden="true"></i>{{ tag }}</span> {% endfor %}</span>{% elif item.subtitle %}<span class="book-tile-title">{{ item.text }}</span> <span class="book-tile-subtitle">{{ item.subtitle }}</span>{% else %}{{ item.text }}{% endif %}</span></li>
+                                    {%- endfor %}
+                                </ul>
+                                {%- endif %}
+                                <span class="book-number" aria-hidden="true">{{ index + 1 }}</span>
+                                {%- endif %}
+                            </div>
+                            {%- endfor %}
+                        </div>
+                        {%- endfor %}
+                    </div>
+                    <div class="book-controls">
+                        <button type="button" class="book-first" aria-label="{{ bookLang.first }}" disabled><i class="icon-step-backward" aria-hidden="true"></i></button>
+                        <button type="button" class="book-prev" aria-label="{{ bookLang.prev }}" disabled><i class="icon-chevron-left" aria-hidden="true"></i></button>
+                        <p class="book-status" aria-live="polite" data-cover="{{ bookLang.cover }}" data-back="{{ bookLang.backCover }}" data-pages="{{ bookLang.pages }}" data-total="{{ sheets.length }}">{{ bookLang.cover }}</p>
+                        <button type="button" class="book-next" aria-label="{{ bookLang.next }}"><i class="icon-chevron-right" aria-hidden="true"></i></button>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 </section>
