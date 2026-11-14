@@ -2075,7 +2075,8 @@ function initGlobe() {
                 spinGlobe();
             }
         } else if (visible) {
-            startGlobe(canvas);
+            // Fire and forget: startGlobe catches its own errors (it hides the globe and warns), so its promise never rejects
+            void startGlobe(canvas);
         }
     }, { rootMargin: '200px' });
     observer.observe(canvas);
