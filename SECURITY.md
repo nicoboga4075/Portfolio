@@ -99,7 +99,7 @@ Dependabot alerts on dev dependencies that a version update fixes are not listed
 
 To maintain the security of this portfolio, I follow these practices:
 
-- **HTTPS enforced** :white_check_mark:: All traffic is served over HTTPS to prevent data interception.
+- **HTTPS enforced** :white_check_mark:: All traffic is served over HTTPS to prevent data interception: Netlify redirects every `http://` request to `https://` (301), `Strict-Transport-Security` in `_headers` makes browsers use HTTPS only for a year, subdomains included, and the `upgrade-insecure-requests` directive of the CSP upgrades any `http://` sub-request of a page to `https://`.
 - **Content Security Policy (CSP)**: CSP headers are configured to mitigate cross-site scripting (XSS) and data injection attacks. `script-src` still allows `'unsafe-inline'` and `'unsafe-eval'`; removing them is tracked in [#399](https://github.com/nicoboga4075/Portfolio/issues/399).
 - **Service worker**: `service-worker.js` only handles same-origin `GET` requests, never caches the Netlify functions (`/.netlify/functions/`), and fetches scripts and stylesheets from the network first, so a security fix in a library reaches visitors with the next deploy instead of waiting for a cached copy to expire.
 - **Public data files**: `/api/articles.json` and `/api/projects.json` are static files written by the build for the Botpress chatbot. They only hold what the pages already show (titles, dates, tags, excerpts, project contexts and links), never anything read from git, the environment or a secret, and are served with `noindex`.

@@ -27,8 +27,11 @@ const isDroppedMedia = request => /\.(mp4|webm)$/i.test(new URL(request.url()).p
 for (const url of pages) {
     test(`${url} loads without a CSP violation, a console error or an exception`, async ({ page }) => {
         const pathname = url.split('#')[0];
-        const policy = headersFor(pathname)['content-security-policy'];
-        expect(policy, 'the /* rule of _headers sets a policy').toBeTruthy();
+        const productionPolicy = headersFor(pathname)['content-security-policy'];
+        expect(productionPolicy, 'the /* rule of _headers sets a policy').toBeTruthy();
+        expect(productionPolicy, 'the policy upgrades every http request to https').toMatch(/(^|;)\s*upgrade-insecure-requests\s*(;|$)/);
+        // Without upgrade-insecure-requests: the preview server is plain http, and WebKit would upgrade its own sub-requests to an https://localhost that doesn't answer
+        const policy = productionPolicy.replace(/;?\s*upgrade-insecure-requests\s*/, '');
         const violations = [];
         const errors = [];
         page.on('console', message => {
