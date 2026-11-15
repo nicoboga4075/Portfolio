@@ -36,7 +36,8 @@ test.describe('head metas', () => {
     test('author, email and twitter card', () => {
         const list = metas(read('index_en.html'));
         expect(values(list, 'author')).toEqual([pkg.author.name]);
-        expect(values(list, 'email')).toEqual([pkg.author.email]);
+        // The address encoded, base64 of it reversed (emailCode of .eleventy.js), never in clear
+        expect(values(list, 'email')).toEqual([Buffer.from([...pkg.author.email].reverse().join('')).toString('base64')]);
         expect(values(list, 'twitter:card')).toEqual(['summary_large_image']);
     });
 

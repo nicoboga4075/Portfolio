@@ -18,7 +18,7 @@ bodyClass: ""
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="{{ author }}">
         <meta name="generator" content="{{ eleventy.generator }}">
-        <meta name="email" content="{{ profile.email }}">
+        <meta name="email" content="{{ profile.emailCode }}">
         <meta name="routes" content="{{ appRoutes | dump }}">
         <meta name="twitter:card" content="summary_large_image">
         {%- for tag in page | openGraph(lang, title, description, image) %}
@@ -100,7 +100,7 @@ bodyClass: ""
             <div id="contact-link" class="text-dark">
                 <p class="d-flex align-items-center">
                     <i class="icon-envelope"></i>
-                    <span class="email">{{ profile.email }}</span>
+                    <span class="email">{% email %}</span>
                 </p>
                 {%- for s in socials %}
                 <p class="d-flex align-items-center">

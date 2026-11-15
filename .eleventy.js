@@ -395,7 +395,7 @@ module.exports = function configureEleventy(eleventyConfig) {
     const lighthousePlugin = toml.parse(fs.readFileSync("./netlify.toml", "utf-8")).context.production.plugins.find(p => p.package === "@netlify/plugin-lighthouse");
     const preset = lighthousePlugin?.inputs?.settings?.preset ?? "mobile";
     eleventyConfig.addGlobalData("viewport", preset);
-    // The author of package.json, its name on every page and its e-mail in the contact window and the email meta
+    // The author of package.json, its name on every page; its e-mail never written in clear, see emailCode below
     const { name: author, email } = pkg.author;
     eleventyConfig.addGlobalData("author", author);
     eleventyConfig.addGlobalData("version", pkg.version);
@@ -414,7 +414,10 @@ module.exports = function configureEleventy(eleventyConfig) {
     const birth = new Date(birthDate);
     const today = new Date();
     const age = today.getFullYear() - birth.getFullYear() - (today < new Date(today.getFullYear(), birth.getMonth(), birth.getDate()) ? 1 : 0);
-    eleventyConfig.addGlobalData("profile", { ...facts, email, age });
+    // The e-mail of the author encoded (base64 of the reversed address), so that address harvesters reading the HTML don't find it: in the email meta, read by sendEmail of js/app.js, and in each {% email %}, an empty span that revealEmails of js/common.js fills in the browser
+    const emailCode = Buffer.from([...email].reverse().join("")).toString("base64");
+    eleventyConfig.addGlobalData("profile", { ...facts, emailCode, age });
+    eleventyConfig.addShortcode("email", () => `<span class="email-address" data-email="${emailCode}"></span>`);
     // Google Analytics only on the Netlify production build: not in npm run dev, the preview build, deploy previews or branch deploys
     eleventyConfig.addGlobalData("analytics", { id: analyticsId, enabled: process.env.CONTEXT === "production" && !isPreview });
     // The LinkedIn profile of config.socials, linked from the tools section, its new message page, the Hire me button, and its projects page, the See more projects button

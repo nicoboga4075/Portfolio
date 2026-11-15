@@ -1,4 +1,4 @@
-// Unit tests of js/common.js, the helpers shared by every page: routes, dates, the language switcher, images, the theme cycle, the redirect links, the service worker, the loader and the copyright year, on a fake page.
+// Unit tests of js/common.js, the helpers shared by every page: routes, dates, the language switcher, images, the theme cycle, the redirect links, the service worker, the loader, the copyright year and the e-mail address, on a fake page.
 
 // The routes meta base.njk writes from package.json, read by common.js on load
 const routesMeta = { content: JSON.stringify(require('../package.json').config.appRoutes) };
@@ -411,6 +411,23 @@ describe('on load', () => {
         load();
         expect(loader.classList.contains('show')).toBe(false);
         expect(year.textContent).toBe(new Date().getFullYear());
+    });
+});
+
+describe('the e-mail address', () => {
+    // emailCode of .eleventy.js: base64 of the reversed address
+    const encode = email => Buffer.from([...email].reverse().join('')).toString('base64');
+
+    test('decodes the address the build encoded', () => {
+        fakePage();
+        expect(load().decodeEmail(encode('me@example.com'))).toBe('me@example.com');
+    });
+
+    test('writes the address into each span of the {% email %} shortcode, which the HTML leaves empty', () => {
+        const spans = [fakeElement({ dataset: { email: encode('me@example.com') } }), fakeElement({ dataset: { email: encode('me@example.com') } })];
+        fakePage({ elements: { 'all:[data-email]': spans } });
+        load();
+        expect(spans.map(span => span.textContent)).toEqual(['me@example.com', 'me@example.com']);
     });
 });
 

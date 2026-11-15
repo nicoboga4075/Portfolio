@@ -94,6 +94,7 @@ function installGlobals() {
     window.convertDate = jest.fn(date => `date ${date}`);
     window.getCurrentFullDate = jest.fn(() => 'now');
     window.initArticle = jest.fn();
+    window.decodeEmail = code => [...atob(code)].reverse().join('');
     // consent.js, loaded before app.js on the page: the third-party services allowed, unless a test says otherwise
     window.hasConsent = jest.fn(() => true);
     window.whenConsented = jest.fn((category, callback) => callback());
@@ -124,7 +125,8 @@ function writeHead(lang, articles) {
         `<meta name="i18n-messages" content='${attribute(messages)}'>`,
         `<meta name="author-cities" content='${attribute(authorCities)}'>`,
         '<meta property="og:site_name" content="Portfolio">',
-        '<meta name="email" content="me@example.com">'
+        // me@example.com as the build encodes it (emailCode of .eleventy.js: base64 of the reversed address)
+        `<meta name="email" content="${Buffer.from('moc.elpmaxe@em').toString('base64')}">`
     ].join('');
 }
 

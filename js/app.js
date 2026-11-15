@@ -2359,7 +2359,7 @@ async function sendEmail(senderName, subject, message) {
     const safeSubject = String(subject).replace(/[\r\n]+/g, ' ');
     const safeSenderName = String(senderName).replace(/[\r\n]+/g, ' ');
     const appName = document.querySelector('meta[property="og:site_name"]').content;
-    const recipient = document.querySelector('meta[name="email"]').content;
+    const recipient = decodeEmail(document.querySelector('meta[name="email"]').content);
     const emailString = [
         'From: me',
         `To: ${recipient}`,

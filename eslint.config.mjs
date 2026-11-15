@@ -126,7 +126,8 @@ export default defineConfig([
         i18next: "readonly",
         Calendly: "readonly",
         convertDate: "readonly",
-        getCurrentFullDate: "readonly"
+        getCurrentFullDate: "readonly",
+        decodeEmail: "readonly"
       }
     }
   },

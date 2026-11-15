@@ -230,6 +230,18 @@ function hideLoader() {
     document.getElementById('ftco-loader')?.classList.remove('show');
 }
 
+// The e-mail of the author, written encoded by the build (emailCode of .eleventy.js: base64 of the reversed address) so that address harvesters reading the HTML don't find it
+function decodeEmail(code) {
+    return [...atob(code)].reverse().join('');
+}
+
+// Writes the address into each empty span of the {% email %} shortcode
+function revealEmails() {
+    document.querySelectorAll('[data-email]').forEach(element => {
+        element.textContent = decodeEmail(element.dataset.email);
+    });
+}
+
 function setCopyrightYear() {
     const yearEl = document.getElementById('year');
     if (yearEl) {
@@ -280,6 +292,7 @@ darkSchemeQuery.addEventListener('change', function () {
     }
 });
 hideLoader();
+revealEmails();
 setCopyrightYear();
 initBackToTop();
 initSkipLink();

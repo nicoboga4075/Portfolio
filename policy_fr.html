@@ -13,7 +13,7 @@ bodyClass: "legal text-center"
 </div>
 <div>
     <h2>Qui est responsable de vos données ?</h2>
-    <p>Nicolas BOGALHEIRO, éditeur de ce site, est responsable du traitement des données personnelles décrites sur cette page. Pour toute question ou pour exercer vos droits : {{ profile.email }}, ou le formulaire de contact.</p>
+    <p>Nicolas BOGALHEIRO, éditeur de ce site, est responsable du traitement des données personnelles décrites sur cette page. Pour toute question ou pour exercer vos droits : {% email %}, ou le formulaire de contact.</p>
     <h2>Quelles données sont collectées ?</h2>
     <p>Le formulaire de contact utilise les données que vous lui donnez : votre nom, l'objet et le contenu de votre message. Ces informations sont intégrées dans un email envoyé via l'API Gmail, et lors de la connexion via OAuth (authentification manuelle), votre adresse email est récupérée depuis votre compte Google. Le bouton de prise de rendez-vous, le chatbot et la mesure d'audience ne reçoivent des données que si vous les utilisez ou les acceptez (voir les services tiers ci-dessous). Le compteur de visites compte seulement les visites : il n'enregistre aucune donnée personnelle. Aucune donnée sensible n'est collectée.</p>
     <h2>Comment les données sont utilisées ?</h2>
@@ -42,7 +42,7 @@ bodyClass: "legal text-center"
     <h2>Conservation et suppression des données</h2>
     <p>Les messages reçus (Netlify Forms et ma boîte mail) sont conservés le temps de traiter votre demande, puis supprimés au plus tard 3 ans après notre dernier échange. Le token d'accès de l'API Gmail expire après 1 heure, conformément aux règles de Google, et est supprimé aussitôt en cas d'erreur ; vous pouvez aussi le supprimer en rechargeant la page. Les cookies de Google Analytics durent 13 mois au plus et votre choix sur les cookies 6 mois. Si vous rencontrez des erreurs répétées pour l'envoi du message, je vous suggère de rafraîchir la page ou d'ouvrir un nouvel onglet.</p>
     <h2>Vos droits</h2>
-    <p>Conformément au RGPD (règlement UE 2016/679) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et d'effacement de vos données, d'un droit à la limitation et d'opposition à leur traitement, et du droit de retirer votre consentement à tout moment. Pour les exercer, écrivez à {{ profile.email }}. Vous pouvez aussi introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).</p>
+    <p>Conformément au RGPD (règlement UE 2016/679) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et d'effacement de vos données, d'un droit à la limitation et d'opposition à leur traitement, et du droit de retirer votre consentement à tout moment. Pour les exercer, écrivez à {% email %}. Vous pouvez aussi introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).</p>
     <i>Pour toute question relative à vos données personnelles, vous pouvez me contacter via le formulaire.</i>
 </div>
 <a id="index">Retour à l'accueil</a>

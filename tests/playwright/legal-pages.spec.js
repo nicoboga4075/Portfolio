@@ -28,7 +28,7 @@ test.describe('privacy policy pages', () => {
             expect(cnil).not.toBeNull();
             expect(cnil[0]).toContain('target="_blank"');
             expect(cnil[0]).toContain('rel="noopener"');
-            expect(html).toContain('{{ profile.email }}');
+            expect(html).toContain('{% email %}');
         });
     }
 });
@@ -40,7 +40,7 @@ test.describe('terms pages legal notice', () => {
             // Its anchor, the target of the Legal notice link of the footer
             expect(html).toContain(`<h2 id="legal-notice">${lang === 'en' ? 'Legal notice' : 'Mentions légales'}</h2>`);
             expect(html).toContain('Nicolas BOGALHEIRO');
-            expect(html).toContain('{{ profile.email }}');
+            expect(html).toContain('{% email %}');
             expect(html).toContain('Netlify, Inc., 101 2nd Street, Suite 575, San Francisco, CA 94105');
             expect(html).toContain(`<a href="https://www.netlify.com" target="_blank" rel="noopener">netlify.com</a>`);
             expect(html).toContain(`href="/${lang}/policy"`);
