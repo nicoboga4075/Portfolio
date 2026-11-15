@@ -7,8 +7,8 @@ const root = path.join(__dirname, '..', '..');
 const read = name => fs.readFileSync(path.join(root, name), 'utf8');
 
 const headings = {
-    en: ['Who is responsible for your data?', 'Third-party services', 'Cookies and audience measurement', 'Transfers outside the European Union', 'Data retention and deletion', 'Your rights'],
-    fr: ['Qui est responsable de vos données ?', 'Services tiers', 'Cookies et mesure d\'audience', 'Transferts hors de l\'Union européenne', 'Conservation et suppression des données', 'Vos droits']
+    en: ['Who is responsible for your data?', 'Third-party services', 'Cookies, audience measurement and third-party services', 'Transfers outside the European Union', 'Data retention and deletion', 'Your rights'],
+    fr: ['Qui est responsable de vos données ?', 'Services tiers', 'Cookies, mesure d\'audience et services tiers', 'Transferts hors de l\'Union européenne', 'Conservation et suppression des données', 'Vos droits']
 };
 
 test.describe('privacy policy pages', () => {

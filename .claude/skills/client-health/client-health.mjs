@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Opens every page of the live site in headless Chromium, as a visitor's browser gets it (the real headers of Netlify, its Content-Security-Policy included), and reports per page: the status, the CSP violations, the console errors, the uncaught exceptions, the failed or 4xx / 5xx requests (the site's own apart from the third-party hosts), the time to first byte, the LCP and the CLS; then, on the home page, whether the third-party pieces a visitor opens still load (the contact form scripts and the captcha, the booking popup, the chatbot), the service worker, the Poppins font, and that nothing of Google Analytics loads before consent.
-// Read-only: the visit function is answered here, never called (each call adds a visit to the counter), the consent banner is never accepted, no form is sent, no message is written to the chatbot and nothing is booked.
+// Read-only: the visit function is answered here, never called (each call adds a visit to the counter), audience measurement is never allowed in the consent banner (only the third-party services, from the notice of the contact form, in a throwaway browser), no form is sent, no message is written to the chatbot and nothing is booked.
 // Usage: node .claude/skills/client-health/client-health.mjs [--base <url>] [--only <text>] [--mobile] [--no-widgets] [--json <file>] (base: homepage of package.json; --only keeps the pages whose path holds the text, written without a leading slash under Git Bash; --mobile opens them at 390 x 844 instead of 1440 x 900); exit code 1 when a page or a widget fails.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -127,8 +127,16 @@ async function checkWidgets(context) {
         if (!answer.date) throw new Error(`no date in the answer: ${JSON.stringify(answer).slice(0, 120)}`);
         return answer.date;
     }));
-    // Scrolled into view, the contact form loads the Google API, Google Identity Services and reCAPTCHA, which draws its checkbox
+    // Scrolled into view without the third-party services allowed, the contact form shows its consent notice and loads nothing; its button allows the services alone (never audience measurement), then the form loads the Google API, Google Identity Services and reCAPTCHA, which draws its checkbox
     await page.locator('form[name="contactForm"]').scrollIntoViewIfNeeded();
+    const notice = page.locator('#contact-consent');
+    checks.push(await widget('Contact form consent notice', async () => {
+        if (!(await notice.count())) return 'none on this deploy (consent of the services not built yet)';
+        await notice.waitFor({ timeout: 10_000 });
+        if (await page.evaluate(() => Boolean(window.grecaptcha || window.gapi))) throw new Error('Google scripts loaded before the services were allowed');
+        await notice.getByRole('button').click();
+        return 'shown, nothing loaded before the services were allowed from it';
+    }));
     checks.push(await widget('Contact form (Google API, Identity Services, reCAPTCHA)', async () => {
         await page.waitForFunction(() => window.gapi && window.google?.accounts && window.grecaptcha, null, { timeout: 20_000 });
         await page.locator('#captcha-check iframe').first().waitFor({ timeout: 20_000 });

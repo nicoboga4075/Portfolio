@@ -59,6 +59,11 @@
                     <div class="form-group">
                         <textarea cols="30" rows="10" class="form-control" placeholder="{{ contactPage.messagePlaceholder }}" name="message" required aria-label="{{ contactPage.messageLabel }}"></textarea>
                     </div>
+                    {#- Shown by loadContactScripts of js/app.js while the third-party services of the consent banner are refused: its button allows them, which loads the captcha #}
+                    <div id="contact-consent" class="contact-consent" hidden>
+                        <p>{{ consent[lang].servicesNeeded }}</p>
+                        <button type="button" class="btn btn-primary" data-consent-grant="services">{{ consent[lang].allow }}</button>
+                    </div>
                     <div id="captcha-check"></div>
                     <div id="callback-form" class="text-center"></div>
                     <div class="form-group text-right">

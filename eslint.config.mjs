@@ -130,6 +130,20 @@ export default defineConfig([
       }
     }
   },
+  // js/consent.js, loaded after common.js on every page, keeps the choices of the consent banner: the scripts that load a third-party service or Google Analytics ask it
+  {
+    files: ["js/app.js", "js/botpress.js", "js/analytics.js"],
+    languageOptions: {
+      globals: {
+        hasConsent: "readonly",
+        whenConsented: "readonly"
+      }
+    }
+  },
+  {
+    files: ["js/consent.js"],
+    rules: { "no-unused-vars": ["warn", { varsIgnorePattern: "^(hasConsent|whenConsented)$" }] }
+  },
   {
     files: ["js/common.js"],
     rules: { "no-unused-vars": "off" }

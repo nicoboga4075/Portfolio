@@ -14,7 +14,7 @@ Open The Portfolio On
     [Documentation]
     ...   **Applies to :** Selenium
     ...
-    ...    Opens a browser on a page of the portfolio, at the size of a laptop screen
+    ...    Opens a browser on a page of the portfolio, at the size of a laptop screen, with the third-party services of the consent banner allowed
     ...
     ...    Arguments :
     ...        - (_string_) *path* : the site path, such as /en or /fr/blog
@@ -24,6 +24,9 @@ Open The Portfolio On
     [Arguments]    ${path}
     ${browserId}=    Open Browser    ${BASE_URL}${path}    ${BROWSER}
     Set Window Size    ${WIDTH}    ${HEIGHT}
+    # The choices of the consent banner (js/consent.js), stored then the page loaded again: the banner stays out of the way and the third-party services load as for a visitor who allowed them
+    Execute Javascript    localStorage.setItem('consent', JSON.stringify({ services: true, date: Date.now() }))
+    Reload Page
     RETURN    ${browserId}
 
 Go To The Page

@@ -86,7 +86,7 @@ flowchart LR
 ### ✉️ Contact Form
 The contact form of the home page ([`_includes/index-contact.html`](_includes/index-contact.html), run by `initIndexPage` and `sendEmail` of [`js/app.js`](js/app.js)) sends each message twice on the live site: as an e-mail from the visitor's Gmail account, then as a copy in [Netlify Forms](https://docs.netlify.com/manage/forms/setup).
 
-1. The Google scripts (Google API client, Google Identity Services, reCAPTCHA) load once the form scrolls into view; the send button stays disabled until the reCAPTCHA is solved.
+1. The Google scripts (Google API client, Google Identity Services, reCAPTCHA) load once the form scrolls into view and the visitor allows the third-party services of the cookie banner ([`js/consent.js`](js/consent.js)); until then the form shows a notice whose button allows them; the send button stays disabled until the reCAPTCHA is solved.
 2. On submit, the native submission is cancelled and Google asks the visitor for the `gmail.send` scope (OAuth client `ENV_CLIENT_ID`); the page checks for the token every 3 seconds and gives up after 2 minutes, long enough to sign in to Google on a phone.
 3. With the token, the Gmail API sends the message from the visitor's account to the address of `<meta name="email">`; the result shows in `#callback-form`, and on the live site the session storage is cleared, so the next message asks for consent again.
 4. If the send fails (no consent in time, Google refusing the in-app browsers of LinkedIn or Instagram and the Android app, no Google account, Gmail unreachable), `#callback-form` shows the error with a `mailto:` link (`contact-mailto` of `_data/messages.json`) that opens the visitor's mail app with the subject and the message filled in.

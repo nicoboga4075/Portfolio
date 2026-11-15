@@ -7,7 +7,7 @@ metadata:
 
 # Check the health of the client side
 
-The tests check the preview build on localhost, and `server-health` checks the Netlify functions and Supabase: neither opens the live pages in a browser. This skill does, as a first-time visitor (no cache, no stored consent), and only reads: it never sends the contact form, never writes to the chatbot, never books, never accepts the consent banner, and never calls the `visit` function (the script answers it itself, since each call adds a visit to the counter).
+The tests check the preview build on localhost, and `server-health` checks the Netlify functions and Supabase: neither opens the live pages in a browser. This skill does, as a first-time visitor (no cache, no stored consent), and only reads: it never sends the contact form, never writes to the chatbot, never books, never allows audience measurement in the consent banner (it allows only the third-party services, from the notice of the contact form, in its throwaway browser), and never calls the `visit` function (the script answers it itself, since each call adds a visit to the counter).
 
 ## Run it
 
@@ -37,7 +37,8 @@ It needs the Chromium of Playwright: after a Playwright update, `npm run playwri
 | TTFB, LCP, CLS | never fail the run, read them against the thresholds below |
 | Service worker, Poppins | not registered, not loaded |
 | CV date | `env?lang=<lang>` answers without a `date` |
-| Contact form | scrolled into view, the Google API, Identity Services and reCAPTCHA do not load or the captcha is not drawn |
+| Contact form consent notice | scrolled into view without the third-party services allowed, the notice `#contact-consent` is missing or a Google script loads before its button is clicked |
+| Contact form | once the services are allowed from the notice, the Google API, Identity Services and reCAPTCHA do not load or the captcha is not drawn |
 | Booking | the Calendly popup does not open |
 | Chatbot (desktop) | no bubble, or Botpress does not mount `#fab-root` |
 

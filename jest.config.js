@@ -13,10 +13,10 @@ module.exports = {
     "adb-reverse.js",
     "work-years.js"
   ],
-  // tests/jest/transform.cjs compiles the Netlify functions (.mts) and their tests (.ts) to CommonJS, the module system Jest runs, and exports the top-level declarations of the classic browser scripts js/app.js, js/common.js and js/standalone.js to their tests
+  // tests/jest/transform.cjs compiles the Netlify functions (.mts) and their tests (.ts) to CommonJS, the module system Jest runs, and exports the top-level declarations of the classic browser scripts js/app.js, js/common.js, js/consent.js and js/standalone.js to their tests
   moduleFileExtensions: ["js", "mjs", "cjs", "json", "ts", "mts"],
   transform: {
-    "^.+\\.m?ts$|[/\\\\]js[/\\\\](app|common|standalone)\\.js$": "<rootDir>/tests/jest/transform.cjs"
+    "^.+\\.m?ts$|[/\\\\]js[/\\\\](app|common|consent|standalone)\\.js$": "<rootDir>/tests/jest/transform.cjs"
   },
   // The functions import each other as ./shared/http.mjs, the name of the compiled file: Jest resolves it to the .mts source
   moduleNameMapper: {

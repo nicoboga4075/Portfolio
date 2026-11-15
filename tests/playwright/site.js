@@ -38,8 +38,13 @@ exports.test = base.test.extend({
     baseURL: async ({ siteUrl }, use) => {
         await use(siteUrl);
     },
+    // The choices of the consent banner (js/consent.js) stored before every page loads, so the banner stays out of the way and the third-party services load as they would for a visitor who allowed them; null for a first visit, the banner shown (test.use({ storedConsent: null }))
+    storedConsent: [{ services: true }, { option: true }],
     // The blog page loads its article from the article function, which serve-build.mjs doesn't serve: answer it with the built article, as the function does
-    page: async ({ page }, use) => {
+    page: async ({ page, storedConsent }, use) => {
+        if (storedConsent) {
+            await page.addInitScript(choices => localStorage.setItem('consent', JSON.stringify({ ...choices, date: Date.now() })), storedConsent);
+        }
         await page.route('**/.netlify/functions/article?*', route => {
             const filename = new URL(route.request().url()).searchParams.get('filename');
             route.fulfill({ contentType: 'text/html', body: fs.readFileSync(path.join(root, '.eleventy', 'articles', filename), 'utf8') });

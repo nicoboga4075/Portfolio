@@ -357,14 +357,24 @@ describe('loading scripts', () => {
         expect(document.querySelectorAll('script')).toHaveLength(0);
     });
 
-    test('loadContactScripts appends the Google API, Identity and reCAPTCHA scripts once', () => {
-        const app = loadApp({ lang: 'fr' });
+    test('loadContactScripts appends the Google API, Identity and reCAPTCHA scripts once, the consent notice hidden', () => {
+        const app = loadApp({ lang: 'fr', body: '<div id="contact-consent"></div>' });
         app.loadContactScripts();
         app.loadContactScripts();
         const sources = [...document.body.querySelectorAll('script')].map(script => script.src);
         expect(sources).toEqual(['https://apis.google.com/js/api.js', 'https://accounts.google.com/gsi/client', 'https://www.google.com/recaptcha/api.js?hl=fr&onload=initCaptcha&render=explicit']);
         expect(scriptFor('api.js').onload).toBe(app.gapiLoaded);
         expect(scriptFor('gsi/client').onload).toBe(app.gisLoaded);
+        expect(window.hasConsent).toHaveBeenCalledWith('services');
+        expect(document.getElementById('contact-consent').hidden).toBe(true);
+    });
+
+    test('loadContactScripts loads nothing and shows the consent notice while the third-party services are refused', () => {
+        const app = loadApp({ body: '<div id="contact-consent" hidden></div>' });
+        window.hasConsent.mockReturnValue(false);
+        app.loadContactScripts();
+        expect(document.body.querySelectorAll('script')).toHaveLength(0);
+        expect(document.getElementById('contact-consent').hidden).toBe(false);
     });
 });
 
@@ -597,6 +607,16 @@ describe('the home page', () => {
         expect(window.Calendly.initPopupWidget).toHaveBeenCalledTimes(2);
     });
 
+    test('asks for the third-party services before opening Calendly', () => {
+        const app = loadApp({ body: '<a id="calendly-cta" data-calendly-url="https://calendly.com/me">Book</a>' });
+        window.whenConsented.mockImplementation(() => {});
+        app.initIndexPage('en');
+        $('#calendly-cta').trigger('click');
+        expect(window.whenConsented).toHaveBeenCalledWith('services', expect.any(Function));
+        expect(document.head.querySelector('link[href*="calendly"]')).toBeNull();
+        expect(scriptFor('widget.js')).toBeUndefined();
+    });
+
     test('opens the Calendly page in a new tab when its widget cannot be fetched', async () => {
         const log = jest.spyOn(console, 'error').mockImplementation(() => {});
         const app = loadApp({ body: '<a id="calendly-cta" data-calendly-url="https://calendly.com/me">Book</a>' });
@@ -644,7 +664,7 @@ describe('the home page', () => {
     });
 
     test('loads the Google scripts of the contact form only when it comes into view', () => {
-        const app = loadApp({ body: '<form name="contactForm"></form>' });
+        const app = loadApp({ body: '<form name="contactForm"><div id="contact-consent" hidden></div></form>' });
         app.initIndexPage('en');
         const observer = observerOf(document.querySelector('form'));
         observer.callback([{ isIntersecting: false }]);
@@ -652,6 +672,19 @@ describe('the home page', () => {
         observer.callback([{ isIntersecting: true }]);
         expect(observer.disconnect).toHaveBeenCalled();
         expect(scriptFor('api.js')).toBeDefined();
+    });
+
+    test('loads the Google scripts of the contact form in view once a choice of the consent banner allows the third-party services', () => {
+        const app = loadApp({ body: '<form name="contactForm"><div id="contact-consent" hidden></div></form>' });
+        window.hasConsent.mockReturnValue(false);
+        app.initIndexPage('en');
+        observerOf(document.querySelector('form')).callback([{ isIntersecting: true }]);
+        expect(scriptFor('api.js')).toBeUndefined();
+        expect(document.getElementById('contact-consent').hidden).toBe(false);
+        window.hasConsent.mockReturnValue(true);
+        document.dispatchEvent(new CustomEvent('consentchange', { detail: { services: true } }));
+        expect(scriptFor('api.js')).toBeDefined();
+        expect(document.getElementById('contact-consent').hidden).toBe(true);
     });
 
     const formBody = '<form name="contactForm"><input name="name" value="Nico"><input name="subject" value="Hello"><textarea name="message">Hi</textarea><button type="submit">Send</button></form><p id="callback-form"></p>';

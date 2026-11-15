@@ -94,7 +94,7 @@ function loadBotpress() {
 	document.head.appendChild(injectScript);
 }
 
-// Botpress (~300 KB of React) only loads when the visitor clicks the stand-in bubble; base.njk renders it and app.css shows it from 1024px.
+// Botpress (~300 KB of React) only loads when the visitor clicks the stand-in bubble, with the third-party services allowed; base.njk renders it and app.css shows it from 1024px.
 const bpFabStub = document.getElementById('bp-fab-stub');
 if (bpFabStub) {
 	const placeStub = function () {
@@ -105,8 +105,12 @@ if (bpFabStub) {
 	if (navbar) {
 		new ResizeObserver(placeStub).observe(navbar);
 	}
-	bpFabStub.addEventListener('click', function () {
-		bpFabStub.setAttribute('aria-busy', 'true');
-		loadBotpress();
-	}, { once: true });
+	// Botpress is a third-party service of the consent banner (js/consent.js): without it allowed, the banner asks first, and the chat loads once it is; a refusal leaves the bubble to ask again
+	bpFabStub.addEventListener('click', function onStubClick() {
+		whenConsented('services', function () {
+			bpFabStub.removeEventListener('click', onStubClick);
+			bpFabStub.setAttribute('aria-busy', 'true');
+			loadBotpress();
+		});
+	});
 }

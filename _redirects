@@ -42,6 +42,7 @@
 /js/app.test.js /404.html 404!
 /js/botpress.test.js /404.html 404!
 /js/common.test.js /404.html 404!
+/js/consent.test.js /404.html 404!
 /js/service-worker.test.js /404.html 404!
 /js/standalone.test.js /404.html 404!
 

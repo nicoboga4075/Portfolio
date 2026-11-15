@@ -1,4 +1,4 @@
-// The Jest transform of the repository, for the two kinds of files Jest cannot run as they are: the Netlify functions (.mts) and their tests (.ts), compiled to CommonJS; the classic browser scripts of js/ (app.js, common.js, standalone.js), given a module.exports of their top-level declarations.
+// The Jest transform of the repository, for the two kinds of files Jest cannot run as they are: the Netlify functions (.mts) and their tests (.ts), compiled to CommonJS; the classic browser scripts of js/ (app.js, common.js, consent.js, standalone.js), given a module.exports of their top-level declarations.
 const crypto = require('node:crypto');
 const path = require('node:path');
 const ts = require('typescript');

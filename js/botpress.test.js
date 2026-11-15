@@ -1,4 +1,4 @@
-// Unit tests of js/botpress.js: the stand-in button loads the pinned inject.js (with its hash) and then the bot script, both addresses read from the botpress meta that base.njk fills from config.botpress of package.json; then the real bubble replaces the stand-in, centered on the navbar and kept there by its observers.
+// Unit tests of js/botpress.js: the stand-in button, once the third-party services of the consent banner are allowed, loads the pinned inject.js (with its hash) and then the bot script, both addresses read from the botpress meta that base.njk fills from config.botpress of package.json; then the real bubble replaces the stand-in, centered on the navbar and kept there by its observers.
 
 const pkg = require('../package.json');
 
@@ -27,6 +27,9 @@ function fakePage({ stub: withStub = true, navbarHeight = 100 } = {}) {
         addEventListener: (type, listener) => {
             stub.listeners[type] = listener;
         },
+        removeEventListener: jest.fn((type, listener) => {
+            if (stub.listeners[type] === listener) delete stub.listeners[type];
+        }),
         setAttribute: (name, value) => {
             stub.attrs[name] = value;
         },
@@ -61,6 +64,8 @@ function fakePage({ stub: withStub = true, navbarHeight = 100 } = {}) {
         getElementById: jest.fn(id => ({ 'bp-fab-stub': withStub ? stub : null, 'ftco-navbar': navbar, 'fab-root': page.fabRoot })[id] ?? null)
     };
     global.botpress = { on: jest.fn(), open: jest.fn() };
+    // whenConsented of js/consent.js: the third-party services allowed, unless a test says otherwise
+    global.whenConsented = jest.fn((category, callback) => callback());
     return page;
 }
 
@@ -79,7 +84,7 @@ function clickAndLoad(page) {
 const overrideStyle = shadowRoot => shadowRoot.getElementById('bp-fab-position-override');
 
 afterEach(() => {
-    for (const name of ['window', 'document', 'getComputedStyle', 'ResizeObserver', 'MutationObserver', 'botpress']) delete global[name];
+    for (const name of ['window', 'document', 'getComputedStyle', 'ResizeObserver', 'MutationObserver', 'botpress', 'whenConsented']) delete global[name];
 });
 
 describe('config.botpress of package.json', () => {
@@ -147,11 +152,24 @@ describe('the stand-in button', () => {
         expect(global.botpress.open).toHaveBeenCalledTimes(1);
     });
 
-    test('listens to the click once only', () => {
+    test('stops listening to the click once the chat loads', () => {
         const page = fakePage();
-        page.stub.addEventListener = jest.fn();
         runScript();
-        expect(page.stub.addEventListener).toHaveBeenCalledWith('click', expect.any(Function), { once: true });
+        const listener = page.stub.listeners.click;
+        listener();
+        expect(page.stub.removeEventListener).toHaveBeenCalledWith('click', listener);
+        expect(page.stub.listeners.click).toBeUndefined();
+    });
+
+    test('asks for the third-party services first, and loads nothing until they are allowed, the click still listened to', () => {
+        const page = fakePage();
+        global.whenConsented.mockImplementation(() => {});
+        runScript();
+        page.stub.listeners.click();
+        expect(global.whenConsented).toHaveBeenCalledWith('services', expect.any(Function));
+        expect(page.appended).toHaveLength(0);
+        expect(page.stub.attrs['aria-busy']).toBeUndefined();
+        expect(page.stub.listeners.click).toBeDefined();
     });
 });
 

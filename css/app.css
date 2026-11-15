@@ -2303,6 +2303,20 @@ textarea.form-control {
     width: 100%;
 }
 
+/* The notice of the form in place of the captcha while the third-party services are refused (loadContactScripts of js/app.js) */
+#contact-section .contact-consent {
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+#contact-section .contact-consent[hidden] {
+    display: none;
+}
+
+#contact-section .contact-consent p {
+    margin-bottom: 8px;
+}
+
 #contact-section .img {
     width: 100%;
     background-position: top center;

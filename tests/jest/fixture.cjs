@@ -1,4 +1,4 @@
-// The fixture of the Jest tests of js/app.js, the page it runs on in the jsdom environment: the real jQuery with its plugins stubbed, the globals of common.js, standalone.js, i18next, Bootstrap, Chart.js and the Google scripts as fakes, the metas of base.njk, and a loader that runs app.js on the page and returns its top-level declarations.
+// The fixture of the Jest tests of js/app.js, the page it runs on in the jsdom environment: the real jQuery with its plugins stubbed, the globals of common.js, consent.js, standalone.js, i18next, Bootstrap, Chart.js and the Google scripts as fakes, the metas of base.njk, and a loader that runs app.js on the page and returns its top-level declarations.
 const path = require('node:path');
 
 const root = path.join(__dirname, '..', '..');
@@ -94,6 +94,9 @@ function installGlobals() {
     window.convertDate = jest.fn(date => `date ${date}`);
     window.getCurrentFullDate = jest.fn(() => 'now');
     window.initArticle = jest.fn();
+    // consent.js, loaded before app.js on the page: the third-party services allowed, unless a test says otherwise
+    window.hasConsent = jest.fn(() => true);
+    window.whenConsented = jest.fn((category, callback) => callback());
     // A request no test answers stays pending, so it neither resolves nor logs
     window.fetch = jest.fn(() => new Promise(() => {}));
     delete window.Chart;

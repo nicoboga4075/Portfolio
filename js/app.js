@@ -827,8 +827,14 @@ function initPipelineLoop() {
     }).observe(pipeline);
 }
 
+// The Google scripts of the contact form, once it is on screen, only if the visitor allows the third-party services of the consent banner (js/consent.js): otherwise the notice of the form asks for them, and the next choice that allows them loads the scripts
 function loadContactScripts() {
     if (loadContactScripts.loaded) {
+        return;
+    }
+    const notice = document.getElementById('contact-consent');
+    notice.hidden = hasConsent('services');
+    if (!notice.hidden) {
         return;
     }
     loadContactScripts.loaded = true;
@@ -862,6 +868,24 @@ function loadScript(src) {
         };
         document.head.appendChild(script);
     });
+}
+
+// The booking popup of Calendly, its widget only fetched on the first booking, not on every page load
+function openCalendly(url) {
+    const primaryColor = cssVarToHex('--primary');
+    if (!document.querySelector(`link[href="${CALENDLY_WIDGET}.css"]`)) {
+        const css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = `${CALENDLY_WIDGET}.css`;
+        document.head.appendChild(css);
+    }
+    loadScriptOnce(`${CALENDLY_WIDGET}.js`)
+        .then(() => Calendly.initPopupWidget({ url, color: primaryColor }))
+        .catch(error => {
+            // Without the widget, the booking page itself still works.
+            console.error(error);
+            window.open(url, '_blank', 'noopener');
+        });
 }
 
 const scriptPromises = new Map();
@@ -1500,21 +1524,8 @@ function initIndexPage(langPage) {
         $('#calendly-cta').on('click', function (event) {
             event.preventDefault();
             const url = this.dataset.calendlyUrl;
-            const primaryColor = cssVarToHex('--primary');
-            // Calendly's widget is only fetched on the first click, not on every page load.
-            if (!document.querySelector(`link[href="${CALENDLY_WIDGET}.css"]`)) {
-                const css = document.createElement('link');
-                css.rel = 'stylesheet';
-                css.href = `${CALENDLY_WIDGET}.css`;
-                document.head.appendChild(css);
-            }
-            loadScriptOnce(`${CALENDLY_WIDGET}.js`)
-                .then(() => Calendly.initPopupWidget({ url, color: primaryColor }))
-                .catch(error => {
-                    // Without the widget, the booking page itself still works.
-                    console.error(error);
-                    window.open(url, '_blank', 'noopener');
-                });
+            // Calendly is a third-party service of the consent banner: without it allowed, the banner asks first and the popup opens once it is
+            whenConsented('services', () => openCalendly(url));
         });
 
         $(window).scroll(function () {
@@ -1610,6 +1621,7 @@ function initIndexPage(langPage) {
                 }
                 contactFormObserver.disconnect();
                 loadContactScripts();
+                document.addEventListener('consentchange', loadContactScripts);
             });
             contactFormObserver.observe(contactFormEl);
         }

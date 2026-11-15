@@ -492,7 +492,7 @@ html.dark-mode .badge {
     color: var(--primary-light);
 }
 
-/* The consent banner of Google Analytics (production build only), fixed at the bottom of the screen in the colours of the footer */
+/* The consent banner of every page (js/consent.js), fixed at the bottom of the screen in the colours of the footer */
 #ftco-footer .consent-banner {
     position: fixed;
     right: 0;
@@ -558,12 +558,49 @@ html.dark-mode .badge {
     }
 }
 
+/* One checkbox per category, unticked until the visitor allows it */
+#ftco-footer .consent-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 480px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#ftco-footer .consent-choice {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    color: var(--white);
+    font-weight: 400;
+    cursor: pointer;
+}
+
+#ftco-footer .consent-choice input {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    accent-color: var(--primary-dark);
+    cursor: pointer;
+}
+
+#ftco-footer .consent-choice input:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 2px;
+}
+
 #ftco-footer .consent-buttons {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 16px;
 }
 
-/* Accept and Refuse look the same, so neither choice is pushed */
+/* Refuse all, Save my choices and Accept all look the same, so no choice is pushed */
 #ftco-footer .consent-button {
     min-width: 112px;
     padding: 8px 24px;
