@@ -1,5 +1,9 @@
 // Unit tests of netlify/functions/env.mts: the public environment variables, Google's test reCAPTCHA key under netlify dev, and the date of the last commit of a CV through the GitHub API, fetch mocked.
+// The rate limit of shared/rate-limit.mts (tested on its own), letting every call through unless a test says otherwise; above the imports, which the TypeScript transform does not hoist it over
+jest.mock("../../../netlify/functions/shared/rate-limit.mjs", () => ({ ...jest.requireActual("../../../netlify/functions/shared/rate-limit.mjs"), isRateLimited: jest.fn(async () => false) }));
 import handlerEnv from "../../../netlify/functions/env.mjs";
+import { isRateLimited } from "../../../netlify/functions/shared/rate-limit.mjs";
+
 import pkg from "../../../package.json";
 
 const context = { requestId: "req-1" } as any;
@@ -80,4 +84,13 @@ test("answers a 500 when the GitHub API fails", async () => {
     const response = await handlerEnv(request("?lang=en"), context);
     expect(response.status).toBe(500);
     expect(await response.json()).toEqual({ error: "Internal error", requestId: "req-1" });
+});
+
+test("answers a 429 past 60 calls a minute of the same visitor, before any other work", async () => {
+    jest.mocked(isRateLimited).mockResolvedValueOnce(true);
+    const fetchSpy = jest.spyOn(global, "fetch");
+    const response = await handlerEnv(request("?lang=en"), context);
+    expect(response.status).toBe(429);
+    expect(isRateLimited).toHaveBeenCalledWith("env", 60, context);
+    expect(fetchSpy).not.toHaveBeenCalled();
 });

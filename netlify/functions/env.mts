@@ -1,5 +1,6 @@
 import { Context } from "@netlify/functions";
 import { internalError, isTrustedRequest, jsonResponse, redirectTo404 } from "./shared/http.mjs";
+import { isRateLimited, tooManyRequests } from "./shared/rate-limit.mjs";
 import pkg from "../../package.json" with { type: "json" };
 
 const PUBLIC_ENV_VARS = [
@@ -55,6 +56,11 @@ export default async function handlerEnv(req: Request, context: Context): Promis
 
         if (!isTrustedRequest(req)) {
             return redirectTo404();
+        }
+
+        // a few calls per page (the contact scripts, the captcha, the CV date): past 60 a minute, a loop draining the quota of GITHUB_API_TOKEN
+        if (await isRateLimited("env", 60, context)) {
+            return tooManyRequests();
         }
 
         if (lang) {

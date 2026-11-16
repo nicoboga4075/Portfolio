@@ -1,8 +1,12 @@
 // Unit tests of netlify/functions/article.mts: it serves an article's HTML from .eleventy/articles (local preview) or articles (production build), and redirects to /404 a missing, malformed or unknown file name, in a temporary working folder.
+// The rate limit of shared/rate-limit.mts (tested on its own), letting every call through unless a test says otherwise; above the imports, which the TypeScript transform does not hoist it over
+jest.mock("../../../netlify/functions/shared/rate-limit.mjs", () => ({ ...jest.requireActual("../../../netlify/functions/shared/rate-limit.mjs"), isRateLimited: jest.fn(async () => false) }));
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import handlerArticle from "../../../netlify/functions/article.mjs";
+import { isRateLimited } from "../../../netlify/functions/shared/rate-limit.mjs";
+
 
 const context = { requestId: "req-1" } as any;
 let cwd: string;
@@ -78,4 +82,13 @@ test("answers a 500 with the request id when the request cannot be read", async 
     const response = await handlerArticle({ url: "not a url" } as Request, context);
     expect(response.status).toBe(500);
     expect(await response.json()).toEqual({ error: "Internal error", requestId: "req-1" });
+});
+
+test("answers a 429 past 60 calls a minute of the same visitor, before any other work", async () => {
+    jest.mocked(isRateLimited).mockResolvedValueOnce(true);
+    const fetchSpy = jest.spyOn(global, "fetch");
+    const response = await handlerArticle(request("x_en.html"), context);
+    expect(response.status).toBe(429);
+    expect(isRateLimited).toHaveBeenCalledWith("article", 60, context);
+    expect(fetchSpy).not.toHaveBeenCalled();
 });

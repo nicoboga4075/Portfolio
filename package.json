@@ -344,5 +344,8 @@
     "unrs-resolver@1.12.2": true,
     "puppeteer@2.1.1": true,
     "cypress@16.3.0": true
+  },
+  "dependencies": {
+    "@netlify/blobs": "^11.1.9"
   }
 }

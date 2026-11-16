@@ -2,6 +2,7 @@ import { Context } from "@netlify/functions";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { internalError, isTrustedRequest, redirectTo404 } from "./shared/http.mjs";
+import { isRateLimited, tooManyRequests } from "./shared/rate-limit.mjs";
 
 export default async function handlerArticle(req: Request, context: Context): Promise<Response> {
     try {
@@ -15,6 +16,11 @@ export default async function handlerArticle(req: Request, context: Context): Pr
         const isValidFilename = /^[a-zA-Z0-9_-]+_[a-z]{2}\.html$/.test(filename);
         if (!isValidFilename) {
             return redirectTo404();
+        }
+
+        // one call per article opened on the blog: past 60 a minute, a loop running up the invocations
+        if (await isRateLimited("article", 60, context)) {
+            return tooManyRequests();
         }
 
         // Local preview (npm run dev, dev:watch, dev:live, dev:live:watch) compiles to .eleventy/ instead of in-place,

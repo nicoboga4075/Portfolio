@@ -1,5 +1,9 @@
 // Unit tests of netlify/functions/visit.mts: it increments the visit counter through the increment_visits RPC of Supabase and returns the new count, fetch mocked.
+// The rate limit of shared/rate-limit.mts (tested on its own), letting every call through unless a test says otherwise; above the imports, which the TypeScript transform does not hoist it over
+jest.mock("../../../netlify/functions/shared/rate-limit.mjs", () => ({ ...jest.requireActual("../../../netlify/functions/shared/rate-limit.mjs"), isRateLimited: jest.fn(async () => false) }));
 import handlerVisit from "../../../netlify/functions/visit.mjs";
+import { isRateLimited } from "../../../netlify/functions/shared/rate-limit.mjs";
+
 
 const context = { requestId: "req-1" } as any;
 
@@ -36,6 +40,15 @@ test("calls increment_visits with the anon key and returns the new count", async
     expect(init.headers).toMatchObject({ apikey: "anon-key", Authorization: "Bearer anon-key" });
 });
 
+test("answers a 500 without calling Supabase when its settings are missing", async () => {
+    jest.spyOn(console, "error").mockImplementation(() => {});
+    delete process.env.SUPABASE_ANON_KEY;
+    const fetchSpy = jest.spyOn(global, "fetch");
+    const response = await handlerVisit(request(), context);
+    expect(response.status).toBe(500);
+    expect(fetchSpy).not.toHaveBeenCalled();
+});
+
 test("answers a 500 and logs the Referer when the RPC fails", async () => {
     const log = jest.spyOn(console, "error").mockImplementation(() => {});
     jest.spyOn(global, "fetch").mockResolvedValue(new Response("", { status: 500, statusText: "Internal Server Error" }));
@@ -48,4 +61,13 @@ test("answers a 500 when Supabase cannot be reached", async () => {
     jest.spyOn(console, "error").mockImplementation(() => {});
     jest.spyOn(global, "fetch").mockRejectedValue(new TypeError("fetch failed"));
     expect((await handlerVisit(request(), context)).status).toBe(500);
+});
+
+test("answers a 429 past 10 calls a minute of the same visitor, before any other work", async () => {
+    jest.mocked(isRateLimited).mockResolvedValueOnce(true);
+    const fetchSpy = jest.spyOn(global, "fetch");
+    const response = await handlerVisit(request(), context);
+    expect(response.status).toBe(429);
+    expect(isRateLimited).toHaveBeenCalledWith("visit", 10, context);
+    expect(fetchSpy).not.toHaveBeenCalled();
 });
