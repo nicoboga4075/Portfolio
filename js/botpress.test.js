@@ -59,11 +59,11 @@ function fakePage({ stub: withStub = true, navbarHeight = 100 } = {}) {
         createElement: jest.fn(tag => ({ tagName: tag })),
         head: { appendChild: jest.fn(script => appended.push(script)) },
         body: { tagName: 'body' },
-        documentElement: {},
+        documentElement: { lang: 'fr' },
         querySelector: jest.fn(selector => (selector === 'meta[name="botpress"]' ? { content: JSON.stringify(scripts) } : null)),
         getElementById: jest.fn(id => ({ 'bp-fab-stub': withStub ? stub : null, 'ftco-navbar': navbar, 'fab-root': page.fabRoot })[id] ?? null)
     };
-    global.botpress = { on: jest.fn(), open: jest.fn() };
+    global.botpress = { on: jest.fn(), open: jest.fn(), updateUser: jest.fn(() => Promise.resolve()) };
     // whenConsented of js/consent.js: the third-party services allowed, unless a test says otherwise
     global.whenConsented = jest.fn((category, callback) => callback());
     return page;
@@ -150,6 +150,29 @@ describe('the stand-in button', () => {
         expect(event).toBe('webchat:initialized');
         handler();
         expect(global.botpress.open).toHaveBeenCalledTimes(1);
+    });
+
+    test('sends the language of the page to the bot once it is initialized', () => {
+        const page = fakePage();
+        runScript();
+        clickAndLoad(page);
+        global.botpress.on.mock.calls[0][1]();
+        expect(global.botpress.updateUser).toHaveBeenCalledWith({ data: { lang: 'fr' } });
+    });
+
+    test('still opens the chat, with a warning, when Botpress refuses the language', async () => {
+        const page = fakePage();
+        const error = new Error('refused');
+        global.botpress.updateUser.mockReturnValue(Promise.reject(error));
+        const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        runScript();
+        clickAndLoad(page);
+        global.botpress.on.mock.calls[0][1]();
+        expect(global.botpress.open).toHaveBeenCalledTimes(1);
+        await Promise.resolve();
+        await Promise.resolve();
+        expect(warn).toHaveBeenCalledWith('Botpress: the language of the page was not sent', error);
+        warn.mockRestore();
     });
 
     test('stops listening to the click once the chat loads', () => {
