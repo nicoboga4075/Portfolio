@@ -309,7 +309,8 @@ const appDefaultMode = 'first';
 
 // A visitor whose address holds ?mode=<name> gets that mode: remembered in localStorage (sessionStorage is cleared by the navigation links), a new link replacing the mode kept and bringing back a banner closed earlier; the marker taken out of the address, even for a name that is no mode; a <name>-mode class on the body and the banner of the mode until its close button is clicked; storage may be blocked (private mode), and the page then works without the mode
 function initMode() {
-    const params = new URLSearchParams(window.location.search);
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
     let mode;
     let closed;
     try {
@@ -319,9 +320,9 @@ function initMode() {
                 localStorage.setItem('mode', asked);
                 localStorage.removeItem('modeBanner');
             }
+            // url.search follows its params, and is empty, without a lone ?, once the mode was the only one
             params.delete('mode');
-            const query = params.toString();
-            history.replaceState(null, '', `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`);
+            history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
         }
         mode = localStorage.getItem('mode');
         // No mode, or one a later version of the site no longer has
