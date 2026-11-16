@@ -72,6 +72,18 @@ test.describe('gen-redirects', () => {
         expect(lines).not.toContain('/js/app.js /404.html 404!');
     });
 
+    test('blocks every tracked file and folder of the deploy root that is not meant for visitors', () => {
+        // Production publishes the repository root: what visitors may load, the rest must have its 404 rule (Netlify serves no dotfile, so those are left out)
+        const PUBLIC = new Set(['css', 'js', 'fonts', 'images', 'docs', 'robots.txt', 'site.webmanifest', 'service-worker.js', 'favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png', 'apple-touch-icon.png', 'android-chrome-192x192.png', 'android-chrome-512x512.png']);
+        const committed = fs.readFileSync(path.join(root, '_redirects'), 'utf8').split(/\r?\n/);
+        const blocked = committed.filter(line => line.endsWith(' 404!')).map(line => line.split(' ')[0].slice(1));
+        const isBlocked = name => blocked.some(rule => (rule.endsWith('*') ? `${name}/`.startsWith(rule.slice(0, -1)) || name.startsWith(rule.slice(0, -1)) : rule === name));
+        const tracked = new Set(execFileSync('git', ['ls-files'], { cwd: root, encoding: 'utf8' }).split('\n').filter(Boolean).map(file => file.split('/')[0]));
+        // The Google Search Console check page stays public
+        const exposed = [...tracked].filter(name => !name.startsWith('.') && !PUBLIC.has(name) && !/^google[\da-f]+\.html$/.test(name) && !isBlocked(name));
+        expect(exposed).toEqual([]);
+    });
+
     test('ends with a single newline', () => {
         const lines = generate(routes, { explore });
         expect(lines.at(-1)).toBe('');

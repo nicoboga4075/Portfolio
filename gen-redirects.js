@@ -50,6 +50,8 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /SECURITY.md /404.html 404!
 /robot_framework.md /404.html 404!
 /ROBOT_FRAMEWORK.md /404.html 404!
+/claude.md /404.html 404!
+/CLAUDE.md /404.html 404!
 /license /404.html 404!
 /LICENSE /404.html 404!
 
@@ -86,6 +88,7 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /node_modules/* /404.html 404!
 /netlify/* /404.html 404!
 /_includes/* /404.html 404!
+/_data/* /404.html 404!
 /tests/* /404.html 404!
 /reports/* /404.html 404!
 /logs/* /404.html 404!
