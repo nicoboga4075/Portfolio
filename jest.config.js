@@ -1,7 +1,7 @@
 module.exports = {
   // The Jest tests of js/ sit next to their modules; those of the Netlify functions sit in tests/jest/netlify/, since Netlify deploys every file of netlify/functions/ as a function
   roots: ["<rootDir>/js", "<rootDir>/netlify", "<rootDir>/tests/jest"],
-  // The same files as the SonarCloud coverage (sonar.coverage.exclusions in sonar-project.properties): the site's own JS, the Netlify functions, the resolveArticles and resolveProjects of the build and adb-reverse.js, not the vendored *.min.js nor the tests
+  // The same files as the SonarCloud coverage (sonar.coverage.exclusions in sonar-project.properties): the site's own JS, the Netlify functions, the resolveArticles and resolveProjects of the build, work-years.js, experience-period.js and adb-reverse.js, not the vendored *.min.js nor the tests
   collectCoverageFrom: [
     "service-worker.js",
     "js/**/*.js",
@@ -11,7 +11,8 @@ module.exports = {
     "articles/resolve-articles.js",
     "projects/resolve-projects.js",
     "adb-reverse.js",
-    "work-years.js"
+    "work-years.js",
+    "experience-period.js"
   ],
   // tests/jest/transform.cjs compiles the Netlify functions (.mts) and their tests (.ts) to CommonJS, the module system Jest runs, and exports the top-level declarations of the classic browser scripts js/app.js, js/common.js, js/consent.js and js/standalone.js to their tests
   moduleFileExtensions: ["js", "mjs", "cjs", "json", "ts", "mts"],

@@ -5,6 +5,7 @@ const { hideFolders } = require("./hide-folders");
 const toml = require("toml");
 const prettier = require("prettier");
 const pkg = require("./package.json");
+const experiencePeriod = require("./experience-period");
 const includesFolder = "_includes";
 const allowedDirs = new Set([".", includesFolder, "articles", "projects"]);
 // npm run dev serves the output folder; npm run build compiles html in place (article.mts reads it off disk).
@@ -341,9 +342,40 @@ function apiData() {
         hasPage: projects.includes(card.explore),
         url: Object.fromEntries(langs.map(lang => [lang, targetUrl(card.explore, lang)]))
     }));
+    const resume = readData("resume");
+    const experienceList = resume.experiences.map(experience => {
+        // Its first and last month, its length in months and whether it goes on at the build (experience-period.js), from the dates in the default language
+        const period = experiencePeriod(inLang(experience.date, defaultLang), defaultLang);
+        return {
+            company: experience.company,
+            title: both(experience.title),
+            // Its contracts in order, an internship then a permanent position for instance
+            type: Object.fromEntries(langs.map(lang => [lang, [experience.type].flat().map(type => resume[lang].types[type])])),
+            mission: experience.mission ? Object.fromEntries(langs.map(lang => [lang, `${inLang(experience.mission, lang)} ${experience.missionCompany}`])) : null,
+            city: experience.city,
+            sector: Object.fromEntries(langs.map(lang => [lang, (experience.sector ?? []).map(sector => plainText(inLang(sector, lang)))])),
+            date: both(experience.date),
+            ...period,
+            // What the resume section shows of it when its card is opened: its mission or field, then its lists (responsibilities, projects, results...) as "label: text" lines, with the space French puts before the colon
+            details: Object.fromEntries(langs.map(lang => [lang, Object.fromEntries(Object.entries(experience.details?.[lang] ?? {}).map(([key, value]) => [key, Array.isArray(value) ? value.map(item => plainText(item?.label ? `${item.label}${lang === "fr" ? " : " : ": "}${item.text ?? ""}` : item)) : plainText(value)]))])),
+            url: Object.fromEntries(langs.map(lang => [lang, `${site}/${lang}#resume-section`]))
+        };
+    });
+    // The longest job, the "other" experiences (tutoring, student and sport roles) left out, so the chatbot names it without a hand-written instruction
+    const jobs = experienceList.filter((_, index) => ![resume.experiences[index].type].flat().every(type => type === "other"));
+    const longest = jobs.reduce((best, job) => (job.months > best.months ? job : best), jobs[0]);
     return {
         articles: { site, languages: langs, articles: articleList },
-        projects: { site, languages: langs, projects: projectList }
+        projects: { site, languages: langs, projects: projectList },
+        experiences: {
+            site,
+            languages: langs,
+            builtOn: new Date().toISOString().slice(0, 10),
+            // The companies of the experiences going on at the build, empty while Nicolas is looking for a job
+            current: experienceList.filter(experience => experience.ongoing).map(experience => experience.company),
+            longest: { company: longest.company, months: longest.months },
+            experiences: experienceList
+        }
     };
 }
 
@@ -432,7 +464,7 @@ module.exports = function configureEleventy(eleventyConfig) {
     // The schema.org JSON-LD of a page (Person + WebSite for home, Blog, BlogPosting for an article, CreativeWork for a project), or "" for the other pages.
     eleventyConfig.addFilter("openGraph", (page, lang, title, description, image) => openGraph({ page, lang, title, description, image, siteName: pkg.name }));
     eleventyConfig.addFilter("jsonLd", (page, lang, title, description, image) => jsonLd({ page, lang, title, description, image, author }));
-    // -> api/ at the repo root, like the feeds: /api/articles.json and /api/projects.json for the chatbot.
+    // -> api/ at the repo root, like the feeds: /api/articles.json, /api/projects.json and /api/experiences.json for the chatbot.
     const api = apiData();
     fs.mkdirSync(path.join(__dirname, "api"), { recursive: true });
     for (const [name, data] of Object.entries(api)) {

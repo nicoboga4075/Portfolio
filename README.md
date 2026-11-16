@@ -25,7 +25,7 @@ Portfolio/
 ├── fonts/, images/                Icon fonts and pictures
 ├── docs/public/                   CVs, certificates, project videos and the background video of the presentation article, with their subtitles
 ├── netlify/functions/             Netlify functions in TypeScript (article, env, visit) and their shared HTTP helpers
-├── api/                           articles.json and projects.json for the chatbot, written by the build (not committed)
+├── api/                           articles.json, projects.json and experiences.json for the chatbot, written by the build (not committed)
 ├── service-worker.js              Offline cache (network first for pages, scripts and styles)
 ├── tests/                         Jest tests of the Netlify functions (tests/jest), Playwright (tests/playwright), Cypress (tests/cypress) and Robot Framework (tests/robot, with ROBOT_FRAMEWORK.md) tests
 ├── .github/                       GitHub Actions workflows, Dependabot, vendored versions check
