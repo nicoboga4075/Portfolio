@@ -58,5 +58,6 @@ test('asks in the banner before Calendly, and opens it once the services are all
     expect(requested).toEqual([]);
     await banner.locator('input[value="services"]').check();
     await banner.getByRole('button', { name: consent.en.save }).click();
-    await expect.poll(() => requested.some(url => url.includes('calendly.com'))).toBe(true);
+    // The host itself, not a substring of the address that any host could hold (CodeQL js/incomplete-url-substring-sanitization)
+    await expect.poll(() => requested.some(url => /(^|\.)calendly\.com$/.test(new URL(url).hostname))).toBe(true);
 });
