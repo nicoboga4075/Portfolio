@@ -1509,6 +1509,87 @@ describe('the contact form', () => {
     });
 });
 
+describe('the contact form validation', () => {
+    const messages = require('../_data/messages.json');
+    // The three fields of _includes/index-contact.html, with their limits and their error paragraphs
+    const fields = '<input id="contact-name" name="name" minlength="2" maxlength="100" data-validate><p id="contact-name-error" hidden></p>'
+        + '<input id="contact-subject" name="subject" minlength="3" maxlength="150" data-validate><p id="contact-subject-error" hidden></p>'
+        + '<textarea id="contact-message" name="message" minlength="10" maxlength="5000" data-validate></textarea><p id="contact-message-error" hidden></p>';
+    const body = `<form name="contactForm" novalidate>${fields}<button type="submit">Send</button></form><p id="callback-form"></p>`;
+    const field = id => document.getElementById(`contact-${id}`);
+    const error = id => document.getElementById(`contact-${id}-error`);
+    const fill = (name, subject, message) => {
+        field('name').value = name;
+        field('subject').value = subject;
+        field('message').value = message;
+    };
+
+    test('refuses an empty field and a field of spaces only, under each field, and focuses the first one', () => {
+        const app = loadApp({ body });
+        fill('', '   ', 'A message long enough');
+        expect(app.validateContactForm(document.querySelector('form'))).toBe(false);
+        expect(error('name').hidden).toBe(false);
+        expect(error('name').textContent).toBe(messages['form-required'].en);
+        expect(error('subject').textContent).toBe(messages['form-required'].en);
+        expect(field('name').getAttribute('aria-invalid')).toBe('true');
+        expect(error('message').hidden).toBe(true);
+        expect(field('message').getAttribute('aria-invalid')).toBe('false');
+        expect(document.activeElement).toBe(field('name'));
+    });
+
+    test('refuses a value under its minlength or over its maxlength once trimmed, with the limit in the message', () => {
+        const app = loadApp({ body });
+        fill(' N ', 'Hello', 'x'.repeat(5001));
+        expect(app.validateContactForm(document.querySelector('form'))).toBe(false);
+        expect(error('name').textContent).toBe(messages['form-too-short'].en.replace('{min}', 2));
+        expect(error('message').textContent).toBe(messages['form-too-long'].en.replace('{max}', 5000));
+        expect(error('subject').hidden).toBe(true);
+    });
+
+    test('accepts any length when the field has no limits', () => {
+        const app = loadApp({ body: '<form><input id="contact-free" data-validate><p id="contact-free-error" hidden></p></form>' });
+        document.getElementById('contact-free').value = 'x';
+        expect(app.validateContactForm(document.querySelector('form'))).toBe(true);
+    });
+
+    test('sends nothing while a field is refused, and goes on to the send once they are all valid', async () => {
+        const app = loadApp({ body });
+        jest.spyOn(console, 'error').mockImplementation(() => {});
+        app.initIndexPage('en');
+        fill('', '', '');
+        $('form').trigger('submit');
+        await flush();
+        expect(document.activeElement).toBe(field('name'));
+        expect(error('message').hidden).toBe(false);
+        // Without the token client of Google, a send that starts shows its error under the form
+        expect(document.getElementById('callback-form').textContent).toBe('');
+        fill('Nico', 'Hello', 'A message long enough');
+        $('form').trigger('submit');
+        await flush();
+        expect(document.getElementById('callback-form').textContent).not.toBe('');
+    });
+
+    test('checks a field the visitor leaves with something typed, not an untouched one, then at each key until it is fixed', () => {
+        const app = loadApp({ body });
+        app.initIndexPage('en');
+        $(field('subject')).trigger('focusout');
+        expect(error('subject').hidden).toBe(true);
+        field('subject').value = 'Hi';
+        $(field('subject')).trigger('focusout');
+        expect(error('subject').hidden).toBe(false);
+        field('subject').value = '';
+        $(field('subject')).trigger('focusout');
+        expect(error('subject').textContent).toBe(messages['form-required'].en);
+        field('subject').value = 'Hello';
+        $(field('subject')).trigger('input');
+        expect(error('subject').hidden).toBe(true);
+        expect(field('subject').getAttribute('aria-invalid')).toBe('false');
+        field('subject').value = 'H';
+        $(field('subject')).trigger('input');
+        expect(error('subject').hidden).toBe(true);
+    });
+});
+
 describe('the counters following the mouse', () => {
     const card = () => document.querySelector('.stat-card');
     const body = '<section id="counter-section"><div class="stat-card"></div></section>';

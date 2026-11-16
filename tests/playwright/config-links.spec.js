@@ -17,9 +17,11 @@ test.describe('links read from config of package.json', () => {
             expect(read(`index_${lang}.html`)).toContain(`data-calendly-url="${calendly}"`);
         });
 
-        test(`${lang}: the Hire me button opens the message page of the LinkedIn profile`, () => {
-            const messaging = new URL('/messaging/thread/new', linkedin).href;
-            expect(read(`index_${lang}.html`)).toContain(`href="${messaging}"`);
+        test(`${lang}: the Hire me button leads to the contact section of the page, not to LinkedIn`, () => {
+            const html = read(`index_${lang}.html`);
+            const hireme = html.slice(html.indexOf('id="hireme-section"'));
+            expect(hireme).toMatch(new RegExp(`<a href="/${lang}#contact-section" class="btn btn-primary`));
+            expect(html).not.toContain('/messaging/thread/new');
         });
 
         test(`${lang}: the See more projects button opens the projects page of the LinkedIn profile`, () => {

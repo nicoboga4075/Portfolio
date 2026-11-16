@@ -20,7 +20,7 @@ test.describe('navbar CV button', () => {
         test(`links the ${lang} CV from the root, so it works from the home and the blog alike`, () => {
             const html = render(`index_${lang}`);
             const hint = nav[lang].downloadCv.replaceAll("'", '&#39;');
-            expect(html).toContain(`<a id="nav-cv" class="btn btn-primary" href="/${about[lang].cvHref}" target="_blank" rel="noopener"><span class="icon-download" aria-hidden="true"></span>${nav[lang].cv}<span class="sr-only"> ${hint}</span></a>`);
+            expect(html).toContain(`<a id="nav-cv" class="btn btn-outline-primary" href="/${about[lang].cvHref}" target="_blank" rel="noopener"><span class="icon-download" aria-hidden="true"></span>${nav[lang].cv}<span class="sr-only"> ${hint}</span></a>`);
             expect(fs.existsSync(path.join(root, about[lang].cvHref))).toBe(true);
         });
     }

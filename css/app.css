@@ -852,6 +852,13 @@ html.dark-mode #counter-section .counter-list a {
     color: var(--white);
 }
 
+/* The blue button disappeared on the blue overlay: in this section it is white with blue text */
+#hireme-section .btn-primary {
+    background-color: var(--white) !important;
+    border-color: var(--white) !important;
+    color: var(--primary-dark) !important;
+}
+
 #hireme-section .btn:focus-visible {
     outline-color: var(--white);
 }
@@ -2355,6 +2362,17 @@ textarea.form-control {
     outline-offset: 2px;
 }
 
+/* A field the contact form refused (validateContactForm of js/app.js), its message under it */
+.contact-row .form-control[aria-invalid="true"] {
+    border-color: var(--danger);
+}
+
+.contact-row .field-error {
+    margin: 6px 0 0;
+    color: var(--danger);
+    font-size: 14px;
+}
+
 /* ==== Projects Section ==== */
 
 .project {
@@ -3800,6 +3818,11 @@ html.dark-mode .pipeline-footer {
     align-items: center;
     gap: 12px;
     margin-top: 24px;
+}
+
+/* The one call to action of the page, under the badges of the hero */
+.hero-cta {
+    margin: 32px 0 0;
 }
 
 /* Availability badge of the hero: its dot pulses like a live status, faster on an active search */

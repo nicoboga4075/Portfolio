@@ -15,7 +15,6 @@ function render(openToWork, fileSlug = 'index', texts = hireme) {
         page: { fileSlug },
         siteLanguages: { default: 'en' },
         hireme: texts,
-        linkedin: { messaging: 'https://example.com/messaging' },
         profile: { openToWork }
     });
 }
@@ -51,11 +50,11 @@ test.describe('hire me section', () => {
     });
 
     test('shows the contact button with its text, none when the text is missing or empty', () => {
-        expect(render(2)).toContain(`class="btn btn-primary py-3 px-5">${hireme.en.contactCta}</a>`);
+        expect(render(2)).toContain(`<a href="/en#contact-section" class="btn btn-primary py-3 px-5">${hireme.en.contactCta}</a>`);
         for (const contactCta of [undefined, '']) {
             const html = render(2, 'index', { ...hireme, en: { ...hireme.en, contactCta } });
             expect(html).toContain('id="hireme-section"');
-            expect(html).not.toContain('https://example.com/messaging');
+            expect(html).not.toContain('#contact-section');
         }
     });
 });

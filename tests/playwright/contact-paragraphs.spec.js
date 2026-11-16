@@ -4,7 +4,8 @@ const path = require('node:path');
 const nunjucks = require('nunjucks');
 
 const root = path.join(__dirname, '..', '..');
-const template = fs.readFileSync(path.join(root, '_includes', 'index-contact.html'), 'utf8');
+// The {% email %} shortcode of .eleventy.js is unknown to a bare Nunjucks environment: its empty span stands in for it
+const template = fs.readFileSync(path.join(root, '_includes', 'index-contact.html'), 'utf8').replaceAll('{% email %}', '<span class="email-address"></span>');
 const contact = require(path.join(root, '_data', 'contact.json'));
 
 // Renders the contact include alone, the way Eleventy gives it its data

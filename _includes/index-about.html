@@ -36,7 +36,7 @@
                             <span>{{ aboutLang.experience }}</span>
                         </p>
                         <p class="mb-4">
-                            <a target="_blank" rel="noopener" href="{{ aboutLang.cvHref }}" id="cv-download" class="btn btn-primary py-3 px-3"><span class="spinner"></span><span class="btn-label">{{ aboutLang.downloadCv }}</span></a>
+                            <a target="_blank" rel="noopener" href="{{ aboutLang.cvHref }}" id="cv-download" class="btn btn-outline-primary py-3 px-3"><span class="spinner"></span><span class="btn-label">{{ aboutLang.downloadCv }}</span></a>
                         </p>
                         <p>
                             <i class="icon-upload"></i>&nbsp;&nbsp;<span id="last-update-date"></span>
@@ -71,7 +71,7 @@
                                 <p class="book-tagline"><i class="icon-laptop" aria-hidden="true"></i>{{ bookLang.front.tagline }}</p>
                                 {#- The years of experience of config.profile, the figure of the About section #}
                                 <p class="book-xp"><i class="icon-star" aria-hidden="true"></i>{{ bookLang.front.xp | replace("{years}", profile.xp) }}</p>
-                                <button type="button" class="book-open btn btn-primary">{{ bookLang.front.open }}</button>
+                                <button type="button" class="book-open btn btn-outline-primary">{{ bookLang.front.open }}</button>
                                 {%- elif index == sheets.length %}
                                 {#- A handshake in a round seal, decorative since the thanks follow #}
                                 <span class="book-seal" aria-hidden="true"><i class="icon-handshake-o"></i></span>

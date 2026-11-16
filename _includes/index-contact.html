@@ -16,7 +16,7 @@
                 {%- endif %}
                 {%- endfor %}
                 {%- if contactPage.bookingCta %}
-                <p><a id="calendly-cta" href="#" class="btn btn-primary btn-outline-primary py-2 px-4" data-calendly-url="{{ calendly }}"><span class="icon-calendar mr-2" aria-hidden="true"></span>{{ contactPage.bookingCta }}</a></p>
+                <p><a id="calendly-cta" href="#" class="btn btn-outline-primary py-2 px-4" data-calendly-url="{{ calendly }}"><span class="icon-calendar mr-2" aria-hidden="true"></span>{{ contactPage.bookingCta }}</a></p>
                 {%- endif %}
             </div>
         </div>
@@ -46,23 +46,27 @@
         </div>
         <div class="row no-gutters contact-row justify-content-center mb-5 pb-3">
             <div class="col-md-6 order-md-last d-flex">
-                <form class="bg-light p-4 p-md-5 contact-form" name="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+                {#- novalidate: the fields are checked by validateContactForm of js/app.js, each error under its field in the language of the page, rather than by the bubbles of the browser #}
+                <form class="bg-light p-4 p-md-5 contact-form" name="contactForm" method="POST" novalidate data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
                     <p hidden>
                         <label>{{ contactPage.honeypot }}<input type="text" name="bot-field"></label>
                     </p>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="{{ contactPage.namePlaceholder }}" name="name" required autocomplete="name" aria-label="{{ contactPage.nameLabel }}">
+                        <input type="text" class="form-control" id="contact-name" placeholder="{{ contactPage.namePlaceholder }}" name="name" required minlength="2" maxlength="100" autocomplete="name" aria-label="{{ contactPage.nameLabel }}" aria-describedby="contact-name-error" data-validate>
+                        <p id="contact-name-error" class="field-error" hidden></p>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="{{ contactPage.subjectPlaceholder }}" name="subject" required aria-label="{{ contactPage.subjectLabel }}">
+                        <input type="text" class="form-control" id="contact-subject" placeholder="{{ contactPage.subjectPlaceholder }}" name="subject" required minlength="3" maxlength="150" aria-label="{{ contactPage.subjectLabel }}" aria-describedby="contact-subject-error" data-validate>
+                        <p id="contact-subject-error" class="field-error" hidden></p>
                     </div>
                     <div class="form-group">
-                        <textarea cols="30" rows="10" class="form-control" placeholder="{{ contactPage.messagePlaceholder }}" name="message" required aria-label="{{ contactPage.messageLabel }}"></textarea>
+                        <textarea cols="30" rows="10" class="form-control" id="contact-message" placeholder="{{ contactPage.messagePlaceholder }}" name="message" required minlength="10" maxlength="5000" aria-label="{{ contactPage.messageLabel }}" aria-describedby="contact-message-error" data-validate></textarea>
+                        <p id="contact-message-error" class="field-error" hidden></p>
                     </div>
                     {#- Shown by loadContactScripts of js/app.js while the third-party services of the consent banner are refused: its button allows them, which loads the captcha #}
                     <div id="contact-consent" class="contact-consent" hidden>
                         <p>{{ consent[lang].servicesNeeded }}</p>
-                        <button type="button" class="btn btn-primary" data-consent-grant="services">{{ consent[lang].allow }}</button>
+                        <button type="button" class="btn btn-outline-primary" data-consent-grant="services">{{ consent[lang].allow }}</button>
                     </div>
                     <div id="captcha-check"></div>
                     <div id="callback-form" class="text-center"></div>

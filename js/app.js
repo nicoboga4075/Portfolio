@@ -1467,6 +1467,38 @@ function initExperienceFilters() {
 }
 
 // Calendly and Chart.js need a hex, but --primary / --secondary can be oklch() expressions (dark mode): an element resolves them, a 1px canvas turns them into sRGB bytes.
+// The error of a field of the contact form, '' when it is valid: required, then at least its minlength and at most its maxlength characters once trimmed, so a value of spaces only counts as empty (minLength and maxLength are -1 without the attribute)
+function contactFieldError(field) {
+    const length = field.value.trim().length;
+    if (length === 0) {
+        return getMessage('form-required');
+    }
+    if (length < field.minLength) {
+        return getMessage('form-too-short').replace('{min}', field.minLength);
+    }
+    if (field.maxLength > 0 && length > field.maxLength) {
+        return getMessage('form-too-long').replace('{max}', field.maxLength);
+    }
+    return '';
+}
+
+// Shows the error of a field under it (its aria-describedby) and marks it aria-invalid, or clears both; true when the field is valid
+function checkContactField(field) {
+    const error = contactFieldError(field);
+    const message = document.getElementById(`${field.id}-error`);
+    message.textContent = error;
+    message.hidden = !error;
+    field.setAttribute('aria-invalid', String(Boolean(error)));
+    return !error;
+}
+
+// Checks every field of the contact form and moves the focus to the first refused one; true when they are all valid
+function validateContactForm(form) {
+    const invalid = Array.from(form.querySelectorAll('[data-validate]')).filter(field => !checkContactField(field));
+    invalid[0]?.focus();
+    return invalid.length === 0;
+}
+
 function cssVarToHex(name) {
     const probe = document.createElement('span');
     probe.style.color = `var(${name})`;
@@ -1626,8 +1658,20 @@ function initIndexPage(langPage) {
             contactFormObserver.observe(contactFormEl);
         }
 
+        // A field is checked when the visitor leaves it with something typed, and again at each key once refused, so its error goes as soon as it is fixed
+        $('form[name="contactForm"]').on('focusout', '[data-validate]', function () {
+            if (this.value || this.getAttribute('aria-invalid') === 'true') {
+                checkContactField(this);
+            }
+        }).on('input', '[data-validate][aria-invalid="true"]', function () {
+            checkContactField(this);
+        });
+
         $('form[name="contactForm"]').on('submit', async (event) => {
             event.preventDefault(); // Avoid the native submission, which would leave the page for the thank-you page of Netlify
+            if (!validateContactForm(event.target)) {
+                return false;
+            }
             const formData = new FormData(event.target);
             try {
                 await sendEmail(formData.get('name'), formData.get('subject'), formData.get('message'));
