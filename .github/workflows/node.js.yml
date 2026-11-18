@@ -83,8 +83,8 @@ jobs:
       with:
         path: ~/.cache/ms-playwright
         key: playwright-${{ steps.playwright-version.outputs.image }}-${{ steps.playwright-version.outputs.version }}
-    # Chromium, Firefox and WebKit with their system libraries, for the *.browser.spec.js specs and the contrast checker, installed through an npm script so the playwright binary of package-lock.json runs instead of one npx could fetch (SonarCloud githubactions:S6505, S8543); a stalled install (a slow apt mirror) is stopped after 5 minutes and tried once more, then the tests, only once the browsers are there
-    - run: (timeout 300 npm run playwright:install || timeout 300 npm run playwright:install) && npm run playwright
+    # Chromium, Firefox and WebKit with their system libraries, for the *.browser.spec.js specs and the contrast checker, installed through an npm script so the playwright binary of package-lock.json runs instead of one npx could fetch (SonarCloud githubactions:S6505, S8543); a stalled install (a slow apt mirror) is stopped after 5 minutes and tried once more, then the tests, only once the browsers are there; the timeout stops npm but not the apt-get it started as root, which keeps the dpkg lock, so the second try waits (4 minutes at most, within the 15 minutes of the job) for apt-get and dpkg to end, or it fails at once on "Could not get lock /var/lib/dpkg/lock-frontend"
+    - run: (timeout 300 npm run playwright:install || (timeout 240 bash -c 'while pgrep -x "apt-get|dpkg" > /dev/null; do sleep 5; done'; timeout 300 npm run playwright:install)) && npm run playwright
     - uses: actions/upload-artifact@v7
       if: ${{ !cancelled() }}
       with:
