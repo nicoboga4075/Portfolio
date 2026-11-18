@@ -515,6 +515,14 @@ html.dark-mode .badge {
     display: none;
 }
 
+/* The texts of the banner carry its black themselves: fixed over the hero, the banner is skipped by axe (Lighthouse), which then measured the white text on the light hero overlay behind it and failed its contrast */
+#ftco-footer .consent-banner p,
+#ftco-footer .consent-banner a,
+#ftco-footer .consent-banner span,
+#ftco-footer .consent-banner legend {
+    background-color: var(--black);
+}
+
 #ftco-footer .consent-text {
     max-width: 720px;
 }

@@ -61,3 +61,11 @@ test('asks in the banner before Calendly, and opens it once the services are all
     // The host itself, not a substring of the address that any host could hold (CodeQL js/incomplete-url-substring-sanitization)
     await expect.poll(() => requested.some(url => /(^|\.)calendly\.com$/.test(new URL(url).hostname))).toBe(true);
 });
+
+test('gives each text of the banner its black background, so a contrast check never reads the hero behind the fixed banner', async ({ page }) => {
+    await page.goto('/en');
+    const banner = page.locator('#consent-banner');
+    await expect(banner).toBeVisible();
+    const backgrounds = await banner.locator('p, a, span, legend').evaluateAll(elements => [...new Set(elements.map(element => getComputedStyle(element).backgroundColor))]);
+    expect(backgrounds).toEqual(['rgb(0, 0, 0)']);
+});
