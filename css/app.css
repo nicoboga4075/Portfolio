@@ -4306,6 +4306,15 @@ html.dark-mode .book-face:not(.book-cover) {
     margin-top: 12px;
 }
 
+/* The link to the path on one slide, under the controls of the book */
+.book-slide {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
 .book-title {
     margin-bottom: 16px;
     color: var(--primary);

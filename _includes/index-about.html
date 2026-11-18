@@ -109,6 +109,8 @@
                         <p class="book-status" aria-live="polite" data-cover="{{ bookLang.cover }}" data-back="{{ bookLang.backCover }}" data-pages="{{ bookLang.pages }}" data-total="{{ sheets.length }}">{{ bookLang.cover }}</p>
                         <button type="button" class="book-next" aria-label="{{ bookLang.next }}"><i class="icon-chevron-right" aria-hidden="true"></i></button>
                     </div>
+                    {#- The same path on one slide, a web page of config.careerSlide in the language of the page #}
+                    <a class="book-slide" href="{{ careerSlide }}/{{ lang }}" target="_blank" rel="noopener"><i class="icon-desktop" aria-hidden="true"></i>{{ bookLang.slide }}</a>
                 </section>
             </div>
         </div>

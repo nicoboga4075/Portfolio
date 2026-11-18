@@ -9,6 +9,7 @@
         "pages": "Pages {from} and {to} of {total}",
         "front": { "title": "Nicolas BOGALHEIRO", "field": "IT", "tagline": "Software engineer", "xp": "XP: {years} years", "open": "Open the book" },
         "back": { "title": "Thanks for reading", "text": "The details of each experience are in the resume below." },
+        "slide": "View in landscape",
         "sheets": [
             { "title": "Education", "icon": "icon-graduation-cap", "placeIcon": "icon-university", "tagIcon": "icon-book", "items": [
                 { "icon": "🎓", "when": "2012–2015", "text": "Saint Jacques de Compostelle", "city": "Dax", "sector": "High school" },
@@ -63,6 +64,7 @@
         "pages": "Pages {from} et {to} sur {total}",
         "front": { "title": "Nicolas BOGALHEIRO", "field": "IT", "tagline": "Ingénieur logiciel", "xp": "XP : {years} ans", "open": "Ouvrir le livre" },
         "back": { "title": "Merci de votre lecture", "text": "Le détail de chaque expérience se trouve dans le résumé plus bas." },
+        "slide": "Voir en paysage",
         "sheets": [
             { "title": "Formation", "icon": "icon-graduation-cap", "placeIcon": "icon-university", "tagIcon": "icon-book", "items": [
                 { "icon": "🎓", "when": "2012–2015", "text": "Saint Jacques de Compostelle", "city": "Dax", "sector": "Lycée" },
