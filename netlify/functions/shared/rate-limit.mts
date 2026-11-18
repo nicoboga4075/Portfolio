@@ -7,6 +7,8 @@ import { jsonResponse } from "./http.mjs";
 type WindowCount = { window: number; count: number };
 
 const WINDOW_MS = 60_000;
+// The reads and writes one call may try before it gives up, each lost to another call of the same visitor written in between
+const MAX_TRIES = 5;
 
 // The 429 a visitor gets past the limit of a function, with the seconds to wait before the next window
 export function tooManyRequests(): Response {
@@ -20,13 +22,22 @@ export async function isRateLimited(name: string, limit: number, context: Contex
         const store = getStore({ name: "rate-limits", consistency: "strong" });
         const key = `${name}/${createHash("sha256").update(context.ip).digest("hex")}`;
         const window = Math.floor(Date.now() / WINDOW_MS);
-        const stored = (await store.get(key, { type: "json" })) as WindowCount | null;
-        const count = stored?.window === window ? stored.count : 0;
-        if (count >= limit) {
-            return true;
+        // Calls at the same time read the same count: each write only goes through if the entry is still the one it read (its ETag, or no entry yet), else the call reads again, so a burst cannot overwrite its own counts
+        for (let attempt = 0; attempt < MAX_TRIES; attempt++) {
+            const entry = await store.getWithMetadata(key, { type: "json" });
+            const stored = entry?.data as WindowCount | undefined;
+            const count = stored?.window === window ? stored.count : 0;
+            if (count >= limit) {
+                return true;
+            }
+            const condition = entry?.etag ? { onlyIfMatch: entry.etag } : { onlyIfNew: true };
+            const { modified } = await store.setJSON(key, { window, count: count + 1 } satisfies WindowCount, condition);
+            if (modified) {
+                return false;
+            }
         }
-        await store.setJSON(key, { window, count: count + 1 } satisfies WindowCount);
-        return false;
+        // Still beaten by other calls of the same visitor after every try: a burst that busy is past the limit anyway
+        return true;
     } catch (error) {
         console.warn(`[${context.requestId}] Rate limit of ${name} not checked`, error);
         return false;
