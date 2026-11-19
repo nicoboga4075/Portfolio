@@ -163,4 +163,5 @@ The project skills live in `.claude/skills/<name>/SKILL.md`. Use the one that fi
 | `new-skill` | Code Scaffolding & Templates | Add a hard, soft or mad skill or a skill card (image, texts in every language, the experiences behind a soft skill) | - |
 | `server-health` | Data Fetching & Analysis | Check, read-only, that the Netlify functions and Supabase work in production (live probes, logs, visits per day, advisors) and say what to fix | - |
 | `client-health` | Product Verification | Check, read-only, that the live pages work in a browser (CSP, console errors, failed requests, Web Vitals, contact form, booking, chatbot, analytics consent) and say what to fix | - |
+| `new-definition` | Code Scaffolding & Templates | Add a definition or an "A vs B" to the glossary of the "Du voc de dev" article in every language, with its badge, and check the languages stay aligned | - |
 <!-- skills:end -->
