@@ -1,4 +1,7 @@
 [
+    { "slug": "les-enquetes-de-a-a-z", "title": { "en": "Surveys from A to Z", "fr": "Les enquêtes de A à Z" }, "date": "2026-11-19", "tags": [
+        "CSAT", "NPS", "CES", { "en": "Surveys", "fr": "Enquêtes" }, { "en": "Customer satisfaction", "fr": "Satisfaction client" }, { "en": "Polls", "fr": "Sondages" }, "CAWI", "CATI", "KPI"
+    ] },
     { "slug": "bien-pasbien", "title": { "en": "Good / Not Good: good and bad coding practices", "fr": "Bien / Pas Bien : bonnes et mauvaises pratiques de code" }, "date": "2025-07-26", "tags": [
         "Clean Code", "SOLID", { "Design Patterns": "https://refactoring.guru/design-patterns" }, "DRY", "KISS", "C#", "Python", "JavaScript"
     ] },

@@ -187,6 +187,176 @@ body.read-zone h1 {
     margin-bottom: 20px;
 }
 
+/* The steps of a survey in the article "Surveys from A to Z", drawn like the delivery pipeline of the home page: a row of circles joined by a line, each step lit in turn in a loop, its tools under its name; a column under 768px, so that every name stays readable */
+.survey-flow-figure {
+    margin: 24px 0;
+}
+
+.survey-flow {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.survey-flow-step {
+    position: relative;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+}
+
+/* The line from the middle of a circle to the middle of the next one */
+.survey-flow-step:not(:last-child)::after {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    width: calc(100% + 8px);
+    height: 2px;
+    content: '';
+    background-color: var(--primary-light);
+}
+
+.survey-flow-icon {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    background-color: var(--background-color);
+    color: var(--primary);
+    font-size: 22px;
+}
+
+.survey-flow-title {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.survey-flow-detail {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--secondary);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* The example tools of a step, the Soft Concept ones first, then the best known */
+.survey-flow-tools {
+    margin: 0;
+    color: var(--primary);
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* A tool name never cut across two lines (OMR Manager, Cati-Web) */
+.survey-flow-tools span {
+    white-space: nowrap;
+}
+
+/* The return to the scoping for the next wave, under the row */
+.survey-flow-loop {
+    margin-top: 16px;
+    padding-top: 8px;
+    border-top: 2px dashed var(--primary-light);
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Each step lit in turn, two seconds each, then the loop starts again: the same twelve seconds for every step, shifted by its place */
+@media (prefers-reduced-motion: no-preference) {
+    .survey-flow-icon {
+        animation: survey-flow-light 12s infinite;
+    }
+
+    .survey-flow-step:nth-child(2) .survey-flow-icon {
+        animation-delay: 2s;
+    }
+
+    .survey-flow-step:nth-child(3) .survey-flow-icon {
+        animation-delay: 4s;
+    }
+
+    .survey-flow-step:nth-child(4) .survey-flow-icon {
+        animation-delay: 6s;
+    }
+
+    .survey-flow-step:nth-child(5) .survey-flow-icon {
+        animation-delay: 8s;
+    }
+
+    .survey-flow-step:nth-child(6) .survey-flow-icon {
+        animation-delay: 10s;
+    }
+}
+
+@keyframes survey-flow-light {
+    0%,
+    16% {
+        background-color: var(--primary);
+        color: var(--white);
+        transform: scale(1.12);
+    }
+
+    17%,
+    100% {
+        background-color: var(--background-color);
+        color: var(--primary);
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 767.98px) {
+    /* Room on the left for the lit circle, which grows by an eighth */
+    .survey-flow {
+        flex-direction: column;
+        gap: 16px;
+        padding-left: 4px;
+    }
+
+    .survey-flow-step {
+        flex-flow: row wrap;
+        align-items: center;
+        gap: 4px 12px;
+        width: 100%;
+        text-align: left;
+    }
+
+    /* The line down from a circle to the next one */
+    .survey-flow-step:not(:last-child)::after {
+        top: 50%;
+        left: 25px;
+        width: 2px;
+        height: calc(100% + 16px);
+    }
+
+    .survey-flow-detail {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 8px;
+        flex-basis: 100%;
+        padding-left: 64px;
+    }
+
+    .survey-flow-tools {
+        flex-basis: 100%;
+        padding-left: 64px;
+    }
+}
+
 /* ==== Career Timeline ==== */
 
 .animation-container {

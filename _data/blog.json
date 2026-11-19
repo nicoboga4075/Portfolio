@@ -8,6 +8,8 @@
         "fr": { "heading": "Blog", "tagline": "Loin, très loin, au-delà des montagnes de code" }
     },
     "entries": [
+        { "id": "survey", "title": { "en": "Surveys from A to Z", "fr": "Les enquêtes de A à Z" }, "date": { "en": "November 19, 2026", "fr": "19 Novembre 2026" }, "readTime": "10 min",
+          "excerpt": { "en": "CSAT, NPS, CES, response rate... The indicators of a survey, the difference between a survey and a poll, its types (customer satisfaction, social barometer, internal surveys, panels), its data collection modes (web, mobile, phone, paper) and its steps, from the scoping to the reporting.", "fr": "CSAT, NPS, CES, taux de réponse... Les indicateurs d'une enquête, la différence entre enquête et sondage, ses types (satisfaction client, baromètre social, enquêtes internes, panels), ses modes de collecte (web, mobile, téléphone, papier) et ses étapes, du cadrage à la restitution." } },
         { "id": "bien-pasbien", "title": { "en": "Good / Not Good", "fr": "Bien / Pas Bien" }, "date": { "en": "July 26, 2025", "fr": "26 Juillet 2025" }, "readTime": "8 min",
           "excerpt": { "en": "Magic numbers, ACID, SOLID, DRY, KISS, GRASP, MVC, Law of Demeter, YAGNI, design patterns... A playful tour of good and bad development practices, illustrated in JavaScript, Python and C#.", "fr": "Magic numbers, ACID, SOLID, DRY, KISS, GRASP, MVC, Loi de Déméter, YAGNI, design patterns... Un tour d'horizon ludique des bonnes et des mauvaises pratiques de développement, illustré en JavaScript, Python et C#." } },
         { "id": "software", "title": { "en": "From the dev vocab", "fr": "Du voc' de dev" }, "date": { "en": "May 5, 2025", "fr": "5 Mai 2025" }, "readTime": "3 min",

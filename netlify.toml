@@ -62,6 +62,12 @@
     path = "fr/blog"
 
   [[context.production.plugins.inputs.audits]]
+    path = ".netlify/functions/article?filename=les-enquetes-de-a-a-z_en.html"
+
+  [[context.production.plugins.inputs.audits]]
+    path = ".netlify/functions/article?filename=les-enquetes-de-a-a-z_fr.html"
+
+  [[context.production.plugins.inputs.audits]]
     path = ".netlify/functions/article?filename=du-voc-de-dev_en.html"
 
   [[context.production.plugins.inputs.audits]]
