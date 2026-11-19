@@ -1,36 +1,17 @@
 // The test of the *.browser.spec.js specs: the preview build served on a free port by serve-build.mjs, once per worker, as the baseURL of page.goto, with the site data the specs check the pages against.
 const base = require('@playwright/test');
-const { spawn } = require('node:child_process');
 const fs = require('node:fs');
-const os = require('node:os');
 const path = require('node:path');
+const { startServeBuild } = require('../serve-build-start.cjs');
 
 const root = path.join(__dirname, '..', '..');
 const data = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
-
-// Starts serve-build.mjs and resolves with its address once it has written the port it got
-function serve() {
-    const portFile = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'portfolio-serve-')), 'port');
-    const child = spawn(process.execPath, [path.join(root, 'tests', 'serve-build.mjs'), '--port-file', portFile], { cwd: root, stdio: 'ignore' });
-    return new Promise((resolve, reject) => {
-        const timer = setInterval(() => {
-            if (fs.existsSync(portFile) && fs.readFileSync(portFile, 'utf8')) {
-                clearInterval(timer);
-                resolve({ url: `http://localhost:${fs.readFileSync(portFile, 'utf8')}`, child });
-            }
-        }, 100);
-        child.on('exit', code => {
-            clearInterval(timer);
-            reject(new Error(`serve-build.mjs exited with code ${code}`));
-        });
-    });
-}
 
 exports.test = base.test.extend({
     // Playwright reads the fixtures a fixture needs from its first parameter, which must be a destructuring pattern even when it needs none
     // eslint-disable-next-line no-empty-pattern
     siteUrl: [async ({}, use) => {
-        const { url, child } = await serve();
+        const { url, child } = await startServeBuild();
         await use(url);
         child.removeAllListeners('exit');
         child.kill();

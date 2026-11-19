@@ -1,9 +1,8 @@
 // Cypress runs on the preview build of the site (npm run cypress, --project tests): it builds it into reports/cypress/site/, serves it on a free port with serve-build.mjs, and points baseUrl at it.
 const { defineConfig } = require('cypress');
-const { execFileSync, spawn } = require('node:child_process');
-const fs = require('node:fs');
-const os = require('node:os');
+const { execFileSync } = require('node:child_process');
 const path = require('node:path');
+const { startServeBuild } = require('./serve-build-start.cjs');
 
 const root = path.join(__dirname, '..');
 // Its own build folder (ELEVENTY_OUTPUT, read by .eleventy.js and serve-build.mjs), not .eleventy/: a rebuild of npm run dev:watch there can empty js/ under a running test, and the page then fails with "initPage is not defined"
@@ -14,23 +13,11 @@ function build() {
     execFileSync(process.execPath, [path.join(root, 'node_modules', '@11ty', 'eleventy', 'cmd.cjs')], { cwd: root, env, stdio: 'inherit' });
 }
 
-// Starts serve-build.mjs, stopped with the Cypress process, and resolves with its address once it has written the port it got
-function serve() {
-    const portFile = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'portfolio-serve-')), 'port');
-    const child = spawn(process.execPath, [path.join(root, 'tests', 'serve-build.mjs'), '--port-file', portFile], { cwd: root, env, stdio: 'ignore' });
+// Starts serve-build.mjs on that build, stopped with the Cypress process, and resolves with its address
+async function serve() {
+    const { url, child } = await startServeBuild(env);
     process.on('exit', () => child.kill());
-    return new Promise((resolve, reject) => {
-        const timer = setInterval(() => {
-            if (fs.existsSync(portFile) && fs.readFileSync(portFile, 'utf8')) {
-                clearInterval(timer);
-                resolve(`http://localhost:${fs.readFileSync(portFile, 'utf8')}`);
-            }
-        }, 100);
-        child.on('exit', code => {
-            clearInterval(timer);
-            reject(new Error(`serve-build.mjs exited with code ${code}`));
-        });
-    });
+    return url;
 }
 
 module.exports = defineConfig({
