@@ -1,10 +1,8 @@
 const { test, expect } = require('@playwright/test');
-const fs = require('node:fs');
 const path = require('node:path');
-const nunjucks = require('nunjucks');
+const { renderInclude } = require('./render');
 
 const root = path.join(__dirname, '..', '..');
-const template = fs.readFileSync(path.join(root, '_includes', 'index-services.html'), 'utf8');
 const services = require(path.join(root, '_data', 'services.json'));
 // The steps in the order they show, those of a group (CI, CD) and the branches out of CD in their place
 const steps = services.pipeline.flatMap(item => item.steps ?? item.branches ?? (item.link ? [] : [item]));
@@ -13,8 +11,7 @@ const groups = services.pipeline.filter(item => item.steps);
 
 // Renders the services include alone, the way Eleventy gives it its data
 function render(fileSlug, data = services) {
-    const env = new nunjucks.Environment(null, { autoescape: true });
-    return env.renderString(template, { page: { fileSlug }, siteLanguages: { default: 'en' }, siteUrl: 'https://example.com', services: data });
+    return renderInclude('index-services.html', { page: { fileSlug }, siteLanguages: { default: 'en' }, siteUrl: 'https://example.com', services: data });
 }
 
 test.describe('services delivery pipeline', () => {

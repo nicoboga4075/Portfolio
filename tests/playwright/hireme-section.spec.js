@@ -1,17 +1,14 @@
 const { test, expect } = require('@playwright/test');
-const fs = require('node:fs');
 const path = require('node:path');
-const nunjucks = require('nunjucks');
+const { renderInclude } = require('./render');
 
 const root = path.join(__dirname, '..', '..');
-const template = fs.readFileSync(path.join(root, '_includes', 'index-hireme.html'), 'utf8');
 const hireme = require(path.join(root, '_data', 'hireme.json'));
 const pkg = require(path.join(root, 'package.json'));
 
 // Renders the include alone, the way Eleventy gives it its data
 function render(openToWork, fileSlug = 'index', texts = hireme) {
-    const env = new nunjucks.Environment(null, { autoescape: true });
-    return env.renderString(template, {
+    return renderInclude('index-hireme.html', {
         page: { fileSlug },
         siteLanguages: { default: 'en' },
         hireme: texts,

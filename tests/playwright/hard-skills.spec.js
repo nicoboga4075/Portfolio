@@ -1,19 +1,16 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
-const nunjucks = require('nunjucks');
+const { renderInclude } = require('./render');
 const { italicNames } = require('../../.eleventy');
 
 const root = path.join(__dirname, '..', '..');
-const template = fs.readFileSync(path.join(root, '_includes', 'skills-hard.html'), 'utf8');
 const skillsData = require(path.join(root, '_data', 'skills.json'));
 
 // Renders the hard skills include alone, the way Eleventy gives it its page
 function render(lang) {
-    const env = new nunjucks.Environment(null, { autoescape: true });
     // The filter of .eleventy.js that puts the companies and schools in italics
-    env.addFilter('italicNames', text => italicNames(text));
-    return env.renderString(template, { page: { fileSlug: `index_${lang}` }, skills: skillsData });
+    return renderInclude('skills-hard.html', { page: { fileSlug: `index_${lang}` }, skills: skillsData });
 }
 
 // Reads the image and the label of each skill of the carousel

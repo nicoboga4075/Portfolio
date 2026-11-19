@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
-const nunjucks = require('nunjucks');
+const { renderInclude } = require('./render');
 
 const root = path.join(__dirname, '..', '..');
 const resume = require(path.join(root, '_data', 'resume.json'));
@@ -10,8 +10,7 @@ const languages = require(path.join(root, '_data', 'languages.json'));
 
 // Renders the resume include, its own includes read from _includes, with the experiences and the education given
 function render(lang, experiences = resume.experiences, education = resume.education) {
-    const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(path.join(root, '_includes')), { autoescape: true });
-    return env.render('index-resume.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, resume: { ...resume, experiences, education }, skills, tools, languages, profile: { xp: 5 } });
+    return renderInclude('index-resume.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, resume: { ...resume, experiences, education }, skills, tools, languages, profile: { xp: 5 } });
 }
 
 // The experiences only, the education above them sharing their markup

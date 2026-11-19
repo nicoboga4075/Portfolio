@@ -1,14 +1,13 @@
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
-const nunjucks = require('nunjucks');
+const { renderInclude } = require('./render');
 
 const root = path.join(__dirname, '..', '..');
 const hireme = require(path.join(root, '_data', 'hireme.json'));
 
 // Renders the hire me include alone, the way Eleventy gives it its data
 function render(lang) {
-    const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(path.join(root, '_includes')), { autoescape: true });
-    return env.render('index-hireme.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, hireme, profile: { openToWork: 2 } });
+    return renderInclude('index-hireme.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, hireme, profile: { openToWork: 2 } });
 }
 
 test.describe('hire me facts', () => {

@@ -1,18 +1,15 @@
 // The scroll-down arrow of the hero (_includes/index-home.html), rendered alone: its target and its label in each language.
 const { test, expect } = require('@playwright/test');
-const fs = require('node:fs');
 const path = require('node:path');
-const nunjucks = require('nunjucks');
+const { renderInclude } = require('./render');
 
 const root = path.join(__dirname, '..', '..');
-const template = fs.readFileSync(path.join(root, '_includes', 'index-home.html'), 'utf8');
 const hero = require(path.join(root, '_data', 'hero.json'));
 const hireme = require(path.join(root, '_data', 'hireme.json'));
 
 // Renders the hero include alone, the way Eleventy gives it its data
 function render(fileSlug) {
-    const env = new nunjucks.Environment(null, { autoescape: true });
-    return env.renderString(template, {
+    return renderInclude('index-home.html', {
         page: { fileSlug },
         siteLanguages: { default: 'en' },
         author: 'Nicolas BOGALHEIRO',

@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
-const nunjucks = require('nunjucks');
+const { renderTemplate } = require('./render');
 
 const root = path.join(__dirname, '..', '..');
 // The {% email %} shortcode of .eleventy.js is unknown to a bare Nunjucks environment: its empty span stands in for it
@@ -10,8 +10,7 @@ const contact = require(path.join(root, '_data', 'contact.json'));
 
 // Renders the contact include alone, the way Eleventy gives it its data
 function render(lang, pageText = contact.pageText) {
-    const env = new nunjucks.Environment(null, { autoescape: true });
-    return env.renderString(template, { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, viewport: 'desktop', contact: { ...contact, pageText }, calendly: 'https://calendly.com/example' });
+    return renderTemplate(template, { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, viewport: 'desktop', contact: { ...contact, pageText }, calendly: 'https://calendly.com/example' });
 }
 
 // The texts of the paragraphs under the heading, before the booking button

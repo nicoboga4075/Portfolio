@@ -1,16 +1,13 @@
 const { test, expect } = require('@playwright/test');
-const fs = require('node:fs');
 const path = require('node:path');
-const nunjucks = require('nunjucks');
+const { renderInclude } = require('./render');
 
 const root = path.join(__dirname, '..', '..');
-const template = fs.readFileSync(path.join(root, '_includes', 'index-about.html'), 'utf8');
 const about = require(path.join(root, '_data', 'about.json'));
 
 // Renders the about include alone, the way Eleventy gives it its data
 function render(lang) {
-    const env = new nunjucks.Environment(null, { autoescape: true });
-    return env.renderString(template, { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, about, author: 'Author', profile: { age: 28, xp: 5 } });
+    return renderInclude('index-about.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, about, author: 'Author', profile: { age: 28, xp: 5 } });
 }
 
 const escapeHtml = text => text.replaceAll("'", '&#39;');

@@ -1,19 +1,15 @@
 const { test, expect } = require('@playwright/test');
-const fs = require('node:fs');
 const path = require('node:path');
-const nunjucks = require('nunjucks');
+const { renderInclude } = require('./render');
 const { italicNames } = require('../../.eleventy');
 
 const root = path.join(__dirname, '..', '..');
-const template = fs.readFileSync(path.join(root, '_includes', 'skills-soft.html'), 'utf8');
 const skills = require(path.join(root, '_data', 'skills.json'));
 
 // Renders the soft skills include alone, the way Eleventy gives it its data
 function render(lang) {
-    const env = new nunjucks.Environment(null, { autoescape: true });
     // The filter of .eleventy.js that puts the companies and schools in italics
-    env.addFilter('italicNames', text => italicNames(text));
-    return env.renderString(template, { page: { fileSlug: `index_${lang}` }, skills }).replaceAll(/>\s+</g, '><');
+    return renderInclude('skills-soft.html', { page: { fileSlug: `index_${lang}` }, skills }).replaceAll(/>\s+</g, '><');
 }
 
 const escapeHtml = text => text.replaceAll('&', '&amp;').replaceAll("'", '&#39;').replaceAll('"', '&quot;');

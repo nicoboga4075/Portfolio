@@ -2,17 +2,15 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
-const nunjucks = require('nunjucks');
+const { renderInclude } = require('./render');
 
 const root = path.join(__dirname, '..', '..');
-const template = fs.readFileSync(path.join(root, '_includes', 'blog-content.html'), 'utf8');
 const blog = require(path.join(root, '_data', 'blog.json'));
 const pkg = require(path.join(root, 'package.json'));
 
 // Renders the include alone, the way Eleventy gives it its data
 function render(qrCodes, fileSlug = 'blog') {
-    const env = new nunjucks.Environment(null, { autoescape: true });
-    return env.renderString(template, {
+    return renderInclude('blog-content.html', {
         page: { fileSlug },
         siteLanguages: { default: pkg.config.defaultLang },
         blog,
