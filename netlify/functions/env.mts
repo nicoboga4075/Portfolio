@@ -12,9 +12,14 @@ const PUBLIC_ENV_VARS = [
 const RECAPTCHA_TEST_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
 
 async function webhook<T, R extends object>(url: string, transform: (data: T) => R): Promise<Response> {
+    const token = process.env.GITHUB_API_TOKEN;
+    // Without its token in Netlify, fail before the call: a 500 through internalError naming the variable rather than a GitHub 401 on "Bearer undefined"
+    if (!token) {
+        throw new Error("GITHUB_API_TOKEN is not set");
+    }
     const response = await fetch(url, {
         headers: {
-            Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
+            Authorization: `Bearer ${token}`,
             Accept: "application/vnd.github+json"
         }
     });
@@ -64,10 +69,14 @@ function getLastCvUpdate(lang: string): Promise<Response> {
 
 export default async function handlerEnv(req: Request, context: Context): Promise<Response> {
     try {
-        const url = new URL(req.url);
-        const lang = url.searchParams.get("lang");
-
+        // Fail fast: the origin first, then the parameter, before the rate limit writes to Blobs
         if (!isTrustedRequest(req)) {
+            return redirectTo404();
+        }
+
+        const lang = new URL(req.url).searchParams.get("lang");
+        // A lang that is not two lowercase letters
+        if (lang !== null && !/^[a-z]{2}$/.test(lang)) {
             return redirectTo404();
         }
 
@@ -77,10 +86,6 @@ export default async function handlerEnv(req: Request, context: Context): Promis
         }
 
         if (lang) {
-            const isValidLang = /^[a-z]{2}$/.test(lang);
-            if (!isValidLang) {
-                return redirectTo404();
-            }
             return await getLastCvUpdate(lang);
         }
 

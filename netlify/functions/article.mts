@@ -6,15 +6,13 @@ import { isRateLimited, tooManyRequests } from "./shared/rate-limit.mjs";
 
 export default async function handlerArticle(req: Request, context: Context): Promise<Response> {
     try {
-        const url = new URL(req.url);
-        const filename = url.searchParams.get("filename");
-
-        if (!filename || !isTrustedRequest(req)) {
+        // Fail fast: the origin first, then the parameter, before any read of the request body or of Blobs
+        if (!isTrustedRequest(req)) {
             return redirectTo404();
         }
 
-        const isValidFilename = /^[a-zA-Z0-9_-]+_[a-z]{2}\.html$/.test(filename);
-        if (!isValidFilename) {
+        const filename = new URL(req.url).searchParams.get("filename");
+        if (!filename || !/^[a-zA-Z0-9_-]+_[a-z]{2}\.html$/.test(filename)) {
             return redirectTo404();
         }
 
@@ -47,8 +45,12 @@ export default async function handlerArticle(req: Request, context: Context): Pr
                         "X-Content-Type-Options": "nosniff"
                     },
                 });
-            } catch {
-                // Try the next candidate, then fall through to 404.
+            } catch (error) {
+                // Any error but a missing file (permissions, a folder in its place) is a fault of the deploy: a 500 through internalError, not a quiet 404
+                if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+                    throw error;
+                }
+                // A missing file: try the next candidate, then fall through to 404
             }
         }
 

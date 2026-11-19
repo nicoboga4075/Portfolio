@@ -77,6 +77,21 @@ test("never reads a path that resolves outside the articles folder, even with an
     expect(read).not.toHaveBeenCalled();
 });
 
+test("checks the origin before the filename and the rate limit", async () => {
+    jest.mocked(isRateLimited).mockClear();
+    expect((await handlerArticle(request("../x", "https://evil.example/"), context)).status).toBe(302);
+    expect(isRateLimited).not.toHaveBeenCalled();
+});
+
+test("answers a 500 rather than a 404 when the article exists but cannot be read", async () => {
+    jest.spyOn(console, "error").mockImplementation(() => {});
+    writeArticle("articles", "mcs_en.html", "<h1>MCS</h1>");
+    jest.spyOn(fs.promises, "readFile").mockRejectedValue(Object.assign(new Error("EACCES: permission denied"), { code: "EACCES" }));
+    const response = await handlerArticle(request("mcs_en.html"), context);
+    expect(response.status).toBe(500);
+    expect(await response.json()).toEqual({ error: "Internal error", requestId: "req-1" });
+});
+
 test("answers a 500 with the request id when the request cannot be read", async () => {
     jest.spyOn(console, "error").mockImplementation(() => {});
     const response = await handlerArticle({ url: "not a url" } as Request, context);

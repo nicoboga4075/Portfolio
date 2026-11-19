@@ -220,15 +220,11 @@ function jsonLd({ page, lang, title, description, image, author }) {
     return data ? JSON.stringify({ "@context": "https://schema.org", ...data }).replaceAll("<", String.raw`\u003c`) : "";
 }
 
-// Width and height of a PNG of the site, read from its IHDR chunk, for og:image:width and og:image:height; null for any other image
+// Width and height of a PNG of the site, read from its IHDR chunk, for og:image:width and og:image:height; null for any other image, and a share image of the site missing from the repository fails the build rather than publish a broken og:image
 function pngSize(url) {
     if (!url.startsWith(`${site}/`) || !url.endsWith(".png")) return null;
-    try {
-        const header = fs.readFileSync(path.join(__dirname, url.slice(site.length + 1)));
-        return { width: header.readUInt32BE(16), height: header.readUInt32BE(20) };
-    } catch {
-        return null;
-    }
+    const header = fs.readFileSync(path.join(__dirname, url.slice(site.length + 1)));
+    return { width: header.readUInt32BE(16), height: header.readUInt32BE(20) };
 }
 
 // The Open Graph tags of a page, as [property, content] pairs: the page and its languages, its share image, and for an article its date, author and tags (ogp.me)
@@ -402,7 +398,7 @@ function htmlMode(env) {
     return production || tests ? "minify" : "prettify";
 }
 
-// The Eleventy transform of every rendered page, never of the Nunjucks partials of _includes/ (a {% if %} between two attributes is not HTML): another file goes through untouched, and a page the formatter cannot parse is kept as rendered with a warning
+// The Eleventy transform of every rendered page, never of the Nunjucks partials of _includes/ (a {% if %} between two attributes is not HTML): another file goes through untouched, a page the minifier cannot parse fails the build, and one Prettier cannot parse is kept as rendered with a warning
 async function formatHtml(content, outputPath, mode) {
     // Eleventy passes false for a template with permalink: false
     if (typeof outputPath !== "string" || !outputPath.endsWith(".html")) return content;
@@ -417,7 +413,12 @@ async function formatHtml(content, outputPath, mode) {
             htmlWhitespaceSensitivity: "strict",
         });
     } catch (e) {
-        console.warn(`${mode === "minify" ? "Minify" : "Prettier"} failed on ${outputPath}: ${e.message}`);
+        // Minify (production and test builds): fail the build fast rather than ship or test a page unlike the others
+        if (mode === "minify") {
+            throw new Error(`Minify failed on ${outputPath}: ${e.message}`, { cause: e });
+        }
+        // Prettier (npm run dev, CI in-place build): keep the page as rendered, readable enough, with a warning
+        console.warn(`Prettier failed on ${outputPath}: ${e.message}`);
         return content;
     }
 }

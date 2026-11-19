@@ -53,18 +53,20 @@ test.describe('format-html', () => {
         }
     });
 
-    test('keeps a page it cannot parse as rendered, with a warning naming the page', async () => {
+    test('fails the build on a page the minifier cannot parse, naming the page', async () => {
+        await expect(formatHtml(partial, 'resume.html', 'minify')).rejects.toThrow(/^Minify failed on resume\.html: /);
+    });
+
+    test('keeps a page Prettier cannot parse as rendered, with a warning naming the page', async () => {
         const warnings = [];
         const warn = console.warn;
         console.warn = message => warnings.push(message);
         try {
-            expect(await formatHtml(partial, 'resume.html', 'minify')).toBe(partial);
             expect(await formatHtml(partial, 'resume.html', 'prettify')).toBe(partial);
         } finally {
             console.warn = warn;
         }
-        expect(warnings[0]).toMatch(/^Minify failed on resume\.html: /);
-        expect(warnings[1]).toMatch(/^Prettier failed on resume\.html: /);
+        expect(warnings[0]).toMatch(/^Prettier failed on resume\.html: /);
     });
 
     test('is the transform of the Eleventy config, and netlify.toml no longer minifies every *.html of the publish folder', () => {

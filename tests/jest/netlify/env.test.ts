@@ -91,6 +91,29 @@ test.each([
     expect(await response.json()).toEqual({});
 });
 
+test("redirects to /404 an empty lang, before the rate limit", async () => {
+    jest.mocked(isRateLimited).mockClear();
+    const response = await handlerEnv(request("?lang="), context);
+    expect(response.status).toBe(302);
+    expect(isRateLimited).not.toHaveBeenCalled();
+});
+
+test("redirects to /404 an invalid lang before the rate limit counts the call", async () => {
+    jest.mocked(isRateLimited).mockClear();
+    expect((await handlerEnv(request("?lang=EN"), context)).status).toBe(302);
+    expect(isRateLimited).not.toHaveBeenCalled();
+});
+
+test("answers a 500 without calling GitHub when GITHUB_API_TOKEN is not set", async () => {
+    const consoleError = jest.spyOn(console, "error").mockImplementation(() => {});
+    delete process.env.GITHUB_API_TOKEN;
+    const fetchSpy = jest.spyOn(global, "fetch");
+    const response = await handlerEnv(request("?lang=en"), context);
+    expect(response.status).toBe(500);
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(String(consoleError.mock.calls[0][1])).toContain("GITHUB_API_TOKEN is not set");
+});
+
 test("answers a 500 when the GitHub API fails", async () => {
     jest.spyOn(console, "error").mockImplementation(() => {});
     mockGithub({}, false);
