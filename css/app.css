@@ -4577,6 +4577,9 @@ html.dark-mode input[name="search-input"]:focus-visible {
     height: var(--page-height);
     perspective: 2200px;
     transition: transform 0.6s ease;
+
+    /* A horizontal swipe turns the pages (initBook of js/app.js), the vertical one still scrolls the page */
+    touch-action: pan-y;
 }
 
 /* Shifted by whole pixels: a fraction of a pixel (the vw page width of phones) blurs the text and the emojis of the 3D pages */

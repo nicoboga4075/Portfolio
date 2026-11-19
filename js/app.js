@@ -2186,6 +2186,9 @@ function initBlogPage(langPage) {
 
 /* Book of my path */
 
+// The pixels a finger or a pen must slide across the book for a swipe that turns a page
+const BOOK_SWIPE = 40;
+
 // The book of the About section (_includes/index-about.html): its leaves turn on the spine, the visible faces being the front of the leaf after the turned ones (right page) and the back of the last turned one (left page); closed shows the cover, end the back cover
 function initBook() {
     const book = document.getElementById('book');
@@ -2227,9 +2230,34 @@ function initBook() {
         show(1);
         next.focus();
     });
-    // A click on a page turns it: the right one forward, the left one back
+    // A swipe of a finger or a pen across the book turns the pages, to the left forward and to the right back, as in a paper book; the CSS (touch-action: pan-y) leaves the up and down scroll of the page to the browser
+    let swipeStart = null;
+    let swiped = false;
+    book.addEventListener('pointerdown', event => {
+        swiped = false;
+        swipeStart = event.pointerType === 'mouse' ? null : [event.clientX, event.clientY];
+    });
+    book.addEventListener('pointerup', event => {
+        if (!swipeStart) {
+            return;
+        }
+        const dx = event.clientX - swipeStart[0];
+        const dy = event.clientY - swipeStart[1];
+        swipeStart = null;
+        // Too short, or more up and down than across: a tap or a scroll, not a swipe
+        if (Math.abs(dx) < BOOK_SWIPE || Math.abs(dx) < Math.abs(dy)) {
+            return;
+        }
+        swiped = true;
+        show(turned + (dx < 0 ? 1 : -1));
+    });
+    book.addEventListener('pointercancel', () => {
+        swipeStart = null;
+    });
+    // A click on a page turns it: the right one forward, the left one back; not the click that may follow a swipe, which has already turned it
     book.addEventListener('click', event => {
-        if (event.target.closest('button, a')) {
+        if (swiped || event.target.closest('button, a')) {
+            swiped = false;
             return;
         }
         const face = event.target.closest('.book-face');

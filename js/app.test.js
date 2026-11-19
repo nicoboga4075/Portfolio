@@ -2172,6 +2172,50 @@ describe('the book of my path', () => {
         expect(status()).toBe('Cover');
     });
 
+    // A press of a finger (or a mouse) at a point, then its release at another
+    const swipe = (from, to, pointerType = 'touch') => {
+        book().dispatchEvent(Object.assign(new MouseEvent('pointerdown', { clientX: from[0], clientY: from[1], bubbles: true }), { pointerType }));
+        book().dispatchEvent(Object.assign(new MouseEvent('pointerup', { clientX: to[0], clientY: to[1], bubbles: true }), { pointerType }));
+    };
+
+    test('turns the pages with a swipe of a finger: to the left forward, to the right back, never past either end', () => {
+        const app = loadApp({ body: bookBody });
+        app.initBook();
+        swipe([300, 100], [200, 110]);
+        expect(status()).toBe('Pages 1 and 2 of 4');
+        swipe([300, 100], [200, 100], 'pen');
+        expect(status()).toBe('Pages 3 and 4 of 4');
+        swipe([100, 100], [250, 90]);
+        expect(status()).toBe('Pages 1 and 2 of 4');
+        swipe([100, 100], [250, 100]);
+        swipe([100, 100], [250, 100]);
+        expect(status()).toBe('Cover');
+    });
+
+    test('leaves the pages alone on a tap, an up and down scroll, a mouse drag or a cancelled touch, and ignores the click that follows a swipe', () => {
+        const app = loadApp({ body: bookBody });
+        app.initBook();
+        // A tap: too short
+        swipe([300, 100], [290, 100]);
+        // A scroll: more up and down than across
+        swipe([300, 100], [240, 300]);
+        // A mouse drag: the mouse turns the pages by clicking them
+        swipe([300, 100], [100, 100], 'mouse');
+        expect(status()).toBe('Cover');
+        // A touch the browser takes back for its own scroll
+        book().dispatchEvent(Object.assign(new MouseEvent('pointerdown', { clientX: 300, clientY: 100 }), { pointerType: 'touch' }));
+        book().dispatchEvent(new MouseEvent('pointercancel'));
+        book().dispatchEvent(Object.assign(new MouseEvent('pointerup', { clientX: 100, clientY: 100 }), { pointerType: 'touch' }));
+        expect(status()).toBe('Cover');
+        // The swipe turns once, the click the browser may send after it turns nothing more
+        swipe([300, 100], [200, 100]);
+        leaves()[1].querySelector('.book-front p').click();
+        expect(status()).toBe('Pages 1 and 2 of 4');
+        // The next click turns again
+        leaves()[1].querySelector('.book-front p').click();
+        expect(status()).toBe('Pages 3 and 4 of 4');
+    });
+
     test('turns a page clicked on: the right one forward, the left one back, but not on a click of a button or outside the pages', () => {
         const app = loadApp({ body: bookBody });
         app.initBook();
