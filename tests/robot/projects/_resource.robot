@@ -16,8 +16,7 @@ Suite Setup For Projects
     ...
     ...    Returns :
     ...        - None
-    ${browserId}=    Open The Portfolio On    /en
-    Set Suite Variable    ${__sessionId}    ${browserId}
+    Open The English Home Page For The Suite
 
 Suite Teardown For Projects
     [Documentation]

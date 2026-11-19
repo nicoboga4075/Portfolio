@@ -29,6 +29,20 @@ Open The Portfolio On
     Reload Page
     RETURN    ${browserId}
 
+Open The English Home Page For The Suite
+    [Documentation]
+    ...   **Applies to :** Selenium
+    ...
+    ...    Opens the English home page for a suite and keeps the id of its browser in the suite variable __sessionId, for the Suite Setup of every section
+    ...
+    ...    Arguments :
+    ...        - None
+    ...
+    ...    Returns :
+    ...        - None
+    ${browserId}=    Open The Portfolio On    /en
+    Set Suite Variable    ${__sessionId}    ${browserId}
+
 Go To The Page
     [Documentation]
     ...   **Applies to :** Selenium
