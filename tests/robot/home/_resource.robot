@@ -48,6 +48,22 @@ The Hero Shows The Name
     [Arguments]    ${name}
     Wait Until Element Contains    css:#home-section h1    ${name}
 
+Open The Home Page In ${lang} And Read The Name In The Hero
+    [Documentation]
+    ...   **Applies to :** Selenium
+    ...
+    ...    Opens the home page of a language, checks the page is in that language and that the hero shows the name of the author of package.json
+    ...
+    ...    Arguments :
+    ...        - (_string_) *lang* : the language, such as en
+    ...
+    ...    Returns :
+    ...        - None
+    ${package}=    Read The Site Data    package.json
+    Go To The Page    /${lang}
+    The Page Language Is    ${lang}
+    The Hero Shows The Name    ${package}[author][name]
+
 Switch The Language To
     [Documentation]
     ...   **Applies to :** Selenium

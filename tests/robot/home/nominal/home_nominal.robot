@@ -14,22 +14,21 @@ ${__sessionId}            __DEFINED_BY_SETUP__
 
 *** Test Cases ***
 # -----------------------------------------------------------------------------
-TC_HOME_Nominal_0001 Open the English home page and read the name in the hero
+TC_HOME_Nominal_0001 Open the home page in each language and read the name in the hero
     [Tags]    Home    Nominal
     [Documentation]
     ...    *Description*
     ...
-    ...        Open the English home page and check that it is in English and that the hero shows the name of the author of package.json
+    ...        Open the home page in each language and check that it is in that language and that the hero shows the name of the author of package.json
     ...
     ...    *Methods description*
     ...
-    ...        Equivalence classes  None
+    ...        Equivalence classes  One language per row
     ...
     ...        Boundary values  None
-    ${package}=    Read The Site Data    package.json
-    Go To The Page    /en
-    The Page Language Is    en
-    The Hero Shows The Name    ${package}[author][name]
+    [Template]    Open The Home Page In ${lang} And Read The Name In The Hero
+    en
+    fr
 
 # -----------------------------------------------------------------------------
 TC_HOME_Nominal_0002 Switch the English home page to French and back with the language switcher

@@ -133,7 +133,7 @@ Print Debug    My label    My text
 
 ### After writing a test
 
-- Add it to the list below, under its section and case type: `- **TC_HOME_Nominal_0001**: Open the English home page and read the name in the hero`.
+- Add it to the list below, under its section and case type: `- **TC_HOME_Nominal_0001**: Open the home page in each language and read the name in the hero`.
 - Commit the suite, its resources and this file with the `✅` gitmoji.
 
 ## Run the tests
@@ -187,7 +187,7 @@ Table of Contents
 
 ### 1.1. Nominal Cases
 
-- **TC_HOME_Nominal_0001**: Open the English home page and read the name in the hero
+- **TC_HOME_Nominal_0001**: Open the home page in each language and read the name in the hero
 - **TC_HOME_Nominal_0002**: Switch the English home page to French and back with the language switcher
 
 ### 1.2. Degraded Cases
