@@ -11,7 +11,7 @@ const PUBLIC_ENV_VARS = [
 // Google's public reCAPTCHA v2 test key (always passes, no domain allowlist): https://developers.google.com/recaptcha/docs/faq
 const RECAPTCHA_TEST_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
 
-async function webhook<T>(url: string, transform: (data: T) => unknown): Promise<Response> {
+async function webhook<T, R extends object>(url: string, transform: (data: T) => R): Promise<Response> {
     const response = await fetch(url, {
         headers: {
             Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
@@ -26,13 +26,28 @@ async function webhook<T>(url: string, transform: (data: T) => unknown): Promise
     return jsonResponse(transform(await response.json()));
 }
 
+// A commit of the GitHub API, each key optional since the answer is not checked by its type
 type GithubCommit = {
-    commit: {
-        committer: {
-            date: string
+    commit?: {
+        committer?: {
+            date?: string
         }
     }
 };
+
+// The date of the last commit of the CV, undefined when the answer lacks it
+function commitDate(data: GithubCommit[]): { date: string | undefined } {
+    // Not a list of commits, or no commit of the CV yet
+    if (!Array.isArray(data) || data.length === 0) {
+        return { date: undefined };
+    }
+    const date = data[0]?.commit?.committer?.date;
+    // A commit without its committer date
+    if (typeof date !== "string") {
+        return { date: undefined };
+    }
+    return { date };
+}
 
 // The languages a docs/public/CV_<lang>.pdf is published for; anything else serves config.cvDefaultLang.
 const { cvLangs, cvDefaultLang } = pkg.config;
@@ -41,11 +56,9 @@ const repository = new URL(pkg.repository.url).pathname.slice(1);
 
 function getLastCvUpdate(lang: string): Promise<Response> {
     const cvLang = cvLangs.includes(lang) ? lang : cvDefaultLang;
-    return webhook<GithubCommit[]>(
+    return webhook<GithubCommit[], { date: string | undefined }>(
         `https://api.github.com/repos/${repository}/commits?path=docs/public/CV_${cvLang}.pdf&per_page=1`,
-        data => ({
-            date: data[0]?.commit.committer.date
-        })
+        commitDate
     );
 }
 

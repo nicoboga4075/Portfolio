@@ -57,6 +57,13 @@ test("answers a 500 and logs the Referer when the RPC fails", async () => {
     expect(log.mock.calls[0][2]).toBe("https://nicoboga.netlify.app/en/");
 });
 
+test.each([["null", "null"], ["an object", '{"count":42}'], ["a string", '"42"']])("returns 0 visits when the RPC returns %s instead of the count", async (_case, body) => {
+    jest.spyOn(global, "fetch").mockResolvedValue(new Response(body, { status: 200 }));
+    const response = await handlerVisit(request(), context);
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ visits: 0 });
+});
+
 test("answers a 500 when Supabase cannot be reached", async () => {
     jest.spyOn(console, "error").mockImplementation(() => {});
     jest.spyOn(global, "fetch").mockRejectedValue(new TypeError("fetch failed"));

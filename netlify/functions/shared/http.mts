@@ -34,7 +34,7 @@ export function redirectTo404(): Response {
     return new Response(null, { status: 302, headers: { Location: "/404" } });
 }
 
-export function jsonResponse(data: unknown, init: ResponseInit = {}): Response {
+export function jsonResponse(data: object, init: ResponseInit = {}): Response {
     return new Response(JSON.stringify(data), {
         ...init,
         headers: { "Content-Type": "application/json", ...init.headers }

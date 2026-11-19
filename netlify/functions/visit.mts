@@ -33,7 +33,11 @@ export default async function handlerVisit(req: Request, context: Context): Prom
             throw new Error(`RPC error: ${response.statusText}`);
         }
 
-        const newCount = await response.json();
+        const newCount: number | null = await response.json();
+        // An answer without the count (the RPC changed or returned nothing): 0 rather than a counter showing nothing
+        if (typeof newCount !== "number") {
+            return jsonResponse({ visits: 0 });
+        }
         return jsonResponse({ visits: newCount });
     } catch (error) {
         return internalError(context, error, req);

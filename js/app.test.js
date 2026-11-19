@@ -551,6 +551,16 @@ describe('the home page', () => {
         expect(log).toHaveBeenCalledWith(new Error('GitHub fetch failed'));
     });
 
+    test('shows 0 visits, and today for the CV, when the answers lack their key', async () => {
+        const log = jest.spyOn(console, 'error').mockImplementation(() => {});
+        const app = loadApp({ body: homeBody, before: () => routeFetch({ 'functions/visit': { error: 'Too many requests' }, 'functions/env': {} }) });
+        app.initIndexPage('en');
+        await flush();
+        expect($('#ftco-visitor').text()).toBe('0');
+        expect($('#last-update-date').text()).toBe('now');
+        expect(log).not.toHaveBeenCalled();
+    });
+
     test('scrolls to the top for the home link and to a resume part for the submenu, remembering the section', () => {
         const app = loadApp({ body: homeBody });
         app.initIndexPage('en');
@@ -1388,6 +1398,16 @@ describe('the contact form', () => {
         expect(log).toHaveBeenCalledWith(new Error('down'));
     });
 
+    test('creates no token client and logs it when the env function has no client id', async () => {
+        const log = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        const app = loadApp({ before: () => routeFetch({ 'functions/env': {} }) });
+        window.google = { accounts: { oauth2: { initTokenClient: jest.fn() } } };
+        app.gisLoaded();
+        await flush();
+        expect(window.google.accounts.oauth2.initTokenClient).not.toHaveBeenCalled();
+        expect(log).toHaveBeenCalledWith('ENV_CLIENT_ID missing from the env function');
+    });
+
     test('sends the message with the token of the consent, without line breaks in the headers, and forgets everything on https', async () => {
         jest.useFakeTimers();
         const app = loadApp({ body, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true } }) });
@@ -1506,6 +1526,16 @@ describe('the contact form', () => {
         app.initCaptcha();
         await flush();
         expect(log).toHaveBeenCalledWith(new Error('down'));
+    });
+
+    test('renders no reCAPTCHA and logs it when the env function has no site key', async () => {
+        const log = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        const app = loadApp({ body, before: () => routeFetch({ 'functions/env': {} }) });
+        window.grecaptcha = { render: jest.fn() };
+        app.initCaptcha();
+        await flush();
+        expect(window.grecaptcha.render).not.toHaveBeenCalled();
+        expect(log).toHaveBeenCalledWith('SITE_RECAPTCHA_KEY missing from the env function');
     });
 });
 

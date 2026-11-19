@@ -17,21 +17,20 @@ export function tooManyRequests(): Response {
 }
 
 // The calls already counted in the current window from the entry Blobs holds, which may be missing, from an older window or without one of its keys
-function storedCount(data: unknown, window: number): number {
+function storedCount(data: Partial<WindowCount> | null | undefined, window: number): number {
     // No entry yet, or a value that is not an object
     if (typeof data !== "object" || data === null) {
         return 0;
     }
-    const stored = data as Partial<WindowCount>;
     // No window key, or an older window: this call starts a new one
-    if (stored.window !== window) {
+    if (data.window !== window) {
         return 0;
     }
     // No count key, or a count that is not a whole number of calls
-    if (!Number.isInteger(stored.count) || (stored.count as number) < 0) {
+    if (typeof data.count !== "number" || !Number.isInteger(data.count) || data.count < 0) {
         return 0;
     }
-    return stored.count as number;
+    return data.count;
 }
 
 // Whether the visitor of this request has already made `limit` calls to the function `name` in the current minute, counting this call otherwise: a function keeps its default address /.netlify/functions/<name>, which the rate limit of a Netlify config cannot (it needs a path of its own); the IP is stored hashed, never in clear, and Blobs failing lets the call through rather than blocking every visitor

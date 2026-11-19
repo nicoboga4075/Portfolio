@@ -78,6 +78,19 @@ test("falls back to the CV of the default language for a language without a CV",
     expect(await response.json()).toEqual({});
 });
 
+test.each([
+    ["an answer that is not a list", { message: "Not Found" }],
+    ["a null commit", [null]],
+    ["a commit without its commit key", [{}]],
+    ["a commit without its committer key", [{ commit: {} }]],
+    ["a commit without its date", [{ commit: { committer: {} } }]]
+])("returns no date for %s rather than a 500", async (_case, commits) => {
+    mockGithub(commits);
+    const response = await handlerEnv(request("?lang=en"), context);
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({});
+});
+
 test("answers a 500 when the GitHub API fails", async () => {
     jest.spyOn(console, "error").mockImplementation(() => {});
     mockGithub({}, false);

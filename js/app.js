@@ -499,6 +499,11 @@ function lastCvUpdate(lang) {
             return res.json();
         })
         .then(data => {
+            // No commit of the CV, or an answer without its date: today, as when GitHub fails
+            if (typeof data?.date !== 'string') {
+                lastUpdateDate.text(getCurrentFullDate(lang));
+                return;
+            }
             lastUpdateDate.text(convertDate(data.date, lang, { dateStyle: 'short', timeStyle: 'medium' }, false));
         })
         .catch(error => {
@@ -1519,6 +1524,11 @@ function initIndexPage(langPage) {
             fetch('/.netlify/functions/visit')
                 .then(response => response.json())
                 .then(data => {
+                    // An answer without the count, as the 429 of the rate limit: 0 rather than an empty counter
+                    if (typeof data?.visits !== 'number') {
+                        $('#ftco-visitor').text(0);
+                        return;
+                    }
                     $('#ftco-visitor').text(data.visits);
                 })
                 .catch(error => {
@@ -2385,7 +2395,12 @@ function gisLoaded() {
     fetch('/.netlify/functions/env')
         .then(response => response.json())
         .then(variables => {
-            appGoogleToken = google.accounts.oauth2.initTokenClient({
+            // ENV_CLIENT_ID not set in Netlify, or a 429 of the rate limit: no token client, so a later form submit fails through handleSendFailure
+            if (!variables?.ENV_CLIENT_ID) {
+                console.warn('ENV_CLIENT_ID missing from the env function');
+                return;
+            }
+            appGoogleToken =google.accounts.oauth2.initTokenClient({
                 client_id: variables.ENV_CLIENT_ID,
                 scope: 'https://www.googleapis.com/auth/gmail.send',
                 callback: (resp) => {
@@ -2519,6 +2534,11 @@ function initCaptcha() {
     fetch('/.netlify/functions/env')
         .then(response => response.json())
         .then(variables => {
+            // SITE_RECAPTCHA_KEY not set in Netlify, or a 429 of the rate limit: no captcha, so the submit button stays disabled
+            if (!variables?.SITE_RECAPTCHA_KEY) {
+                console.warn('SITE_RECAPTCHA_KEY missing from the env function');
+                return;
+            }
             grecaptcha.render('captcha-check', {
                 'sitekey': variables.SITE_RECAPTCHA_KEY,
                 'callback': enableSubmitForm
