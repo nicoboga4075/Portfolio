@@ -63,6 +63,24 @@
                         <textarea cols="30" rows="10" class="form-control" id="contact-message" placeholder="{{ contactPage.messagePlaceholder }}" name="message" required minlength="10" maxlength="5000" aria-label="{{ contactPage.messageLabel }}" aria-describedby="contact-message-error" data-validate></textarea>
                         <p id="contact-message-error" class="field-error" hidden></p>
                     </div>
+                    {%- if contactAttachment %}
+                    {%- set fileTypes = contactAttachment.extensions | join(", ") %}
+                    {#- The optional attachments, checked and served into the basket by initTennisUpload of js/app.js: the ball flies in for valid files, hits the rim for refused ones #}
+                    <div class="form-group tennis-upload" data-max-mb="{{ contactAttachment.maxSizeMb }}" data-max-files="{{ contactAttachment.maxFiles }}">
+                        <input type="file" class="tennis-upload-input" id="contact-file" name="attachment" multiple accept="{{ contactAttachment.extensions | join(',') }}" aria-describedby="contact-file-hint contact-file-error">
+                        <label for="contact-file" class="tennis-upload-zone">
+                            <span class="tennis-court" aria-hidden="true">
+                                <span class="tennis-ball"></span>
+                                <span class="tennis-basket"><span class="tennis-basket-rim"></span><span class="tennis-basket-balls"></span></span>
+                            </span>
+                            <span class="tennis-upload-label">{{ contactPage.fileLabel }}</span>
+                            <span id="contact-file-hint" class="tennis-upload-hint">{{ contactPage.fileHint | replace("{count}", contactAttachment.maxFiles) | replace("{types}", fileTypes) | replace("{max}", contactAttachment.maxSizeMb) }}</span>
+                        </label>
+                        <ul class="tennis-upload-files" hidden></ul>
+                        <p class="sr-only tennis-upload-status" aria-live="polite"></p>
+                        <p id="contact-file-error" class="field-error" role="alert" hidden></p>
+                    </div>
+                    {%- endif %}
                     {#- Shown by loadContactScripts of js/app.js while the third-party services of the consent banner are refused: its button allows them, which loads the captcha #}
                     <div id="contact-consent" class="contact-consent" hidden>
                         <p>{{ consent[lang].servicesNeeded }}</p>

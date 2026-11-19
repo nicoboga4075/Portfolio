@@ -755,6 +755,249 @@ describe('the home page', () => {
         expect(window.fetch).not.toHaveBeenCalledWith('/en', expect.anything());
     });
 
+    // The tennis upload of index-contact.html, its file list faked since jsdom cannot set one: emptying the value empties it, as in a browser
+    const tennisBody = '<form name="contactForm"><input name="name" value="Nico"><input name="subject" value="Hello"><textarea name="message">Hi</textarea><div class="tennis-upload" data-max-mb="3" data-max-files="3"><input type="file" id="contact-file" name="attachment" class="tennis-upload-input" multiple accept=".pdf,.png"><label for="contact-file" class="tennis-upload-zone"><span class="tennis-basket-balls"></span></label><ul class="tennis-upload-files" hidden></ul><p class="tennis-upload-status"></p><p id="contact-file-error" hidden></p></div><button type="submit">Send</button></form><p id="callback-form"></p>';
+    function fakeFiles(input) {
+        let files = [];
+        Object.defineProperty(input, 'files', { configurable: true, get: () => files });
+        Object.defineProperty(input, 'value', { configurable: true, get: () => (files.length ? files[0].name : ''), set: value => { if (value === '') files = []; } });
+        // Picks the given files, as the dialog of the browser does
+        return picked => {
+            files = picked;
+            input.dispatchEvent(new Event('change'));
+        };
+    }
+    const pdf = (size = 2048, name = 'CV é.pdf') => new File([new Uint8Array(size).fill(65)], name, { type: 'application/pdf', lastModified: 1 });
+    const tennisInput = () => document.getElementById('contact-file');
+    const tennisZone = () => document.querySelector('.tennis-upload');
+    const listed = () => [...document.querySelectorAll('.tennis-upload-files li > span')].map(name => name.textContent);
+    const ballsInBasket = () => document.querySelectorAll('.tennis-basket-ball').length;
+    // jsdom's Blob has no arrayBuffer(), which every browser of the site has: read through its FileReader instead
+    Blob.prototype.arrayBuffer ??= function readBlob() {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = () => reject(reader.error);
+            reader.readAsArrayBuffer(this);
+        });
+    };
+
+    test('refuses a file whose extension is not one of the accept attribute, naming it', () => {
+        const app = loadApp({ body: tennisBody });
+        const input = tennisInput();
+        expect(app.attachmentTypeError(pdf(), input)).toBe('');
+        expect(app.attachmentTypeError(pdf(10, 'PHOTO.PNG'), input)).toBe('');
+        expect(app.attachmentTypeError(pdf(10, 'virus.exe'), input)).toBe(app.getMessage('form-file-type').replace('{name}', 'virus.exe').replace('{types}', '.pdf, .png'));
+        expect(app.attachmentTypeError(pdf(10, 'README'), input)).toBe(app.getMessage('form-file-type').replace('{name}', 'README').replace('{types}', '.pdf, .png'));
+    });
+
+    test('writes a file size in kB under a megabyte and in MB above, in the language of the page', () => {
+        let app = loadApp();
+        expect(app.fileSize(2048)).toBe('2 kB');
+        expect(app.fileSize(1.5 * 1024 * 1024)).toBe('1.5 MB');
+        app = loadApp({ lang: 'fr', url: '/fr' });
+        expect(app.fileSize(1.5 * 1024 * 1024).replace(/\s/g, ' ')).toBe('1,5 Mo');
+    });
+
+    test('serves several files into the basket, adds the next pick to them, and takes each one out with its own cross', () => {
+        const app = loadApp({ body: tennisBody });
+        app.initTennisUpload();
+        const pick = fakeFiles(tennisInput());
+        pick([pdf(2048, 'a.pdf'), pdf(1024, 'b.png')]);
+        expect(tennisZone().classList.contains('is-in')).toBe(true);
+        expect(listed()).toEqual(['a.pdf (2 kB)', 'b.png (1 kB)']);
+        expect(ballsInBasket()).toBe(2);
+        expect(document.querySelector('.tennis-upload-files').hidden).toBe(false);
+        expect(document.querySelector('.tennis-upload-status').textContent).toBe(`${app.getMessage('contact-file-in').replace('{name}', 'a.pdf')} ${app.getMessage('contact-file-in').replace('{name}', 'b.png')}`);
+        expect(tennisInput().getAttribute('aria-invalid')).toBe('false');
+        expect(document.getElementById('contact-file-error').hidden).toBe(true);
+        // The input is emptied after each pick, so a file taken out can be picked again
+        expect(tennisInput().files).toHaveLength(0);
+        pick([pdf(512, 'c.pdf')]);
+        expect(listed()).toEqual(['a.pdf (2 kB)', 'b.png (1 kB)', 'c.pdf (0.5 kB)']);
+        const removeB = document.querySelectorAll('.tennis-upload-remove')[1];
+        expect(removeB.getAttribute('aria-label')).toBe(app.getMessage('contact-file-remove').replace('{name}', 'b.png'));
+        expect(removeB.title).toBe(removeB.getAttribute('aria-label'));
+        expect(removeB.querySelector('.icon-close').getAttribute('aria-hidden')).toBe('true');
+        removeB.click();
+        expect(listed()).toEqual(['a.pdf (2 kB)', 'c.pdf (0.5 kB)']);
+        expect(ballsInBasket()).toBe(2);
+        expect(tennisZone().classList.contains('is-in')).toBe(false);
+        expect(document.querySelector('.tennis-upload-status').textContent).toBe('');
+        expect(document.activeElement).toBe(tennisInput());
+        document.querySelectorAll('.tennis-upload-remove').forEach(remove => remove.click());
+        expect(document.querySelector('.tennis-upload-files').hidden).toBe(true);
+        expect(ballsInBasket()).toBe(0);
+    });
+
+    test('keeps a file picked twice once, with no error and no new shot', () => {
+        const app = loadApp({ body: tennisBody });
+        app.initTennisUpload();
+        const pick = fakeFiles(tennisInput());
+        pick([pdf()]);
+        tennisZone().classList.remove('is-in');
+        pick([pdf()]);
+        expect(listed()).toHaveLength(1);
+        expect(tennisZone().classList.contains('is-in')).toBe(false);
+        expect(tennisZone().classList.contains('is-out')).toBe(false);
+        expect(document.getElementById('contact-file-error').hidden).toBe(true);
+    });
+
+    test('bounces refused files off the rim with one error per reason, keeping the valid files of the same pick', () => {
+        const app = loadApp({ body: tennisBody });
+        app.initTennisUpload();
+        const pick = fakeFiles(tennisInput());
+        const error = document.getElementById('contact-file-error');
+        pick([pdf(10, 'virus.exe')]);
+        expect(tennisZone().classList.contains('is-out')).toBe(true);
+        expect(tennisInput().getAttribute('aria-invalid')).toBe('true');
+        expect(error.hidden).toBe(false);
+        expect(error.textContent).toBe(app.getMessage('form-file-type').replace('{name}', 'virus.exe').replace('{types}', '.pdf, .png'));
+        expect(listed()).toEqual([]);
+        // Over the total size: the first file goes in, the second is refused
+        pick([pdf(2 * 1024 * 1024, 'a.pdf'), pdf(1024 * 1024 + 1, 'b.pdf')]);
+        expect(tennisZone().classList.contains('is-in')).toBe(true);
+        expect(listed()).toEqual(['a.pdf (2 MB)']);
+        expect(error.textContent).toBe(app.getMessage('form-file-too-big').replace('{max}', '3'));
+        // Past the number of files: the third one goes in, the next ones are refused, with one error for both
+        pick([pdf(10, 'c.pdf'), pdf(10, 'd.pdf'), pdf(10, 'e.pdf')]);
+        expect(listed()).toHaveLength(3);
+        expect(error.textContent).toBe(app.getMessage('form-file-too-many').replace('{max}', '3'));
+        // A pick that fits clears the error
+        document.querySelector('.tennis-upload-remove').click();
+        pick([pdf(10, 'f.pdf')]);
+        expect(error.hidden).toBe(true);
+        expect(tennisInput().getAttribute('aria-invalid')).toBe('false');
+    });
+
+    test('takes the files dropped on the court, and ignores a drop without a file', () => {
+        const app = loadApp({ body: tennisBody });
+        app.initTennisUpload();
+        fakeFiles(tennisInput());
+        const court = document.querySelector('.tennis-upload-zone');
+        const dragEvent = (type, files) => Object.assign(new Event(type, { cancelable: true }), { dataTransfer: { files } });
+        const over = dragEvent('dragover', []);
+        court.dispatchEvent(over);
+        expect(over.defaultPrevented).toBe(true);
+        expect(tennisZone().classList.contains('is-dragover')).toBe(true);
+        court.dispatchEvent(new Event('dragleave'));
+        expect(tennisZone().classList.contains('is-dragover')).toBe(false);
+        court.dispatchEvent(dragEvent('drop', []));
+        expect(listed()).toEqual([]);
+        expect(tennisZone().classList.contains('is-in')).toBe(false);
+        const drop = dragEvent('drop', [pdf(2048, 'a.pdf'), pdf(2048, 'b.pdf')]);
+        court.dispatchEvent(drop);
+        expect(drop.defaultPrevented).toBe(true);
+        expect(listed()).toEqual(['a.pdf (2 kB)', 'b.pdf (2 kB)']);
+        expect(tennisZone().classList.contains('is-in')).toBe(true);
+    });
+
+    test('leaves a page without the tennis upload alone', () => {
+        const app = loadApp();
+        expect(() => app.initTennisUpload()).not.toThrow();
+    });
+
+    // The raw message the Gmail API received, decoded from its URL-safe base64
+    const gmailRaw = () => atob(JSON.parse(window.fetch.mock.calls.find(call => String(call[0]).includes('gmail'))[1].body).raw.replaceAll('-', '+').replaceAll('_', '/'));
+    // Runs the fake timers a second at a time until the check holds, 30 seconds at most: jsdom's FileReader reads each part of the message on timers, before the token check of every 3 seconds
+    async function settle(check) {
+        for (let second = 0; !check() && second < 30; second++) {
+            await jest.advanceTimersByTimeAsync(1000);
+        }
+    }
+    // Waits for a send of sendEmail to finish
+    async function settleSend(sending) {
+        let done = false;
+        sending.finally(() => { done = true; });
+        await settle(() => done);
+        await sending;
+    }
+    // A base64 part of the MIME message, decoded as UTF-8 (jsdom has no TextDecoder)
+    const decodePart = base64 => Buffer.from(base64.replace(/\r\n/g, ''), 'base64').toString('utf8');
+    // The token client of gisLoaded, whose consent the Google API reports at its first check
+    async function withToken(app) {
+        window.google = { accounts: { oauth2: { initTokenClient: jest.fn(() => ({ requestAccessToken: jest.fn() })) } } };
+        window.gapi = { client: { getToken: jest.fn(() => ({ token_type: 'Bearer', access_token: 't' })) } };
+        app.gisLoaded();
+        await flush();
+    }
+
+    test('sends the files of the contact form as MIME attachments, the text in UTF-8, the file names encoded', async () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body: tennisBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true } }) });
+        await withToken(app);
+        const first = new File([new Uint8Array(100).fill(66)], "CV (Nico)'s é.pdf", { type: 'application/pdf' });
+        const second = new File(['png'], 'photo.png', { type: 'image/png' });
+        const sending = app.sendEmail('Nico', 'Hello', 'Héllo 👋', [first, second]);
+        await settleSend(sending);
+        const raw = gmailRaw();
+        const boundary = raw.match(/boundary="([^"]+)"/)[1];
+        expect(raw).toContain('To: me@example.com\r\nSubject: Hello\r\nMIME-Version: 1.0');
+        const parts = raw.split(`--${boundary}`);
+        expect(parts).toHaveLength(5);
+        expect(parts[4]).toBe('--');
+        const [textHead, textBody] = parts[1].split('\r\n\r\n');
+        expect(textHead).toContain('Content-Type: text/plain; charset=UTF-8');
+        expect(decodePart(textBody.trim())).toBe('Héllo 👋\n----------------------------------------\nMessage sent by Nico (Portfolio)');
+        const [fileHead, fileBody] = parts[2].split('\r\n\r\n');
+        expect(fileHead).toContain("Content-Type: application/pdf; name*=UTF-8''CV%20%28Nico%29%27s%20%C3%A9.pdf");
+        expect(fileHead).toContain("Content-Disposition: attachment; filename*=UTF-8''CV%20%28Nico%29%27s%20%C3%A9.pdf");
+        expect(fileBody.trim().split('\r\n').every(line => line.length <= 76)).toBe(true);
+        expect(decodePart(fileBody.trim())).toBe('B'.repeat(100));
+        const [pngHead, pngBody] = parts[3].split('\r\n\r\n');
+        expect(pngHead).toContain("Content-Type: image/png; name*=UTF-8''photo.png");
+        expect(decodePart(pngBody.trim())).toBe('png');
+        expect($('#callback-form').text()).toBe(app.getMessage('success-generic'));
+    });
+
+    test('sends a file without a type, or with a type that is not a plain type/subtype, as application/octet-stream', async () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body: tennisBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true } }) });
+        await withToken(app);
+        let sending = app.sendEmail('Nico', 'Hello', 'Hi', [new File([], 'notes.txt')]);
+        await settleSend(sending);
+        expect(gmailRaw()).toContain("Content-Type: application/octet-stream; name*=UTF-8''notes.txt");
+        window.fetch.mockClear();
+        sending = app.sendEmail('Nico', 'Hello', 'Hi', [new File(['x'], 'notes.txt', { type: 'text/plain; charset=x' })]);
+        await settleSend(sending);
+        expect(gmailRaw()).toContain("Content-Type: application/octet-stream; name*=UTF-8''notes.txt");
+    });
+
+    test('offers the mail app when a file cannot be read, without calling Gmail', async () => {
+        const log = jest.spyOn(console, 'error').mockImplementation(() => {});
+        const app = loadApp({ body: tennisBody, before: () => routeFetch({ 'gmail/v1': { ok: true } }) });
+        const file = pdf();
+        file.arrayBuffer = () => Promise.reject(new Error('NotReadableError'));
+        await app.sendEmail('Nico', 'Hello', 'Hi', [file]);
+        expect(log).toHaveBeenCalledWith(new Error('NotReadableError'));
+        expect($('#callback-form').text()).toBe(`${app.getMessage('error-generic')} ${app.getMessage('contact-mailto')}`);
+        expect(window.fetch.mock.calls.some(call => String(call[0]).includes('gmail'))).toBe(false);
+    });
+
+    test('sends the files of the basket with the message, and leaves them out of the copy of Netlify Forms', async () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body: tennisBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true }, '/en': { ok: true } }) });
+        await withToken(app);
+        app.initPage();
+        const pick = fakeFiles(tennisInput());
+        pick([pdf(), pdf(10, 'b.png')]);
+        $('form').trigger('submit');
+        // The copy of Netlify Forms is posted once the e-mail is sent
+        await settle(() => window.fetch.mock.calls.some(([url]) => url === '/en'));
+        expect(gmailRaw()).toContain("filename*=UTF-8''CV%20%C3%A9.pdf");
+        expect(gmailRaw()).toContain("filename*=UTF-8''b.png");
+        const [, options] = window.fetch.mock.calls.find(([url]) => url === '/en');
+        expect(Object.fromEntries(new URLSearchParams(options.body))).toEqual({ name: 'Nico', subject: 'Hello', message: 'Hi', 'form-name': 'contactForm' });
+    });
+
+    test('sends a plain message when the basket is empty', async () => {
+        jest.useFakeTimers();
+        const app = loadApp({ body: tennisBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true }, '/en': { ok: true } }) });
+        await submitContactForm(app);
+        expect(gmailRaw()).not.toContain('multipart');
+        expect(gmailRaw()).toContain('Subject: Hello\n\nHi');
+    });
+
     test('unlocks a soft skill card only from its padlock to show its experiences, stops the carousel while one is open, and locks it again', () => {
         const card = () => '<div class="soft-card"><button class="soft-card-toggle" aria-expanded="false"><i class="icon-lock"></i></button><div class="soft-card-back" aria-hidden="true" inert></div></div>';
         const app = loadApp({ body: `<div id="soft-skills" class="owl-carousel">${card()}${card()}</div>` });

@@ -30,4 +30,35 @@ for (const lang of langs) {
         await page.locator('#contact-name').fill('Nico');
         await expect(page.locator('#contact-name-error')).toBeHidden();
     });
+
+    test(`/${lang}: the tennis upload serves several files into the basket, bounces the refused ones off the rim, and takes each file back out`, async ({ page }) => {
+        const { maxSizeMb, maxFiles, extensions } = data('package.json').config.contactAttachment;
+        const file = (name, size = 2048) => ({ name, mimeType: 'application/pdf', buffer: Buffer.alloc(size) });
+        await page.goto(`/${lang}`);
+        const zone = page.locator('.tennis-upload');
+        const listed = page.locator('.tennis-upload-files li');
+        const error = page.locator('#contact-file-error');
+        await zone.scrollIntoViewIfNeeded();
+        await page.setInputFiles('#contact-file', [file('a.pdf'), file('b.pdf')]);
+        await expect(zone).toHaveClass(/\bis-in\b/);
+        await expect(listed).toHaveCount(2);
+        await expect(page.locator('.tennis-basket-ball')).toHaveCount(2);
+        await expect(page.locator('.tennis-upload-status')).toHaveText(['a.pdf', 'b.pdf'].map(name => messages['contact-file-in'][lang].replace('{name}', name)).join(' '));
+        // A second pick adds to the basket, the input itself emptied each time
+        await page.setInputFiles('#contact-file', [file('c.pdf')]);
+        await expect(listed).toHaveCount(3);
+        expect(await page.locator('#contact-file').evaluate(input => input.files.length)).toBe(0);
+        await page.setInputFiles('#contact-file', [file('big.pdf', maxSizeMb * 1024 * 1024)]);
+        await expect(zone).toHaveClass(/\bis-out\b/);
+        await expect(error).toHaveText(messages['form-file-too-big'][lang].replace('{max}', String(maxSizeMb)));
+        await page.setInputFiles('#contact-file', [{ name: 'run.exe', mimeType: 'application/octet-stream', buffer: Buffer.alloc(8) }]);
+        await expect(error).toHaveText(messages['form-file-type'][lang].replace('{name}', 'run.exe').replace('{types}', extensions.join(', ')));
+        await page.setInputFiles('#contact-file', Array.from({ length: maxFiles }, (_, index) => file(`more-${index}.pdf`, 10)));
+        await expect(listed).toHaveCount(maxFiles);
+        await expect(error).toHaveText(messages['form-file-too-many'][lang].replace('{max}', String(maxFiles)));
+        await page.getByRole('button', { name: messages['contact-file-remove'][lang].replace('{name}', 'b.pdf') }).click();
+        await expect(listed).toHaveCount(maxFiles - 1);
+        await expect(page.locator('#contact-file')).toBeFocused();
+        await expect(listed.filter({ hasText: 'b.pdf' })).toHaveCount(0);
+    });
 }

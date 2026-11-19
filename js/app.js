@@ -1525,6 +1525,139 @@ function validateContactForm(form) {
     return invalid.length === 0;
 }
 
+// The files of the contact form kept in the basket, sent with the message: the input only picks them, so a pick adds to the basket and each file can be taken out on its own
+let contactAttachments = [];
+
+// The error of one file of the contact form, '' when it is one of the extensions of the accept attribute of its input
+function attachmentTypeError(file, input) {
+    const extensions = input.accept.split(',');
+    const dot = file.name.lastIndexOf('.');
+    if (dot < 0 || !extensions.includes(file.name.slice(dot).toLowerCase())) {
+        return getMessage('form-file-type').replace('{name}', file.name).replace('{types}', extensions.join(', '));
+    }
+    return '';
+}
+
+// Puts the files of a pick or a drop into the basket, in order, while they fit: an accepted extension, a file not already in it, at most data-max-files files and data-max-mb megabytes in all; returns the errors of the refused ones, one per reason
+function addAttachments(files, input) {
+    const { maxFiles, maxMb } = input.closest('.tennis-upload').dataset;
+    const errors = new Set();
+    const added = [];
+    for (const file of files) {
+        const typeError = attachmentTypeError(file, input);
+        const total = contactAttachments.reduce((sum, kept) => sum + kept.size, 0) + file.size;
+        // Not an accepted format
+        if (typeError) {
+            errors.add(typeError);
+        // The same file picked again: kept once, with no error
+        } else if (contactAttachments.some(kept => kept.name === file.name && kept.size === file.size && kept.lastModified === file.lastModified)) {
+            continue;
+        // The basket is full
+        } else if (contactAttachments.length >= Number(maxFiles)) {
+            errors.add(getMessage('form-file-too-many').replace('{max}', maxFiles));
+        // Over the size of all the files together
+        } else if (total > Number(maxMb) * 1024 * 1024) {
+            errors.add(getMessage('form-file-too-big').replace('{max}', maxMb));
+        } else {
+            contactAttachments.push(file);
+            added.push(file);
+        }
+    }
+    return { added, errors: [...errors] };
+}
+
+// The size of a file in the language of the page: kB under a megabyte, MB above (ko and Mo in French)
+function fileSize(bytes) {
+    const megabytes = bytes >= 1024 * 1024;
+    return new Intl.NumberFormat(document.documentElement.lang, { style: 'unit', unit: megabytes ? 'megabyte' : 'kilobyte', unitDisplay: 'short', maximumFractionDigits: 1 }).format(bytes / (megabytes ? 1024 * 1024 : 1024));
+}
+
+// The attachments of the contact form, served like tennis balls: picked or dropped on the court, the valid files fly into the basket (is-in), which then holds one ball per file, a refused one hits the rim and bounces out (is-out) with its error, and the cross of each file takes it back out
+function initTennisUpload() {
+    const zone = document.querySelector('.tennis-upload');
+    if (!zone) {
+        return;
+    }
+    contactAttachments = [];
+    const input = zone.querySelector('.tennis-upload-input');
+    const court = zone.querySelector('.tennis-upload-zone');
+    const list = zone.querySelector('.tennis-upload-files');
+    const balls = zone.querySelector('.tennis-basket-balls');
+    const status = zone.querySelector('.tennis-upload-status');
+    const error = document.getElementById(`${input.id}-error`);
+
+    // Plays the shot again from the start: the class goes, a layout read restarts the animation, the class comes back
+    function serve(shot) {
+        zone.classList.remove('is-in', 'is-out');
+        zone.getBoundingClientRect();
+        if (shot) {
+            zone.classList.add(shot);
+        }
+    }
+
+    // The list of the files in the basket, each with its cross, and one ball per file in the basket, the last one dropping in
+    function render() {
+        list.replaceChildren(...contactAttachments.map(file => {
+            const item = document.createElement('li');
+            const name = document.createElement('span');
+            name.textContent = `${file.name} (${fileSize(file.size)})`;
+            const remove = document.createElement('button');
+            remove.type = 'button';
+            remove.className = 'tennis-upload-remove';
+            remove.setAttribute('aria-label', getMessage('contact-file-remove').replace('{name}', file.name));
+            remove.title = remove.getAttribute('aria-label');
+            const icon = document.createElement('span');
+            icon.className = 'icon-close';
+            icon.setAttribute('aria-hidden', 'true');
+            remove.append(icon);
+            remove.addEventListener('click', () => {
+                contactAttachments = contactAttachments.filter(kept => kept !== file);
+                render();
+                status.textContent = '';
+                serve(null);
+                input.focus();
+            });
+            item.append(name, remove);
+            return item;
+        }));
+        list.hidden = contactAttachments.length === 0;
+        balls.replaceChildren(...contactAttachments.map(() => Object.assign(document.createElement('span'), { className: 'tennis-basket-ball' })));
+    }
+
+    function take(files) {
+        const { added, errors } = addAttachments(files, input);
+        error.textContent = errors.join(' ');
+        error.hidden = errors.length === 0;
+        input.setAttribute('aria-invalid', String(errors.length > 0));
+        // The input only picks: emptied, so the same file can be picked again after being taken out
+        input.value = '';
+        render();
+        status.textContent = added.map(file => getMessage('contact-file-in').replace('{name}', file.name)).join(' ');
+        // Something new in the basket: the shot goes in, even if another file of the pick was refused
+        if (added.length > 0) {
+            serve('is-in');
+        // Only refused files: out on the rim
+        } else if (errors.length > 0) {
+            serve('is-out');
+        }
+    }
+
+    input.addEventListener('change', () => take([...input.files]));
+    court.addEventListener('dragover', event => {
+        event.preventDefault();
+        zone.classList.add('is-dragover');
+    });
+    court.addEventListener('dragleave', () => zone.classList.remove('is-dragover'));
+    court.addEventListener('drop', event => {
+        event.preventDefault();
+        zone.classList.remove('is-dragover');
+        // A drop of something that is not a file (a text, a link) leaves the basket as it was
+        if (event.dataTransfer.files.length > 0) {
+            take([...event.dataTransfer.files]);
+        }
+    });
+}
+
 function cssVarToHex(name) {
     const probe = document.createElement('span');
     probe.style.color = `var(${name})`;
@@ -1690,6 +1823,8 @@ function initIndexPage(langPage) {
             contactFormObserver.observe(contactFormEl);
         }
 
+        initTennisUpload();
+
         // A field is checked when the visitor leaves it with something typed, and again at each key once refused, so its error goes as soon as it is fixed
         $('form[name="contactForm"]').on('focusout', '[data-validate]', function () {
             if (this.value || this.getAttribute('aria-invalid') === 'true') {
@@ -1705,8 +1840,10 @@ function initIndexPage(langPage) {
                 return false;
             }
             const formData = new FormData(event.target);
+            // The files go with the e-mail from the basket of the tennis upload, never in the copy of Netlify Forms
+            formData.delete('attachment');
             try {
-                await sendEmail(formData.get('name'), formData.get('subject'), formData.get('message'));
+                await sendEmail(formData.get('name'), formData.get('subject'), formData.get('message'), contactAttachments);
                 if (window.location.protocol === 'https:') {
                     // Keeps a copy in Netlify Forms, posted to the home page of the language since / redirects and would lose the POST
                     formData.set('form-name', event.target.getAttribute('name'));
@@ -2437,21 +2574,19 @@ function gisLoaded() {
         .catch(error => console.error(error));
 }
 
-async function sendEmail(senderName, subject, message) {
+async function sendEmail(senderName, subject, message, attachments = []) {
     // Strip CR/LF from header fields to prevent email header injection
     const safeSubject = String(subject).replace(/[\r\n]+/g, ' ');
     const safeSenderName = String(senderName).replace(/[\r\n]+/g, ' ');
     const appName = document.querySelector('meta[property="og:site_name"]').content;
     const recipient = decodeEmail(document.querySelector('meta[name="email"]').content);
-    const emailString = [
-        'From: me',
-        `To: ${recipient}`,
-        `Subject: ${safeSubject}`,
-        '',
+    const headers = ['From: me', `To: ${recipient}`, `Subject: ${safeSubject}`];
+    const text = [
         `${message}`,
         '----------------------------------------',
         `Message sent by ${safeSenderName} (${appName})`,
     ].join('\n');
+    const emailString = [...headers, '', text].join('\n');
     const successMessage = getMessage('success-generic');
     const errorMessage = getMessage('error-generic');
     const callbackForm = $('#callback-form');
@@ -2470,8 +2605,19 @@ async function sendEmail(senderName, subject, message) {
         appGmailToken = null;
     }
 
+    // With files of the contact form, a multipart message holding them; a file that cannot be read fails like a refused send
+    let rawEmail = emailString;
+    if (attachments.length > 0) {
+        try {
+            rawEmail = await mimeWithAttachments(headers, text, attachments);
+        } catch (error) {
+            handleSendFailure(error);
+            return;
+        }
+    }
+
     // Base64 encode the email in URL-safe format
-    const base64EncodedEmail = removeTrailingEquals(btoa(emailString).replaceAll('+', '-').replaceAll('/', '_'));
+    const base64EncodedEmail = removeTrailingEquals(btoa(rawEmail).replaceAll('+', '-').replaceAll('/', '_'));
 
     async function sendHelper(apiToken) {
         const response = await fetch('https://www.googleapis.com/gmail/v1/users/me/messages/send', {
@@ -2545,6 +2691,49 @@ async function sendEmail(senderName, subject, message) {
             handleSendFailure(error);
         }
     }
+}
+
+// The bytes of a Blob (a file, or a text in UTF-8) in base64, cut into lines of 76 characters as MIME asks
+async function base64Lines(blob) {
+    const bytes = new Uint8Array(await blob.arrayBuffer());
+    let binary = '';
+    // By chunks, since String.fromCharCode takes its bytes as arguments and a big file would overflow the stack
+    for (let start = 0; start < bytes.length; start += 0x8000) {
+        binary += String.fromCharCode(...bytes.subarray(start, start + 0x8000));
+    }
+    return btoa(binary).match(/.{1,76}/g)?.join('\r\n') ?? '';
+}
+
+// One file of the contact form as a part of the MIME message: its type, its name encoded as RFC 2231 asks so any character survives, and its bytes in base64
+async function attachmentPart(file) {
+    const fileName = encodeURIComponent(file.name).replace(/['()*]/g, char => `%${char.charCodeAt(0).toString(16).toUpperCase()}`);
+    // The type the browser gives, when it is a plain type/subtype that cannot break the header
+    const fileType = /^[\w.+-]+\/[\w.+-]+$/.test(file.type) ? file.type : 'application/octet-stream';
+    return [
+        `Content-Type: ${fileType}; name*=UTF-8''${fileName}`,
+        `Content-Disposition: attachment; filename*=UTF-8''${fileName}`,
+        'Content-Transfer-Encoding: base64',
+        '',
+        await base64Lines(file)
+    ].join('\r\n');
+}
+
+// The e-mail with the files of the contact form, as a multipart/mixed MIME message: the text in UTF-8, then each file, all in base64
+async function mimeWithAttachments(headers, text, files) {
+    const boundary = `portfolio-${Date.now().toString(36)}`;
+    const textPart = ['Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', '', await base64Lines(new Blob([text]))].join('\r\n');
+    const parts = [textPart];
+    for (const file of files) {
+        parts.push(await attachmentPart(file));
+    }
+    return [
+        ...headers,
+        'MIME-Version: 1.0',
+        `Content-Type: multipart/mixed; boundary="${boundary}"`,
+        '',
+        ...parts.map(part => `--${boundary}\r\n${part}`),
+        `--${boundary}--`
+    ].join('\r\n');
 }
 
 function enableSubmitForm() {

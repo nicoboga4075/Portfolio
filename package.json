@@ -139,6 +139,11 @@
     ],
     "analyticsId": "G-S08CZ1FDQM",
     "calendly": "https://calendly.com/nicolas-bogalheiro/30min",
+    "contactAttachment": {
+      "maxSizeMb": 3,
+      "maxFiles": 5,
+      "extensions": [".pdf", ".doc", ".docx", ".odt", ".txt", ".png", ".jpg", ".jpeg"]
+    },
     "careerSlide": "https://floral-bodhi-5mfp.here.now",
     "qrCodes": [
       {
