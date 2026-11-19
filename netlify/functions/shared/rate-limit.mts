@@ -33,6 +33,19 @@ function storedCount(data: Partial<WindowCount> | null | undefined, window: numb
     return data.count;
 }
 
+// The condition of the write of a count: only over the entry read (its ETag), or only if there is still none; an entry read without its ETag, as the local Blobs server of netlify dev returns (its GET sends no ETag header, so an onlyIfNew write would always fail and limit every call), is written without a condition, a burst then able to lose a count
+function writeCondition(entry: { etag?: string } | null): { onlyIfMatch: string } | { onlyIfNew: true } | Record<string, never> {
+    // No entry yet
+    if (!entry) {
+        return { onlyIfNew: true };
+    }
+    // An entry with its ETag, as Netlify Blobs returns in production
+    if (entry.etag) {
+        return { onlyIfMatch: entry.etag };
+    }
+    return {};
+}
+
 // Whether the visitor of this request has already made `limit` calls to the function `name` in the current minute, counting this call otherwise: a function keeps its default address /.netlify/functions/<name>, which the rate limit of a Netlify config cannot (it needs a path of its own); the IP is stored hashed, never in clear, and Blobs failing lets the call through rather than blocking every visitor
 export async function isRateLimited(name: string, limit: number, context: Context): Promise<boolean> {
     try {
@@ -46,7 +59,7 @@ export async function isRateLimited(name: string, limit: number, context: Contex
             if (count >= limit) {
                 return true;
             }
-            const condition = entry?.etag ? { onlyIfMatch: entry.etag } : { onlyIfNew: true };
+            const condition = writeCondition(entry);
             const { modified } = await store.setJSON(key, { window, count: count + 1 } satisfies WindowCount, condition);
             if (modified) {
                 return false;

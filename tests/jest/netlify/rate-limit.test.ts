@@ -61,6 +61,18 @@ test("writes the first count only if no other call created it, then only over th
     expect(store.setJSON.mock.calls[1][2]).toEqual({ onlyIfMatch: '"1"' });
 });
 
+test("writes over an entry read without its ETag, as the local Blobs server of netlify dev returns, rather than limiting every call", async () => {
+    // The GET of the local server sends no ETag header: the entry comes back with an empty one
+    store.getWithMetadata.mockImplementation(async (key: string) => {
+        await tick();
+        const entry = blobs.get(key);
+        return entry ? { data: entry.data, etag: undefined as unknown as string, metadata: {} } : null;
+    });
+    for (let call = 0; call < 3; call++) expect(await isRateLimited("article", 3, context())).toBe(false);
+    expect(await isRateLimited("article", 3, context())).toBe(true);
+    expect(store.setJSON.mock.calls.map(([, , condition]) => condition)).toEqual([{ onlyIfNew: true }, {}, {}]);
+});
+
 test("limits a call still beaten by other calls after every try", async () => {
     for (let attempt = 0; attempt < 5; attempt++) store.setJSON.mockResolvedValueOnce({ modified: false });
     expect(await isRateLimited("visit", 10, context())).toBe(true);
