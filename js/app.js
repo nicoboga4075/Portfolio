@@ -2355,7 +2355,7 @@ function visitRegion(visit) {
     const region = { type: 'Polygon', coordinates: [ring] };
     // A ring wound the other way: d3-geo reads it as the rest of the sphere, so it is turned round
     if (d3.geoArea(region) > 2 * Math.PI) {
-        return { type: 'Polygon', coordinates: [ring.reverse()] };
+        return { type: 'Polygon', coordinates: [ring.toReversed()] };
     }
     return region;
 }
@@ -2821,16 +2821,16 @@ async function sendEmail(senderName, subject, message, attachments = []) {
 async function base64Lines(blob) {
     const bytes = new Uint8Array(await blob.arrayBuffer());
     let binary = '';
-    // By chunks, since String.fromCharCode takes its bytes as arguments and a big file would overflow the stack
+    // By chunks, since String.fromCodePoint takes its bytes (each 0 to 255, the same character as with fromCharCode) as arguments and a big file would overflow the stack
     for (let start = 0; start < bytes.length; start += 0x8000) {
-        binary += String.fromCharCode(...bytes.subarray(start, start + 0x8000));
+        binary += String.fromCodePoint(...bytes.subarray(start, start + 0x8000));
     }
     return btoa(binary).match(/.{1,76}/g)?.join('\r\n') ?? '';
 }
 
 // One file of the contact form as a part of the MIME message: its type, its name encoded as RFC 2231 asks so any character survives, and its bytes in base64
 async function attachmentPart(file) {
-    const fileName = encodeURIComponent(file.name).replace(/['()*]/g, char => `%${char.charCodeAt(0).toString(16).toUpperCase()}`);
+    const fileName = encodeURIComponent(file.name).replace(/['()*]/g, char => `%${char.codePointAt(0).toString(16).toUpperCase()}`);
     // The type the browser gives, when it is a plain type/subtype that cannot break the header
     const fileType = /^[\w.+-]+\/[\w.+-]+$/.test(file.type) ? file.type : 'application/octet-stream';
     return [
@@ -2846,10 +2846,8 @@ async function attachmentPart(file) {
 async function mimeWithAttachments(headers, text, files) {
     const boundary = `portfolio-${Date.now().toString(36)}`;
     const textPart = ['Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', '', await base64Lines(new Blob([text]))].join('\r\n');
-    const parts = [textPart];
-    for (const file of files) {
-        parts.push(await attachmentPart(file));
-    }
+    // The files read together, their parts kept in the order of the files
+    const parts = [textPart, ...await Promise.all(files.map(attachmentPart))];
     return [
         ...headers,
         'MIME-Version: 1.0',
