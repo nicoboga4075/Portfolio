@@ -4960,6 +4960,32 @@ html.dark-mode {
     cursor: grabbing;
 }
 
+/* The frame of the globe, the place of its tooltip */
+.globe-frame {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 420px;
+}
+
+/* The name of the dot under the pointer or the finger, above the dot, in the style of the Bootstrap tooltips of the site */
+.globe-tooltip {
+    position: absolute;
+    z-index: 2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 13px;
+    white-space: nowrap;
+    pointer-events: none;
+    transform: translate(-50%, calc(-100% - 8px));
+}
+
+.globe-tooltip[hidden] {
+    display: none;
+}
+
 .globe-hint {
     margin: 8px 0 0;
     color: var(--secondary);

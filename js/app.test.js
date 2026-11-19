@@ -2209,7 +2209,7 @@ describe('the book of my path', () => {
 });
 
 describe('the globe of the visited countries', () => {
-    const globeBody = `<div class="col-12"><canvas id="globe" width="420" height="420" data-countries='[{"iso":"250","coords":[2,46]},{"iso":"840","coords":[-98,39]}]'></canvas><p class="globe-hint">Drag</p></div>`;
+    const globeBody = `<div class="col-12"><canvas id="globe" width="420" height="420" data-countries='[{"iso":"250","coords":[2,46],"name":{"en":"France"}},{"iso":"840","coords":[-98,39],"name":{"en":"United States"}}]'></canvas><span class="globe-tooltip" hidden></span><p class="globe-hint">Drag</p></div>`;
     const canvas = () => document.getElementById('globe');
     const scripts = ['js/d3-array.min.js', 'js/d3-geo.min.js', 'js/topojson-client.min.js'];
     const world = { objects: { countries: 'countries' } };
@@ -2220,7 +2220,7 @@ describe('the globe of the visited countries', () => {
 
     // A 2D context that records the drawing, and the cssVarToHex probe reads #102030 from it
     const fakeContext = () => ({
-        canvas: {}, scale: jest.fn(), clearRect: jest.fn(), beginPath: jest.fn(), fill: jest.fn(), stroke: jest.fn(), arc: jest.fn(), fillRect: jest.fn(),
+        canvas: {}, scale: jest.fn(), clearRect: jest.fn(), beginPath: jest.fn(), fill: jest.fn(), stroke: jest.fn(), arc: jest.fn(), fillRect: jest.fn(), save: jest.fn(), clip: jest.fn(), restore: jest.fn(),
         getImageData: () => ({ data: [16, 32, 48, 255] })
     });
 
@@ -2241,7 +2241,9 @@ describe('the globe of the visited countries', () => {
             geoOrthographic: () => projection,
             geoPath: jest.fn(() => path),
             geoGraticule10: () => 'graticule',
-            geoDistance: jest.fn(point => (point[0] > -50 ? 0.5 : 2))
+            geoDistance: jest.fn(point => (point[0] > -50 ? 0.5 : 2)),
+            // Every ring of a test is a small region, wound as d3-geo reads one
+            geoArea: jest.fn(() => 0.01)
         };
         window.topojson = {
             feature: jest.fn(() => ({ features: [{ id: '250' }, { id: '840' }, { id: '392' }] })),
@@ -2341,6 +2343,135 @@ describe('the globe of the visited countries', () => {
         await startGlobe({ ratio: 0 });
         expect(canvas().width).toBe(420);
         expect(context.scale).toHaveBeenCalledWith(1, 1);
+    });
+
+    test('draws a dot on each place with coords of a visited country, the places the map lacks such as the Canary Islands, and none for a list that is not one', async () => {
+        await startGlobe({ body: `<div class="col-12"><canvas id="globe" width="420" height="420" data-countries='[{"iso":"724","coords":[-3,40],"places":[{"coords":[-15,28],"name":{"en":"Canary Islands"}},{"name":{"en":"No coords"}},null]},{"iso":"250","coords":[2,46],"places":"no"}]'></canvas></div>` });
+        expect(window.d3.geoDistance.mock.calls.map(([point]) => point)).toEqual([[-3, 40], [-15, 28], [2, 46]]);
+        expect(context.arc).toHaveBeenCalledTimes(3);
+    });
+
+    test('names each dot in the language of the page, a place followed by its country in brackets, and an empty name for one without a name in it', () => {
+        const app = loadApp({ lang: 'fr', url: '/fr' });
+        expect(app.visitDots({ coords: [-3, 40], name: { en: 'Spain', fr: 'Espagne' }, places: [{ coords: [-15, 28], name: { en: 'Canary Islands', fr: 'Îles Canaries' } }, { coords: [1, 1] }] })).toEqual([
+            { coords: [-3, 40], name: 'Espagne' },
+            { coords: [-15, 28], name: 'Îles Canaries (Espagne)' },
+            { coords: [1, 1], name: '' }
+        ]);
+        // A country without a name in the language: its place alone
+        expect(app.visitDots({ coords: [-3, 40], places: [{ coords: [-15, 28], name: { fr: 'Îles Canaries' } }] })).toEqual([
+            { coords: [-3, 40], name: '' },
+            { coords: [-15, 28], name: 'Îles Canaries' }
+        ]);
+        expect(app.visitDots({ name: { fr: 'Espagne' } })).toEqual([]);
+    });
+
+    // A pointer event of the given type and kind at a point of the screen, on the globe drawn at half its size (210 pixels for its 420)
+    const pointAt = (type, x, y, pointerType = 'mouse') => canvas().dispatchEvent(Object.assign(new MouseEvent(type, { clientX: x, clientY: y }), { pointerId: 1, pointerType }));
+    const tooltip = () => document.querySelector('.globe-tooltip');
+
+    test('names the dot under the mouse above it and holds the globe still, then hides the name and turns again away from every dot or off the globe', async () => {
+        const { frame, frames } = await startGlobe();
+        jest.spyOn(canvas(), 'getBoundingClientRect').mockReturnValue({ left: 0, top: 0, width: 210 });
+        // France is drawn at (202, 246) of the 420 of the globe, so at (101, 123) on the screen
+        pointAt('pointermove', 104, 125);
+        expect(tooltip().hidden).toBe(false);
+        expect(tooltip().textContent).toBe('France');
+        expect([tooltip().style.left, tooltip().style.top]).toEqual(['101px', '123px']);
+        frame();
+        expect(frames()).toHaveLength(0);
+        // Over 10 pixels of the screen from France: nothing
+        pointAt('pointermove', 101, 134);
+        expect(tooltip().hidden).toBe(true);
+        expect(frames()).toHaveLength(1);
+        // Hidden again without a second loop
+        pointAt('pointermove', 0, 0);
+        expect(frames()).toHaveLength(1);
+        pointAt('pointermove', 101, 123);
+        pointAt('pointerleave', 300, 300);
+        expect(tooltip().hidden).toBe(true);
+    });
+
+    test('names no dot behind the globe nor a dot without a name, and the nearest of two close dots', async () => {
+        await startGlobe({ body: `<div class="col-12"><canvas id="globe" width="420" height="420" data-countries='[{"iso":"1","coords":[-60,0],"name":{"en":"Behind"}},{"iso":"2","coords":[0,0]},{"iso":"3","coords":[10,0],"name":{"en":"Far"}},{"iso":"4","coords":[4,0],"name":{"en":"Near"}}]'></canvas><span class="globe-tooltip" hidden></span></div>` });
+        jest.spyOn(canvas(), 'getBoundingClientRect').mockReturnValue({ left: 0, top: 0, width: 210 });
+        // Behind the globe: (-60, 0) is drawn at (140, 200), so at (70, 100) on the screen
+        pointAt('pointermove', 70, 100);
+        expect(tooltip().hidden).toBe(true);
+        // The dot without a name, at (100, 100) on the screen
+        pointAt('pointermove', 100, 100);
+        expect(tooltip().hidden).toBe(true);
+        // Between Far (105) and Near (102): Near is nearer
+        pointAt('pointermove', 103, 100);
+        expect(tooltip().textContent).toBe('Near');
+    });
+
+    test('names a tapped dot and keeps the name once the finger is lifted, but names nothing after a drag, and hides the name at the next touch', async () => {
+        await startGlobe();
+        jest.spyOn(canvas(), 'getBoundingClientRect').mockReturnValue({ left: 0, top: 0, width: 210 });
+        canvas().setPointerCapture = jest.fn();
+        pointAt('pointerdown', 101, 123, 'touch');
+        pointAt('pointerup', 102, 124, 'touch');
+        pointAt('pointerleave', 102, 124, 'touch');
+        expect(tooltip().hidden).toBe(false);
+        expect(tooltip().textContent).toBe('France');
+        pointAt('pointerdown', 101, 123, 'touch');
+        expect(tooltip().hidden).toBe(true);
+        pointAt('pointermove', 140, 123, 'touch');
+        pointAt('pointerup', 140, 123, 'touch');
+        expect(tooltip().hidden).toBe(true);
+        // A leave while dragging leaves the drag alone
+        pointAt('pointerdown', 101, 123);
+        pointAt('pointerleave', 101, 123);
+        expect(canvas().classList.contains('dragging')).toBe(true);
+        pointAt('pointercancel', 101, 123);
+        expect(tooltip().hidden).toBe(true);
+    });
+
+    test('fills a country with a within ring inside that region only, such as England in the United Kingdom, and the others as before', async () => {
+        await startGlobe({ body: `<div class="col-12"><canvas id="globe" width="420" height="420" data-countries='[{"iso":"250","coords":[2,46]},{"iso":"840","coords":[-98,39],"within":[[0,0],[1,0],[1,1]]}]'></canvas></div>` });
+        const shapes = path.mock.calls.map(([shape]) => shape);
+        expect(shapes[3].features.map(feature => feature.id)).toEqual(['250']);
+        expect(shapes[4]).toEqual({ type: 'Polygon', coordinates: [[[0, 0], [1, 0], [1, 1], [0, 0]]] });
+        expect(shapes[5].id).toBe('840');
+        expect(shapes[6]).toEqual({ borders: true });
+        expect(context.save).toHaveBeenCalledTimes(1);
+        expect(context.clip).toHaveBeenCalledTimes(1);
+        expect(context.restore).toHaveBeenCalledTimes(1);
+        expect(context.save.mock.invocationCallOrder[0]).toBeLessThan(context.clip.mock.invocationCallOrder[0]);
+        expect(context.clip.mock.invocationCallOrder[0]).toBeLessThan(context.restore.mock.invocationCallOrder[0]);
+    });
+
+    test('closes the ring of a within list into a region, turns round a ring d3-geo would read as the rest of the sphere, and gives none for a list that is not a ring', () => {
+        const app = loadApp();
+        window.d3 = { geoArea: jest.fn(() => 0.01) };
+        expect(app.visitRegion({ within: [[0, 0], [1, 0], [1, 1]] })).toEqual({ type: 'Polygon', coordinates: [[[0, 0], [1, 0], [1, 1], [0, 0]]] });
+        window.d3.geoArea.mockReturnValue(4 * Math.PI - 0.01);
+        expect(app.visitRegion({ within: [[0, 0], [1, 0], [1, 1]] })).toEqual({ type: 'Polygon', coordinates: [[[0, 0], [1, 1], [1, 0], [0, 0]]] });
+        for (const visit of [undefined, {}, { within: 'no' }, { within: [[0, 0], [1, 0]] }]) {
+            expect(app.visitRegion(visit)).toBeUndefined();
+        }
+    });
+
+    test('keeps out of a visited country the polygons that hold a point of its notVisited list, such as French Guiana and Corsica', () => {
+        const app = loadApp();
+        const mainland = [[[0, 45], [5, 45], [5, 50], [0, 45]]];
+        const guiana = [[[-54, 2], [-52, 2], [-52, 5], [-54, 2]]];
+        const corsica = [[[8.5, 41.5], [9.5, 41.5], [9.5, 43], [8.5, 41.5]]];
+        const france = { id: '250', geometry: { type: 'MultiPolygon', coordinates: [guiana, mainland, corsica] } };
+        // A polygon holds a point when the point lies within the box of its ring
+        window.d3 = { geoContains: jest.fn(({ coordinates: [ring] }, [x, y]) => x >= Math.min(...ring.map(c => c[0])) && x <= Math.max(...ring.map(c => c[0])) && y >= Math.min(...ring.map(c => c[1])) && y <= Math.max(...ring.map(c => c[1]))) };
+        const shape = app.visitedShape(france, { iso: '250', notVisited: [[-53, 4], [9, 42]] });
+        expect(shape.geometry.coordinates).toEqual([mainland]);
+        expect(shape.id).toBe('250');
+        expect(france.geometry.coordinates).toHaveLength(3);
+        // No list, a list that is not one, or a shape of a single polygon: the whole shape
+        expect(app.visitedShape(france, { iso: '250' })).toBe(france);
+        expect(app.visitedShape(france, { iso: '250', notVisited: 'no' })).toBe(france);
+        expect(app.visitedShape(france, undefined)).toBe(france);
+        const polygon = { id: '724', geometry: { type: 'Polygon', coordinates: mainland } };
+        expect(app.visitedShape(polygon, { iso: '724', notVisited: [[1, 46]] })).toBe(polygon);
+        expect(app.visitedShape({ id: '1' }, { iso: '1', notVisited: [[1, 46]] })).toEqual({ id: '1' });
     });
 
     test('turns a little each frame while on screen, stops off screen and starts again once back, without a second loop', async () => {

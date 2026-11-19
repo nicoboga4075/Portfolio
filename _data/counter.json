@@ -20,12 +20,12 @@
         {"name": {"en": "TOEFL", "fr": "TOEFL"}, "logo": "ets", "category": "languages", "by": "ESILV", "score": "550/677", "level": {"en": "B2", "fr": "B2"}, "levelTip": {"en": "CEFR B2 (A1 to C2 scale): independent user, works in English. TOEFL ITP: 543 to 626/677", "fr": "B2 du CECRL (échelle A1 à C2) : utilisateur autonome, travaille en anglais. TOEFL ITP : 543 à 626/677"}, "date": "01/2019", "href": "/docs/public/TOEFL.pdf"}
     ],
     "countryList": [
-        {"flag": "fr", "iso": "250", "coords": [2.2, 46.6], "continent": "europe", "name": {"en": "France", "fr": "France"}},
-        {"flag": "gb-eng", "iso": "826", "coords": [-1.5, 52.6], "continent": "europe", "name": {"en": "England", "fr": "Angleterre"}},
-        {"flag": "it", "iso": "380", "coords": [12.6, 42.8], "continent": "europe", "name": {"en": "Italy", "fr": "Italie"}},
-        {"flag": "us", "iso": "840", "coords": [-98.6, 39.8], "continent": "america", "name": {"en": "United States", "fr": "États-Unis"}},
+        {"flag": "fr", "iso": "250", "coords": [2.2, 46.6], "notVisited": [[-53.1, 3.9], [9.1, 42.1]], "continent": "europe", "name": {"en": "France", "fr": "France"}},
+        {"flag": "gb-eng", "iso": "826", "coords": [-1.5, 52.6], "within": [[2.5, 55.85], [-2.03, 55.8], [-2.6, 55.4], [-3.05, 55.0], [-3.6, 54.9], [-4.0, 54.0], [-3.2, 53.4], [-3.05, 53.2], [-3.1, 52.9], [-3.0, 52.5], [-3.15, 52.1], [-2.9, 51.9], [-2.65, 51.6], [-3.2, 51.45], [-4.5, 51.4], [-5.5, 51.2], [-6.5, 50.0], [-6.5, 49.5], [2.5, 49.5]], "continent": "europe", "name": {"en": "England", "fr": "Angleterre"}},
+        {"flag": "it", "iso": "380", "coords": [12.6, 42.8], "notVisited": [[9.0, 40.1]], "continent": "europe", "name": {"en": "Italy", "fr": "Italie"}},
+        {"flag": "us", "iso": "840", "coords": [-98.6, 39.8], "notVisited": [[-150.0, 64.0], [-153.4, 57.4], [-166.5, 60.1], [-170.3, 63.4], [-155.5, 19.6], [-156.3, 20.8], [-157.0, 21.15], [-158.0, 21.5], [-159.5, 22.05]], "continent": "america", "name": {"en": "United States", "fr": "États-Unis"}},
         {"flag": "cz", "iso": "203", "coords": [15.5, 49.8], "continent": "europe", "name": {"en": "Czech Republic", "fr": "République tchèque"}},
-        {"flag": "es", "iso": "724", "coords": [-3.7, 40.4], "continent": "europe", "name": {"en": "Spain", "fr": "Espagne"}},
+        {"flag": "es", "iso": "724", "coords": [-3.7, 40.4], "places": [{"coords": [-15.6, 28.2], "name": {"en": "Canary Islands", "fr": "Îles Canaries"}}], "continent": "europe", "name": {"en": "Spain", "fr": "Espagne"}},
         {"flag": "hu", "iso": "348", "coords": [19.5, 47.2], "continent": "europe", "name": {"en": "Hungary", "fr": "Hongrie"}},
         {"flag": "be", "iso": "056", "coords": [4.5, 50.5], "continent": "europe", "name": {"en": "Belgium", "fr": "Belgique"}},
         {"flag": "nl", "iso": "528", "coords": [5.3, 52.1], "continent": "europe", "name": {"en": "Netherlands", "fr": "Pays-Bas"}},

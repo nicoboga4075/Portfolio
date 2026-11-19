@@ -2335,6 +2335,104 @@ async function startGlobe(canvas) {
     }
 }
 
+// The visited part of a country: the polygons of its shape that hold none of the points of its notVisited list (French Guiana and Corsica for France), the whole shape without that list
+function visitedShape(feature, visit) {
+    const skipped = Array.isArray(visit?.notVisited) ? visit.notVisited : [];
+    // Nothing left out, or a shape of a single polygon that cannot be split
+    if (skipped.length === 0 || feature.geometry?.type !== 'MultiPolygon') {
+        return feature;
+    }
+    const coordinates = feature.geometry.coordinates.filter(polygon => !skipped.some(point => d3.geoContains({ type: 'Polygon', coordinates: polygon }, point)));
+    return { ...feature, geometry: { ...feature.geometry, coordinates } };
+}
+
+// The region the fill of a visited country is cut to, from the ring of its within list (England, which the 1:110m map does not split off the United Kingdom), wound the way d3-geo reads a small polygon; undefined without a ring of three points or more
+function visitRegion(visit) {
+    if (!Array.isArray(visit?.within) || visit.within.length < 3) {
+        return undefined;
+    }
+    const ring = [...visit.within, visit.within[0]];
+    const region = { type: 'Polygon', coordinates: [ring] };
+    // A ring wound the other way: d3-geo reads it as the rest of the sphere, so it is turned round
+    if (d3.geoArea(region) > 2 * Math.PI) {
+        return { type: 'Polygon', coordinates: [ring.reverse()] };
+    }
+    return region;
+}
+
+// A visited country as the globe fills it: its visited polygons, with the region its fill is cut to when it has one
+function visitedFeature(feature, visit) {
+    const shape = visitedShape(feature, visit);
+    const region = visitRegion(visit);
+    return region ? { ...shape, within: region } : shape;
+}
+
+// The dots of a visited country, each with the name its tooltip shows in the language of the page: the country at its coords, then each of its places with coords, the visited places the 1:110m map lacks or that lie apart (the Canary Islands for Spain); none without coords
+function visitDots(visit) {
+    // No coords: no dot for the country nor its places
+    if (!Array.isArray(visit.coords)) {
+        return [];
+    }
+    const lang = document.documentElement.lang;
+    const country = visit.name?.[lang] ?? '';
+    const places = Array.isArray(visit.places) ? visit.places.filter(place => Array.isArray(place?.coords)) : [];
+    return [
+        { coords: visit.coords, name: country },
+        // A place followed by its country in brackets, "Canary Islands (Spain)", or alone when one of the two has no name in the language
+        ...places.map(place => {
+            const name = place.name?.[lang] ?? '';
+            return { coords: place.coords, name: name && country ? `${name} (${country})` : name };
+        })
+    ];
+}
+
+// The dot of the globe under a pointer, the nearest one facing the viewer within 10 pixels of the screen; null away from every dot
+function globeDotAt(event) {
+    const rect = globe.canvas.getBoundingClientRect();
+    const scale = globe.size / rect.width;
+    const x = (event.clientX - rect.left) * scale;
+    const y = (event.clientY - rect.top) * scale;
+    const [lambda, phi] = globe.projection.rotate();
+    let nearest = null;
+    let best = 10 * scale;
+    for (const point of globe.points) {
+        // A dot behind the globe cannot be pointed at
+        if (d3.geoDistance(point.coords, [-lambda, -phi]) >= Math.PI / 2) {
+            continue;
+        }
+        const [dotX, dotY] = globe.projection(point.coords);
+        const distance = Math.hypot(dotX - x, dotY - y);
+        if (distance <= best) {
+            best = distance;
+            nearest = { ...point, x: dotX / scale, y: dotY / scale };
+        }
+    }
+    return nearest;
+}
+
+// Shows the name of the dot under the pointer above it, the globe holding still meanwhile, or hides it away from every dot (or for a dot without a name), the globe turning again
+function pointGlobe(event) {
+    const tooltip = globe.tooltip;
+    const dot = globeDotAt(event);
+    if (dot?.name) {
+        tooltip.textContent = dot.name;
+        tooltip.style.left = `${globe.canvas.offsetLeft + dot.x}px`;
+        tooltip.style.top = `${globe.canvas.offsetTop + dot.y}px`;
+        tooltip.hidden = false;
+        globe.pointed = true;
+        return;
+    }
+    hideGlobeTooltip();
+}
+
+function hideGlobeTooltip() {
+    globe.tooltip.hidden = true;
+    if (globe.pointed) {
+        globe.pointed = false;
+        spinGlobe();
+    }
+}
+
 // The projection, centred on Europe, the shapes of the countries and the visited ones, drawn on a canvas sized for the screen density
 function createGlobe(canvas, world) {
     const size = canvas.width;
@@ -2344,7 +2442,7 @@ function createGlobe(canvas, world) {
     context.scale(ratio, ratio);
     // No data-countries, or one that is not JSON: no visited country, the globe shows the land alone
     const visits = appParseJson(canvas.dataset.countries, []);
-    const ids = new Set(visits.map(country => country.iso));
+    const byIso = new Map(visits.map(country => [country.iso, country]));
     const countries = topojson.feature(world, world.objects.countries).features;
     const projection = d3.geoOrthographic().scale(size / 2 - 2).translate([size / 2, size / 2]).rotate([-10, -40]).clipAngle(90);
     return {
@@ -2354,11 +2452,13 @@ function createGlobe(canvas, world) {
         projection,
         path: d3.geoPath(projection, context),
         land: { type: 'FeatureCollection', features: countries },
-        visited: { type: 'FeatureCollection', features: countries.filter(country => ids.has(country.id)) },
+        visited: { type: 'FeatureCollection', features: countries.filter(country => byIso.has(country.id)).map(country => visitedFeature(country, byIso.get(country.id))) },
         borders: topojson.mesh(world, world.objects.countries, (a, b) => a !== b),
         graticule: d3.geoGraticule10(),
         // A country without its coords gets no dot
-        points: visits.filter(country => Array.isArray(country.coords)).map(country => country.coords),
+        points: visits.flatMap(visitDots),
+        tooltip: canvas.parentElement.querySelector('.globe-tooltip'),
+        pointed: false,
         colors: globeColors(),
         dragging: false,
         visible: true,
@@ -2398,14 +2498,23 @@ function drawGlobe() {
     fill({ type: 'Sphere' }, colors.sea);
     stroke(globe.graticule, colors.line, 0.4);
     fill(globe.land, colors.land);
-    fill(globe.visited, colors.visited);
+    fill({ type: 'FeatureCollection', features: globe.visited.features.filter(feature => !feature.within) }, colors.visited);
+    // A country with a region, filled inside it only
+    globe.visited.features.filter(feature => feature.within).forEach(feature => {
+        context.save();
+        context.beginPath();
+        path(feature.within);
+        context.clip();
+        fill(feature, colors.visited);
+        context.restore();
+    });
     stroke(globe.borders, colors.line, 0.5);
     // A dot on each visited country facing the viewer, so the smallest ones (Vatican City) show too
     const [lambda, phi] = projection.rotate();
     const centre = [-lambda, -phi];
     context.fillStyle = colors.dot;
-    globe.points.filter(point => d3.geoDistance(point, centre) < Math.PI / 2).forEach(point => {
-        const [x, y] = projection(point);
+    globe.points.filter(point => d3.geoDistance(point.coords, centre) < Math.PI / 2).forEach(point => {
+        const [x, y] = projection(point.coords);
         context.beginPath();
         context.arc(x, y, 3, 0, 2 * Math.PI);
         context.fill();
@@ -2419,7 +2528,7 @@ function spinGlobe() {
         return;
     }
     const step = () => {
-        if (!globe.visible || globe.dragging) {
+        if (!globe.visible || globe.dragging || globe.pointed) {
             globe.frame = 0;
             return;
         }
@@ -2431,17 +2540,22 @@ function spinGlobe() {
     globe.frame = requestAnimationFrame(step);
 }
 
-// Dragging with a mouse, a pen or a finger turns the globe, up and down within the poles
+// Dragging with a mouse, a pen or a finger turns the globe, up and down within the poles; a pointer resting on a dot, or a tap on it, shows its name
 function bindGlobeDrag(canvas) {
     let last = null;
+    let start = null;
     canvas.addEventListener('pointerdown', event => {
         last = [event.clientX, event.clientY];
+        start = last;
         globe.dragging = true;
         canvas.classList.add('dragging');
         canvas.setPointerCapture?.(event.pointerId);
+        hideGlobeTooltip();
     });
     canvas.addEventListener('pointermove', event => {
+        // Not dragging: the pointer only hovers, and names the dot under it
         if (!last) {
+            pointGlobe(event);
             return;
         }
         const [lambda, phi] = globe.projection.rotate();
@@ -2451,17 +2565,27 @@ function bindGlobeDrag(canvas) {
         globe.projection.rotate([lambda + dx * GLOBE_DRAG, Math.max(-90, Math.min(90, phi - dy * GLOBE_DRAG))]);
         drawGlobe();
     });
-    const release = () => {
+    const release = event => {
         if (!last) {
             return;
         }
         last = null;
         globe.dragging = false;
         canvas.classList.remove('dragging');
+        // A tap, a press that hardly moved: the name of the dot under it, as a hover gives with a mouse
+        if (event.type === 'pointerup' && Math.hypot(event.clientX - start[0], event.clientY - start[1]) < 5) {
+            pointGlobe(event);
+        }
         spinGlobe();
     };
     canvas.addEventListener('pointerup', release);
     canvas.addEventListener('pointercancel', release);
+    canvas.addEventListener('pointerleave', event => {
+        // A mouse leaving the globe takes the name away; a finger lifted also fires pointerleave, so the name of a tapped dot stays until the next touch
+        if (!last && event.pointerType === 'mouse') {
+            hideGlobeTooltip();
+        }
+    });
 }
 
 function initPage() {
