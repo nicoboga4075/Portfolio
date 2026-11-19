@@ -202,6 +202,84 @@ input[name="search-input"].highlight-flash {
     width: 100%;
 }
 
+/* The picture of the hero above "Hello! My name is" (_includes/hero-map.html): the dotted world and the heart of a robot hand and a human hand beating slowly, centred where the blue half of the hero meets the white one; as the hero fills the window, the picture is as tall as the window leaves room for above the text and the scroll cue (113px from 783px of height, 48px at the least), and only hidden on a window shorter than 700px */
+.hero-map {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: clamp(48px, calc(100vh - 670px), 113px);
+    margin: 0 auto 8px;
+    overflow: visible;
+}
+
+.hero-map-land {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    opacity: 0.3;
+}
+
+.hero-map-robot,
+.hero-map-circuit {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.hero-map-robot {
+    fill: color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.hero-map-circuit {
+    stroke-width: 1;
+}
+
+.hero-map-human {
+    fill: color-mix(in srgb, var(--accent-color) 35%, transparent);
+    stroke: var(--accent-color);
+    stroke-width: 2;
+    stroke-linejoin: round;
+}
+
+.hero-map-heart {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero-map-heart {
+        animation: hero-map-beat 2.4s ease-in-out infinite;
+    }
+}
+
+@keyframes hero-map-beat {
+    0%,
+    40%,
+    100% {
+        scale: 1;
+    }
+
+    20% {
+        scale: 1.08;
+    }
+}
+
+@media (min-width: 768px) and (max-height: 699.98px) {
+    .hero-map {
+        display: none;
+    }
+}
+
+/* On a phone the name wraps on two lines and the badges stack, with no scroll cue: a smaller picture, from 56px high up to 90px on a tall screen, keeps the contact button on screen */
+@media (max-width: 767.98px) {
+    .hero-map {
+        height: clamp(56px, calc(100vh - 750px), 90px);
+    }
+}
+
 .slider-text .subheading {
     color: var(--primary);
     letter-spacing: 4px;
@@ -319,8 +397,8 @@ html:not(.dark-mode) .slider-text .hero-tagline {
    (but still >= 992px wide, so .mouse isn't already hidden) browser window,
    that leaves too little room above it and the scroll-down cue overlaps the
    vertically-centered hero text. Pull it closer to the true bottom edge to
-   free up that space. */
-@media (max-height: 820px) {
+   free up that space. Up to 960px of height, where the picture of the hero (.hero-map) takes its room too. */
+@media (max-height: 960px) {
     .mouse {
         bottom: 40px;
     }
