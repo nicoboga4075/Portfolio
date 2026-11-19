@@ -3,7 +3,7 @@
  * @jest-environment-options {"url": "https://nicoboga.netlify.app"}
  */
 // Unit tests of js/app.js, the script of the home and blog pages, on the jsdom page of tests/jest/fixture.cjs (the docblock above, a block by Jest's syntax, picks that environment and the https origin of the live site, each test setting its own path; js/app.http.test.js covers the http one).
-const { articlesIn, observers, observerOf, installChart, loadApp, cleanUp, flush, scriptFor, routeFetch } = require('../tests/jest/fixture.cjs');
+const { articlesIn, observers, observerOf, installChart, loadApp, cleanUp, flush, scriptFor, routeFetch, withGoogleConsent } = require('../tests/jest/fixture.cjs');
 
 // The real articles of the English pages, and the one the sidebar offers next to the article of a slug: the first other one
 const articles = articlesIn('en');
@@ -714,10 +714,7 @@ describe('the home page', () => {
 
     // The token client of gisLoaded, whose consent the Google API reports at its first check, then one message sent from the contact form
     async function submitContactForm(app) {
-        window.google = { accounts: { oauth2: { initTokenClient: jest.fn(() => ({ requestAccessToken: jest.fn() })) } } };
-        window.gapi = { client: { getToken: jest.fn(() => ({ token_type: 'Bearer', access_token: 't' })) } };
-        app.gisLoaded();
-        await flush();
+        await withGoogleConsent(app);
         app.initPage();
         $('form').trigger('submit');
         await jest.advanceTimersByTimeAsync(3000);
@@ -914,18 +911,11 @@ describe('the home page', () => {
     }
     // A base64 part of the MIME message, decoded as UTF-8 (jsdom has no TextDecoder)
     const decodePart = base64 => Buffer.from(base64.replace(/\r\n/g, ''), 'base64').toString('utf8');
-    // The token client of gisLoaded, whose consent the Google API reports at its first check
-    async function withToken(app) {
-        window.google = { accounts: { oauth2: { initTokenClient: jest.fn(() => ({ requestAccessToken: jest.fn() })) } } };
-        window.gapi = { client: { getToken: jest.fn(() => ({ token_type: 'Bearer', access_token: 't' })) } };
-        app.gisLoaded();
-        await flush();
-    }
 
     test('sends the files of the contact form as MIME attachments, the text in UTF-8, the file names encoded', async () => {
         jest.useFakeTimers();
         const app = loadApp({ body: tennisBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true } }) });
-        await withToken(app);
+        await withGoogleConsent(app);
         const first = new File([new Uint8Array(100).fill(66)], "CV (Nico)'s é.pdf", { type: 'application/pdf' });
         const second = new File(['png'], 'photo.png', { type: 'image/png' });
         const sending = app.sendEmail('Nico', 'Hello', 'Héllo 👋', [first, second]);
@@ -953,7 +943,7 @@ describe('the home page', () => {
     test('sends a file without a type, or with a type that is not a plain type/subtype, as application/octet-stream', async () => {
         jest.useFakeTimers();
         const app = loadApp({ body: tennisBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true } }) });
-        await withToken(app);
+        await withGoogleConsent(app);
         let sending = app.sendEmail('Nico', 'Hello', 'Hi', [new File([], 'notes.txt')]);
         await settleSend(sending);
         expect(gmailRaw()).toContain("Content-Type: application/octet-stream; name*=UTF-8''notes.txt");
@@ -977,7 +967,7 @@ describe('the home page', () => {
     test('sends the files of the basket with the message, and leaves them out of the copy of Netlify Forms', async () => {
         jest.useFakeTimers();
         const app = loadApp({ body: tennisBody, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true }, '/en': { ok: true } }) });
-        await withToken(app);
+        await withGoogleConsent(app);
         app.initPage();
         const pick = fakeFiles(tennisInput());
         pick([pdf(), pdf(10, 'b.png')]);
@@ -1619,7 +1609,6 @@ describe('initPage', () => {
 
 describe('the contact form', () => {
     const body = '<form name="contactForm"><button type="submit" disabled>Send</button></form><p id="callback-form"></p>';
-    const token = { token_type: 'Bearer', access_token: 't' };
     // The message the Gmail API received, decoded from its URL-safe base64
     const sentMessage = () => {
         const raw = JSON.parse(window.fetch.mock.calls.find(call => String(call[0]).includes('gmail'))[1].body).raw;
@@ -1667,7 +1656,7 @@ describe('the contact form', () => {
     test('sends the message with the token of the consent, without line breaks in the headers, and forgets everything on https', async () => {
         jest.useFakeTimers();
         const app = loadApp({ body, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true } }) });
-        const client = await withConsent(app, 0);
+        const client = await withGoogleConsent(app);
         sessionStorage.setItem('currentHash', 'contact-section');
         const sending = app.sendEmail('Nico\r\nBcc: x', 'Hello\nthere', 'Hi');
         await jest.advanceTimersByTimeAsync(3000);
@@ -1693,14 +1682,14 @@ describe('the contact form', () => {
         jest.useFakeTimers();
         const log = jest.spyOn(console, 'error').mockImplementation(() => {});
         let app = loadApp({ body, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: false } }) });
-        await withConsent(app, 0);
+        await withGoogleConsent(app);
         let sending = app.sendEmail('Nico', 'Hello', 'Hi');
         await jest.advanceTimersByTimeAsync(3000);
         await sending;
         expect($('#callback-form').text()).toBe(`${app.getMessage('error-generic')} ${app.getMessage('contact-mailto')}`);
         expect(log).not.toHaveBeenCalled();
         app = loadApp({ body, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': new Error('offline') }) });
-        await withConsent(app, 0);
+        await withGoogleConsent(app);
         sending = app.sendEmail('Nico', 'Hello', 'Hi');
         await jest.advanceTimersByTimeAsync(3000);
         await sending;
@@ -1726,20 +1715,10 @@ describe('the contact form', () => {
         expect($('#callback-form').text()).toBe(`${app.getMessage('error-generic')} ${app.getMessage('contact-mailto')}`);
     });
 
-    // The token client of gisLoaded, then a consent the Google API reports after the given number of checks, or never
-    async function withConsent(app, checksBeforeConsent) {
-        window.google = { accounts: { oauth2: { initTokenClient: jest.fn(() => ({ requestAccessToken: jest.fn() })) } } };
-        let checks = 0;
-        window.gapi = { client: { getToken: jest.fn(() => (++checks > checksBeforeConsent ? token : null)) } };
-        app.gisLoaded();
-        await flush();
-        return window.google.accounts.oauth2.initTokenClient.mock.results[0].value;
-    }
-
     test('asks for consent, checks for the token every 3 seconds, and sends once it is given', async () => {
         jest.useFakeTimers();
         const app = loadApp({ body, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' }, 'gmail/v1': { ok: true } }) });
-        const client = await withConsent(app, 2);
+        const client = await withGoogleConsent(app, 2);
         const sending = app.sendEmail('Nico', 'Hello', 'Hi');
         expect(client.requestAccessToken).toHaveBeenCalledWith({ prompt: 'consent' });
         await jest.advanceTimersByTimeAsync(9000);
@@ -1752,7 +1731,7 @@ describe('the contact form', () => {
         jest.useFakeTimers();
         const log = jest.spyOn(console, 'error').mockImplementation(() => {});
         const app = loadApp({ body, before: () => routeFetch({ 'functions/env': { ENV_CLIENT_ID: 'id' } }) });
-        await withConsent(app, Infinity);
+        await withGoogleConsent(app, Infinity);
         const sending = app.sendEmail('Nico', 'Hello', 'Hi');
         await jest.advanceTimersByTimeAsync(120000);
         await sending;

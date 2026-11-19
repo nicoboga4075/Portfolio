@@ -179,4 +179,17 @@ function routeFetch(routes) {
     return window.fetch;
 }
 
-module.exports = { $, articlesIn, messages, observers, observerOf, installChart, loadApp, cleanUp, flush, scriptFor, routeFetch };
+// The OAuth token the consent of Google hands back to the contact form
+const googleToken = { token_type: 'Bearer', access_token: 't' };
+
+// The token client of gisLoaded of app.js, then a consent the Google API reports after the given number of checks (at the first one by default, never with Infinity); returns the token client
+async function withGoogleConsent(app, checksBeforeConsent = 0) {
+    window.google = { accounts: { oauth2: { initTokenClient: jest.fn(() => ({ requestAccessToken: jest.fn() })) } } };
+    let checks = 0;
+    window.gapi = { client: { getToken: jest.fn(() => (++checks > checksBeforeConsent ? googleToken : null)) } };
+    app.gisLoaded();
+    await flush();
+    return window.google.accounts.oauth2.initTokenClient.mock.results[0].value;
+}
+
+module.exports = { $, articlesIn, messages, observers, observerOf, installChart, loadApp, cleanUp, flush, scriptFor, routeFetch, googleToken, withGoogleConsent };
