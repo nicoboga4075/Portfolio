@@ -15,7 +15,11 @@ const linkedin = socials.find(s => s.icon === 'linkedin').href;
 test.describe('links read from config of package.json', () => {
     for (const lang of Object.keys(locales)) {
         test(`${lang}: the Calendly button opens the one address of config.calendly`, () => {
-            expect(read(`index_${lang}.html`)).toContain(`data-calendly-url="${calendly}"`);
+            const link = read(`index_${lang}.html`).match(/<a id="?calendly-cta"?[^>]*>/)[0];
+            expect(link).toContain(`href="${calendly}"`);
+            expect(link).toContain('target="_blank"');
+            expect(link).toContain('rel="noopener"');
+            expect(link).not.toContain('data-calendly-url');
         });
 
         test(`${lang}: the link under the book opens the slide of config.careerSlide in the language of the page`, () => {

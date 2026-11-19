@@ -1585,8 +1585,9 @@ function initIndexPage(langPage) {
         }
 
         $('#calendly-cta').on('click', function (event) {
+            // The link opens the Calendly page in a new tab without JS; with it, the popup opens over the page instead
             event.preventDefault();
-            const url = this.dataset.calendlyUrl;
+            const url = this.href;
             // Calendly is a third-party service of the consent banner: without it allowed, the banner asks first and the popup opens once it is
             whenConsented('services', () => openCalendly(url));
         });

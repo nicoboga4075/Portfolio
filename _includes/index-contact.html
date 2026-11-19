@@ -16,7 +16,7 @@
                 {%- endif %}
                 {%- endfor %}
                 {%- if contactPage.bookingCta %}
-                <p><a id="calendly-cta" href="#" class="btn btn-outline-primary py-2 px-4" data-calendly-url="{{ calendly }}"><span class="icon-calendar mr-2" aria-hidden="true"></span>{{ contactPage.bookingCta }}</a></p>
+                <p><a id="calendly-cta" href="{{ calendly }}" target="_blank" rel="noopener" class="btn btn-outline-primary py-2 px-4"><span class="icon-calendar mr-2" aria-hidden="true"></span>{{ contactPage.bookingCta }}</a></p>
                 {%- endif %}
             </div>
         </div>

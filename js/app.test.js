@@ -602,8 +602,11 @@ describe('the home page', () => {
         Object.defineProperty(window, 'pageYOffset', { value: 0, configurable: true });
     });
 
+    // The booking button of _includes/index-contact.html, its address in href
+    const calendlyBody = '<a id="calendly-cta" href="https://calendly.com/me" target="_blank" rel="noopener">Book</a>';
+
     test('opens Calendly in a popup with the site colour, fetching its files on the first click only', async () => {
-        const app = loadApp({ body: '<a id="calendly-cta" href="https://calendly.com/me" data-calendly-url="https://calendly.com/me">Book</a>' });
+        const app = loadApp({ body: calendlyBody });
         window.Calendly = { initPopupWidget: jest.fn() };
         app.initIndexPage('en');
         $('#calendly-cta').trigger('click');
@@ -618,7 +621,7 @@ describe('the home page', () => {
     });
 
     test('asks for the third-party services before opening Calendly', () => {
-        const app = loadApp({ body: '<a id="calendly-cta" data-calendly-url="https://calendly.com/me">Book</a>' });
+        const app = loadApp({ body: calendlyBody });
         window.whenConsented.mockImplementation(() => {});
         app.initIndexPage('en');
         $('#calendly-cta').trigger('click');
@@ -629,7 +632,7 @@ describe('the home page', () => {
 
     test('opens the Calendly page in a new tab when its widget cannot be fetched', async () => {
         const log = jest.spyOn(console, 'error').mockImplementation(() => {});
-        const app = loadApp({ body: '<a id="calendly-cta" data-calendly-url="https://calendly.com/me">Book</a>' });
+        const app = loadApp({ body: calendlyBody });
         app.initIndexPage('en');
         $('#calendly-cta').trigger('click');
         scriptFor('external/widget.js').onerror();
