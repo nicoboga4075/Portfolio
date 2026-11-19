@@ -176,25 +176,27 @@ input[name="search-input"].highlight-flash {
 
 /* ==== Home Section ==== */
 
+/* Positioned, so that its blue half (.overlay) and its scroll cue (.mouse) follow the hero when its text makes it taller than the window */
 .hero-wrap {
     width: 100%;
     height: 100%;
-    position: inherit;
+    position: relative;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-/* The window height fullHeight() in app.js sets, applied before the JS runs: otherwise the hero starts short and the next sections jump down (CLS 0.4) */
+/* The window height fullHeight() in app.js sets, applied before the JS runs: otherwise the hero starts short and the next sections jump down (CLS 0.4); a minimum, so that a text taller than the window (a phone held sideways) makes the hero grow instead of spilling over the next section */
 .js-fullheight {
-    height: 100vh;
+    min-height: 100vh;
 }
 
+/* The blue half of the hero, from the top and left edges of the window (past the margin of <main>) down to the bottom of the hero, its right edge on the middle of the window */
 .hero-wrap .overlay {
     position: absolute;
-    inset: 0;
+    inset: calc(-1 * var(--main-margin)) auto 0 calc(-1 * var(--main-margin));
     content: '';
     opacity: 0.1;
-    width: 50%;
+    width: calc(50% + var(--main-margin));
     background-color: var(--primary);
 }
 
@@ -380,7 +382,7 @@ html:not(.dark-mode) .slider-text .hero-tagline {
    "I'm a <rotating role>" line) has none: at the default 32px, the longest
    role ("AI-Augmented Developer.", nbsp-glued to "a" so it can't wrap before
    AI-Augmented) doesn't fit one line on a phone-width screen, and the extra
-   wrapped line overflows .hero-wrap's JS-fixed viewport height (fullHeight()
+   wrapped line makes .hero-wrap taller than the window (fullHeight()
    in app.js). */
 @media (max-width: 767.98px) {
     .slider-text h2 {
@@ -392,7 +394,7 @@ html:not(.dark-mode) .slider-text .hero-tagline {
     }
 }
 
-/* .hero-wrap is set to the exact window height in JS (fullHeight() in
+/* .hero-wrap is at least the window height in JS (fullHeight() in
    app.js), and .mouse sits at a fixed 120px from its bottom - on a short
    (but still >= 992px wide, so .mouse isn't already hidden) browser window,
    that leaves too little room above it and the scroll-down cue overlaps the

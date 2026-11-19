@@ -50,6 +50,7 @@
 
     /* The size of the round buttons in the corners: the contact button, the chat stand-in, and the Botpress bubble, whose shadow root reads it too (js/botpress.js) */
     --fab-size: 60px;
+    --main-margin: 10px; /* The margin of <main> on every page, which the blue half of the home hero reaches past to the edge of the window */
 }
 
 html.dark-mode {
@@ -125,7 +126,7 @@ body {
 }
 
 main {
-    margin: 10px;
+    margin: var(--main-margin);
 }
 
 h1,

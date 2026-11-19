@@ -95,14 +95,14 @@ describe('small helpers', () => {
 });
 
 describe('on load', () => {
-    test('starts the parallax and scrollax plugins, and sizes the full-height blocks to the window, on resize too', () => {
+    test('starts the parallax and scrollax plugins, and makes the full-height blocks at least as tall as the window, on resize too', () => {
         loadApp({ body: '<div class="js-fullheight"></div>' });
         expect($.fn.stellar).toHaveBeenCalledWith(expect.objectContaining({ parallaxBackgrounds: true }));
         expect($.Scrollax).toHaveBeenCalled();
-        expect($('.js-fullheight')[0].style.height).toBe(`${$(window).height()}px`);
-        $('.js-fullheight')[0].style.height = '';
+        expect($('.js-fullheight')[0].style.minHeight).toBe(`${$(window).height()}px`);
+        $('.js-fullheight')[0].style.minHeight = '';
         $(window).trigger('resize');
-        expect($('.js-fullheight')[0].style.height).toBe(`${$(window).height()}px`);
+        expect($('.js-fullheight')[0].style.minHeight).toBe(`${$(window).height()}px`);
     });
 
     test('marks the burger button active while the menu is closed, and not once it is open', () => {

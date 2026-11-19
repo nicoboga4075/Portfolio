@@ -1099,10 +1099,11 @@ function createCircularChart({
         scrollProperty: 'scroll'
     });
 
+    // The hero is at least as tall as the window, and grows past it when its text needs more (a phone held sideways, a small phone), rather than spilling over the About section
     const fullHeight = function () {
-        $('.js-fullheight').css('height', $(window).height());
+        $('.js-fullheight').css('min-height', $(window).height());
         $(window).resize(function () {
-            $('.js-fullheight').css('height', $(window).height());
+            $('.js-fullheight').css('min-height', $(window).height());
         });
     };
     fullHeight();
