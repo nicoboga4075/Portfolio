@@ -14,4 +14,11 @@ const renderInclude = (name, data) => env.render(name, data);
 // A template given as text (a partial read and changed by the spec), with the data Eleventy would give it
 const renderTemplate = (template, data) => env.renderString(template, data);
 
-module.exports = { renderInclude, renderTemplate };
+// The counter section of the home page in a language, as the desktop build renders it, with the whitespace between tags removed
+function renderCounter(lang) {
+    const data = name => require(path.join(root, '_data', `${name}.json`));
+    const { profile } = require(path.join(root, 'package.json')).config;
+    return renderInclude('index-counter.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, viewport: 'desktop', counter: data('counter'), resume: data('resume'), profile }).replaceAll(/>\s+</g, '><');
+}
+
+module.exports = { renderInclude, renderTemplate, renderCounter };

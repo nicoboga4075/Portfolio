@@ -9,7 +9,6 @@ const skills = require(path.join(root, '_data', 'skills.json'));
 
 // Renders the mad skills include alone, the way Eleventy gives it its data
 function render(lang, data = skills) {
-    // The filter of .eleventy.js that puts the companies and schools in italics
     return renderInclude('skills-mad.html', { page: { fileSlug: `index_${lang}` }, skills: data });
 }
 

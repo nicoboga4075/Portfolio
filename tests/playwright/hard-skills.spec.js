@@ -9,7 +9,6 @@ const skillsData = require(path.join(root, '_data', 'skills.json'));
 
 // Renders the hard skills include alone, the way Eleventy gives it its page
 function render(lang) {
-    // The filter of .eleventy.js that puts the companies and schools in italics
     return renderInclude('skills-hard.html', { page: { fileSlug: `index_${lang}` }, skills: skillsData });
 }
 

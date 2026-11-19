@@ -8,7 +8,6 @@ const skills = require(path.join(root, '_data', 'skills.json'));
 
 // Renders the soft skills include alone, the way Eleventy gives it its data
 function render(lang) {
-    // The filter of .eleventy.js that puts the companies and schools in italics
     return renderInclude('skills-soft.html', { page: { fileSlug: `index_${lang}` }, skills }).replaceAll(/>\s+</g, '><');
 }
 

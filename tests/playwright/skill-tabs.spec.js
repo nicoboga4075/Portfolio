@@ -10,7 +10,6 @@ const css = fs.readFileSync(path.join(root, 'css', 'app.css'), 'utf8');
 
 // Renders the carousel partial with its includes, the way Eleventy gives it its data on the desktop build
 function render(lang) {
-    // The filter of .eleventy.js that puts the companies and schools in italics
     return renderInclude('index-carousel.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, viewport: 'desktop', skills }).replaceAll(/>\s+</g, '><');
 }
 

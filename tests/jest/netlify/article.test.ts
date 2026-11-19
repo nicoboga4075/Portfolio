@@ -6,6 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import handlerArticle from "../../../netlify/functions/article.mjs";
 import { isRateLimited } from "../../../netlify/functions/shared/rate-limit.mjs";
+import { expectInternalError } from "./internal-error.mjs";
 
 
 const context = { requestId: "req-1" } as any;
@@ -88,15 +89,13 @@ test("answers a 500 rather than a 404 when the article exists but cannot be read
     writeArticle("articles", "mcs_en.html", "<h1>MCS</h1>");
     jest.spyOn(fs.promises, "readFile").mockRejectedValue(Object.assign(new Error("EACCES: permission denied"), { code: "EACCES" }));
     const response = await handlerArticle(request("mcs_en.html"), context);
-    expect(response.status).toBe(500);
-    expect(await response.json()).toEqual({ error: "Internal error", requestId: "req-1" });
+    await expectInternalError(response);
 });
 
 test("answers a 500 with the request id when the request cannot be read", async () => {
     jest.spyOn(console, "error").mockImplementation(() => {});
     const response = await handlerArticle({ url: "not a url" } as Request, context);
-    expect(response.status).toBe(500);
-    expect(await response.json()).toEqual({ error: "Internal error", requestId: "req-1" });
+    await expectInternalError(response);
 });
 
 test("answers a 429 past 60 calls a minute of the same visitor, before any other work", async () => {

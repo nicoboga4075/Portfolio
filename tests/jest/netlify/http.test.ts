@@ -1,5 +1,6 @@
 // Unit tests of netlify/functions/shared/http.mts: which requests count as coming from the site, and the 404 redirect, JSON and 500 responses every function returns.
 import { internalError, isTrustedRequest, jsonResponse, redirectTo404 } from "../../../netlify/functions/shared/http.mjs";
+import { expectInternalError } from "./internal-error.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import toml from "toml";
@@ -91,8 +92,7 @@ describe("internalError", () => {
         const log = jest.spyOn(console, "error").mockImplementation(() => {});
         const error = new Error("boom");
         const response = internalError(context, error);
-        expect(response.status).toBe(500);
-        expect(await response.json()).toEqual({ error: "Internal error", requestId: "req-1" });
+        await expectInternalError(response);
         expect(log).toHaveBeenCalledWith("[req-1]", error);
     });
 

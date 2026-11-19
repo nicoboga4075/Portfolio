@@ -3,6 +3,7 @@
 jest.mock("../../../netlify/functions/shared/rate-limit.mjs", () => ({ ...jest.requireActual("../../../netlify/functions/shared/rate-limit.mjs"), isRateLimited: jest.fn(async () => false) }));
 import handlerEnv from "../../../netlify/functions/env.mjs";
 import { isRateLimited } from "../../../netlify/functions/shared/rate-limit.mjs";
+import { expectInternalError } from "./internal-error.mjs";
 
 import pkg from "../../../package.json";
 
@@ -109,7 +110,7 @@ test("answers a 500 without calling GitHub when GITHUB_API_TOKEN is not set", as
     delete process.env.GITHUB_API_TOKEN;
     const fetchSpy = jest.spyOn(global, "fetch");
     const response = await handlerEnv(request("?lang=en"), context);
-    expect(response.status).toBe(500);
+    await expectInternalError(response);
     expect(fetchSpy).not.toHaveBeenCalled();
     expect(String(consoleError.mock.calls[0][1])).toContain("GITHUB_API_TOKEN is not set");
 });
@@ -118,8 +119,7 @@ test("answers a 500 when the GitHub API fails", async () => {
     jest.spyOn(console, "error").mockImplementation(() => {});
     mockGithub({}, false);
     const response = await handlerEnv(request("?lang=en"), context);
-    expect(response.status).toBe(500);
-    expect(await response.json()).toEqual({ error: "Internal error", requestId: "req-1" });
+    await expectInternalError(response);
 });
 
 test("answers a 429 past 60 calls a minute of the same visitor, before any other work", async () => {

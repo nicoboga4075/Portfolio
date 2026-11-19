@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
-const { renderInclude } = require('./render');
+const { renderCounter } = require('./render');
 const { italicNames } = require('../../.eleventy');
 
 const root = path.join(__dirname, '..', '..');
@@ -9,11 +9,7 @@ const counter = require(path.join(root, '_data', 'counter.json'));
 const resume = require(path.join(root, '_data', 'resume.json'));
 const { profile } = require(path.join(root, 'package.json')).config;
 
-// Renders the counter include alone, the way Eleventy gives it its data on the desktop build
-function render(lang) {
-    // The filter of .eleventy.js that puts the companies and schools in italics (the delivered projects card)
-    return renderInclude('index-counter.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, viewport: 'desktop', counter, resume, profile }).replaceAll(/>\s+</g, '><');
-}
+const render = renderCounter;
 
 const escapeHtml = text => text.replaceAll("'", '&#39;');
 

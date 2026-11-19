@@ -3,6 +3,7 @@
 jest.mock("../../../netlify/functions/shared/rate-limit.mjs", () => ({ ...jest.requireActual("../../../netlify/functions/shared/rate-limit.mjs"), isRateLimited: jest.fn(async () => false) }));
 import handlerVisit from "../../../netlify/functions/visit.mjs";
 import { isRateLimited } from "../../../netlify/functions/shared/rate-limit.mjs";
+import { expectInternalError } from "./internal-error.mjs";
 
 
 const context = { requestId: "req-1" } as any;
@@ -45,7 +46,7 @@ test("answers a 500 without calling Supabase when its settings are missing", asy
     delete process.env.SUPABASE_ANON_KEY;
     const fetchSpy = jest.spyOn(global, "fetch");
     const response = await handlerVisit(request(), context);
-    expect(response.status).toBe(500);
+    await expectInternalError(response);
     expect(fetchSpy).not.toHaveBeenCalled();
 });
 
@@ -53,7 +54,7 @@ test("answers a 500 and logs the Referer when the RPC fails", async () => {
     const log = jest.spyOn(console, "error").mockImplementation(() => {});
     jest.spyOn(global, "fetch").mockResolvedValue(new Response("", { status: 500, statusText: "Internal Server Error" }));
     const response = await handlerVisit(request(), context);
-    expect(response.status).toBe(500);
+    await expectInternalError(response);
     expect(log.mock.calls[0][2]).toBe("https://nicoboga.netlify.app/en/");
 });
 
@@ -67,7 +68,7 @@ test.each([["null", "null"], ["an object", '{"count":42}'], ["a string", '"42"']
 test("answers a 500 when Supabase cannot be reached", async () => {
     jest.spyOn(console, "error").mockImplementation(() => {});
     jest.spyOn(global, "fetch").mockRejectedValue(new TypeError("fetch failed"));
-    expect((await handlerVisit(request(), context)).status).toBe(500);
+    await expectInternalError(await handlerVisit(request(), context));
 });
 
 test("answers a 429 past 10 calls a minute of the same visitor, before any other work", async () => {

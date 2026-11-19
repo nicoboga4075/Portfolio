@@ -214,12 +214,18 @@ describe('the stand-in button', () => {
 });
 
 describe('the real bubble', () => {
-    test('is taken over at once when #fab-root is already mounted: the stand-in goes and the override style is appended', () => {
+    // The page of a navbar 100px high whose #fab-root is already mounted, its bubble of the given height (undefined while Botpress has not drawn it), the chatbot loaded by a click
+    function loadedBubble(bubbleHeight) {
         const page = fakePage({ navbarHeight: 100 });
-        const shadowRoot = fakeShadowRoot(50);
+        const shadowRoot = fakeShadowRoot(bubbleHeight);
         page.fabRoot = { shadowRoot };
         runScript();
         clickAndLoad(page);
+        return { page, shadowRoot };
+    }
+
+    test('is taken over at once when #fab-root is already mounted: the stand-in goes and the override style is appended', () => {
+        const { page, shadowRoot } = loadedBubble(50);
         expect(page.stub.remove).toHaveBeenCalledTimes(1);
         const style = overrideStyle(shadowRoot);
         expect(style.tagName).toBe('style');
@@ -250,20 +256,12 @@ describe('the real bubble', () => {
     });
 
     test('falls back on the --fab-size height while Botpress has not drawn its bubble', () => {
-        const page = fakePage({ navbarHeight: 100 });
-        const shadowRoot = fakeShadowRoot(undefined);
-        page.fabRoot = { shadowRoot };
-        runScript();
-        clickAndLoad(page);
+        const { shadowRoot } = loadedBubble(undefined);
         expect(overrideStyle(shadowRoot).textContent).toContain(`top: ${Math.round((100 - 60) / 2)}px !important`);
     });
 
     test('puts the override back after Botpress rebuilds its shadow root, and follows the navbar height', () => {
-        const page = fakePage({ navbarHeight: 100 });
-        const shadowRoot = fakeShadowRoot(50);
-        page.fabRoot = { shadowRoot };
-        runScript();
-        clickAndLoad(page);
+        const { page, shadowRoot } = loadedBubble(50);
         const shadowObserver = page.observers.find(o => o.targets.some(t => t.target === shadowRoot));
         expect(shadowObserver.targets[0].options).toEqual({ childList: true });
         // Botpress wipes its shadow root: the observer appends the style again
@@ -280,11 +278,7 @@ describe('the real bubble', () => {
     });
 
     test('leaves the style untouched when nothing moved, so its own write does not trigger the observer again', () => {
-        const page = fakePage({ navbarHeight: 100 });
-        const shadowRoot = fakeShadowRoot(50);
-        page.fabRoot = { shadowRoot };
-        runScript();
-        clickAndLoad(page);
+        const { page, shadowRoot } = loadedBubble(50);
         const style = overrideStyle(shadowRoot);
         const css = style.textContent;
         let writes = 0;

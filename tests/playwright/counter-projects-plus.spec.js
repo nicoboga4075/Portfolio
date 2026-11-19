@@ -1,18 +1,13 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
-const { renderInclude } = require('./render');
+const { renderCounter } = require('./render');
 
 const root = path.join(__dirname, '..', '..');
-const counter = require(path.join(root, '_data', 'counter.json'));
-const resume = require(path.join(root, '_data', 'resume.json'));
 const { profile } = require(path.join(root, 'package.json')).config;
 const css = fs.readFileSync(path.join(root, 'css', 'app.css'), 'utf8');
 
-function render(lang) {
-    // The filter .eleventy.js gives the counter partial for the years of the work experiences
-    return renderInclude('index-counter.html', { page: { fileSlug: `index_${lang}` }, siteLanguages: { default: 'en' }, viewport: 'desktop', counter, resume, profile }).replaceAll(/>\s+</g, '><');
-}
+const render = renderCounter;
 
 test.describe('delivered projects counter shown as a floor', () => {
     for (const lang of ['en', 'fr']) {
