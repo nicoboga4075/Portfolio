@@ -81,6 +81,21 @@ test("starts again at the next minute", async () => {
     expect(await isRateLimited("visit", 1, context())).toBe(false);
 });
 
+test.each([
+    ["a value that is not an object", "oops"],
+    ["a null value", null],
+    ["an entry without its window key", { count: 7 }],
+    ["an entry without its count key", { window: Math.floor(NOW.getTime() / 60_000) }],
+    ["an entry with a count that is not a number", { window: Math.floor(NOW.getTime() / 60_000), count: "7" }],
+    ["an entry with a negative count", { window: Math.floor(NOW.getTime() / 60_000), count: -2 }]
+])("counts from 0 over %s", async (_case, data) => {
+    await isRateLimited("visit", 5, context());
+    const [key] = blobs.keys();
+    blobs.set(key, { data, etag: '"old"' });
+    expect(await isRateLimited("visit", 1, context())).toBe(false);
+    expect(blobs.get(key)?.data).toEqual({ window: Math.floor(NOW.getTime() / 60_000), count: 1 });
+});
+
 test("stores the IP hashed, never in clear", async () => {
     await isRateLimited("visit", 5, context());
     const [key] = blobs.keys();

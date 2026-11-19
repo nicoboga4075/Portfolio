@@ -16,6 +16,24 @@ export function tooManyRequests(): Response {
     return jsonResponse({ error: "Too many requests" }, { status: 429, headers: { "Retry-After": String(retryAfter) } });
 }
 
+// The calls already counted in the current window from the entry Blobs holds, which may be missing, from an older window or without one of its keys
+function storedCount(data: unknown, window: number): number {
+    // No entry yet, or a value that is not an object
+    if (typeof data !== "object" || data === null) {
+        return 0;
+    }
+    const stored = data as Partial<WindowCount>;
+    // No window key, or an older window: this call starts a new one
+    if (stored.window !== window) {
+        return 0;
+    }
+    // No count key, or a count that is not a whole number of calls
+    if (!Number.isInteger(stored.count) || (stored.count as number) < 0) {
+        return 0;
+    }
+    return stored.count as number;
+}
+
 // Whether the visitor of this request has already made `limit` calls to the function `name` in the current minute, counting this call otherwise: a function keeps its default address /.netlify/functions/<name>, which the rate limit of a Netlify config cannot (it needs a path of its own); the IP is stored hashed, never in clear, and Blobs failing lets the call through rather than blocking every visitor
 export async function isRateLimited(name: string, limit: number, context: Context): Promise<boolean> {
     try {
@@ -25,8 +43,7 @@ export async function isRateLimited(name: string, limit: number, context: Contex
         // Calls at the same time read the same count: each write only goes through if the entry is still the one it read (its ETag, or no entry yet), else the call reads again, so a burst cannot overwrite its own counts
         for (let attempt = 0; attempt < MAX_TRIES; attempt++) {
             const entry = await store.getWithMetadata(key, { type: "json" });
-            const stored = entry?.data as WindowCount | undefined;
-            const count = stored?.window === window ? stored.count : 0;
+            const count = storedCount(entry?.data, window);
             if (count >= limit) {
                 return true;
             }
