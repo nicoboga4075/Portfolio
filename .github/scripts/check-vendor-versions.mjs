@@ -33,7 +33,13 @@ async function npmVersions(pkg) {
   const res = await fetch(`https://registry.npmjs.org/${pkg}`);
   if (!res.ok) throw new Error(`npm registry HTTP ${res.status}`);
   const data = await res.json();
-  return { latest: data["dist-tags"].latest, versions: Object.keys(data.versions) };
+  // No dist-tags or no latest tag: no latest version, the library is listed as unknown
+  const latest = data?.["dist-tags"]?.latest ?? null;
+  // No versions key: no published version to pick the latest of the major from
+  if (!data?.versions || typeof data.versions !== "object") {
+    return { latest, versions: [] };
+  }
+  return { latest, versions: Object.keys(data.versions) };
 }
 
 async function githubVersions(repo) {
@@ -41,7 +47,13 @@ async function githubVersions(repo) {
     headers: { "User-Agent": "vendor-version-check", Accept: "application/vnd.github+json" }
   });
   if (!res.ok) throw new Error(`GitHub API HTTP ${res.status}`);
-  const versions = (await res.json()).map(tag => tag.name.replace(/^v/, ""));
+  const tags = await res.json();
+  // Not a list of tags: no version
+  if (!Array.isArray(tags)) {
+    return { latest: null, versions: [] };
+  }
+  // A tag without its name is skipped
+  const versions = tags.filter(tag => typeof tag?.name === "string").map(tag => tag.name.replace(/^v/, ""));
   return { latest: versions[0] ?? null, versions };
 }
 

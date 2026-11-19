@@ -109,6 +109,13 @@ describe('routes', () => {
         expect(Object.fromEntries(routes)).toEqual(cases);
     });
 
+    test.each([['no routes meta', null], ['a routes meta without content', { content: '' }], ['a routes meta that is not JSON', { content: '{oops' }]])('are empty on a page with %s', (_case, meta) => {
+        fakePage({ metas: { 'meta[name="routes"]': meta } });
+        const helpers = load();
+        expect(helpers.appRoutes).toEqual({});
+        expect(() => helpers.getCurrentRoute()).not.toThrow();
+    });
+
     test('read the languages of the switcher, the page language and the remembered hash', () => {
         fakePage({ lang: 'fr', languages: ['en', 'fr', 'es'] });
         const helpers = load();

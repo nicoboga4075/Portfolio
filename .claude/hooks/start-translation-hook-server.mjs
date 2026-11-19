@@ -15,7 +15,8 @@ const PORT = Number(new URL(hookUrl).port);
 async function runningRoot() {
     try {
         const res = await fetch(`http://localhost:${PORT}/health`, { signal: AbortSignal.timeout(1000) });
-        return res.ok ? (await res.json()).root : null;
+        // A server that does not answer, or an answer without its root key: no running server known
+        return res.ok ? (await res.json())?.root ?? null : null;
     } catch {
         return null;
     }

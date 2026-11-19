@@ -1,7 +1,21 @@
 // Shared helpers loaded before both standalone.js (light pages) and app.js (index/blog): the code that was identical (or trivially reconcilable) in both.
 
 // The routes of package.json (config.appRoutes), written into the routes meta of every page by base.njk; light pages only ever match policy, terms and error404, and the "/{lng}" or "/{lng}/blog" patterns of index and blog cannot match their paths
-const appRoutes = JSON.parse(document.querySelector('meta[name="routes"]').content);
+function readRoutes() {
+    const meta = document.querySelector('meta[name="routes"]');
+    // No routes meta, or one without content: no route, so no page is matched and no redirect link is set
+    if (!meta?.content) {
+        return {};
+    }
+    try {
+        return JSON.parse(meta.content);
+    } catch {
+        // A content that is not JSON: no route either
+        return {};
+    }
+}
+
+const appRoutes = readRoutes();
 
 // The pages that restore the remembered #hash, whose own link resets it on click instead of being marked as the current page
 const hashRoutes = new Set(['index', 'blog']);

@@ -163,12 +163,21 @@ function jsonLd({ page, lang, title, description, image, author }) {
     let data = null;
     // Home: who the author is, and the site itself
     if (slug === "index") {
-        const roles = JSON.parse(plainText(readData("hero")[lang].roles));
-        // Every school of the resume's education, with its link in the page's language
-        const alumniOf = readData("resume").education.map(school => ({ "@type": "EducationalOrganization", name: school.school, url: inLang(school.href, lang) }));
+        const hero = readData("hero")[lang];
+        let roles = [];
+        // No hero texts in this language, or no roles: no job title
+        if (hero?.roles) {
+            try {
+                roles = JSON.parse(plainText(hero.roles));
+            } catch {
+                // Roles that are not JSON: no job title either
+            }
+        }
+        // Every school of the resume's education, with its link in the page's language; none when the resume has no education key
+        const alumniOf = (readData("resume").education ?? []).map(school => ({ "@type": "EducationalOrganization", name: school.school, url: inLang(school.href, lang) }));
         data = {
             "@graph": [
-                { ...person, jobTitle: roles[0].replace(/\.$/, ""), description: plainText(description), alumniOf },
+                { ...person, jobTitle: roles[0]?.replace(/\.$/, ""), description: plainText(description), alumniOf },
                 { "@type": "WebSite", "@id": `${site}/#website`, name: pkg.name, url: site, inLanguage: langs.map(code => locales[code].replace("_", "-")), author: { "@id": `${site}/#person` } }
             ]
         };

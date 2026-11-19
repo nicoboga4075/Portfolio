@@ -22,7 +22,12 @@ async function ciChecks(repository, sha) {
     try {
         const res = await fetch(`https://api.github.com/repos/${repository}/commits/${sha}/check-runs`, { headers: { Accept: 'application/vnd.github+json' }, signal: AbortSignal.timeout(15000) });
         if (!res.ok) return { error: `GitHub API ${res.status}` };
-        return (await res.json()).check_runs.map(run => ({ name: run.name, status: run.status, conclusion: run.conclusion }));
+        const data = await res.json();
+        // No check_runs key: no check reported yet
+        if (!Array.isArray(data?.check_runs)) {
+            return [];
+        }
+        return data.check_runs.map(run => ({ name: run.name, status: run.status, conclusion: run.conclusion }));
     } catch (error) {
         return { error: error.message };
     }
@@ -32,7 +37,13 @@ function qualityGate(root) {
     const run = spawnSync('sonar', ['quality-gate', 'status', '--format', 'json'], { cwd: root, encoding: 'utf8', timeout: 60000, shell: process.platform === 'win32' });
     try {
         const gate = JSON.parse(run.stdout).qualityGate;
-        return { status: gate.status, failing: gate.conditions.filter(c => c.status !== 'OK').map(c => `${c.metricName ?? c.metric}: ${c.formattedActualValue ?? c.actualValue} (needs ${c.comparator === 'LT' ? '≥' : '≤'} ${c.formattedThreshold ?? c.threshold})`) };
+        // No qualityGate key: the status is unknown
+        if (!gate) {
+            return { status: 'UNKNOWN', failing: [] };
+        }
+        // No conditions key: nothing failing to list
+        const conditions = Array.isArray(gate.conditions) ? gate.conditions : [];
+        return { status: gate.status ?? 'UNKNOWN', failing: conditions.filter(c => c.status !== 'OK').map(c => `${c.metricName ?? c.metric}: ${c.formattedActualValue ?? c.actualValue} (needs ${c.comparator === 'LT' ? '≥' : '≤'} ${c.formattedThreshold ?? c.threshold})`) };
     } catch {
         return { error: 'sonar CLI unavailable or not logged in (sonar auth login)' };
     }

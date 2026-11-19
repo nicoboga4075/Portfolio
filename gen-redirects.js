@@ -12,8 +12,8 @@ const path = require("node:path");
 const { locales, defaultLang, appRoutes } = require("./package.json").config;
 // The sections, the pages of the root served at /<lang>/<name> from <name>_<lang>.html: the routes of config.appRoutes except the home and the 404 page
 const sections = Object.keys(appRoutes).filter(name => !["index", "error404"].includes(name));
-// The projects with a page of their own, from the explore of their _data/projects.json card
-const projects = require("./projects/resolve-projects")(JSON.parse(fs.readFileSync(path.join(__dirname, "_data", "projects.json"), "utf8")).cards);
+// The projects with a page of their own, from the explore of their _data/projects.json card; none when the file has no cards key
+const projects = require("./projects/resolve-projects")(JSON.parse(fs.readFileSync(path.join(__dirname, "_data", "projects.json"), "utf8")).cards ?? []);
 const langs = Object.keys(locales);
 
 // pretty url -> real file (rewrite, 200). No source file exists at these paths, so no force flag.

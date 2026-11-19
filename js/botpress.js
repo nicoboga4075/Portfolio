@@ -58,9 +58,26 @@ function watchBotpressFab(shadowRoot) {
 	}
 }
 
+// Whether the chat started loading: not when the botpress meta lacks a script address
 function loadBotpress() {
 	// The script addresses of config.botpress in package.json, written into the botpress meta by base.njk
-	const scripts = JSON.parse(document.querySelector('meta[name="botpress"]').content);
+	const meta = document.querySelector('meta[name="botpress"]');
+	// No botpress meta, or one without content: the chat cannot load
+	if (!meta?.content) {
+		console.warn('Botpress: no botpress meta on the page');
+		return false;
+	}
+	let scripts = null;
+	try {
+		scripts = JSON.parse(meta.content);
+	} catch {
+		// A content that is not JSON: no script address, warned below
+	}
+	// No inject or bot script address: the chat cannot load
+	if (!scripts?.inject?.src || !scripts.bot) {
+		console.warn('Botpress: the botpress meta lacks the inject or bot script address');
+		return false;
+	}
 	const injectScript = document.createElement('script');
 	injectScript.src = scripts.inject.src;
 	injectScript.integrity = scripts.inject.integrity;
@@ -94,6 +111,7 @@ function loadBotpress() {
 		observer.observe(document.body, { childList: true, subtree: true });
 	};
 	document.head.appendChild(injectScript);
+	return true;
 }
 
 // Botpress (~300 KB of React) only loads when the visitor clicks the stand-in bubble, with the third-party services allowed; base.njk renders it and app.css shows it from 1024px.
@@ -111,8 +129,10 @@ if (bpFabStub) {
 	bpFabStub.addEventListener('click', function onStubClick() {
 		whenConsented('services', function () {
 			bpFabStub.removeEventListener('click', onStubClick);
-			bpFabStub.setAttribute('aria-busy', 'true');
-			loadBotpress();
+			// Busy only while the chat loads, not when it cannot
+			if (loadBotpress()) {
+				bpFabStub.setAttribute('aria-busy', 'true');
+			}
 		});
 	});
 }

@@ -16,7 +16,7 @@ function fakeShadowRoot(fabHeight) {
 }
 
 // A minimal document: the stand-in button (unless stub is false), the navbar (unless navbarHeight is null), the botpress meta, #fab-root once set, the head where the scripts are appended, and every observer created, with its callback and what it observes
-function fakePage({ stub: withStub = true, navbarHeight = 100 } = {}) {
+function fakePage({ stub: withStub = true, navbarHeight = 100, meta = { content: JSON.stringify(scripts) } } = {}) {
     const appended = [];
     const observers = [];
     const stub = {
@@ -60,7 +60,7 @@ function fakePage({ stub: withStub = true, navbarHeight = 100 } = {}) {
         head: { appendChild: jest.fn(script => appended.push(script)) },
         body: { tagName: 'body' },
         documentElement: { lang: 'fr' },
-        querySelector: jest.fn(selector => (selector === 'meta[name="botpress"]' ? { content: JSON.stringify(scripts) } : null)),
+        querySelector: jest.fn(selector => (selector === 'meta[name="botpress"]' ? meta : null)),
         getElementById: jest.fn(id => ({ 'bp-fab-stub': withStub ? stub : null, 'ftco-navbar': navbar, 'fab-root': page.fabRoot })[id] ?? null)
     };
     global.botpress = { on: jest.fn(), open: jest.fn(), updateUser: jest.fn(() => Promise.resolve()) };
@@ -137,6 +137,23 @@ describe('the stand-in button', () => {
         expect(page.appended[0].src).toBe(scripts.inject.src);
         expect(page.appended[0].integrity).toBe(scripts.inject.integrity);
         expect(page.appended[0].crossOrigin).toBe('anonymous');
+    });
+
+    test.each([
+        ['no botpress meta', null, 'Botpress: no botpress meta on the page'],
+        ['a meta without content', { content: '' }, 'Botpress: no botpress meta on the page'],
+        ['a meta without the inject script', { content: JSON.stringify({ bot: scripts.bot }) }, 'Botpress: the botpress meta lacks the inject or bot script address'],
+        ['a meta without the bot script', { content: JSON.stringify({ inject: scripts.inject }) }, 'Botpress: the botpress meta lacks the inject or bot script address'],
+        ['a meta that is not JSON', { content: '{oops' }, 'Botpress: the botpress meta lacks the inject or bot script address']
+    ])('loads nothing, with a warning and without a busy stand-in, on a page with %s', (_case, meta, message) => {
+        const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        const page = fakePage({ meta });
+        runScript();
+        page.stub.listeners.click();
+        expect(page.appended).toHaveLength(0);
+        expect(page.stub.attrs['aria-busy']).toBeUndefined();
+        expect(warn).toHaveBeenCalledWith(message);
+        warn.mockRestore();
     });
 
     test('appends the bot script, without a hash, only once inject.js has loaded, and opens the chat when it is initialized', () => {

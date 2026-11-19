@@ -663,6 +663,16 @@ describe('the home page', () => {
         expect(observer.disconnect).toHaveBeenCalledTimes(1);
     });
 
+    test('draws the skills chart without labels when the canvas has no data-labels', async () => {
+        const app = loadApp({ body: '<canvas id="skills-chart" data-title="Time"></canvas>' });
+        const Chart = installChart();
+        app.initIndexPage('en');
+        const canvas = document.getElementById('skills-chart');
+        observerOf(canvas).callback([{ isIntersecting: true }]);
+        await flush();
+        expect(Chart.getChart(canvas).data.labels).toEqual([]);
+    });
+
     test('keeps watching the skills chart when Chart.js cannot be fetched, to retry', async () => {
         const app = loadApp({ body: chartBody });
         app.initIndexPage('en');
@@ -1994,10 +2004,10 @@ describe('the globe of the visited countries', () => {
     }
 
     // Loads app.js on the globe, brings it into view and answers the map and the three scripts; frame() runs the pending animation frames
-    async function startGlobe({ ratio = 2, still = false, map = world } = {}) {
+    async function startGlobe({ ratio = 2, still = false, map = world, body = globeBody } = {}) {
         context = fakeContext();
         const app = loadApp({
-            body: globeBody,
+            body,
             before: () => {
                 window.matchMedia = jest.fn(() => ({ matches: still }));
             }
@@ -2071,6 +2081,16 @@ describe('the globe of the visited countries', () => {
         expect(context.fillStyle).toBe('#102030');
     });
 
+    test('draws no visited country nor dot without data-countries, and no dot for a country without its coords', async () => {
+        await startGlobe({ body: '<div class="col-12"><canvas id="globe" width="420" height="420"></canvas></div>' });
+        expect(path.mock.calls[3][0].features).toEqual([]);
+        expect(context.arc).not.toHaveBeenCalled();
+        path.mockClear();
+        await startGlobe({ body: `<div class="col-12"><canvas id="globe" width="420" height="420" data-countries='[{"iso":"250"}]'></canvas></div>` });
+        expect(path.mock.calls[3][0].features.map(feature => feature.id)).toEqual(['250']);
+        expect(context.arc).not.toHaveBeenCalled();
+    });
+
     test('draws at one pixel per point on a screen that gives no density', async () => {
         await startGlobe({ ratio: 0 });
         expect(canvas().width).toBe(420);
@@ -2139,5 +2159,16 @@ describe('the globe of the visited countries', () => {
         expect(warn).toHaveBeenCalledWith('Globe not drawn:', expect.objectContaining({ message: 'js/countries-110m.json: HTTP 404' }));
         expect(canvas().closest('.col-12').hidden).toBe(true);
         expect(canvas().dataset.loading).toBeUndefined();
+    });
+});
+
+describe('the metas of base.njk', () => {
+    test('reads the JSON of a meta, or the fallback when the page lacks it or its content', () => {
+        const app = loadApp();
+        expect(app.appMetaJson('articles', null)).toEqual(app.appArticles);
+        expect(app.appMetaJson('missing', [])).toEqual([]);
+        document.head.insertAdjacentHTML('beforeend', '<meta name="empty" content=""><meta name="broken" content="{oops">');
+        expect(app.appMetaJson('empty', {})).toEqual({});
+        expect(app.appMetaJson('broken', [])).toEqual([]);
     });
 });

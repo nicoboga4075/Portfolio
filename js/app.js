@@ -44,7 +44,26 @@ const carouselItems = {
     '#soft-skills': { 0: { items: 1 }, 576: { items: 2 }, 992: { items: 3 }, 1200: { items: 4 } }
 };
 
-const appArticles = JSON.parse($('meta[name="articles"]').attr('content'));
+// The value of a JSON text the build writes (a meta, a data attribute), or the fallback when the text is missing or is not JSON
+function appParseJson(text, fallback) {
+    // No text, or an empty one
+    if (!text) {
+        return fallback;
+    }
+    try {
+        return JSON.parse(text);
+    } catch {
+        // A text that is not JSON
+        return fallback;
+    }
+}
+
+// The JSON of a meta that base.njk writes, or the fallback when the page lacks the meta, its content, or valid JSON
+function appMetaJson(name, fallback) {
+    return appParseJson($(`meta[name="${name}"]`).attr('content'), fallback);
+}
+
+const appArticles = appMetaJson('articles', []);
 
 const appKeywords = [
     // Frontend
@@ -255,7 +274,7 @@ const appKeywords = [
     "Survey Magazine",
     "OpenClassrooms",
     // Main Cities, from config.authorCities of package.json (the author-cities meta of base.njk)
-    ...JSON.parse($('meta[name="author-cities"]').attr('content')),
+    ...appMetaJson('author-cities', []),
     // Editor Softwares
     "Ethnos",
     "Web Reports",
@@ -283,7 +302,7 @@ const appKeywords = [
 ];
 
 // Visitor-facing strings needed at runtime (app.js only - standalone.js pages don't load i18next), authored once in _data/messages.json and embedded by base.njk into the <meta name="i18n-messages"> tag (same pattern as appArticles below). Page language is fixed server-side (separate _en/_fr builds), so init runs synchronously (initImmediate: false) and getMessage() can call t() right away without awaiting the init promise.
-const appI18nMessages = JSON.parse($('meta[name="i18n-messages"]').attr('content'));
+const appI18nMessages = appMetaJson('i18n-messages', {});
 const appI18nResources = Object.keys(appI18nMessages).reduce((resources, key) => {
     Object.entries(appI18nMessages[key]).forEach(([lng, value]) => {
         resources[lng] ??= { translation: {} };
@@ -1242,10 +1261,11 @@ function createCircularChart({
         }, delta);
     };
     $('.txt-rotate').each(function () {
-        const toRotate = $(this).attr('data-rotate');
+        const toRotate = appParseJson($(this).attr('data-rotate'), null);
         const period = $(this).attr('data-period');
+        // No data-rotate, or one that is not JSON: the text stays as written
         if (toRotate) {
-            this.txtRotate = new TxtRotate($(this), JSON.parse(toRotate), period);
+            this.txtRotate = new TxtRotate($(this), toRotate, period);
         }
     });
 
@@ -1364,7 +1384,7 @@ function initExperienceFilters() {
     ];
     groups.forEach(g => { g.values = new Set(); });
     // Every contract of the site is a chip, in the order of resume.json, even one no experience has yet (data-contracts of #experiences)
-    JSON.parse(container.dataset.contracts || '[]').forEach(contract => groups[0].values.add(contract));
+    appParseJson(container.dataset.contracts, []).forEach(contract => groups[0].values.add(contract));
 
     wraps.forEach(wrap => {
         groups.forEach(g => {
@@ -1642,7 +1662,7 @@ function initIndexPage(langPage) {
                         canvasId: 'skills-chart',
                         data: [45, 25, 15, 10, 5],
                         backgroundColor: [cssVar('--blue'), cssVar('--orange'), cssVar('--green'), cssVar('--red'), cssVar('--purple')],
-                        labels: JSON.parse(skillsChartCanvas.dataset.labels),
+                        labels: appParseJson(skillsChartCanvas.dataset.labels, []),
                         title: skillsChartCanvas.dataset.title,
                         subtitle: skillsChartCanvas.dataset.subtitle,
                         centerText: skillsChartCanvas.dataset.center
@@ -2184,7 +2204,8 @@ function createGlobe(canvas, world) {
     canvas.width = canvas.height = size * ratio;
     const context = canvas.getContext('2d');
     context.scale(ratio, ratio);
-    const visits = JSON.parse(canvas.dataset.countries);
+    // No data-countries, or one that is not JSON: no visited country, the globe shows the land alone
+    const visits = appParseJson(canvas.dataset.countries, []);
     const ids = new Set(visits.map(country => country.iso));
     const countries = topojson.feature(world, world.objects.countries).features;
     const projection = d3.geoOrthographic().scale(size / 2 - 2).translate([size / 2, size / 2]).rotate([-10, -40]).clipAngle(90);
@@ -2198,7 +2219,8 @@ function createGlobe(canvas, world) {
         visited: { type: 'FeatureCollection', features: countries.filter(country => ids.has(country.id)) },
         borders: topojson.mesh(world, world.objects.countries, (a, b) => a !== b),
         graticule: d3.geoGraticule10(),
-        points: visits.map(country => country.coords),
+        // A country without its coords gets no dot
+        points: visits.filter(country => Array.isArray(country.coords)).map(country => country.coords),
         colors: globeColors(),
         dragging: false,
         visible: true,
