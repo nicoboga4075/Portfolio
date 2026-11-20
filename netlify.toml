@@ -15,22 +15,7 @@
   staticServerPort = 3999
 
 # The HTML is minified by the Eleventy transform of .eleventy.js on the production build (CONTEXT), on the rendered pages only: netlify-plugin-minify-html minified every *.html of the publish folder, the Nunjucks partials of _includes/ included
-[[context.production.plugins]]
-  package = "netlify-plugin-inline-critical-css"
-
-  [context.production.plugins.inputs]
-    fileFilter = ["*.html"]
-    directoryFilter = ["!node_modules"]
-    extract = false
-    # One headless browser pass per size and page: above 1920 the above-the-fold CSS barely changes, so larger screens only slow the build
-    dimensions = [
-      { width = 360, height = 740 },   # Small phone
-      { width = 414, height = 896 },   # Large phone
-      { width = 768, height = 1024 },  # Tablet
-      { width = 1366, height = 768 },  # Laptop
-      { width = 1920, height = 1080 }  # Desktop
-    ]
-
+# The critical CSS is inlined by inline-critical.mjs, the last step of npm run build on the production build (CONTEXT), with beasties: netlify-plugin-inline-critical-css, unmaintained, pulled Puppeteer 2 and its vulnerable extract-zip
 [[context.production.plugins]]
   package = "@netlify/plugin-lighthouse"
 

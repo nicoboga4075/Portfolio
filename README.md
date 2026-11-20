@@ -33,6 +33,7 @@ Portfolio/
 ├── .eleventy.js                   Eleventy configuration (also writes sitemap.xml, feed_*.xml and api/*.json)
 ├── gen-redirects.js               Writes _redirects from config of package.json
 ├── uglify-code.js                 Minifies the site scripts after the build
+├── inline-critical.mjs            Inlines the critical CSS of every page with beasties, last step of the Netlify production build
 ├── hide-folders.js                Hides the generated folders (.eleventy, .netlify, .playwright-mcp, api, logs, node_modules, reports) after each build, each npm install (postinstall), each Playwright MCP call (hook of .claude/settings.json) or with npm run hide:folders: hidden attribute on Windows, hidden flag on macOS, .hidden file on Linux
 ├── work-years.js                  The years of a job on the back of the work experiences counter
 ├── experience-period.js           The months and the status of each experience of api/experiences.json

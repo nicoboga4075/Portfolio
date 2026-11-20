@@ -1,0 +1,79 @@
+// inline-critical.mjs: the critical CSS inlined with beasties in the built pages of a temporary site, and the skip outside the Netlify production build.
+const { test, expect } = require('@playwright/test');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+const { execFileSync } = require('node:child_process');
+const { pathToFileURL } = require('node:url');
+
+const script = path.join(__dirname, '..', '..', 'inline-critical.mjs');
+const load = () => import(pathToFileURL(script).href);
+
+const css = 'body{margin:0}.used{color:red}.unused{color:blue}html.dark-mode{--bg:#000}html.dark-mode body{color:#fff}html.dark-mode .used{color:pink}html.dark-modes{color:gray}.ftco-animated{visibility:visible}.fadeInUp{animation-name:fadeInUp}@keyframes fadeInUp{to{opacity:1}}';
+const page = '<!DOCTYPE html><html><head><base href="../"><link rel="stylesheet" href="css/site.css"></head><body><p class="used">Hi</p></body></html>';
+
+// A built site: pages at the root, in articles/ and projects/, and HTML that is not a page
+function site() {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'inline-critical-'));
+    for (const folder of ['css', 'articles', 'projects', '_includes']) {
+        fs.mkdirSync(path.join(dir, folder));
+    }
+    fs.writeFileSync(path.join(dir, 'css', 'site.css'), css);
+    for (const file of ['index_en.html', 'index_fr.html', '404.html', 'articles/mcs_en.html', 'projects/crm_fr.html', '_includes/nav.html', 'notes.html', 'index_de.html']) {
+        fs.writeFileSync(path.join(dir, file), page);
+    }
+    return dir;
+}
+
+test.describe('inline-critical', () => {
+    test('lists the pages Eleventy writes in every language, never a partial or another HTML file', async () => {
+        const { builtPages } = await load();
+        const dir = site();
+        try {
+            expect(builtPages(dir).map(file => path.relative(dir, file).replaceAll('\\', '/')).sort()).toEqual(['404.html', 'articles/mcs_en.html', 'index_en.html', 'index_fr.html', 'projects/crm_fr.html']);
+        } finally {
+            fs.rmSync(dir, { recursive: true, force: true });
+        }
+    });
+
+    test('inlines the rules a page uses and those of the classes the scripts add (dark theme, scroll reveal), and loads the stylesheet without blocking', async () => {
+        const { inlineCritical } = await load();
+        const dir = site();
+        try {
+            expect(await inlineCritical(dir)).toBe(5);
+            const html = fs.readFileSync(path.join(dir, 'articles', 'mcs_en.html'), 'utf8');
+            const style = html.match(/<style>([^<]*)<\/style>/)[1];
+            expect(style).toContain('.used{color:red}');
+            expect(style).toContain('body{margin:0}');
+            expect(style).toContain('html.dark-mode{--bg:#000}');
+            expect(style).toContain('html.dark-mode body{color:#fff}');
+            expect(style).toContain('html.dark-mode .used{color:pink}');
+            expect(style).toContain('.ftco-animated{visibility:visible}');
+            expect(style).toContain('.fadeInUp{animation-name:fadeInUp}');
+            expect(style).toContain('@keyframes fadeInUp');
+            expect(style).not.toContain('.unused');
+            expect(style).not.toContain('gray');
+            expect(html).toMatch(/<link rel="stylesheet" href="css\/site.css" media="print" onload="this.media='all'">/);
+            expect(html).toContain('<noscript><link rel="stylesheet" href="css/site.css"></noscript>');
+            // The stylesheet itself is left whole, and the HTML that is not a page untouched
+            expect(fs.readFileSync(path.join(dir, 'css', 'site.css'), 'utf8')).toBe(css);
+            expect(fs.readFileSync(path.join(dir, '_includes', 'nav.html'), 'utf8')).toBe(page);
+        } finally {
+            fs.rmSync(dir, { recursive: true, force: true });
+        }
+    });
+
+    test('skips outside the Netlify production build, and runs on the folder it is given', () => {
+        const dir = site();
+        try {
+            const env = { ...process.env };
+            delete env.CONTEXT;
+            const skipped = execFileSync(process.execPath, [script], { env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+            expect(skipped).toBe('');
+            execFileSync(process.execPath, [script, dir], { env, stdio: 'ignore' });
+            expect(fs.readFileSync(path.join(dir, 'index_fr.html'), 'utf8')).toContain('<style>');
+        } finally {
+            fs.rmSync(dir, { recursive: true, force: true });
+        }
+    });
+});
