@@ -73,6 +73,7 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /changelog.hbs /404.html 404!
 /gen-redirects.js /404.html 404!
 /uglify-code.js /404.html 404!
+/inline-critical.mjs /404.html 404!
 /dev-watch.js /404.html 404!
 /html-validate-nunjucks.js /404.html 404!
 /update-version.js /404.html 404!

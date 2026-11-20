@@ -43,10 +43,9 @@ export async function inlineCritical(dir) {
         compress: true,
         logLevel: 'warn'
     });
+    // Every page at once: each one is read, processed and written on its own
     const pages = builtPages(dir);
-    for (const file of pages) {
-        await inlinePage(beasties, file);
-    }
+    await Promise.all(pages.map(file => inlinePage(beasties, file)));
     return pages.length;
 }
 
