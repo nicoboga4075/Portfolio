@@ -32,11 +32,12 @@ test.describe('serve-build output folder', () => {
 
     test.afterAll(() => fs.rmSync(full, { recursive: true, force: true }));
 
-    test('a folder of reports/ is served instead of .eleventy', async () => {
+    // Through Playwright's request, not fetch: in the Playwright image of the CI, localhost resolves to ::1 for the server and fetch only tries 127.0.0.1
+    test('a folder of reports/ is served instead of .eleventy', async ({ request }) => {
         const { child, text, port } = await start(folder);
         try {
             expect(text).toContain(`Serving ${folder} on`);
-            const response = await fetch(`http://localhost:${port}/probe.txt`);
+            const response = await request.get(`http://localhost:${port}/probe.txt`);
             expect(await response.text()).toBe('from the moved build');
         } finally {
             child.kill();
