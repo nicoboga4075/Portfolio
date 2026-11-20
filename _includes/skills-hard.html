@@ -59,7 +59,7 @@
     { key: "lang-es",    label: { en: "Spanish", fr: "Espagnol" }, categories: ["spoken"] }
 ] -%}
 {#- Above the carousel, one button per category that keeps only its tools, and one that shows them all, each with its number in brackets; shown with the hard skills only (initSkillFilter of js/app.js) #}
-<div id="hard-skills-filter" class="skill-filter" data-target="#hard-skills" role="group" aria-label="{{ skills.carousel[lang].hardFilterLabel }}">
+<fieldset id="hard-skills-filter" class="skill-filter" data-target="#hard-skills"><legend class="sr-only">{{ skills.carousel[lang].hardFilterLabel }}</legend>
     <button type="button" data-filter="" aria-pressed="true">{{ filterIcon(skills.hardFilterIcons.all) }}{{ skills.carousel[lang].hardFilterAll }} ({{ hardSkills | length }})</button>
     {#- The categories from the most tools to the fewest, a tie in the order of hardCategories #}
     {%- set categories = [] %}
@@ -71,7 +71,7 @@
     {%- for c in categories | sort(true, false, "count") %}
     <button type="button" data-filter="{{ c.key }}" aria-pressed="false">{{ filterIcon(skills.hardFilterIcons[c.key]) }}{{ c.name }} ({{ c.count }})</button>
     {%- endfor %}
-</div>
+</fieldset>
 <div id="hard-skills" class="owl-carousel owl-theme">
     {%- for s in hardSkills %}
     {%- set label = s.label[lang] or s.label %}

@@ -95,7 +95,7 @@ test.describe('hard skills carousel', () => {
             expect(categories).toHaveLength(items(html).length);
             // From the most tools to the fewest, a tie in the order of hardCategories (a stable sort)
             const buttons = Object.entries(carousel.hardCategories).map(([key, name]) => [key, name, categories.filter(list => list.includes(key)).length]).toSorted((a, b) => b[2] - a[2]).map(([key, name, number]) => `<button type="button" data-filter="${key}" aria-pressed="false"><i class="${skillsData.hardFilterIcons[key]}" aria-hidden="true"></i>${name.replaceAll('&', '&amp;')} (${number})</button>`).join('');
-            expect(html).toContain(`<div id="hard-skills-filter" class="skill-filter" data-target="#hard-skills" role="group" aria-label="${carousel.hardFilterLabel}"><button type="button" data-filter="" aria-pressed="true"><i class="${skillsData.hardFilterIcons.all}" aria-hidden="true"></i>${carousel.hardFilterAll} (${categories.length})</button>${buttons}</div><div id="hard-skills"`);
+            expect(html).toContain(`<fieldset id="hard-skills-filter" class="skill-filter" data-target="#hard-skills"><legend class="sr-only">${carousel.hardFilterLabel}</legend><button type="button" data-filter="" aria-pressed="true"><i class="${skillsData.hardFilterIcons.all}" aria-hidden="true"></i>${carousel.hardFilterAll} (${categories.length})</button>${buttons}</fieldset><div id="hard-skills"`);
             // Every category has tools, and a tool belongs to known categories only
             for (const key of Object.keys(carousel.hardCategories)) expect(categories.some(list => list.includes(key))).toBe(true);
             for (const list of categories) for (const key of list) expect(Object.keys(carousel.hardCategories)).toContain(key);

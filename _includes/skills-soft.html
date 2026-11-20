@@ -4,7 +4,7 @@
 {%- if icon.startsWith("icon-") %}<i class="{{ icon }}" aria-hidden="true"></i>{% else %}<span class="filter-emoji" aria-hidden="true">{{ icon }}</span>{% endif -%}
 {%- endmacro -%}
 {#- Above the carousel, one button per family of skills (categories of each skill, skills.carousel softCategories) that keeps only its cards, and one that shows them all, each with its number in brackets, from the most cards to the fewest; shown with the soft skills only (initSkillFilter of js/app.js) #}
-<div class="skill-filter d-none" data-target="#soft-skills" role="group" aria-label="{{ skills.carousel[lang].softFilterLabel }}">
+<fieldset class="skill-filter d-none" data-target="#soft-skills"><legend class="sr-only">{{ skills.carousel[lang].softFilterLabel }}</legend>
     <button type="button" data-filter="" aria-pressed="true">{{ filterIcon(skills.softFilterIcons.all) }}{{ skills.carousel[lang].hardFilterAll }} ({{ skills.soft | length }})</button>
     {%- set families = [] %}
     {%- for key, name in skills.carousel[lang].softCategories %}
@@ -15,7 +15,7 @@
     {%- for f in families | sort(true, false, "count") %}
     <button type="button" data-filter="{{ f.key }}" aria-pressed="false">{{ filterIcon(skills.softFilterIcons[f.key]) }}{{ f.name }} ({{ f.count }})</button>
     {%- endfor %}
-</div>
+</fieldset>
 <div id="soft-skills" class="owl-carousel owl-theme d-none">
     {%- for s in skills.soft %}
     {#- A card locked on its skill: only its padlock, in the top right corner, turns it over and unlocks the experiences that prove it, one per line as on the CV #}

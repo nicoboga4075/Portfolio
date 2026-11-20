@@ -32,7 +32,7 @@ test.describe('soft skills cards', () => {
             const icon = key => `<i class="${skills.softFilterIcons[key]}" aria-hidden="true"></i>`;
             // From the most cards to the fewest, a tie in the order of softCategories (a stable sort)
             const buttons = Object.entries(carousel.softCategories).map(([key, name]) => [key, name, skills.soft.filter(skill => skill.categories.includes(key)).length]).toSorted((a, b) => b[2] - a[2]).map(([key, name, number]) => `<button type="button" data-filter="${key}" aria-pressed="false">${icon(key)}${escapeHtml(name)} (${number})</button>`).join('');
-            expect(html).toContain(`<div class="skill-filter d-none" data-target="#soft-skills" role="group" aria-label="${carousel.softFilterLabel}"><button type="button" data-filter="" aria-pressed="true">${icon('all')}${carousel.hardFilterAll} (${skills.soft.length})</button>${buttons}</div><div id="soft-skills"`);
+            expect(html).toContain(`<fieldset class="skill-filter d-none" data-target="#soft-skills"><legend class="sr-only">${carousel.softFilterLabel}</legend><button type="button" data-filter="" aria-pressed="true">${icon('all')}${carousel.hardFilterAll} (${skills.soft.length})</button>${buttons}</fieldset><div id="soft-skills"`);
             for (const skill of skills.soft) {
                 expect(skill.categories.length).toBeGreaterThan(0);
                 for (const key of skill.categories) expect(carousel.softCategories[key]).toBeTruthy();

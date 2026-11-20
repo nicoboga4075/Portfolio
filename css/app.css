@@ -1711,6 +1711,12 @@ html.dark-mode .btn-outline-primary:active {
     transform: scaleX(1);
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .ftco-navbar-light .navbar-nav>.nav-item>.nav-link span::before {
+        transition: none;
+    }
+}
+
 @media (max-width: 991.98px) {
     .ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
         padding: 0 0 16px;
@@ -4431,6 +4437,13 @@ html.dark-mode a.hero-availability:focus-visible {
     animation: shake 0.5s;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .victory,
+    .defeat {
+        animation: none;
+    }
+}
+
 @keyframes blink {
     from {
         opacity: 1;
@@ -5049,6 +5062,7 @@ html.dark-mode {
     display: inline-block;
     width: 100%;
     max-width: 420px;
+    margin: 0;
 }
 
 /* The name of the dot under the pointer or the finger, above the dot, in the style of the Bootstrap tooltips of the site */

@@ -400,6 +400,13 @@ body.read-zone h1 {
     animation-range: contain 0% contain 100%;
 }
 
+/* For a visitor who asks for less motion the car stays still at the start of the road */
+@media (prefers-reduced-motion: reduce) {
+    #car {
+        animation: none;
+    }
+}
+
 @keyframes drive-car {
     from {
         top: 0%;
@@ -467,6 +474,12 @@ body.read-zone h1 {
     aspect-ratio: 1;
     animation: rotate 8s infinite alternate;
     transform-style: preserve-3d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .box-rotate {
+        animation: none;
+    }
 }
 
 .img-rotate {
@@ -563,6 +576,16 @@ html.dark-mode .card a {
 .card:hover {
     transform: translateY(-8px);
     box-shadow: 0 0 12px var(--shadow-lg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card {
+        transition: none;
+    }
+
+    .card:hover {
+        transform: none;
+    }
 }
 
 .bien {

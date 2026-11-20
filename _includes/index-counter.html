@@ -21,7 +21,7 @@
                         </div>
                         <div class="soft-card-face soft-card-back" aria-hidden="true" inert>
                             {#- Above the list, one button per subject (counterLang.certifCategories) that keeps only its certifications, and one that shows them all, each with its number in brackets (initCounterFilters of js/app.js) #}
-                            <div class="counter-filter" role="group" aria-label="{{ counterLang.certifsFilterLabel }}">
+                            <fieldset class="counter-filter"><legend class="sr-only">{{ counterLang.certifsFilterLabel }}</legend>
                                 {#- Each button of a filter after its icon (certifFilterIcons, experienceFilterIcons, continentFilterIcons of counter.json) #}
                                 <button type="button" data-filter="" aria-pressed="true">{{ filterIcon(counter.certifFilterIcons.all) }}{{ counterLang.filterAll }} ({{ counter.certifList | length }})</button>
                                 {%- set byCategory = counter.certifList | groupby("category") %}
@@ -31,7 +31,7 @@
                                 {%- for g in groups | sort(true, false, "count") %}
                                 <button type="button" data-filter="{{ g.key }}" aria-pressed="false">{{ filterIcon(counter.certifFilterIcons[g.key]) }}{{ g.label }} ({{ g.count }})</button>
                                 {%- endfor %}
-                            </div>
+                            </fieldset>
                             <ul class="counter-list">
                                 {%- for certif in counter.certifList %}
                                 <li data-filter="{{ certif.category }}">{% if certif.logo %}<img src="images/certifs/{{ certif.logo }}.png" alt="" width="16" height="16" loading="lazy" class="counter-logo"> {% endif %}<a href="{{ certif.href }}" target="_blank" rel="noopener">{{ certif.name[lang] }}</a> <span class="counter-by">[{{ certif.by }}]</span> <span class="counter-details">{% if certif.score %}{{ certif.score }} · {% endif %}{% if certif.level %}<button type="button" class="counter-level" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="{{ certif.levelTip[lang] }}">{{ certif.level[lang] }}</button> · {% endif %}{{ certif.date }}</span></li>
@@ -74,7 +74,7 @@
                             {#- Above the list, one button per contract of counterLang.experiencesFilter (named by resume.json) that keeps only its experiences, and one that shows them all, each with its number in brackets; a job of two contracts counts in both (initCounterFilters of js/app.js) #}
                             {%- set shownExperiences = [] %}
                             {%- for e in resume.experiences %}{% if e.type != "other" %}{% set _ = shownExperiences.push(e) %}{% endif %}{% endfor %}
-                            <div class="counter-filter" role="group" aria-label="{{ counterLang.experiencesFilterLabel }}">
+                            <fieldset class="counter-filter"><legend class="sr-only">{{ counterLang.experiencesFilterLabel }}</legend>
                                 <button type="button" data-filter="" aria-pressed="true">{{ filterIcon(counter.experienceFilterIcons.all) }}{{ counterLang.filterAll }} ({{ shownExperiences | length }})</button>
                                 {%- set groups = [] %}
                                 {%- for key in counterLang.experiencesFilter %}
@@ -85,7 +85,7 @@
                                 {%- for g in groups | sort(true, false, "count") %}
                                 <button type="button" data-filter="{{ g.key }}" aria-pressed="false">{{ filterIcon(counter.experienceFilterIcons[g.key]) }}{{ g.label }} ({{ g.count }})</button>
                                 {%- endfor %}
-                            </div>
+                            </fieldset>
                             <ul class="counter-list counter-list-grid">
                                 {%- for e in resume.experiences %}
                                 {%- set types = [e.type] if e.type is string else e.type %}
@@ -108,7 +108,7 @@
                             <span>{{ counterLang.countries }}</span>
                         </div>
                         <div class="soft-card-face soft-card-back" aria-hidden="true" inert>
-                            <div class="counter-filter counter-filter-grid" role="group" aria-label="{{ counterLang.continentsLabel }}">
+                            <fieldset class="counter-filter counter-filter-grid"><legend class="sr-only">{{ counterLang.continentsLabel }}</legend>
                                 <button type="button" data-filter="" aria-pressed="true">{{ filterIcon(counter.continentFilterIcons.all) }}{{ counterLang.filterAll }} ({{ counter.countryList | length }})</button>
                                 {%- set byContinent = counter.countryList | groupby("continent") %}
                                 {%- set groups = [] %}
@@ -116,7 +116,7 @@
                                 {%- for g in groups | sort(true, false, "count") %}
                                 <button type="button" data-filter="{{ g.key }}" aria-pressed="false">{{ filterIcon(counter.continentFilterIcons[g.key]) }}{{ g.label }} ({{ g.count }})</button>
                                 {%- endfor %}
-                            </div>
+                            </fieldset>
                             <ul class="counter-flags">
                                 {%- for country in counter.countryList %}
                                 <li data-filter="{{ country.continent }}"><img src="images/flags/{{ country.flag }}.svg" alt="{{ country.name[lang] }}" data-bs-toggle="tooltip" data-container="body" data-boundary="window" title="{{ country.name[lang] }}" width="24" height="16" loading="lazy"></li>
@@ -131,7 +131,8 @@
         <div class="row justify-content-center pt-5">
             <div class="col-12 text-center ftco-animate">
                 {#- Each country followed by its places in brackets (the Canary Islands of Spain); the tooltip names the dot under the pointer or the finger (pointGlobe of js/app.js) #}
-                <div class="globe-frame" role="img" aria-label="{{ counterLang.globeLabel }} {% for country in counter.countryList %}{{ country.name[lang] }}{% if country.places %} ({% for place in country.places %}{{ place.name[lang] }}{{ ", " if not loop.last }}{% endfor %}){% endif %}{{ ", " if not loop.last }}{% endfor %}"><canvas id="globe" class="globe" width="420" height="420" data-countries="{{ counter.countryList | dump }}"></canvas><span class="globe-tooltip" hidden></span></div>
+                {#- A figure named by its hidden caption, the canvas and its tooltip being only the picture of that list #}
+                <figure class="globe-frame"><canvas id="globe" class="globe" width="420" height="420" data-countries="{{ counter.countryList | dump }}" aria-hidden="true"></canvas><span class="globe-tooltip" aria-hidden="true" hidden></span><figcaption class="sr-only">{{ counterLang.globeLabel }} {% for country in counter.countryList %}{{ country.name[lang] }}{% if country.places %} ({% for place in country.places %}{{ place.name[lang] }}{{ ", " if not loop.last }}{% endfor %}){% endif %}{{ ", " if not loop.last }}{% endfor %}</figcaption></figure>
                 <p class="globe-hint">{{ counterLang.globeHint }}</p>
             </div>
         </div>
