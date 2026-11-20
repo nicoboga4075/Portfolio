@@ -1,5 +1,5 @@
 // Inlines the critical CSS of every built page with beasties, the last step of the Netlify production build (CONTEXT=production): the CSS rules a page uses go into a <style> of its head, and its stylesheets load without blocking the first paint (media="print" switched to all once loaded, a <noscript> link for browsers without JS)
-// Run on Netlify only, like the netlify-plugin-inline-critical-css it replaces: the production build writes the pages over their sources, so a local run would bake the inlined CSS into the tracked files; node inline-critical.mjs <dir> runs it on another folder (a preview build), for a check or a test
+// Run on Netlify only, like the netlify-plugin-inline-critical-css it replaces: the production build writes the pages over their sources, so a local run would bake the inlined CSS into the tracked files; node inline-critical.mjs reports/<folder> runs it on a preview build moved there, for a check or a test
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,12 +11,14 @@ const ENCODING = 'utf-8';
 // The pages Eleventy writes: <name>_<lang>.html and 404.html at the root, the articles and the projects in their folders; never the Nunjucks partials of _includes/ nor the vendored or generated HTML
 export function builtPages(dir) {
     const { locales } = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), ENCODING)).config;
-    const page = new RegExp(`_(${Object.keys(locales).join('|')})\\.html$`);
+    // A suffix test, not a RegExp built from the data
+    const endings = Object.keys(locales).map(lang => `_${lang}.html`);
+    const isPage = name => endings.some(ending => name.endsWith(ending));
     const inFolder = folder => {
         const full = path.join(dir, folder);
-        return fs.existsSync(full) ? fs.readdirSync(full).filter(name => page.test(name)).map(name => path.join(full, name)) : [];
+        return fs.existsSync(full) ? fs.readdirSync(full).filter(isPage).map(name => path.join(full, name)) : [];
     };
-    const atRoot = fs.readdirSync(dir).filter(name => page.test(name) || name === '404.html').map(name => path.join(dir, name));
+    const atRoot = fs.readdirSync(dir).filter(name => isPage(name) || name === '404.html').map(name => path.join(dir, name));
     return [...atRoot, ...inFolder('articles'), ...inFolder('projects')];
 }
 
@@ -48,12 +50,22 @@ export async function inlineCritical(dir) {
     return pages.length;
 }
 
+// The folder given on the command line: only a folder of reports/ (a preview build moved by ELEVENTY_OUTPUT), as serve-build.mjs accepts it, never a path elsewhere on the disk
+export function commandLineFolder(arg) {
+    const reports = path.join(ROOT, 'reports');
+    const dir = path.resolve(ROOT, arg);
+    if (!dir.startsWith(reports + path.sep)) {
+        throw new Error(`inline-critical: ${arg} is not a folder of reports/`);
+    }
+    return dir;
+}
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-    const dir = process.argv[2];
-    if (!dir && process.env.CONTEXT !== 'production') {
-        console.warn('inline-critical: skipped, it runs on the Netlify production build only (or on the folder given)');
+    const arg = process.argv[2];
+    if (!arg && process.env.CONTEXT !== 'production') {
+        console.warn('inline-critical: skipped, it runs on the Netlify production build only (or on the folder of reports/ given)');
     } else {
-        const count = await inlineCritical(path.resolve(dir ?? ROOT));
+        const count = await inlineCritical(arg ? commandLineFolder(arg) : ROOT);
         console.warn(`inline-critical: critical CSS inlined in ${count} pages`);
     }
 }

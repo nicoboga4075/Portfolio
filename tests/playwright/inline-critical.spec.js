@@ -6,7 +6,8 @@ const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 const { pathToFileURL } = require('node:url');
 
-const script = path.join(__dirname, '..', '..', 'inline-critical.mjs');
+const root = path.join(__dirname, '..', '..');
+const script = path.join(root, 'inline-critical.mjs');
 const load = () => import(pathToFileURL(script).href);
 
 const css = 'body{margin:0}.used{color:red}.unused{color:blue}html.dark-mode{--bg:#000}html.dark-mode body{color:#fff}html.dark-mode .used{color:pink}html.dark-modes{color:gray}.ftco-animated{visibility:visible}.fadeInUp{animation-name:fadeInUp}@keyframes fadeInUp{to{opacity:1}}';
@@ -63,17 +64,31 @@ test.describe('inline-critical', () => {
         }
     });
 
-    test('skips outside the Netlify production build, and runs on the folder it is given', () => {
+    test('skips outside the Netlify production build, and runs on the folder of reports/ it is given', () => {
         const dir = site();
+        const moved = path.join(root, 'reports', `inline-critical-${process.pid}`);
         try {
             const env = { ...process.env };
             delete env.CONTEXT;
             const skipped = execFileSync(process.execPath, [script], { env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
             expect(skipped).toBe('');
-            execFileSync(process.execPath, [script, dir], { env, stdio: 'ignore' });
-            expect(fs.readFileSync(path.join(dir, 'index_fr.html'), 'utf8')).toContain('<style>');
+            fs.cpSync(dir, moved, { recursive: true });
+            execFileSync(process.execPath, [script, path.relative(root, moved)], { cwd: root, env, stdio: 'ignore' });
+            expect(fs.readFileSync(path.join(moved, 'index_fr.html'), 'utf8')).toContain('<style>');
         } finally {
             fs.rmSync(dir, { recursive: true, force: true });
+            fs.rmSync(moved, { recursive: true, force: true });
         }
+    });
+
+    test('refuses a folder outside reports/ given on the command line', async () => {
+        const { commandLineFolder } = await load();
+        expect(commandLineFolder('reports/preview')).toBe(path.join(root, 'reports', 'preview'));
+        for (const arg of ['.', 'reports', '../outside', 'reports/../css', os.tmpdir()]) {
+            expect(() => commandLineFolder(arg)).toThrow('is not a folder of reports/');
+        }
+        const env = { ...process.env };
+        delete env.CONTEXT;
+        expect(() => execFileSync(process.execPath, [script, '..'], { cwd: root, env, stdio: 'ignore' })).toThrow();
     });
 });
