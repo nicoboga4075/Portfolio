@@ -844,7 +844,10 @@ async function nonTextPass(page, where, failures) {
                 }
                 p = p.parentElement;
             }
-            const s = getComputedStyle(e);
+            // A visually hidden field (a file input behind its drop zone) shows its boundary on the label it drives, as its focus
+            const box = e.getBoundingClientRect();
+            const host = (box.width < 4 || box.height < 4) ? (e.labels?.[0] ?? e) : e;
+            const s = getComputedStyle(host);
             const width = Number.parseFloat(s.borderTopWidth) + Number.parseFloat(s.borderBottomWidth);
             const border = width > 0 ? ratio(rgba(s.borderTopColor), rgba(outside)) : 1;
             const fill = ratio(rgba(s.backgroundColor === 'rgba(0, 0, 0, 0)' ? outside : s.backgroundColor), rgba(outside));

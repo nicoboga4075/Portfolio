@@ -71,7 +71,7 @@
                                 <p class="book-tagline"><i class="icon-laptop" aria-hidden="true"></i>{{ bookLang.front.tagline }}</p>
                                 {#- The years of experience of config.profile, the figure of the About section #}
                                 <p class="book-xp"><i class="icon-star" aria-hidden="true"></i>{{ bookLang.front.xp | replace("{years}", profile.xp) }}</p>
-                                <button type="button" class="book-open btn btn-outline-primary">{{ bookLang.front.open }}</button>
+                                <button type="button" class="book-open btn">{{ bookLang.front.open }}</button>
                                 {%- elif index == sheets.length %}
                                 {#- A handshake in a round seal, decorative since the thanks follow #}
                                 <span class="book-seal" aria-hidden="true"><i class="icon-handshake-o"></i></span>

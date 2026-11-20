@@ -2496,7 +2496,7 @@ textarea.form-control {
 }
 
 .tennis-upload-input:focus-visible + .tennis-upload-zone {
-    outline: 2px solid var(--primary);
+    outline: 3px solid var(--primary-dark);
     outline-offset: 2px;
 }
 
@@ -2598,7 +2598,7 @@ textarea.form-control {
 
 .tennis-upload-hint {
     display: block;
-    color: var(--gray);
+    color: var(--secondary-dark);
     font-size: 13px;
 }
 
@@ -4724,8 +4724,19 @@ html.dark-mode .book-face:not(.book-cover) {
     font-size: 14px;
 }
 
+/* Filled in the dark blue of the cover text, not a Bootstrap outline button: its blue text read too light on the lavender cover */
 .book-open {
     margin-top: 12px;
+    border-color: var(--primary-dark);
+    background-color: var(--primary-dark);
+    color: var(--white);
+}
+
+.book-open:hover,
+.book-open:focus-visible {
+    border-color: oklch(from var(--primary-dark) calc(l - 0.1) c h);
+    background-color: oklch(from var(--primary-dark) calc(l - 0.1) c h);
+    color: var(--white);
 }
 
 /* The link to the path on one slide, under the controls of the book */
@@ -4946,8 +4957,11 @@ html.dark-mode .book-face:not(.book-cover) {
     cursor: pointer;
 }
 
+/* A disabled button outlined in grey with a grey arrow, still readable, instead of a faded blue disc under a white arrow */
 .book-controls button:disabled {
-    opacity: 0.4;
+    box-shadow: inset 0 0 0 2px var(--secondary-light);
+    background-color: transparent;
+    color: var(--secondary-dark);
     cursor: default;
 }
 
