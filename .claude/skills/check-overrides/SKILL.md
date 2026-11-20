@@ -17,12 +17,12 @@ That is `node .claude/skills/check-overrides/check-overrides.mjs`. For each over
 
 | Result | Meaning | What to do |
 |---|---|---|
-| `✖ obsolete` | No installed package (or no package of the parent, for a nested override such as `critical > oust`) depends on it any more: the parent dropped it or was removed; for an override limited to a range (`glob@>=10 <14`), no package would get a version in that range any more | Remove the entry |
+| `✖ obsolete` | No installed package (or no package of the parent, for a nested override such as `js-yaml@^3 > argparse`) depends on it any more: the parent dropped it or was removed; for an override limited to a range (`glob@>=10 <14`), no package would get a version in that range any more | Remove the entry |
 | `-` line | That package gets a version outside the range of the override key (`rimraf` asks glob 7, `glob@>=10 <14` leaves it alone): it doesn't count towards keeping the override | Nothing: only the `→` lines keep it active |
 | `✖ redundant` | Every package that asks for it would already get a version matching the override: the parents raised their own range (e.g. `auto-changelog` now asks `handlebars ^4.7.9`) | Remove the entry, then check the version and `npm audit` do not move |
 | `✔ active` | At least one package (`→` line) would get another version without it | Keep it: it becomes redundant once that package raises its range |
 | `✔ active: replaces ... with ...` | An `npm:` alias swaps the package for another one, or a local package (`file:`, `link:`, also through a `$name` reference to a root dependency such as `$deepmerge`) stands in for it | Keep it while the parent depends on the replaced package |
-| `⚠ holds ... below the version npm would pick` | The override pins an older version than npm would choose (e.g. `nwsapi` 2.2.27 while 2.2.28 exists) | Find why it was pinned (below) before touching it |
+| `⚠ holds ... below the version npm would pick` | The override pins an older version than npm would choose (e.g. a 2.2.27 pinned while 2.2.28 exists) | Find why it was pinned (below) before touching it |
 
 ## Removing an override
 
@@ -38,7 +38,7 @@ That is `node .claude/skills/check-overrides/check-overrides.mjs`. For each over
 
 ## A pin below the latest version (`⚠`)
 
-The reason is not always written down. Look for it in this order: the commit body, the CHANGELOG.md entry of that commit, an issue of this repository that mentions the package (`gh issue list --search <package> --state all`), then the release notes and issues of the package itself for the newer version. If the newer version has no known problem, try it as in "Removing an override", with the tool that uses the package: `nwsapi` is used by the `jsdom` of `inline-critical`, which only runs in the Netlify build (`netlify-plugin-inline-critical-css`), so check the critical CSS of the next deploy. If no reason can be found, tell the user rather than removing it.
+The reason is not always written down. Look for it in this order: the commit body, the CHANGELOG.md entry of that commit, an issue of this repository that mentions the package (`gh issue list --search <package> --state all`), then the release notes and issues of the package itself for the newer version. If the newer version has no known problem, try it as in "Removing an override", with the tool that uses the package: a package only the Netlify production build runs (such as `beasties` of `inline-critical.mjs`) is checked on the next deploy, built without cache. If no reason can be found, tell the user rather than removing it.
 
 ## Then
 
