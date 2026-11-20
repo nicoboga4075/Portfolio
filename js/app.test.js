@@ -2216,6 +2216,50 @@ describe('the book of my path', () => {
         expect(status()).toBe('Pages 3 and 4 of 4');
     });
 
+    // A sideways scroll over the book, as a two-finger slide on a touchpad sends it
+    const wheel = (deltaX, deltaY = 0, deltaMode = 0) => {
+        const event = new WheelEvent('wheel', { deltaX, deltaY, deltaMode, bubbles: true, cancelable: true });
+        book().dispatchEvent(event);
+        return event;
+    };
+
+    test('turns one page per two-finger slide on a touchpad: to the left forward, to the right back, its momentum turning nothing more', () => {
+        jest.useFakeTimers();
+        try {
+            const app = loadApp({ body: bookBody });
+            app.initBook();
+            // Small steps add up to a turn, and the browser's own sideways swipe is stopped
+            expect(wheel(12).defaultPrevented).toBe(true);
+            expect(status()).toBe('Cover');
+            wheel(12);
+            wheel(12);
+            expect(status()).toBe('Pages 1 and 2 of 4');
+            // The rest of the same slide, its momentum, turns nothing more
+            wheel(60);
+            jest.advanceTimersByTime(200);
+            wheel(60);
+            expect(status()).toBe('Pages 1 and 2 of 4');
+            // After a pause, a new slide turns again, a line counting as several pixels
+            jest.advanceTimersByTime(250);
+            wheel(3, 0, 1);
+            expect(status()).toBe('Pages 3 and 4 of 4');
+            jest.advanceTimersByTime(250);
+            wheel(-40);
+            expect(status()).toBe('Pages 1 and 2 of 4');
+        } finally {
+            jest.useRealTimers();
+        }
+    });
+
+    test('leaves an up and down scroll to the page', () => {
+        const app = loadApp({ body: bookBody });
+        app.initBook();
+        const event = wheel(20, 40);
+        expect(event.defaultPrevented).toBe(false);
+        wheel(0, 0);
+        expect(status()).toBe('Cover');
+    });
+
     test('turns a page clicked on: the right one forward, the left one back, but not on a click of a button or outside the pages', () => {
         const app = loadApp({ body: bookBody });
         app.initBook();

@@ -2190,6 +2190,15 @@ function initBlogPage(langPage) {
 // The pixels a finger or a pen must slide across the book for a swipe that turns a page
 const BOOK_SWIPE = 40;
 
+// The pixels a two-finger slide across a touchpad must scroll sideways over the book to turn a page
+const BOOK_WHEEL = 30;
+
+// The milliseconds without a sideways scroll that end a touchpad slide, so one slide and its momentum turn one page only
+const BOOK_WHEEL_PAUSE = 250;
+
+// The pixels of one line of a wheel event counted in lines (deltaMode 1, Firefox with Shift and a mouse wheel)
+const WHEEL_LINE = 16;
+
 // The book of the About section (_includes/index-about.html): its leaves turn on the spine, the visible faces being the front of the leaf after the turned ones (right page) and the back of the last turned one (left page); closed shows the cover, end the back cover
 function initBook() {
     const book = document.getElementById('book');
@@ -2255,6 +2264,30 @@ function initBook() {
     book.addEventListener('pointercancel', () => {
         swipeStart = null;
     });
+    // A sideways slide of two fingers on a touchpad over the book turns one page, to the left forward and to the right back, as a finger does; an up and down one still scrolls the page
+    let wheelSum = 0;
+    let wheelTurned = false;
+    let wheelEnd = null;
+    book.addEventListener('wheel', event => {
+        if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) {
+            return;
+        }
+        // Not the browser's back or forward swipe nor a sideways scroll of the page
+        event.preventDefault();
+        clearTimeout(wheelEnd);
+        wheelEnd = setTimeout(() => {
+            wheelSum = 0;
+            wheelTurned = false;
+        }, BOOK_WHEEL_PAUSE);
+        if (wheelTurned) {
+            return;
+        }
+        wheelSum += event.deltaX * (event.deltaMode === 1 ? WHEEL_LINE : 1);
+        if (Math.abs(wheelSum) >= BOOK_WHEEL) {
+            wheelTurned = true;
+            show(turned + (wheelSum > 0 ? 1 : -1));
+        }
+    }, { passive: false });
     // A click on a page turns it: the right one forward, the left one back; not the click that may follow a swipe, which has already turned it
     book.addEventListener('click', event => {
         if (swiped || event.target.closest('button, a')) {
