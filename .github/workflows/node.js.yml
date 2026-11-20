@@ -56,12 +56,30 @@ jobs:
         name: reports-jest
         path: reports/jest/
 
+  # The version of Playwright in package-lock.json, which names the image of the playwright job: its browsers must be the ones that version drives
+  playwright-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        sparse-checkout: package-lock.json
+        sparse-checkout-cone-mode: false
+    - id: version
+      run: echo "version=$(jq -r '.packages["node_modules/@playwright/test"].version' package-lock.json)" >> "$GITHUB_OUTPUT"
+
   playwright:
-    needs: build
-    # Ubuntu 24.04, not ubuntu-latest: on Ubuntu 26.04 (ubuntu-latest since November 2026) the WebKit of Playwright 1.65 does not start, it needs libicudata.so.74 and the system ships ICU 78; back to ubuntu-latest once a Playwright release supports it
-    runs-on: ubuntu-24.04
-    # 12 minutes for a slow install of the browsers and about 6 for the tests
-    timeout-minutes: 25
+    needs: [build, playwright-image]
+    runs-on: ubuntu-latest
+    # The official image of that Playwright version, Ubuntu 24.04 with Chromium, Firefox, WebKit and their system libraries already there: no apt-get from a slow Ubuntu mirror (12 minutes and more on 2026-11-18, 19 and 20, which timed the job out) and no WebKit missing the ICU of a newer Ubuntu; user 1001, the runner's, as the Playwright docs advise, so the workspace and Firefox's home stay its own
+    container:
+      image: mcr.microsoft.com/playwright:v${{ needs.playwright-image.outputs.version }}-noble
+      options: --user 1001
+    # About 6 minutes of tests
+    timeout-minutes: 20
     permissions:
       contents: read
     steps:
@@ -74,18 +92,8 @@ jobs:
         node-version-file: .nvmrc
         cache: 'npm'
     - run: npm ci --ignore-scripts
-    # Version of the installed Playwright and image of the runner (ImageOS, ubuntu24), the key of the browser cache, so a Playwright update or a new Ubuntu downloads its own browsers instead of restoring ones built for other system libraries
-    - id: playwright-version
-      run: |
-        echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
-        echo "image=$ImageOS" >> "$GITHUB_OUTPUT"
-    # Browsers downloaded by an earlier run of the same Playwright version on the same image, so a run only installs their system libraries
-    - uses: actions/cache@v6
-      with:
-        path: ~/.cache/ms-playwright
-        key: playwright-${{ steps.playwright-version.outputs.image }}-${{ steps.playwright-version.outputs.version }}
-    # Chromium, Firefox and WebKit with their system libraries, for the *.browser.spec.js specs and the contrast checker, installed through an npm script so the playwright binary of package-lock.json runs instead of one npx could fetch (SonarCloud githubactions:S6505, S8543), then the tests, only once the browsers are there; one try of 12 minutes at most: the Ubuntu mirror can be slow (about 50 kB/s on 2026-11-18, 9 minutes for the system libraries) yet still progressing, and a timeout stops npm but not the apt-get it started as root, which keeps the dpkg lock, so a second try only failed on "Could not get lock /var/lib/dpkg/lock-frontend"
-    - run: timeout 720 npm run playwright:install && npm run playwright
+    # The *.browser.spec.js specs and the contrast checker run on the browsers of the image
+    - run: npm run playwright
     - uses: actions/upload-artifact@v7
       if: ${{ !cancelled() }}
       with:
