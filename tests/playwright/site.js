@@ -27,8 +27,13 @@ exports.test = base.test.extend({
             await page.addInitScript(choices => localStorage.setItem('consent', JSON.stringify({ ...choices, date: Date.now() })), storedConsent);
         }
         await page.route('**/.netlify/functions/article?*', route => {
-            const filename = new URL(route.request().url()).searchParams.get('filename');
-            route.fulfill({ contentType: 'text/html', body: fs.readFileSync(path.join(root, '.eleventy', 'articles', filename), 'utf8') });
+            // Only a file of the built articles, never a path out of that folder
+            const articles = path.join(root, '.eleventy', 'articles');
+            const file = path.resolve(articles, new URL(route.request().url()).searchParams.get('filename') ?? '');
+            if (!file.startsWith(articles + path.sep)) {
+                return route.fulfill({ status: 404 });
+            }
+            return route.fulfill({ contentType: 'text/html', body: fs.readFileSync(file, 'utf8') });
         });
         await use(page);
     }

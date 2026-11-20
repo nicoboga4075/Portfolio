@@ -26,8 +26,8 @@ function loadAnalytics() {
 function removeAnalytics() {
     window[`ga-disable-${gaId}`] = true;
     document.cookie.split(';').map(cookie => cookie.split('=')[0].trim()).filter(name => name.startsWith('_ga')).forEach(name => {
-        document.cookie = `${name}=; max-age=0; path=/`;
-        document.cookie = `${name}=; max-age=0; path=/; domain=${location.hostname}`;
+        document.cookie = `${name}=; max-age=0; path=/; secure`;
+        document.cookie = `${name}=; max-age=0; path=/; domain=${location.hostname}; secure`;
     });
 }
 

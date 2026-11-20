@@ -39,7 +39,7 @@ afterEach(() => {
     jest.restoreAllMocks();
     document.head.innerHTML = '';
     document.cookie.split(';').forEach(cookie => {
-        document.cookie = `${cookie.split('=')[0].trim()}=; max-age=0; path=/`;
+        document.cookie = `${cookie.split('=')[0].trim()}=; max-age=0; path=/; secure`;
     });
     delete window.gtag;
     delete window.dataLayer;
@@ -86,9 +86,9 @@ describe('analytics.js', () => {
     });
 
     test('loads nothing on a refusal and deletes the _ga cookies only', () => {
-        document.cookie = '_ga=GA1.1.1; path=/';
-        document.cookie = '_ga_TEST123=GS1.1.1; path=/';
-        document.cookie = 'theme=dark; path=/';
+        document.cookie = '_ga=GA1.1.1; path=/; secure';
+        document.cookie = '_ga_TEST123=GS1.1.1; path=/; secure';
+        document.cookie = 'theme=dark; path=/; secure';
         runScript();
         choose(false);
         expect(window['ga-disable-G-TEST123']).toBe(true);
