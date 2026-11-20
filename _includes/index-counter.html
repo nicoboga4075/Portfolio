@@ -131,8 +131,8 @@
         <div class="row justify-content-center pt-5">
             <div class="col-12 text-center ftco-animate">
                 {#- Each country followed by its places in brackets (the Canary Islands of Spain); the tooltip names the dot under the pointer or the finger (pointGlobe of js/app.js) #}
-                {#- A figure named by its hidden caption, the canvas and its tooltip being only the picture of that list #}
-                <figure class="globe-frame"><canvas id="globe" class="globe" width="420" height="420" data-countries="{{ counter.countryList | dump }}" aria-hidden="true"></canvas><span class="globe-tooltip" aria-hidden="true" hidden></span><figcaption class="sr-only">{{ counterLang.globeLabel }} {% for country in counter.countryList %}{{ country.name[lang] }}{% if country.places %} ({% for place in country.places %}{{ place.name[lang] }}{{ ", " if not loop.last }}{% endfor %}){% endif %}{{ ", " if not loop.last }}{% endfor %}</figcaption></figure>
+                {#- A figure named by its hidden caption; the canvas, which takes the drag, has no role nor aria-hidden (it would hide an element the pointer works), and its tooltip only repeats a name of the caption #}
+                <figure class="globe-frame"><canvas id="globe" class="globe" width="420" height="420" data-countries="{{ counter.countryList | dump }}"></canvas><span class="globe-tooltip" aria-hidden="true" hidden></span><figcaption class="sr-only">{{ counterLang.globeLabel }} {% for country in counter.countryList %}{{ country.name[lang] }}{% if country.places %} ({% for place in country.places %}{{ place.name[lang] }}{{ ", " if not loop.last }}{% endfor %}){% endif %}{{ ", " if not loop.last }}{% endfor %}</figcaption></figure>
                 <p class="globe-hint">{{ counterLang.globeHint }}</p>
             </div>
         </div>
