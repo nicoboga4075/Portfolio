@@ -29,7 +29,8 @@ export function localFontFaces(dir) {
         return '';
     }
     const faces = fs.readFileSync(file, ENCODING).match(/@font-face\s*\{[^}]*\}/g) ?? [];
-    return faces.filter(face => face.includes('local(')).map(face => face.replace(/\s+/g, ' ').replace(/\s*([{}:;,])\s*/g, '$1').replace(/;\}/g, '}')).join('');
+    // Whitespace runs first collapse to one space, so the space around a punctuation mark is at most one character: a linear regex, with no backtracking over long runs
+    return faces.filter(face => face.includes('local(')).map(face => face.replace(/\s+/g, ' ').replace(/ ?([{}:;,]) ?/g, '$1').replaceAll(';}', '}')).join('');
 }
 
 // One page in place; the stylesheets are read from the root of the site, where css/ lives, whatever the <base> of the page; the local fallback fonts go at the end of its head
