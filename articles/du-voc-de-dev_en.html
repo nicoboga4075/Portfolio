@@ -2893,5 +2893,21 @@ description: "A glossary of software development terms, from framework, library,
             </div>
             <div class="card-body">A cloud region is a geographic area of the planet holding at least one, but usually several, datacenters, located close to each other and linked by a private network with very low latency; at AWS, Azure or Google Cloud, those datacenters are split into isolated availability zones. Each region is named after its location (eu-west-3 for Paris at AWS, France Central at Azure) and runs on its own, so an outage in one does not spread to the others. A region is picked close to the users to cut latency, in a given country to meet data residency rules such as the GDPR, or for its price and the services it offers, both of which vary from one region to another; a critical application can be deployed in several regions to survive the loss of one.</div>
         </div>
+        <div class="card">
+            <input type="checkbox" id="q335">
+            <div class="card-header">
+                <label for="q335">Resource group</label>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">A resource group is a logical container that gathers the cloud resources of one solution, such as the web app, the database and the storage account of a site, so they are managed together. On Microsoft Azure, where the term is central, every resource belongs to exactly one resource group, itself inside a subscription; the access rights (RBAC), policies, tags and budgets set on the group apply to all its resources, and deleting the group deletes everything in it. The group has a region, where its metadata is stored, but its resources can live in other regions. Resources are usually grouped by application and environment, for example rg-portfolio-prod and rg-portfolio-dev, so that a test environment can be removed in one go. AWS Resource Groups only gather resources by tags, without that shared lifecycle, while a Google Cloud project plays a close role.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q336">
+            <div class="card-header">
+                <label for="q336">Management group</label>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">A management group is a container of Microsoft Azure placed above the subscriptions, to govern many of them at once. The levels nest from the top down: management groups, subscriptions, resource groups, then resources; each tenant has a root management group, and a management group or a subscription has a single parent. The access rights (RBAC) and the policies set on a management group are inherited by everything below it, which no subscription can opt out of: a company can, for example, allow only European regions for all its subscriptions, or give its security team read access everywhere, in a single assignment. Management groups usually follow the organisation or the environments (Production, Development, Sandbox), as the Azure landing zones recommend. AWS Organizations offers the same with its organizational units (OU), and Google Cloud with its folders.</div>
+        </div>
     </div>
 </article>
