@@ -2876,5 +2876,29 @@ description: "Un glossaire des termes du développement logiciel, de framework, 
             </div>
             <div class="card-body">Le TCO (Total Cost of Ownership ; coût total de possession) est le coût complet d'un système informatique sur toute sa durée de vie, et pas seulement son prix d'achat. Il additionne les CapEx (capital expenditure ; dépenses d'investissement), payées au départ comme les locaux et les serveurs, et les OpEx (operating expenditure ; dépenses d'exploitation), récurrentes comme les employés, les formations, les licences et l'énergie. C'est le chiffre à comparer avant une migration vers le cloud : un datacenter sur site pèse surtout en CapEx, achetées d'avance et dimensionnées pour le pic, alors que le cloud en transforme l'essentiel en OpEx, facturées à l'usage, le matériel, sa maintenance et son renouvellement restant à la charge du fournisseur. Le cloud peut pourtant coûter plus cher dans la durée pour une charge stable, d'où un TCO qui compte aussi ce que la facture ne montre pas (migration, sortie des données, montée en compétences des équipes) ; des outils comme l'Azure TCO Calculator ou l'AWS Pricing Calculator aident à l'estimer.</div>
         </div>
+        <div class="card">
+            <input type="checkbox" id="q332">
+            <div class="card-header">
+                <label for="q332">Availability zone (AZ)</label>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">Une availability zone (AZ ; zone de disponibilité) est un emplacement isolé au sein d'une région cloud, formé d'un ou plusieurs datacenters dotés de leur propre alimentation, de leur refroidissement et de leur réseau, si bien qu'un incendie, une inondation ou une coupure de courant dans une zone n'arrête pas les autres. Les zones d'une région sont distantes de quelques kilomètres à quelques dizaines de kilomètres, assez proches pour être reliées par un réseau privé à faible latence, assez éloignées pour ne pas subir le même sinistre ; AWS et Azure prévoient au moins trois zones par région qui en propose, Google Cloud les appelle simplement zones. Une application hautement disponible répartit ses serveurs sur plusieurs zones derrière un load balancer et réplique sa base de données d'une zone à l'autre (Amazon RDS Multi-AZ par exemple) : si une zone tombe, les autres continuent de répondre. Pour résister à la perte d'une région entière, on la déploie plutôt sur plusieurs régions.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q333">
+            <div class="card-header">
+                <label for="q333">Datacenter</label>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">Un datacenter (centre de données) est un bâtiment qui abrite des serveurs, du stockage et des équipements réseau, avec tout ce qu'il faut pour les faire tourner sans interruption : alimentation redondante (onduleurs, groupes électrogènes), refroidissement, raccordement à plusieurs opérateurs réseau et sécurité physique (badges, caméras, gardiens). Une entreprise peut en posséder un dans ses locaux (on-premises), louer des baies dans un datacenter partagé (colocation) ou utiliser ceux d'un fournisseur cloud, qui en exploite de très grands (hyperscale) et en loue la capacité à la demande. L'Uptime Institute classe leur résilience en quatre niveaux, du Tier I, sans redondance, au Tier IV, où n'importe quel composant peut tomber en panne ou être entretenu sans arrêter les serveurs. Dans le cloud, les datacenters sont regroupés en zones de disponibilité, elles-mêmes regroupées en régions.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q334">
+            <div class="card-header">
+                <label for="q334">Région</label>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">Une région cloud est une zone géographique de la planète contenant au moins un, mais souvent plusieurs centres de données, situés à proximité et connectés par un réseau privé à très faible latence ; chez AWS, Azure ou Google Cloud, ces centres sont répartis en zones de disponibilité isolées. Chaque région porte le nom de son emplacement (eu-west-3 pour Paris chez AWS, France Central chez Azure) et fonctionne de façon autonome, si bien qu'une panne dans l'une ne se propage pas aux autres. On choisit une région proche des utilisateurs pour réduire la latence, dans un pays donné pour respecter des règles de localisation des données comme le RGPD, ou pour son prix et les services qu'elle propose, qui varient d'une région à l'autre ; une application critique peut être déployée sur plusieurs régions pour survivre à la perte de l'une d'elles.</div>
+        </div>
     </div>
 </article>
