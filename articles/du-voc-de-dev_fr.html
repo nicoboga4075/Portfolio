@@ -427,6 +427,7 @@ description: "Un glossaire des termes du développement logiciel, de framework, 
             <input type="checkbox" id="q43">
             <div class="card-header">
                 <label for="q43">Vertical scaling vs Horizontal scaling</label>
+                <span class="badge badge-definition">Cloud</span>
             </div>
             <div class="card-body">Le vertical scaling consiste à rendre un serveur plus puissant en ajoutant CPU, RAM ou stockage; simple mais limité par le matériel. Le horizontal scaling consiste à ajouter plusieurs serveurs pour répartir la charge (load balancing); très scalable et résilient mais plus complexe à gérer.</div>
         </div>
@@ -2858,6 +2859,22 @@ description: "Un glossaire des termes du développement logiciel, de framework, 
                 <label for="q329">ERP vs CRM</label>
             </div>
             <div class="card-body">Un ERP (Enterprise Resource Planning ; progiciel de gestion intégré ou PGI) et un CRM (Customer Relationship Management ; gestion de la relation client) sont deux logiciels de gestion d'entreprise, souvent proposés en SaaS et reliés entre eux par des API. L'ERP regarde vers l'intérieur : il réunit dans une base unique les processus de l'entreprise (comptabilité, achats, stocks, production, paie, facturation) pour que chaque service travaille sur les mêmes données. Le CRM regarde vers l'extérieur : il suit chaque client et prospect (contacts, opportunités commerciales, campagnes marketing, devis, tickets de support) pour mieux vendre et fidéliser. On choisit un ERP pour piloter et optimiser le fonctionnement de l'entreprise (SAP S/4HANA, Odoo, Sage, Microsoft Dynamics 365 Business Central) et un CRM pour développer les ventes et la relation client (Salesforce, HubSpot, Microsoft Dynamics 365 Sales). La plupart des entreprises utilisent les deux : le CRM transmet par exemple un devis signé à l'ERP, qui le facture, réserve le stock et lance la livraison.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q330">
+            <div class="card-header">
+                <label for="q330">Well-Architected Framework</label>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">Le Well-Architected Framework est un ensemble de bonnes pratiques publié par un fournisseur cloud pour concevoir, évaluer et améliorer une architecture qui tourne sur sa plateforme. Le plus connu, celui d'AWS, repose sur six piliers : excellence opérationnelle, sécurité, fiabilité, efficacité des performances, optimisation des coûts et durabilité (ajoutée en 2021). Chaque pilier apporte des principes de conception et des questions, auxquelles on répond lors d'une revue, par exemple avec l'outil gratuit AWS Well-Architected Tool de la console, pour lister les risques d'une charge de travail et les améliorations à prévoir. Des lenses (extensions) l'adaptent à un domaine (serverless, SaaS, machine learning). Microsoft Azure et Google Cloud publient leur propre Well-Architected Framework, bâti sur des piliers proches, si bien que la même revue s'applique à tout cloud : une équipe en mène une avant la mise en production, puis après chaque changement majeur.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q331">
+            <div class="card-header">
+                <label for="q331">TCO</label>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">Le TCO (Total Cost of Ownership ; coût total de possession) est le coût complet d'un système informatique sur toute sa durée de vie, et pas seulement son prix d'achat. Il additionne les CapEx (capital expenditure ; dépenses d'investissement), payées au départ comme les locaux et les serveurs, et les OpEx (operating expenditure ; dépenses d'exploitation), récurrentes comme les employés, les formations, les licences et l'énergie. C'est le chiffre à comparer avant une migration vers le cloud : un datacenter sur site pèse surtout en CapEx, achetées d'avance et dimensionnées pour le pic, alors que le cloud en transforme l'essentiel en OpEx, facturées à l'usage, le matériel, sa maintenance et son renouvellement restant à la charge du fournisseur. Le cloud peut pourtant coûter plus cher dans la durée pour une charge stable, d'où un TCO qui compte aussi ce que la facture ne montre pas (migration, sortie des données, montée en compétences des équipes) ; des outils comme l'Azure TCO Calculator ou l'AWS Pricing Calculator aident à l'estimer.</div>
         </div>
     </div>
 </article>
