@@ -27,9 +27,13 @@ for (const lang of langs) {
             await expect(bubble).toHaveText(projects[lang].types[card.type]);
             await expect(bubble.locator(`.${icons[card.type]}`)).toHaveAttribute('aria-hidden', 'true');
             // In the top right corner, facing the technology badge in the top left one
-            const [cardBox, bubbleBox] = [await page.locator(`#${card.id}`).boundingBox(), await bubble.boundingBox()];
-            expect(cardBox.x + cardBox.width - (bubbleBox.x + bubbleBox.width)).toBeCloseTo(10, 0);
-            expect(bubbleBox.y - cardBox.y).toBeCloseTo(10, 0);
+            // Both boxes read in the same frame: the card may still be sliding up in its fadeInUp reveal, and two boundingBox() calls apart measure it at two positions
+            const [right, top] = await page.locator(`#${card.id}`).evaluate(el => {
+                const [cardBox, bubbleBox] = [el.getBoundingClientRect(), el.querySelector('.project-type').getBoundingClientRect()];
+                return [cardBox.right - bubbleBox.right, bubbleBox.top - cardBox.top];
+            });
+            expect(right).toBeCloseTo(10, 0);
+            expect(top).toBeCloseTo(10, 0);
             // Not styled as the technology badge: white with a blue outline, where the badge is filled
             const colors = await page.locator(`#${card.id}`).evaluate(el => [el.querySelector('.project-type'), el.querySelector('.badge:not(.project-type)')].map(badge => getComputedStyle(badge).backgroundColor));
             expect(colors[0]).toBe('rgb(255, 255, 255)');
