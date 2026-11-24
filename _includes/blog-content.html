@@ -38,7 +38,7 @@
                     </form>
                     <div id="search-info"></div>
                 </div>
-                {#- The model row of a recent article, copied by initBlogPage of js/app.js for each article of the last config.recentMonths months but the open one, or for the newest one when none is that recent; the box goes when the blog holds no other article #}
+                {#- The model row of a recent article, copied by initBlogPage of js/app.js for each article of the last config.recentMonths months, or for the newest one when none is that recent, the open one left out; the box goes when that leaves none #}
                 <div class="sidebar-box recent-articles" data-recent-months="{{ recentMonths }}">
                     <h3 class="heading-sidebar font-weight-bold">{{ labels.recent }}</h3>
                     <div class="media-row recent-article mb-4 d-flex justify-content-center">

@@ -7,13 +7,12 @@ const { articlesIn, observers, observerOf, installChart, loadApp, cleanUp, flush
 
 // The real articles of the English pages, and the one the sidebar offers next to the article of a slug: the first other one
 const articles = articlesIn('en');
-// The recent articles the blog lists today with the open one left out: those of the last 6 months (config.recentMonths), or else the newest other one
+// The recent articles the blog lists today: those of the last 6 months (config.recentMonths), or else the newest one, the open one left out
 const recentTo = slug => {
-    const others = articles.filter(article => article.slug !== slug);
     const since = new Date();
     since.setMonth(since.getMonth() - 6);
-    const recent = others.filter(article => new Date(article.date) >= since);
-    return recent.length ? recent : others.slice(0, 1);
+    const recent = articles.filter(article => new Date(article.date) >= since);
+    return (recent.length ? recent : articles.slice(0, 1)).filter(article => article.slug !== slug);
 };
 
 afterEach(cleanUp);
@@ -94,18 +93,21 @@ describe('small helpers', () => {
         expect(app.getRecentArticles(6).map(article => article.slug)).not.toContain('presentation');
     });
 
-    test('the recent articles are those of the last months, the newest first, or else the newest other one alone', () => {
+    test('the recent articles are those of the last months, the newest first, or else the newest one alone, never the open one', () => {
         const dated = [['new', '2026-11-01'], ['open', '2026-10-01'], ['spring', '2026-05-24'], ['winter', '2026-01-10'], ['old', '2025-03-01']].map(([slug, date]) => ({ slug, title: slug, date, tags: [] }));
         const app = loadApp({ url: '/en/blog#open', articles: dated });
         const slugs = (months, today) => app.getRecentArticles(months, new Date(today)).map(article => article.slug);
         // Six months back from 24 November 2026 is 24 May 2026, that day included
         expect(slugs(6, '2026-11-24')).toEqual(['new', 'spring']);
         expect(slugs(12, '2026-11-24')).toEqual(['new', 'spring', 'winter']);
-        // None that recent but the open one: the newest of the others
+        // None that recent: the newest article
         expect(slugs(6, '2027-12-01')).toEqual(['new']);
         expect(slugs(1, '2026-11-24')).toEqual(['new']);
         history.replaceState(null, '', '/en/blog#new');
-        expect(slugs(1, '2026-12-15')).toEqual(['open']);
+        expect(slugs(6, '2026-11-24')).toEqual(['open', 'spring']);
+        // The open article is the only recent one, or the newest when none is recent: no other article to list, not an older one instead
+        expect(slugs(1, '2026-11-24')).toEqual([]);
+        expect(slugs(1, '2026-12-15')).toEqual([]);
     });
 
     test('cssVarToHex resolves a CSS variable through a canvas pixel', () => {
@@ -1359,11 +1361,16 @@ describe('the blog page', () => {
         expect(window.fetch).toHaveBeenCalledWith(expect.stringContaining('filename=presentation_en.html'));
     });
 
-    test('drops the Recent Publications box when the blog holds one article only, and shows the newest other one when none is recent', async () => {
+    test('drops the Recent Publications box when the open article is the only one or the only recent one, and shows the newest one when none is recent', async () => {
         await openBlog({ articles: articles.filter(article => article.slug === 'presentation') });
         expect($('.recent-articles')).toHaveLength(0);
         cleanUp();
-        // Both older than six months: the other one alone
+        // The open presentation published today, the other article older than six months: not that older one
+        const today = new Date().toISOString().slice(0, 10);
+        await openBlog({ articles: articles.filter(article => ['presentation', 'mcs'].includes(article.slug)).map(article => (article.slug === 'presentation' ? { ...article, date: today } : article)) });
+        expect($('.recent-articles')).toHaveLength(0);
+        cleanUp();
+        // Both older than six months: the newest one, mcs
         await openBlog({ articles: articles.filter(article => ['presentation', 'mcs'].includes(article.slug)) });
         expect($('.recent-article')).toHaveLength(1);
         expect($('.recent-article .blog-img').attr('href')).toBe('/en/blog#mcs');

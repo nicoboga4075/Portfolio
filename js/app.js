@@ -491,14 +491,13 @@ function getSlugFromUrl() {
     return window.location.hash.substring(1);
 }
 
-// The articles of the last months months but the open one, the newest first as _data/articles.json lists them; the newest of the others alone when none is that recent
+// The articles of the last months months, the newest first as _data/articles.json lists them, or the newest article alone when none is that recent; the open one left out, so none at all when it is the only recent one
 function getRecentArticles(months, today = new Date()) {
     const currentSlug = getSlugFromUrl() || getHashFromSession();
-    const others = appArticles.filter(article => article.slug !== currentSlug);
     const since = new Date(today);
     since.setMonth(since.getMonth() - months);
-    const recent = others.filter(article => new Date(article.date) >= since);
-    return recent.length ? recent : others.slice(0, 1);
+    const recent = appArticles.filter(article => new Date(article.date) >= since);
+    return (recent.length ? recent : appArticles.slice(0, 1)).filter(article => article.slug !== currentSlug);
 }
 
 function getCurrentArticle() {
