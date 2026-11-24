@@ -39,7 +39,7 @@ const passthroughFiles = [
 // Add a language: add its config.locales entry + create the *_<lang>.html files.
 // The address of the deployed site, the homepage of package.json
 const site = pkg.homepage;
-const { locales, defaultLang, authorLang, appRoutes, authorCities, botpress, profile, analyticsId, calendly, contactAttachment, careerSlide, socials, qrCodes } = pkg.config;
+const { locales, defaultLang, authorLang, appRoutes, authorCities, botpress, profile, analyticsId, calendly, contactAttachment, careerSlide, recentMonths, socials, qrCodes } = pkg.config;
 // The sections, the pages of the root served at /<lang>/<name> from <name>_<lang>.html: the routes of config.appRoutes except the home and the 404 page
 const sections = Object.keys(appRoutes).filter(name => !["index", "error404"].includes(name));
 const langs = Object.keys(locales);
@@ -471,6 +471,8 @@ module.exports = function configureEleventy(eleventyConfig) {
     eleventyConfig.addGlobalData("contactAttachment", contactAttachment ?? null);
     // The one-slide web version of my path (config.careerSlide, hosted on here.now), in the language of the page at /<lang>, linked under the book of the About section
     eleventyConfig.addGlobalData("careerSlide", careerSlide);
+    // How many months back an article counts as recent in the Recent Publications box of the blog (config.recentMonths), read by initBlogPage of js/app.js from the box
+    eleventyConfig.addGlobalData("recentMonths", recentMonths);
     // The social links of config.socials, in the nav, the footer and the sameAs of the JSON-LD
     eleventyConfig.addGlobalData("socials", socials);
     // The link pages of config.qrCodes, each with its logo and QR code (images/logo-<id>.png, images/qrcode-<id>.png) in the author card of the blog

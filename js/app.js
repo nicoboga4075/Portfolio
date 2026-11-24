@@ -491,9 +491,14 @@ function getSlugFromUrl() {
     return window.location.hash.substring(1);
 }
 
-function getRecentArticle() {
+// The articles of the last months months but the open one, the newest first as _data/articles.json lists them; the newest of the others alone when none is that recent
+function getRecentArticles(months, today = new Date()) {
     const currentSlug = getSlugFromUrl() || getHashFromSession();
-    return appArticles.find(article => article.slug !== currentSlug);
+    const others = appArticles.filter(article => article.slug !== currentSlug);
+    const since = new Date(today);
+    since.setMonth(since.getMonth() - months);
+    const recent = others.filter(article => new Date(article.date) >= since);
+    return recent.length ? recent : others.slice(0, 1);
 }
 
 function getCurrentArticle() {
@@ -1882,7 +1887,6 @@ function initBlogPage(langPage) {
         }
 
         const currentArticle = getCurrentArticle();
-        const recentArticle = getRecentArticle();
 
         if (currentArticle) {
             const $searchForm = $('.search-form');
@@ -1986,7 +1990,13 @@ function initBlogPage(langPage) {
                 $searchInfo.text('').removeClass('search-no-result');
             });
 
+            // The icon is no focusable control: a press on it would move the focus out of the field, where Enter no longer goes on to the next occurrence; keep it in the field
+            $searchSpan.on('mousedown', function (event) {
+                event.preventDefault();
+            });
+
             $searchSpan.on('click', function () {
+                $searchInput.trigger('focus');
                 if (!$searchInfo.text().includes('occurrence')) {
                     $searchForm.submit();
                 } else {
@@ -1994,19 +2004,28 @@ function initBlogPage(langPage) {
                 }
             });
 
-            if (recentArticle) {
-                loadImages('.blog-img', 'avif', true);
-                const recentArticleUrl = `/${langPage}/blog#${recentArticle.slug}`;
+            // One copy of the model row of the Recent Publications box per recent article, with the picture of its blog card, then the model goes; the whole box goes when the blog holds no other article
+            const $recentModel = $('.recent-article').first();
+            const recentArticles = getRecentArticles(Number($('.recent-articles').data('recent-months')));
+            recentArticles.forEach((article, index) => {
+                const $row = $recentModel.clone();
+                const headingId = `recent-article-heading-${index + 1}`;
+                const articleUrl = `/${langPage}/blog#${article.slug}`;
                 // Real href for middle-click / new tab; a plain click only changes the hash on this same page, hence the reload.
-                $('.blog-img').attr('href', recentArticleUrl).on('click', function (event) {
+                $row.find('.blog-img').attr({ href: articleUrl, 'aria-labelledby': headingId }).css('background-image', `url(images/${article.image}.avif)`).on('click', function (event) {
                     event.preventDefault();
-                    window.location.href = recentArticleUrl;
+                    window.location.href = articleUrl;
                     setTimeout(() => location.reload(), 150);
                 });
-                $('#recent-article-heading').text(recentArticle.title);
-                $('.meta')
-                    .text(convertDate(recentArticle.date, langPage))
+                $row.find('h4').attr('id', headingId).text(article.title);
+                $row.find('.meta')
+                    .text(convertDate(article.date, langPage))
                     .prepend($('<i>', { 'class': 'icon-calendar' }), ' ');
+                $row.insertBefore($recentModel);
+            });
+            $recentModel.remove();
+            if (!recentArticles.length) {
+                $('.recent-articles').remove();
             }
 
             const $tagCloud = $('.tagcloud');

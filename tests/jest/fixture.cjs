@@ -9,7 +9,7 @@ const { authorCities } = pkg.config;
 const resolveArticles = require(path.join(root, 'articles', 'resolve-articles.js'));
 
 // The articles meta of a page in that language, as base.njk writes it from the real _data/articles.json
-const articlesIn = lang => resolveArticles(require(path.join(root, '_data', 'articles.json')), lang, defaultLang, locales);
+const articlesIn = lang => resolveArticles(require(path.join(root, '_data', 'articles.json')), lang, defaultLang, locales, require(path.join(root, '_data', 'blog.json')).entries);
 
 const $ = require(path.join(__dirname, '..', '..', 'js', 'jquery.min.js'));
 

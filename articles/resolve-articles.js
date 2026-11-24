@@ -1,5 +1,5 @@
-// Each article of _data/articles.json in one language (falling back to the default one), as the articles meta of the home and blog pages gives it to js/app.js: its bilingual title and tags resolved, the tags that are already single-language left as they are; the resolveArticles filter of .eleventy.js, and the articles of the Jest tests of js/app.js (tests/jest/fixture.cjs).
-module.exports = function resolveArticles(articles, lang, defaultLang, locales) {
+// Each article of _data/articles.json in one language (falling back to the default one), as the articles meta of the home and blog pages gives it to js/app.js: its bilingual title and tags resolved, the tags that are already single-language left as they are, and the picture of its blog card (the id of the entry of _data/blog.json at the same position, images/<id>.avif); the resolveArticles filter of .eleventy.js, and the articles of the Jest tests of js/app.js (tests/jest/fixture.cjs).
+module.exports = function resolveArticles(articles, lang, defaultLang, locales, entries = []) {
     const langCodes = Object.keys(locales);
     const isBilingualText = value => typeof value === "object" && langCodes.every(code => code in value);
     const resolveTag = tag => {
@@ -10,10 +10,11 @@ module.exports = function resolveArticles(articles, lang, defaultLang, locales) 
         }
         return isBilingualText(tag) ? (tag[lang] ?? tag[defaultLang]) : tag;
     };
-    return articles.map(article => ({
+    return articles.map((article, index) => ({
         slug: article.slug,
         title: article.title[lang] ?? article.title[defaultLang],
         date: article.date,
+        image: entries[index]?.id,
         tags: article.tags.map(resolveTag)
     }));
 };

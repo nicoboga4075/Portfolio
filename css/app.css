@@ -2077,7 +2077,7 @@ html.dark-mode .ftco-navbar-light:not(.awake) .navbar-brand,
     width: calc(100% - 100px);
 }
 
-#recent-article-heading {
+.recent-article h4 {
     color: var(--primary);
 }
 

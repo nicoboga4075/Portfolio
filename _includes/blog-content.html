@@ -38,12 +38,13 @@
                     </form>
                     <div id="search-info"></div>
                 </div>
-                <div class="sidebar-box">
+                {#- The model row of a recent article, copied by initBlogPage of js/app.js for each article of the last config.recentMonths months but the open one, or for the newest one when none is that recent; the box goes when the blog holds no other article #}
+                <div class="sidebar-box recent-articles" data-recent-months="{{ recentMonths }}">
                     <h3 class="heading-sidebar font-weight-bold">{{ labels.recent }}</h3>
-                    <div class="media-row mb-4 d-flex justify-content-center">
-                        <a id="crm" class="blog-img mr-4" href="/{{ lang }}/blog" aria-labelledby="recent-article-heading"><span class="sr-only">{{ labels.recentAria }}</span></a>
+                    <div class="media-row recent-article mb-4 d-flex justify-content-center">
+                        <a class="blog-img mr-4" href="/{{ lang }}/blog" aria-labelledby="recent-article-heading-1"><span class="sr-only">{{ labels.recentAria }}</span></a>
                         <div class="text">
-                            <h4 id="recent-article-heading">{{ labels.recentAria }}</h4>
+                            <h4 id="recent-article-heading-1">{{ labels.recentAria }}</h4>
                             <div class="meta"></div>
                         </div>
                     </div>

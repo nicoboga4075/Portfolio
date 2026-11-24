@@ -10,6 +10,12 @@ describe('resolveArticles', () => {
         expect(resolveArticles([article()], 'fr', 'en', locales)).toEqual([{ slug: 'a', title: 'Titre', date: '2025-01-02', tags: [] }]);
     });
 
+    test('gives each article the picture of the blog card at its position, none without blog cards', () => {
+        const entries = [{ id: 'survey' }, { id: 'brand' }];
+        expect(resolveArticles([article(), article({ slug: 'b' })], 'en', 'en', locales, entries).map(resolved => resolved.image)).toEqual(['survey', 'brand']);
+        expect(resolveArticles([article()], 'en', 'en', locales)[0].image).toBeUndefined();
+    });
+
     test('falls back to the default language when the title lacks the language', () => {
         const [resolved] = resolveArticles([article({ title: { en: 'Only English' } })], 'fr', 'en', locales);
         expect(resolved.title).toBe('Only English');

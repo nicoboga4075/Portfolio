@@ -7,7 +7,14 @@ const { articlesIn, observers, observerOf, installChart, loadApp, cleanUp, flush
 
 // The real articles of the English pages, and the one the sidebar offers next to the article of a slug: the first other one
 const articles = articlesIn('en');
-const recentTo = slug => articles.find(article => article.slug !== slug);
+// The recent articles the blog lists today with the open one left out: those of the last 6 months (config.recentMonths), or else the newest other one
+const recentTo = slug => {
+    const others = articles.filter(article => article.slug !== slug);
+    const since = new Date();
+    since.setMonth(since.getMonth() - 6);
+    const recent = others.filter(article => new Date(article.date) >= since);
+    return recent.length ? recent : others.slice(0, 1);
+};
 
 afterEach(cleanUp);
 
@@ -77,14 +84,28 @@ describe('small helpers', () => {
         expect(window.location.pathname + window.location.search + window.location.hash).toBe('/en/blog');
     });
 
-    test('the current and the recent article come from the hash, or else from the session', () => {
+    test('the current article comes from the hash, or else from the session, and is never one of the recent ones', () => {
         let app = loadApp({ url: '/en/blog#mcs' });
         expect(app.getCurrentArticle().slug).toBe('mcs');
-        expect(app.getRecentArticle().slug).toBe(recentTo('mcs').slug);
+        expect(app.getRecentArticles(6).map(article => article.slug)).not.toContain('mcs');
         app = loadApp({ url: '/en/blog' });
         sessionStorage.setItem('currentHash', 'presentation');
         expect(app.getCurrentArticle().slug).toBe('presentation');
-        expect(app.getRecentArticle().slug).toBe(recentTo('presentation').slug);
+        expect(app.getRecentArticles(6).map(article => article.slug)).not.toContain('presentation');
+    });
+
+    test('the recent articles are those of the last months, the newest first, or else the newest other one alone', () => {
+        const dated = [['new', '2026-11-01'], ['open', '2026-10-01'], ['spring', '2026-05-24'], ['winter', '2026-01-10'], ['old', '2025-03-01']].map(([slug, date]) => ({ slug, title: slug, date, tags: [] }));
+        const app = loadApp({ url: '/en/blog#open', articles: dated });
+        const slugs = (months, today) => app.getRecentArticles(months, new Date(today)).map(article => article.slug);
+        // Six months back from 24 November 2026 is 24 May 2026, that day included
+        expect(slugs(6, '2026-11-24')).toEqual(['new', 'spring']);
+        expect(slugs(12, '2026-11-24')).toEqual(['new', 'spring', 'winter']);
+        // None that recent but the open one: the newest of the others
+        expect(slugs(6, '2027-12-01')).toEqual(['new']);
+        expect(slugs(1, '2026-11-24')).toEqual(['new']);
+        history.replaceState(null, '', '/en/blog#new');
+        expect(slugs(1, '2026-12-15')).toEqual(['open']);
     });
 
     test('cssVarToHex resolves a CSS variable through a canvas pixel', () => {
@@ -1246,7 +1267,7 @@ describe('the blog page', () => {
     const blogBody = `<nav id="ftco-navbar">${navLinks}</nav>
         <form class="search-form"><input name="search-input"><span class="icon-search"></span><span class="icon-times"></span></form>
         <ul id="search-suggestions"></ul><p id="search-info"></p>
-        <a class="blog-img"></a><h3 id="recent-article-heading"></h3><div class="meta"></div>
+        <div class="recent-articles" data-recent-months="6"><div class="recent-article"><a class="blog-img" aria-labelledby="recent-article-heading-1"></a><h4 id="recent-article-heading-1">Recent</h4><div class="meta"></div></div></div>
         <div class="tagcloud"><a>old</a></div>
         <div class="sidebar" data-diploma-alt="My diploma"></div>
         <div id="article-shape"><div class="kept">kept</div></div>
@@ -1298,12 +1319,20 @@ describe('the blog page', () => {
         expect(window.injected).toBeUndefined();
         expect(window.initArticle).toHaveBeenCalledWith(false);
         expect($('.about-author').hasClass('d-flex')).toBe(true);
+        // One row per recent article, the newest first, each with the picture of its blog card, its title, its date and its own heading id
         const recent = recentTo('presentation');
-        expect($('.blog-img').attr('href')).toBe(`/en/blog#${recent.slug}`);
-        expect(window.loadImages).toHaveBeenCalledWith('.blog-img', 'avif', true);
-        expect($('#recent-article-heading').text()).toBe(recent.title);
-        expect($('.meta').text()).toBe(` date ${recent.date}`);
-        expect($('.meta i').hasClass('icon-calendar')).toBe(true);
+        const rows = $('.recent-article');
+        expect(rows).toHaveLength(recent.length);
+        rows.each((index, row) => {
+            expect($(row).find('.blog-img').attr('href')).toBe(`/en/blog#${recent[index].slug}`);
+            expect($(row).find('.blog-img').attr('aria-labelledby')).toBe(`recent-article-heading-${index + 1}`);
+            expect($(row).find('h4').attr('id')).toBe(`recent-article-heading-${index + 1}`);
+            expect($(row).find('.blog-img')[0].style.backgroundImage).toBe(`url("images/${recent[index].image}.avif")`);
+            expect($(row).find('h4').text()).toBe(recent[index].title);
+            expect($(row).find('.meta').text()).toBe(` date ${recent[index].date}`);
+            expect($(row).find('.meta i').hasClass('icon-calendar')).toBe(true);
+        });
+        expect(recent.every(article => article.image)).toBe(true);
         // A plain tag links nowhere, a tag with an address links to it
         const tags = articles.find(article => article.slug === 'presentation').tags.map(tag => (typeof tag === 'string' ? [tag, '#'] : Object.entries(tag)[0]));
         expect($('.tagcloud a').map((index, link) => [[link.textContent, link.getAttribute('href')]]).get()).toEqual(tags);
@@ -1322,7 +1351,7 @@ describe('the blog page', () => {
         expect(document.querySelectorAll('script[src="js/standalone.js"]')).toHaveLength(1);
         expect($('#article-shape .article-container').text()).toBe('MCS');
         expect($('.sidebar img')).toHaveLength(0);
-        expect($('.blog-img').attr('href')).toBe(`/en/blog#${recentTo('mcs').slug}`);
+        expect($('.recent-article .blog-img').map((index, link) => link.getAttribute('href')).get()).toEqual(recentTo('mcs').map(article => `/en/blog#${article.slug}`));
     });
 
     test('ignores a remembered section that is not an article, and opens the presentation', async () => {
@@ -1330,10 +1359,14 @@ describe('the blog page', () => {
         expect(window.fetch).toHaveBeenCalledWith(expect.stringContaining('filename=presentation_en.html'));
     });
 
-    test('has no recent article to show when the blog holds one article only', async () => {
+    test('drops the Recent Publications box when the blog holds one article only, and shows the newest other one when none is recent', async () => {
         await openBlog({ articles: articles.filter(article => article.slug === 'presentation') });
-        expect($('#recent-article-heading').text()).toBe('');
-        expect($('.blog-img').attr('href')).toBeUndefined();
+        expect($('.recent-articles')).toHaveLength(0);
+        cleanUp();
+        // Both older than six months: the other one alone
+        await openBlog({ articles: articles.filter(article => ['presentation', 'mcs'].includes(article.slug)) });
+        expect($('.recent-article')).toHaveLength(1);
+        expect($('.recent-article .blog-img').attr('href')).toBe('/en/blog#mcs');
     });
 
     test('shows the error, centered, for a broken link, an error answer, a missing script or an unknown slug', async () => {
@@ -1400,6 +1433,26 @@ describe('the blog page', () => {
         expect(app.getMessage('search-no-result')).toBeTruthy();
     });
 
+    test('keeps the focus in the search field when the search icon is pressed, so Enter then goes on to the next occurrence', async () => {
+        await openBlog();
+        const input = $('input[name="search-input"]');
+        const marks = () => $('.article-container mark.highlight');
+        input.val('html');
+        $('.search-form').trigger('submit');
+        // The press on the icon doesn't take the focus out of the field
+        const press = $.Event('mousedown');
+        $('.icon-search').trigger(press);
+        expect(press.isDefaultPrevented()).toBe(true);
+        input[0].blur();
+        $('.icon-search').trigger('click');
+        expect(document.activeElement).toBe(input[0]);
+        expect(marks().eq(0).hasClass('current-match')).toBe(true);
+        input.trigger($.Event('keydown', { key: 'Enter' }));
+        expect(marks().eq(1).hasClass('current-match')).toBe(true);
+        input.trigger($.Event('keydown', { key: 'Enter' }));
+        expect(marks().eq(2).hasClass('current-match')).toBe(true);
+    });
+
     test('counts the occurrences on submit, goes from one to the next with the search icon, and resets', async () => {
         jest.useFakeTimers();
         await openBlog();
@@ -1462,9 +1515,9 @@ describe('the blog page', () => {
         await openBlog();
         jest.spyOn(console, 'error').mockImplementation(() => {});
         const event = $.Event('click');
-        $('.blog-img').trigger(event);
+        $('.recent-article .blog-img').first().trigger(event);
         expect(event.isDefaultPrevented()).toBe(true);
-        expect(window.location.hash).toBe(`#${recentTo('presentation').slug}`);
+        expect(window.location.hash).toBe(`#${recentTo('presentation')[0].slug}`);
         jest.advanceTimersByTime(150);
     });
 });

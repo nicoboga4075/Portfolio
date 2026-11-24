@@ -30,7 +30,7 @@ bodyClass: ""
         <script type="application/ld+json">{{ structuredData | safe }}</script>
         {%- endif %}
         {%- if assets and "head-scripts.html" in assets %}
-        <meta name="articles" content="{{ articles | resolveArticles(lang, siteLanguages.default, siteLanguages.locales) | dump }}">
+        <meta name="articles" content="{{ articles | resolveArticles(lang, siteLanguages.default, siteLanguages.locales, blog.entries) | dump }}">
         <meta name="i18n-messages" content="{{ messages | dump }}">
         <meta name="author-cities" content="{{ authorCities | dump }}">
         {%- endif %}
