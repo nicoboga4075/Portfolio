@@ -1300,7 +1300,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q125">Container vs VM</label>
                 <span class="badge badge-definition">DevOps</span>
             </div>
-            <div class="card-body">A container allows rapid deployment of web applications in a lightweight and portable way, whereas a VM (Virtual Machine) provides full isolation but is heavier and slower. Containers are ideal for modern development environments and microservices. Virtual machines are useful for testing different configurations or running multiple operating systems on the same server.</div>
+            <div class="card-body">A container and a VM (Virtual Machine) both isolate an application and its dependencies so it runs the same everywhere, but not at the same level. A VM virtualises the hardware: a hypervisor runs a full guest OS, with its own kernel, in each VM, so it weighs several gigabytes, takes about a minute to boot and is strongly isolated from its neighbours. A container virtualises only the OS: it shares the kernel of the host and isolates its processes with Linux namespaces and cgroups, so its image weighs a few megabytes to a few hundred, it starts in about a second and dozens fit where a few VMs would; its isolation is lighter, and a Linux container needs a Linux kernel, which Docker Desktop provides on Windows and macOS through a lightweight VM. Containers (Docker, Podman, orchestrated by Kubernetes) suit microservices, CI and fast deployments; VMs suit running another OS, legacy applications or workloads that need strong isolation. Both are often combined: in the cloud, containers usually run on VMs.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q126">
@@ -2941,6 +2941,14 @@ description: "A glossary of software development terms, from framework, library,
                 <span class="badge badge-definition">Cloud</span>
             </div>
             <div class="card-body">A stateless component keeps no memory of earlier requests: each request carries everything needed to handle it, so any instance can answer it and the result does not depend on which one does. HTTP is stateless by design and REST makes it one of its constraints: to recognise a logged-in user, the client sends a cookie or a token (a JWT, for example) with every request, and the session data, when there is any, lives outside the server, in a database or a cache such as Redis. That is what lets an application scale horizontally behind a load balancer, without sticky sessions, restart an instance without losing anything and run as serverless functions. The opposite, stateful, keeps state between requests (a database, a WebSocket connection, a game server): it is harder to replicate, which is why Kubernetes runs stateless apps with a Deployment and stateful ones with a StatefulSet.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q341">
+            <div class="card-header">
+                <label for="q341">OCI image</label>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">An OCI image is a container image in the standard format of the OCI (Open Container Initiative), a project of the Linux Foundation launched in June 2015 by Docker, CoreOS and other leaders of the field. It is made of a manifest that lists its content, a configuration (command to run, environment variables, architecture) and a stack of filesystem layers, each one identified by a digest, a hash of its content (sha256:...): two images that share a base layer store and download it only once, and a digest always points to the same bytes, unlike a tag such as latest. The OCI also writes the runtime specification, followed by runc, and the distribution specification, which describes how a registry stores and serves images. Thanks to this standard, an image built with Docker, Podman or Buildah runs on containerd, CRI-O or Kubernetes, and is pushed to any registry (Docker Hub, GitHub Container Registry, Amazon ECR, Azure Container Registry, Google Artifact Registry); registries now also store other artifacts in that format, such as Helm charts.</div>
         </div>
     </div>
 </article>
