@@ -2926,5 +2926,21 @@ description: "A glossary of software development terms, from framework, library,
             </div>
             <div class="card-body">A rack is a standardised metal cabinet that holds the servers, switches, storage and power units of a datacenter, stacked one above another. The common width is 19 inches (482.6 mm, standard EIA-310) and the height is counted in rack units (U) of 1.75 inches (44.45 mm): a standard 42U rack holds, for example, 42 servers of 1U or 21 of 2U, with their cables and cooling grouped together. A company can rent a whole rack or part of one in a shared datacenter (colocation) to install its own machines, but hosting providers mostly rent what runs in their racks, in three main types of servers: a dedicated server, a physical machine reserved for a single customer, for maximum performance, full control and high security, at a higher cost; a VPS (Virtual Private Server), an isolated virtual partition of a shared physical server created by a hypervisor, a good balance between cost, flexibility and guaranteed resources; and a cloud server, running on an infrastructure spread across many connected physical machines, which scales easily with load peaks or needs.</div>
         </div>
+        <div class="card">
+            <input type="checkbox" id="q339">
+            <div class="card-header">
+                <label for="q339">Serverless</label>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">Serverless is a cloud model in which the developer deploys code without managing any server: the provider still runs servers, but it provisions, scales, patches and bills them on its own. Its best-known form is FaaS (Function as a Service): small functions started by an event (an HTTP request, a file uploaded, a message in a queue, a schedule), billed by the number of calls and their run time rather than by the hour of a server, and scaled from zero to thousands of instances as the load requires. AWS Lambda, Azure Functions and Google Cloud Run functions offer it, and the Netlify Functions of this site (visit counter, contact form settings, blog articles) work that way. The trade-offs: a cold start adds latency when a new instance starts, a call is limited in time (30 minutes at most on AWS Lambda), the function keeps no state between two calls, and the code depends on the provider. It suits irregular loads, APIs and event-driven jobs, less so long or constant computations.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q340">
+            <div class="card-header">
+                <label for="q340">Stateless</label>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">A stateless component keeps no memory of earlier requests: each request carries everything needed to handle it, so any instance can answer it and the result does not depend on which one does. HTTP is stateless by design and REST makes it one of its constraints: to recognise a logged-in user, the client sends a cookie or a token (a JWT, for example) with every request, and the session data, when there is any, lives outside the server, in a database or a cache such as Redis. That is what lets an application scale horizontally behind a load balancer, without sticky sessions, restart an instance without losing anything and run as serverless functions. The opposite, stateful, keeps state between requests (a database, a WebSocket connection, a game server): it is harder to replicate, which is why Kubernetes runs stateless apps with a Deployment and stateful ones with a StatefulSet.</div>
+        </div>
     </div>
 </article>
