@@ -3,14 +3,14 @@
         "CSAT", "NPS", "CES", { "en": "Surveys", "fr": "Enquêtes" }, { "en": "Customer satisfaction", "fr": "Satisfaction client" }, { "en": "Polls", "fr": "Sondages" }, "CAWI", "CATI", "KPI"
     ] },
     { "slug": "bien-pasbien", "title": { "en": "Good / Not Good: good and bad coding practices", "fr": "Bien / Pas Bien : bonnes et mauvaises pratiques de code" }, "date": "2025-07-26", "tags": [
-        "Clean Code", "SOLID", { "Design Patterns": "https://refactoring.guru/design-patterns" }, "DRY", "KISS", "C#", "Python", "JavaScript"
+        "Clean Code", "SOLID", { "Design Patterns": "https://refactoring.guru/design-patterns" }, "DRY", "KISS", "YAGNI", "ACID", { "en": "Law of Demeter", "fr": "Loi de Déméter" }, "C#", "Python", "JavaScript", "SQL"
     ] },
     { "slug": "du-voc-de-dev", "title": { "en": "From the dev vocab", "fr": "Du voc' de dev" }, "date": "2025-05-05", "tags": [
-        "Framework", { "en": "Library", "fr": "Bibliothèque" }, "Package", "Module"
+        { "en": "Glossary", "fr": "Glossaire" }, "Framework", { "en": "Library", "fr": "Bibliothèque" }, "Package", "Module", { "en": "Cybersecurity", "fr": "Cybersécurité" }, { "en": "AI", "fr": "IA" }, "Cloud"
     ] },
     { "slug": "mcs", "title": { "en": "What is a MSC application?", "fr": "Une application MCS : Kézako ?" }, "date": "2024-12-23", "tags": [
         { "MCS": "https://gimelec.fr/wp-content/uploads/2025/03/GIMELEC-Cyber-OT-Livre-blanc-MCS-2025-web.pdf" },
-        { "name": { "en": "CyberSecurity", "fr": "Cybersécurité" }, "url": "https://cyber.gouv.fr/le-cyberdico" },
+        { "name": { "en": "Cybersecurity", "fr": "Cybersécurité" }, "url": "https://cyber.gouv.fr/le-cyberdico" },
         { "name": { "en": "Vulnerability", "fr": "Vulnérabilité" }, "url": "https://www.cvedetails.com/vulnerability-list" },
         "REST",
         { "API": "https://aws.amazon.com/fr/what-is/api" },
@@ -25,14 +25,14 @@
     ] },
     { "slug": "sur-quels-criteres-choisir-une-agence-web", "title": { "en": "How to choose a web agency?", "fr": "Sur quels critères choisir une agence web ?" }, "date": "2019-07-31", "tags": [
         { "en": "Web Agency", "fr": "Agence Web" },
-        { "en": "Digital Transformation", "fr": "Transformation Digitale" },
+        { "en": "Digital Transformation", "fr": "Transformation numérique" },
         { "en": "Project Management", "fr": "Gestion de Projet" },
-        "Business Growth"
+        { "en": "Business Growth", "fr": "Croissance de l'entreprise" }
     ] },
     { "slug": "5-conseils-pour-un-nom-de-marque-parfait", "title": { "en": "5 tips for the perfect brand name", "fr": "5 conseils pour un nom de marque parfait" }, "date": "2019-07-03", "tags": [
-        "Brand Naming",
-        "Business Growth",
-        "Trademark",
+        { "en": "Brand Naming", "fr": "Naming" },
+        { "en": "Business Growth", "fr": "Croissance de l'entreprise" },
+        { "en": "Trademark", "fr": "Marque déposée" },
         { "en": "Entrepreneurship", "fr": "Entrepreneuriat" }
     ] }
 ]

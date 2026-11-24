@@ -80,7 +80,7 @@ test.describe('head metas', () => {
         expect(values(list, 'og:url')).toEqual([`${site}/en/blog#mcs`]);
         expect(values(list, 'article:published_time')).toEqual(['2024-12-23']);
         expect(values(list, 'article:author')).toEqual([`${site}/en`]);
-        expect(values(list, 'article:tag')).toEqual(['MCS', 'CyberSecurity', 'Vulnerability', 'REST', 'API', 'OAuth2']);
+        expect(values(list, 'article:tag')).toEqual(['MCS', 'Cybersecurity', 'Vulnerability', 'REST', 'API', 'OAuth2']);
     });
 
     test('article tags are translated in French', () => {
