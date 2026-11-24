@@ -1,7 +1,7 @@
 ---
 name: new-definition
-description: Adds a definition or a comparison ("A vs B") to the "Du voc de dev" article (articles/du-voc-de-dev_en.html and _fr.html) - a card of its "To go further" accordion in English and French with the next number and an optional badge (Cyber, AI / IA, C#, SQL, DevOps, JavaScript, Linux...) - after checking the term is not there yet, then checks both languages stay aligned. Use it when the user asks to add, define, explain, compare, fix or remove a term, an acronym, a concept or a "vs" in the dev vocabulary article, the glossary or the "voc de dev", even if they don't name the article.
-argument-hint: "<term or A vs B> [badge] [what it should say]"
+description: Adds a definition or a comparison ("A vs B") to the "Du voc de dev" article (articles/du-voc-de-dev_en.html and _fr.html) - a card of its "To go further" accordion in English and French with the next number and one or more badges (Dev, Web, Network / Réseau, Cyber, AI / IA, Cloud, C#, SQL, DevOps...) - after checking the term is not there yet, then checks both languages stay aligned. Use it when the user asks to add, define, explain, compare, fix or remove a term, an acronym, a concept or a "vs" in the dev vocabulary article, the glossary or the "voc de dev", even if they don't name the article.
+argument-hint: "<term or A vs B> [badges] [what it should say]"
 metadata:
   category: Code Scaffolding & Templates
 ---
@@ -12,9 +12,9 @@ The article "Du voc de dev" (slug `du-voc-de-dev`) ends with a glossary: the acc
 
 ## Arguments
 
-`/new-definition <term> [badge] [details]`, for example `/new-definition Rebase vs Merge` or `/new-definition SBOM Cyber`.
+`/new-definition <term> [badges] [details]`, for example `/new-definition Rebase vs Merge Git DevOps` or `/new-definition SBOM Cyber DevOps`.
 
-Everything typed: `$ARGUMENTS`. Take the term, the badge and any wording it gives, in the language it is written in, and write the other language from it.
+Everything typed: `$ARGUMENTS`. Take the term, the badges and any wording it gives, in the language it is written in, and write the other language from it.
 
 ## 1. Check it is new
 
@@ -33,6 +33,7 @@ Add it at the end of the accordion of both files, after the last card (the scrip
             <input type="checkbox" id="q329">
             <div class="card-header">
                 <label for="q329">Rebase vs Merge</label>
+                <span class="badge badge-definition">Git</span>
                 <span class="badge badge-definition">DevOps</span>
             </div>
             <div class="card-body">...</div>
@@ -40,7 +41,7 @@ Add it at the end of the accordion of both files, after the last card (the scrip
 ```
 
 - The term: as it is used in the trade, the same in both languages when it is (an acronym, a command, a product name), translated when it is a common word ("Shallow copy vs Deep copy" / "Copie superficielle vs Copie profonde"). An acronym is spelled out once in the text, with its French meaning after a semicolon in the French card ("WCAG (Web Content Accessibility Guidelines ; règles pour l'accessibilité des contenus web)").
-- The badge: optional, one at most, only for a term tied to a field or a language; reuse one the script lists, the same in both files, except AI written `IA` in French. A new badge needs the user's go-ahead.
+- The badges: at least one, each a span of its own after the label, the main field first, then every other field or language the term clearly belongs to (Docker vs Kubernetes: DevOps, then Cloud); reuse those the script lists, the same in both files and in the same order, with their French names in the French file (AI / IA, Network / Réseau, Hardware / Matériel, Data / Données, System / Système, the names of `BADGE_NAMES` in the script). A new badge needs the user's go-ahead, and its French name, when it has one, goes in `BADGE_NAMES`.
 - The text: one paragraph, no list, no title. A definition starts by what the term is, then how it is used and a concrete example; a comparison says what both share, then what sets them apart, then when to pick which. Facts only, checked against the official docs when they are recent or versioned (a version number, a standard, a limit): never invent one. Plain text, as the other cards: `<b>` and `<i>` only, and `&lt;` `&gt;` for a placeholder (`git worktree add &lt;path&gt;`). French text uses French punctuation (space before `:` and `;`, `’` or `'` as the neighbours), English text English punctuation.
 - Both cards say the same thing, neither a word-for-word translation nor one longer than the other.
 - To fix a card, change it in both files; to remove one, remove it from both and renumber the ids after it (`id` and `for`), since the script wants no gap.
@@ -52,4 +53,4 @@ node .claude/skills/new-definition/check-definitions.mjs
 npm run lint:html
 ```
 
-The script must say the definitions are aligned, with the new count and the new last term. Then open the article on the local site (`run-portfolio` skill, `/en/blog#du-voc-de-dev` and `/fr/blog#du-voc-de-dev`) and expand the new card in both languages: its term, its badge and its text, on a phone width too.
+The script must say the definitions are aligned, with the new count and the new last term. Then open the article on the local site (`run-portfolio` skill, `/en/blog#du-voc-de-dev` and `/fr/blog#du-voc-de-dev`) and expand the new card in both languages: its term, its badges and its text, on a phone width too.

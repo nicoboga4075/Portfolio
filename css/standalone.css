@@ -625,10 +625,12 @@ html.dark-mode .card a {
 
 /* ==== Badges ==== */
 
-.badge-definition {
-    top: 30px;
-    right: 65px;
-    left: inherit;
+/* In the flow of the card header, between the term and its + sign, so a long term wraps beside them instead of running under them on a small screen; on the next lines, aligned with the term, when even its longest word leaves no room */
+.accordion .card-header .badge-definition {
+    position: static;
+    flex-shrink: 0;
+    margin: 5px 0;
+    white-space: nowrap;
 }
 
 /* ==== FAQ Accordion ==== */
@@ -645,8 +647,14 @@ html.dark-mode .card a {
     box-shadow: 0 0 4px var(--shadow-sm);
 }
 
+/* The term, then its badges, side by side, 6 px between two badges; the left padding lines up the badges that wrap with the term, the right one keeps room for the + sign of the label */
 .accordion > .card .card-header {
-    padding: 0;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 6px;
+    padding: 0 45px 0 20px;
 }
 
 .accordion .card > input {
@@ -657,9 +665,8 @@ html.dark-mode .card a {
 }
 
 .accordion .card-header label {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 20px;
+    flex: 1 1 0;
+    padding: 5px 14px 5px 0;
     margin-bottom: 0;
     cursor: pointer;
     font-weight: 700;
@@ -672,13 +679,18 @@ html.dark-mode .card a {
     outline-offset: -2px;
 }
 
+/* At the right edge of the header, past the badge, and centred on its height, as the term and the badge are; still part of the label so a click on it opens the card */
 .accordion .card-header label::after {
+    position: absolute;
+    top: 50%;
+    right: 20px;
     content: '+';
+    transform: translateY(-50%);
     transition: transform 0.3s;
 }
 
 .accordion .card > input:checked ~ .card-header label::after {
-    transform: rotate(45deg);
+    transform: translateY(-50%) rotate(45deg);
 }
 
 .accordion .card-body {
