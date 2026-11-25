@@ -44,6 +44,7 @@
 /js/common.test.js /404.html 404!
 /js/consent.test.js /404.html 404!
 /js/service-worker.test.js /404.html 404!
+/js/standalone.glossary.test.js /404.html 404!
 /js/standalone.test.js /404.html 404!
 
 # The 404 page itself must not be reachable directly with a 200
