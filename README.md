@@ -47,14 +47,25 @@ Portfolio/
 Generated and not committed: `.eleventy/` (output of `npm run dev`), `api/`, `sitemap.xml`, `feed_*.xml`, `reports/` (test reports) and `logs/`.
 
 ### 🔌 Local Ports
-`npm run dev` ([`dev-watch.js`](dev-watch.js)) and the Claude Code hooks listen on four local ports:
+`npm run dev` ([`dev-watch.js`](dev-watch.js)) and the Claude Code hooks listen on these local ports:
 
 | Port | Value | Set in | Listened on by | Role |
 |---|---|---|---|---|
 | `port` | 8888 | `[dev]` of [`netlify.toml`](netlify.toml) | browser-sync | The local site, the one address to open: it reloads the page after each build and forwards everything else to netlify dev. The Netlify functions trust `http://localhost` on any port only under netlify dev (`CONTEXT` is `dev`) |
 | proxy port | free, picked by the system | `dev-watch.js`, written to `.netlify/dev-proxy-port` while it runs (read by the status line) | netlify dev | Serves `.eleventy` with `_redirects`, `_headers`, the environment variables and the functions (`/.netlify/functions/*`), behind browser-sync |
-| `staticServerPort` | 3999 | `[dev]` of `netlify.toml` | the static server of netlify dev | Serves the files of `.eleventy`; `dev-watch.js` reads `docs/public/*` straight from it, since netlify dev answers 403 on Windows for a static file matched by a `_redirects` rule |
+| `staticServerPort` | 3999 | `[dev]` of `netlify.toml` | the static server of netlify dev | Serves the files of `.eleventy` as they are, without `_redirects` nor `_headers`; `dev-watch.js` reads `docs/public/*` straight from it, since netlify dev answers 403 on Windows for a static file matched by a `_redirects` rule |
+| functions port | free, picked by netlify dev (`functionsPort` of `[dev]` would fix it, not set) | netlify dev | the functions server of netlify dev | Runs `netlify/functions/*.mts`; the proxy port forwards `/.netlify/functions/*` to it, nothing else calls it |
+| Blobs port | free, picked by netlify dev | netlify dev | the local Netlify Blobs server | Holds the call counts of `isRateLimited` (`shared/rate-limit.mts`) in `.netlify/blobs-serve`; the functions reach it through the `NETLIFY_BLOBS_CONTEXT` netlify dev gives them, with a random token (403 without it) |
+| database port | free, picked by netlify dev, on `localhost` only | netlify dev | NetlifyDB, a local Postgres (PGlite) that netlify dev always starts | Unused: the visit counter is on Supabase |
 | translation port | 4799 | the url of the `/post-edit` http hook in [`.claude/settings.json`](.claude/settings.json) | [`translation-hook-server.mjs`](.claude/hooks/translation-hook-server.mjs) | Checks every `_data/*.json` file Claude edits (valid JSON, every language with the same shape); started by a SessionStart hook, stops after 2 hours without a request. Not part of the site |
+
+How the three ports of the site work together:
+
+- **port (browser-sync)** is the only one to open. It holds the fixed port of `[dev]`, so netlify dev can't take it: `dev-watch.js` gives netlify dev a free port instead (`--port`), and starts browser-sync on `port` once netlify dev answers.
+- **proxy (netlify dev)** does what Netlify does in production: the pretty URLs and the 404 of `_redirects`, the headers of `_headers` (CSP included), the environment variables and the functions. Opening it directly works, but without the reload after each build and with the 403 on `docs/public/*`.
+- **static** is the plain file server behind the proxy. Only `dev-watch.js` calls it directly, for `docs/public/*`, adding itself the headers `_headers` gives these files (`headersFor`).
+
+Under netlify dev, no edge function and no inspector port open: the project has no `netlify/edge-functions/`, and `--inspect` isn't passed. A function that returns a stream opens one more short-lived port on `localhost`, closed once the body is sent.
 
 The tests that open the built site (the `*.browser.spec.js` Playwright specs, Cypress, Robot Framework) use one more, a free port that [`serve-build.mjs`](tests/serve-build.mjs) prints at start-up. The Android app ([`capacitor.config.js`](capacitor.config.js)) loads the local site on `port` too, forwarded from the device by `npm run adb:reverse`.
 
@@ -67,7 +78,8 @@ flowchart LR
     bs["browser-sync<br/>port (netlify.toml)"]
     nd["netlify dev<br/>proxy port (free, .netlify/dev-proxy-port)"]
     st["static server<br/>staticServerPort (netlify.toml)"]
-    fn["Netlify functions<br/>/.netlify/functions/*"]
+    fn["functions server<br/>functions port (free)"]
+    bl["Netlify Blobs<br/>Blobs port (free)"]
   end
   out[/".eleventy"/]
 
@@ -76,11 +88,13 @@ flowchart LR
   end
   data[/"_data/*.json"/]
 
-  browser -->|"the site, on localhost"| bs
-  bs -->|"every request but docs/public/*"| nd
-  bs -->|"docs/public/*"| st
-  nd -->|"static files"| st
-  nd -->|"functions"| fn
+  browser -->|"a page, a function, a file, on localhost"| bs
+  bs -->|"a page: /en, /fr/blog"| nd
+  bs -->|"a function: /.netlify/functions/*"| nd
+  bs -->|"a file: docs/public/*, headers of _headers added"| st
+  nd -->|"the page after _redirects, with _headers"| st
+  nd -->|"/.netlify/functions/*"| fn
+  fn -->|"rate limit counts"| bl
   st --> out
   claude -->|"POST /post-edit after Edit / Write"| th
   th -->|"checks the edited file"| data
