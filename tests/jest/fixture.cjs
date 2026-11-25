@@ -94,6 +94,7 @@ function installGlobals() {
     window.convertDate = jest.fn(date => `date ${date}`);
     window.getCurrentFullDate = jest.fn(() => 'now');
     window.initArticle = jest.fn();
+    window.initGlossaryFilters = jest.fn();
     window.decodeEmail = code => [...atob(code)].reverse().join('');
     // consent.js, loaded before app.js on the page: the third-party services allowed, unless a test says otherwise
     window.hasConsent = jest.fn(() => true);

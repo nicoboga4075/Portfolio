@@ -1495,9 +1495,12 @@ describe('the blog page', () => {
         input.val('html');
         $('.icon-search').trigger('click');
         expect(info.text()).toBe('3 occurrences');
+        // Every search puts the article back first, its glossary filters built again with none on
+        expect(window.initGlossaryFilters).toHaveBeenCalledTimes(4);
         // Any other key puts the article back as it was
         input.trigger($.Event('keydown', { key: 'a' }));
         expect(marks()).toHaveLength(0);
+        expect(window.initGlossaryFilters).toHaveBeenCalledTimes(5);
         expect(info.css('display')).toBe('none');
         input.val('html');
         $('.search-form').trigger('submit');
@@ -1506,6 +1509,7 @@ describe('the blog page', () => {
         expect(marks()).toHaveLength(0);
         expect(info.text()).toBe('');
         expect($('.icon-times').css('display')).toBe('none');
+        expect(window.initGlossaryFilters).toHaveBeenCalledTimes(7);
     });
 
     test('leaves the page alone when the search is reset or run before an article is loaded', async () => {

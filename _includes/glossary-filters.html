@@ -1,0 +1,8 @@
+{#- The domain filters of the glossary of "Du voc de dev", put just before its accordion: initGlossaryFilters of js/standalone.js adds one chip per badge of the accordion, the texts come from _data/messages.json in the language of the page -#}
+{%- set lang = page.fileSlug.split("_") | last -%}
+<div class="glossary-filters" data-reset="{{ messages['filter-reset'][lang] }}" data-count="{{ messages['glossary-count'][lang] }}">
+    <div class="filter-group" role="group" aria-label="{{ messages['glossary-domains'][lang] }}">
+        <span class="filter-group-label" aria-hidden="true">{{ messages['glossary-domains'][lang] }}</span>
+    </div>
+    <p class="glossary-count" aria-live="polite"></p>
+</div>

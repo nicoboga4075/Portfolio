@@ -5,7 +5,7 @@ function fakePage(links = []) {
     global.window = global;
     global.loadImages = jest.fn();
     global.initTranslator = jest.fn();
-    global.document = { querySelectorAll: jest.fn(() => links) };
+    global.document = { querySelectorAll: jest.fn(() => links), querySelector: jest.fn(() => null) };
 }
 
 // Loads standalone.js on the fake page and returns its top-level functions, exported by tests/jest/transform.cjs

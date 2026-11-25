@@ -642,6 +642,21 @@ html.dark-mode .card a {
     transition: none;
 }
 
+/* A card left out by the domain filters of the glossary (initGlossaryFilters in js/standalone.js) */
+.accordion > .card.filtered-out {
+    display: none;
+}
+
+.glossary-filters {
+    margin-bottom: 16px;
+}
+
+.glossary-count {
+    margin: 8px 0 0;
+    font-size: 13.6px;
+    color: var(--secondary);
+}
+
 .accordion > .card:hover {
     transform: none;
     box-shadow: 0 0 4px var(--shadow-sm);

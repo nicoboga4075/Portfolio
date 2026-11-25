@@ -3135,69 +3135,6 @@ html.dark-mode #experience-filters-toggle.active {
     }
 }
 
-.filter-group {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 8px;
-}
-
-.filter-group-label {
-    font-weight: 600;
-    font-size: 13.6px;
-    margin-right: 4px;
-}
-
-.filter-chip {
-    display: inline-block;
-    padding: 3px 12px;
-    font-size: 12.8px;
-    color: var(--dark);
-    background-color: var(--primary-pale);
-    border: 1px solid var(--background-color);
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.filter-chip:focus {
-    outline: none;
-}
-
-/* The gap in --background-color keeps the ring visible on an active (--primary) chip. */
-.filter-chip:focus-visible {
-    box-shadow: 0 0 0 2px var(--background-color), 0 0 0 4px var(--primary);
-}
-
-.filter-chip.active {
-    color: var(--white);
-    background-color: var(--primary);
-    border-color: var(--primary);
-}
-
-html.dark-mode .filter-chip.active {
-    background-color: var(--primary-dark);
-    border-color: var(--primary-dark);
-}
-
-#experience-filters-reset {
-    padding: 3px 12px;
-    font-size: 12.8px;
-    color: var(--primary);
-    background-color: transparent;
-    border: 1px solid var(--primary);
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-#experience-filters-reset:focus {
-    outline: none;
-}
-
-#experience-filters-reset:focus-visible {
-    box-shadow: 0 0 0 2px var(--background-color), 0 0 0 4px var(--primary);
-}
-
 /* .resume-wrap also carries Bootstrap's .d-flex (display: flex !important),
    which otherwise wins over a plain display: none here. */
 .resume-wrap.filtered-out {

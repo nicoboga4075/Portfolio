@@ -121,6 +121,7 @@ export default defineConfig([
     languageOptions: {
       globals: {
         initArticle: "readonly",
+        initGlossaryFilters: "readonly",
         appRoutes: "readonly",
         getHashFromSession: "readonly",
         i18next: "readonly",

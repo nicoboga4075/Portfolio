@@ -407,9 +407,15 @@ function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
 }
 
+// Puts the injected article back as it was before any highlight; the chips of its glossary filters (initGlossaryFilters of js/standalone.js) come back without their listeners, so they are built again, every filter off: a search always runs on every definition
+function restoreArticleContent() {
+    $('.article-container').html(originalArticleContent);
+    initGlossaryFilters();
+}
+
 function highlightKeywords(keywords) {
     if (!originalArticleContent) return;
-    $('.article-container').html(originalArticleContent);
+    restoreArticleContent();
     $('.article-container').contents().each(function recurse() {
         if (this.nodeType === 3) {
             let text = this.nodeValue;
@@ -1478,6 +1484,7 @@ function initExperienceFilters() {
     const resetBtn = document.createElement('button');
     resetBtn.type = 'button';
     resetBtn.id = 'experience-filters-reset';
+    resetBtn.className = 'filter-reset';
     resetBtn.textContent = getMessage('filter-reset');
     resetBtn.addEventListener('click', () => {
         active.clear();
@@ -1955,7 +1962,7 @@ function initBlogPage(langPage) {
                     event.preventDefault();
                     $searchSpan.trigger('click');
                 } else {
-                    $('.article-container').html(originalArticleContent);
+                    restoreArticleContent();
                     $searchInfo.hide().removeClass('no-result').text('');
                 }
             });
@@ -1983,7 +1990,7 @@ function initBlogPage(langPage) {
                 $searchInput.val('').focus();
                 $suggestions.empty().hide();
                 if (originalArticleContent) {
-                    $('.article-container').html(originalArticleContent);
+                    restoreArticleContent();
                 }
                 $(this).hide();
                 $searchInfo.text('').removeClass('search-no-result');
