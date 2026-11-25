@@ -4,7 +4,7 @@
         "fr": { "profileAlt": "Profil", "role": "Ingénieur Logiciel", "scanMe": "Scanne-moi", "sidebar": "Barre latérale", "searchPlaceholder": "Rechercher...", "searchAria": "Rechercher dans l'article", "searchSuggestions": "Suggestions de recherche", "recent": "Récents", "recentAria": "Publication récente", "tags": "Mots-clés", "diplomaAlt": "Ma remise de diplôme à l'ESILV, promotion 2021" }
     },
     "sectionText": {
-        "en": { "heading": "Blog", "tagline": "Far far away, beyond the mountains of code" },
+        "en": { "heading": "Blog", "tagline": "Far, far away, beyond the mountains of code" },
         "fr": { "heading": "Blog", "tagline": "Loin, très loin, au-delà des montagnes de code" }
     },
     "entries": [

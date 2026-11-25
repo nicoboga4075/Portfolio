@@ -7,7 +7,7 @@
         "facts": [
             { "icon": "icon-map-marker", "text": "In Paris area" },
             { "icon": "icon-clock-o", "text": "ASAP" },
-            { "icon": "icon-car", "text": "B driving licence, no car" }
+            { "icon": "icon-car", "text": "B driver's license, no car" }
         ],
         "roles": "Software Engineer, Full Stack Developer",
         "contactCta": "Contact me"

@@ -9,7 +9,7 @@ description: "A glossary of software development terms, from framework, library,
     <h2>Framework</h2>
     <p>A framework is a complete environment that provides a predefined architecture for developing applications. It imposes rules, conventions and a workflow that the developer must follow. The idea is to <b>standardize</b> development and reduce errors thanks to a <b>rigid structure</b>.</p>
     <h3>ASP.NET Core (C#)</h3>
-    <p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/aspnet/core">ASP.NET Core</a> is powerful, flexible and interoperable (Linux, MacOS and Windows), making it an excellent choice for modern development (web applications, APIs or microservices). It supports large-scale and critical applications for large businesses such as <b>Microsoft</b> and is supported by the large <i>Stack Overflow</i> community. Its modular design allows you to choose the components you need and it has robust security features to protect you from common vulnerabilities (<i>OWASP</i>). However, even if .NET has become easier to use, early-stage developers might find it more difficult than the frameworks associated with languages like Python or JavaScript, described below. Since the release of .NET 5 in November 2020, the "Core" has officially disappeared from the name.</p>
+    <p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/aspnet/core">ASP.NET Core</a> is powerful, flexible and interoperable (Linux, macOS and Windows), making it an excellent choice for modern development (web applications, APIs or microservices). It supports large-scale and critical applications for large businesses such as <b>Microsoft</b> and is supported by the large <i>Stack Overflow</i> community. Its modular design allows you to choose the components you need and it has robust security features to protect you from common vulnerabilities (<i>OWASP</i>). However, even if .NET has become easier to use, early-stage developers might find it more difficult than the frameworks associated with languages like Python or JavaScript, described below. Since the release of .NET 5 in November 2020, the "Core" has officially disappeared from the name.</p>
     <h3>Flask (Python)</h3>
     <p><a target="_blank" rel="noopener" href="https://flask.palletsprojects.com">Flask</a>, used by <b>Netflix</b>, has been known for its ease of use since its inception in 2010. Unlike "battery-included" frameworks like <a target="_blank" rel="noopener" href="https://www.djangoproject.com">Django</a> used by <b>Instagram</b>, Flask has a minimalist kernel, making it adaptable to a variety of projects, from simple <i>REST</i> APIs to microservices to more complex web applications. This gives developers flexibility but also requires them to make more decisions about architecture and component selection. This can be an advantage for experienced developers but it can be difficult for juniors who are penalized by the lack of built-in features. Furthermore, while Flask adequately addresses common security needs, it requires developers to be more pragmatic in the architecture and security of their applications.</p>
     <h3>Angular (JavaScript)</h3>
@@ -264,7 +264,7 @@ description: "A glossary of software development terms, from framework, library,
                 <span class="badge badge-definition">Web</span>
                 <span class="badge badge-definition">Network</span>
             </div>
-            <div class="card-body">Easy to remember uniform address for calling a web page (such as wwww.linkedin.com or www.github.com)</div>
+            <div class="card-body">Easy to remember uniform address for calling a web page (such as www.linkedin.com or www.github.com)</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q25">
@@ -997,7 +997,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q81">Black hat vs White hat</label>
                 <span class="badge badge-definition">Cyber</span>
             </div>
-            <div class="card-body">A <b>black hat</b> is a malicious hacker who exploits security vulnerabilities for illegal or personal gain. A <b>white hat</b> is an ethical hacker who uses their skills to identify and fix vulnerabilities in order to strengthen security. At the boundary between ethics and illegality, a <b>grey hat</b> may identify vulnerabilities without authorization but without malicious intent, sometimes to alert the affected organization or to test their skills.</div>
+            <div class="card-body">A <b>black hat</b> is a malicious hacker who exploits security vulnerabilities for illegal or personal gain. A <b>white hat</b> is an ethical hacker who uses their skills to identify and fix vulnerabilities in order to strengthen security. At the boundary between ethics and illegality, a <b>gray hat</b> may identify vulnerabilities without authorization but without malicious intent, sometimes to alert the affected organization or to test their skills.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q82">
@@ -1205,7 +1205,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q106">Vulnerability</label>
                 <span class="badge badge-definition">Cyber</span>
             </div>
-            <div class="card-body">Specific flaw in an application that a risk source could exploit (e.g., using code) to gain unauthorized access, steal data or deploy malwares</div>
+            <div class="card-body">Specific flaw in an application that a risk source could exploit (e.g., using code) to gain unauthorized access, steal data or deploy malware</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q107">
@@ -1213,7 +1213,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q107">Operating system</label>
                 <span class="badge badge-definition">System</span>
             </div>
-            <div class="card-body">An operating system (OS) is the interface between computer hardware and the user. The most well-known are Linux, MacOS and Windows.</div>
+            <div class="card-body">An operating system (OS) is the interface between computer hardware and the user. The most well-known are Linux, macOS and Windows.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q108">
@@ -1404,7 +1404,7 @@ description: "A glossary of software development terms, from framework, library,
                 <span class="badge badge-definition">DevOps</span>
                 <span class="badge badge-definition">Cloud</span>
             </div>
-            <div class="card-body">A container and a VM (Virtual Machine) both isolate an application and its dependencies so it runs the same everywhere, but not at the same level. A VM virtualises the hardware: a hypervisor runs a full guest OS, with its own kernel, in each VM, so it weighs several gigabytes, takes about a minute to boot and is strongly isolated from its neighbours. A container virtualises only the OS: it shares the kernel of the host and isolates its processes with Linux namespaces and cgroups, so its image weighs a few megabytes to a few hundred, it starts in about a second and dozens fit where a few VMs would; its isolation is lighter, and a Linux container needs a Linux kernel, which Docker Desktop provides on Windows and macOS through a lightweight VM. Containers (Docker, Podman, orchestrated by Kubernetes) suit microservices, CI and fast deployments; VMs suit running another OS, legacy applications or workloads that need strong isolation. Both are often combined: in the cloud, containers usually run on VMs.</div>
+            <div class="card-body">A container and a VM (Virtual Machine) both isolate an application and its dependencies so it runs the same everywhere, but not at the same level. A VM virtualizes the hardware: a hypervisor runs a full guest OS, with its own kernel, in each VM, so it weighs several gigabytes, takes about a minute to boot and is strongly isolated from its neighbors. A container virtualizes only the OS: it shares the kernel of the host and isolates its processes with Linux namespaces and cgroups, so its image weighs a few megabytes to a few hundred, it starts in about a second and dozens fit where a few VMs would; its isolation is lighter, and a Linux container needs a Linux kernel, which Docker Desktop provides on Windows and macOS through a lightweight VM. Containers (Docker, Podman, orchestrated by Kubernetes) suit microservices, CI and fast deployments; VMs suit running another OS, legacy applications or workloads that need strong isolation. Both are often combined: in the cloud, containers usually run on VMs.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q126">
@@ -1440,7 +1440,7 @@ description: "A glossary of software development terms, from framework, library,
                 <span class="badge badge-definition">Web</span>
                 <span class="badge badge-definition">Architecture</span>
             </div>
-            <div class="card-body">An API (Application Programming Interface) is an interface exposed by an application, service or system, allowing other applications to consume its functions or data in a standardized way without knowing its internal implementation (grey-box approach).</div>
+            <div class="card-body">An API (Application Programming Interface) is an interface exposed by an application, service or system, allowing other applications to consume its functions or data in a standardized way without knowing its internal implementation (gray-box approach).</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q130">
@@ -1783,7 +1783,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q170">OS</label>
                 <span class="badge badge-definition">System</span>
             </div>
-            <div class="card-body">An operating system (OS) is essential software that manages a computer or the hardware of an electronic device and provides services to application programs. It acts as an intermediary between the user, applications and hardware. The most well-known are MacOS, Windows, Linux android, iOS and ChromeOS.</div>
+            <div class="card-body">An operating system (OS) is essential software that manages a computer or the hardware of an electronic device and provides services to application programs. It acts as an intermediary between the user, applications and hardware. The most well-known are macOS, Windows, Linux, Android, iOS and ChromeOS.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q171">
@@ -2795,7 +2795,7 @@ description: "A glossary of software development terms, from framework, library,
         <div class="card">
             <input type="checkbox" id="q290">
             <div class="card-header">
-                <label for="q290">Handcheck</label>
+                <label for="q290">Handshake</label>
                 <span class="badge badge-definition">Cyber</span>
                 <span class="badge badge-definition">Network</span>
             </div>
@@ -2907,7 +2907,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q303">Netiquette</label>
                 <span class="badge badge-definition">Web</span>
             </div>
-            <div class="card-body">Netiquette (a blend of "net" and "etiquette") is the set of good-conduct and courtesy rules expected in online exchanges (emails, forums, chats, social media). It advises, for example, against writing in all caps (read as shouting), in favour of a clear message subject, not overusing "reply all" and not feeding trolls.</div>
+            <div class="card-body">Netiquette (a blend of "net" and "etiquette") is the set of good-conduct and courtesy rules expected in online exchanges (emails, forums, chats, social media). It advises, for example, against writing in all caps (read as shouting), in favor of a clear message subject, not overusing "reply all" and not feeding trolls.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q304">
@@ -2932,7 +2932,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q306">Moore's law</label>
                 <span class="badge badge-definition">Hardware</span>
             </div>
-            <div class="card-body">Stated in 1965 by Gordon Moore, Intel's co-founder, Moore's law is an empirical observation that the number of transistors on a microprocessor roughly doubles every two years at constant cost, resulting in exponential growth in computing power. This pace has been slowing since the 2010s as miniaturisation approaches its physical limits.</div>
+            <div class="card-body">Stated in 1965 by Gordon Moore, Intel's co-founder, Moore's law is an empirical observation that the number of transistors on a microprocessor roughly doubles every two years at constant cost, resulting in exponential growth in computing power. This pace has been slowing since the 2010s as miniaturization approaches its physical limits.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q307">
@@ -2940,7 +2940,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q307">RAG vs Fine-tuning</label>
                 <span class="badge badge-definition">AI</span>
             </div>
-            <div class="card-body">RAG (Retrieval-Augmented Generation) leaves the model unchanged and feeds it, at query time, relevant document snippets retrieved from an external knowledge base: information stays up to date and verifiable, with no retraining. Fine-tuning continues the model's training on a specialised dataset to durably change its behaviour or style: more costly, it freezes knowledge at the training date. The two approaches are complementary.</div>
+            <div class="card-body">RAG (Retrieval-Augmented Generation) leaves the model unchanged and feeds it, at query time, relevant document snippets retrieved from an external knowledge base: information stays up to date and verifiable, with no retraining. Fine-tuning continues the model's training on a specialized dataset to durably change its behavior or style: more costly, it freezes knowledge at the training date. The two approaches are complementary.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q308">
@@ -2948,7 +2948,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q308">Hijacking</label>
                 <span class="badge badge-definition">Cyber</span>
             </div>
-            <div class="card-body">Hijacking is the takeover of a legitimate resource while it is in use, redirecting it to an attacker's benefit without the victim noticing. Depending on the target: <i>session hijacking</i> steals the session cookie to impersonate a logged-in user, <i>clickjacking</i> overlays the target page in an invisible <i>iframe</i> to divert clicks toward an unintended action, <i>base-tag hijacking</i> injects a &lt;base&gt; tag that redirects all of the page's relative URLs (scripts, images, links) to an attacker-controlled server and <i>DNS hijacking</i> corrupts a domain name's resolution to reroute traffic. Common defences include <i>SameSite</i> and <i>HttpOnly</i> cookies, the <i>Content-Security-Policy</i> header (<i>frame-ancestors</i> and <i>base-uri</i> directives) and HTTPS.</div>
+            <div class="card-body">Hijacking is the takeover of a legitimate resource while it is in use, redirecting it to an attacker's benefit without the victim noticing. Depending on the target: <i>session hijacking</i> steals the session cookie to impersonate a logged-in user, <i>clickjacking</i> overlays the target page in an invisible <i>iframe</i> to divert clicks toward an unintended action, <i>base-tag hijacking</i> injects a &lt;base&gt; tag that redirects all of the page's relative URLs (scripts, images, links) to an attacker-controlled server and <i>DNS hijacking</i> corrupts a domain name's resolution to reroute traffic. Common defenses include <i>SameSite</i> and <i>HttpOnly</i> cookies, the <i>Content-Security-Policy</i> header (<i>frame-ancestors</i> and <i>base-uri</i> directives) and HTTPS.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q309">
@@ -2956,7 +2956,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q309">Transformers</label>
                 <span class="badge badge-definition">AI</span>
             </div>
-            <div class="card-body">The Transformer is a neural network architecture introduced in 2017 ("Attention Is All You Need", Google). It processes an entire sequence in parallel through a <i>self-attention</i> mechanism that weighs, for every token, its relevance to every other token, capturing long-range dependencies without recurrence — unlike RNNs and LSTMs, which are sequential, or CNNs, whose receptive field is local. It stacks encoder and/or decoder blocks (multi-head attention plus feed-forward layers, with residual connections and layer normalisation) and underpins nearly every modern large language model: encoder-only (BERT) for understanding, decoder-only (GPT, Claude) for generation, encoder-decoder (T5) for translation. Because the computation is fully parallel it maps well onto GPUs: training and inference at scale rely almost entirely on NVIDIA hardware — from a single T4 in a notebook to clusters of H100s — through <i>CUDA</i>, NVIDIA’s parallel-computing platform. On top of such models, agent patterns like the <i>ReAct</i> loop (Reason + Act) interleave a reasoning step with a tool call, feed the resulting observation back into the model and repeat until it produces a final answer. To standardise how such agents reach external tools and data, Anthropic released the <i>Model Context Protocol</i> (MCP) in 2024 — an open client–server protocol, quickly adopted across the ecosystem, that exposes tools, resources and prompts to any compatible model. A related pattern, <i>Retrieval-Augmented Generation</i> (RAG), grounds answers by pulling relevant passages from a knowledge base into the prompt rather than by calling a tool.</div>
+            <div class="card-body">The Transformer is a neural network architecture introduced in 2017 ("Attention Is All You Need", Google). It processes an entire sequence in parallel through a <i>self-attention</i> mechanism that weighs, for every token, its relevance to every other token, capturing long-range dependencies without recurrence — unlike RNNs and LSTMs, which are sequential, or CNNs, whose receptive field is local. It stacks encoder and/or decoder blocks (multi-head attention plus feed-forward layers, with residual connections and layer normalization) and underpins nearly every modern large language model: encoder-only (BERT) for understanding, decoder-only (GPT, Claude) for generation, encoder-decoder (T5) for translation. Because the computation is fully parallel it maps well onto GPUs: training and inference at scale rely almost entirely on NVIDIA hardware — from a single T4 in a notebook to clusters of H100s — through <i>CUDA</i>, NVIDIA’s parallel-computing platform. On top of such models, agent patterns like the <i>ReAct</i> loop (Reason + Act) interleave a reasoning step with a tool call, feed the resulting observation back into the model and repeat until it produces a final answer. To standardize how such agents reach external tools and data, Anthropic released the <i>Model Context Protocol</i> (MCP) in 2024 — an open client–server protocol, quickly adopted across the ecosystem, that exposes tools, resources and prompts to any compatible model. A related pattern, <i>Retrieval-Augmented Generation</i> (RAG), grounds answers by pulling relevant passages from a knowledge base into the prompt rather than by calling a tool.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q310">
@@ -2972,7 +2972,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q311">Nucleus sampling</label>
                 <span class="badge badge-definition">AI</span>
             </div>
-            <div class="card-body">Nucleus sampling (or <i>top-p</i>) is a decoding strategy for language models. Rather than always taking the most likely next token (<i>greedy</i>) or sampling from the whole vocabulary, it keeps the smallest set of leading tokens whose cumulative probability reaches a threshold p (say 0.9) — the <i>nucleus</i> — renormalises it and samples from there. The candidate pool shrinks when the model is confident and widens when it hesitates, keeping the output varied without letting improbable tokens through. Unlike <i>top-k</i>, which fixes the number of candidates, top-p adapts it; both are usually combined with the temperature.</div>
+            <div class="card-body">Nucleus sampling (or <i>top-p</i>) is a decoding strategy for language models. Rather than always taking the most likely next token (<i>greedy</i>) or sampling from the whole vocabulary, it keeps the smallest set of leading tokens whose cumulative probability reaches a threshold p (say 0.9) — the <i>nucleus</i> — renormalizes it and samples from there. The candidate pool shrinks when the model is confident and widens when it hesitates, keeping the output varied without letting improbable tokens through. Unlike <i>top-k</i>, which fixes the number of candidates, top-p adapts it; both are usually combined with the temperature.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q312">
@@ -2996,7 +2996,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q314">Top-k sampling</label>
                 <span class="badge badge-definition">AI</span>
             </div>
-            <div class="card-body">Top-k sampling is a decoding strategy that restricts the next token to the k most probable candidates (say k = 40), renormalises their probabilities and samples from that set. It is simpler than nucleus sampling but its cutoff is fixed: the same k applies whether the model is almost certain (the extra candidates only add noise) or genuinely undecided (k may then be too small). It is frequently stacked with top-p and the temperature.</div>
+            <div class="card-body">Top-k sampling is a decoding strategy that restricts the next token to the k most probable candidates (say k = 40), renormalizes their probabilities and samples from that set. It is simpler than nucleus sampling but its cutoff is fixed: the same k applies whether the model is almost certain (the extra candidates only add noise) or genuinely undecided (k may then be too small). It is frequently stacked with top-p and the temperature.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q315">
@@ -3004,7 +3004,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q315">CTE</label>
                 <span class="badge badge-definition">SQL</span>
             </div>
-            <div class="card-body">A CTE (Common Table Expression) is a named temporary result set declared with the <i>with</i> keyword and available only for the duration of the query that follows. It flattens a complex query into readable, named steps that can each be referenced several times, without creating a view or a temporary table. A recursive CTE (<i>with recursive</i>) references itself to walk hierarchical or graph data — organisation charts, bills of materials, tree paths.</div>
+            <div class="card-body">A CTE (Common Table Expression) is a named temporary result set declared with the <i>with</i> keyword and available only for the duration of the query that follows. It flattens a complex query into readable, named steps that can each be referenced several times, without creating a view or a temporary table. A recursive CTE (<i>with recursive</i>) references itself to walk hierarchical or graph data — organization charts, bills of materials, tree paths.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q316">
@@ -3012,7 +3012,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q316">NLP</label>
                 <span class="badge badge-definition">AI</span>
             </div>
-            <div class="card-body">NLP (Natural Language Processing) is the field at the intersection of linguistics and machine learning concerned with getting computers to read, interpret and produce human language. Classic tasks include tokenisation, part-of-speech tagging, named-entity recognition, sentiment analysis, translation, summarisation and question answering. Early systems relied on hand-written rules and statistical models over bag-of-words features; the field was reshaped first by word embeddings (word2vec, GloVe), then by the Transformer, whose pretrained language models (BERT, GPT) now underpin most modern NLP.</div>
+            <div class="card-body">NLP (Natural Language Processing) is the field at the intersection of linguistics and machine learning concerned with getting computers to read, interpret and produce human language. Classic tasks include tokenization, part-of-speech tagging, named-entity recognition, sentiment analysis, translation, summarization and question answering. Early systems relied on hand-written rules and statistical models over bag-of-words features; the field was reshaped first by word embeddings (word2vec, GloVe), then by the Transformer, whose pretrained language models (BERT, GPT) now underpin most modern NLP.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q317">
@@ -3020,7 +3020,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q317">k-NN</label>
                 <span class="badge badge-definition">AI</span>
             </div>
-            <div class="card-body">k-NN (k-Nearest Neighbours) is a lazy, non-parametric algorithm: it stores the training set and, to classify a new point, looks at its k closest points under a distance metric (Euclidean, cosine, Manhattan) and takes the majority vote — or the average, for regression. There is no training phase, so every prediction costs a full scan of the data unless it is indexed (k-d tree, ball tree, HNSW). A small k follows the noise and overfits; a large k oversmooths and blurs class boundaries. For binary classification an odd k is preferable: it rules out a tied vote (with k = 4 the neighbours can split 2–2, with k = 5 they cannot). Features must be scaled first, or the largest-range feature dominates the distance.</div>
+            <div class="card-body">k-NN (k-Nearest Neighbors) is a lazy, non-parametric algorithm: it stores the training set and, to classify a new point, looks at its k closest points under a distance metric (Euclidean, cosine, Manhattan) and takes the majority vote — or the average, for regression. There is no training phase, so every prediction costs a full scan of the data unless it is indexed (k-d tree, ball tree, HNSW). A small k follows the noise and overfits; a large k oversmooths and blurs class boundaries. For binary classification an odd k is preferable: it rules out a tied vote (with k = 4 the neighbors can split 2–2, with k = 5 they cannot). Features must be scaled first, or the largest-range feature dominates the distance.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q318">
@@ -3044,7 +3044,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q320">Cyber Threat Intelligence</label>
                 <span class="badge badge-definition">Cyber</span>
             </div>
-            <div class="card-body">Cyber Threat Intelligence (CTI), or cyberintelligence, is the collection, analysis and dissemination of information about cyber threats — threat actors, attack techniques, indicators of compromise (IOCs) — to help anticipate, detect and respond to cyberattacks. It draws on open sources (OSINT), tactics and techniques catalogued by the <a target="_blank" rel="noopener" href="https://attack.mitre.org">MITRE ATT&amp;CK</a> framework, and sharing platforms like <a target="_blank" rel="noopener" href="https://www.misp-project.org">MISP</a>, turning raw data into intelligence that security teams (SOC, CERT) can act on.</div>
+            <div class="card-body">Cyber Threat Intelligence (CTI), or cyberintelligence, is the collection, analysis and dissemination of information about cyber threats — threat actors, attack techniques, indicators of compromise (IOCs) — to help anticipate, detect and respond to cyberattacks. It draws on open sources (OSINT), tactics and techniques cataloged by the <a target="_blank" rel="noopener" href="https://attack.mitre.org">MITRE ATT&amp;CK</a> framework, and sharing platforms like <a target="_blank" rel="noopener" href="https://www.misp-project.org">MISP</a>, turning raw data into intelligence that security teams (SOC, CERT) can act on.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q321">
@@ -3136,7 +3136,7 @@ description: "A glossary of software development terms, from framework, library,
                 <span class="badge badge-definition">Cloud</span>
                 <span class="badge badge-definition">Business</span>
             </div>
-            <div class="card-body">The TCO (Total Cost of Ownership) is the full cost of an IT system over its whole lifetime, not only its purchase price. It adds up the CapEx (capital expenditure), the upfront investments such as premises and servers, and the OpEx (operating expenditure), the recurring costs such as staff, training, licences and energy. It is the figure to compare before a cloud migration: an on-premises datacenter weighs mostly in CapEx, bought ahead and sized for the peak, while the cloud turns most of it into OpEx, billed per use, with the hardware, its maintenance and its renewal left to the provider. A cloud can still cost more over time for a steady load, so the TCO also counts what the bill hides (migration, data egress, upskilling the teams); tools such as the business case of Azure Migrate or the AWS Pricing Calculator help make that estimate.</div>
+            <div class="card-body">The TCO (Total Cost of Ownership) is the full cost of an IT system over its whole lifetime, not only its purchase price. It adds up the CapEx (capital expenditure), the upfront investments such as premises and servers, and the OpEx (operating expenditure), the recurring costs such as staff, training, licenses and energy. It is the figure to compare before a cloud migration: an on-premises datacenter weighs mostly in CapEx, bought ahead and sized for the peak, while the cloud turns most of it into OpEx, billed per use, with the hardware, its maintenance and its renewal left to the provider. A cloud can still cost more over time for a steady load, so the TCO also counts what the bill hides (migration, data egress, upskilling the teams); tools such as the business case of Azure Migrate or the AWS Pricing Calculator help make that estimate.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q332">
@@ -3144,7 +3144,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q332">Availability zone (AZ)</label>
                 <span class="badge badge-definition">Cloud</span>
             </div>
-            <div class="card-body">An availability zone (AZ) is an isolated location within a cloud region, made of one or more datacenters with their own power, cooling and network, so that a fire, a flood or a power cut in one zone does not take down the others. The zones of a region are several kilometres apart but within 100 km of each other, close enough to be linked by a low-latency private network, far enough not to share the same disaster; AWS and Azure give at least three zones to each region that offers them, Google Cloud simply calls them zones. A highly available application spreads its servers across several zones behind a load balancer and replicates its database from one zone to another (Amazon RDS Multi-AZ, for example): if one zone fails, the others keep serving. To survive the loss of a whole region, it is deployed in several regions instead.</div>
+            <div class="card-body">An availability zone (AZ) is an isolated location within a cloud region, made of one or more datacenters with their own power, cooling and network, so that a fire, a flood or a power cut in one zone does not take down the others. The zones of a region are several kilometers apart but within 100 km of each other, close enough to be linked by a low-latency private network, far enough not to share the same disaster; AWS and Azure give at least three zones to each region that offers them, Google Cloud simply calls them zones. A highly available application spreads its servers across several zones behind a load balancer and replicates its database from one zone to another (Amazon RDS Multi-AZ, for example): if one zone fails, the others keep serving. To survive the loss of a whole region, it is deployed in several regions instead.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q333">
@@ -3177,7 +3177,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q336">Management group</label>
                 <span class="badge badge-definition">Cloud</span>
             </div>
-            <div class="card-body">A management group is a container of Microsoft Azure placed above the subscriptions, to govern many of them at once. The levels nest from the top down: management groups, subscriptions, resource groups, then resources; each tenant has a root management group, and a management group or a subscription has a single parent. The access rights (RBAC) and the policies set on a management group are inherited by everything below it, which no subscription can opt out of: a company can, for example, allow only European regions for all its subscriptions, or give its security team read access everywhere, in a single assignment. Management groups usually follow the organisation or the environments (Production, Development, Sandbox), as the Azure landing zones recommend. AWS Organizations offers the same with its organizational units (OU), and Google Cloud with its folders.</div>
+            <div class="card-body">A management group is a container of Microsoft Azure placed above the subscriptions, to govern many of them at once. The levels nest from the top down: management groups, subscriptions, resource groups, then resources; each tenant has a root management group, and a management group or a subscription has a single parent. The access rights (RBAC) and the policies set on a management group are inherited by everything below it, which no subscription can opt out of: a company can, for example, allow only European regions for all its subscriptions, or give its security team read access everywhere, in a single assignment. Management groups usually follow the organization or the environments (Production, Development, Sandbox), as the Azure landing zones recommend. AWS Organizations offers the same with its organizational units (OU), and Google Cloud with its folders.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q337">
@@ -3195,7 +3195,7 @@ description: "A glossary of software development terms, from framework, library,
                 <span class="badge badge-definition">Cloud</span>
                 <span class="badge badge-definition">Hardware</span>
             </div>
-            <div class="card-body">A rack is a standardised metal cabinet that holds the servers, switches, storage and power units of a datacenter, stacked one above another. The common width is 19 inches (482.6 mm, standard EIA-310) and the height is counted in rack units (U) of 1.75 inches (44.45 mm): a standard 42U rack holds, for example, 42 servers of 1U or 21 of 2U, with their cables and cooling grouped together. A company can rent a whole rack or part of one in a shared datacenter (colocation) to install its own machines, but hosting providers mostly rent what runs in their racks, in three main types of servers: a dedicated server, a physical machine reserved for a single customer, for maximum performance, full control and high security, at a higher cost; a VPS (Virtual Private Server), an isolated virtual partition of a shared physical server created by a hypervisor, a good balance between cost, flexibility and guaranteed resources; and a cloud server, running on an infrastructure spread across many connected physical machines, which scales easily with load peaks or needs.</div>
+            <div class="card-body">A rack is a standardized metal cabinet that holds the servers, switches, storage and power units of a datacenter, stacked one above another. The common width is 19 inches (482.6 mm, standard EIA-310) and the height is counted in rack units (U) of 1.75 inches (44.45 mm): a standard 42U rack holds, for example, 42 servers of 1U or 21 of 2U, with their cables and cooling grouped together. A company can rent a whole rack or part of one in a shared datacenter (colocation) to install its own machines, but hosting providers mostly rent what runs in their racks, in three main types of servers: a dedicated server, a physical machine reserved for a single customer, for maximum performance, full control and high security, at a higher cost; a VPS (Virtual Private Server), an isolated virtual partition of a shared physical server created by a hypervisor, a good balance between cost, flexibility and guaranteed resources; and a cloud server, running on an infrastructure spread across many connected physical machines, which scales easily with load peaks or needs.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q339">
@@ -3212,7 +3212,7 @@ description: "A glossary of software development terms, from framework, library,
                 <span class="badge badge-definition">Cloud</span>
                 <span class="badge badge-definition">Architecture</span>
             </div>
-            <div class="card-body">A stateless component keeps no memory of earlier requests: each request carries everything needed to handle it, so any instance can answer it and the result does not depend on which one does. HTTP is stateless by design and REST makes it one of its constraints: to recognise a logged-in user, the client sends a cookie or a token (a JWT, for example) with every request, and the session data, when there is any, lives outside the server, in a database or a cache such as Redis. That is what lets an application scale horizontally behind a load balancer, without sticky sessions, restart an instance without losing anything and run as serverless functions. The opposite, stateful, keeps state between requests (a database, a WebSocket connection, a game server): it is harder to replicate, which is why Kubernetes runs stateless apps with a Deployment and stateful ones with a StatefulSet.</div>
+            <div class="card-body">A stateless component keeps no memory of earlier requests: each request carries everything needed to handle it, so any instance can answer it and the result does not depend on which one does. HTTP is stateless by design and REST makes it one of its constraints: to recognize a logged-in user, the client sends a cookie or a token (a JWT, for example) with every request, and the session data, when there is any, lives outside the server, in a database or a cache such as Redis. That is what lets an application scale horizontally behind a load balancer, without sticky sessions, restart an instance without losing anything and run as serverless functions. The opposite, stateful, keeps state between requests (a database, a WebSocket connection, a game server): it is harder to replicate, which is why Kubernetes runs stateless apps with a Deployment and stateful ones with a StatefulSet.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q341">
@@ -3240,7 +3240,7 @@ description: "A glossary of software development terms, from framework, library,
                 <span class="badge badge-definition">Network</span>
                 <span class="badge badge-definition">Cloud</span>
             </div>
-            <div class="card-body">CIDR (Classless Inter-Domain Routing) is the way of writing and allocating a range of IP addresses as an address followed by a slash and a prefix length: the number of leading bits shared by every address of the range. In 10.0.0.0/16, the first 16 of the 32 bits of an IPv4 address are fixed, which leaves 16 free bits, so 65,536 addresses (2 to the power of 16), from 10.0.0.0 to 10.0.255.255; a /24 holds 256 addresses, and a /32 a single one. Introduced in 1993 (RFC 1518 and 1519), it replaced the classes A, B and C, whose blocks of fixed size (/8, /16 or /24) wasted addresses, and lets routers merge neighbouring networks into one route. In the cloud, the address space of a VNet or a VPC and of each of its subnets is written in CIDR, usually inside the private ranges of RFC 1918 (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16), and the ranges of networks to connect must not overlap; Azure reserves 5 addresses of each subnet, so a /24 subnet leaves 251. The same notation serves in firewall and NSG rules, and in IPv6 (2001:db8::/32).</div>
+            <div class="card-body">CIDR (Classless Inter-Domain Routing) is the way of writing and allocating a range of IP addresses as an address followed by a slash and a prefix length: the number of leading bits shared by every address of the range. In 10.0.0.0/16, the first 16 of the 32 bits of an IPv4 address are fixed, which leaves 16 free bits, so 65,536 addresses (2 to the power of 16), from 10.0.0.0 to 10.0.255.255; a /24 holds 256 addresses, and a /32 a single one. Introduced in 1993 (RFC 1518 and 1519), it replaced the classes A, B and C, whose blocks of fixed size (/8, /16 or /24) wasted addresses, and lets routers merge neighboring networks into one route. In the cloud, the address space of a VNet or a VPC and of each of its subnets is written in CIDR, usually inside the private ranges of RFC 1918 (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16), and the ranges of networks to connect must not overlap; Azure reserves 5 addresses of each subnet, so a /24 subnet leaves 251. The same notation serves in firewall and NSG rules, and in IPv6 (2001:db8::/32).</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q344">
@@ -3267,7 +3267,7 @@ description: "A glossary of software development terms, from framework, library,
                 <span class="badge badge-definition">Network</span>
                 <span class="badge badge-definition">Cloud</span>
             </div>
-            <div class="card-body">A backbone is the main network, of very high capacity, that links the other networks together: the local networks of a campus, the sites of a company or, at the scale of the Internet, the networks of the operators, joined by long-distance optical fibres, submarine cables and interconnection points (IXP). The backbone of the Internet is run by the largest operators, called tier 1, which exchange their traffic without paying each other. Each big cloud provider also has its own private backbone, a global fibre network linking its regions, its datacenters and its points of presence close to the users: at Azure, the traffic between two regions or two Microsoft services goes through the Microsoft global network rather than the public Internet; at Google Cloud, the Premium tier carries the traffic on Google's network up to the point of presence nearest to the user, while the Standard tier, cheaper, hands it to the public Internet earlier. A private backbone gives a lower and steadier latency, more bandwidth and fewer hops exposed to the Internet, which is why a replication between two regions or a CDN relies on it.</div>
+            <div class="card-body">A backbone is the main network, of very high capacity, that links the other networks together: the local networks of a campus, the sites of a company or, at the scale of the Internet, the networks of the operators, joined by long-distance optical fibers, submarine cables and interconnection points (IXP). The backbone of the Internet is run by the largest operators, called tier 1, which exchange their traffic without paying each other. Each big cloud provider also has its own private backbone, a global fiber network linking its regions, its datacenters and its points of presence close to the users: at Azure, the traffic between two regions or two Microsoft services goes through the Microsoft global network rather than the public Internet; at Google Cloud, the Premium tier carries the traffic on Google's network up to the point of presence nearest to the user, while the Standard tier, cheaper, hands it to the public Internet earlier. A private backbone gives a lower and steadier latency, more bandwidth and fewer hops exposed to the Internet, which is why a replication between two regions or a CDN relies on it.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q347">
@@ -3275,7 +3275,7 @@ description: "A glossary of software development terms, from framework, library,
                 <label for="q347">Refactoring</label>
                 <span class="badge badge-definition">Dev</span>
             </div>
-            <div class="card-body">Refactoring means reworking the code of an application without changing what it does: the same inputs give the same outputs, but the code becomes easier to read, test and change. It goes by small steps, each one checked by the tests, which act as a safety net: renaming a variable, extracting a method from a function that is too long, removing a duplication, splitting a class that does too much. It answers code smells and pays back technical debt, as part of everyday work rather than as a project of its own, and was popularised by Martin Fowler's book <i>Refactoring: Improving the Design of Existing Code</i> (1999, second edition in 2018). It is not a migration, which changes the technology, nor a rewrite, which changes the application itself.</div>
+            <div class="card-body">Refactoring means reworking the code of an application without changing what it does: the same inputs give the same outputs, but the code becomes easier to read, test and change. It goes by small steps, each one checked by the tests, which act as a safety net: renaming a variable, extracting a method from a function that is too long, removing a duplication, splitting a class that does too much. It answers code smells and pays back technical debt, as part of everyday work rather than as a project of its own, and was popularized by Martin Fowler's book <i>Refactoring: Improving the Design of Existing Code</i> (1999, second edition in 2018). It is not a migration, which changes the technology, nor a rewrite, which changes the application itself.</div>
         </div>
         <div class="card">
             <input type="checkbox" id="q348">
@@ -3284,7 +3284,7 @@ description: "A glossary of software development terms, from framework, library,
                 <span class="badge badge-definition">Architecture</span>
                 <span class="badge badge-definition">Dev</span>
             </div>
-            <div class="card-body">A migration and a rewrite both start from an existing application, often a legacy one, and both are projects of their own, unlike a refactoring. A migration moves the application to another technology or another environment while keeping its features and, as much as possible, its structure: from C++ to C# .NET, from an on-premise server to the cloud, from one database to another; users should see no difference. A rewrite (or redesign) rethinks the application: a new architecture, often new features and a new interface, sometimes on a new technology too, such as a legacy monolith rebuilt as a modular platform the client configures. A migration is cheaper and less risky, and fits an application whose features still meet the needs but whose technology is ageing; a rewrite fits when the design itself blocks the changes the business needs, but a big-bang rewrite, the new system replacing the old one in one go, is known for its delays: rewriting progressively, piece by piece, with the strangler fig pattern, limits that risk.</div>
+            <div class="card-body">A migration and a rewrite both start from an existing application, often a legacy one, and both are projects of their own, unlike a refactoring. A migration moves the application to another technology or another environment while keeping its features and, as much as possible, its structure: from C++ to C# .NET, from an on-premise server to the cloud, from one database to another; users should see no difference. A rewrite (or redesign) rethinks the application: a new architecture, often new features and a new interface, sometimes on a new technology too, such as a legacy monolith rebuilt as a modular platform the client configures. A migration is cheaper and less risky, and fits an application whose features still meet the needs but whose technology is aging; a rewrite fits when the design itself blocks the changes the business needs, but a big-bang rewrite, the new system replacing the old one in one go, is known for its delays: rewriting progressively, piece by piece, with the strangler fig pattern, limits that risk.</div>
         </div>
     </div>
 </article>

@@ -167,7 +167,7 @@
                 "fr": "TB"
             },
             "scoreTip": {
-                "en": "Scientific Baccalaureate with highest honours (17.15/20) [Life and Earth Sciences], Maths specialty, European English option + Tennis",
+                "en": "Scientific Baccalaureate with highest honors (17.15/20) [Life and Earth Sciences], Maths specialty, European English option + Tennis",
                 "fr": "Bac S Mention Très Bien (17,15/20) [SVT] Spé Maths, Option Anglais Européen + Tennis"
             },
             "detail": {
@@ -299,7 +299,7 @@
                         { "label": "Tests", "text": "unit and integration (xUnit, Vitest), end-to-end (Playwright)" },
                         { "label": "Quality and teamwork", "text": "code reviews and technical decisions under IGI 1300 and ISO 42001, with the front-end (React, TypeScript) and Design & Product (Figma) teams" },
                         { "label": "DevSecOps", "text": "GitLab CI/CD, Trivy, Docker, PowerShell scripts" },
-                        { "label": "Scalability and traceability", "text": "internationalisation of the application (i18n), setting up the logging/audit system and the error/exception handling" },
+                        { "label": "Scalability and traceability", "text": "internationalization of the application (i18n), setting up the logging/audit system and the error/exception handling" },
                         { "label": "Encryption", "text": "setting up the KMS (Key Management System) to secure the storage of the imported documents" }
                     ],
                     "projects": [
@@ -534,7 +534,7 @@
                         { "label": "Client services", "text": "development in C# .NET and JavaScript of data viz and web reporting applications for surveys (customer satisfaction, social barometer, quality of work life, HSE…) or business workflows, with real-time tracking of the KPIs (NPS, CSAT, CES, response rate…)" },
                         { "label": "Support before, during and after the surveys", "text": "questionnaire design and data collection (EthnoForms, Net-Survey, Survey Manager), panel management (Panel Manager), processing and analysis of the results (Ethnos, EthnosAI), data reporting and hosting (Web-Reports)" },
                         { "label": "Project management and follow-up", "text": "analysis of the needs, settings, tests and quality and compliance assurance" },
-                        { "label": "Support and operations", "text": "technical assistance and troubleshooting, maintenance of the applications hosted on Windows (IIS) and traffic optimisation" },
+                        { "label": "Support and operations", "text": "technical assistance and troubleshooting, maintenance of the applications hosted on Windows (IIS) and traffic optimization" },
                         { "label": "Training", "text": "remote or on site, in a group for the MNT or one-to-one for a La Poste employee" },
                         { "label": "Product presentation", "text": "client demos and exhibitor at the E-Marketing trade fair 2022 at Porte de Versailles (Paris)" }
                     ],
@@ -542,7 +542,7 @@
                         { "label": "CRM Elphicom", "href": "#crm", "text": "customer management software (CRM) for the client Elphicom" },
                         { "label": "EBati Carto Amiante", "href": "#building", "text": "real estate management software" },
                         { "label": "JCA Sushi Robots", "href": "#sushi", "text": "e-learning platform for cooking" },
-                        { "label": "Enquêtes internes Pragma", "href": "#pragma", "text": "an internal survey platform, with the provider Pragma" },
+                        { "label": "Enquêtes Internes Pragma", "href": "#pragma", "text": "an internal survey platform, with the provider Pragma" },
                         { "label": "REF230 AFNOR", "href": "#smiley", "text": "an audit management application for the certification of opticians, with the provider Vitalis and the AFNOR" },
                         { "label": "Panel Terriscope MNT", "href": "#satisfaction", "text": "a panel reached through surveys and the panellist website of the MNT" },
                         { "label": "OPALE SNITEM", "href": "#health", "text": "a tool to steer the steps towards the MDR certification of medical devices, with the provider Nexialist" },
@@ -571,7 +571,7 @@
                         { "label": "CRM Elphicom", "href": "#crm", "text": "logiciel de gestion de la clientèle (CRM) du client Elphicom" },
                         { "label": "EBati Carto Amiante", "href": "#building", "text": "logiciel de gestion de biens immobiliers" },
                         { "label": "JCA Sushi Robots", "href": "#sushi", "text": "plateforme d'e-learning culinaire" },
-                        { "label": "Enquêtes internes Pragma", "href": "#pragma", "text": "plateforme d'enquêtes internes, avec le prestataire Pragma" },
+                        { "label": "Enquêtes Internes Pragma", "href": "#pragma", "text": "plateforme d'enquêtes internes, avec le prestataire Pragma" },
                         { "label": "REF230 AFNOR", "href": "#smiley", "text": "application de gestion d'audits pour la certification des opticiens, avec le prestataire Vitalis et l'AFNOR" },
                         { "label": "Panel Terriscope MNT", "href": "#satisfaction", "text": "constitution d'un panel sollicité par enquêtes et conception du site panéliste de la MNT" },
                         { "label": "OPALE SNITEM", "href": "#health", "text": "outil de pilotage des étapes de la certification RDM des dispositifs médicaux, avec le prestataire Nexialist" },
@@ -686,7 +686,7 @@
                 "en": {
                     "field": "Versatile internship in a web development start-up: design, marketing and training in code (HTML, CSS, JavaScript)",
                     "responsibilities": [
-                        { "label": "Design", "text": "UI/UX designer assistant (Gimp)" },
+                        { "label": "Design", "text": "UI/UX designer assistant (GIMP)" },
                         { "label": "Marketing", "text": "lead outreach, article writing" },
                         { "label": "Recruiting support", "text": "Welcome Kit, Malt" }
                     ],
@@ -698,7 +698,7 @@
                 "fr": {
                     "field": "Stage polyvalent dans une start-up de développement web : design, marketing et formation au code (HTML, CSS, JavaScript)",
                     "responsibilities": [
-                        { "label": "Design", "text": "assistant UI/UX designer (Gimp)" },
+                        { "label": "Design", "text": "assistant UI/UX designer (GIMP)" },
                         { "label": "Marketing", "text": "contact de leads, rédaction d'articles" },
                         { "label": "Aide au recrutement", "text": "Welcome Kit, Malt" }
                     ],
@@ -792,7 +792,7 @@
                     "mission": "Project manager for the CGI 2019 Citizen Challenges, with a team of four ESILV students",
                     "responsibilities": [
                         { "label": "Coordination", "text": "leading the team for 7 months, from the idea to the showroom" },
-                        { "label": "Organisation", "text": "splitting the tasks and following the deadlines" },
+                        { "label": "Organization", "text": "splitting the tasks and following the deadlines" },
                         { "label": "Pitch", "text": "presenting the project, building the business model, video editing" }
                     ],
                     "projects": [
