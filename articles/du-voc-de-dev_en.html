@@ -3249,5 +3249,23 @@ description: "A glossary of software development terms, from framework, library,
             </div>
             <div class="card-body">A NAT gateway is a managed cloud service that lets the resources of a private subnet, which have no public IP address, reach the Internet, while nobody on the Internet can open a connection to them. It applies NAT (Network Address Translation): it replaces the private source address of each outgoing packet with its own public IP address, keeps track of the connection, and sends the response back to the right resource. A VM of a private subnet can thus download its updates or call an external API without being exposed. At Azure, a NAT gateway is associated with one or more subnets of a VNet, uses up to 16 public IPv4 addresses or a public IP prefix, and takes precedence over the other outbound methods of the subnet (load balancer, public IP of a VM). At AWS, a public NAT gateway is created in a public subnet with an Elastic IP, and the route table of the private subnets sends the Internet traffic (0.0.0.0/0) to it. It only handles outbound connections: to publish a service, a load balancer or an application gateway is used instead.</div>
         </div>
+        <div class="card">
+            <input type="checkbox" id="q345">
+            <div class="card-header">
+                <label for="q345">Load balancer</label>
+                <span class="badge badge-definition">Network</span>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">A load balancer spreads the incoming requests of a service across several servers, VMs or containers, so that none of them is overloaded and the service stays up when one of them fails. Clients reach a single address, the one of the load balancer, which picks a server for each connection with an algorithm (round robin, least connections, hash of the client IP address) and checks each server with health probes, sending nothing to one that no longer answers. A layer 4 load balancer (transport, TCP and UDP) only looks at addresses and ports, fast and protocol-agnostic; a layer 7 one (application, HTTP) reads the requests, so it can route /api to one pool and /images to another, terminate TLS, or keep a user on the same server (sticky sessions). It is the base of horizontal scaling: servers are added or removed behind it without the clients noticing. Each cloud offers its own: Azure Load Balancer (layer 4) and Application Gateway (layer 7) at Azure, Network Load Balancer and Application Load Balancer at AWS, Cloud Load Balancing at Google Cloud; on your own servers, NGINX or HAProxy play the same role.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q346">
+            <div class="card-header">
+                <label for="q346">Backbone</label>
+                <span class="badge badge-definition">Network</span>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">A backbone is the main network, of very high capacity, that links the other networks together: the local networks of a campus, the sites of a company or, at the scale of the Internet, the networks of the operators, joined by long-distance optical fibres, submarine cables and interconnection points (IXP). The backbone of the Internet is run by the largest operators, called tier 1, which exchange their traffic without paying each other. Each big cloud provider also has its own private backbone, a global fibre network linking its regions, its datacenters and its points of presence close to the users: at Azure, the traffic between two regions or two Microsoft services goes through the Microsoft global network rather than the public Internet; at Google Cloud, the Premium tier carries the traffic on Google's network up to the point of presence nearest to the user, while the Standard tier, cheaper, hands it to the public Internet earlier. A private backbone gives a lower and steadier latency, more bandwidth and fewer hops exposed to the Internet, which is why a replication between two regions or a CDN relies on it.</div>
+        </div>
     </div>
 </article>

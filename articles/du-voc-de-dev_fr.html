@@ -3256,5 +3256,23 @@ description: "Un glossaire des termes du développement logiciel, de framework, 
             </div>
             <div class="card-body">Une passerelle NAT (NAT gateway) est un service cloud managé qui permet aux ressources d'un sous-réseau privé, sans adresse IP publique, de joindre Internet, sans que personne sur Internet ne puisse leur ouvrir une connexion. Elle applique le NAT (Network Address Translation ; traduction d'adresses réseau) : elle remplace l'adresse source privée de chaque paquet sortant par sa propre adresse IP publique, garde la trace de la connexion, et renvoie la réponse à la bonne ressource. Une VM d'un sous-réseau privé peut ainsi télécharger ses mises à jour ou appeler une API externe sans être exposée. Chez Azure, une passerelle NAT est associée à un ou plusieurs sous-réseaux d'un VNet, utilise jusqu'à 16 adresses IPv4 publiques ou un préfixe d'IP publiques, et passe avant les autres moyens de sortie du sous-réseau (load balancer, IP publique d'une VM). Chez AWS, une passerelle NAT publique se crée dans un sous-réseau public avec une Elastic IP, et la table de routage des sous-réseaux privés lui envoie le trafic vers Internet (0.0.0.0/0). Elle ne gère que les connexions sortantes : pour publier un service, on utilise plutôt un load balancer ou une passerelle applicative.</div>
         </div>
+        <div class="card">
+            <input type="checkbox" id="q345">
+            <div class="card-header">
+                <label for="q345">Répartiteur de charge</label>
+                <span class="badge badge-definition">Réseau</span>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">Un répartiteur de charge (load balancer) distribue les requêtes entrantes d'un service entre plusieurs serveurs, VM ou conteneurs, pour qu'aucun ne soit surchargé et que le service tienne quand l'un d'eux tombe. Les clients s'adressent à une seule adresse, celle du répartiteur, qui choisit un serveur pour chaque connexion selon un algorithme (round robin, moins de connexions, hachage de l'adresse IP du client) et vérifie chaque serveur par des sondes d'intégrité, sans rien envoyer à celui qui ne répond plus. Un répartiteur de couche 4 (transport, TCP et UDP) ne regarde que les adresses et les ports, rapide et indépendant du protocole ; un répartiteur de couche 7 (application, HTTP) lit les requêtes, et peut donc envoyer /api vers un groupe et /images vers un autre, terminer le TLS, ou garder un utilisateur sur le même serveur (sessions persistantes). C'est la base du scaling horizontal : on ajoute ou retire des serveurs derrière lui sans que les clients s'en aperçoivent. Chaque cloud propose le sien : Azure Load Balancer (couche 4) et Application Gateway (couche 7) chez Azure, Network Load Balancer et Application Load Balancer chez AWS, Cloud Load Balancing chez Google Cloud ; sur ses propres serveurs, NGINX ou HAProxy jouent le même rôle.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q346">
+            <div class="card-header">
+                <label for="q346">Backbone</label>
+                <span class="badge badge-definition">Réseau</span>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">Un backbone (dorsale réseau) est le réseau principal, de très grande capacité, qui relie les autres réseaux entre eux : les réseaux locaux d'un campus, les sites d'une entreprise ou, à l'échelle d'Internet, les réseaux des opérateurs, reliés par des fibres optiques longue distance, des câbles sous-marins et des points d'échange (IXP). Le backbone d'Internet est tenu par les plus grands opérateurs, dits tier 1, qui échangent leur trafic sans se payer entre eux. Chaque grand fournisseur cloud a aussi son propre backbone privé, un réseau mondial de fibres qui relie ses régions, ses datacenters et ses points de présence proches des utilisateurs : chez Azure, le trafic entre deux régions ou deux services Microsoft passe par le réseau mondial de Microsoft plutôt que par l'Internet public ; chez Google Cloud, le niveau Premium transporte le trafic sur le réseau de Google jusqu'au point de présence le plus proche de l'utilisateur, alors que le niveau Standard, moins cher, le confie plus tôt à l'Internet public. Un backbone privé offre une latence plus faible et plus stable, plus de bande passante et moins de sauts exposés à Internet, c'est pourquoi une réplication entre deux régions ou un CDN s'appuie dessus.</div>
+        </div>
     </div>
 </article>
