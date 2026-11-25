@@ -11,7 +11,7 @@ const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'))
 // The languages of the site, the keys of config.locales; English and French without that key
 const langs = Object.keys(pkg.config?.locales ?? { en: '', fr: '' });
 // A badge named differently in a language, by its English name; every other badge keeps its name in every language
-const BADGE_NAMES = { AI: { fr: 'IA' }, Network: { fr: 'Réseau' }, Hardware: { fr: 'Matériel' }, Data: { fr: 'Données' }, System: { fr: 'Système' } };
+const BADGE_NAMES = { AI: { fr: 'IA' }, Network: { fr: 'Réseau' }, Hardware: { fr: 'Matériel' }, Data: { fr: 'Données' }, System: { fr: 'Système' }, Software: { fr: 'Logiciel' } };
 
 // The cards of the accordion of one language, in their order: the number of their id, their term and their badges, in their order
 function entriesOf(lang) {
