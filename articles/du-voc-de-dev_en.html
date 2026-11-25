@@ -3269,5 +3269,22 @@ description: "A glossary of software development terms, from framework, library,
             </div>
             <div class="card-body">A backbone is the main network, of very high capacity, that links the other networks together: the local networks of a campus, the sites of a company or, at the scale of the Internet, the networks of the operators, joined by long-distance optical fibres, submarine cables and interconnection points (IXP). The backbone of the Internet is run by the largest operators, called tier 1, which exchange their traffic without paying each other. Each big cloud provider also has its own private backbone, a global fibre network linking its regions, its datacenters and its points of presence close to the users: at Azure, the traffic between two regions or two Microsoft services goes through the Microsoft global network rather than the public Internet; at Google Cloud, the Premium tier carries the traffic on Google's network up to the point of presence nearest to the user, while the Standard tier, cheaper, hands it to the public Internet earlier. A private backbone gives a lower and steadier latency, more bandwidth and fewer hops exposed to the Internet, which is why a replication between two regions or a CDN relies on it.</div>
         </div>
+        <div class="card">
+            <input type="checkbox" id="q347">
+            <div class="card-header">
+                <label for="q347">Refactoring</label>
+                <span class="badge badge-definition">Dev</span>
+            </div>
+            <div class="card-body">Refactoring means reworking the code of an application without changing what it does: the same inputs give the same outputs, but the code becomes easier to read, test and change. It goes by small steps, each one checked by the tests, which act as a safety net: renaming a variable, extracting a method from a function that is too long, removing a duplication, splitting a class that does too much. It answers code smells and pays back technical debt, as part of everyday work rather than as a project of its own, and was popularised by Martin Fowler's book <i>Refactoring: Improving the Design of Existing Code</i> (1999, second edition in 2018). It is not a migration, which changes the technology, nor a rewrite, which changes the application itself.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q348">
+            <div class="card-header">
+                <label for="q348">Migration vs Rewrite</label>
+                <span class="badge badge-definition">Architecture</span>
+                <span class="badge badge-definition">Dev</span>
+            </div>
+            <div class="card-body">A migration and a rewrite both start from an existing application, often a legacy one, and both are projects of their own, unlike a refactoring. A migration moves the application to another technology or another environment while keeping its features and, as much as possible, its structure: from C++ to C# .NET, from an on-premise server to the cloud, from one database to another; users should see no difference. A rewrite (or redesign) rethinks the application: a new architecture, often new features and a new interface, sometimes on a new technology too, such as a legacy monolith rebuilt as a modular platform the client configures. A migration is cheaper and less risky, and fits an application whose features still meet the needs but whose technology is ageing; a rewrite fits when the design itself blocks the changes the business needs, but a big-bang rewrite, the new system replacing the old one in one go, is known for its delays: rewriting progressively, piece by piece, with the strangler fig pattern, limits that risk.</div>
+        </div>
     </div>
 </article>
