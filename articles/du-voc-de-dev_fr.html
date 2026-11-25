@@ -3228,5 +3228,33 @@ description: "Un glossaire des termes du développement logiciel, de framework, 
             </div>
             <div class="card-body">Une image OCI est une image de conteneur au format standard de l'OCI (Open Container Initiative ; initiative pour les conteneurs ouverts), un projet de la Linux Foundation lancé en juin 2015 par Docker, CoreOS et d'autres acteurs du domaine. Elle se compose d'un manifeste qui liste son contenu, d'une configuration (commande à lancer, variables d'environnement, architecture) et d'une pile de couches de système de fichiers, chacune identifiée par un digest, une empreinte de son contenu (sha256:...) : deux images qui partagent une couche de base ne la stockent et ne la téléchargent qu'une fois, et un digest désigne toujours les mêmes octets, contrairement à un tag comme latest. L'OCI rédige aussi la spécification du runtime, que suit runc, et celle de la distribution, qui décrit comment un registre stocke et sert les images. Grâce à ce standard, une image construite avec Docker, Podman ou Buildah tourne sur containerd, CRI-O ou Kubernetes, et se pousse vers n'importe quel registre (Docker Hub, GitHub Container Registry, Amazon ECR, Azure Container Registry, Google Artifact Registry) ; les registres stockent désormais aussi d'autres artefacts dans ce format, comme les charts Helm.</div>
         </div>
+        <div class="card">
+            <input type="checkbox" id="q342">
+            <div class="card-header">
+                <label for="q342">NSG</label>
+                <span class="badge badge-definition">Cloud</span>
+                <span class="badge badge-definition">Réseau</span>
+                <span class="badge badge-definition">Cyber</span>
+            </div>
+            <div class="card-body">Un NSG (Network Security Group ; groupe de sécurité réseau) est le filtre réseau de Microsoft Azure : une liste de règles de sécurité qui autorisent ou refusent le trafic entrant et sortant des ressources d'un VNet, associée à un sous-réseau, à l'interface réseau d'une VM, ou aux deux. Chaque règle porte sur les cinq éléments d'une connexion (source, port source, destination, port de destination, protocole) et a une priorité entre 100 et 4096 : les règles sont lues du plus petit numéro au plus grand, et la première qui correspond décide. Une source ou une destination peut être une adresse IP, une plage CIDR, une étiquette de service comme Internet ou VirtualNetwork, ou un groupe de sécurité d'application qui regroupe des VM par rôle. Le NSG est avec état : quand une requête est autorisée, sa réponse passe sans règle à elle. Des règles par défaut, qu'on ne peut pas supprimer mais qu'on peut contourner avec un numéro de priorité plus petit, autorisent le trafic interne au VNet et celui du load balancer Azure, et refusent le reste du trafic entrant (DenyAllInBound, priorité 65500). Par exemple, un sous-réseau web autorise le port 443 depuis Internet, et un sous-réseau de base de données n'autorise le port 1433 que depuis le sous-réseau web. AWS a le même outil, appelé security group.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q343">
+            <div class="card-header">
+                <label for="q343">CIDR</label>
+                <span class="badge badge-definition">Réseau</span>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">CIDR (Classless Inter-Domain Routing ; routage inter-domaine sans classe) est la façon d'écrire et d'attribuer une plage d'adresses IP sous la forme d'une adresse suivie d'une barre oblique et d'une longueur de préfixe : le nombre de bits de tête communs à toutes les adresses de la plage. Dans 10.0.0.0/16, les 16 premiers des 32 bits d'une adresse IPv4 sont fixés, ce qui laisse 16 bits libres, soit 65 536 adresses (2 puissance 16), de 10.0.0.0 à 10.0.255.255 ; un /24 contient 256 adresses, et un /32 une seule. Introduit en 1993 (RFC 1518 et 1519), il a remplacé les classes A, B et C, dont les blocs de taille fixe (/8, /16 ou /24) gaspillaient des adresses, et permet aux routeurs de regrouper des réseaux voisins en une seule route. Dans le cloud, l'espace d'adresses d'un VNet ou d'un VPC et de chacun de ses sous-réseaux s'écrit en CIDR, en général dans les plages privées de la RFC 1918 (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16), et les plages des réseaux à relier ne doivent pas se chevaucher ; Azure réserve 5 adresses de chaque sous-réseau, donc un sous-réseau /24 en laisse 251. La même notation sert dans les règles de pare-feu et de NSG, et en IPv6 (2001:db8::/32).</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q344">
+            <div class="card-header">
+                <label for="q344">Passerelle NAT</label>
+                <span class="badge badge-definition">Cloud</span>
+                <span class="badge badge-definition">Réseau</span>
+            </div>
+            <div class="card-body">Une passerelle NAT (NAT gateway) est un service cloud managé qui permet aux ressources d'un sous-réseau privé, sans adresse IP publique, de joindre Internet, sans que personne sur Internet ne puisse leur ouvrir une connexion. Elle applique le NAT (Network Address Translation ; traduction d'adresses réseau) : elle remplace l'adresse source privée de chaque paquet sortant par sa propre adresse IP publique, garde la trace de la connexion, et renvoie la réponse à la bonne ressource. Une VM d'un sous-réseau privé peut ainsi télécharger ses mises à jour ou appeler une API externe sans être exposée. Chez Azure, une passerelle NAT est associée à un ou plusieurs sous-réseaux d'un VNet, utilise jusqu'à 16 adresses IPv4 publiques ou un préfixe d'IP publiques, et passe avant les autres moyens de sortie du sous-réseau (load balancer, IP publique d'une VM). Chez AWS, une passerelle NAT publique se crée dans un sous-réseau public avec une Elastic IP, et la table de routage des sous-réseaux privés lui envoie le trafic vers Internet (0.0.0.0/0). Elle ne gère que les connexions sortantes : pour publier un service, on utilise plutôt un load balancer ou une passerelle applicative.</div>
+        </div>
     </div>
 </article>

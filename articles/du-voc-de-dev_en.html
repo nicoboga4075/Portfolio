@@ -3221,5 +3221,33 @@ description: "A glossary of software development terms, from framework, library,
             </div>
             <div class="card-body">An OCI image is a container image in the standard format of the OCI (Open Container Initiative), a project of the Linux Foundation launched in June 2015 by Docker, CoreOS and other leaders of the field. It is made of a manifest that lists its content, a configuration (command to run, environment variables, architecture) and a stack of filesystem layers, each one identified by a digest, a hash of its content (sha256:...): two images that share a base layer store and download it only once, and a digest always points to the same bytes, unlike a tag such as latest. The OCI also writes the runtime specification, followed by runc, and the distribution specification, which describes how a registry stores and serves images. Thanks to this standard, an image built with Docker, Podman or Buildah runs on containerd, CRI-O or Kubernetes, and is pushed to any registry (Docker Hub, GitHub Container Registry, Amazon ECR, Azure Container Registry, Google Artifact Registry); registries now also store other artifacts in that format, such as Helm charts.</div>
         </div>
+        <div class="card">
+            <input type="checkbox" id="q342">
+            <div class="card-header">
+                <label for="q342">NSG</label>
+                <span class="badge badge-definition">Cloud</span>
+                <span class="badge badge-definition">Network</span>
+                <span class="badge badge-definition">Cyber</span>
+            </div>
+            <div class="card-body">An NSG (Network Security Group) is the network filter of Microsoft Azure: a list of security rules that allow or deny the inbound and outbound traffic of the resources of a VNet, associated with a subnet, with the network interface of a VM, or with both. Each rule matches the five-tuple of a connection (source, source port, destination, destination port, protocol) and has a priority between 100 and 4096: rules are read from the lowest number up, and the first one that matches decides. A source or a destination can be an IP address, a CIDR range, a service tag such as Internet or VirtualNetwork, or an application security group that groups VMs by role. The NSG is stateful: when a request is allowed, its response goes through without a rule of its own. Default rules that cannot be removed, but can be overridden by a lower priority number, allow traffic inside the VNet and from the Azure load balancer and deny the rest of the inbound traffic (DenyAllInBound, priority 65500). For example, a web subnet allows port 443 from Internet, and a database subnet allows port 1433 only from the web subnet. AWS has the same tool, called a security group.</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q343">
+            <div class="card-header">
+                <label for="q343">CIDR</label>
+                <span class="badge badge-definition">Network</span>
+                <span class="badge badge-definition">Cloud</span>
+            </div>
+            <div class="card-body">CIDR (Classless Inter-Domain Routing) is the way of writing and allocating a range of IP addresses as an address followed by a slash and a prefix length: the number of leading bits shared by every address of the range. In 10.0.0.0/16, the first 16 of the 32 bits of an IPv4 address are fixed, which leaves 16 free bits, so 65,536 addresses (2 to the power of 16), from 10.0.0.0 to 10.0.255.255; a /24 holds 256 addresses, and a /32 a single one. Introduced in 1993 (RFC 1518 and 1519), it replaced the classes A, B and C, whose blocks of fixed size (/8, /16 or /24) wasted addresses, and lets routers merge neighbouring networks into one route. In the cloud, the address space of a VNet or a VPC and of each of its subnets is written in CIDR, usually inside the private ranges of RFC 1918 (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16), and the ranges of networks to connect must not overlap; Azure reserves 5 addresses of each subnet, so a /24 subnet leaves 251. The same notation serves in firewall and NSG rules, and in IPv6 (2001:db8::/32).</div>
+        </div>
+        <div class="card">
+            <input type="checkbox" id="q344">
+            <div class="card-header">
+                <label for="q344">NAT gateway</label>
+                <span class="badge badge-definition">Cloud</span>
+                <span class="badge badge-definition">Network</span>
+            </div>
+            <div class="card-body">A NAT gateway is a managed cloud service that lets the resources of a private subnet, which have no public IP address, reach the Internet, while nobody on the Internet can open a connection to them. It applies NAT (Network Address Translation): it replaces the private source address of each outgoing packet with its own public IP address, keeps track of the connection, and sends the response back to the right resource. A VM of a private subnet can thus download its updates or call an external API without being exposed. At Azure, a NAT gateway is associated with one or more subnets of a VNet, uses up to 16 public IPv4 addresses or a public IP prefix, and takes precedence over the other outbound methods of the subnet (load balancer, public IP of a VM). At AWS, a public NAT gateway is created in a public subnet with an Elastic IP, and the route table of the private subnets sends the Internet traffic (0.0.0.0/0) to it. It only handles outbound connections: to publish a service, a load balancer or an application gateway is used instead.</div>
+        </div>
     </div>
 </article>
