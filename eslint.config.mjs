@@ -24,7 +24,7 @@ const vendorJs = [
 
 export default defineConfig([
   // Generated build/test output, regenerated on every run
-  { ignores: ["reports/", ".eleventy/", ".netlify/"] },
+  { ignores: ["reports/", ".eleventy/", ".netlify/", "android/"] },
   // JS config
   {
     files: ["**/*.js"],

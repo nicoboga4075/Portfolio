@@ -5,6 +5,7 @@
     ".netlify/**",
     ".eleventy/**",
     "reports/**",
+    "android/**",
     "css/animate.min.css",
     "css/bootstrap.min.css",
     "css/flaticon.css",
