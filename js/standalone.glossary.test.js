@@ -8,7 +8,7 @@ function glossaryPage(cards, lang = 'fr') {
     document.documentElement.lang = lang;
     document.body.innerHTML = `
         <div class="glossary-filters" data-reset="Réinitialiser" data-count="{count} définitions sur {total}">
-            <div class="filter-group"><span class="filter-group-label">Domaines</span></div>
+            <fieldset class="filter-group"><legend class="sr-only">Domaines</legend><span class="filter-group-label" aria-hidden="true">Domaines</span></fieldset>
             <p class="glossary-count"></p>
         </div>
         <div class="accordion">${cards.map((badges, index) => `
@@ -57,8 +57,9 @@ test('adds one chip per domain of the badges, once each, sorted in the page lang
     expect(count()).toBe('3 définitions sur 3');
     expect(reset().hidden).toBe(true);
     expect(reset().textContent).toBe('Réinitialiser');
-    // The chips and the reset button go after the label of the group
-    expect(document.querySelector('.filter-group').firstElementChild.className).toBe('filter-group-label');
+    // The chips and the reset button go after the legend and the visible label of the group
+    expect(chips()[0].previousElementSibling.className).toBe('filter-group-label');
+    expect(document.querySelector('.filter-group').firstElementChild.tagName).toBe('LEGEND');
     expect(document.querySelector('.filter-group').lastElementChild).toBe(reset());
 });
 

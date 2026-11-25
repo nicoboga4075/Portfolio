@@ -49,6 +49,11 @@ for (const lang of langs) {
         const text = n => messages['glossary-count'][lang].replace('{count}', n).replace('{total}', total);
         await expect(count).toHaveText(text(total));
         await expect(page.locator('.glossary-filters .filter-group-label')).toHaveText(messages['glossary-domains'][lang]);
+        // A native group (fieldset) named by its legend, the visible label starting the row of chips in every browser
+        await expect(page.getByRole('group', { name: messages['glossary-domains'][lang] })).toBeVisible();
+        const [label, firstChip] = await page.locator('.glossary-filters').evaluate(bar => [bar.querySelector('.filter-group-label'), bar.querySelector('.filter-chip')].map(element => element.getBoundingClientRect()));
+        expect(firstChip.left).toBeGreaterThan(label.right);
+        expect(Math.abs(firstChip.top - label.top)).toBeLessThan(10);
         // One chip per domain of the badges, each once
         const domains = await page.locator('.accordion .badge-definition').evaluateAll(badges => [...new Set(badges.map(badge => badge.textContent.trim()))]);
         await expect(page.locator('.glossary-filters .filter-chip')).toHaveCount(domains.length);
@@ -80,6 +85,8 @@ for (const lang of langs) {
         await chips.filter({ hasText: /^Cloud$/ }).click();
         await expect(page.locator('#article-shape .accordion > .card:visible')).not.toHaveCount(total);
         await expect(page.locator('#article-shape .glossary-filters .filter-group')).toHaveCount(1);
+        // A native group named by its legend, on the blog page too
+        await expect(page.locator('#article-shape').getByRole('group', { name: messages['glossary-domains'][lang] })).toBeVisible();
         // A search puts every definition back, every chip off, and the chips still filter afterwards
         await page.locator('input[name="search-input"]').fill('Kubernetes');
         await page.locator('.search-form').evaluate(form => form.requestSubmit());

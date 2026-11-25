@@ -651,6 +651,14 @@ html.dark-mode .card a {
     margin-bottom: 16px;
 }
 
+/* The chips sit in a native fieldset, with no border nor padding of its own: its legend, for screen readers only, names the group, and a visible label of its own starts the row of chips (WebKit keeps a legend on its own line, even floated) */
+.glossary-filters .filter-group {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
 .glossary-count {
     margin: 8px 0 0;
     font-size: 13.6px;
