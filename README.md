@@ -38,6 +38,7 @@ Portfolio/
 ├── work-years.js                  The years of a job on the back of the work experiences counter
 ├── experience-period.js           The months and the status of each experience of api/experiences.json
 ├── adb-reverse.js                 Forwards the dev port of netlify.toml from the Android device (npm run adb:reverse, adb:unreverse)
+├── lighthouse-report.js           The Lighthouse report of a page on mobile or desktop, the live site by default (npm run lighthouse:mobile, lighthouse:desktop)
 ├── _headers, _redirects           Netlify headers (CSP, cache) and redirects
 ├── netlify.toml                   Netlify build settings and plugins
 ├── .gitlab/.gitlab-ci.yml         GitLab CI pipeline (self-hosted Windows runner, see CI/CD below)

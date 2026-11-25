@@ -54,6 +54,23 @@ Make sure to push changes to the appropriate remote(s) depending on your workflo
 
 In GitHub, the "Protect main" ruleset blocks force pushes and deletion of `main`; only the repository admin can bypass it (GitHub logs every bypass). In GitLab, when importing the repo, the `main` branch is set with labels `default` and `protected`. **Push force is not allowed by default in GitLab**.
 
+### Local build, Lighthouse and mobile preview
+
+| Need | Command |
+|---|---|
+| Build the site into `.eleventy/` without touching the sources, as the tests do (minified pages and scripts), with no server | `npm run build:preview` (never `npm run build`, the Netlify build that compiles the pages in place) |
+| The Lighthouse scores on mobile, the form factor Google ranks with | `npm run lighthouse:mobile`, or `npm run lighthouse:mobile -- http://localhost:8888/en` for a local page after `npm run dev` |
+| The Lighthouse scores on desktop, the preset of the Netlify plugin | `npm run lighthouse:desktop [-- <url>]` |
+| The Netlify state, a build of `main` with or without cache | `npm run netlify:ops -- status`, `npm run netlify:ops -- build [--clear-cache]` (prints the plan, acts with `--yes`) |
+
+The Lighthouse reports (HTML and JSON) go to `reports/lighthouse/`; they run in a headless Chrome installed on the computer. Netlify audits each production deploy on desktop only (`@netlify/plugin-lighthouse` in `netlify.toml`, after the deploy is live): the mobile scores come from `npm run lighthouse:mobile`.
+
+To preview on a phone:
+
+- **Chrome device mode**: DevTools (F12), then the device toolbar (Ctrl+Shift+M) on `http://localhost:8888`.
+- **A real Android phone**: `npm run dev`, then `npm run adb:reverse` with the phone plugged in (USB debugging on), and `http://localhost:8888` in Chrome on the phone; `chrome://inspect` on the computer opens DevTools and Lighthouse on the phone's tab. `npm run adb:unreverse` stops the forward.
+- **The Android app**: `npm run capacitor:sync`, then `npm run capacitor:run` (or `capacitor:open` for Android Studio); the app of `capacitor.config.js` loads `http://localhost:8888` through the same `adb:reverse`.
+
 ### Conventions
 
 - **Commits**: start the message with the [gitmoji](https://gitmoji.dev) of the change, as the character itself (`🐛 Fix ...`, `✨ Add ...`, `📝 Update ...`), one per commit. See [CLAUDE.md](CLAUDE.md).

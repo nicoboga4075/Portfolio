@@ -11,6 +11,7 @@ module.exports = {
     "articles/resolve-articles.js",
     "projects/resolve-projects.js",
     "adb-reverse.js",
+    "lighthouse-report.js",
     "work-years.js",
     "experience-period.js"
   ],
