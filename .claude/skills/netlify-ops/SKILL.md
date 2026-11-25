@@ -32,6 +32,7 @@ Every command but `status` only prints what it would do; it acts only with `--ye
 ## Common situations
 
 - **The site is not up to date** (the published commit is older than `main`): look at `buildsStopped` and `published.locked`. Both must be off for a push to be published: `builds start`, `unlock`, then `build --clear-cache` if dependencies changed since the last deploy.
+- **Lighthouse scores look old**: they are not a reason to rebuild. `@netlify/plugin-lighthouse` runs in `onSuccess` (no `fail_deploy_on_score_thresholds` in `netlify.toml`) and audits the deploy's own `DEPLOY_URL`, so each deploy reports its own scores (`lighthouse_plugin_scores` of the deploy). Keep `build --clear-cache` for a change of the Netlify plugins' dependencies or of `overrides` only.
 - **A deploy failed**: `status` shows its `error`; the details are in the Netlify deploy log. Fix it in the code, push, or `build` again.
 - **Something broke in production**: `restore <id of the last good deploy>`, then `lock` so the next push doesn't replace it before the fix; `unlock` once fixed.
 - **Hold publishing for a while** (a series of commits to ship together): `lock`, push, then `unlock` and `build`.
