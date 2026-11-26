@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// SessionStart hook (startup): reads the expiry date of each token of the dev machine from the API it opens, and writes the dates only, never the values, to .github/token-expiry.json, which the weekly services report routine reads in its clone; a token renewed is caught at the next session, with no date to type by hand.
+// SessionStart hook (startup), and PostToolUse hook of Bash / PowerShell after a command that changes a token (--after-command): reads the expiry date of each token of the dev machine from the API it opens, and writes the dates only, never the values, to .github/token-expiry.json, which the weekly services report routine reads in its clone; a token renewed is caught at the next session, with no date to type by hand.
 // GITHUB_PERSONAL_ACCESS_TOKEN: the user environment variable; GITHUB_API_TOKEN: its Netlify value, through the linked Netlify CLI (the default context, the production one being masked); both give their date in the github-authentication-token-expiration header of any GitHub API call, none for a token without expiry.
 // GITLAB_TOKEN: the gitlab.com credential Git pushes with (Windows Credential Manager), whose date GitLab gives at /personal_access_tokens/self.
 // A token that cannot be read (no network, CLI logged out, credential missing) keeps its last date; the file is only written when a date changes, and the session starts either way.
@@ -53,6 +53,17 @@ async function gitlabExpiry() {
     return (await response.json()).expires_at ?? 'none';
 }
 
+// With --after-command, the PostToolUse hook of Bash / PowerShell: only after a command that can change a token (one naming a token variable, git credential, a git push that stores the credential typed for it), so a renewed token gets its date at once, not at the next session
+const afterCommand = process.argv.includes('--after-command');
+const changesToken = command => /GITHUB_API_TOKEN|GITHUB_PERSONAL_ACCESS_TOKEN|GITLAB_TOKEN|\bgit\s+(credential|push)\b/.test(command);
+if (afterCommand) {
+    let input = '';
+    for await (const chunk of process.stdin) input += chunk;
+    if (!changesToken(JSON.parse(input || '{}').tool_input?.command ?? '')) {
+        process.exit(0);
+    }
+}
+
 const readers = {
     GITHUB_API_TOKEN: async () => githubExpiry(await netlifyEnv('GITHUB_API_TOKEN')),
     GITHUB_PERSONAL_ACCESS_TOKEN: () => githubExpiry(process.env.GITHUB_PERSONAL_ACCESS_TOKEN),
@@ -71,5 +82,7 @@ const dates = Object.fromEntries(names.map((name, index) => [name, read[index] ?
 const changed = names.filter(name => dates[name] !== previous[name]);
 if (changed.length) {
     await writeFile(file, `${JSON.stringify(dates, null, 4)}\n`);
-    console.log(`Token expiry dates updated in .github/token-expiry.json (commit it so the weekly report sees them): ${changed.map(name => `${name} ${previous[name] ?? 'none recorded'} -> ${dates[name]}`).join(', ')}`);
+    const message = `Token expiry dates updated in .github/token-expiry.json (commit it so the weekly report sees them): ${changed.map(name => `${name} ${previous[name] ?? 'none recorded'} -> ${dates[name]}`).join(', ')}`;
+    // Claude reads the plain output of a SessionStart hook, but only the additionalContext of a PostToolUse one
+    console.log(afterCommand ? JSON.stringify({ hookSpecificOutput: { hookEventName: 'PostToolUse', additionalContext: message } }) : message);
 }

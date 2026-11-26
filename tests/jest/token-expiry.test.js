@@ -83,3 +83,26 @@ test('starts from nothing when the file of dates is not valid JSON', () => {
     fs.writeFileSync(file(), 'not json');
     expect(runHook(allReadable)).toContain('GITHUB_PERSONAL_ACCESS_TOKEN none recorded -> 2026-12-06');
 });
+
+// Runs the hook as the PostToolUse hook of Bash / PowerShell, after this command
+function runAfterCommand(scenario, command) {
+    const env = { ...process.env, CLAUDE_PROJECT_DIR: project, TOKEN_EXPIRY_SCENARIO: JSON.stringify(scenario), GITHUB_PERSONAL_ACCESS_TOKEN: 'pat-value' };
+    const result = spawnSync(process.execPath, ['--require', preload, hook, '--after-command'], { env, encoding: 'utf8', input: JSON.stringify({ tool_input: { command } }) });
+    expect(result.stderr).toBe('');
+    expect(result.status).toBe(0);
+    return result.stdout;
+}
+
+test('after a command, reads the dates only when the command can change a token, and tells Claude through additionalContext', () => {
+    expect(runAfterCommand(allReadable, 'npm run lint')).toBe('');
+    expect(fs.existsSync(file())).toBe(false);
+    expect(runAfterCommand(allReadable, 'git pushover')).toBe('');
+
+    for (const command of ['git push gitlab main', 'printf "protocol=https\nhost=gitlab.com\n\n" | git credential reject', 'netlify env:set GITHUB_API_TOKEN x', 'setx GITHUB_PERSONAL_ACCESS_TOKEN x']) {
+        fs.rmSync(file(), { force: true });
+        const { hookSpecificOutput } = JSON.parse(runAfterCommand(allReadable, command));
+        expect(hookSpecificOutput.hookEventName).toBe('PostToolUse');
+        expect(hookSpecificOutput.additionalContext).toContain('GITLAB_TOKEN none recorded -> 2026-11-26');
+    }
+    expect(runAfterCommand(allReadable, 'git push')).toBe('');
+});
