@@ -98,6 +98,8 @@
 /update-version.js /404.html 404!
 /hide-folders.js /404.html 404!
 /adb-reverse.js /404.html 404!
+/lighthouse-report.js /404.html 404!
+/lint-scripts.js /404.html 404!
 /work-years.js /404.html 404!
 /experience-period.js /404.html 404!
 /.hidden /404.html 404!
