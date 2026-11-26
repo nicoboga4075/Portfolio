@@ -53,7 +53,7 @@ jobs:
       run: |
         pwsh -NoProfile -Command "if (-not (Get-Module -ListAvailable PSScriptAnalyzer)) { Install-PSResource PSScriptAnalyzer -Version 1.24.0 -Scope CurrentUser -TrustRepository }"
         archive="actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
-        curl -fsSLO "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/${archive}"
+        curl --proto '=https' --tlsv1.2 -fsSLO "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/${archive}"
         echo "${ACTIONLINT_SHA256}  ${archive}" | sha256sum -c -
         mkdir -p "$HOME/.local/bin"
         tar -xzf "$archive" -C "$HOME/.local/bin" actionlint
