@@ -69,7 +69,7 @@ function lintPowerShell() {
             "$ErrorActionPreference = 'Stop'",
             "if (-not (Get-Module -ListAvailable PSScriptAnalyzer)) { Write-Error 'PSScriptAnalyzer not found: Install-PSResource PSScriptAnalyzer -Scope CurrentUser' }",
             `$results = @(Invoke-ScriptAnalyzer -Path ${quote(path.join(root, '.gitlab'))} -Settings ${quote(settings)}) + @(Invoke-ScriptAnalyzer -Path ${quote(path.join(root, 'tests', 'powershell'))} -Settings ${quote(settings)}) + @(Invoke-ScriptAnalyzer -Path ${quote(dir)} -Settings ${quote(settings)})`,
-            `foreach ($r in $results) { $file = if ($r.ScriptPath.StartsWith(${quote(dir)})) { '.gitlab/.gitlab-ci.yml, job ' + [IO.Path]::GetFileNameWithoutExtension($r.ScriptPath) + ', script line' } else { [IO.Path]::GetRelativePath(${quote(root)}, $r.ScriptPath).Replace('\\', '/') }; '{0} {1}: {2} {3} {4}' -f $file, $r.Line, $r.Severity, $r.RuleName, $r.Message }`,
+            String.raw`foreach ($r in $results) { $file = if ($r.ScriptPath.StartsWith(${quote(dir)})) { '.gitlab/.gitlab-ci.yml, job ' + [IO.Path]::GetFileNameWithoutExtension($r.ScriptPath) + ', script line' } else { [IO.Path]::GetRelativePath(${quote(root)}, $r.ScriptPath).Replace('\', '/') }; '{0} {1}: {2} {3} {4}' -f $file, $r.Line, $r.Severity, $r.RuleName, $r.Message }`,
             'exit $results.Count',
         ].join('; ');
         const { status, output } = run(pwsh, ['-NoProfile', '-NonInteractive', '-Command', command]);
