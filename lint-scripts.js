@@ -1,4 +1,4 @@
-// npm run lint:ps / lint:sh: lints the scripts the other linters don't read, and exits 1 on any error or warning. ps: PSScriptAnalyzer (settings in .gitlab/PSScriptAnalyzerSettings.psd1) on .gitlab/*.ps1 and on the PowerShell of each job of .gitlab/.gitlab-ci.yml, run by the windows-local runner. sh: ShellCheck on the bash -c scripts of package.json, and actionlint on .github/workflows, which runs ShellCheck on each run: step.
+// npm run lint:ps / lint:sh: lints the scripts the other linters don't read, and exits 1 on any error or warning. ps: PSScriptAnalyzer (settings in .gitlab/PSScriptAnalyzerSettings.psd1) on .gitlab/*.ps1, tests/powershell/*.ps1 and the PowerShell of each job of .gitlab/.gitlab-ci.yml, run by the windows-local runner. sh: ShellCheck on scripts/*.sh, the scripts package.json runs with bash, and on the Bats helpers of tests/bash, and actionlint on .github/workflows, which runs ShellCheck on each run: step.
 const { spawnSync } = require('node:child_process');
 const fs = require('node:fs');
 const os = require('node:os');
@@ -37,12 +37,9 @@ function gitlabJobScripts(source) {
         .map(([job, def]) => ({ job, script: `${[...lines(def.before_script ?? before), ...lines(def.script), ...lines(def.after_script)].join('\n')  }\n` }));
 }
 
-// The bash code of each `bash -c "..." --` script of package.json, as bash gets it: the double quotes of the command line unescaped
-function bashScripts(scripts) {
-    return Object.entries(scripts).flatMap(([name, command]) => {
-        const match = /^bash -c "([\s\S]*)" --$/.exec(command);
-        return match ? [{ name, code: `${match[1].replaceAll(/\\(["\\])/g, '$1')  }\n` }] : [];
-    });
+// The files of a folder of the repository with this extension, as paths relative to the root
+function filesOf(folder, extension) {
+    return fs.readdirSync(path.join(root, folder)).filter(name => name.endsWith(extension)).map(name => path.posix.join(folder, name));
 }
 
 // Runs a program and returns its exit status and its output
@@ -71,8 +68,8 @@ function lintPowerShell() {
         const command = [
             "$ErrorActionPreference = 'Stop'",
             "if (-not (Get-Module -ListAvailable PSScriptAnalyzer)) { Write-Error 'PSScriptAnalyzer not found: Install-PSResource PSScriptAnalyzer -Scope CurrentUser' }",
-            `$results = @(Invoke-ScriptAnalyzer -Path ${quote(path.join(root, '.gitlab'))} -Settings ${quote(settings)}) + @(Invoke-ScriptAnalyzer -Path ${quote(dir)} -Settings ${quote(settings)})`,
-            `foreach ($r in $results) { $file = if ($r.ScriptPath.StartsWith(${quote(dir)})) { '.gitlab/.gitlab-ci.yml, job ' + [IO.Path]::GetFileNameWithoutExtension($r.ScriptPath) + ', script line' } else { '.gitlab/' + $r.ScriptName }; '{0} {1}: {2} {3} {4}' -f $file, $r.Line, $r.Severity, $r.RuleName, $r.Message }`,
+            `$results = @(Invoke-ScriptAnalyzer -Path ${quote(path.join(root, '.gitlab'))} -Settings ${quote(settings)}) + @(Invoke-ScriptAnalyzer -Path ${quote(path.join(root, 'tests', 'powershell'))} -Settings ${quote(settings)}) + @(Invoke-ScriptAnalyzer -Path ${quote(dir)} -Settings ${quote(settings)})`,
+            `foreach ($r in $results) { $file = if ($r.ScriptPath.StartsWith(${quote(dir)})) { '.gitlab/.gitlab-ci.yml, job ' + [IO.Path]::GetFileNameWithoutExtension($r.ScriptPath) + ', script line' } else { [IO.Path]::GetRelativePath(${quote(root)}, $r.ScriptPath).Replace('\\', '/') }; '{0} {1}: {2} {3} {4}' -f $file, $r.Line, $r.Severity, $r.RuleName, $r.Message }`,
             'exit $results.Count',
         ].join('; ');
         const { status, output } = run(pwsh, ['-NoProfile', '-NonInteractive', '-Command', command]);
@@ -88,13 +85,10 @@ function lintShell() {
     const actionlint = need('actionlint', 'install actionlint (https://github.com/rhysd/actionlint/blob/main/docs/install.md)');
     if (!shellcheck || !actionlint) return false;
     let ok = true;
-    const { scripts } = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
-    for (const { name, code } of bashScripts(scripts)) {
-        const { status, output } = run(shellcheck, ['--shell=bash', '--severity=warning', '-'], code);
-        if (status !== 0) {
-            process.stdout.write(`package.json, script ${name}:\n${output}\n`);
-            ok = false;
-        }
+    const scripts = run(shellcheck, ['--severity=warning', ...filesOf('scripts', '.sh'), ...filesOf('tests/bash', '.sh'), ...filesOf('tests/bash', '.bash')]);
+    if (scripts.status !== 0) {
+        process.stdout.write(`${scripts.output}\n`);
+        ok = false;
     }
     const { status, output } = run(actionlint, ['-shellcheck', shellcheck, '-pyflakes', '']);
     if (status !== 0) {
@@ -114,4 +108,4 @@ if (require.main === module) {
     process.exit(lint() ? 0 : 1);
 }
 
-module.exports = { findProgram, gitlabJobScripts, bashScripts };
+module.exports = { findProgram, gitlabJobScripts, filesOf };

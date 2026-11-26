@@ -1,8 +1,8 @@
-// Unit tests of lint-scripts.js: where it finds the linters (PATH, then the winget package folders on Windows), the PowerShell it reads from each GitLab CI job, and the bash code it reads from the bash -c scripts of package.json.
+// Unit tests of lint-scripts.js: where it finds the linters (PATH, then the winget package folders on Windows), the PowerShell it reads from each GitLab CI job, and the files of a folder it lints.
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { findProgram, gitlabJobScripts, bashScripts } = require('../../lint-scripts');
+const { findProgram, gitlabJobScripts, filesOf } = require('../../lint-scripts');
 
 const root = path.join(__dirname, '..', '..');
 let dir;
@@ -79,18 +79,9 @@ describe('gitlabJobScripts', () => {
     });
 });
 
-describe('bashScripts', () => {
-    test('keeps the bash -c scripts only, with the double quotes and backslashes of the command line unescaped', () => {
-        const scripts = {
-            lint: 'npx eslint .',
-            tag: 'bash -c "v=$(node -p \\"1\\"); echo \\\\n $v" --',
-            other: 'bash -c "echo" -- extra',
-        };
-        expect(bashScripts(scripts)).toEqual([{ name: 'tag', code: 'v=$(node -p "1"); echo \\n $v\n' }]);
-    });
-
-    test('reads the bash -c scripts of package.json', () => {
-        const { scripts } = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
-        expect(bashScripts(scripts).map(({ name }) => name)).toEqual(expect.arrayContaining(['tag-version', 'release']));
+describe('filesOf', () => {
+    test('lists the files of a folder with the extension, relative to the root with forward slashes', () => {
+        expect(filesOf('scripts', '.sh')).toEqual(expect.arrayContaining(['scripts/release.sh', 'scripts/tag-version.sh', 'scripts/push-all.sh', 'scripts/rollback-reflog.sh']));
+        expect(filesOf('.gitlab', '.ps1').every(file => file.startsWith('.gitlab/') && file.endsWith('.ps1'))).toBe(true);
     });
 });

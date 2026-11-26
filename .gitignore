@@ -835,6 +835,8 @@ tags
 [Ll]ib64
 [Ll]ocal
 [Ss]cripts
+# The Bash scripts of the npm scripts (release, tag-version, push-all, rollback-reflog), not a virtualenv
+!/scripts/
 pyvenv.cfg
 .venv
 pip-selfcheck.json

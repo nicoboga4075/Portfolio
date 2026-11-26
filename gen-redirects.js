@@ -93,6 +93,7 @@ const STATIC = `# The 404 page itself must not be reachable directly with a 200
 /_includes/* /404.html 404!
 /_data/* /404.html 404!
 /tests/* /404.html 404!
+/scripts/* /404.html 404!
 /reports/* /404.html 404!
 /logs/* /404.html 404!
 /docs/* /404.html 404!

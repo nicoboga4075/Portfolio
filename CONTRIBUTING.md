@@ -102,3 +102,8 @@ You may add the attribute default for one track so as to have automatically the 
 ### Add a Robot Framework test
 
 Follow [tests/robot/ROBOT_FRAMEWORK.md](tests/robot/ROBOT_FRAMEWORK.md): the folder layout, the suite template, the writing rules, the run commands and the list of the tests, where each new test is added.
+
+### Test the PowerShell and Bash scripts
+
+- **PowerShell** (`.gitlab/runner_status.ps1`, `.gitlab/runner_simulate.ps1`): [Pester 5](https://pester.dev) tests in `tests/powershell/*.Tests.ps1`, run by `npm run test:ps` (JUnit report in `reports/pester/junit.xml`). Install Pester 5 once with `Install-PSResource Pester -Scope CurrentUser -TrustRepository`: Windows only ships Pester 3.4. The tests mock what touches the computer (`Get-Service`, `Start-Service`, `Start-Sleep`, `Install-Module`, `Read-Host`, `ConvertFrom-Yaml`) and run the simulator in a temporary folder. They run on the GitLab Windows runner (`powershell-job`).
+- **Bash** (`scripts/release.sh`, `tag-version.sh`, `push-all.sh`, `rollback-reflog.sh`, run by the npm scripts of the same names): [Bats](https://bats-core.readthedocs.io) tests in `tests/bash/*.bats`, with `bats-support` and `bats-assert` from npm, run by `npm run test:sh` (JUnit report in `reports/bats/`) in Git Bash on Windows. Each test runs the script in a temporary git repository whose origin is a local bare repository, with `npm` replaced by a stand-in (`tests/bash/helpers.bash`): nothing reaches GitHub, GitLab or this repository. They run in the `bats` job of GitHub Actions.

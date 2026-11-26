@@ -61,6 +61,26 @@ jobs:
     - run: npm run lint:ps
     - run: npm run lint:sh
 
+  # The Bats tests of scripts/ (release, tag-version, push-all, rollback-reflog), each in a temporary git repository with a local bare origin; the Pester tests of the PowerShell run on the Windows runner of GitLab, where these scripts run
+  bats:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v7
+    - name: Use Node.js of .nvmrc
+      uses: actions/setup-node@v7
+      with:
+        node-version-file: .nvmrc
+        cache: 'npm'
+    - run: npm ci --ignore-scripts
+    - run: npm run test:sh
+    - uses: actions/upload-artifact@v7
+      if: ${{ !cancelled() }}
+      with:
+        name: reports-bats
+        path: reports/bats/
+
   # Jest, Playwright, Cypress and Robot Framework in four jobs that run side by side, each failing the run when one of its tests fails and uploading its reports even then
   jest:
     needs: build

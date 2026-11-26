@@ -72,7 +72,8 @@ foreach ($stage in $stages) {
         Write-Host "`n▶️  Job: $jobName`n" -ForegroundColor Green
         "=== Job: $jobName ===" | Out-File $logPath
 
-		$dangerousPatterns = "Remove-Item|Remove-ItemProperty|Clear-Content|Clear-Item|Clear-ItemProperty|Stop-Computer|Restart-Computer|Format-Volume|Stop-Process|Set-ExecutionPolicy|Uninstall-Module|Remove-Module|Start-Process|New-Item|rm|rmdir|unlink|shutdown|reboot|halt|mkfs|dd|:\(\)\s*\{\s*:\|\s*:\&\s*\};:|curl\s+\|\s*sh|wget\s+\|\s*sh|mv|chmod|chown|killall|kill\s+-9"
+        # Whole command names only (\b around them), so a word that merely contains one (git add, npm run format) still runs; the fork bomb and the piped downloads are matched as they are
+        $dangerousPatterns = "\b(Remove-Item|Remove-ItemProperty|Clear-Content|Clear-Item|Clear-ItemProperty|Stop-Computer|Restart-Computer|Format-Volume|Stop-Process|Set-ExecutionPolicy|Uninstall-Module|Remove-Module|Start-Process|New-Item|rm|rmdir|unlink|shutdown|reboot|halt|mkfs|dd|mv|chmod|chown|killall|kill\s+-9)\b|:\(\)\s*\{\s*:\|\s*:\&\s*\};:|curl\s+\|\s*sh|wget\s+\|\s*sh"
 
         foreach ($cmd in $jobValue.script) {
 			if ($cmd -match $dangerousPatterns) {

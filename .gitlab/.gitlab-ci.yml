@@ -48,12 +48,22 @@ build-job:
     policy: pull-push
 
 # The test stage: one job per framework, the Cypress and Robot Framework ones only once their tests exist; each fails the pipeline on a failed test and keeps its reports even then
-# PSScriptAnalyzer on .gitlab/*.ps1 and on the scripts of this file, on the PowerShell that runs them; the module is installed for the runner's user the first time
-lint-ps-job:
+# PSScriptAnalyzer on the PowerShell of .gitlab/, tests/powershell/ and this file, then the Pester tests of runner_status.ps1 and runner_simulate.ps1, on the PowerShell that runs them; both modules are installed for the runner's user the first time
+powershell-job:
   stage: test
   script:
     - if (-not (Get-Module -ListAvailable PSScriptAnalyzer)) { Install-PSResource PSScriptAnalyzer -Version 1.24.0 -Scope CurrentUser -TrustRepository }
+    - if (-not (Get-Module -ListAvailable Pester | Where-Object { $_.Version.Major -ge 5 })) { Install-PSResource Pester -Version 5.7.1 -Scope CurrentUser -TrustRepository }
     - npm run lint:ps
+    - npm run test:ps
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - reports/pester/junit.xml
+    paths:
+      - reports/pester/
+    expire_in: 1 week
 
 jest-job:
   stage: test

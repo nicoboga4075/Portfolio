@@ -23,7 +23,7 @@ An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI,
 |---|---|
 | `npm run dev` | Local site on http://localhost:8888 (`npm run dev:watch` rebuilds on change) |
 | `npm run build` | Netlify build: redirects, Eleventy, minified JS. It writes over the source pages, so for a local preview use `npm run dev` or `ELEVENTY_PREVIEW=1 npx eleventy` (output in `.eleventy/`) |
-| `npm test` | Every test suite: Jest, Cypress, Playwright, Robot Framework |
+| `npm test` | Every test suite: Jest, Cypress, Playwright, Robot Framework, Pester (`test:ps`) and Bats (`test:sh`) |
 | `npm run jest` | Unit tests with coverage (`reports/jest/coverage`) |
 | `npm run playwright` / `npm run cypress` / `npm run robot` | One end-to-end suite |
 | `npm run lint` | html-validate, Stylelint, ESLint, PSScriptAnalyzer, ShellCheck and actionlint (`lint:html`, `lint:css`, `lint:js`, `lint:ps`, `lint:sh` one by one) |
@@ -34,7 +34,7 @@ An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI,
 - Always use an LTS version of Node.js for the builds and the tests (`.nvmrc`, Netlify, the GitHub workflows, the GitLab runner), never a Current (odd) release; Node 20, past its end of life, stays in the CI build matrix as `lts/iron` (its last LTS release, 20.20.2) for backward compatibility only.
 - Netlify CLI installed globally (`npm install -g netlify-cli`), logged in and linked to the site: `dev-watch.js` runs it from next to `node`, and `netlify dev` brings the environment variables and the functions.
 - Environment variables, set in Netlify, never in the repository: `SUPABASE_URL`, `SUPABASE_ANON_KEY` (visit counter), `GITHUB_API_TOKEN` (date of the last CV commit), `ENV_CLIENT_ID` (Google OAuth client of the contact form, Gmail send), `SITE_RECAPTCHA_KEY` (under `netlify dev` the `env` function hands back Google's test key). CI secrets: `SONAR_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN`.
-- Robot Framework: Python with `pip install --require-hashes -r tests/robot/requirements.txt` (the lock of `requirements.in`: change a version in `requirements.in`, then lock again with the pip-compile command at its top). Cypress: its binary with `npm run cypress:install`; Playwright: its browsers with `npm run playwright:install`. Android: Android Studio and `adb` (`npm run adb:reverse` forwards port 8888).
+- Robot Framework: Python with `pip install --require-hashes -r tests/robot/requirements.txt` (the lock of `requirements.in`: change a version in `requirements.in`, then lock again with the pip-compile command at its top). Cypress: its binary with `npm run cypress:install`; Playwright: its browsers with `npm run playwright:install`. Android: Android Studio and `adb` (`npm run adb:reverse` forwards port 8888). Pester 5 (`Install-PSResource Pester -Scope CurrentUser -TrustRepository`, Windows only ships Pester 3.4) for `npm run test:ps`; Bats comes from npm and runs in Git Bash.
 - Main dev machine on Windows (PowerShell and Git Bash); Netlify builds on Linux; the GitLab runner is a self-hosted Windows runner (`windows-local`), only up while that computer is on.
 - Local ports (8888, 3999, the free proxy port, 4799 for the translation hook): see "Local Ports" in README.md.
 
@@ -83,6 +83,7 @@ An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI,
 - Jest unit tests of `js/` sit next to their module (`js/app.js` → `js/app.test.js`); those of the Netlify functions go in `tests/jest/netlify/` (`visit.mts` → `visit.test.ts`), since Netlify deploys every file of `netlify/functions/` as a function; those of the build scripts in `tests/jest/`.
 - Coverage is 100 % on the files of `collectCoverageFrom` in `jest.config.js`, which matches `sonar.coverage.exclusions` in `sonar-project.properties`: keep both in step and keep the coverage at 100 % (the SonarCloud quality gate checks the new code).
 - Playwright in `tests/playwright/`: `*.browser.spec.js` open a page of the preview build, served by `tests/playwright/site.js`, and run in Chromium, Firefox and WebKit; the specs of `BUILT` in `playwright.config.js` read the preview build made by `build.setup.js`; the others run once in Node.
+- The Pester tests of the PowerShell of `.gitlab/` in `tests/powershell/*.Tests.ps1` (`npm run test:ps`, on the GitLab Windows runner), the Bats tests of `scripts/*.sh` in `tests/bash/*.bats` (`npm run test:sh`, in the `bats` job of GitHub Actions), each script run in a temporary folder or git repository with a local bare origin: nothing reaches a service, a remote or the real repository.
 - Cypress in `tests/cypress/` (`tests/cypress.config.js` builds the preview and serves it) and Robot Framework in `tests/robot/` (follow `tests/robot/ROBOT_FRAMEWORK.md`), run on the built site; the three serve it with `tests/serve-build.mjs`, which has no Netlify function (a Playwright spec answers the `article` function itself).
 - Every new or changed behaviour comes with its test (the `test-writer` agent writes the missing ones). Reports go to `reports/` (git-ignored).
 
