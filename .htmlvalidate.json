@@ -19,7 +19,7 @@
         "heading-level": ["error", { "minInitialRank": "any" }],
         "require-sri": ["error", { "target": "crossorigin" }],
         "class-pattern": ["error", { "pattern": "kebabcase" }],
-        "id-pattern": ["error", { "pattern": "kebabcase" }],
+        "id-pattern": ["error", { "pattern": ["kebabcase", "/^[a-z][a-z0-9]*(-[a-z0-9]+)*--[0-9]+$/"] }],
         "no-missing-references": "error",
         "input-missing-label": "error"
     }

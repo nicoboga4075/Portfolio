@@ -137,10 +137,11 @@ function initTranslator() {
     });
 }
 
+// The picture of each element, images/<id>.<extension>: the src of an img, the background of any other element; a --<number> at the end of the id is left out (fft--1 and fft--2 both show images/fft.svg: one picture shown twice, where each id must stay unique), so no picture file has two dashes in a row in its name (photo-2.png keeps its -2)
 function loadImages(selector, extension, one = false) {
     const imgs = document.querySelectorAll(`${selector}`);
     Array.from(imgs).some((el, index) => {
-        const locationImg = `images/${el.id}.${extension}`;
+        const locationImg = `images/${el.id.replace(/--\d+$/, '')}.${extension}`;
         if (el.tagName.toLowerCase() === 'img') {
             el.src = locationImg;
         } else {

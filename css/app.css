@@ -1279,7 +1279,8 @@ html:not(.dark-mode) .resume-details .skill-icons img[src$="/github.png"] {
     border: 1px solid var(--cyan);
 }
 
-#fft {
+/* The FFT icons of the resume, fft--1 in Experiences and fft--2 in Awards (the svgId fft of resume.json with the suffix of index-resume.html): every id that starts with fft--; loadImages gives them all images/fft.svg */
+.resume-wrap .icon[id^="fft--"] {
     background-size: 30px;
     background-color: var(--yellow);
     background-repeat: no-repeat;

@@ -66,7 +66,7 @@
                     {#- The experiences make a timeline: a line joins their icons inside a frame closed above the first one, and the icon of the job held today ("current": true) pulses #}
                     <div class="resume-wrap d-flex ftco-animate{{ ' is-first' if loop.first }}{{ ' is-current' if e.current }}">
                         {%- if e.svgId %}
-                        <div id="{{ e.svgId }}" class="icon svg d-flex align-items-center justify-content-center"></div>
+                        <div id="{{ e.svgId }}--1" class="icon svg d-flex align-items-center justify-content-center"></div>
                         {%- else %}
                         <div class="icon d-flex align-items-center justify-content-center">
                             <span class="{{ e.icon }}"></span>
@@ -199,7 +199,7 @@
                     {%- for a in resume.awards %}
                     <div class="resume-wrap d-flex ftco-animate">
                         {%- if a.svgId %}
-                        <div id="{{ a.svgId }}" class="icon svg d-flex align-items-center justify-content-center"></div>
+                        <div id="{{ a.svgId }}--2" class="icon svg d-flex align-items-center justify-content-center"></div>
                         {%- else %}
                         <div class="icon d-flex align-items-center justify-content-center">
                             <span class="{{ a.icon }}"></span>

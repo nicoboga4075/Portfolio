@@ -249,6 +249,21 @@ describe('loadImages', () => {
         expect(div.style.backgroundImage).toBe('url(images/logo.png)');
     });
 
+    test('leaves out a --<number> at the end of the id, and keeps a single dash, a -<number> and any other digit', () => {
+        const experience = fakeElement({ id: 'fft--1' });
+        const award = fakeElement({ id: 'fft--2', tagName: 'IMG' });
+        const numbered = fakeElement({ id: 'photo-2' });
+        const dashed = fakeElement({ id: 'agence-web' });
+        const digit = fakeElement({ id: 'n8n', tagName: 'IMG' });
+        fakePage({ elements: { 'all:.pictures': [experience, award, numbered, dashed, digit] } });
+        load().loadImages('.pictures', 'svg');
+        expect(experience.style.backgroundImage).toBe('url(images/fft.svg)');
+        expect(award.src).toBe('images/fft.svg');
+        expect(numbered.style.backgroundImage).toBe('url(images/photo-2.svg)');
+        expect(dashed.style.backgroundImage).toBe('url(images/agence-web.svg)');
+        expect(digit.src).toBe('images/n8n.svg');
+    });
+
     test('stops after the first element with one', () => {
         const first = fakeElement({ id: 'a', tagName: 'IMG' });
         const second = fakeElement({ id: 'b', tagName: 'IMG' });
