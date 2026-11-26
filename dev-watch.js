@@ -15,7 +15,7 @@ const uglifyScript = path.join(__dirname, 'uglify-code.js');
 const taskkill = path.join(process.env.SystemRoot ?? String.raw`C:\Windows`, 'System32', 'taskkill.exe');
 
 // Visitors browse browser-sync on the port of [dev] in netlify.toml (the only localhost origin isTrustedRequest lets call the functions), which proxies netlify dev on a free port the system picks.
-const { port: sitePort, staticServerPort } = toml.parse(fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8')).dev;
+const { port: sitePort, staticServerPort, publish } = toml.parse(fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8')).dev;
 
 // netlify dev (27.9.0) answers 403 on Windows for any static file that a _redirects rule matches: its getStatic() builds the path with path.relative, so it hands its own static server /docs\public\CV_en.pdf, which that server refuses. /docs/public/* is matched by such a rule, so the CV and the other public documents never load through the site port. Serve them straight from netlify dev's static server instead (production isn't affected: Netlify runs on Linux), with the headers _headers gives them, which that static server leaves out.
 function serveDocsPublic(req, res, next) {
@@ -24,12 +24,52 @@ function serveDocsPublic(req, res, next) {
     if (!['GET', 'HEAD'].includes(req.method) || !pathname.toLowerCase().startsWith('/docs/public/')) {
         return next();
     }
+    // The static server of netlify dev ignores Range and always answers the whole file, so a video can't be sought: a range is read from the published copy here, as Netlify answers it in production (206)
+    if (req.headers.range) {
+        // An encoded slash (..%2f) is decoded only here, after new URL: the file must still be under docs/public of the published folder
+        const docs = path.join(__dirname, publish, 'docs', 'public');
+        const file = path.resolve(path.join(__dirname, publish), `.${decodeURIComponent(pathname)}`);
+        if (!file.toLowerCase().startsWith(docs.toLowerCase() + path.sep)) return next();
+        return servePartial(file, req.headers.range, req.method, res, headersFor(pathname), next);
+    }
     const upstream = http.request({ host: 'localhost', port: staticServerPort, method: req.method, path: pathname + search }, response => {
-        res.writeHead(response.statusCode, { ...response.headers, ...headersFor(pathname) });
+        res.writeHead(response.statusCode, { ...response.headers, 'accept-ranges': 'bytes', ...headersFor(pathname) });
         response.pipe(res);
     });
     upstream.on('error', next);
     upstream.end();
+}
+
+// The bytes a Range header asks of a file of this size, as { start, end } (end included), or null when the range can't be served (another unit, several ranges, past the end); "bytes=-500" is the last 500 bytes, "bytes=500-" from byte 500 to the end
+function parseRange(header, size) {
+    const match = /^bytes=(\d*)-(\d*)$/.exec(header.trim());
+    if (!match || (match[1] === '' && match[2] === '')) return null;
+    const [start, end] = match[1] === '' ? [Math.max(size - Number(match[2]), 0), size - 1] : [Number(match[1]), match[2] === '' ? size - 1 : Math.min(Number(match[2]), size - 1)];
+    return start <= end && start < size ? { start, end } : null;
+}
+
+// The content types of the public documents, for the partial answers that don't go through the static server
+const contentTypes = { '.mp4': 'video/mp4', '.webm': 'video/webm', '.vtt': 'text/vtt', '.pdf': 'application/pdf', '.png': 'image/png', '.jpg': 'image/jpeg', '.avif': 'image/avif' };
+
+// Answers the range of a file with 206 and its Content-Range, 416 when the range can't be served, or hands the request on when the file isn't there
+function servePartial(file, rangeHeader, method, res, headers, next) {
+    fs.stat(file, (error, stats) => {
+        if (error || !stats.isFile()) return next();
+        const range = parseRange(rangeHeader, stats.size);
+        if (!range) {
+            res.writeHead(416, { 'content-range': `bytes */${stats.size}` });
+            return res.end();
+        }
+        res.writeHead(206, {
+            'content-type': contentTypes[path.extname(file).toLowerCase()] ?? 'application/octet-stream',
+            'content-length': range.end - range.start + 1,
+            'content-range': `bytes ${range.start}-${range.end}/${stats.size}`,
+            'accept-ranges': 'bytes',
+            ...headers
+        });
+        if (method === 'HEAD') return res.end();
+        fs.createReadStream(file, range).pipe(res);
+    });
 }
 
 // The headers _headers sets on a path, as Netlify reads it: a path pattern at the start of a line (* for any rest, :name for one segment), its "Name: value" lines indented below, # for comments. The file is read on every call so an edit applies without a restart; for a header two matching rules both set, the longer pattern wins, as the /docs/public/* rule of _headers expects.
@@ -164,9 +204,9 @@ function watch() {
     });
 }
 
-module.exports = { headersFor };
+module.exports = { headersFor, parseRange, servePartial };
 
-// The servers start only when the file runs as a script (npm run dev), not when a test requires it for headersFor.
+// The servers start only when the file runs as a script (npm run dev), not when a test requires it for headersFor, parseRange or servePartial.
 if (require.main === module) {
     fs.writeFileSync(reloadTrigger, '');
     if (!fs.existsSync(netlifyCli)) {
