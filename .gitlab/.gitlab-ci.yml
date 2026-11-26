@@ -26,19 +26,19 @@ status-job:
 build-job:
   stage: build
   script:
-    - echo "Installing dependencies..."
+    - Write-Output "Installing dependencies..."
     - |
       if ($env:CI -eq "true") {
-        echo "> npm ci"
+        Write-Output "> npm ci"
         npm ci --cache .npm-cache
       } else {
-        echo "> npm install"
+        Write-Output "> npm install"
         npm install
       }
-    - echo "Building application..."
-    - echo "> npm run build"
+    - Write-Output "Building application..."
+    - Write-Output "> npm run build"
     - npm run build
-    - echo "Build done!"
+    - Write-Output "Build done!"
   cache:
     key:
       files:
@@ -48,10 +48,17 @@ build-job:
     policy: pull-push
 
 # The test stage: one job per framework, the Cypress and Robot Framework ones only once their tests exist; each fails the pipeline on a failed test and keeps its reports even then
+# PSScriptAnalyzer on .gitlab/*.ps1 and on the scripts of this file, on the PowerShell that runs them; the module is installed for the runner's user the first time
+lint-ps-job:
+  stage: test
+  script:
+    - if (-not (Get-Module -ListAvailable PSScriptAnalyzer)) { Install-PSResource PSScriptAnalyzer -Version 1.24.0 -Scope CurrentUser -TrustRepository }
+    - npm run lint:ps
+
 jest-job:
   stage: test
   script:
-    - echo "Running Jest tests..."
+    - Write-Output "Running Jest tests..."
     - npm run jest
   # % Lines of Jest's "All files" row; the other columns hold decimals too (1.47), not only whole numbers
   coverage: '/All files\s+\|\s+[\d.]+\s+\|\s+[\d.]+\s+\|\s+[\d.]+\s+\|\s+([\d.]+)/'
@@ -71,7 +78,7 @@ playwright-job:
   script:
     # Chromium, Firefox and WebKit for the *.browser.spec.js specs, kept on the runner between jobs (downloaded once per Playwright version)
     - npm run playwright:install
-    - echo "Running Playwright tests..."
+    - Write-Output "Running Playwright tests..."
     # Three workers: the default (half the 12 threads of windows-local) starves Firefox, whose reloads and navigations then time out; the -- is quoted because PowerShell drops a bare one
     - npm run playwright '--' --workers=3
   artifacts:
@@ -94,7 +101,7 @@ cypress-job:
   script:
     # The Cypress binary, kept on the runner between jobs; tests/cypress.config.js builds and serves the site itself
     - npm run cypress:install
-    - echo "Running Cypress tests..."
+    - Write-Output "Running Cypress tests..."
     - npm run cypress
   artifacts:
     when: always
@@ -108,7 +115,7 @@ robot-job:
     - exists:
         - tests/robot/**/*.robot
   script:
-    - echo "Building and serving the site for the Robot Framework tests..."
+    - Write-Output "Building and serving the site for the Robot Framework tests..."
     - $env:ELEVENTY_PREVIEW = "1"; npx eleventy
     # The built site on a free port, in the background for the length of the job, which writes the port it got to reports/robot/port for the tests
     # The runner fails the job when $? is false after a line, even for an error silenced by -ErrorAction SilentlyContinue: test the file first
@@ -116,7 +123,7 @@ robot-job:
     - $server = Start-Process -FilePath node -ArgumentList "tests/serve-build.mjs", "--port-file", "reports/robot/port" -PassThru -WindowStyle Hidden
     - for ($i = 0; $i -lt 50 -and -not (Test-Path reports/robot/port); $i++) { Start-Sleep -Milliseconds 200 }
     - $port = Get-Content reports/robot/port
-    - echo "Running Robot Framework tests on http://localhost:$port..."
+    - Write-Output "Running Robot Framework tests on http://localhost:$port..."
     - robot --outputdir reports/robot --xunit junit.xml --variable "BASE_URL:http://localhost:$port" tests/robot; $code = $LASTEXITCODE; Stop-Process -Id $server.Id -Force; exit $code
   artifacts:
     when: always
@@ -145,36 +152,36 @@ sonar-job:
         $runs = @((Invoke-RestMethod "${runsUrl}?head_sha=$env:CI_COMMIT_SHA").workflow_runs | Where-Object { $_.name -eq 'Node.js CI' })
       } catch {
         # GitHub API unreachable or rate limited: analyse here rather than skip blindly
-        echo "Could not read the GitHub Actions runs ($($_.Exception.Message)): analysing on GitLab"
+        Write-Output "Could not read the GitHub Actions runs ($($_.Exception.Message)): analysing on GitLab"
         $runs = @()
       }
       if ($runs.Count -gt 0) {
         # Skip the analysis here, but wait for the sonar job of GitHub (quality gate included) and take its verdict, polling once a minute for up to 20 minutes
         $run = $runs[0]
-        echo "GitHub Actions analyses $env:CI_COMMIT_SHA (Node.js CI run $($run.id)): SonarCloud analysis skipped on GitLab, waiting for the GitHub sonar job..."
+        Write-Output "GitHub Actions analyses $env:CI_COMMIT_SHA (Node.js CI run $($run.id)): SonarCloud analysis skipped on GitLab, waiting for the GitHub sonar job..."
         $deadline = (Get-Date).AddMinutes(20)
         $job = $null
         while ((Get-Date) -lt $deadline) {
           try {
             $job = (Invoke-RestMethod "$runsUrl/$($run.id)/jobs").jobs | Where-Object { $_.name -eq 'sonar' } | Select-Object -First 1
           } catch {
-            echo "Could not read the jobs of run $($run.id) ($($_.Exception.Message)), retrying"
+            Write-Output "Could not read the jobs of run $($run.id) ($($_.Exception.Message)), retrying"
           }
           if ($job -and $job.status -eq 'completed') { break }
           Start-Sleep -Seconds 60
         }
         if (-not $job -or $job.status -ne 'completed') {
-          echo "The GitHub sonar job did not finish within 20 minutes: see $($run.html_url)"
+          Write-Output "The GitHub sonar job did not finish within 20 minutes: see $($run.html_url)"
           exit 1
         }
-        echo "GitHub sonar job: $($job.conclusion) ($($job.html_url))"
+        Write-Output "GitHub sonar job: $($job.conclusion) ($($job.html_url))"
         # failure (the quality gate included), cancelled or timed_out fail this job; success and skipped (Dependabot) pass
         if ($job.conclusion -in @('failure', 'cancelled', 'timed_out')) { exit 1 }
       } else {
-        echo "No GitHub Actions run for ${env:CI_COMMIT_SHA}: running the SonarCloud analysis on GitLab..."
+        Write-Output "No GitHub Actions run for ${env:CI_COMMIT_SHA}: running the SonarCloud analysis on GitLab..."
         npx @sonar/scan "-Dsonar.token=$env:SONAR_TOKEN"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-        echo "Sonar analysis done!"
+        Write-Output "Sonar analysis done!"
       }
 
 cleanup-job:

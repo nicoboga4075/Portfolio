@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// PreToolUse hook (Bash / PowerShell): before a `git commit`, runs the HTML, CSS and JS/MTS lints and blocks the commit (exit 2) on any error or warning.
+// PreToolUse hook (Bash / PowerShell): before a `git commit`, runs the HTML, CSS, JS/MTS, PowerShell and Bash lints and blocks the commit (exit 2) on any error or warning.
 import { spawnSync } from 'node:child_process';
 import { hookCommand, isGitCommit } from './git-commit.mjs';
 
@@ -11,6 +11,8 @@ const lints = [
     ['HTML', 'npx html-validate --max-warnings 0 "*.html" "*/*.html"'],
     ['CSS', 'npx stylelint --max-warnings 0 "**/*.css"'],
     ['JS / MTS', 'npx eslint --max-warnings 0 .'],
+    ['PowerShell', 'node lint-scripts.js ps'],
+    ['Bash / workflows', 'node lint-scripts.js sh'],
 ];
 
 const failures = [];

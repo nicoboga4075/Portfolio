@@ -33,6 +33,34 @@ jobs:
     - run: npm ci --ignore-scripts
     - run: npm run build
 
+  # PSScriptAnalyzer on the PowerShell of .gitlab/, ShellCheck on the bash -c scripts of package.json and actionlint on these workflows (lint-scripts.js); the runner image has pwsh and ShellCheck, actionlint comes from its release, checked against its SHA-256
+  lint-scripts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      ACTIONLINT_VERSION: 1.7.12
+      ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
+    steps:
+    - uses: actions/checkout@v7
+    - name: Use Node.js of .nvmrc
+      uses: actions/setup-node@v7
+      with:
+        node-version-file: .nvmrc
+        cache: 'npm'
+    - run: npm ci --ignore-scripts
+    - name: Install PSScriptAnalyzer and actionlint
+      run: |
+        pwsh -NoProfile -Command "if (-not (Get-Module -ListAvailable PSScriptAnalyzer)) { Install-PSResource PSScriptAnalyzer -Version 1.24.0 -Scope CurrentUser -TrustRepository }"
+        archive="actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+        curl -fsSLO "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/${archive}"
+        echo "${ACTIONLINT_SHA256}  ${archive}" | sha256sum -c -
+        mkdir -p "$HOME/.local/bin"
+        tar -xzf "$archive" -C "$HOME/.local/bin" actionlint
+        echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+    - run: npm run lint:ps
+    - run: npm run lint:sh
+
   # Jest, Playwright, Cypress and Robot Framework in four jobs that run side by side, each failing the run when one of its tests fails and uploading its reports even then
   jest:
     needs: build
@@ -149,7 +177,7 @@ jobs:
     - name: Robot Framework on the built site
       run: |
         node tests/serve-build.mjs --port-file reports/robot/port &
-        for i in $(seq 50); do [ -s reports/robot/port ] && break; sleep 0.2; done
+        for _ in $(seq 50); do [ -s reports/robot/port ] && break; sleep 0.2; done
         robot --outputdir reports/robot --xunit junit.xml --variable "BASE_URL:http://localhost:$(cat reports/robot/port)" tests/robot
     - uses: actions/upload-artifact@v7
       if: ${{ !cancelled() }}

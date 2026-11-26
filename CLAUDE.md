@@ -26,7 +26,7 @@ An Android app wraps it with Capacitor. CI runs on GitHub Actions and GitLab CI,
 | `npm test` | Every test suite: Jest, Cypress, Playwright, Robot Framework |
 | `npm run jest` | Unit tests with coverage (`reports/jest/coverage`) |
 | `npm run playwright` / `npm run cypress` / `npm run robot` | One end-to-end suite |
-| `npm run lint` | html-validate, Stylelint and ESLint (`lint:html`, `lint:css`, `lint:js` one by one) |
+| `npm run lint` | html-validate, Stylelint, ESLint, PSScriptAnalyzer, ShellCheck and actionlint (`lint:html`, `lint:css`, `lint:js`, `lint:ps`, `lint:sh` one by one) |
 
 ## Environment and setup
 
