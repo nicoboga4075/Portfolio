@@ -154,8 +154,8 @@ function loadImages(selector, extension, one = false) {
 
 const darkSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-// The #dark-icon button cycles through these; auto (nothing stored) follows the OS setting. base.njk's inline script applies the same rule before first paint, and migrates the old 'darkMode' key to this one.
-const themeChoices = ['auto', 'light', 'dark'];
+// The #dark-icon button cycles through these; auto (nothing stored) follows the OS setting, mono is the light theme in greys (html.mono-mode of common.css). base.njk's inline script applies the same rule before first paint, and migrates the old 'darkMode' key to this one.
+const themeChoices = ['auto', 'light', 'dark', 'mono'];
 
 function getThemeChoice() {
     return localStorage.getItem('theme') ?? 'auto';
@@ -181,6 +181,7 @@ function toggleDarkMode(event) {
     const choice = getThemeChoice();
     const isDark = isDarkModePreferred();
     document.documentElement.classList.toggle('dark-mode', isDark);
+    document.documentElement.classList.toggle('mono-mode', choice === 'mono');
     // Browser chrome (Android address bar, Safari tab bar, PWA title bar) follows the page background; the meta itself is created by base.njk's inline script.
     const themeColor = document.querySelector('meta[name="theme-color"]');
     if (themeColor) {
@@ -195,7 +196,7 @@ function toggleDarkMode(event) {
             const span = icon.querySelector('span[aria-hidden]');
             span.textContent = span.dataset[`emoji${suffix}`];
         } else {
-            icon.className = { auto: 'icon-adjust', light: 'icon-sun-o', dark: 'icon-moon-o' }[choice];
+            icon.className = { auto: 'icon-adjust', light: 'icon-sun-o', dark: 'icon-moon-o', mono: 'icon-tint' }[choice];
         }
         const label = icon.dataset[`label${suffix}`];
         icon.querySelector('.sr-only').textContent = label;

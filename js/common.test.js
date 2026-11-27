@@ -295,7 +295,7 @@ describe('theme', () => {
         expect(page.events).toEqual(['darkmodechange']);
     });
 
-    test('cycles auto, light, dark and back to auto on each click, which forgets the stored choice', () => {
+    test('cycles auto, light, dark, mono and back to auto on each click, which forgets the stored choice', () => {
         const page = fakePage();
         const { toggleDarkMode } = load();
         const click = () => ({ preventDefault: jest.fn(), stopPropagation: jest.fn() });
@@ -308,8 +308,14 @@ describe('theme', () => {
         expect(localStorage.getItem('theme')).toBe('dark');
         expect(page.classes.has('dark-mode')).toBe(true);
         toggleDarkMode(click());
+        // Mono is the light theme in greys: the mono-mode class, not dark-mode
+        expect(localStorage.getItem('theme')).toBe('mono');
+        expect(page.classes.has('dark-mode')).toBe(false);
+        expect(page.classes.has('mono-mode')).toBe(true);
+        toggleDarkMode(click());
         expect(localStorage.getItem('theme')).toBeNull();
         expect(page.classes.has('dark-mode')).toBe(false);
+        expect(page.classes.has('mono-mode')).toBe(false);
     });
 
     test('follows a change of the OS setting in auto only', () => {
@@ -333,6 +339,16 @@ describe('theme', () => {
         expect(icon.title).toBe('Light');
     });
 
+    test('shows the tint icon and the mono label in the monochrome theme', () => {
+        const srOnly = fakeElement();
+        const icon = fakeElement({ id: 'dark-icon', dataset: { labelMono: 'Mono' }, children: { '.sr-only': srOnly } });
+        const page = fakePage({ theme: 'mono', elements: { 'dark-icon': icon } });
+        load();
+        expect(icon.className).toBe('icon-tint');
+        expect(srOnly.textContent).toBe('Mono');
+        expect(page.classes.has('mono-mode')).toBe(true);
+    });
+
     test('swaps the emoji of the aria-hidden span on a page without the icon font, with no title to update', () => {
         const srOnly = fakeElement();
         const span = fakeElement({ dataset: { emojiAuto: '🌓', emojiLight: '☀️', emojiDark: '🌙' } });
@@ -348,7 +364,7 @@ describe('theme', () => {
         const srOnly = fakeElement();
         const inner = fakeElement();
         const openTip = fakeElement({ id: 'tooltip1', children: { '.tooltip-inner': inner } });
-        const icon = fakeElement({ id: 'dark-icon', attributes: { 'aria-describedby': 'tooltip1' }, dataset: { originalTitle: 'Auto', labelAuto: 'Auto', labelLight: 'Light', labelDark: 'Dark' }, children: { '.sr-only': srOnly }, extra: { tooltip: { update: jest.fn() } } });
+        const icon = fakeElement({ id: 'dark-icon', attributes: { 'aria-describedby': 'tooltip1' }, dataset: { originalTitle: 'Auto', labelAuto: 'Auto', labelLight: 'Light', labelDark: 'Dark', labelMono: 'Mono' }, children: { '.sr-only': srOnly }, extra: { tooltip: { update: jest.fn() } } });
         fakePage({ elements: { 'dark-icon': icon, tooltip1: openTip } });
         const { toggleDarkMode } = load();
         toggleDarkMode({ preventDefault() {}, stopPropagation() {} });
@@ -364,7 +380,7 @@ describe('theme', () => {
         // An open tooltip without a tooltip object: the text changes, no update to call
         icon.setAttribute('aria-describedby', 'tooltip1');
         toggleDarkMode({ preventDefault() {}, stopPropagation() {} });
-        expect(inner.textContent).toBe('Auto');
+        expect(inner.textContent).toBe('Mono');
     });
 });
 

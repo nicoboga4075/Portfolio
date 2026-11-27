@@ -3,7 +3,8 @@
         "theme": {
             "auto": "Theme: automatic",
             "light": "Theme: light",
-            "dark": "Theme: dark"
+            "dark": "Theme: dark",
+            "mono": "Theme: monochrome"
         },
         "navigation": "Toggle navigation",
         "language": "Language",
@@ -14,7 +15,8 @@
         "theme": {
             "auto": "Thème : automatique",
             "light": "Thème : clair",
-            "dark": "Thème : sombre"
+            "dark": "Thème : sombre",
+            "mono": "Thème : monochrome"
         },
         "navigation": "Basculer la navigation",
         "language": "Langue",

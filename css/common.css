@@ -68,6 +68,27 @@ html.dark-mode body {
     --secondary: var(--secondary-light);
 }
 
+/* The monochrome theme, after dark on the #dark-icon button: the light theme with each colour of the palette turned into the grey of the same luminance, so every contrast checked in light mode stays the same, and its -light, -dark and -pale shades follow (oklch() keeps a grey grey) */
+html.mono-mode {
+    --blue: #747474;
+    --indigo: #575757;
+    --purple: #5e5e5e;
+    --pink: #828282;
+    --red: #767676;
+    --orange: #a1a1a1;
+    --yellow: #cbcbcb;
+    --green: #919191;
+    --teal: #b2b2b2;
+    --cyan: #949494;
+    --success: #6e6e6e;
+    --info: var(--cyan);
+    --warning: var(--yellow);
+    --danger: #686868;
+
+    /* What the colours can't reach in grey (pictures, videos, emojis, the chatbot and the maps): the root alone can take a filter without becoming the containing block of the fixed navbar and buttons */
+    filter: grayscale(1);
+}
+
 /* ==== Fonts ==== */
 
 /* Local stand-ins shown while the web font loads, sized like it to avoid layout shift. */

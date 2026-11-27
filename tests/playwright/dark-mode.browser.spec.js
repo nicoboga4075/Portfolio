@@ -1,12 +1,13 @@
-// The theme button of the built site: it cycles auto, light, dark and back to auto, stores the choice, shows its label in the page language, and auto follows the colour scheme of the system.
+// The theme button of the built site: it cycles auto, light, dark, mono and back to auto, stores the choice, shows its label in the page language, and auto follows the colour scheme of the system.
 const { test, expect, data, langs } = require('./site');
 
 const nav = data('_data/nav.json');
 const darkClass = /(^|\s)dark-mode(\s|$)/;
+const monoClass = /(^|\s)mono-mode(\s|$)/;
 
 for (const lang of langs) {
     for (const path of [`/${lang}`, `/${lang}/policy`]) {
-        test(`${path}: the button cycles auto, light, dark and auto, and the page keeps the stored choice on reload`, async ({ page }) => {
+        test(`${path}: the button cycles auto, light, dark, mono and auto, and the page keeps the stored choice on reload`, async ({ page }) => {
             await page.emulateMedia({ colorScheme: 'light' });
             await page.goto(path);
             const label = page.locator('#dark-icon .sr-only');
@@ -28,9 +29,22 @@ for (const lang of langs) {
             await expect(html).toHaveClass(darkClass);
             await expect(label).toHaveText(nav[lang].theme.dark);
 
+            // Mono: the light theme in greys, kept on reload too
+            await page.locator('#dark-icon').click();
+            await expect(label).toHaveText(nav[lang].theme.mono);
+            await expect(html).toHaveClass(monoClass);
+            await expect(html).not.toHaveClass(darkClass);
+            expect(await page.evaluate(() => localStorage.getItem('theme'))).toBe('mono');
+            expect(await html.evaluate(element => getComputedStyle(element).filter)).toBe('grayscale(1)');
+
+            await page.reload();
+            await expect(html).toHaveClass(monoClass);
+            await expect(label).toHaveText(nav[lang].theme.mono);
+
             await page.locator('#dark-icon').click();
             await expect(label).toHaveText(nav[lang].theme.auto);
             await expect(html).not.toHaveClass(darkClass);
+            await expect(html).not.toHaveClass(monoClass);
             expect(await page.evaluate(() => localStorage.getItem('theme'))).toBeNull();
         });
     }

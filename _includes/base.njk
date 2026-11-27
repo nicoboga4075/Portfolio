@@ -72,6 +72,7 @@ bodyClass: ""
                 // Same rule as isDarkModePreferred() in common.js, which isn't loaded yet.
                 const choice = localStorage.getItem('theme');
                 document.documentElement.classList.toggle('dark-mode', choice === null ? matchMedia('(prefers-color-scheme: dark)').matches : choice === 'dark');
+                document.documentElement.classList.toggle('mono-mode', choice === 'mono');
                 const themeColor = document.createElement('meta');
                 themeColor.name = 'theme-color';
                 themeColor.content = getComputedStyle(document.documentElement).getPropertyValue('--background-color').trim();

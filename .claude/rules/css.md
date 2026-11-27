@@ -11,6 +11,6 @@ paths:
 - Bootstrap is not loaded on the light pages: a partial shared by both kinds of page must not rely on Bootstrap classes (`d-flex`, `row`, `col-*`) for anything that matters, and the light pages re-implement what they need (`.card`, `.badge`, `.accordion`) in `standalone.css`.
 - `css/bootstrap.min.css` is a customised build that also holds site rules (`.contact-section .box .icon`): grep it too before calling a class or id unused.
 - Before moving or deleting a selector, check every page type in the built output (`.eleventy/`, preview build), not only the sources; a class may also be added at runtime by a plugin (`.owl-item`, `.owl-nav`).
-- The colours come from the variables of `css/common.css` (`--primary`, `--secondary`, `--accent-color`...), in light and dark mode.
+- The colours come from the variables of `css/common.css` (`--primary`, `--secondary`, `--accent-color`...), in light and dark mode; the monochrome theme (`html.mono-mode`, after dark on the theme button) redefines each colour of the palette as the grey of the same luminance, so a new colour variable gets its grey there too.
 - Never edit the vendored styles of `css/` (`owl.carousel.css` and the icon fonts `flaticon.css`, `icomoon.css`): they are replaced by a new download, with README.md updated (`update-docs` skill).
 - Run `npm run lint:css` after a change. Run the WCAG contrast check (`wcag-contrast` skill) only when asked: after a colour change, say it hasn't been run.

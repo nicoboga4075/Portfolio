@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// WCAG AA contrast check of every built page, in light and dark mode, at phone / tablet / laptop / desktop sizes: text on load, on hover, after
+// WCAG AA contrast check of every built page, in light, dark and mono mode, at phone / tablet / laptop / desktop sizes: text on load, on hover, after
 // interactions (opened cards, menus, windows, panels, carousel slides, search suggestions, tooltips), under keyboard focus, plus non-text contrast
 // (focus indicators, icon-only controls, field borders).
 // Usage: node .claude/skills/wcag-contrast/check-contrast.mjs [--no-build] [--only=<substring>] [--quick] [--json=<file>]
@@ -7,7 +7,7 @@
 //   --only=blog  only pages whose URL contains the substring (no leading slash: Git Bash rewrites /en/... into a Windows path)
 //   --quick[=<ref>]        only the pages the files changed since <ref> (HEAD by default, untracked files included; A..B between two commits) can show
 //   --sizes=phone,tablet   only these sizes (phone, tablet, laptop, desktop)
-//   --modes=dark           only this theme (light, dark)
+//   --modes=dark           only this theme (light, dark, mono)
 //   --pages=/fr/blog,/en   only these exact URLs (to recheck what failed without redoing the rest)
 //   --list       print the pages a run would check, then stop (no browser)
 //   --json=f     also write the full report to f
@@ -41,7 +41,7 @@ const VIEWPORTS = [
 ].filter(v => typeof args.sizes !== 'string' || args.sizes.split(',').includes(v.name));
 // Focus and non-text contrast depend on the theme, not on the width: checked at both ends (mobile and desktop navbar).
 const FOCUS_VIEWPORTS = new Set(['phone', 'desktop']);
-const SCHEMES = ['light', 'dark'].filter(s => typeof args.modes !== 'string' || args.modes.split(',').includes(s));
+const SCHEMES = ['light', 'dark', 'mono'].filter(s => typeof args.modes !== 'string' || args.modes.split(',').includes(s));
 const CONCURRENCY = 3;
 
 // ---- Build ----
@@ -861,7 +861,9 @@ async function nonTextPass(page, where, failures) {
 
 // ---- One page, one size, one theme ----
 async function checkPage(browser, pageInfo, viewport, scheme) {
-    const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height }, isMobile: !!viewport.isMobile, hasTouch: !!viewport.hasTouch, colorScheme: scheme });
+    // Mono is the light theme in greys, chosen on the theme button: a light system scheme, with that choice stored before the page loads
+    const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height }, isMobile: !!viewport.isMobile, hasTouch: !!viewport.hasTouch, colorScheme: scheme === 'mono' ? 'light' : scheme });
+    if (scheme === 'mono') await context.addInitScript(() => localStorage.setItem('theme', 'mono'));
     const page = await context.newPage();
     const where = { url: pageInfo.url, viewport: viewport.name, scheme };
     const failures = [];
