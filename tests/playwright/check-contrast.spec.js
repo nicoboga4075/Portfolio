@@ -19,7 +19,8 @@ function run(...args) {
 test('--list prints the pages, sizes and themes without checking anything', () => {
     const { status, out } = run('--list');
     expect(status).toBe(0);
-    expect(out).toMatch(/^\d+ page\(s\) × 4 size\(s\) × 2 theme\(s\): /);
+    // The light, dark and mono themes
+    expect(out).toMatch(/^\d+ page\(s\) × 4 size\(s\) × 3 theme\(s\): /);
     for (const lang of langs) {
         expect(out).toContain(` /${lang} `);
         expect(out).toContain(`/${lang}/blog#${articles[0].slug}`);
@@ -39,6 +40,7 @@ test('--only keeps the pages whose url contains the text', () => {
 test('--sizes and --modes narrow the sizes and the themes', () => {
     const { out } = run('--list', '--sizes=phone,tablet', '--modes=dark', `--pages=/${langs[0]}`);
     expect(out).toMatch(/^1 page\(s\) × 2 size\(s\) × 1 theme\(s\): /);
+    expect(run('--list', '--modes=light,mono', `--pages=/${langs[0]}`).out).toMatch(/^1 page\(s\) × 4 size\(s\) × 2 theme\(s\): /);
 });
 
 test('--pages keeps only the exact urls', () => {
