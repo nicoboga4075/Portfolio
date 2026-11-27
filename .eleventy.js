@@ -425,6 +425,16 @@ async function formatHtml(content, outputPath, mode) {
     }
 }
 
+// Under --watch, Eleventy 3.1.8 reloads its config when .eleventy.js or a file it requires changes, but on Windows it looks those files up in require.cache by a path with forward slashes, where Node keys them with backslashes: nothing is deleted, the old module comes back, and the rebuild keeps the old config (a changed option of the prettify transform, a changed helper of this file). So before each watch build that changed a loaded project module, every project module of require.cache (none of node_modules) is deleted by its real key, and the config reset loads them again. Reported upstream as https://github.com/11ty/buildawesome/issues/4460: remove this once a fixed release is installed.
+function forgetChangedModules(changedFiles, cache = require.cache, root = __dirname) {
+    if (!changedFiles.some(file => path.resolve(root, file) in cache)) return;
+    const project = root + path.sep;
+    const nodeModules = path.join(root, "node_modules") + path.sep;
+    for (const key of Object.keys(cache)) {
+        if (key.startsWith(project) && !key.startsWith(nodeModules)) delete cache[key];
+    }
+}
+
 module.exports = function configureEleventy(eleventyConfig) {
     // -> repo root (the publish dir); passthrough-copied for the preview server.
     fs.writeFileSync(path.join(__dirname, "sitemap.xml"), sitemapXml(buildSitemap()));
@@ -531,6 +541,7 @@ module.exports = function configureEleventy(eleventyConfig) {
         }
     }
     eleventyConfig.addTransform("prettify", (content, outputPath) => formatHtml(content, outputPath, htmlMode(process.env)));
+    eleventyConfig.on("eleventy.beforeWatch", changedFiles => forgetChangedModules(changedFiles));
     let cleaned = false;
     eleventyConfig.on("eleventy.before", ({ runMode }) => {
         // Always start from a clean output folder so a stale preview build
@@ -577,3 +588,5 @@ module.exports = function configureEleventy(eleventyConfig) {
 module.exports.italicNames = italicNames;
 module.exports.htmlMode = htmlMode;
 module.exports.formatHtml = formatHtml;
+// The module cache fix of the watch builds, for its test (tests/playwright/eleventy-watch.spec.js)
+module.exports.forgetChangedModules = forgetChangedModules;
