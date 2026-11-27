@@ -368,7 +368,7 @@
     "toml": "^5.0.1",
     "ts-jest": "^29.4.15",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.73.0"
+    "typescript-eslint": "^8.74.0"
   },
   "overrides": {
     "js-yaml@^3": {
