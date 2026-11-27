@@ -384,6 +384,45 @@ describe('theme', () => {
     });
 });
 
+describe('start-up without inline handlers', () => {
+    test('calls the function named by data-init of <body> once the page has loaded, only initPage or initArticle', () => {
+        const page = fakePage();
+        load();
+        document.body = { dataset: { init: 'initArticle' } };
+        window.initArticle = jest.fn();
+        page.windowListeners.load();
+        expect(window.initArticle).toHaveBeenCalledTimes(1);
+        // Any other name, a name not defined on the page, or no body: nothing runs
+        document.body.dataset.init = 'alert';
+        window.alert = jest.fn();
+        page.windowListeners.load();
+        expect(window.alert).not.toHaveBeenCalled();
+        document.body.dataset.init = 'initPage';
+        expect(() => page.windowListeners.load()).not.toThrow();
+        delete document.body;
+        expect(() => page.windowListeners.load()).not.toThrow();
+    });
+
+    test('switches the deferred stylesheets to their data-media, at once when loaded and on their load otherwise', () => {
+        const loaded = fakeElement({ dataset: { media: 'all' }, extra: { media: 'print', sheet: {} } });
+        const pending = fakeElement({ dataset: { media: 'all' }, extra: { media: 'print', sheet: null } });
+        fakePage({ elements: { 'all:link[data-media]': [loaded, pending] } });
+        load();
+        expect(loaded.media).toBe('all');
+        expect(pending.media).toBe('print');
+        pending.listeners.load();
+        expect(pending.media).toBe('all');
+    });
+
+    test('toggles the theme on a click of the theme button, through a listener', () => {
+        const icon = fakeElement({ id: 'dark-icon', dataset: {}, children: { '.sr-only': fakeElement() } });
+        fakePage({ elements: { 'dark-icon': icon } });
+        load();
+        icon.listeners.click({ preventDefault() {}, stopPropagation() {} });
+        expect(localStorage.getItem('theme')).toBe('light');
+    });
+});
+
 describe('addRedirectById', () => {
     test('gives each route link its path in the page language, and clears the remembered hash on click', () => {
         const blog = fakeElement({ id: 'blog' });

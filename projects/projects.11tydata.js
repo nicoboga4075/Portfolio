@@ -1,5 +1,5 @@
 module.exports = {
     layout: "base.njk",
-    onload: "initArticle()",
+    init: "initArticle",
     bodyClass: "read-zone"
 };

@@ -80,7 +80,9 @@ test.describe('inline-critical', () => {
             expect(html).not.toContain('web.woff2');
             expect(style).not.toContain('.unused');
             expect(style).not.toContain('gray');
-            expect(html).toMatch(/<link rel="stylesheet" href="css\/site.css" media="print" onload="this.media='all'">/);
+            // Deferred by media="print", switched by data-media and js/common.js: no inline onload, which the CSP refuses
+            expect(html).toMatch(/<link rel="stylesheet" href="css\/site.css" media="print" data-media="all">/);
+            expect(html).not.toContain('onload=');
             expect(html).toContain('<noscript><link rel="stylesheet" href="css/site.css"></noscript>');
             // The stylesheet itself is left whole, and the HTML that is not a page untouched
             expect(fs.readFileSync(path.join(dir, 'css', 'site.css'), 'utf8')).toBe(css);

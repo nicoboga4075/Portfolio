@@ -69,7 +69,7 @@ function initGlossaryFilters() {
     apply();
 }
 
-// Guarded: on the blog page, app.js's own (richer) initPage() already ran via <body onload> before standalone.js ever loads.
+// Guarded: on the blog page, app.js's own (richer) initPage() already ran (data-init of <body>, runPageInit() of common.js) before standalone.js ever loads.
 if (typeof initPage !== 'function') {
     window.initPage = function () {
         loadImages('.icon.svg', 'svg');

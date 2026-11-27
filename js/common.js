@@ -166,7 +166,7 @@ function isDarkModePreferred() {
     return choice === 'auto' ? darkSchemeQuery.matches : choice === 'dark';
 }
 
-// No argument: apply the choice (on page load, or when the OS setting changes); with an event (the #dark-icon button's onclick): move to the next choice first, then apply. The icon, title and sr-only label show the choice, not the theme on screen, so auto keeps its own icon in both themes; fires `darkmodechange` so app.js can recolour the skills chart.
+// No argument: apply the choice (on page load, or when the OS setting changes); with an event (a click on the #dark-icon button, its listener at the end of this file): move to the next choice first, then apply. The icon, title and sr-only label show the choice, not the theme on screen, so auto keeps its own icon in both themes; fires `darkmodechange` so app.js can recolour the skills chart.
 function toggleDarkMode(event) {
     if (event) {
         event.preventDefault();
@@ -299,6 +299,30 @@ function initSkipLink() {
     });
 }
 
+// The start-up functions a page can name in the data-init of its <body> (base.njk: initPage, of app.js or standalone.js, or initArticle on the articles and projects), called once the page has loaded, in place of an inline onload attribute, which a script-src without 'unsafe-inline' refuses
+const pageInits = ['initPage', 'initArticle'];
+
+function runPageInit() {
+    const name = document.body?.dataset.init;
+    if (pageInits.includes(name) && typeof window[name] === 'function') {
+        window[name]();
+    }
+}
+
+// The stylesheets loaded without blocking the first paint, media="print" with data-media="all" (Poppins in base.njk, and every stylesheet beasties defers on the production build): switched to their data-media once loaded, as an inline onload="this.media='all'" did
+function applyDeferredStylesheets() {
+    document.querySelectorAll('link[data-media]').forEach(link => {
+        const apply = () => {
+            link.media = link.dataset.media;
+        };
+        if (link.sheet) {
+            apply();
+        } else {
+            link.addEventListener('load', apply, { once: true });
+        }
+    });
+}
+
 // Run on every page as soon as this (deferred) script loads.
 registerServiceWorker();
 toggleDarkMode();
@@ -313,3 +337,7 @@ setCopyrightYear();
 initBackToTop();
 initSkipLink();
 Object.keys(appRoutes).forEach(addRedirectById);
+applyDeferredStylesheets();
+// The theme button (dark-mode.html), a listener rather than an inline onclick
+document.getElementById('dark-icon')?.addEventListener('click', toggleDarkMode);
+window.addEventListener('load', runPageInit);

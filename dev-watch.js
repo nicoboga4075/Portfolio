@@ -172,7 +172,9 @@ function serveThrough(netlifyPort) {
         open: 'local',
         notify: false,
         ui: false,
-        ghostMode: false
+        ghostMode: false,
+        // Its client as a plain <script src="/browser-sync/browser-sync-client.js">, on the page's own origin, rather than the inline script that writes it, which the CSP of _headers (served by netlify dev, script-src without 'unsafe-inline') refuses: the reload after each build would stop
+        script: { domain: () => '' }
     }));
 }
 

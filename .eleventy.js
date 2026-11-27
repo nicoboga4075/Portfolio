@@ -411,6 +411,8 @@ async function formatHtml(content, outputPath, mode) {
             useTabs: false,
             printWidth: 1000,
             htmlWhitespaceSensitivity: "strict",
+            // The inline scripts kept as written: the CSP of _headers allows the theme script of base.njk by the hash of its exact text, which reformatting would change
+            embeddedLanguageFormatting: "off",
         });
     } catch (e) {
         // Minify (production and test builds): fail the build fast rather than ship or test a page unlike the others

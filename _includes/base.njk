@@ -1,6 +1,6 @@
 ---
 base: "../../"
-onload: "initPage()"
+init: "initPage"
 image: "https://nicoboga.netlify.app/images/view.png"
 bodyClass: ""
 ---
@@ -36,8 +36,8 @@ bodyClass: ""
         {%- endif %}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-        {#- Poppins loads without blocking the first paint (display=swap shows the local fallbacks of common.css, sized like it, meanwhile): beasties leaves the stylesheets of another origin as they are, and a plain link here held the first paint back #}
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+        {#- Poppins loads without blocking the first paint (display=swap shows the local fallbacks of common.css, sized like it, meanwhile), switched from print to all by applyDeferredStylesheets() of js/common.js once loaded: beasties leaves the stylesheets of another origin as they are, and a plain link here held the first paint back #}
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" data-media="all">
         <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"></noscript>
         <base href="{{ base }}">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -60,7 +60,7 @@ bodyClass: ""
         <meta name="botpress" content="{{ botpressScripts | dump }}">
         <script defer src="js/botpress.js"></script>
         {%- endif %}
-        <!-- Inline, after the stylesheets and before first paint: the deferred common.js applies the theme too late (white flash in dark mode). It waits for the CSS above, so --background-color is already resolved. -->
+        {#- Inline, after the stylesheets and before first paint: the deferred common.js applies the theme too late (white flash in dark mode). It waits for the CSS above, so --background-color is already resolved. The script-src of _headers allows it by its sha256 hash alone, not 'unsafe-inline': any change of its text, spaces and comments included, needs that hash computed again (page-health.browser.spec.js fails on the CSP violation otherwise) #}
         <script>
             {
                 // One-off migration from the two-state button's 'darkMode' ('true'/'false') to 'theme' ('light'/'dark', absent = auto).
@@ -80,7 +80,7 @@ bodyClass: ""
             }
         </script>
     </head>
-    <body class="{{ bodyClass }}"{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} onload="{{ onload }}">
+    <body class="{{ bodyClass }}"{% if scrollspy %} data-spy="scroll" data-target="#ftco-navbar" data-offset="300"{% endif %} data-init="{{ init }}">
         {#- First stop of the keyboard, shown only once focused: straight to the content past the menu (initSkipLink of js/common.js moves the focus, since <base> would turn its #hash into another page) #}
         <a id="skip-link" href="#ftco-main">{{ common.skipLink[lang] }}</a>
         <div id="ftco-loader" class="show" role="status" aria-live="polite" aria-atomic="true" aria-label="{{ common.loading[lang] }}">
