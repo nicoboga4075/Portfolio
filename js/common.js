@@ -300,11 +300,11 @@ function initSkipLink() {
 }
 
 // The start-up functions a page can name in the data-init of its <body> (base.njk: initPage, of app.js or standalone.js, or initArticle on the articles and projects), called once the page has loaded, in place of an inline onload attribute, which a script-src without 'unsafe-inline' refuses
-const pageInits = ['initPage', 'initArticle'];
+const pageInits = new Set(['initPage', 'initArticle']);
 
 function runPageInit() {
     const name = document.body?.dataset.init;
-    if (pageInits.includes(name) && typeof window[name] === 'function') {
+    if (pageInits.has(name) && typeof window[name] === 'function') {
         window[name]();
     }
 }
