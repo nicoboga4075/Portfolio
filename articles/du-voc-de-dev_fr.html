@@ -3320,5 +3320,14 @@ description: "Un glossaire des termes du développement logiciel, de framework, 
             </div>
             <div class="card-body">Une migration et une refonte partent toutes deux d'une application existante, souvent ancienne (legacy), et sont toutes deux des projets à part entière, contrairement à une refactorisation. Une migration déplace l'application vers une autre technologie ou un autre environnement en gardant ses fonctionnalités et, autant que possible, sa structure : du C++ vers le C# .NET, d'un serveur sur site vers le cloud, d'une base de données vers une autre ; les utilisateurs ne doivent voir aucune différence. Une refonte (rewrite ou redesign) repense l'application : une nouvelle architecture, souvent de nouvelles fonctionnalités et une nouvelle interface, parfois aussi une nouvelle technologie, comme un monolithe ancien reconstruit en plateforme modulaire que le client paramètre. Une migration coûte moins cher et comporte moins de risques, et convient à une application dont les fonctionnalités répondent encore aux besoins mais dont la technologie vieillit ; une refonte convient quand la conception elle-même bloque les évolutions dont le métier a besoin, mais une refonte big bang, où le nouveau système remplace l'ancien d'un coup, est connue pour ses retards : refondre progressivement, morceau par morceau, avec le pattern strangler fig, limite ce risque.</div>
         </div>
+        <div class="card">
+            <input type="checkbox" id="q349">
+            <div class="card-header">
+                <label for="q349">VCF</label>
+                <span class="badge badge-definition">Données</span>
+                <span class="badge badge-definition">Logiciel</span>
+            </div>
+            <div class="card-body">Un VCF (Virtual Contact File ou fichier de contact virtuel) est un fichier texte, d'extension .vcf, qui contient une ou plusieurs fiches de contact au format vCard : nom, numéros de téléphone, adresses e-mail, adresse postale, entreprise, poste, anniversaire, voire une photo. Chaque fiche commence par <b>BEGIN:VCARD</b>, donne sa version (<b>VERSION:4.0</b>), puis une propriété par ligne (<b>FN:</b> pour le nom complet, <b>TEL;TYPE=cell:</b>, <b>EMAIL:</b>) et se termine par <b>END:VCARD</b>. C'est le format commun pour passer des contacts d'un outil à un autre : les exporter de Gmail, d'Outlook ou d'un téléphone et les importer dans un autre, joindre une carte de visite à un e-mail, ou en mettre une dans un QR code qui ajoute le contact en un scan. vCard 3.0 est défini par la RFC 2426 (1998) et vCard 4.0 par la RFC 6350 (2011), avec le type de média text/vcard ; CardDAV (RFC 6352) s'en sert pour synchroniser les contacts de plusieurs appareils, comme iCalendar (.ics) le fait pour les événements d'agenda.</div>
+        </div>
     </div>
 </article>

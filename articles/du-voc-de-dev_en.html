@@ -3313,5 +3313,14 @@ description: "A glossary of software development terms, from framework, library,
             </div>
             <div class="card-body">A migration and a rewrite both start from an existing application, often a legacy one, and both are projects of their own, unlike a refactoring. A migration moves the application to another technology or another environment while keeping its features and, as much as possible, its structure: from C++ to C# .NET, from an on-premise server to the cloud, from one database to another; users should see no difference. A rewrite (or redesign) rethinks the application: a new architecture, often new features and a new interface, sometimes on a new technology too, such as a legacy monolith rebuilt as a modular platform the client configures. A migration is cheaper and less risky, and fits an application whose features still meet the needs but whose technology is aging; a rewrite fits when the design itself blocks the changes the business needs, but a big-bang rewrite, the new system replacing the old one in one go, is known for its delays: rewriting progressively, piece by piece, with the strangler fig pattern, limits that risk.</div>
         </div>
+        <div class="card">
+            <input type="checkbox" id="q349">
+            <div class="card-header">
+                <label for="q349">VCF</label>
+                <span class="badge badge-definition">Data</span>
+                <span class="badge badge-definition">Software</span>
+            </div>
+            <div class="card-body">A VCF (Virtual Contact File) is a text file, with the .vcf extension, that holds one or more contact cards in the vCard format: name, phone numbers, email addresses, postal address, company, job title, birthday, even a photo. Each card starts with <b>BEGIN:VCARD</b>, gives its version (<b>VERSION:4.0</b>), then one property per line (<b>FN:</b> for the full name, <b>TEL;TYPE=cell:</b>, <b>EMAIL:</b>) and ends with <b>END:VCARD</b>. It is the common format to move contacts from one tool to another: export them from Gmail, Outlook or a phone and import them into another one, attach a business card to an email, or put one in a QR code that adds the contact in one scan. vCard 3.0 is defined by RFC 2426 (1998) and vCard 4.0 by RFC 6350 (2011), with the media type text/vcard; CardDAV (RFC 6352) uses it to keep the contacts of several devices in sync, as iCalendar (.ics) does for calendar events.</div>
+        </div>
     </div>
 </article>
